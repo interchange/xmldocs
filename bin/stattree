@@ -37,6 +37,8 @@ my $cpath = $ENV{PWD};
 # Source contexts
 my $ctx_p = 10; # How much context lines to show before
 my $ctx_n = 4; #                                after
+my %resolver_path; # Support for stack (a -> b -> c -> d   =>
+                   # a = d with full "path" recorded). This expands MapRoutines.
 
 # All file types should be listed here or the stats wont. It should be
 # reported if an unknown file is found in the archive
@@ -302,7 +304,7 @@ sub wanted {
 				# (Most often, the difference is in _ and -).
 				my $tn = shift @lis;
 
-				my $tagopt = shift @lis;
+				my $tagopt = lc(shift @lis);
 				next if $tagopt =~ /^documentation$/i;
 
 				# See if it's a routine and parse routine lines as usual perl lines
@@ -326,7 +328,7 @@ sub wanted {
 
 					@lis == 1 or die "$tn MapRoutines, but argc != 1 ?\n";
 					next if "@lis" =~ /^::/; # TODO
-					file_extractSub("@lis");
+					file_extractSub($tn, "@lis", \%c);
 				}
 				
 				if ( "@lis" =~ /<</ and $tagopt !~ /^routine/i ) {
@@ -363,10 +365,19 @@ sub wanted {
 					%{ $hash{specific}{$tagname} || {}},
 					%{ $specific{$tagname} || {}},
 				};
-			}
-			
-			last;
 
+				# Push whole resolved chain; last item is actual function
+				if ( $resolver_path{$tagname} ) {
+					while ( my $spath = shift @{ $resolver_path{$tagname} } ) {
+						push @{ $hash{symbols}{$c{fsubtype}}{$tagname} }, {
+							ctxpre => 0,
+							ctxpost => 0,
+							%$spath,
+						};
+					}
+				}
+			}
+			last;
 		}
 	} # END FOR each line
 
@@ -616,9 +627,12 @@ sub file_parseVendConfig {
 
 
 sub file_extractSub {
+	my $tagname = shift;
 	my $func = shift;
+	my $c = shift;
 	my $done = 0;
 	$func or die "file_extractSub with no args?\n";
+	my ( $start, $end );
 	my $content;
 
 	my @path = split /::/, $func;
@@ -633,31 +647,49 @@ sub file_extractSub {
 		my $line = $fc[$i];
 
 		if ( $line =~ /^\*$func = \\\&(\S+);/ ) {
-			#print "REPOINT TO $1\n";
-			my $repoint = ( file_extractSub( $1 ) );
+			push @{ $resolver_path{$tagname} }, {
+				name => $func,
+				file => "lib/$path",
+				lnum => $start,
+				ctxs => $i,
+				ctxe => $i,
+				ctx_p => 0,
+				ctx_n => 0,
+				ctx => [ format_ctx($line) ],
+			};
+			file_extractSub( $tagname, $1, $c );
 			return;
 
 		} elsif ( $line =~ /^sub $func {/ ) {
+			$start = $i+1 unless $start;
 			$content = $line;
 
 			# Quick and dirty extractor. This same functionality is in 
 			# file_parseVendConfig() above but is written too much purpose-specific
 			# to generalize it.
-			my $opens = 0;
-			for ( my $j = $i; $j < @fc; $j++) {
+			my $opens = 1; # Oh you dirty one..
+			for ( my $j = $i+1; $j < @fc; $j++) {
 				my $line2 = $fc[$j];
 				$opens += ( $line2 =~ s/(?<!(?<!\\)\\)([\(\[\{])/$1/g );
 				$opens -= ( $line2 =~ s/(?<!(?<!\\)\\)([\)\]\}])/$1/g );
 				$content .= $line2;
-				if ( !$opens) { $done++; last }
+				if ( !$opens) { $done++; $end = $j+1; last }
 			}
 
 			die "NOT FOUND FOR $func ?\n" unless $done;
 		}
 	}
 
-	return $content if wantarray;
-
-	$hash{functions}{$path}{$func} = [ split(/\n/, $content) ];
+	# func in lib/$path from $start to $end
+	push @{ $resolver_path{$tagname} }, {
+		name => $func,
+		file => "lib/$path",
+		lnum => $start,
+		ctxs => $start,
+		ctxe => $end,
+		ctx_p => 0,
+		ctx_n => 0,
+		ctx => [ format_ctx(split(/\n/, $content)) ],
+	};
 }
 

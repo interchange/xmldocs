@@ -162,7 +162,7 @@ up-% cvs-% %-up %-cvs: sources/% $T
 #############################################################
 # Cache files
 cache caches: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) $T
-cache/%/.cache.bin: sources/%
+cache/%/.cache.bin: sources/% bin/stattree
 	echo "C     $@"
 	bin/stattree $<
 
@@ -178,7 +178,7 @@ $T/%.list: BNAME = $(subst $T/,,$@)
 refs/%.xml: BNAME = $(subst refs/,,$@)
 $T/%.list: FNAME = $(subst .list,,$(BNAME))
 refs/%.xml: FNAME = $(subst .xml,,$(BNAME))
-$T/%.list refs/%.xml: bin/refs-autogen $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin)
+$T/%.list refs/%.xml: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) bin/refs-autogen
 	# PEH, -g is useless since tags migrate between tag groups
 	#bin/refs-autogen -g $(FNAME) -o $@ $(BOTH) $(IC_VERSIONS)
 	bin/refs-autogen -o $@ $(BOTH) $(IC_VERSIONS)
