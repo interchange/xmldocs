@@ -203,13 +203,19 @@ $T/%.list refs/%.xml: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) 
 
 #############################################################
 # One-shot targets
-glossary/glossary.xml: $(shell find glossary/ -regex '.+[^(\.xml)]$$') bin/generic-autogen
+glossary/glossary.xml docbook/autoglossary.ent: $(shell find glossary/ -regex '.+[^(\.xml)]$$') bin/generic-autogen
 	bin/generic-autogen glossary
 	make tmp/glossary-nc.db tmp/glossary-c.db
-howtos/howtos.xml: $(shell find howtos/ -regex '.+[^(\.xml)]$$') bin/generic-autogen
+howtos/howtos.xml docbook/autohowtos.ent: $(shell find howtos/ -regex '.+[^(\.xml)]$$') bin/generic-autogen
 	bin/generic-autogen howtos
 	make tmp/howtos-nc.db tmp/howtos-c.db
+docbook/autorefs.ent: refxmls
 
+
+# Helper target, only used by docelic
+colt-preview:
+	tar jcf OUTPUT.tar.bz2 OUTPUT
+	scp OUTPUT.tar.bz2 colt.projectgamma.com:web/ic/xmldocs/
 
 ## Man pages
 #$(OUTPUT)/%.man: %.xml
