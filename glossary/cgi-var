@@ -1,9 +1,38 @@
 
 <glossentry id="cgi-var">
-<glossterm>Interchange CGI variables</glossterm>
+<glossterm>CGI Variable</glossterm>
 
 <glossdef>
 <para>
+Interchange server runs as a daemon on an Unix system, and is typically
+accessed over a communication socket by a web server daemon. In turn,
+the web server is accessed by a client using a web browser.
+</para>
+<para>
+Users can send data back to the web server (and thus, indirectly,
+to the Interchange process it contacts) by submitting HTML forms.
+</para>
+<para>
+For the form submission to be meaningful, it must carry some data, which
+is organized in <literal>
+<replaceable>key</replaceable>=<replaceable>value</replaceable>
+</literal> pairs. The submission happens according to the CGI
+(Common Gateway Interface) specification.
+</para><para>
+Those submitted keys (and their associated values) are, now obviously, called
+"CGI variables".
+</para>
+<para>
+CGI variables in &IC; are accessible using the &cgi; tag, but
+<emphasis role='bold'>only</emphasis>
+on a page directly following the form submission. In other words, you can't
+use &cgi; to retrieve a variable submitted at arbitrary past time during
+an user session - that is possible only using &value;.
+</para>
+<para>
+As CGI variables contain user-supplied data, they are obviously of
+great concern from a security standpoint.
+<!-- TODO: IC functionality to deal with CGI data security .. filters etc. -->
 </para>
 </glossdef>
 

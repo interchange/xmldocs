@@ -9,7 +9,8 @@ PRIMARY:
   but the header says 'displaying 2/2 contexts', it doesn't remove
   'duplicates'. fix that.
 - ./files/ directory is not properly referenced from chunked documents.
-  Either use entities or XML catalog to solve that.
+  Solve by using entities?
+- bin/refs-autogen to print appropriate header for docbook/autodefs.ent
 
 - In iccattut:
   - make a "translation map" of /etc/interchange/* to RPM-equivs.
@@ -24,6 +25,7 @@ PRIMARY:
 - check if all Default fields are properly formated (<literal> or none)
 - s/a HTML/an HTML/
 - script to [un]comment debug lines
+- script to extract SUB out of UserTag or CodeDef and run through perl -c !!
 
 GLOSSARY:
 Say about accesskeys in html source, for key-based navigation

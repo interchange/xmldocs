@@ -205,6 +205,11 @@ Database   banner   NUMERIC      weight
 		banners are found in the <literal>tech:hw</literal> category, the
 		<tag>banner</tag> will fallback to category <literal>tech</literal>.
 		</para>
+		<para>
+		For futher, supplementary reading on banners ads and standard 
+		banner sizes, check out the
+		<olink targetdoc='glossary' targetptr='ad'/> glossary entry.
+		</para>
 	</sect1>
 
 </chapter>

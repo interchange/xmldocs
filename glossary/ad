@@ -3,12 +3,75 @@
 <glossterm>Ad</glossterm>
 <glossterm>Banner Ad</glossterm>
 
-<!--<acronym></acronym>-->
-<!--<abbrev></abbrev>-->
-
 <glossdef>
 <para>
-meek.
+A rectangular graphic image which is included on a content page for
+advertising and promotional purposes.
+</para><para>
+In &IC;, when "banner" or "ad" is used to describe the functionality of
+the &banner; tag, it does not neccesarily mean an image, since you can
+put anything in the content placeholder. In fact, banner examples from
+<olink targetdoc='howtos' targetptr='implementbanners'/> HOW-TO use plain 
+text.
+</para><para>
+Along with animation, contemporary banners are introducing an interactive
+dimension taking advantage of plug-ins such as SVG, Flash or Shockwave to
+liven them up or create banner-based games.
+</para><para>
+Voluntary ad unit guidelines as suggested by the
+<ulink url="http://www.iab.net/standards/adunits.asp">Interactive
+Advertising Bureau</ulink> (in ascending order):
+</para>
+
+<itemizedlist>
+	<listitem><para>
+		<emphasis role='bold'>Micro Bar</emphasis> - 88x31
+	</para></listitem>
+	<listitem><para>
+		<emphasis role='bold'>Button 2</emphasis> - 120x60
+	</para></listitem>
+	<listitem><para>
+		<emphasis role='bold'>Button 1</emphasis> - 120x90
+	</para></listitem>
+	<listitem><para>
+		<emphasis role='bold'>Half Banner</emphasis> - 234x60
+	</para></listitem>
+	<listitem><para>
+		<emphasis role='bold'>Square Button</emphasis> - 125x125
+	</para></listitem>
+	<listitem><para>
+		<emphasis role='bold'>Full Banner</emphasis> - 468x60
+	</para></listitem>
+	<listitem><para>
+		<emphasis role='bold'>Vertical Banner</emphasis> - 120x240
+	</para></listitem>
+	<listitem><para>
+		<emphasis role='bold'>Rectangle</emphasis> - 180x150
+	</para></listitem>
+	<listitem><para>
+		<emphasis role='bold'>Medium Rectangle</emphasis> - 300x250
+	</para></listitem>
+	<listitem><para>
+		<emphasis role='bold'>Vertical Rectangle</emphasis> - 240x400
+	</para></listitem>
+	<listitem><para>
+		<emphasis role='bold'>Square Pop-up</emphasis> - 250x250
+	</para></listitem>
+	<listitem><para>
+		<emphasis role='bold'>Large Rectangle</emphasis> - 336x280
+	</para></listitem>
+	<listitem><para>
+		<emphasis role='bold'>Skyscraper</emphasis> - 120x600
+	</para></listitem>
+	<listitem><para>
+		<emphasis role='bold'>Wide Skyscraper</emphasis> - 160x600
+	</para></listitem>
+</itemizedlist>
+
+<para>
+You can see the above dimensions in practice at 
+<ulink url="http://www.motive.co.nz/glossary/bannerads.html">
+MOTIVE Resources</ulink>.
 </para>
 
 </glossdef>
