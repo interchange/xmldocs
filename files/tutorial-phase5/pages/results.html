@@ -5,30 +5,30 @@ __LEFT__
 
 [search-region]
 
-	[on-match]
-	<table cellpadding="5">
-	<tr>
-	<th>Test #</th>
-	<th>Description</th>
-	<th>Price</th>
-	</tr>
-	[/on-match]
+  [on-match]
+  <table cellpadding="5">
+  <tr>
+  <th>Test #</th>
+  <th>Description</th>
+  <th>Price</th>
+  </tr>
+  [/on-match]
 
-	[search-list]
-	<tr>
-	<td>[item-code]</td>
-	<td><a href="[item-code].html">[item-field description]</a></td>
-	<td align="right">[item-field price]</td>
-	<td>[order [item-code]]order now</a></td>
-	</tr>
-	[/search-list]
+  [search-list]
+  <tr>
+  <td>[item-code]</td>
+  <td><a href="[item-code].html">[item-field description]</a></td>
+  <td align="right">[item-field price]</td>
+  <td>[order [item-code]]order now</a></td>
+  </tr>
+  [/search-list]
 
-	[on-match]
-	</table>
-	[/on-match]
-	[no-match]
-	<p>Sorry, no matches were found for '[cgi mv_searchspec]'.</p>
-	[/no-match]
+  [on-match]
+  </table>
+  [/on-match]
+  [no-match]
+  <p>Sorry, no matches were found for '[cgi mv_searchspec]'.</p>
+  [/no-match]
 [/search-region]
 
 <hr>

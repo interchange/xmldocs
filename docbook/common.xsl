@@ -21,6 +21,7 @@
 	<xsl:param name="use.extensions">1</xsl:param>
 	<xsl:param name="textinsert.extension">1</xsl:param>
 
+	<!--<xsl:template match="tag"><xsl:text>[</xsl:text><xsl:call-template name="inline.monoseq"/><xsl:text>]</xsl:text></xsl:template>-->
 	<xsl:template match="tag">[<xsl:call-template name="inline.monoseq"/>]</xsl:template>
 	<xsl:template match="pragma"><xsl:call-template name="inline.monoseq"/></xsl:template>
 
