@@ -53,7 +53,7 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>
-	&glos-cgi-var; to pass. If you want to use this, the form
+	&glos-CGI; to pass. If you want to use this, the form
 	method should be <literal>POST</literal> or <literal>PUT</literal>.
 	The list can be ampersand-separated, like 
 	<literal><![CDATA[fname=Brev&lname=Patterson&state=UT]]></literal>, and
