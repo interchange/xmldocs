@@ -1,0 +1,52 @@
+__TOP__
+__LEFT__
+
+<h2>This is your shopping cart!</h2>
+
+<form method='post' action='[process]'>
+
+<table cellpadding="5">
+
+<tr>
+  <th>Qty.</th>
+  <th>Description</th>
+  <th>Cost</th>
+  <th>Subtotal</th>
+</tr>
+
+[item-list]
+<tr>
+  <td align="right"><input type='text' size='2' name='[quantity-name]' value='[item-quantity]'/></td>
+  <td>[item-field description]</td>
+  <td align="right">[item-price]</td>
+  <td align="right">[item-subtotal]</td>
+</tr>
+[/item-list]
+
+<tr><td colspan="4"></td></tr>
+
+<tr>
+  <td colspan="3" align="right"><strong>Total:</strong></td>
+  <td align="right">[subtotal]</td>
+</tr>
+
+<tr>
+  <td colspan="4" align="right">
+  [button text='Recalculate']
+    mv_todo=refresh
+  [/button]
+  </td>
+</tr>
+
+</table>
+
+</form>
+
+<hr>
+
+<p>
+[page checkout]Purchase now</a><br>
+[page index]Return to shopping</a>
+</p>
+
+__BOTTOM__

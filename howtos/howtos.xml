@@ -4,6 +4,7 @@
   "../docbook/docbookxi.dtd" [
 
 	<!ENTITY custom-sendmail-routine SYSTEM "custom-sendmail-routine.xml">
+	<!ENTITY quantity-in-basket      SYSTEM "quantity-in-basket.xml">
 ]>
 
 <book id="howtos">
@@ -53,5 +54,6 @@
 	-->
 
 &custom-sendmail-routine;
+&quantity-in-basket;
 
 </book>
