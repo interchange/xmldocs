@@ -223,6 +223,7 @@ while ( $path = shift @paths) { # For each version specified
 			
 				# Support item types with only context info in this field
 				for my $arr ( @{ $covered{$key}{$fi} } ) {
+					next if !$ln or !$$arr[0] or !$$arr[1];
 					goto DONELOOP if $ln > $$arr[0] and $ln < $$arr[1];
 				}
 				# We 'shift' here because we unshifted 1 row to match line
@@ -261,6 +262,7 @@ while ( $path = shift @paths) { # For each version specified
 					}
 					my $r = $hash{revision}{$plf}->[0];
 					my $d = $hash{revision}{$plf}->[1];
+					{ no warnings; # XXX If someone can figure out which of the used vars here is undefined...
 					$$ag{source} .= <<ENDD;
 <para>
 </para>
@@ -273,6 +275,7 @@ while ( $path = shift @paths) { # For each version specified
 </example>
 
 ENDD
+					}
 					$$ag{"source ver"} = $hash{version};
 				}
 				push @{ $covered{$key}{$fi} }, [ $$ctx{ctxs}, $$ctx{ctxe} ];

@@ -10,7 +10,11 @@
 #############################################################
 # Base definitions
 IC_VERSIONS = 4.6.0 4.8.0 5.0.0 5.2.0 cvs-head
-SYMBOL_TYPES= pragmas globvars usertags uitags systemtags
+SYMBOL_TYPES= pragmas globvars usertags uitags systemtags globconfs catconfs
+GUIDES      = iccattut xmldocs
+HOWTOS      = howtos
+GLOSSARY    = glossary
+ALL_DOCS    = $(GUIDES) $(HOWTOS) $(GLOSSARY) $(SYMBOL_TYPES)
 SHELL       = /bin/sh
 export O    = OUTPUT
 export T    = tmp
@@ -23,25 +27,33 @@ PSR_FLAGS   = --xinclude --nonet
 
 VPATH       = guides refs howtos glossary
 .SILENT:
-.PHONY: all complete skel clean distclean
-.PHONY: guides refs howtos
-.PHONY: refxmls
-.PHONY: cache caches clean-cache up-all all-up %-up up-%
+.PHONY: all complete
+.PHONY: skel
 .PHONY: olinkdbs-nc olinks-nc olinkdbs-c olinks-c
+.PHONY: clean clean-cache clean-refs distclean look-clean
+.PHONY: up-all cvs-sources srcs cvsrcs cvs cvss all-up cvsup
+.PHONY: up-% cvs-% %-up %-cvs
+.PHONY: cache caches
+.PHONY: refxmls
 
 
 #############################################################
 # Complete build
-all: skel refxmls howtos/howtos.xml glossary/glossary.xml
-complete: skel srcs caches all
-
+all: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) \
+  skel                                                         \
+  refxmls                                                      \
+  olinks-nc olinks-c                                           \
+  $(foreach doc,$(ALL_DOCS),$O/$(doc).html)                    \
+  $(foreach doc,$(ALL_DOCS),$O/$(doc))
 
 #############################################################
 # Skel
 skel: $T $O $O/files $O/images $O/xmldocs.css
 $T:
-	echo "U     $T/"
-	mkdir -p $T
+	if test -e $T.temporary; then                                \
+		echo "U     $T/"; mv $T.temporary $T;                      \
+	else                                                         \
+		echo "C     $T/";  mkdir -p $T; fi
 $O:
 	echo "U     $O/"
 	mkdir -p $O
@@ -51,15 +63,15 @@ $O/files: $(shell find files) bin/dbgen
 	cp -a files $O/
 	rm -rf `find $@ -name CVS`
 	cp bin/dbgen $O/files/
-	cd files; for p in *; do                                  \
-	  if test "$$p" != "CVS"; then                            \
-	    if test -d "$$p"; then                                \
-	      cp -a $$p ../$O/files/;                             \
-	      tar --exclude=CVS -cf ../$O/files/$$p.tar $$p;      \
-	      tar --exclude=CVS -zcf ../$O/files/$$p.tar.gz $$p;  \
-	      tar --exclude=CVS -jcf ../$O/files/$$p.tar.bz2 $$p  \
-	    ; fi                                                  \
-	  ; fi                                                    \
+	cd files; for p in *; do                                     \
+	  if test "$$p" != "CVS"; then                               \
+	    if test -d "$$p"; then                                   \
+	      cp -a $$p ../$O/files/;                                \
+	      tar --exclude=CVS -cf ../$O/files/$$p.tar $$p;         \
+	      tar --exclude=CVS -zcf ../$O/files/$$p.tar.gz $$p;     \
+	      tar --exclude=CVS -jcf ../$O/files/$$p.tar.bz2 $$p     \
+	    ; fi                                                     \
+	  ; fi                                                       \
 	; done
 $O/images: $(shell find images)
 	echo "C     $@/"
@@ -73,11 +85,7 @@ $O/xmldocs.css: docbook/xmldocs.css
 
 #############################################################
 # OLINK DBs (interlinking between documents)
-olinkdbs-nc olinks-nc:                                              \
-	$(patsubst %.xml,$T/%-nc.db,$(shell find $(VPATH) -name '*.xml' | \
-	awk -F/ '{ print $$2 }'))                                         \
-	$(patsubst %.xml,$T/%-nc.db,$(shell find $(VPATH) -name '*.xml' | \
-	awk -F/ '{ print $$2 }'))
+olinkdbs-nc olinks-nc: $(foreach f,$(ALL_DOCS),$T/$f-nc.db)
 $T/%-nc.db: %.xml $T
 	$(PSR) $(PSR_FLAGS)                                               \
 	  --stringparam collect.xref.targets only                         \
@@ -85,11 +93,7 @@ $T/%-nc.db: %.xml $T
 	  docbook/html-nochunks.xsl $<
 	  tail +2 $@ > $T/tail
 	  mv $T/tail $@
-olinkdbs-c olinks-c:                                              \
-	$(patsubst %.xml,$T/%-c.db,$(shell find $(VPATH) -name '*.xml' | \
-	awk -F/ '{ print $$2 }'))                                         \
-	$(patsubst %.xml,$T/%-c.db,$(shell find $(VPATH) -name '*.xml' | \
-	awk -F/ '{ print $$2 }'))
+olinkdbs-c olinks-c: $(foreach f,$(ALL_DOCS),$T/$f-c.db)
 $T/%-c.db: %.xml $T
 	$(PSR) $(PSR_FLAGS)                                               \
 	  --stringparam collect.xref.targets only                         \
@@ -126,6 +130,9 @@ clean-refs:
 distclean: clean clean-cache
 	-rm -rf $T
 	-rm -rf {refs,glossary}/*.xml
+look-clean: clean clean-cache
+	-mv $T $T.temporary 2>/dev/null
+
 
 
 #############################################################
@@ -169,7 +176,7 @@ $T/%.list refs/%.xml: bin/refs-autogen $(foreach icver,$(IC_VERSIONS),cache/$(ic
 
 
 #############################################################
-# One-shot targets # XXX possible to 'compress' into single rule?
+# One-shot targets
 glossary/glossary.xml: $(shell find glossary/ -regex '.+[^(\.xml)]$$')
 	bin/generic-autogen glossary
 howtos/howtos.xml: $(shell find howtos/ -regex '.+[^(\.xml)]$$')
