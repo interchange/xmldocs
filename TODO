@@ -8,6 +8,9 @@ PRIMARY:
   multiple times within +- of first occurence, we treat it like one context.
   but the header says 'displaying 2/2 contexts', it doesn't remove
   'duplicates'. fix that.
+- Parameter is positional, others are attributes
+- ./files/ directory is not properly referenced from chunked documents.
+  Either use entities or XML catalog to solve that.
 
 - In iccattut:
   - make a "translation map" of /etc/interchange/* to RPM-equivs.
@@ -28,7 +31,7 @@ Say about accesskeys in html source, for key-based navigation
 tag, interpolation, reparse, symbol types
 catalog/global variable, tag,ui,
 action, form,  unix inet socket, values,
-regex, flypage, sku
+regex, flypage, sku, ad, weighted display
 
 HOWTOs:
 - how to delete item from cart in all possible ways

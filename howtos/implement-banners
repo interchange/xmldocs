@@ -1,0 +1,172 @@
+<chapter id="Implement Banners">
+
+	<chapterinfo>
+		<title>Implement Banner Ads</title>
+		<titleabbrev>implementbanners</titleabbrev>
+
+		<keywordset>
+			<keyword>banner</keyword>
+			<keyword>weight</keyword>
+			<keyword>random</keyword>
+			<keyword>rotate</keyword>
+			<keyword>ad</keyword>
+			<keyword>sequential</keyword>
+		</keywordset>
+
+		<!--<authorgroup>
+			<author>
+				<firstname>Davor</firstname>
+				<surname>Ocelic</surname>
+				<affiliation>
+					<email>docelic@icdevgroup.org</email>
+				</affiliation>
+			</author>
+		</authorgroup>-->
+
+
+	</chapterinfo>
+
+	<sect1 id='implementbanners_introduction'>
+		<title>Introduction</title>
+		<para>
+		Banners in &IC; are implemented using the <tag>banner</tag> tag.
+		For this tag to work, you'll need to have a
+		<database class='table'>banner</database> table. Here's an 
+		example:
+		</para>
+		<programlisting>
+<xi:include parse='text' href='../files/banner/banner.txt'/>
+		</programlisting>
+		<para>
+		Field descriptions follow:
+		<itemizedlist>
+			<listitem><para>
+			<database class='field'>code</database> - key for an item. If banners
+			are not weighted, this should be a category-specific code.
+			</para></listitem>
+			<listitem><para>
+			<database class='field'>category</database> - categorize weighted ads.
+			If empty, the banner will be placed in the default category.
+			</para></listitem>
+			<listitem><para>
+			<database class='field'>weight</database> - banner weight. Must be an
+			integer number equal or greater than 1 to include the banner for display.
+			0 or blank will ignore the banner when weighted ads are built.
+			</para></listitem>
+			<listitem><para>
+			<database class='field'>rotate</database> - 
+			must contain a value if weighted banners are
+			<emphasis role='bold'>not</emphasis> used:
+			<itemizedlist>
+				<listitem><para>
+				Empty value will prevent the banner from being displayed.
+				</para></listitem>
+				<listitem><para>
+				Literal value of
+				<literal>0</literal> (zero) will cause the entire content of the banner
+				field to be displayed when the category is matched.
+				</para></listitem>
+				<listitem><para>
+				Non-zero value will cause the banner field to be split into segments
+				(using the specified or default delimiter, of course). For each
+				segment, the
+				banner will then rotate in sequence (for each website visitor
+				separately).
+				Obviously, the first banner in the sequence is more likely to be
+				displayed
+				than the last.
+				</para></listitem>
+			</itemizedlist>
+			</para></listitem>
+			<listitem><para>
+			<database class='field'>banner</database> - the field containing actual
+			banner content. Multiple banner texts (if this feature is used) need to be
+			separated using the specified or default delimiter.
+			</para></listitem>
+		</itemizedlist>
+		</para>
+		<para>
+		You might have noticed that the fields names and values in the tables
+		above are not properly aligned. This is an unfortunate nature of
+		<glossterm linkend="tab_delimited">TAB-delimited</glossterm> files.
+		</para>
+		<para>
+		To minimize the chance of confusion, you can download properly composed
+		<ulink url="files/banner/banner.txt">banner.txt</ulink>.
+		</para>
+	</sect1>
+
+	<sect1 id='implementbanners_solution'>
+		<title>Solution</title>
+		<para>
+		As usual, databases first need to be registered for use
+		with the catalog, and so is the case with the text database
+		from the <xref linkend="implementbanners_introduction"/>.
+		The following modification to your
+		<filename>catalog.cfg</filename> is needed (and a
+		<glossterm linkend="reconfig">catalog reconfiguration</glossterm>
+		afterwards):
+		<programlisting>
+Database   banner   banner.txt   TAB
+Database   banner   NUMERIC      weight
+		</programlisting>
+		</para>
+		<para>
+		Now that we have everything in place, we can start experimenting with the
+		<tag>banner</tag> tag.
+		</para>
+		<para>
+		To display weighted banners from a specific category (say, 
+		<literal>tech</literal>), use
+		<code>[banner weighted=1 category=tech]</code>. The tag would look for
+		<emphasis>all</emphasis> banners where the
+		<database class='field'>weight</database> field is positive integer and
+		the <database class='field'>category</database> matches "tech", and 
+		build them in the <filename class='directory'>tmp/Banners/tech/</filename>
+		directory.
+		</para>
+		<para>
+		To display weighted banners regardless of the category, use
+		<code>[banner weighted=1]</code>. The tag would look for
+		<emphasis>all</emphasis> banners where the
+		<database class='field'>weight</database> field is positive integer, and
+		build them in the <filename class='directory'>tmp/Banners/</filename>
+		directory. Note that the total sum of weights in our sample database
+		is 20, so each weight point is worth 100/20 = 5%. Therefore, the banners
+		with the weight of 7 would be displayed 35% of the time each.
+		</para>
+		<para>
+		To display categorized,
+		<glossterm linkend="rotated_banner">non-rotating</glossterm>
+		banners (from category
+		<literal>tech</literal>), use
+		<code>[banner category=tech]</code>, which is equal in effect to
+		<code>[data table=banner col=banner key=tech]</code>. <emphasis role='bold'>
+		Note that the 
+		value of the <database class='field'>rotate</database> field must be
+		<literal>0</literal></emphasis>.
+		</para>
+		<para>
+		To display categorized,
+		<glossterm linkend="rotated_banner">rotating</glossterm>
+		banners (from category
+		<literal>tech</literal>), use
+		<code>[banner category=tech]</code>, which is equal in effect to
+		<code>[data table=banner col=banner key=tech]</code>. <emphasis role='bold'>
+		Note that the 
+		value of the <database class='field'>rotate</database> field must be
+		<literal>1</literal></emphasis>.
+		</para>
+		<para>
+		To display multilevel-categorized banners (from say, the 
+		<literal>tech -> hardware</literal> category), use
+		<code>[banner category=tech:hw]</code>. The colon will help &IC;
+		select the most specific banner available, so the difference in
+		respect to single-level categories is the fallback mechanism; if no
+		banners are found in the <literal>tech:hw</literal> category, the
+		<tag>banner</tag> will fallback to category <literal>tech</literal>.
+		</para>
+	</sect1>
+
+</chapter>
+

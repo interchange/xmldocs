@@ -1,0 +1,234 @@
+__NAME__ purpose
+display banner ads or messages, based on category and optional weighting
+__END__
+
+
+__NAME__ synopsis
+<row>
+	<entry>
+		<arg choice='plain'>category</arg>
+	</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry><literal>default</literal></entry>
+	<entry>
+	For a <emphasis>weighted</emphasis> banner display, this field specifies
+	category name; only database entries where the
+	<database class='field'>category</database>
+	field matches this value are taken as possible candidates for display.
+	In an <emphasis>unweighted</emphasis> display, this field specifies
+	banner code; only one database entry with the matching value in the
+	<database class='field'>code</database> field should exist.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>table</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry><literal>banner</literal></entry>
+	<entry>The banner table name. The default is reasonable and
+	rarely needs to be changed.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>r_field</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry><literal>rotate</literal></entry>
+	<entry>
+	Row in a banner table may include multiple banners in the <database
+	class='field'>banner</database> column (separated by specified delimiters).
+	The column specified by <database class='field'>r_field</database> is 
+	consulted (expecting a boolean value) to determine whether to
+	sequentially rotate banners.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>b_field</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry><literal>banner</literal></entry>
+	<entry>Banner descriptor field. In other words, name of the column that will
+	contain actual banner text to display. If a proper delimiter is used, and
+	the <arg choice='plain'>r_field</arg> column is true, this field may contain
+	multiple banner texts.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>separator</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry><literal>:</literal></entry>
+	<entry>
+	Separator within the table key (the <database class='field'>code</database>
+	column), used for multilevel categorized ads.
+	This is only used with unweighted ads.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>delimiter</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry><literal>{or}</literal></entry>
+	<entry>
+	Delimiter that sets different banner texts in the
+	<database class='field'>banner</database> field apart.
+	This is only used with unweighted ads.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>weighted</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>
+	Use weighted banner system? In a weighted system, the database is expected
+	to contain multiple entries with the same
+	<database class='field'>category</database>, and then the banners are
+	selected in regard to their relative weight (more weight = more 
+	visibility).
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>once</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>
+	Don't rebuild the banners until the appropriate
+	<filename>tmp/Banners/*/total_weight</filename> files are manually removed?
+	This is only used with weighted ads.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>c_field</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry><literal>category</literal></entry>
+	<entry>
+	Specify the column containing banner category.
+	This is only used with weighted ads.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>w_field</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry><literal>weight</literal></entry>
+	<entry>
+	Specify the table column containing banner weights.
+	This is only used with weighted ads.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>interpolate</arg>
+		<arg choice='plain'>reparse</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>.</entry>
+</row>
+__END__
+
+
+__NAME__ see also
+implement_banners
+__END__
+
+
+__NAME__ description
+&IC; has a built-in banner rotation system designed to show 
+<glossterm linkend="ad">ads</glossterm> or other
+messages, according to optional categories and
+<glossterm linkend="weighting_system">weighting</glossterm>.
+All this functionality is accessible using the <tag>banner</tag> tag.
+</para><para>
+The <glossterm linkend="weighted_system">weighting system</glossterm>, 
+if used, will pre-built banners in the directory
+<filename class='directory'>Banners/*</filename> under the catalog temporary
+directory (this will happen when the banners are first requested after
+a catalog reconfiguration or Interchange daemon start).
+It will build one copy of the banner for every value of <database
+class='field'>weight</database>.
+If one banner is weighted 7, one 2 and one 1 (in abstract points), then a
+total of 10 pre-built banners will be made. The first will be displayed
+70 percent of the time, the second 20 percent and the third 10 percent,
+in random fashion. If all banners need to be equal, give each a weight of 1.
+</para><para>
+Each category has its own separate weighting if categorized display is
+requested; otherwise all weights enter the same logical "pool".
+__END__
+
+
+__NAME__ example
+	<example>
+		<title>
+		</title>
+		<para>
+		</para>
+		<programlisting>
+		</programlisting>
+	</example>
+
+<!--
+		To display weighted banners from a specific category (say, 
+		<literal>tech</literal>), use
+		<code>[banner weighted=1 category=tech]</code>. The tag would look for
+		<emphasis>all</emphasis> banners where the
+		<database class='field'>weight</database> field is positive integer and
+		the <database class='field'>category</database> matches "tech", and 
+		build them in the <filename class='directory'>tmp/Banners/tech/</filename>
+		directory.
+		</para>
+		<para>
+		To display weighted banners regardless of the category, use
+		<code>[banner weighted=1]</code>. The tag would look for
+		<emphasis>all</emphasis> banners where the
+		<database class='field'>weight</database> field is positive integer, and
+		build them in the <filename class='directory'>tmp/Banners/</filename>
+		directory. Note that the total sum of weights in our sample database
+		is 20, so each weight point is worth 100/20 = 5%. Therefore, the banners
+		with the weight of 7 would be displayed 35% of the time each.
+		</para>
+		<para>
+		To display categorized,
+		<glossterm linkend="rotated_banner">non-rotating</glossterm>
+		banners (from category
+		<literal>tech</literal>), use
+		<code>[banner category=tech]</code>, which is equal in effect to
+		<code>[data table=banner col=banner key=tech]</code>. <emphasis role='bold'>
+		Note that the 
+		value of the <database class='field'>rotate</database> field must be
+		<literal>0</literal></emphasis>.
+		</para>
+		<para>
+		To display categorized,
+		<glossterm linkend="rotated_banner">rotating</glossterm>
+		banners (from category
+		<literal>tech</literal>), use
+		<code>[banner category=tech]</code>, which is equal in effect to
+		<code>[data table=banner col=banner key=tech]</code>. <emphasis role='bold'>
+		Note that the 
+		value of the <database class='field'>rotate</database> field must be
+		<literal>1</literal></emphasis>.
+		</para>
+		<para>
+		To display multilevel-categorized banners (from say, the 
+		<literal>tech -> hardware</literal> category), use
+		<code>[banner category=tech:hw]</code>. The colon will help &IC;
+		select the most specific banner available, so the difference in
+		respect to single-level categories is the fallback mechanism; if no
+		banners are found in the <literal>tech:hw</literal> category, the
+		<tag>banner</tag> will fallback to category <literal>tech</literal>.
+		</para>
+		-->
+__END__
+
