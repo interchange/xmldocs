@@ -10,6 +10,7 @@ Outstanding:
 - check if all Default fields are properly formated (<literal> or none)
 - s/a HTML/an HTML/
 - script to [un]comment debug lines!!
+- use Interchange.pm to make an Interchange shell
 
 DOCUMENTATION SYSTEM:
 - Add support to document tags which are NOT found in separate files

@@ -46,7 +46,7 @@ my %dups; # List of symbols names that are not unique
 my $last_path; # Last version we want docs generated for (say, 5.2.0).
 my $compounds = 1; # Summarize similar symbol groups to single page?
 
-my @page_order = (qw/purpose default structure synopsis description structure online example notes bugs/, "symbol type", "source", "author", "copyright", "see also", "directive type", "filter type");
+my @page_order = (qw/purpose default structure synopsis description online example notes bugs/, "symbol type", "source", "author", "copyright", "see also", "directive type", "filter type");
 
 unless ( GetOptions ( 
 	"verbosedb|dumpdb|d!" => \$dumpdb,
@@ -385,13 +385,14 @@ while ( $path = shift @paths) { # For each version specified
 
 
 					{ no warnings; # XXX If someone can figure out which of the used vars here is undefined...
+#<screen linenumbering='numbered' startinglinenumber='$ls'>
 					$$ag{source} .= <<ENDD;
 <para>
 </para>
 <figure>
 <title>$loc $revinfo$ctxmeta</title>
 
-<screen linenumbering='numbered' startinglinenumber='$ls'>
+<screen>
 <![CDATA[$ctxsdata]]>
 </screen>
 </figure>
@@ -567,7 +568,7 @@ ENDD
 	# The 'structure' field will show which other symbols the current
 	# symbol uses. Fill it:
 	if ( $hash{uses}{$group}{$ag{name}} ) {
-		$ag{structure} = "<para>This tag appears to be affected by, or affects, the following:</para>\n";
+		$ag{structure} = "This tag appears to be affected by, or affects, the following:\n";
 		while (my($k,$v)=each %{ $hash{uses}{$group}{$ag{name}} }) {
 			s/^(.+)$/<$tagname{lc $k}>$1<\/$tagname{lc $k}>/ for @$v;
 			local $" = ", ";
@@ -575,7 +576,7 @@ ENDD
 			$ag{structure} .= "${k}s: @$v<sbr/>\n";
 		}
 	} else {
-		$ag{structure} = "<para>This tag does not appear to be affected by, or affect, the rest of Interchange.</para>\n";
+		$ag{structure} = "This tag does not appear to be affected by, or affect, the rest of Interchange.\n";
 	}
 
 	# Expand template
@@ -1114,7 +1115,7 @@ $templates{filter} = <<'__ENDP__';
 <para>$ag{"description"}</para>
 </refsect1>
 
-<refsect1 id='$ag{"name"}_type"}'>
+<refsect1 id='$ag{"name"}_type'>
 <title>FILTER TYPE</title>
 <para>$ag{"filter type"}</para>
 </refsect1>
@@ -1203,7 +1204,7 @@ $ag{"synopsis"}
 <para>$ag{"description"}</para>
 </refsect1>
 
-<refsect1 id='$ag{"name"}_structure"}'>
+<refsect1 id='$ag{"name"}_structure'>
 <title>BEHAVIOR</title>
 <para>$ag{"structure"}</para>
 </refsect1>
@@ -1272,7 +1273,7 @@ $ag{"synopsis"}
 <para>$ag{"description"}</para>
 </refsect1>
 
-<refsect1 id='$ag{"name"}_type"}'>
+<refsect1 id='$ag{"name"}_type'>
 <title>DIRECTIVE TYPE</title>
 <para>$ag{"directive type"}</para>
 </refsect1>
