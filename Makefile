@@ -157,7 +157,6 @@ tmp/stattrees:
 	ctags -f cache/$$p/.tags -R --extra=fq --fields=afikKlmnsSz --line-directives sources/$$p \
 	; done
 
-
 #
 # Cleanup
 #

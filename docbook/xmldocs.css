@@ -291,6 +291,11 @@ a { text-decoration: none; }
 	border: dashed 1px white;
 }
 
+.database {
+	border: dotted 1px #cee7f6;
+	padding-left: 3mm;
+}
+
 a {
 	color: #208cbd;
 }
