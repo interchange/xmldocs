@@ -1,15 +1,3 @@
-# The usual comments can be used here. 
-# To override a field, supply a value
-# To let it through unmodified, simply leave the fields empty
-#  id: name of the output file (defaults to <name>)
-id:
-#  name: visible name in the pages
-name:
-#  purpose: oneline description (MUST FILL IN)
 purpose: custom subroutine to run after Variable substitution, before interpolation
-#  specify person(s). Defaults to icdevgroup
-author:
-#  leave empty; GPL is the default
-copyright:
-see also: init_page, post_page
 default: none
+see also: init_page, post_page

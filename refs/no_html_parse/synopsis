@@ -1,4 +1,3 @@
 <synopsis><![CDATA[
-[pragma no_html_parse]
-[pragma no_html_parse 0]
+Pragma no_html_parse <0|1>
 ]]></synopsis>

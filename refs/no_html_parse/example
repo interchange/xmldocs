@@ -5,13 +5,12 @@ Tag parsing
 </title>
 
 <para>
-If you want to enable or disable this pragma for only a particular page,
+If you want to enable this pragma for only a particular page,
 do anywhere in the page:
 </para>
 
 <programlisting><![CDATA[
 [pragma no_html_parse]
-[pragma no_html_parse 0]
 ]]></programlisting>
 
 </example>

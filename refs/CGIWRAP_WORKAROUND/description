@@ -1,1 +1,1 @@
-Implemented to fix the Cobalt CGIwrap problem. When set, removes the script name from the URL pathinfo.
+Implements the fix for the Cobalt CGIwrap problem. When set, removes the script name from the URL pathinfo.

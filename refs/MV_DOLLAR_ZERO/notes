@@ -1,3 +1,3 @@
 Note that this is set globally (and only once) when the Interchange daemon starts, so it is pointless to change the variable in runtime.
 </para><para>
-It will also <emphasis>not</emphasis> work on BSD kernels.
+This variable will have <emphasis>no</emphasis> effect on BSD kernels.

@@ -1,23 +1,2 @@
-# The usual comments can be used here. 
-# To override a field, supply a value
-# To let it through unmodified, simply leave the fields empty
-
-#  purpose: oneline description (MUST FILL IN)
 purpose: strip whitespace from the top of Interchange-served HTML pages
-# Please take time to fill in the See Also line.
-#  Just name the related symbols. The system will work everything out.
-#  (Note that if you link some item from here, that item will auto-point
-#  back here (under "indirect links" section))
-see also:
-
-# Usually not needed to modify below
-
-#  id: name of the output file (defaults to <name>)
-id:
-#  name: visible name in the pages
-name:
-#  specify person(s). Defaults to icdevgroup
-author:
-#  leave empty; GPL is the default
-copyright:
 default: 0
