@@ -104,13 +104,11 @@
 		Lining up <literal>=</literal>s in a series of assignments can be
 		used to emphasize the parallel structure.
 <programlisting><![CDATA[
-sub init_calc {
-#::logDebug("reset_state=$Vend::Calc_reset init_state=$Vend::Calc_initialized -- initting calc from " . caller);
-	reset_calc() unless $Vend::Calc_reset;
-	$CGI_array  = \%CGI::values_array;
-	$CGI        = \%CGI::values;
-	$Carts      = $::Carts;
-	$Items      = $Vend::Items;
+    reset_calc() unless $Vend::Calc_reset;
+    $CGI_array  = \%CGI::values_array;
+    $CGI        = \%CGI::values;
+    $Carts      = $::Carts;
+    $Items      = $Vend::Items;
 ]]></programlisting>
 	</para></listitem>
 

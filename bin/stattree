@@ -38,7 +38,8 @@ my $cpath = $ENV{PWD};
 my $ctx_p = 10; # How much context lines to show before
 my $ctx_n = 4; #                                after
 my %resolver_path; # Support for stack (a -> b -> c -> d   =>
-                   # a = d with full "path" recorded). This expands MapRoutines.
+                   # a = d with full "path" recorded). This expands
+                   # MapRoutines, parse_ functions and things like that.
 
 # All file types should be listed here or the stats wont be accurate.
 # It should be reported if an unknown file is found in the archive (you can 
@@ -451,8 +452,8 @@ sub wanted {
 				};
 
 				# Push whole resolved chain; last item is actual function
-				if ( $resolver_path{$tagname} ) {
-					while ( my $spath = shift @{ $resolver_path{$tagname} } ) {
+				if ( $resolver_path{$c{fsubtype}}{$tagname} ) {
+					while (my $spath=shift @{ $resolver_path{$c{fsubtype}}{$tagname}}){
 						push @{ $hash{symbols}{$c{fsubtype}}{$tagname} }, {
 							ctxpre => 0,
 							ctxpost => 0,
@@ -818,10 +819,7 @@ sub file_parseVendConfig {
 
 # This is basically an excersize in bracket-matching
 sub file_extractSub {
-	my $tagname = shift;
-	my $func = shift;
-	my $c = shift;
-	my $context_data = shift;
+	my ( $tagname, $func, $c, $context_data) = @_;
 
 	my $done = 0;
 	$func or die "file_extractSub with no args?\n";
@@ -840,7 +838,7 @@ sub file_extractSub {
 		my $line = $fc[$i];
 
 		if ( $line =~ /^\*$func = \\\&(\S+);/ ) {
-			push @{ $resolver_path{$tagname} }, {
+			push @{ $resolver_path{$$context_data{group}}{$tagname} }, {
 				name => $func,
 				file => "lib/$path",
 				lnum => $start,
@@ -875,7 +873,7 @@ sub file_extractSub {
 
 	# func in lib/$path from $start to $end
 	$content = join '', @content;
-	push @{ $resolver_path{$tagname} }, {
+	push @{ $resolver_path{$$context_data{group}}{$tagname} }, {
 		name => $func,
 		file => "lib/$path",
 		lnum => $start,

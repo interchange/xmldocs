@@ -1,3 +1,33 @@
 __NAME__ purpose
-(obsolete)
+(obsolete) explicitly specify pages or directories that are not to be cached when static page building is enabled
 __END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'>file or directory name</arg>
+</group>
+__END__
+
+__NAME__ see also
+Static, StaticAll, StaticDepth, StaticDir, StaticPath, StaticPattern,
+StaticIndex, StaticLogged, StaticPage, StaticDBM, StaticFly, 
+StaticSessionDefault, StaticSuffix, StaticTrack
+__END__
+
+
+__NAME__ description
+The directive lists names of &IC; pages that are not to be built statically
+if &glos-static; page building is in use. If the name is a directory, no
+pages in that directory (or any below it) will be cached or built statically.
+__END__
+
+
+__NAME__ example: Setting NoCache
+Put the following in &ccf;:
+<programlisting>
+NoCache ord special
+</programlisting>
+__END__
+
+

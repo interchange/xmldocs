@@ -1,0 +1,44 @@
+__NAME__ purpose
+only honor the toplevel domain in IP qualification
+__END__
+
+
+__NAME__ see also
+DomainTail,IpHead,IpQuad,WideOpen
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>yes</arg>
+	<arg choice='plain'>no</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive simply specifies that only the toplevel domain 
+should be used in IP qualification for &glos-session; IDs.
+If, for example, an IP was <literal>ri01-053.dialin.iskon.hr</literal>,
+only <literal>iskon.hr</literal> would be used.
+__END__
+
+TODO: how does this work with non-resolving stuff?
+
+__NAME__ notes
+This directive is a compromise on security, but it allows browsers that
+do not accept cookies to use multiple proxy servers in the same domain.
+Note that this directive is <emphasis role='bold'>enabled</emphasis>
+by default.
+</para><para>
+If you are encrypting credit cards with PGP/GPG or using payment services
+(such as CyberCash), then look at the &conf-WideOpen; directive, which
+enables more browser compatibility, again at the cost of some more security.
+__END__
+
+__NAME__ example: Disabling DomainTail
+<programlisting>
+DomainTail No
+</programlisting>
+__END__
+
