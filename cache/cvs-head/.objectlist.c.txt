@@ -1,0 +1,80 @@
+AF_LOCAL         macro        49 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c #define AF_LOCAL AF_UNIX
+BUFSIZE          macro       319 sources/cvs-head/dist/src/vlink.c #define BUFSIZE 16384
+BUFSIZE          macro       383 sources/cvs-head/dist/src/tlink.c #define BUFSIZE 16384
+CGIOUT           macro        46 sources/cvs-head/dist/src/vlink.c #define CGIOUT 1
+CGIOUT           macro        58 sources/cvs-head/dist/src/tlink.c #define CGIOUT 1
+ERRMSG           macro        49 sources/cvs-head/dist/src/vlink.c #define ERRMSG strerror
+ERRMSG           macro        51 sources/cvs-head/dist/src/vlink.c #define ERRMSG perror
+ERRMSG           macro        64 sources/cvs-head/dist/src/tlink.c #define ERRMSG strerror
+ERRMSG           macro        66 sources/cvs-head/dist/src/tlink.c #define ERRMSG perror
+IC_CONFIG_STRING_LEN macro        70 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c #define IC_CONFIG_STRING_LEN 100
+IC_DEFAULT_ADDR  macro        61 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c #define IC_DEFAULT_ADDR "127.0.0.1"
+IC_DEFAULT_CONNECT_RETRY_DELAY macro        64 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c #define IC_DEFAULT_CONNECT_RETRY_DELAY 2
+IC_DEFAULT_CONNECT_TRIES macro        63 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c #define IC_DEFAULT_CONNECT_TRIES 10
+IC_DEFAULT_PORT  macro        60 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c #define IC_DEFAULT_PORT 7786
+IC_DEFAULT_TIMEOUT macro        62 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c #define IC_DEFAULT_TIMEOUT 10
+IC_MAX_DROPLIST  macro        66 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c #define IC_MAX_DROPLIST 10
+IC_MAX_LIST_ENTRYSIZE macro        68 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c #define IC_MAX_LIST_ENTRYSIZE 40
+IC_MAX_ORDINARYLIST macro        67 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c #define IC_MAX_ORDINARYLIST 10
+IC_MAX_SERVERS   macro        69 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c #define IC_MAX_SERVERS 2
+INADDR_NONE      macro        51 sources/cvs-head/dist/src/tlink.c #define INADDR_NONE -1
+MODULE_VERSION   macro         1 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c #define MODULE_VERSION "mod_interchange/1.30"
+PERL             macro        25 sources/cvs-head/dist/src/mvctl.c #define PERL "/usr/bin/perl"
+PF_LOCAL         macro        53 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c #define PF_LOCAL PF_UNIX
+SUN_LEN          macro        57 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c #define SUN_LEN(su) (sizeof(*(su)) - sizeof((su)->sun_path) + strlen((su)->sun_path))
+VendRoot         macro        26 sources/cvs-head/dist/src/mvctl.c #define VendRoot "/home/minivend"
+buf_size         macro       120 sources/cvs-head/dist/src/vlink.c #define buf_size 1024 /* output buffer size */
+buf_size         macro       153 sources/cvs-head/dist/src/tlink.c #define buf_size 1024 /* output buffer size */
+close_socket     function    174 sources/cvs-head/dist/src/vlink.c static void close_socket()
+close_socket     function    238 sources/cvs-head/dist/src/tlink.c static void close_socket()
+die              function     71 sources/cvs-head/dist/src/vlink.c static void die(e, msg)
+die              function    104 sources/cvs-head/dist/src/tlink.c static void die(e, msg)
+get_entity       function     89 sources/cvs-head/dist/src/vlink.c get_entity()
+get_entity       function    122 sources/cvs-head/dist/src/tlink.c get_entity()
+get_the_host     function     81 sources/cvs-head/dist/src/tlink.c struct hostent *get_the_host(char *host, struct in_addr *ip_address)
+ic_connect       function    390 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c static BUFF *ic_connect(request_rec *r,ic_conf_rec *conf_rec)
+ic_connectretrydelay_cmd function    331 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c static const char *ic_connectretrydelay_cmd(cmd_parms *parms,void *mconfig,const char *arg)
+ic_connecttries_cmd function    318 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c static const char *ic_connecttries_cmd(cmd_parms *parms,void *mconfig,const char *arg)
+ic_create_dir_config function    131 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c static void *ic_create_dir_config(pool *p,char *dir)
+ic_droprequestlist_cmd function    344 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c static const char *ic_droprequestlist_cmd(cmd_parms *parms,void *mconfig,const char *arg)
+ic_handler       function    805 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c static int ic_handler(request_rec *r)
+ic_initialise    function    118 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c static void ic_initialise(server_rec *s,pool *p)
+ic_interchangescript_cmd function    376 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c static const char *ic_interchangescript_cmd(cmd_parms *parms,void *mconfig,const char *arg)
+ic_ordinaryfilelist_cmd function    360 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c static const char *ic_ordinaryfilelist_cmd(cmd_parms *parms,void *mconfig,const char *arg)
+ic_select        function    458 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c static int ic_select(int sock_rd,int sock_wr,int secs,int usecs)
+ic_send_request  function    489 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c static int ic_send_request(request_rec *r,ic_conf_rec *conf_rec,BUFF *ic_buff)
+ic_server_cmd    function    200 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c static const char *ic_server_cmd(cmd_parms *parms,void *mconfig,const char *arg)
+ic_server_setup  function    227 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c static const char *ic_server_setup(cmd_parms *parms,void *mconfig,int server,const char *arg)
+ic_serverbackup_cmd function    210 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c static const char *ic_serverbackup_cmd(cmd_parms *parms,void *mconfig,const char *arg)
+ic_transfer_response function    699 sources/cvs-head/dist/src/mod_interchange/mod_interchange.c static int ic_transfer_response(request_rec *r,BUFF *ic_buff)
+itoa             function    241 sources/cvs-head/dist/src/vlink.c static char* itoa(i)
+itoa             function    305 sources/cvs-head/dist/src/tlink.c static char* itoa(i)
+main             function     34 sources/cvs-head/dist/src/mvctl.c int main(argc, argv)
+main             function    478 sources/cvs-head/dist/src/vlink.c int main(argc, argv)
+main             function    542 sources/cvs-head/dist/src/tlink.c int main(argc, argv)
+new_buffer       function    328 sources/cvs-head/dist/src/vlink.c static struct buffer* new_buffer()
+new_buffer       function    392 sources/cvs-head/dist/src/tlink.c static struct buffer* new_buffer()
+open_socket      function    130 sources/cvs-head/dist/src/vlink.c static void open_socket()
+open_socket      function    163 sources/cvs-head/dist/src/tlink.c static void open_socket()
+out              function    208 sources/cvs-head/dist/src/vlink.c static void out(len, str)
+out              function    272 sources/cvs-head/dist/src/tlink.c static void out(len, str)
+outs             function    233 sources/cvs-head/dist/src/vlink.c static void outs(str)
+outs             function    297 sources/cvs-head/dist/src/tlink.c static void outs(str)
+outv             function    253 sources/cvs-head/dist/src/vlink.c static void outv(str)
+outv             function    317 sources/cvs-head/dist/src/tlink.c static void outv(str)
+read_from_server function    339 sources/cvs-head/dist/src/vlink.c static int read_from_server(bp)
+read_from_server function    403 sources/cvs-head/dist/src/tlink.c static int read_from_server(bp)
+return_response  function    377 sources/cvs-head/dist/src/vlink.c static void return_response()
+return_response  function    441 sources/cvs-head/dist/src/tlink.c static void return_response()
+send_arguments   function    267 sources/cvs-head/dist/src/vlink.c static void send_arguments(argc, argv)
+send_arguments   function    331 sources/cvs-head/dist/src/tlink.c static void send_arguments(argc, argv)
+send_entity      function    303 sources/cvs-head/dist/src/vlink.c send_entity()
+send_entity      function    367 sources/cvs-head/dist/src/tlink.c send_entity()
+send_environment function    283 sources/cvs-head/dist/src/vlink.c static void send_environment()
+send_environment function    347 sources/cvs-head/dist/src/tlink.c static void send_environment()
+server_not_running function     58 sources/cvs-head/dist/src/vlink.c void server_not_running()
+server_not_running function     71 sources/cvs-head/dist/src/tlink.c void server_not_running()
+write_out        function    184 sources/cvs-head/dist/src/vlink.c static void write_out()
+write_out        function    248 sources/cvs-head/dist/src/tlink.c static void write_out()
+write_to_client  function    360 sources/cvs-head/dist/src/vlink.c static int write_to_client(bp)
+write_to_client  function    424 sources/cvs-head/dist/src/tlink.c static int write_to_client(bp)

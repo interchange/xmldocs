@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE catalog PUBLIC "-//OASIS//DTD Entity Resolution XML Catalog V1.0//EN"
+    "http://www.oasis-open.org/committees/entity/release/1.0/catalog.dtd">
+
+
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+
+	<public publicId="-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+	        uri="../docbook/docbookxi.dtd"/>
+
+	<system systemId="iccattut-nochunks-targets"
+		uri="iccattut-nochunks-targets.db" />
+
+	<system systemId="iccattut-chunks-targets"
+		uri="iccattut-chunks-targets.db" />
+
+</catalog>
+

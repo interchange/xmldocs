@@ -1,0 +1,194 @@
+#!/usr/bin/perl
+# Davor Ocelic, docelic@mail.inet.hr
+# Simple perl script that creates text database files.
+
+#
+# PURPOSE:
+#	dbgen.pl can be used to quickly create sample Minivend
+#	or Interchange databases. It should come handy during the
+#	test phase.
+#
+#	It currently creates text, TAB delimited files.
+#
+#	The generated data will, of course, be meaningless, but the
+#	user can specify column names and types, which should allow
+#	him to test the engine on arbitrary number of random-generated
+#	records.
+#
+# COMMAND LINE OPTIONS:
+#	-f --fields          : Set column names
+#	-v --values          : Specify data types for the columns.
+#	                       Use the same order in which you specified --fields
+#	-c --count           : The number of records to generate
+#	-d --debug --nodebug : Print few lines of debug data
+#	-r --chartable       : Load in the charset/symbols to use from a file.
+#
+# USAGE:
+# 	Use program defaults for column names and types, and print out
+# 	5 sample records:
+#	 perl dbgen.pl
+#
+#	Which is equal to:
+#	 perl dbgen.pl --fields='sku|description|price'
+#	               --values='INC(0,1)|STRAND(8)|RAND(1500,"%.2f")'
+#	               --count=5
+#
+# SYNTAX:
+#	--values='INC(0,1)|STRAND(8)|RAND(1500,"%.2f")' can also be specified as:
+#	--values='INC(0,1)|STRAND(8)' --values='RAND(1500,"%.2f")'
+#
+#	The pipe (|) character is used as the element separator.
+#
+#	The "fields" option just accepts the column names, where their order
+#	in the database file is the same as the one on the command line.
+#	For example, this specifies a 5-column db:
+#	  --fields="sku|description|price" --fields="desc_long|quant"
+#
+#
+#	The "values" field accepts column specifications, and can be any
+#	combination of:
+#	  INC(st,inc) - start from "st", and increment by "inc". Useful for
+#	    auto-increment fields or unique keys (SKUs for example).
+#	    For example, --fields=sku --values='INC(0,2)' --count 4
+#	    would create a single-column table with SKUs 0,2,4 and 8 (start from 0
+#	    and increment by 2 in each of 4 iterations).
+#	  RAND(num,'fmt') - generate a random number, not greater than "num",
+#	    and output it via the standard printf routine, using "fmt" as the
+#	    format specification.
+#	  STRAND(len) - Using the characters available in a specified character
+#	    map, create a random string of length "len". When specifying a custom
+#	    character map, each "character" has to be alone in it's own line.
+#	    It is also possible to specify /usr/share/dict/words or something
+#	    similar as the "chartable" file, but then the generated string lengths
+#	    would not be exact (they would be equal, or few characters larger than
+#	    the length you specified).
+#	  SET("something") - Fixed-content field. Anything you specify will be
+#	    inserted in the database verbatim.
+#
+#
+
+use Getopt::Long;
+
+# Basic init
+my @fields = ();
+my @values = ();
+my $count = 5;
+my @chartable = ();
+my $current_field_num = 0;
+my $debug = 0;
+my @defchartable = qw/a b c d e f g h i j k l m n o p q r s t u w x y z _/;
+push (@defchartable, " ");
+
+# GetOptions
+unless ( GetOptions (
+	"f|fields=s"	=> \@fields,
+	"v|values=s"	=> \@values,
+	"c|count=s" 	=> \$count,
+
+	"d|debug!"	=> \$debug,
+	"r|chartable=s"	=> \$chartablefile
+
+)) { die "Can't process command line options\n" } ;
+
+# Option checks
+@fields = split(/\|/, join('|', @fields));
+@values = split(/\|/, join('|', @values));
+unless ($chartablefile) {
+	@chartable = @defchartable;
+} else {
+	open(CHARTABLE, "< $chartablefile")
+		or die "Can't open character table file '$chartablefile' for reading ($!)\n";
+	while (<CHARTABLE>) {
+		chomp;
+		push (@chartable, $_);
+	}
+	close(CHARTABLE);
+}
+
+# Okay, set defaults here.
+scalar(@fields) or @fields = qw/sku description price/;
+scalar(@values) or @values = qw/INC(0,1) STRAND(16) RAND(1500,'%.2f')/;
+
+# Check for fields/values match
+die "Field/value parameters do not match\n" unless (scalar(@fields) == scalar(@values));
+
+# Print out summary
+if ($debug) {
+		print STDERR "FIELDS(", scalar(@fields), "): ", join(',', @fields), "\n";
+		print STDERR "VALUES(", scalar(@values), "): ", join(',', @values), "\n";
+		print STDERR "CHARTABLE: ", join(',', @chartable), ".\n";
+		print STDERR "    COUNT: ", $count, "\n";
+}
+
+# Let's prepare the array we will use in a loop to produce results
+for (my $p = 0; $p < scalar(@fields); $p++ ) {
+	# So, each entry has an array which holds its definition and a value from the previous pass
+	$runtime[$p] = $values[$p];
+	$oldval[$p] = '';
+}
+
+
+# Okay, let's begin
+print join("\t", @fields), "\n";
+
+
+for (my $l = 0; $l < $count; $l++ ) {
+	for (my $p = 0; $p < scalar(@runtime); $p++ ) {
+		$current_field_num = $p;
+		my $res = eval ( $runtime[$p] );
+		print $res;
+		print $p < $#runtime ? "\t" : "\n";
+		$oldval[$p] = $res;
+	}
+}
+
+
+
+
+
+
+
+## Helper functions
+# strand(length) - generate a random string of specified 'length'
+sub STRAND {
+	my $len = shift;
+	my $rndstring = '';
+	# ascii space from 65 to 91
+
+	unless ( $len =~ m/^\d+$/ ) { die "STRAND argument '$len' is invalid\n" };
+
+	for (my $p = 0; $p < $len; $p++ ) {
+		my $rndchr = $chartable[int(rand(scalar(@chartable)))];
+		$rndstring .= $rndchr;
+		length($rndchr) > 1 and $rndstring .= " ";
+		# Just to cover the case of specifying /usr/share/dict/words
+		# as the character table file
+		last if ( length($rndstring) >= $len );
+	}
+
+	return $rndstring;
+}
+
+
+# random number
+sub RAND {
+	my $max = shift;
+	my $fmtstring = shift;
+	my $last = shift;
+
+	my $rndnumber = rand($max);
+	return printf($fmtstring, $rndnumber);
+
+}
+
+# inc: starts with x, and increments by y in each pass
+sub INC {
+	my $start = shift;
+	my $inc = shift;
+
+	return "$oldval[$current_field_num]" ne ''  ? $oldval[$current_field_num] + $inc : $start;
+}
+
+# Simple user-defined value for a field
+sub SET { return shift; }
+

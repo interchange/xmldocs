@@ -1,0 +1,25 @@
+tutorial/:
+total 44
+drwxrwx---    7 interch  interch      4096 Jul  7 20:28 .
+drwxr-xr-x    4 interch  interch      4096 Jul  7 20:27 ..
+-rw-r--r--    1 interch  interch       110 Jul  7 20:00 bottom
+-rw-r--r--    1 interch  interch       328 Jul  7 19:57 catalog.cfg
+drwxr-xr-x    2 interch  interch      4096 Jul  7 20:27 etc
+-rw-r--r--    1 interch  interch        64 Jul  7 20:00 left
+drwxr-xr-x    2 interch  interch      4096 Jul  7 20:00 pages
+drwxr-xr-x    2 interch  interch      4096 Jul  7 19:59 products
+drwxr-xr-x    2 interch  interch      4096 Jul  7 20:27 session
+drwxr-xr-x    2 interch  interch      4096 Jul  7 20:27 tmp
+-rw-r--r--    1 interch  interch       230 Jul  7 19:59 top
+
+tutorial/pages:
+total 12
+drwxr-xr-x    2 interch  interch      4096 Jul  7 20:00 .
+drwxrwx---    7 interch  interch      4096 Jul  7 20:28 ..
+-rw-r--r--    1 interch  interch        81 Jul  7 20:00 index.html
+
+tutorial/products:
+total 12
+drwxr-xr-x    2 interch  interch      4096 Jul  7 19:59 .
+drwxrwx---    7 interch  interch      4096 Jul  7 20:28 ..
+-rw-r--r--    1 interch  interch       359 Jul  7 19:58 products.txt

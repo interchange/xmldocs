@@ -1,0 +1,123 @@
+__TOP__
+__LEFT__
+<h1>Checkout Page</h1>
+
+<form method="post" action="[process]">
+<input type="hidden" name="mv_todo" value="submit">
+<input type="hidden" name="mv_order_profile" value="order_profile">
+<input type="hidden" name="mv_cyber_mode" value="minivend_test">
+
+<table cellpadding="3">
+
+<tr>
+<td align="right"><b>First name:</b></td>
+<td><input type="text" name="fname" value="[value fname]"></td>
+</tr>
+
+<tr>
+<td align="right"><b>Last name:</b></td>
+<td><input type="text" name="lname" value="[value lname]"></td>
+</tr>
+
+<tr>
+<td align="right" rowspan="2"><b>Address:</b></td>
+<td><input type="text" name="address1" value="[value address1]"></td>
+</tr>
+
+<tr>
+<td><input type="text" name="address2" value="[value address2]"></td>
+</tr>
+
+<tr>
+<td align="right"><b>City:</b></td>
+<td><input type=text name=city value="[value city]"></td>
+</tr>
+
+<tr>
+<td align="right"><b>State:</b></td>
+<td><input type="text" name="state" value="[value state]"></td>
+</tr>
+
+<tr>
+<td align="right"><b>Postal code:</b></td>
+<td><input type="text" name="zip" value="[value zip]"></td>
+</tr>
+
+<tr>
+<td align="right"><b>Country:</b></td>
+<td><input type="text" name="country" value="[value country]"></td>
+</tr>
+
+</table>
+
+<p>
+Note: We assume that your billing address is the same as your shipping address.
+</p>
+
+<table cellpadding="3">
+
+<tr>
+<td align="right"><b>Credit card number:</b></td>
+<td><input type="text" name="mv_credit_card_number" value="" size="20"></td>
+</tr>
+
+<tr>
+<td align="right"><b>Credit card expiration date:</b></td>
+<td>
+
+Month:
+<select name=mv_credit_card_exp_month>
+[loop
+   lr=1
+   option=mv_credit_card_exp_month
+   list="
+1	01 - January
+2	02 - February
+3	03 - March
+4	04 - April
+5	05 - May
+6	06 - June
+7	07 - July
+8	08 - August
+9	09 - September
+10	10 - October
+11	11 - November
+12	12 - December"]
+<option value="[loop-code]">[loop-pos 1]
+[/loop]
+</select>
+
+Year:
+<select name=mv_credit_card_exp_year>
+[comment]
+   This should always return the current year as the first, then
+   seven more years.
+[/comment]
+[loop option=mv_credit_card_exp_year lr=1 list=`
+  my $year = $Tag->time( '', { format => '%Y' }, '%Y' );
+  my $out = '';
+  for ($year .. $year + 7) {
+    /\d\d(\d\d)/;
+    $last_two = $1;
+    $out .= "$last_two\t$_\n";
+  }
+  return $out;
+`]
+  <option value="[loop-code]">[loop-pos 1]
+[/loop]
+</select>
+
+</td>
+</tr>
+
+</table>
+
+<p>
+<input type="submit" name="submit" value="Finalize!">
+<input type="reset" name="reset" value="Reset">
+</p>
+
+</form>
+
+<p>[page index]Return to shopping instead</a></p>
+__BOTTOM__

@@ -1,0 +1,251 @@
+#!/usr/bin/perl
+#
+# Perl script to build Interchange source tree statistics.
+# Data is collected and dumped using Storable, that's where 
+# this script's job ends.
+#
+# Other tools can then only read the dump to get information,
+# they shouldn't parse the sources again.
+#
+
+use warnings;
+use strict;
+use Fatal qw/chdir/;
+use File::Find;
+use Data::Dumper;
+use Getopt::Long;
+use Storable qw/nstore_fd fd_retrieve/;
+use Fcntl qw/:DEFAULT :flock/;
+
+# Dumper behavior
+$Data::Dumper::Indent = 1;
+$Data::Dumper::Terse++;
+$Data::Dumper::Sortkeys++;
+
+# Vars
+my $verbose = 0;
+my $cachedir = $ENV{CACHE} || "cache";
+my %hash;
+my $cpath = $ENV{PWD};
+
+# All types should be listed here or the stats wont. It should be
+# reported if an unknown file is found in the archive
+# Order is important. First match wins.
+my %binary_types = (
+	images => [qw/\.gif \.jpeg \.jpg \.png \.bmp/],
+	);
+my %text_types = (
+	database => [qw|\.(..)?sql \.ora \..?dbm \.notes \.csv
+		/products/\S+\.txt \.asc|],
+	release_helpfile => [qw/^WHATSNEW-\d+\.\d+ README(\..+)? TODO
+		^LICENSE ^MANIFEST(\.skip)? ^UPGRADE \.cvsignore \.append/],
+	build_helpfile => [qw/configure ^debian.* ^SPECS.*/],
+	catalog_helpfile => [qw/\.access \.log \.error \.(auto)?number \.empty/],
+	config => [qw/\.cfg \.dist/],
+	c => [qw/\.c \.in/],
+	perl => [qw/\.pl \.pm/],
+	usertag => [qw|UserTag/\S+\.tag \.tag|],
+	systemtag => [qw|SystemTag/\S+\.coretag|],
+	uitag => [qw|UI_Tag/\S+\.coretag|],
+	filter => [qw/\.filter/],
+	actionmap => [qw/\.am/],
+	html => [qw/\.css \.html?/],
+	widget => [qw/\.widget/],
+	profile => [qw|/profiles/.+ \.profiles \.login \.order|],
+	globalsub => [qw|/globalsub/.+|],
+	variable => [qw|/vars/.+ /variables/.+|],
+);
+
+my $binary_types;
+my $text_types;
+for ( keys %binary_types ) { $binary_types += scalar @{ $binary_types{$_} } }
+for ( keys %text_types ) { $text_types += scalar @{ $text_types{$_} } }
+
+# A general overview: how many different contents do we have
+$hash{total}{types} = $binary_types + $text_types;
+$hash{total}{binary_types} = $binary_types;
+$hash{total}{text_types} = $text_types;
+
+
+# Parse args (not much available anyway :)
+unless ( GetOptions ( 
+	"verbose|v!" => \$verbose,
+)) { die "Error parsing options\n" }
+
+@ARGV == 1 or die "Usage: $0 path[/] \n";
+
+# $path is the dir to process, $dumppath is relocated name, say
+# sources/cvs-head becomes output/cvs-head/cache
+my $path = shift;
+( my $dumppath = $path ) =~ s#.+?/##;
+my $dumpdir = $dumppath;
+$dumppath .= "/.cache.bin";
+
+# Convenient routine to just discover all files in a module
+chdir $path; # Go into the directory
+find({
+	wanted => \&wanted,
+	bydepth => 0,
+	no_chdir=> 1,
+}, ".");
+chdir $cpath; # Return to starting location
+
+
+# Dump
+print STDERR Dumper \%hash if $verbose;
+dumpdb( "$cachedir/$dumppath" );
+
+exit 0;
+
+#################################################################
+# Helpers below
+sub wanted {
+	( my $file = $_ ) =~ s/^\.\///;
+
+	# Things we ignore
+	return if /(^|\/)(CVS|\.cvs|\.svn|\.autoload)(\/.+[^\/])?$/;
+	
+	stat($file);
+
+	# totals
+	if ( -d $file ) {
+		$hash{total}{directories}++;
+		$hash{tree}{$file}{type} = "directory";
+		return;
+	} else {
+		$hash{total}{files}++;
+		$hash{total}{size} += (stat _)[7];
+	}
+
+	# file data itself (collected for all types)
+	$hash{tree}{$file} = {
+		size => (stat _)[7],
+		atime => (stat _)[8],
+		mtime => (stat _)[9],
+		ctime => (stat _)[10],
+	};
+
+	#
+	# Make sure the file extension is known (we're entering
+	# content-based processing now, not filename-based as above).
+
+	my $ftype;
+	my $fsubtype;
+	my $fext;
+	# Binary
+	for my $k ( keys %binary_types ) {
+		for my $t ( @{ $binary_types{$k} } ) {
+			if ( $file =~ /$t$/i ) {
+				$ftype = "binary"; $fsubtype = "$k"; $fext = $t;
+				goto EXTDONE;
+			}
+		}
+	}
+	#Text
+	for my $k ( keys %text_types ) {
+		for my $t ( @{ $text_types{$k} } ) {
+			if ( $file =~ /$t$/i ) {
+				$ftype = "text"; $fsubtype = "$k"; $fext = $t;
+				goto EXTDONE;
+			}
+		}
+	}
+	# Unknown
+	print STDERR "$file UNKNOWN\n" if $verbose;
+	return; # We're not interested in handling that
+
+	EXTDONE:
+
+	# ftype, fsubtype and fext are known here
+	$hash{total}{$ftype."_files"}++;
+	$hash{total}{filetypes}{$fsubtype}++;
+	$hash{total}{matches}{$fext}++;
+	$hash{tree}{$file}{type} = "$ftype";
+	$hash{tree}{$file}{subtype} = "$fsubtype";
+	$hash{tree}{$file}{ext} = "$fext";
+
+	# No more job with binary files
+	return if $ftype eq 'binary';
+
+	# Open text file, parse contents
+	open IN, "< $file" or die "Can't open $file ($!)\n";
+
+	while (<IN>) {
+		$hash{tree}{$file}{lines}++ 
+
+		# TODO:
+		# - parse contents, identify blocks and add to appropriate
+		#   counters.
+		# - code with inline comments or html with tags count as "gray area"
+		#   (adds 1 to both)
+	}
+
+	close IN;
+}
+
+# Storable dumper
+sub dumpdb {
+
+	my $dbpath = shift;
+
+	sysopen( OUT, $dbpath, O_WRONLY|O_CREAT, 0664 ) or
+		die "Can't dump ($dbpath) ($!).\n";
+	flock( OUT, LOCK_EX ) or
+		die "Can't exclusive-lock ($dbpath) ($!).\n";;
+	nstore_fd(\%hash, \*OUT ) or
+		die "Can't dump to ($dbpath) ($!).\n";
+	truncate( OUT, tell(OUT));
+	close OUT or
+		die "Can't properly close database ($dbpath) ($!).\n";
+
+}
+
+#
+#	This is how the final dumped hash looks like:
+# The %hash is per-module (main directory) of course!
+#
+# %hash = (
+# 	# General overview, summarized statistics
+# 	total => {
+#
+# 		types            # all extensions: binary + text
+#
+# 		binary_types     # how many file types are considered binary
+# 		
+# 		text_types       # how many file types are considered text
+# 		
+#			files            # total number of files (non-dirs)
+#
+#			directories      # total number of dirs
+#
+#			binary_files     # how many bin files in total
+#
+#			text_files       # how many text files in total
+#
+#			size             # total size
+# 	
+#			matches => {     # files with that extension/selector
+# 			...ext...
+# 		}
+#
+#			filetypes => {   # files of that type
+# 			...ftype...
+# 		}
+#
+#		# Each file's stat() data
+# 	tree => {
+# 		...file... => {
+#				size => (stat _)[7],
+#				atime => (stat _)[8],
+#				mtime => (stat _)[9],
+#				ctime => (stat _)[10],
+#				type  => directory/text/binary
+#				(for text only below)
+#				subtype> subtype (binary image, text c source, text perl source..)
+#				ext   => extension as recognized by file matcher
+#				lines => number of lines
+# 		}
+# 	}
+# )
+#
+#

@@ -1,0 +1,21 @@
+[include top]
+[include left]
+<table cellpadding="5">
+	<tr>
+		<th>Test #</th>
+		<th>Description</th>
+		<th>Price</th>
+	</tr>
+	[loop search="ra=yes/fi=products"]
+	<tr>
+		<td>[loop-code]</td>
+		<td>
+			<a href="[loop-code].html">
+			[loop-field description]
+			</a>
+		</td>
+		<td align="right">[loop-field price]</td>
+	</tr>
+	[/loop]
+</table>
+[include bottom]

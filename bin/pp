@@ -1,0 +1,195 @@
+#!/usr/bin/perl
+
+# docelic@icdevgroup.org / July 10, 2004.
+
+# Script that expands various shorthands to valid XML. Useful if 
+# writing long chunks of new XML and want a little help in the 
+# process. Then preprocess the source with this script, and you'll
+# get full, expanded XML out.
+# 
+# See comments below for all the syntax and expansions/modifications
+# performed on the input stream (search for "# \d:" to jump directly)
+
+use warnings;
+use strict;
+
+# Translation table
+my %tt = (
+	L => 'itemizedlist',
+	I => [qw/listitem para/],
+	P => 'para',
+	C => 'command',
+	E => 'emphasis',
+	PL => 'programlisting',
+	PLC => 'programlisting', # PL with CDATA
+	SRC => 'xi:include',
+	NOTE => [qw/note para/],
+	IMP => [qw/important para/],
+	WARN => [qw/warning para/],
+);
+
+# Mimic docbook entities
+my %entities = ( 
+	IC        =>'<ulink url="http://www.icdevgroup.org">Interchange</ulink>',
+	ICCVS     => '<ulink url="http://www.icdevgroup.org/i/dev/cvs.html">CVS</ulink>',
+	ICDL      => '<ulink url="http://http://www.icdevgroup.org/i/dev/download.html">tarball</ulink>',
+	ICSTDCAT  => 'interchange-cat-standard',
+	FS        => '<ulink url="http://www.fsf.org">Free Software</ulink>',
+	GNU       => '<ulink url="http://www.gnu.org">GNU</ulink>',
+	DEB       => '<ulink url="http://www.debian.org">Debian</ulink>',
+	RH        => '<ulink url="http://www.redhat.com">Red Hat</ulink>',
+	"RFC-STATE" => '<ulink url="http://www.ietf.org/rfc/rfc2109.txt">RFC 2109</ulink>',
+);
+
+# Default parameters (Watch out for the starting/ending space!)
+my %dp = (
+	SRC => " parse='text' "
+);
+
+# Default content for tags
+my %dcstart = (
+	PLC => '<![CDATA[',
+);
+my %dcend = (
+	PLC => ']]>',
+);
+
+my $sect = 0;
+my $active = 1;
+
+while (<STDIN>) {
+
+	my $line = $_;
+
+	#
+	# 0: control flow. Possibility to turn off the expander (to avoid
+	# wrong expansions in say, <programlisting><![CDATA[ ... ]]>
+	#
+	# Stop preprocessor with <-NOEX(PAND)?>, re-enable with <-EX(PAND)?>
+	#
+	# Although xml uses only lowecase tags and we use only uppercase,
+	# the dash in "<-.*" needs to be present just to be sure we don't
+	# clash with html or anything eventually in uppercase.
+	#
+	if ( $line =~ s/<-NOEX(PAND)?>// ) { $active = 0; next}
+	if ( $line =~ s/<-EX(PAND)?>// ) { $active++; next}
+	goto DUMP unless $active;
+
+	# 1: Handle automatic IDS:
+	#
+	# <sectX>
+	# 	<title>something cool</title>
+	#
+	# becomes
+	#
+	# <sectX id="SomethingCool">
+	# 	<title>Something Cool</title>
+	#
+	# If <sect> contains a parameter (say, <sect something>), it's skipped.
+	# Also, if the <title> is not found on the next line, everything's
+	# passed on as-is.
+	#
+	if ( /(\s*)<sect(.)>\s*$/ ) {
+		my ( $space, $sectnum ) = ( $1, $2 );
+		my $title = <STDIN>;
+		$title =~ m#<title>(.+)</title># and do {
+			my @titles = split / /, $title;
+			for my $r (@titles) { $r = ucfirst($r) unless $r =~ /^(a|and|of|in|the|for|or)$/; }
+			$title = "@titles";
+			$title =~ m#<title>(.+)</title>#;
+			( my $stitle = $1 ) =~ s/\s+//g;
+			$stitle =~ s/[\/\-\.,]/_/g;
+			$stitle =~ s/.html?$//;
+			$stitle =~ s/^_//;
+			$line = "$space<sect$sectnum id='$stitle'>\n";
+		} or do {
+			$line = "$space<sect$sectnum>\n";
+		};
+		$line .= $title;
+	}
+
+	
+	#
+	# 2: GENERIC EXPANDER - turn every <X arg > or <X.arg.> to
+	# <xexpanded arg>. And every </X> to </xexpanded>.
+	# Character before "arg" and the one after it must match, they
+	# designate argument list (space is also accepted as shown above).
+	#
+	# Expansion is done according to a list, and expansion can turn one
+	# element into more elements: for example, <I> turns into
+	# <listitem><para> and </I> to </para></listitem>. Tags can also 
+	# have values appended. For example, <PL> turns into 
+	# "<programlisting><![CDATA[" and </PL> into "]]></programlisting>".
+	#
+	# General invocation is:
+	# For start tags: <-SHORTNAME((.)args(.))?>
+	#   (where the first "." and second "." must be the same characters).
+	# For end tags:   <-/SHORTNAME>
+	# Which shorthands are available, check in the list at the top 
+	# of the file.
+	#
+	# 1- cmd name (optional with "/"), 4- arguments
+	while ( $line =~ s/<-(\/?[A-Z]+)((.)(.+?)\3)?>/expandtag($1,$4)/ge ) {}
+
+
+	#
+	# 3: TODO
+	# Automatic file includer. If you call, say, <-INCL xyz>, it checks
+	# what variants of files/xyz* exist, and adds links to each. 
+	# If we have, say, files/{xyz/,xyz.tar,xyz.tgz,xyz.tbz2}, INCL
+	# would detect all that and provide <ulinks> for each of the 
+	# packages.
+
+
+	#
+	# 4: Simple entities replacement
+	while ( $line =~ s/&(\S+?);/$entities{$1} || $1/ge ) {}
+
+
+	# Finished
+	DUMP:
+	print $line;
+}
+
+
+sub expandtag {
+	# tag is in capslock (to differ from xml). $arg is optional
+	my ($tag, $arg) = @_;
+	length $tag or warn "Empty tag ?\n";
+
+	my $rev = ( $tag =~ s/^\/// ); # is it a closing tag?
+	$arg = " $arg" if $arg or $arg = ""; # for easier output later
+	my $ret = ""; # final string we'll return
+	
+	# get the list of tags we expand to. in the tt table, you can specify
+	# both a scalar (single tags) and arrays if we expand to multiple tags.
+	my @tags = $tt{$tag} ? 
+		( @{ ref $tt{$tag} ? $tt{$tag} : [$tt{$tag}] } ) : ();
+
+	# Check for unusual patterns
+	die "Closing tag has args in '$tag $arg' ?\n" if $rev and $arg;
+	unless ( scalar @tags ) {
+		#warn "Translation empty for $tag ?\n"
+		# We pass unrecognized tags just lowercased. (Maybe they have the
+		# $dcstart{} or $dcend{} entry even they're not in %tt ).
+		@tags = ( lc($tag) );
+	}
+
+	# Reverse the output line if we're closing
+	@tags = reverse @tags if $rev;
+
+	# build the return value
+	my $cnt; # Adding user parameters only to the first tag (if tag expands
+	         # to multiple tags)
+	for my $t (@tags) {
+		$ret .= 
+			( $rev ? $dcend{$tag} || "" : "" ) . # prepend $dcend{} before close
+			'<' . ( $rev ? "/" : "" ) . $t . # we have <tag or </tag now
+			( !$rev ? $dp{$tag} || "": "" ) . # Default parms for a tag
+			( !$cnt++ ? $arg||"" : "" ) . # User-specified parms for first tag!
+			'>' . # Ended tag
+			( $rev ? "" : $dcstart{$tag} || "" ); # append $dcstart{} after open
+	}
+	$ret;
+}
+

@@ -1,0 +1,31 @@
+
+<!-- Remove MsgSet -->
+<!ENTITY % compound.class "procedure|sidebar">
+<!ENTITY % msgset.content.module "IGNORE">
+
+
+<!ELEMENT xi:include (xi:fallback?)>
+<!ATTLIST xi:include
+    xmlns:xi        CDATA       #FIXED    "http://www.w3.org/2003/XInclude"
+    href            CDATA       #IMPLIED
+    parse           (xml|text)  "text"
+    xpointer        CDATA       #IMPLIED
+    encoding        CDATA       #IMPLIED
+    accept          CDATA       #IMPLIED
+    accept-charset  CDATA       #IMPLIED
+    accept-language CDATA       #IMPLIED
+>
+
+<!ELEMENT xi:fallback ANY>
+<!ATTLIST xi:fallback
+    xmlns:xi   CDATA   #FIXED   "http://www.w3.org/2003/XInclude"
+>
+
+<!ENTITY % local.para.char.mix "|xi:include">
+<!ENTITY % local.common.attrib  "xml:base  CDATA  #IMPLIED">
+
+
+<!-- Load DocBook -->
+<!ENTITY % DocBookDTD PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+	"file:///usr/share/xml/docbook/schema/dtd/4.2/docbookx.dtd"> %DocBookDTD;
+

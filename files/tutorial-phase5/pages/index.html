@@ -1,0 +1,24 @@
+__TOP__
+__LEFT__
+<table cellpadding="5">
+	<tr>
+		<th>Test #</th>
+		<th>Description</th>
+		<th>Price</th>
+	</tr>
+	[loop search="ra=yes/fi=products/tf=description"]
+	<tr>
+		<td>[loop-code]</td>
+		<td>
+			<a href="[loop-code].html">
+			[loop-field description]
+			</a>
+		</td>
+		<td align="right">[currency][loop-field price][/currency]</td>
+		<td>[order [loop-code]]Order Now</a></td>
+	</tr>
+	[/loop]
+</table>
+<hr>
+<p align=center>[page order]View shopping cart</a></p>
+__BOTTOM__

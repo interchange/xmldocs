@@ -1,0 +1,14 @@
+__NAME__ order_profile
+
+fname=required
+lname=required
+address1=required
+city=required
+state=required
+zip=required
+
+&fatal=yes
+&final=yes
+&credit_card=standard keep
+
+__END__

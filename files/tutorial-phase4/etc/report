@@ -1,0 +1,14 @@
+               Name: [value fname] [value lname]
+            Address: [value address1][if value address2]
+                     [value address2][/if]
+  City, State, etc.: [value city], [value state]  [value zip] [value country]
+
+      Credit Card #: [cgi mv_credit_card_number]
+    Expiration Date: [cgi mv_credit_card_exp_month]/[cgi mv_credit_card_exp_year]
+
+  ************ ORDER ************
+  [item-list]
+  [item-quantity] x [item-description] ([item-code]), [item-price] ea.
+  [/item-list]
+  Subtotal: [subtotal]
+     Total: [total-cost]

@@ -1,0 +1,17 @@
+	<tr>
+	<td align="center">
+		<form action="[area search]" method="post">
+		Search:<br>
+		[set testname]
+		      su=yes
+		      fi=product
+		      sf=sk
+		      sf=description
+		[/set]
+		<input type="hidden" name="mv_profile" value="testname>"
+		<input type="text" name="mv_searchspec" size="15" value="">
+		</form>
+		<hr>
+		__DISPLAYDATE__
+	</td>
+	<td align="center">

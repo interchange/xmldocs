@@ -1,0 +1,5 @@
+sku	description	price
+4595	Nice Bio Test	275.45
+2623	Stack of Econ Quizzes	1.24
+0198	Really Hard Physics Test	1589.34
+1299	Ubiquitous diff eq final	37.00
