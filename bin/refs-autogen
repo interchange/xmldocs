@@ -57,6 +57,7 @@ my %symbol_lists; # symbols listed in categories
 my %symbols; # FINAL symbol refentries
 my %templates;
 my $max_ctxs = 10;
+my @set_missing_all;
 
 my @page_order = (qw/purpose default structure synopsis description example notes bugs/, "symbol type", "source", "author", "copyright", "see also");
 
@@ -357,6 +358,7 @@ ENDD
 }
 
 # Output the 'invalid' list
+$invalid{$_} = ("Missing all (undocumented)") for @set_missing_all;
 open INVOUT, "> tmp/missing" or
 	die "Can't open tmp/missing ($!)\n";
 print INVOUT Dumper \%invalid;
@@ -445,37 +447,70 @@ sub populate {
 
 	# From other file sets
 	} elsif (! length $file) { # all files
-		opendir INDIR, "refs/$name/" or do {
-			push @{ $invalid{$name} }, "Missing directory (all other errors follow from this)";
-			return;
-		};
-		while (my $fn = readdir INDIR) {
-			next if $fn =~ /^\.|^CVS$/;
-			next if $fn eq 'control';
-			open INF, "< refs/$name/$fn" or
-				die "Can't open refs/$name/$fn ($!)\n";
 
-			( my $sect = $fn ) =~ s/[\-\.\+_:\d].*//;
-			$sect =~ s/([a-z])([A-Z])/$1 $2/g;
-			$sect = lc $sect;
+		if ( -d "refs/$name" ) {
+			opendir INDIR, "refs/$name/" or do {
+				warn "Can't open refs/$name/ ($!)\n";
+				return
+			};
+			while (my $fn = readdir INDIR) {
+				next if $fn =~ /^\.|^CVS$/;
+				next if $fn eq 'control';
+				open INF, "< refs/$name/$fn" or
+					die "Can't open refs/$name/$fn ($!)\n";
 
-			if (!( grep {/^$sect/} @page_order )) {
-				push @{ $invalid{$name} }, "Section '$sect' from file '$fn' won't be used (name not recognized)";
+				my $sect = $fn;
+
+				my $content = join "", <INF>;
+				close INF;
+
+				update_field ("append", $name, $ref, $fn, $sect, $content);
 			}
-			
-			my $content = join "", <INF>;
-			close INF;
+			closedir INDIR;
 
-			if ( $mode eq 'override' ) {
-				$$ref{$sect} = $content;
-			} elsif ( $mode eq 'append' ) {
-				$$ref{$sect} .= $content;
+		} elsif ( -f "refs/$name" ) {
+			open IN, "< refs/$name" or do {
+				warn "Can't open refs/$name ($!)\n";
+				return
+			};
+			my @c = <IN>;
+			close IN;
+
+			my ( $section, $content );
+			for my $line (@c) {
+				if ( $line =~ /^__NAME__ (.+)\s*$/ ) { $section = $1; next }
+				if ( $line =~ /^__END__/ ) {
+					update_field("append", $name, $ref, "refs/$name", $section, $content);
+					$section = "";
+					$content = "";
+				}
+				$content .= $line if $section;
 			}
+
+		} else {
+			push @set_missing_all, $name;
 		}
-		closedir INDIR;
 
 	} else {
 		die "Parsing of specific, non-control files not implemented\n";
+	}
+}
+
+sub update_field {
+	my ($mode, $name, $sref, $fn, $sect, $content) = @_;
+
+	$sect =~ s/[\-\.\+_:\d].*//;
+	$sect =~ s/([a-z])([A-Z])/$1 $2/g;
+	$sect = lc $sect;
+
+	if (!( grep {/^$sect/} @page_order )) {
+		push @{ $invalid{$name} }, "Section '$sect' from file '$fn' won't be used (name not recognized)";
+	}
+
+	if ( $mode eq 'override' ) {
+		$$sref{$sect} = $content;
+	} elsif ( $mode eq 'append' ) {
+		$$sref{$sect} .= $content;
 	}
 }
 

@@ -1,7 +1,5 @@
 
 PRIMARY:
-- Support using refs/<filename> with all the documentation for a symbol
-  instead of refs/<directory>/<files>.
 - Stinky manpage stylesheets are a disaster. This time it's that
   <cmdsynopsis> is verbatim and <screen> still renders comments without
   newlines! I mean, what the... (And &copy; is translated to crap instead
@@ -13,12 +11,9 @@ PRIMARY:
   when modifying array/hash). It should be made so that we only modify
   array/hash during the whole program, then in the last step before
   generating the template they get stringified.
-- Visually identify obsolete items (those not present in cvs-head)
-- Add a note that we're focusing on really basic stuff that won't change
-  over time (the criteria we used to determine what's for iccattut and what
-	isn't)
-- not to forget, fix cases where context goes to negative values, and make
-  cache target in Makefile
+- Visually mark obsolete items (those not present in cvs-head)
+- leaf nodes
+- not to forget, fix cases where context goes to negative values
 
 - In iccattut:
   - mention which paths would be valid for /usr/local tarball
@@ -36,9 +31,6 @@ PRIMARY:
 	- explain syntax accepted in profile files
 
 DOCUMENTATION SYSTEM:
-- bin/stattree, in format_ctx(), see how many spacings all the lines have
-  in common, and trim that from the beginning. [Did that, and the thing
-  still doesn't work somehow].
 - copy the definition for <example> to a
   new name so we'll be able to differentiate between source chunks and 
   examples.
