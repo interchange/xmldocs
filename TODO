@@ -1,5 +1,16 @@
 
 DOCUMENTATION SYSTEM:
+- Make docbook/symbol-type-skel/* contents of a glossary, and display a 
+  glossary entry instead of those files.
+- For tags documentation, have a field if it's a container or not
+
+
+Hm, why does the <tag> item render as supposed in unchunked html
+(renders like: [tag]), but renders with extra spaces in chunked mode
+(renders like: [ tag ])?
+
+(Remember to delete TABs and put spaces for indenting for files in 
+tutorial-phase?/*). -> helps with xml processing.
 
  Mid-term:
 - Think about adding "online example" (role=html in combination with 

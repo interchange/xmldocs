@@ -24,7 +24,7 @@ VPATH = guides refs
 .PHONY: all guides refs %.man
 
 all: tmp/refs-autogen tmp/olinkdbs guides refs
-	echo 'all' done
+	echo all done
 
 guides: $(OUTPUT)/images $(OUTPUT)/files \
   $(patsubst guides/%.xml,OUTPUT/%.html,$(wildcard guides/*.xml))  \

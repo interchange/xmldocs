@@ -5,8 +5,10 @@ Image path rewriting example
 </title>
 
 <para>
-If the no_image_rewrite directive is <emphasis>disabled</emphasis> and
-ImageDir is set to "/standard/images", a tag like
+If the <pragma>no_image_rewrite</pragma> pragma is
+<emphasis>disabled</emphasis> and
+<option>ImageDir</option> is set to "/standard/images", an image URL
+like:
 </para>
 
 <programlisting><![CDATA[
@@ -14,7 +16,7 @@ ImageDir is set to "/standard/images", a tag like
 ]]></programlisting>
 
 <para>
-would be changed to
+would be changed to:
 </para>
 
 <programlisting><![CDATA[

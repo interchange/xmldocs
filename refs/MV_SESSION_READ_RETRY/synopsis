@@ -1,3 +1,3 @@
 <synopsis><![CDATA[
-Variable MV_SESSION_READ_RETRY <integer>
+Variable MV_SESSION_READ_RETRY <count>
 ]]></synopsis>

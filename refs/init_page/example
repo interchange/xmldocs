@@ -5,7 +5,8 @@ Auto-wrapping pages in templates
 </title>
 
 <para>
-We check the page to see if it contains any @_VARIABLE_@ strings.
+We check the page to see if it contains any <varname>@_VARIABLE_@</varname>
+strings.
 If it does not, we consider it not to have a template and add the
 definitions ourselves.
 The following is needed in <filename>catalog.cfg</filename>:

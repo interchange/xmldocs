@@ -8,9 +8,18 @@
 	<!-- This section here till I find out how to pick this
 	information from a catalog -->
 
+	<xsl:param name="html.stylesheet">../xmldocs.css</xsl:param>
+
 	<xsl:param name="admon.graphics.path">../images/</xsl:param>
 	<xsl:param name="navig.graphics.path">../images/</xsl:param>
 	<xsl:param name="callout.graphics.path">../images/</xsl:param>
+
+	<xsl:param name="use.id.as.filename"/>
+	<xsl:param name="root.filename">index</xsl:param>
+	<xsl:param name="chunk.fast">1</xsl:param>
+	<xsl:param name="chunk.section.depth">1</xsl:param>
+	<xsl:param name="chunker.output.encoding">ISO8859-1</xsl:param>
+	<xsl:param name="chunker.output.indent">yes</xsl:param>
 
   <xsl:template name="user.footer.content" >
   <p class='w3c'>
@@ -28,20 +37,9 @@
     </a>
   </p>
   </xsl:template>
-	<!-- END -->
 
 	<xsl:include href="common.xsl"/>
 	<xsl:include href="html-common.xsl"/>
-
-	<xsl:param name="html.stylesheet">../xmldocs.css</xsl:param>
-
-	<xsl:param name="use.id.as.filename"/>
-	<xsl:param name="root.filename">index</xsl:param>
-	<!--<xsl:param name="base.dir">iccattut/</xsl:param>-->
-	<xsl:param name="chunk.fast">1</xsl:param>
-	<xsl:param name="chunk.section.depth">1</xsl:param>
-	<xsl:param name="chunker.output.encoding">ISO8859-1</xsl:param>
-	<xsl:param name="chunker.output.indent">yes</xsl:param>
 
 </xsl:stylesheet>
 

@@ -144,21 +144,26 @@ while ( $path = shift @paths) {
 				my @ctxsize = split /\s/, $ctxmeta;
 				# Support item types with only context info in this field
 				my $ctxsize = scalar @ctxsize == 2 ? $ctxsize[1] : $ctxsize[0];
+				( my $ctxpre = $ctxsize ) =~ s/:.+// or
+					warn "CTXPRE didnt encounter x:y context ?\n";
 				my $loc = "$fi:$ln";
 				for my $arr ( @{ $covered{$key}{$fi} } ) {
 					goto DONELOOP if $ln > $$arr[0] and $ln < $$arr[1];
 				}
 				my $ctxsdata = join "", @$ctxdata;
 				if ( length $ctxsdata ) {
+					my $ls = $ln - $ctxpre; # line start nr.
+# XXX when xsltproc gets to support line numbering, add this below: XXX
+#<screen linenumbering='numbered' startinglinenumber='$ls'><![CDATA[
 					$$ag{source} .= <<ENDD;
 <para>
 </para>
 <example>
 <title>$loc ($ctxmeta)</title>
 
-<programlisting><![CDATA[
+<screen><![CDATA[
 $ctxsdata
-]]></programlisting>
+]]></screen>
 </example>
 
 ENDD
@@ -455,7 +460,7 @@ $ag{"available in"}</para>
 <refsect1>
 <title>SOURCE</title>
 <para>The current Interchange development version (cvs-head) is $ag{"latest"}.
-The $ag{"name"} symbol last appears in Interchange $ag{"source ver"}, in the
+The symbol last appears in Interchange $ag{"source ver"}, in the
 following contexts:</para>
 $ag{source}
 </refsect1>

@@ -1,3 +1,4 @@
-Allow systems with broken locks to not destroy the pidfile lock
-by reading the file. Alleviates inability to use
-<command>interchange -stop</command>.
+Allow systems with broken locking mechanism to still work properly.
+The variable makes sure the <option>PIDFile</option> lock is not destroyed
+by reading the lockfile. Alleviates inability to use
+<userinput>interchange -stop</userinput>.

@@ -1,11 +1,12 @@
 By default, Interchange does not allow data returned from databases to be reparsed for Interchange tags. Setting this pragma eliminates the restriction.
 </para><para>
-If for some reason you want to have tags in your database, for example, to use [page ...] for catalog-internal hyperlinks in your product descriptions, you need to enable safe_data. Some things to consider:
+If you want to have tags in your database and display them in Interchange pages (to say, display <tag>page</tag> links for catalog-internal hyperlinks in your product descriptions), you need to enable the <pragma>safe_data</pragma> pragma.
+Some things to consider, though:
 </para><para>
-It might be better to use the safe_data attribute available to certain tags instead of setting the pragma, or perhaps to use [pragma] for a whole page or [tag pragma safe_data][/tag] for a small ITL block, instead of a catalog-wide Pragma directive.
+It might be better to use the <option>safe_data</option> attribute available to certain tags, or perhaps the <tag>pragma</tag> for a whole page or <tag>tag pragma safe_data</tag><tag>/tag</tag> for a small block of ITL code on a page, instead of setting a catalog-wide <pragma>safe_data</pragma> pragma.
 </para><para>
-In any case, it is strongly recommended that you surround the area with [restrict][/restrict] tags to allow only the specific (hopefully relatively safe) set of tags you expect to appear, such as [page] or [area]. Expect security compromises if you allow [calc] or [perl], or other extremely powerful tags.
+In any case, it is strongly recommended that you surround the area in a <tag>restrict</tag> tag to only allow a specific set of tags to appear "in-band" (which should be relatively safe), such as <tag>page</tag> or <tag>area</tag>. Expect security compromises if you allow <tag>calc</tag>, <tag>perl</tag> or any other extremely powerful tags.
 </para><para>
-Be certain that you absolutely know where the data from your databases will be used. Will it always be possible to reparse for tags? What about when it's used to create an emailed plain-text receipt -- will a literal '[page ...]' tag show up in the product description on the receipt? Would the desired output of &lt;a href="..."&gt; be any better in a plaintext situation? What if you access your database from applications other than Interchange? You'll then have to decide what to do with such tags; perhaps you can simply strip them, but will the missing tag output cause you any trouble?
+Be certain that you absolutely know where the data from your databases will be used. Will it always be possible to reparse for tags? What about when it's used to create an e-mailed plain-text receipt? Will a literal "<tag>page </tag>" tag show up in the product description on the receipt? Would the desired output of &lt;a href="..."&gt; be any better in a plaintext situation? What if you access your database from applications other than Interchange? You'll then have to decide what to do with such tags; perhaps you can simply strip them, but will the missing tag output cause you any trouble?
 </para><para>
-In short, safe_data is disabled by default for a reason, and you should be very careful if you decide to enable it.
+To sum up, <pragma>safe_data</pragma> is disabled by default for a reason, and you should be very careful if you decide to enable it.

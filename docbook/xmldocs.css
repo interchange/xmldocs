@@ -22,8 +22,8 @@ a { text-decoration: none; }
 	margin: 0;
 	margin-bottom: 20px;
 	padding: 2px 4px 2px 4px;
-	border: dashed 1px #FFFFFF;
-	color: #FFF;
+	border: dashed 1px #ffffff;
+	color: #fff;
 
 	/* background-image: url(../images/icon_ic2.png);
 	background-position: center right;
@@ -43,14 +43,14 @@ a { text-decoration: none; }
 .reference .toc, .article .toc {
 	margin: 0;
 	margin-bottom: 40px;
-	border: 1px dashed #CEE7F6;
+	border: 1px dashed #cee7f6;
 }
 
 .reference .toc p, .article .toc p {
 	margin: 0;
 	padding: 0;
-	background-color: #6CA6C8;
-	border-bottom: 1px dashed #FFF;
+	background-color: #6ca6c8;
+	border-bottom: 1px dashed #fff;
 	padding: 1px 4px 1px 4px;
 	color: #FFF;
 }
@@ -62,10 +62,10 @@ a { text-decoration: none; }
 .refentry .refnamediv h2 {
 	margin: 0;
 	padding: 0;
-	background-color: #FFF;
+	background-color: #fff;
 	border: none;
 	padding: 0;
-	color: #FFF;
+	color: #fff;
 	font-size: 0;
 	visibility: hidden;
 }
@@ -73,10 +73,10 @@ a { text-decoration: none; }
 .refentry .refnamediv p {
 	margin: 0;
 	padding: 0;
-	background-color: #6CA6C8;
-	border: 1px dashed #FFF;
+	background-color: #6ca6c8;
+	border: 1px dashed #fff;
 	padding: 4px 4px 4px 4px;
-	color: #FFF;
+	color: #fff;
 	font-weight: bold;
 }
 
@@ -115,24 +115,24 @@ a { text-decoration: none; }
 .article .authorgroup {
 	margin: 0;
 	margin-bottom: 40px;
-	border: 1px dashed #CEE7F6;
+	border: 1px dashed #cee7F6;
 	padding: 2px 4px 8px 4px;
 }
 
 .article .abstract {
 	margin: 0;
 	margin-bottom: 40px;
-	border: 1px dashed #CEE7F6;
+	border: 1px dashed #cee7F6;
 	border-bottom: none;
 }
 
 .article .abstract p.title {
 	margin: 0;
 	padding: 0;
-	background-color: #6CA6C8;
-	border-bottom: 1px dashed #FFF;
+	background-color: #6ca6c8;
+	border-bottom: 1px dashed #fff;
 	padding: 1px 4px 1px 4px;
-	color: #FFF;
+	color: #fff;
 }
 
 .article .abstract p {
@@ -142,10 +142,10 @@ a { text-decoration: none; }
 .article .sect1 .titlepage h2.title {
 	margin: 0;
 	padding: 0;
-	background-color: #6CA6C8;
-	border: 1px dashed #FFF;
+	background-color: #6ca6c8;
+	border: 1px dashed #fff;
 	padding: 4px 4px 4px 4px;
-	color: #FFF;
+	color: #fff;
 	font-weight: bold;
 	margin-bottom: 20px;
 }
@@ -153,8 +153,8 @@ a { text-decoration: none; }
 .article .sect2 .titlepage h3.title {
 	margin: 0;
 	padding: 0;
-	background-color: #CEE7F6;
-	border: 1px dashed #FFF;
+	background-color: #cee7F6;
+	border: 1px dashed #fff;
 	padding: 4px 4px 4px 4px;
 	color: #000;
 	font-weight: bold;
@@ -195,5 +195,76 @@ a { text-decoration: none; }
 .w3c .w3cimg {
 	border: 0;
 	padding-right: 4px;
+}
+
+
+/* Inlined elements */
+
+.programlisting {
+	/*background-color: #e5e5e5;*/
+	/*background-color: #f7e8e8;*/
+	padding: 4px 4px 4px 4px;
+	border-left: dashed 1px #ffd1d1;
+	padding-left: 8px;
+	margin: 0;
+}
+
+.example .title {
+	padding: 2px 0px 0px 4px;
+	margin-bottom: 0;
+	/*background-color: #e8b9b9;*/
+	/*background-color: #ffd1d1;*/
+	border: dashed 1px #ffd1d1;
+}
+
+.example p {
+	border-left: dashed 1px #ffd1d1;
+	padding: 10px 0px 10px 4px;
+	margin: 0;
+}
+
+.screen {
+	margin-top: 0;
+	padding: 4px 4px 4px 4px;
+	border-left: dashed 1px #ffd1d1;
+	padding-left: 8px;
+}
+
+.code {
+	background-color: #e5e5e5;
+	padding: 1px 1px 1px 1px;
+	border: dashed 1px white;
+}
+
+.option {
+	background-color: #ffcc66;
+	padding: 1px 1px 1px 1px;
+	border: dashed 1px white;
+}
+
+.filename {
+	background-color: #cee7F6;
+	padding: 1px 1px 1px 1px;
+	border: dashed 1px white;
+}
+
+.varname {
+	background-color: #208cbd;
+	padding: 1px 1px 1px 1px;
+	border: dashed 1px white;
+	color: white;
+}
+
+.pragma {
+	background-color: #bb7009;
+	padding: 1px 1px 1px 1px;
+	border: dashed 1px white;
+	color: white;
+}
+
+.function {
+	background-color: #d2aa55;
+	padding: 1px 1px 1px 1px;
+	border: dashed 1px white;
 }
 

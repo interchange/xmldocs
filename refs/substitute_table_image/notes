@@ -1,2 +1,3 @@
-The substitute_table_image pragma which was added in Interchange 4.6.2
-was removed in 4.7, in favor of a general image rewriting system.
+The <pragma>substitute_table_image</pragma> pragma which was added in
+Interchange 4.6.2 was removed in 4.7, in favor of a general image
+rewriting system.

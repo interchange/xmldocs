@@ -1,1 +1,1 @@
-The no_html_parse pragma itself, for which code has already been deleted in 4.8 series, was finally removed in Interchange 4.9.
+The <pragma>no_html_parse</pragma> pragma itself, for which the source code has already been deleted in 4.8 series, was finally removed in Interchange 4.9.

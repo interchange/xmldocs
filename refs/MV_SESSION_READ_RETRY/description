@@ -1,2 +1,2 @@
 This variable specifies the number of times Interchange
-will attempt to read the session file before failing.
+will attempt to read the user's session file before failing.

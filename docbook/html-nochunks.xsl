@@ -7,11 +7,6 @@
 
 	<xsl:import
 		href="/usr/share/xml/docbook/stylesheet/nwalsh/xhtml/docbook.xsl"/>
-	
-	<xsl:include href="common.xsl"/>
-	<xsl:include href="html-common.xsl"/>
-	
-	<xsl:param name="html.stylesheet">xmldocs.css</xsl:param>
 
 	<!-- till we use catalog for this -->
   <xsl:template name="user.footer.content" >
@@ -30,6 +25,11 @@
     </a>
   </p>
   </xsl:template>
+	
+	<xsl:param name="html.stylesheet">xmldocs.css</xsl:param>
+	
+	<xsl:include href="common.xsl"/>
+	<xsl:include href="html-common.xsl"/>
 
 </xsl:stylesheet>
 

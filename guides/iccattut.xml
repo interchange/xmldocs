@@ -362,7 +362,7 @@ ErrorFile /var/log/interchange/error.log
 		</programlisting>
 		</para>
 		<important><para>
-			You can't use positional parameters if the values contain whitespace. For example, <tag>tagname "<tag>data session mv_arg</tag>"</tag> is invalid; the only way to specify that is <tag>tagname optionname="<tag>data session mv_arg</tag>"</tag>. Also, if the first parameter is positional, all must be positional (and vice versa, if the first parameter is named - all must be named).
+			You can't use positional parameters if the values contain whitespace. For example, <code>[tagname "[data session mv_arg]"]</code> is invalid; the only way to specify that is <code>[tagname optionname="[data session mv_arg]"]</code>. Also, if the first parameter is positional, all must be positional (and vice versa, if the first parameter is named - all must be named).
 		</para></important>
 		<para>
 		Tags can span multiple lines which helps readability when the tags have a large number of (long) options. There's a whole lot of tags available (around 200 in Interchange 5.2), but in this tutorial very few will be addressed. For a complete listing of the ITL tags, see the <!--<olink targetdoc='ictags' targetptr='ictags'>-->Interchange Tags Reference<!--</olink>-->.
@@ -491,7 +491,7 @@ ErrorFile /var/log/interchange/error.log
 </table>
 		]]></programlisting>
 		</para> <para>
-		Now we will use Interchange tags to fill in the rest of the table with the products database you created. The <tag>loop</tag> <tag>/loop</tag> ITL tag pair tells Interchange to iterate over each item in the parameter list. In this case, the loop runs over the results of an Interchange search. The search parameter does a database search on the provided parameters. In this case, <command>we're doing a very simple search that returns all of the fields for all of the entries in the <database class='table'>products</database> database</command>. The parameters passed to the search tell Interchange to return all records ('ra') from the products file ('fi'). The following should take the place of the ellipsis in the code we placed in <filename>pages/index.html</filename>:
+		Now we will use Interchange tags to fill in the rest of the table with the products database you created. The <tag>loop</tag> ITL tag pair tells Interchange to iterate over each item in the parameter list. In this case, the loop runs over the results of an Interchange search. The search parameter does a database search on the provided parameters. In this case, <command>we're doing a very simple search that returns all of the fields for all of the entries in the <database class='table'>products</database> database</command>. The parameters passed to the search tell Interchange to return all records ('ra') from the products file ('fi'). The following should take the place of the ellipsis in the code we placed in <filename>pages/index.html</filename>:
 		<programlisting><![CDATA[
 	[loop search="ra=yes/fi=products"]
 
@@ -599,7 +599,7 @@ ErrorFile /var/log/interchange/error.log
 		</para> <para>
 		<tag>item-quantity</tag> shows the quantity of the item ordered. If the same item is ordered multiple times, the quantity increases.
 		</para> <para>
-		<tag>item-field description</tag> shows the description from the product database table. Any field that is not special to Interchange can be accessed from the shopping cart this way.
+		<code>[item-field description]</code> shows the description from the product database table. Any field that is not special to Interchange can be accessed from the shopping cart this way.
 		</para> <para>
 		<tag>item-price</tag> shows the per-item price that is defined in the product database table.
 		</para> <para>
@@ -607,7 +607,7 @@ ErrorFile /var/log/interchange/error.log
 		</para> <para>
 		<tag>subtotal</tag> shows the calculated shopping basket subtotal.
 		</para> <para>
-		<tag>page index</tag> creates the starting HTML &lt;a href=...&gt; for a link to the catalog welcome page.
+		<code>[page index]</code> creates the starting HTML &lt;a href=...&gt; for a link to the catalog welcome page.
 		</para> <para>
 		You also need to put a link in the index page so that shoppers can go to their shopping cart without ordering something. Modify the end of <filename>pages/index.html</filename> by adding the following lines:
 		<programlisting><![CDATA[
@@ -671,14 +671,14 @@ ErrorFile /var/log/interchange/error.log
 <xi:include parse='text'  href='../files/tutorial-phase4/etc/profiles.order'></xi:include>
 		</programlisting>
 		</para> <para>
-		A single file can contain multiple profile definitions. First the profile is named using the <literal>__NAME__</literal> pragma (but this is unrelated to the <varname>__VARIABLE__</varname> syntax seen elsewhere in Interchange). Then in the profile there is a list of the form fields that are required. The ampfatal setting indicates that validation will fail if any of the requirements are not met. ampfinal indicates that this form will complete the ordering process. This setting is helpful if you have a multi-page ordering process and you want to validate each page individually. The <literal>__END__</literal> pragma signals the end of this profile, after which you can begin another one.
+		A single file can contain multiple profile definitions. First the profile is named using the <pragma>__NAME__</pragma> pragma (but this is unrelated to the <varname>__VARIABLE__</varname> syntax seen elsewhere in Interchange). Then in the profile there is a list of the form fields that are required. The ampfatal setting indicates that validation will fail if any of the requirements are not met. ampfinal indicates that this form will complete the ordering process. This setting is helpful if you have a multi-page ordering process and you want to validate each page individually. The <pragma>__END__</pragma> pragma signals the end of this profile, after which you can begin another one.
 		</para> <para>
 		In order to activate your order profile, add the <option>OrderProfile</option> directive to the <filename>catalog.cfg</filename>:
 		<programlisting>
 OrderProfile etc/profiles.order
 		</programlisting>
 		</para> <para>
-		Watch for white space in front of the <literal>__NAME__</literal> pragma, it can cause your profile to be ignored. Rember to reconfigure the catalog or simply restart Interchange altogether after modifying <filename>catalog.cfg</filename> or the profiles.
+		Watch for white space in front of the <pragma>__NAME__</pragma> pragma, it can cause your profile to be ignored. Rember to reconfigure the catalog or simply restart Interchange altogether after modifying <filename>catalog.cfg</filename> or the profiles.
 		</para>
 	</sect2>
 
@@ -786,9 +786,9 @@ __END__
 Locale en_US currency_symbol $
 		</programlisting>
 		</para> <para>
-		Restart Interchange and view your catalog. You will notice little has changed on the welcome page or the flypages, <command>but in the shopping cart</command> (<filename>pages/ord/basket.html</filename>) all your prices should be formatted as U.S. dollars ("1347.3" has become "$1,347.30"). Why the currency is only displayed on the basket page is easy to understand; we use the <tag>item-price</tag> tag there. That tag is equivalent to <tag>item-field price</tag> used elsewhere, but it has that extra logic associated with it that automatically displays the currency format. To use <tag>item-price</tag> without the autoformat, you'd have to change the <tag>item-price</tag> tag to <tag>item-price noformat</tag>.
+		Restart Interchange and view your catalog. You will notice little has changed on the welcome page or the flypages, <command>but in the shopping cart</command> (<filename>pages/ord/basket.html</filename>) all your prices should be formatted as U.S. dollars ("1347.3" has become "$1,347.30"). Why the currency is only displayed on the basket page is easy to understand; we use the <tag>item-price</tag> tag there. That tag is equivalent to <code>[item-field price]</code> used elsewhere, but it has that extra logic associated with it that automatically displays the currency format. To use <tag>item-price</tag> without the autoformat, you'd have to change the <tag>item-price</tag> tag to <code>[item-price noformat]</code>.
 		</para> <para>
-		But that's probably not what you want to do. You're probably more interested in formatting your other prices (such as those on the Welcome page) as currency. To do that, you could obviously replace <tag>item-field price</tag> with <tag>item-price</tag>, but we'll take on more general approach here. Simply use the <tag>currency</tag><tag>/currency</tag> tag pair for all price values. Make the following change to <filename>pages/index.html</filename>:
+		But that's probably not what you want to do. You're probably more interested in formatting your other prices (such as those on the Welcome page) as currency. To do that, you could obviously replace <code>[item-field price]</code> with <tag>item-price</tag>, but we'll take on more general approach here. Simply use the <tag>currency</tag><tag>/currency</tag> tag pair for all price values. Make the following change to <filename>pages/index.html</filename>:
 		<programlisting><![CDATA[
 	[loop search="ra=yes/fi=products"]
 	<tr>
@@ -809,7 +809,7 @@ Locale en_US currency_symbol $
 		The line that begins with '-' should be deleted. Do not type the '-'. The next line, that starts with '+', replaces it. (It's the <emphasis>context diff</emphasis> format we mentioned, remember?)
 		</para></note>
 		<para>
-		A similar change to the <tag>item-field price</tag> tag in the <filename>pages/flypage.html</filename> page will fix that currency display. View the page in your browser. All your prices should be formatted for U.S. currency.
+		A similar change to the <code>[item-field price]</code> tag in the <filename>pages/flypage.html</filename> page will fix that currency display. View the page in your browser. All your prices should be formatted for U.S. currency.
 		</para> <para>
 		If your prices are not being formatted correctly, your default system locale may be set up differently or your en_US locale settings may be wrong. There are a few other <filename>catalog.cfg</filename> directives you can use to correct the situation:
 		<programlisting>
@@ -953,7 +953,7 @@ Now add the following to the left template piece:
   </table>
 		]]></programlisting>
 		</para> <para>
-		In the first set of &lt;select&gt; &lt;/select&gt; HTML tags a list is generated of the months to choose from. This is accomplished by using a <tag>loop</tag> tag. In this case we are looping over an explicit list. The list is provided in the list parameter. Use caution when typing this, as it is sensitive to formatting (which may not be reflected in this document). Make sure that the numbers are the first characters on each new line and that the single tab separates them from the rest of the line text. Since the columns in this list are not named, the first element can be accessed using <tag>loop-code</tag> or <tag>loop-pos 0</tag> with subsequent elements being accessed by <tag>loop-pos N</tag> where N is the number of the column you want. Notice that the elements are zero-indexed. Each time through this loop Interchange generates a select &lt;option&gt; with a number as the value and the name of the month as the text for the select menu.
+		In the first set of &lt;select&gt; &lt;/select&gt; HTML tags a list is generated of the months to choose from. This is accomplished by using a <tag>loop</tag> tag. In this case we are looping over an explicit list. The list is provided in the list parameter. Use caution when typing this, as it is sensitive to formatting (which may not be reflected in this document). Make sure that the numbers are the first characters on each new line and that the single tab separates them from the rest of the line text. Since the columns in this list are not named, the first element can be accessed using <tag>loop-code</tag> or <code>[loop-pos 0]</code> with subsequent elements being accessed by <code>[loop-pos N]</code> where N is the number of the column you want. Notice that the elements are zero-indexed. Each time through this loop Interchange generates a select &lt;option&gt; with a number as the value and the name of the month as the text for the select menu.
 		</para> <para>
 		For the next set of &lt;select&gt; &lt;/select&gt; tags embedded Perl is used to generate the list which is iterated over. Perl code can be embedded in Interchange pages in order to extend the abilities of the system. Make sure you type backticks (grave accents) after "list=" and before the closing bracket (and <command>not apostrophes</command>). This code generates an entry for seven years in addition to the current year. It is not necessary at this point for you to understand this Perl code.
 		</para>
@@ -1056,7 +1056,7 @@ Now add the following to the left template piece:
 		</para> <para>
 		This is a simple HTML form with a single input box for text. The action goes to a special Interchange processor called 'search' that will perform the search and pass the results to a page called <filename>pages/results.html</filename> (that has not been created yet). The search will be case-insensitive, but will only match complete words, not substrings.
 		</para> <para>
-		The <tag>set testname</tag>...<tag>/set</tag> tags set an Interchange 'value' variable that, in this case, will be used as a predefined search profile. We specify all the search parameters except the one the user will enter, 'mv_searchspec' (the long name for 'se'). We then tell Interchange we want to use this search profile in a hidden form variable named 'mv_profile'.
+		The <code>[set testname]...[/set]</code> tags set an Interchange scratch variable that will be (in this case, of course) used as a predefined search profile. We specify all the search parameters except the one the user will enter, 'mv_searchspec' (the long name for 'se'). We then tell Interchange we want to use this search profile in a hidden form variable named 'mv_profile'.
 		</para> <para>
 		The search box will now appear on all catalog pages, but you still need to create the search results page. To create the search results page, type the following code and save it as <filename>pages/results.html</filename>.
 		</para> <para>
@@ -1093,7 +1093,7 @@ Variable LEFT   [include left]
 Variable BOTTOM [include bottom]
 		</programlisting>
 		</para> <para>
-		Now change every instance of <tag>include top</tag> to <varname>__TOP__</varname>, doing the same for each <tag>include</tag> tag. At this point, you might not want to do a search-and-replace<footnote><para>If you're adventurous enough, try this Perl oneliner on the command line for automatic replace: cd /var/lib/interchange/catalogs/tutorial; perl -pi -e 's/\[include (\S+)\]/"__".uc($1)."__"/ge' `find . -name '*.html'`</para></footnote> on all the .html files you just created, but keep this capability in mind for the next catalog you work on.
+		Now change every instance of <code>[include top]</code> to <varname>__TOP__</varname>, doing the same for each <tag>include</tag> tag. At this point, you might not want to do a search-and-replace<footnote><para>If you're adventurous enough, try this Perl oneliner on the command line for automatic replace: cd /var/lib/interchange/catalogs/tutorial; perl -pi -e 's/\[include (\S+)\]/"__".uc($1)."__"/ge' `find . -name '*.html'`</para></footnote> on all the .html files you just created, but keep this capability in mind for the next catalog you work on.
 		</para> <para>
 		If you made all of the replacements and then renamed and moved your top file elsewhere, you would only have to make a single change for each region in <filename>catalog.cfg</filename> to get your pages up to date:
 		<programlisting>

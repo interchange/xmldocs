@@ -8,7 +8,7 @@ purpose: substitute background image paths in HTML table elements
 #  Just name the related symbols. The system will work everything out.
 #  (Note that if you link some item from here, that item will auto-point
 #  back here (under "indirect links" section))
-see also: no_image_rewrite
+see also: no_image_rewrite, ImageDir, ImageSecureDir
 
 # Usually not needed to modify below
 

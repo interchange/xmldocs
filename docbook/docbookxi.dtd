@@ -36,7 +36,7 @@
 
 
 <!ENTITY % local.para.char.mix "|xi:include">
-<!ENTITY % local.tech.char.class "|tag">
+<!ENTITY % local.tech.char.class "|tag|pragma">
 
 <!-- Load DocBook -->
 <!ENTITY % DocBookDTD PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
@@ -62,6 +62,27 @@
     %tag.role.attrib;
     %local.tag.attrib;
 >
-<!--end of tagname.attlist-->]]>
-<!--end of tagname.module-->]]>
+<!--end of tag.attlist-->]]>
+<!--end of tag.module-->]]>
 
+<!-- pragma element -->
+<!ENTITY % pragma.module "INCLUDE">
+<![%pragma.module;[
+<!ENTITY % local.pragma.attrib "">
+<!ENTITY % pragma.role.attrib "%role.attrib;">
+
+<!ENTITY % pragma.element "INCLUDE">
+<![%pragma.element;[
+<!ELEMENT pragma %ho; (%para.char.mix;|%para.mix;)*>
+<!--end of pragma.element-->]]>
+
+<!ENTITY % pragma.attlist "INCLUDE">
+<![%pragma.attlist;[
+<!ATTLIST pragma
+    %moreinfo.attrib;
+    %common.attrib;
+    %pragma.role.attrib;
+    %local.pragma.attrib;
+>
+<!--end of pragma.attlist-->]]>
+<!--end of pragma.module-->]]>

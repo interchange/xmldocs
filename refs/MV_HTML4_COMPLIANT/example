@@ -9,7 +9,7 @@ Add the following to <filename>interchange.cfg</filename>:
 </para>
 
 <programlisting><![CDATA[
-Variable MV_HTML4_COMPLIANT 0
+Variable MV_HTML4_COMPLIANT 1
 ]]></programlisting>
 
 </example>

@@ -3,7 +3,7 @@
 # To let it through unmodified, simply leave the fields empty
 
 #  purpose: oneline description (MUST FILL IN)
-purpose: specifies the default user e-mail address when SMTP is used to send mail
+purpose: specifies the default sender e-mail address when SMTP is used to send mail
 #  default value if applicable (make it short, just like: 0, none, ...)
 default:
 # Please take time to fill in the See Also line.

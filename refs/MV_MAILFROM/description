@@ -1,2 +1,2 @@
 When using SMTP (Net::SMTP module) to send mail from Interchange,
-this variable specifies the default sender email address to use.
+this variable specifies the default sender e-mail address.

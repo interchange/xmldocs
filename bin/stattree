@@ -247,18 +247,18 @@ sub wanted {
 						# TODO Here, and 2 places below: make sure if ctx is say, 5:5,
 						# it always shows that much (that is, workaround file beginning/
 						# file end problems - pad with empty lines or something).
-						[ "$i{ver}/$file", $lnum, "$gfunc[0]:$gfunc[1] $ctx_p\:$ctx_n", [@file[$lnum-$ctx_p..$lnum+$ctx_n]] ];
+						[ "$i{ver}/$file", $lnum, "$gfunc[0]:$gfunc[1] $ctx_p\:$ctx_n", [format_ctx(@file[$lnum-$ctx_p..$lnum+$ctx_n])] ];
 				}
 				
 				######################################################
 				# Diskover global variables
 				if ( $line =~ /(()|\$())\$Global::Variable(->\2|\3){(\w+?)}/ ) {
 					push @{ $hash{symbols}{globvar}{$5} },
-						[ "$i{ver}/$file", $lnum, "$gfunc[0]:$gfunc[1] $ctx_p\:$ctx_n", [@file[$lnum-$ctx_p..$lnum+$ctx_n]] ];
+						[ "$i{ver}/$file", $lnum, "$gfunc[0]:$gfunc[1] $ctx_p\:$ctx_n", [format_ctx(@file[$lnum-$ctx_p..$lnum+$ctx_n])] ];
 				}
 				if ( $line =~ /\$Tag->var\s*\(\s*(["'])(\S+?)\1(\s*,\s*(\d))?/ ) {
 					push @{ $hash{symbols}{globvar}{$5} },
-						[ "$i{ver}/$file", $lnum, "$gfunc[0]:$gfunc[1] $ctx_p\:$ctx_n", [@file[$lnum-$ctx_p..$lnum+$ctx_n]] ];
+						[ "$i{ver}/$file", $lnum, "$gfunc[0]:$gfunc[1] $ctx_p\:$ctx_n", [format_ctx(@file[$lnum-$ctx_p..$lnum+$ctx_n])] ];
 					warn "\$Tag->var syntax never used in .pl/.pm files by now.
 						I'll register that, but is it a mistake? ($2, $4)\n";
 				}
@@ -295,6 +295,12 @@ sub wanted {
 			last;
 		}
 	}
+}
+
+# Format the context lines before saving to the db
+sub format_ctx {
+	map { s/\t/  /g } @_;
+	return @_;
 }
 
 # Storable dumper

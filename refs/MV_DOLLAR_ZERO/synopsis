@@ -1,5 +1,5 @@
 <synopsis><![CDATA[
 Variable MV_DOLLAR_ZERO 0
 Variable MV_DOLLAR_ZERO 1
-Variable MV_DOLLAR_ZERO arbitrary string
+Variable MV_DOLLAR_ZERO <arbitrary string>
 ]]></synopsis>

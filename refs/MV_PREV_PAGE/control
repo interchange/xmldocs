@@ -3,7 +3,7 @@
 # To let it through unmodified, simply leave the fields empty
 
 #  purpose: oneline description (MUST FILL IN)
-purpose: relative pathname of the last page read
+purpose: contains the relative pathname of the last page read
 #  default value if applicable (make it short, just like: 0, none, ...)
 default:
 # Please take time to fill in the See Also line.

@@ -3,7 +3,7 @@
 # To let it through unmodified, simply leave the fields empty
 
 #  purpose: oneline description (MUST FILL IN)
-purpose: fix Cobalt/CGIWrap problem
+purpose: fix Cobalt CGIWrap problem
 #  default value if applicable (make it short, just like: 0, none, ...)
 default: 0
 # Please take time to fill in the See Also line.

@@ -1,2 +1,2 @@
 If configured, it disables the use
-of crypt() function or MD5 password hashing server-wide.
+of <function>crypt()</function> function or <ulink url="http://userpages.umbc.edu/~mabzug1/cs/md5/md5.html">MD5</ulink> password hashing server-wide.

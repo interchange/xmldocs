@@ -1,1 +1,1 @@
-Watch out for parse order with [tag pragma] or [restrict] when used with lists that retrieve data from the database (such as [PREFIX-*] or the flypage). Loops parse before regular tags like [tag] and [restrict], and thus aren't affected by it.
+Watch out for parse order with <tag>tag pragma</tag> or <tag>restrict</tag> when used with lists that retrieve data from the database (such as <tag>PREFIX-*</tag> or the flypage). Loops parse before regular tags like <tag>tag</tag> or <tag>restrict</tag>, and are thus not affected by it.

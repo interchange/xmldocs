@@ -1,7 +1,7 @@
 <example>
 
 <title>
-Use the predefined value of 1 to set MV_DOLLAR_ZERO
+Setting MV_DOLLAR_ZERO to "1"
 </title>
 
 <para>
