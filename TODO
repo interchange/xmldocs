@@ -1,10 +1,23 @@
 
 DOCUMENTATION SYSTEM:
 
+ Mid-term:
+- Think about adding "online example" (role=html in combination with 
+  a flag that says if html is to be static or for hosting on IC-enabled site) 
+- for "online" docs, also provide a form where users can add comments or
+  ask for clarification. (this could be done with either pure IC (forum?), or 
+	XML forms capability)..
+- filenames in Source contexts should also be clickable
+
  Long-term:
 - Support using refs/<filename> with all the documentation for a symbol
   instead of refs/<directory>/<files>.
 
 DOCUMENTATION ITSELF:
 - Resolve items from tmp/missing file. (You need to run 'make' in your tree
-  first, to get that file generated).
+  first, to get that file generated). I did what I could, now the list only
+	contains items which don't even exist in the old docs, so I can't copy/paste;
+	someone who is able to write the description/examples from scratch should
+	do that.
+
+

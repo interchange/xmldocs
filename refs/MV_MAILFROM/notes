@@ -1,1 +1,1 @@
-If present, this variable overrides the MailOrdersTo config directive.
+If this variable is not defined, the MailOrdersTo config value is used in place.

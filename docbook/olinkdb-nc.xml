@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE targetset 
+	SYSTEM "/usr/share/xml/docbook/stylesheet/nwalsh/common/targetdatabase.dtd" [
+	<!ENTITY iccattut SYSTEM "../tmp/iccattut-nc.db"> 
+	<!ENTITY pragmas SYSTEM "../tmp/pragmas-nc.db"> 
+	<!ENTITY globvars SYSTEM "../tmp/globvars-nc.db"> 
+]>
+
+<targetset>
+  <targetsetinfo>
+		Interchange XML Documentation System Sitemap
+  </targetsetinfo>
+
+	<sitemap>
+		<dir name="OUTPUT"> 
+			<document targetdoc="iccattut" baseuri="iccattut.html"> &iccattut; </document>
+			<document targetdoc="pragmas" baseuri="pragmas.html"> &pragmas; </document>
+			<document targetdoc="globvars" baseuri="globvars.html"> &globvars; </document>
+		</dir>
+	</sitemap>
+
+</targetset>
+

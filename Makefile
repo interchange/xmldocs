@@ -23,14 +23,14 @@ VPATH = guides refs
 
 .PHONY: all guides refs %.man
 
-all: guides refs
+all: tmp/refs-autogen tmp/olinkdbs guides refs
 	echo 'all' done
 
 guides: $(OUTPUT)/images $(OUTPUT)/files \
   $(patsubst guides/%.xml,OUTPUT/%.html,$(wildcard guides/*.xml))  \
   $(patsubst guides/%.xml,OUTPUT/%,$(wildcard guides/*.xml))
 
-refs: tmp/refs-autogen $(OUTPUT)/images $(OUTPUT)/files
+refs: $(OUTPUT)/images $(OUTPUT)/files
 	make $(OUTPUT)/pragmas.html $(OUTPUT)/pragmas $(OUTPUT)/pragmas.man
 	make $(OUTPUT)/globvars.html $(OUTPUT)/globvars $(OUTPUT)/globvars.man
 
@@ -43,7 +43,7 @@ refs: tmp/refs-autogen $(OUTPUT)/images $(OUTPUT)/files
 $(OUTPUT)/%.html: %.xml $(OUTPUT)/xmldocs.css
 	$(XSLT) $(XSLT_FLAGS)                                          \
 	--stringparam current.docid $*                                 \
-	--stringparam target.database.document ../docbook/olinkdb.xml  \
+	--stringparam target.database.document ../docbook/olinkdb-nc.xml  \
 	-o $@ docbook/html-nochunks.xsl $<
 
 # Man pages
@@ -58,21 +58,57 @@ $(OUTPUT)/%.man: %.xml
 $(OUTPUT)/%: %.xml $(OUTPUT)/xmldocs.css
 	$(XSLT) $(XSLT_FLAGS)                                          \
 	--stringparam current.docid $*                                 \
-	--stringparam target.database.document ../docbook/olinkdb.xml  \
+	--stringparam target.database.document ../docbook/olinkdb-c.xml  \
 	-o $@/ docbook/html-chunks.xsl $<
 	touch $@
+
+
+#
+# OlinkDBs
+#
+# OlinkDB information for unchunked parts
+#tmp/olinkdbs: $(LTMPDIR) \
+#  $(patsubst guides/%.xml,$(LTMPDIR)/%-c.db,$(wildcard guides/*.xml))  \
+#  $(patsubst guides/%.xml,$(LTMPDIR)/%-nc.db,$(wildcard guides/*.xml)) \
+#  $(patsubst refs/%.xml,$(LTMPDIR)/%-c.db,$(wildcard refs/*.xml))  \
+#  $(patsubst refs/%.xml,$(LTMPDIR)/%-nc.db,$(wildcard refs/*.xml))
+#	touch tmp/olinkdbs
+tmp/olinkdbs: $(LTMPDIR)
+	make $(patsubst guides/%.xml,$(LTMPDIR)/%-c.db,$(wildcard guides/*.xml))
+	make $(patsubst guides/%.xml,$(LTMPDIR)/%-nc.db,$(wildcard guides/*.xml))
+	make $(patsubst refs/%.xml,$(LTMPDIR)/%-c.db,$(wildcard refs/*.xml))
+	make $(patsubst refs/%.xml,$(LTMPDIR)/%-nc.db,$(wildcard refs/*.xml))
+	touch tmp/olinkdbs
+
+$(LTMPDIR)/%-nc.db: %.xml $(LTMPDIR)
+	$(XSLT) $(XSLT_FLAGS)                                          \
+	--stringparam collect.xref.targets only                        \
+	--stringparam targets.filename $@                              \
+	docbook/html-nochunks.xsl $<
+	tail +2 $@ > $(LTMPDIR)/tail
+	mv $(LTMPDIR)/tail $@
+
+# OlinkDB information for chunked parts
+$(LTMPDIR)/%-c.db: %.xml $(TMPDIR)
+	$(XSLT) $(XSLT_FLAGS)                                          \
+	--stringparam collect.xref.targets only                        \
+	--stringparam targets.filename $@                              \
+	docbook/html-chunks.xsl $<
+	tail +2 $@ > $(LTMPDIR)/tail
+	mv $(LTMPDIR)/tail $@
+
 
 #
 # Support targets
 #
 
-tmp/mkreport: $(LTMPDIR)
+mkreport: tmp/mkreport $(LTMPDIR)
 	./bin/mkreport $(IC_VERSIONS)
-	touch $@
+	touch tmp/mkreport
 
 tmp/refs-autogen: $(LTMPDIR) bin/refs-autogen
 	./bin/refs-autogen $(IC_VERSIONS)
-	touch $@
+	touch tmp/refs-autogen
 
 $(OUTPUT): $(LTMPDIR)
 	mkdir -p $(OUTPUT)
@@ -131,21 +167,6 @@ distclean: clean
 
 # OLD
 #
-# OlinkDBs
-#
-# OlinkDB information for unchunked parts
-#$(LTMPDIR)/%-nc.db: %.xml $(LTMPDIR)
-#	$(XSLT) $(XSLT_FLAGS)                                          \
-#	--stringparam collect.xref.targets only                        \
-#	--stringparam targets.filename $@                              \
-#	docbook/html-nochunks.xsl $<
-#
-## OlinkDB information for chunked parts
-#$(TMPDIR)/%-c.db: %.xml $(TMPDIR)
-#	$(XSLT) $(XSLT_FLAGS)                                          \
-#	--stringparam collect.xref.targets only                        \
-#	--stringparam targets.filename $@                              \
-#	docbook/html-chunks.xsl $<
 #
 #
 ## TODO Make target that conveniently checks out all IC releases from CVS
