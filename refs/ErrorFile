@@ -1,0 +1,33 @@
+__NAME__ purpose
+error log filename
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>file name</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify the error log file location. 
+</para><para>
+The Interchange daemon must have the permission to create and write to the
+specified file.
+__END__
+
+__NAME__ see also
+SysLog
+__END__
+
+
+__NAME__ example
+<example>
+  <title></title>
+  <programlisting>
+ErrorLog /var/log/interchange/error.log
+  </programlisting>
+</example>
+__END__
+

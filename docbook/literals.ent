@@ -85,6 +85,8 @@ option) any later version.</para>">
 <!ENTITY gcfs "<filename>interchange.cfg</filename> or <filename>catalog.cfg</filename>">
 <!ENTITY cgfs "<filename>catalog.cfg</filename> or <filename>interchange.cfg</filename>">
 
+<!ENTITY ICROOT "<olink targetdoc='glossary' targetptr='ICROOT'>ICROOT</olink>">
+
 
 <!-- ENTITIES TO EASIER CONSTRUCT TAG PARAMETERS LIST -->
 <!-- put standard ones here, such as Hide or Interpolate/reparse -->
