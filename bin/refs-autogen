@@ -148,6 +148,8 @@ while ( $path = shift @paths) {
 				my $ctxsdata = join "", @$ctxdata;
 				if ( length $ctxsdata ) {
 					$$ag{source} .= <<ENDD;
+<para>
+</para>
 <example>
 <title>$loc ($ctxmeta)</title>
 
@@ -242,7 +244,7 @@ while (my ($k,$v) = each %symbol_lists ) {
 
 	my $refpage = <<ENDD;
 <!DOCTYPE reference PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
-	"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+	"../docbook/docbookxi.dtd">
 
 <reference id="$k">
 	<title>Interchange Reference Pages: $longname{$k}s</title>

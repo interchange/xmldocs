@@ -49,7 +49,8 @@ $(OUTPUT)/%.html: %.xml $(OUTPUT)/xmldocs.css
 # Man pages
 $(OUTPUT)/%.man: %.xml
 	mkdir -p $(OUTPUT)/man
-	XML_CATALOG_FILES="$(DEFAULT_CATALOG)" $(XMLTO) $(XMLTO_FLAGS)    \
+	$(XMLTO) $(XMLTO_FLAGS)                                        \
+	-x docbook/reference.xsl                                       \
 	-o $(OUTPUT)/man/                                              \
 	man $<
 
