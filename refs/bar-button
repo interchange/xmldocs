@@ -35,8 +35,8 @@ not excluded).
 The content between the <tag>selected</tag><tag>/selected</tag> tags will be
 displayed <emphasis role='bold'>if</emphasis> the name of the current
 page (<varname>MV_PAGE</varname> variable, or your custom
-<arg choice='plain'>current=</arg> argument)
-matches the <arg choice='plain'>page=</arg> parameter.
+<arg choice='plain'>current</arg> argument)
+matches the <arg choice='plain'>page</arg> parameter.
 </para><para>
 The default content (one outside of <tag>select</tag> tags) will be displayed
 when there is no match.

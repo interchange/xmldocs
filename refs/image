@@ -170,10 +170,10 @@ __NAME__ synopsis2
 	<entry><arg choice='plain'>title</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>
-	Value of the <arg choice='plain'>alt=</arg> attribute.
+	Value of the <arg choice='plain'>alt</arg> attribute.
 	</entry>
 	<entry>
-	Text to use for the &img;'s <arg choice='plain'>title=</arg>
+	Text to use for the &img;'s <arg choice='plain'>title</arg>
 	attribute. This is supported by newer browsers to provide things like
 	rollover tips.
 	</entry>

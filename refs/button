@@ -38,7 +38,7 @@ __NAME__ synopsis2
 	Button text to show while the next page is being loaded.
 	If defined, this is used for the
 	&scratch; variable name instead of the
-	<arg choice='plain'>text=</arg> argument value. Requires &js;.
+	<arg choice='plain'>text</arg> argument value. Requires &js;.
 	</entry>
 </row>
 <row>
@@ -63,14 +63,14 @@ __NAME__ synopsis2
 	<entry>0</entry>
 	<entry>
 	Use <classname>Image::Size</classname> Perl module to determine image size and
-	add <arg choice='plain'>width=</arg> and <arg choice='plain'>height=</arg>
+	add <arg choice='plain'>width</arg> and <arg choice='plain'>height</arg>
 	attributes to the image definition?
 	</entry>
 </row>
 <row>
 	<entry><arg choice='plain'>alt</arg></entry>
 	<entry></entry><entry></entry>
-	<entry>Value of the <arg choice='plain'>text=</arg> parameter.</entry>
+	<entry>Value of the <arg choice='plain'>text</arg> parameter.</entry>
 	<entry>Alternate text for the browser status bar (window.status)
 	and <olink targetdoc='glossary' targetptr='balloon'>balloons</olink>.
 	</entry>

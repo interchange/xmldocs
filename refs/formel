@@ -22,7 +22,7 @@ __NAME__ synopsis2
 	<entry></entry>
 	<entry>
 	Name to assign to this form element (appears as
-	<arg choice='plain'>name=</arg> parameter to the appropriate HTML tag).
+	<arg choice='plain'>name</arg> parameter to the appropriate HTML tag).
 	</entry>
 </row>
 <row>
@@ -62,7 +62,7 @@ __NAME__ synopsis2
 <row>
 	<entry><arg choice='plain'>checkfor</arg></entry>
 	<entry></entry><entry></entry>
-	<entry>The element's <arg choice='plain'>name=</arg> value.</entry>
+	<entry>The element's <arg choice='plain'>name</arg> value.</entry>
 	<entry>
 	Name to pass to the <tag>error</tag> tag.
 	</entry>
@@ -103,7 +103,7 @@ __NAME__ synopsis2
 	<entry><arg choice='plain'>maxlength</arg></entry>
 	<entry></entry><entry></entry>
 	<entry></entry>
-	<entry>The <arg choice='plain'>maxlength=</arg> attribute for the
+	<entry>The <arg choice='plain'>maxlength</arg> attribute for the
 	HTML form element.</entry>
 </row>
 <row>
