@@ -106,8 +106,14 @@ $(LTMPDIR):
 # STATTREE
 tmp/stattrees:
 	-for p in $(IC_VERSIONS); do \
-	./bin/stattree sources/$$p \
+	./bin/stattree sources/$$p; \
+	ctags -R -x --languages=perl --perl-kinds=cls sources/$$p/ \
+	> cache/$$p/.objectlist.perl.txt; \
+	ctags -R -x --languages=c --c-kinds=cdf sources/$$p/ \
+	> cache/$$p/.objectlist.c.txt; \
+	ctags -f cache/$$p/.tags -R --extra=fq --fields=afikKlmnsSz --line-directives sources/$$p \
 	; done
+
 
 #
 # Cleanup
@@ -126,10 +132,6 @@ distclean: clean
 #
 # OlinkDBs
 #
-# TODO OlinkDB targets get properly called implicitly by 
-# the above targets, but SOMEHOW the tmp/*.db files are not created.
-# Everything works fine if you run it manually. I really don't know
-# the problem here.
 # OlinkDB information for unchunked parts
 #$(LTMPDIR)/%-nc.db: %.xml $(LTMPDIR)
 #	$(XSLT) $(XSLT_FLAGS)                                          \
@@ -144,22 +146,6 @@ distclean: clean
 #	--stringparam targets.filename $@                              \
 #	docbook/html-chunks.xsl $<
 #
-#
-#	# Generate human-readable ctags information
-#	-for p in $(IC_VERSIONS); do \
-#		ctags -R -x --languages=perl --perl-kinds=cls sources/$$p/ \
-#		> $(CACHE)/$$p/.objectlist.perl.txt; \
-#		ctags -R -x --languages=c --c-kinds=cdf sources/$$p/ \
-#		> $(CACHE)/$$p/.objectlist.c.txt; \
-#		cd sources \
-#	; done
-#
-#tags:
-#	# Generate ctags information
-#	-for p in $(IC_VERSIONS); do \
-#		ctags -f $(CACHE)/$$p/.tags -R --extra=fq --fields=afikKlmnsSz --line-directives sources/$$p; \
-#		cd sources \
-#	; done
 #
 ## TODO Make target that conveniently checks out all IC releases from CVS
 #
