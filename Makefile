@@ -26,7 +26,7 @@ PSR         = xsltproc
 PSR_FLAGS   = --xinclude
 
 VPATH       = guides refs howtos glossary
-#.SILENT:
+.SILENT:
 .PHONY: all complete
 .PHONY: skel
 .PHONY: guides howtos symbols glossary
@@ -42,7 +42,7 @@ VPATH       = guides refs howtos glossary
 # Complete build
 all: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) \
   skel refxmls olinks-nc olinks-c                              \
-  guides howtos symbols glossary
+  glossary howtos guides symbols
 
 guides:   $(foreach doc,$(GUIDES),$O/$(doc).html  )            \
           $(foreach doc,$(GUIDES),$O/$(doc))
@@ -196,7 +196,7 @@ refs/%.xml: FNAME = $(subst .xml,,$(BNAME))
 $T/%.list refs/%.xml: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) $(shell find refs/ -regex '.+[^(\.xml)]$$') bin/refs-autogen
 	# PEH, -g is useless since tags migrate between tag groups
 	#bin/refs-autogen -g $(FNAME) -o $@ $(BOTH) $(IC_VERSIONS)
-	bin/refs-autogen -o $@ $(BOTH) $(IC_VERSIONS)
+	bin/refs-autogen -o $@ $(BOTH) $(TARGET_RELEASE) $(IC_VERSIONS)
 
 
 #############################################################

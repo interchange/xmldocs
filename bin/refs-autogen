@@ -42,6 +42,7 @@ my $output_both; # Unconditionally override $output_spec
 my $no_autodefs; # Generate autodefs.ent collection of entities by default
 my $autopath = "docbook/autorefs.ent";
 my %dups; # List of symbols names that are not unique
+my $last_path; # Last path we want docs generated for (say, 5.2.0).
 
 my @page_order = (qw/purpose default structure synopsis description structure example notes bugs/, "symbol type", "source", "author", "copyright", "see also");
 
@@ -52,6 +53,7 @@ unless ( GetOptions (
 	"output|o=s" => \$output_spec,
 	"both|b!"    => \$output_both,
 	"noentities|noents!" => \$no_autodefs,
+	"last-path|last|lp=s" => \$last_path,
 )) { die "Error parsing options\n" }
 
 # Determine which stuff to output
@@ -323,6 +325,11 @@ ENDD
 			$$ag{"ctxs shown"} = $ctxshown < $max_ctxs ? $ctxshown : $max_ctxs;
 		}
 	}
+
+	# If this is the last one we want (so, manual break), then stop here.
+	# This is for cases where you want to generate docs for say, 5.2.0 and not
+	# always cvs-head
+	last if $last_path and $last_path eq $path;
 }
 
 ### THIS IS LAST RUN (Split in multiple loops to avoid chicken-and-egg problem)###
