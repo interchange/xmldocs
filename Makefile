@@ -26,7 +26,8 @@ VPATH       = guides refs howtos glossary
 .PHONY: all complete skel clean distclean
 .PHONY: guides refs howtos
 .PHONY: refxmls
-.PHONY: cache caches clean-cache up-all up-%
+.PHONY: cache caches clean-cache up-all all-up %-up up-%
+.PHONY: olinkdbs-nc olinks-nc olinkdbs-c olinks-c
 
 
 #############################################################
@@ -36,10 +37,61 @@ complete: skel srcs caches all
 
 
 #############################################################
-# Group targets
-#guides: $(foreach doc,$(subst .xml,,$(shell find guides -name '*.xml'| awk -F/ '{ print $$2 }')),$O/$(doc).html $O/$(doc))
-#howtos: $(foreach doc,$(subst .xml,,$(shell find howtos -name '*.xml'| awk -F/ '{ print $$2 }')),$O/$(doc).html $O/$(doc))
-#refs: $(foreach doc,$(subst .xml,,$(shell find refs -name '*.xml'| awk -F/ '{ print $$2 }')),$O/$(doc).html $O/$(doc))
+# Skel
+skel: $T $O $O/files $O/images $O/xmldocs.css
+$T:
+	echo "U     $T/"
+	mkdir -p $T
+$O:
+	echo "U     $O/"
+	mkdir -p $O
+$O/files: $(shell find files) bin/dbgen
+	echo "C     $@/"
+	rm -rf $@/
+	cp -a files $O/
+	rm -rf `find $@ -name CVS`
+	cp bin/dbgen $O/files/
+	cd files; for p in *; do                                  \
+	  if test "$$p" != "CVS"; then                            \
+	    if test -d "$$p"; then                                \
+	      cp -a $$p ../$O/files/;                             \
+	      tar --exclude=CVS -cf ../$O/files/$$p.tar $$p;      \
+	      tar --exclude=CVS -zcf ../$O/files/$$p.tar.gz $$p;  \
+	      tar --exclude=CVS -jcf ../$O/files/$$p.tar.bz2 $$p  \
+	    ; fi                                                  \
+	  ; fi                                                    \
+	; done
+$O/images: $(shell find images)
+	echo "C     $@/"
+	rm -rf $@/
+	cp -a images $O/
+	rm -rf `find $@ -name CVS`
+$O/xmldocs.css: docbook/xmldocs.css
+	echo "C     $@"
+	cp $< $@
+
+
+#############################################################
+# OLINK DBs (interlinking between documents)
+#olinkdbs-nc olinks-nc:                                              \
+#	$(patsubst %.xml,$T/%-nc.db,$(shell find $(VPATH) -name '*.xml' | \
+#	awk -F/ '{ print $$2 }'))                                         \
+#	$(patsubst %.xml,$T/%-nc.db,$(shell find $(VPATH) -name '*.xml' | \
+#	awk -F/ '{ print $$2 }'))
+$T/%-nc.db: %.xml $T
+	$(PSR) $(PSR_FLAGS)                                               \
+	  --stringparam collect.xref.targets only                         \
+	  --stringparam targets.filename $@                               \
+	  docbook/html-nochunks.xsl $<
+	  tail +2 $@ > $T/tail
+	  mv $T/tail $@
+$T/%-c.db: %.xml $T
+	$(PSR) $(PSR_FLAGS)                                               \
+	  --stringparam collect.xref.targets only                         \
+	  --stringparam targets.filename $@                               \
+	  docbook/html-chunks.xsl $<
+	  tail +2 $@ > $T/tail
+	  mv $T/tail $@
 
 
 #############################################################
@@ -59,65 +111,14 @@ $O/%: %.xml skel
 
 
 #############################################################
-# OLINK DBs (interlinking between documents)
-$T/%-nc.db: %.xml $T
-	$(PSR) $(PSR_FLAGS)                                               \
-	  --stringparam collect.xref.targets only                         \
-	  --stringparam targets.filename $@                               \
-	  docbook/html-nochunks.xsl $<
-	  tail +2 $@ > $T/tail
-	  mv $T/tail $@
-$T/%-c.db: %.xml $T
-	$(PSR) $(PSR_FLAGS)                                               \
-	  --stringparam collect.xref.targets only                         \
-	  --stringparam targets.filename $@                               \
-	  docbook/html-chunks.xsl $<
-	  tail +2 $@ > $T/tail
-	  mv $T/tail $@
-
-
-#############################################################
-# Skel
-skel: $T $O $O/files $O/images $O/xmldocs.css
-$T:
-	echo "U     $T/"
-	mkdir -p $T
-$O:
-	echo "U     $O/"
-	mkdir -p $O
-$O/files: $O $(shell find files)
-	echo "C     $@/"
-	rm -rf $@/
-	cp -a files $O/
-	#rm -rf `find $@ -name CVS`
-	cp bin/dbgen $O/files/
-	cd files; for p in *; do                                  \
-	  if test "$$p" != "CVS"; then                            \
-	    if test -d "$$p"; then                                \
-	      cp -a $$p ../$O/files/;                             \
-	      tar --exclude=CVS -cf ../$O/files/$$p.tar $$p;      \
-	      tar --exclude=CVS -zcf ../$O/files/$$p.tar.gz $$p;  \
-	      tar --exclude=CVS -jcf ../$O/files/$$p.tar.bz2 $$p  \
-	    ; fi                                                  \
-	  ; fi                                                    \
-	; done
-$O/images: $(shell find images)
-	echo "C     $@/"
-	rm -rf $@/
-	cp -a images $O/
-	#rm -rf `find $@ -name CVS`
-$O/xmldocs.css: docbook/xmldocs.css $O
-	echo "C     $@"
-	cp $< $@
-
-
-#############################################################
 # Cleaning
 clean:
 	-rm -rf $O
 clean-cache:
-	-rm cache/*/.cache.bin
-distclean: clean
+	-rm -f cache/*/.cache.bin 2>/dev/null
+clean-refs:
+	-rm -f refs/*.xml
+distclean: clean clean-cache
 	-rm -rf $T
 	-rm -rf {refs,glossary}/*.xml
 
@@ -129,11 +130,11 @@ sources:
 	mkdir -p $@
 sources/%: sources $T
 	bin/coup $(subst sources/,,$@)
-up-all cvs-sources srcs cvsrcs cvs cvss: sources $T
+up-all cvs-sources srcs cvsrcs cvs cvss all-up cvsup: sources $T
 	for p in $(IC_VERSIONS); do      \
 	  bin/coup -u $$p                \
 	; done
-up-% cvs-%: sources/% $T
+up-% cvs-% %-up %-cvs: sources/% $T
 	bin/coup -u $(subst sources/,,$<)
 
 

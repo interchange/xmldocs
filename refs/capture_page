@@ -1,0 +1,134 @@
+__NAME__ purpose
+process page and save output to file
+__END__
+
+__NAME__ missing
+Explain what is expiry= parameter and how touch= affects it.
+__END__
+
+
+__NAME__ synopsis
+<row>
+	<entry>
+		<arg choice='plain'>page</arg>
+	</entry>
+	<entry>Yes</entry><entry>Yes</entry>
+	<entry></entry>
+	<entry>Name of the Interchange page to process (as if the user visited
+	it with the browser).</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>file</arg>
+	</entry>
+	<entry>Yes</entry><entry>Yes</entry>
+	<entry></entry>
+	<entry>
+	File to dump contents to.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>scan</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>Specifies the search string and reproduces a search
+	results page.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>auto_create_dir</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>Create directory path to the dump file?</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>expiry</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>See if file Modification time is newer than expiry deadline</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>touch</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>If the file is expired, touch it?</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>umask</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>File creation umask</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>hide</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>Hide return value of the <function>Vend::File::writefile()</function>
+	function?</entry>
+</row>
+__END__
+
+__NAME__ description
+This tag processes the page (as if the user visited it with the browser),
+and writes contents to disk.
+This is usually called from Interchange jobs but, of course, nothing
+enforces this.
+</para><para>
+The tag is able to reproduce both standard and search results pages.
+</para><para>
+This is similar to the output you could get from 
+<userinput>lynx -dump</userinput> or <userinput>w3m -dump</userinput>
+commands.
+__END__
+
+
+__NAME__ example
+<example>
+	<title>Basic static page example</title>
+	<para>
+	Create page named <filename>make-static.html</filename> with the following
+	content:
+	</para>
+	<programlisting>
+	[capture-page page=index file=static/index.html umask=022 auto_create_dir=1]
+	</programlisting>
+	<para>
+	This would create the <filename class='directory'>static/</filename>
+	directory in your catalog root, and a snapshot of
+	<filename>index.html</filename> in it.
+	</para>
+</example>
+__END__
+
+__NAME__ example2
+<example>
+	<title>Static page example using scan=</title>
+	<para>
+	Create page named <filename>make-static2.html</filename> with the following
+	content:
+	</para>
+	<programlisting>
+[loop list="Levels,Rulers,Squares"]
+  [capture-page page="[loop-code]" file="static/cats/[loop-code].html"
+    scan="fi=products/st=db/co=yes/sf=category/se=[loop-code]"
+    auto_create_dir=1]
+[/loop]
+	</programlisting>
+</example>
+__END__
+
+__NAME__ author
+&racke;, &ICDEVGROUP;
+__END__
+

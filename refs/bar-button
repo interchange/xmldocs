@@ -1,0 +1,80 @@
+__NAME__ purpose
+display content (menubar usually) based on page name
+__END__
+
+
+__NAME__ synopsis
+<row>
+	<entry>
+		<arg choice='plain'>page</arg>
+	</entry>
+	<entry>Yes</entry><entry>Yes</entry>
+	<entry></entry>
+	<entry>Name of the page for which the button is defined.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>current</arg>
+	</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry>Current page name (as obtained from <varname>MV_PAGE</varname>)</entry>
+	<entry>
+	Name of the current page. Usually you do not want to override the default.
+	</entry>
+</row>
+
+__END__
+
+
+__NAME__ description
+This tag can display content based on the (current) page name. It is most
+directly useful for creating menu bars, but can be used for other purposes.
+</para><para>
+The content between the <tag>selected</tag><tag>/selected</tag> tags will be
+displayed <emphasis role='bold'>if</emphasis> the name of the current
+page (<varname>MV_PAGE</varname> variable, or your custom 'current=' argument)
+matches the 'page=' parameter.
+</para><para>
+The default content (one outside of <tag>select</tag> tags) will be displayed
+when there is no match.
+__END__
+
+
+__NAME__ example
+<example>
+	<title>Create 3-button menubar</title>
+	<para>
+	Create three different pages,
+	<filename>page1.html</filename>,
+	<filename>page2.html</filename> and
+	<filename>page3.html</filename>, each with the identical content:
+	</para>
+	<programlisting><![CDATA[
+<table><tr>
+
+[bar-button page=page1]
+<td><a href="[area page1]">PAGE-1</a></td>
+[selected]
+<td bgcolor="red"><a href="[area page1]"><b>PAGE-1-selected</b></a></td>
+[/selected]
+[/bar-button]
+
+[bar-button page=page2]
+<td><a href="[area page2]">PAGE-2</a></td>
+[selected]
+<td bgcolor="red"><a href="[area page2]"><b>PAGE-2-selected</b></a></td>
+[/selected]
+[/bar-button]
+
+[bar-button page=page3]
+<td><a href="[area page3]">PAGE-3</a></td>
+[selected]
+<td bgcolor="red"><a href="[area page3]"><b>PAGE-3-selected</b></a></td>
+[/selected]
+[/bar-button]
+
+</tr></table>
+]]></programlisting>
+</example>
+__END__
+

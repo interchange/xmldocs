@@ -253,21 +253,21 @@ while ( $path = shift @paths) { # For each version specified
 					#	$cstart = 0 ;
 					#}
 					
-					$ctxmeta .= " in $$ctx{func}():$$ctx{funclnum}" if $$ctx{funclnum};
-					$ctxmeta .= ")";
+					if ( $$ctx{funclnum} ) {
+						$ctxmeta .= " in $$ctx{func}():$$ctx{funclnum}" ;
+						$ctxmeta .= ")";
+					}
 					my $r = $hash{revision}{$plf}->[0];
 					my $d = $hash{revision}{$plf}->[1];
-# XXX when xsltproc gets to support line numbering, add this below:
-#<screen linenumbering='numbered' startinglinenumber='$ls'><![CDATA[
 					$$ag{source} .= <<ENDD;
 <para>
 </para>
 <example>
 <title>$loc (rev. $r from $d)$ctxmeta</title>
 
-<screen linenumbering='numbered' startinglinenumber='$ls'><![CDATA[
-$ctxsdata
-]]></screen>
+<screen linenumbering='numbered' startinglinenumber='$ls'>
+<![CDATA[$ctxsdata]]>
+</screen>
 </example>
 
 ENDD
@@ -596,11 +596,12 @@ sub update_field {
 	$sect =~ s/([a-z])([A-Z])/$1 $2/g;
 	$sect = lc $sect;
 
-	if (!( grep {/^$sect/} @page_order )) {
-		push @{ $invalid{$name} }, "Section '$sect' from file '$fn' won't be used (name not recognized)";
-	}
-
 	if ( $sect ne 'missing' ) {
+
+		if (!( grep {/^$sect/} @page_order )) {
+			push @{ $invalid{$name} }, "Section '$sect' from file '$fn' won't be used (name not recognized)";
+		}
+
 		if ( $mode eq 'override' ) {
 			$$sref{lc $sect} = $content;
 		} else {
@@ -615,6 +616,10 @@ sub update_field {
 			push @{ $$sref{'_see also'} }, @list;
 			$$sref{'see also'} = join ", ", @{$$sref{'_see also'}};
 		}
+
+	} else { # "Missing" section
+		my @missing_list = split /\n/, $content;
+		push @{ $invalid{$name} }, $_ for @missing_list
 	}
 
 	# Older code

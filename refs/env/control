@@ -1,3 +1,3 @@
 purpose: provides read-only access to the HTTP environment variables
 see also: var
-author: Ed LaFrance, &ICDEVGROUP;
+author: &edl;,, &ICDEVGROUP;
