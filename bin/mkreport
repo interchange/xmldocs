@@ -222,7 +222,10 @@ sub procitem {
 	unless (ref $val eq 'HASH') {
 		$val = join("\n", @$val) if ( ref $val eq 'ARRAY' );
 		local $" = ".";
-		open OUT, "> $cachedir/$dumpdir/@$stack.$key" or
+		# Handle cases like $hash{version}, where it's a toplevel element
+		# without anything on @$stack.
+		( my $fout = "@$stack.$key" ) =~ s/^\.//;
+		open OUT, "> $cachedir/$dumpdir/$fout" or
 			die "Can't dump $dumpdir/@$stack.$key ($!)\n";
 		print OUT $val;
 		close OUT;

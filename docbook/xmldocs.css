@@ -16,9 +16,74 @@ h1.title {
 	background-repeat: no-repeat;
 }
 
+h3.title {
+	/*background-color: #d5e1ff;*/
+	background-color: #e5ecff;
+	font-weight: normal;
+}
+
+
+/* Refentry */
+.refentry .refnamediv {
+	border: dotted 1px #ffcc66;
+	margin-top: 40px;
+	margin-bottom: 20px;
+}
+
+.refentry .refnamediv h2 {
+	background-color: #ffcc66;
+	margin: 0 0 0 0;
+	/*font-size: 0px;*/
+	padding-left: 10px;
+	font-size: small;
+	font-variant: small-caps;
+	border-top: dotted 1px #208cbd;
+	border-left: dotted 1px #208cbd;
+	border-right: dotted 1px #208cbd;
+	/*visibility: hidden;*/
+}
+
+.refentry .refnamediv p {
+	margin: 0 0 0 0;
+	padding: 2px 0px 2px 10px;
+	background-color: #ffcc66;
+	border: dotted 1px #208cbd;
+	border-top: none;
+	font-weight: bold;
+	/*font-stretch: semi-condensed;*/
+}
+
+.refsect1 h2 {
+	/*background-color: #ffcc66;*/
+	/*background-color: #d5e1ff;*/
+	background-color: #e5ecff;
+	padding: 2px 0px 2px 10px;
+	font-size: 90%;
+	/*font-variant: small-caps;*/
+	font-weight: bold;
+	/*font-stretch: semi-condensed;*/
+	/*font-size: small;*/
+	border: dotted 1px #208cbd;
+	/*border-right: none;
+	border-bottom: none;*/
+}
+
+.refsect1 p {
+	padding-left: 10px;
+}
+
+/* Refentry end */
+
+
 .toc {
 	border: dotted 1px #208cbd;
 	padding: 14px;
+	margin-bottom: 40px;
+}
+
+.example .title {
+	/*background-color: #d5e1ff;*/
+	background-color: transparent;
 }
 
 .programlisting, .screen {
@@ -30,6 +95,11 @@ h1.title {
 	background-image: url(images/example2.png);
 	background-position: top left;
 	background-repeat: no-repeat;
+}
+
+.refsect1 .example .programlisting {
+	background-image: none;
+	border: none;
 }
 
 hr {

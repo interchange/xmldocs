@@ -7,8 +7,8 @@
 
 	<sitemap>
 		<dir name="OUTPUT"> 
-			<document targetdoc="iccattut" baseuri="docbook">
-				<xi:include href="iccattut-nochunks-targets.db"  
+			<document targetdoc="iccattut" baseuri="tmp">
+				<xi:include href="iccattut-nc.db"  
 					xmlns:xi="http://www.w3.org/2001/XInclude"/>
 			</document>
 		</dir>

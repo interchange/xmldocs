@@ -7,182 +7,153 @@
 # Base definitions
 SHELL = /bin/sh
 export OUTPUT = OUTPUT
-export CACHE  = cache
-export XML_CATALOG_FILES = $(DOCBOOKDIR)/catalog.xml
-DOCBOOKDIR = docbook
+export LTMPDIR = tmp
+export XML_CATALOG_FILES = docbook/catalog.xml
+DEFAULT_CATALOG = "/etc/xml/catalog"
 XSLT = xsltproc
-XSLT_FLAGS = --xinclude
-IC_VERSIONS = cvs-head
+XSLT_FLAGS = --xinclude --nonet
+XMLTO = xmlto
+XMLTO_FLAGS = --skip-validation
+IC_VERSIONS = 4.6.0 4.8.0 5.0.0 5.2.0 cvs-head
+
+VPATH = guides refs
 .SILENT:
-
-VPATH = guides
-
-## ## ##
-# Future updates (as documentation expands) go here:
-GUIDES = $(OUTPUT)/iccattut.html $(OUTPUT)/iccattut
-OLINKDBS_UNCHUNKED = $(DOCBOOKDIR)/iccattut-nochunks-targets.db
-OLINKDBS_CHUNKED = $(DOCBOOKDIR)/iccattut-chunks-targets.db
-
-BASE_OUTPUT = output-skel image-files support-files css
-TREE_STATS = tree-cache tree-reports
-# END
-## ## ##
-#
-# Plain "make" cleans up and builds everything. To invoke targets 
-# manually, use names from the section above.
-# 
-# The targets not autobuilt are tree-stats, tags and objlists. They generate
-# files in cache/. cache/ contains information derived from IC
-# releases.
-# When you want to re-generate the cache information (because say,
-# CVS update happends), make sure the "sources" directory or symlink
-# points to a directory with the release you wish to update (for 
-# example, "cvs-head" or "5.2.0"), then run 'make cache'.
-# And don't forget to commit updated cache/ files (if any) to docs CVS.
 
 ############## No need to modify below ##############
 
+.PHONY: all guides refs %.man
 
-.PHONY: $(BASE_OUTPUT) $(TREE_STATS) cache distclean clean FORCE
+all: guides refs
+	echo 'all' done
 
-all: distclean $(BASE_OUTPUT) $(TREE_STATS) \
-	$(OLINKDBS_UNCHUNKED) $(OLINKDBS_CHUNKED) \
-	$(GUIDES) final
+guides: $(OUTPUT)/images $(OUTPUT)/files \
+  $(patsubst guides/%.xml,OUTPUT/%.html,$(wildcard guides/*.xml))  \
+  $(patsubst guides/%.xml,OUTPUT/%,$(wildcard guides/*.xml))
 
-#
-# XML documentation
-#
-#@echo GOT $*-shortname / $?-all prereqs / $@-output.html / $<-first prereq
-$(OUTPUT)/%.html: %.xml $(DOCBOOKDIR)/* OUTPUT
-	# Unchunked document
-	$(XSLT) $(XSLT_FLAGS) \
-	        --stringparam current.docid $* \
-	        --stringparam target.database.document ../$(DOCBOOKDIR)/olinkdb.xml \
-	        -o $@ \
-	        $(DOCBOOKDIR)/html-nochunks.xsl $<
+refs: tmp/refs-autogen $(OUTPUT)/images $(OUTPUT)/files
+	make $(OUTPUT)/pragmas.html $(OUTPUT)/pragmas $(OUTPUT)/pragmas.man
+	make $(OUTPUT)/globvars.html $(OUTPUT)/globvars $(OUTPUT)/globvars.man
 
-$(OUTPUT)/%: %.xml $(DOCBOOKDIR)/* OUTPUT
-	# Chunked document
-	$(XSLT) $(XSLT_FLAGS) \
-	        --stringparam current.docid $* \
-	        --stringparam target.database.document ../$(DOCBOOKDIR)/olinkdb.xml \
-	        -o $(OUTPUT)/ \
-	        $(DOCBOOKDIR)/html-chunks.xsl $<
 
 #
-# OLink databases
+# All documents
 #
-$(DOCBOOKDIR)/%-nochunks-targets.db: %.xml
-	# Generate olink databases for unchunked html files
-	$(XSLT) $(XSLT_FLAGS) \
-	        --stringparam collect.xref.targets only \
-	        --stringparam targets.filename $@ \
-	        $(DOCBOOKDIR)/html-nochunks.xsl \
-	        $<
 
-$(DOCBOOKDIR)/%-chunks-targets.db: %.xml
-	# Generate olink databases for chunked html files
-	$(XSLT) $(XSLT_FLAGS) \
-	        --stringparam collect.xref.targets only \
-	        --stringparam targets.filename $@ \
-	        $(DOCBOOKDIR)/html-chunks.xsl \
-	        $<
+# Unchunked documents
+$(OUTPUT)/%.html: %.xml $(OUTPUT)/xmldocs.css
+	$(XSLT) $(XSLT_FLAGS)                                          \
+	--stringparam current.docid $*                                 \
+	--stringparam target.database.document ../docbook/olinkdb.xml  \
+	-o $@ docbook/html-nochunks.xsl $<
+
+# Man pages
+$(OUTPUT)/%.man: %.xml
+	mkdir -p $(OUTPUT)/man
+	XML_CATALOG_FILES="$(DEFAULT_CATALOG)" $(XMLTO) $(XMLTO_FLAGS)    \
+	-o $(OUTPUT)/man/                                              \
+	man $<
+
+# Chunked documents
+$(OUTPUT)/%: %.xml $(OUTPUT)/xmldocs.css
+	$(XSLT) $(XSLT_FLAGS)                                          \
+	--stringparam current.docid $*                                 \
+	--stringparam target.database.document ../docbook/olinkdb.xml  \
+	-o $@/ docbook/html-chunks.xsl $<
+	touch $@
 
 #
-# Support files
+# Support targets
 #
-OUTPUT: $(BASE_OUTPUT)
 
-cache: tree-stats objlists tags
+tmp/mkreport: $(LTMPDIR)
+	./bin/mkreport $(IC_VERSIONS)
+	touch $@
 
-objlists:
-	# Generate human-readable ctags information
-	-for p in $(IC_VERSIONS); do \
-		ctags -R -x --languages=perl --perl-kinds=cls sources/$$p/ \
-		> $(CACHE)/$$p/.objectlist.perl.txt; \
-		ctags -R -x --languages=c --c-kinds=cdf sources/$$p/ \
-		> $(CACHE)/$$p/.objectlist.c.txt; \
-		cd sources \
-	; done
+tmp/refs-autogen: $(LTMPDIR) bin/refs-autogen
+	./bin/refs-autogen $(IC_VERSIONS)
+	touch $@
 
-tags:
-	# Generate ctags information
-	-for p in $(IC_VERSIONS); do \
-		ctags -f $(CACHE)/$$p/.tags -R --extra=fq --fields=afikKlmnsSz --line-directives sources/$$p; \
-		cd sources \
-	; done
-
-tree-stats:
-	# Generate stats to bin dump 
-	# Only do that when sources/ is populated
-	-for p in $(IC_VERSIONS); do \
-		mkdir -p $(CACHE)/$$p; \
-		./bin/stattree sources/$$p \
-	; done
-
-tree-reports:
-	# Make report from $(OUTPUT)/<ver>/.cache.bin
-	for p in $(IC_VERSIONS); do \
-		mkdir -p $(CACHE)/$$p; \
-		./bin/mkreport cache/$$p \
-	; done
-
-tree-cache:
-	# Copy tree stats to $(OUTPUT)
-	-for p in $(IC_VERSIONS); do \
-		cp -a $(CACHE)/$$p $(OUTPUT) \
-	; done
-
-output-skel:
-	# Mirror cache/ structure in output (actually, determine releases)
+$(OUTPUT): $(LTMPDIR)
 	mkdir -p $(OUTPUT)
-	for p in $(IC_VERSIONS); do \
-	  mkdir -p $(OUTPUT)/$$p \
-	; done
-	mkdir -p $(OUTPUT)/images
-	mkdir -p $(OUTPUT)/files
 
-image-files: $(OUTPUT)/images
-	# Images
-	#cp images/*.{png,gif,jpg,jpeg} $(OUTPUT)/images/
-	-cp images/*.png $(OUTPUT)/images/
+$(OUTPUT)/xmldocs.css: docbook/xmldocs.css $(OUTPUT)
+	cp docbook/xmldocs.css $(OUTPUT)/xmldocs.css
 
-support-files:
-	# Copy support files
-	cp -a files/* $(OUTPUT)/files/
+$(OUTPUT)/images: $(wildcard images/*.jpg images/*.png images/*.gif)
+	mkdir -p $(OUTPUT)/images/
+	cp $(wildcard images/*.jpg images/*.png images/*.gif) $(OUTPUT)/images/
+
+$(OUTPUT)/files: files/*
+	rm -rf $(OUTPUT)/files
+	mkdir -p $(OUTPUT)/files/
 	cp bin/dbgen $(OUTPUT)/files/
-	cd files; for p in *; do \
-		if test "$$p" != "CVS"; then \
-			if test -d "$$p"; then \
-				tar cf ../$(OUTPUT)/files/$$p.tar $$p; \
-				tar zcf ../$(OUTPUT)/files/$$p.tgz $$p; \
-				tar jcf ../$(OUTPUT)/files/$$p.tbz2 $$p \
-			; fi \
-		; fi \
+	cd files; for p in *; do                                      \
+		if test "$$p" != "CVS"; then                              \
+			if test -d "$$p"; then                                \
+				cp -a $$p ../$(OUTPUT)/files/;                    \
+				tar cf ../$(OUTPUT)/files/$$p.tar $$p;            \
+				tar zcf ../$(OUTPUT)/files/$$p.tgz $$p;           \
+				tar jcf ../$(OUTPUT)/files/$$p.tbz2 $$p           \
+			; fi                                                  \
+		; fi                                                      \
 	; done
+	rm -rf `find $(OUTPUT)/files/ -name CVS`
 
-css:
-	# Copy css definitions
-	cp $(DOCBOOKDIR)/*.css $(OUTPUT)/
+$(LTMPDIR):
+	mkdir -p $(LTMPDIR)
 
-#
-# sources/ directory related
-# TODO Make target that conveniently checks out all IC releases from CVS,
-# sets them in appropriate directories under cache/ and runs the tree
-# statistics generator.
 
 #
+# Cleanup
 #
-#
-distclean clean:
+
+clean:
 	-rm -rf $(OUTPUT)
-	-rm -f $(DOCBOOKDIR)/*.db
-	-for p in $(IC_VERSIONS); do \
-	  rm -f $(CACHE)/$$p/* \
-	; done
 
-final:
-	-rm -r `find $(OUTPUT) -name CVS`
+distclean: clean
+	-rm -rf $(LTMPDIR)
+	-rm -rf refs/*.xml
+	-for p in $(IC_VERSIONS); do rm cache/$$p/*; done
 
-FORCE: ;
 
+# OLD
+#
+# OlinkDBs
+#
+# TODO OlinkDB targets get properly called implicitly by 
+# the above targets, but SOMEHOW the tmp/*.db files are not created.
+# Everything works fine if you run it manually. I really don't know
+# the problem here.
+# OlinkDB information for unchunked parts
+#$(LTMPDIR)/%-nc.db: %.xml $(LTMPDIR)
+#	$(XSLT) $(XSLT_FLAGS)                                          \
+#	--stringparam collect.xref.targets only                        \
+#	--stringparam targets.filename $@                              \
+#	docbook/html-nochunks.xsl $<
+#
+## OlinkDB information for chunked parts
+#$(TMPDIR)/%-c.db: %.xml $(TMPDIR)
+#	$(XSLT) $(XSLT_FLAGS)                                          \
+#	--stringparam collect.xref.targets only                        \
+#	--stringparam targets.filename $@                              \
+#	docbook/html-chunks.xsl $<
+#
+#
+#	# Generate human-readable ctags information
+#	-for p in $(IC_VERSIONS); do \
+#		ctags -R -x --languages=perl --perl-kinds=cls sources/$$p/ \
+#		> $(CACHE)/$$p/.objectlist.perl.txt; \
+#		ctags -R -x --languages=c --c-kinds=cdf sources/$$p/ \
+#		> $(CACHE)/$$p/.objectlist.c.txt; \
+#		cd sources \
+#	; done
+#
+#tags:
+#	# Generate ctags information
+#	-for p in $(IC_VERSIONS); do \
+#		ctags -f $(CACHE)/$$p/.tags -R --extra=fq --fields=afikKlmnsSz --line-directives sources/$$p; \
+#		cd sources \
+#	; done
+#
+## TODO Make target that conveniently checks out all IC releases from CVS
+#

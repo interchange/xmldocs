@@ -1,0 +1,24 @@
+#!/bin/sh
+
+if test -z "$1"; then
+	echo "No-go. Supply item to add/modify: $0 <name>"
+fi
+
+EDPROG="$EDITOR";
+if test -z "$EDPROG"; then
+	EDPROG=vim
+fi
+
+echo Creating/updating item $1
+mkdir -p "refs/$1"
+cp -i --reply=no docbook/item-skel/* "refs/$1"
+
+echo Editing all item files
+sleep 1
+$EDPROG refs/$1/*
+
+echo Removing empty files
+rm `find "refs/$1" -size 0`
+
+echo Done.
+
