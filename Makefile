@@ -100,16 +100,16 @@ $T/%-nc.db: %.xml $T
 	  --stringparam collect.xref.targets only                         \
 	  --stringparam targets.filename $@                               \
 	  docbook/html-nochunks.xsl $<
-	  tail +2 $@ > $T/tail
-	  mv $T/tail $@
+	  # tail +2 $@ > $T/tail
+	  # mv $T/tail $@
 olinkdbs-c olinks-c: $(foreach f,$(ALL_DOCS),$T/$f-c.db)
 $T/%-c.db: %.xml $T
 	$(PSR) $(PSR_FLAGS)                                               \
 	  --stringparam collect.xref.targets only                         \
 	  --stringparam targets.filename $@                               \
 	  docbook/html-chunks.xsl $<
-	  tail +2 $@ > $T/tail
-	  mv $T/tail $@
+	  # tail +2 $@ > $T/tail
+	  # mv $T/tail $@
 
 
 #############################################################
