@@ -1,0 +1,14 @@
+
+<glossentry id="ActionMap">
+<glossterm>ActionMap</glossterm>
+
+<glossdef>
+<para>
+The standard C<process> action has a number of associated C<FormAction> settings. Besides using Perl, Interchange tags may be used in an action, though they are not nearly as efficient.
+
+</para>
+
+</glossdef>
+
+</glossentry>
+

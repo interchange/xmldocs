@@ -18,8 +18,7 @@ __NAME__ description
 The directive defines a variable that will be available either
 globally (if defined in &gcf;) or within a catalog (if defined in &ccf;).
 </para><para>
-Cariable names are case sensitive, must begin with a capital letter
-(uppercase), and can only contain word characters
+Cariable names are case sensitive and and can only contain word characters
 (that is, a-z, A-Z, 0-9 and _).
 </para><para>
 Once the variable is defined, it can be accessed using the following
@@ -43,6 +42,9 @@ __END__
 
 
 __NAME__ notes
+Variable names <emphasis role='bold'>do not</emphasis> need to begin
+with a capital letter (unlike the documentation prior to
+&IC; &first-xmldocs-release; release stated).
 __END__
 
 

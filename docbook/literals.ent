@@ -1,6 +1,4 @@
 
-
-
 <!-- GENERAL ENTITIES -->
 <!ENTITY GNU "<ulink url='http://www.gnu.org'>GNU</ulink>">
 <!ENTITY IC "<ulink url='http://www.icdevgroup.org'>Interchange</ulink>">
@@ -246,4 +244,7 @@ option) any later version.</para>">
   </entry>
 </row>
 ">
+
+<!-- first IC release shipping with xmldocs -->
+<!ENTITY first-xmldocs-release "5.6">
 
