@@ -25,7 +25,7 @@ __NAME__ synopsis2
 	<entry>Yes</entry><entry></entry>
 	<entry></entry>
 	<entry>
-	Button text. <glossterm linkend="scratch-var">Scratch variable</glossterm>
+	Button text. &scratch; variable
 	of the same name is also created to
 	hold the code associated with the button.
 	</entry>
@@ -37,8 +37,7 @@ __NAME__ synopsis2
 	<entry>
 	Button text to show while the next page is being loaded.
 	If defined, this is used for the
-	<glossterm linkend='scratch-var'>scratch variable</glossterm> name
-	instead of the
+	&scratch; variable name instead of the
 	<arg choice='plain'>text=</arg> argument value. Requires &js;.
 	</entry>
 </row>
@@ -73,7 +72,7 @@ __NAME__ synopsis2
 	<entry></entry><entry></entry>
 	<entry>Value of the <arg choice='plain'>text=</arg> parameter.</entry>
 	<entry>Alternate text for the browser status bar (window.status)
-	and <glossterm linkend='baloon'>balloons</glossterm>.
+	and <olink targetdoc='glossary' targetptr='balloon'>balloons</olink>.
 	</entry>
 </row>
 <row>

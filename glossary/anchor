@@ -1,0 +1,11 @@
+
+<glossentry id="anchor">
+<glossterm>HyperText Anchor</glossterm>
+
+<glossdef>
+<para>
+<ulink url='http://www.w3.org/TR/REC-html40/struct/links.html'>anchor</ulink>
+</para>
+</glossdef>
+
+</glossentry>

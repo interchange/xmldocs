@@ -1,0 +1,13 @@
+
+<glossentry id="SMTP">
+<acronym>SMTP</acronym>
+<glossterm>Simple Mail Transfer Protocol</glossterm>
+
+<glossdef>
+<para>
+<ulink url='http://cr.yp.to/smtp.html'>SMTP</ulink> (<classname>Net::SMTP</classname> Perl module)
+</para>
+</glossdef>
+
+</glossentry>
+

@@ -49,20 +49,32 @@ option) any later version.</para>">
 
 
 
-<!-- ENTITIES TO AVOID A LOT OF REPETITION -->
-<!ENTITY js "<glossterm linkend='js'>JavaScript</glossterm>">
-<!ENTITY anchor "<ulink url='http://www.w3.org/TR/REC-html40/struct/links.html'>anchor</ulink>">
-<!ENTITY CSS "<ulink url='http://www.w3.org/Style/CSS/'>CSS</ulink>">
-<!ENTITY HTML "<ulink url='http://www.w3.org/MarkUp/'>HTML</ulink>">
-<!ENTITY img "<ulink url='http://www.w3.org/MarkUp/html3/img.html'>&lt;img&gt;</ulink>">
-<!ENTITY link "<ulink url='http://www.w3.org/TR/REC-html40/struct/links.html'>link</ulink>">
-<!ENTITY pragma "<glossterm linkend='pragma'>pragma</glossterm>">
-<!ENTITY MIME "<ulink url='http://www.mhonarc.org/~ehood/MIME/'>MIME</ulink>">
-<!ENTITY ITL "<glossterm linkend='ITL'>ITL</glossterm>">
-<!ENTITY SMTP "<ulink url='http://cr.yp.to/smtp.html'>SMTP</ulink> (<classname>Net::SMTP</classname> Perl module)">
-<!ENTITY interpolation "<glossterm linkend='interpolation'>interpolation</glossterm>">
-<!ENTITY epoch "<glossterm linkend='epoch'>Epoch</glossterm>">
-<!ENTITY userdb "UserDB">
+<!-- ENTITIES TO AVOID A LOT OF REPETITION, ESPECIALLY LINKING TO GLOSSARY -->
+<!ENTITY js "<olink targetdoc='glossary' targetptr='js'>JavaScript</olink>">
+<!ENTITY CSS "<olink targetdoc='glossary' targetptr='CSS'>CSS</olink>">
+<!ENTITY anchor "<olink targetdoc='glossary' targetptr='anchor'>Anchor</olink>">
+<!ENTITY HTML "<olink targetdoc='glossary' targetptr='HTML'>HTML</olink>">
+<!ENTITY img "<olink targetdoc='glossary' targetptr='img'>Img</olink>">
+<!ENTITY link "<olink targetdoc='glossary' targetptr='link'>Link</olink>">
+<!ENTITY pragma "<olink targetdoc='glossary' targetptr='pragma'>Pragma</olink>">
+<!ENTITY MIME "<olink targetdoc='glossary' targetptr='MIME'>MIME</olink>">
+<!ENTITY ITL "<olink targetdoc='glossary' targetptr='ITL'>ITL</olink>">
+<!ENTITY SMTP "<olink targetdoc='glossary' targetptr='SMTP'>SMTP</olink>">
+<!ENTITY interpolation "<olink targetdoc='glossary' targetptr='interpolation'>Interpolation</olink>">
+<!ENTITY interpolate "<olink targetdoc='glossary' targetptr='interpolation'>Interpolate</olink>">
+<!ENTITY epoch "<olink targetdoc='glossary' targetptr='epoch'>Epoch</olink>">
+<!ENTITY userdb "<olink targetdoc='glossary' targetptr='userdb'>UserDB</olink>">
+<!ENTITY weighted "<olink targetdoc='glossary' targetptr='weighted'>Weighted</olink>">
+<!ENTITY ad "<olink targetdoc='glossary' targetptr='ad'>Ad</olink>">
+<!ENTITY scratch "<olink targetdoc='glossary' targetptr='scratch'>Scratch</olink>">
+<!ENTITY jobs "<olink targetdoc='glossary' targetptr='jobs'>Jobs</olink>">
+<!ENTITY GET "<olink targetdoc='glossary' targetptr='GET'>GET</olink>">
+<!ENTITY interval "<olink targetdoc='glossary' targetptr='interval'>Interval</olink>">
+<!ENTITY cgi-var "<olink targetdoc='glossary' targetptr='cgi-var'>CGI Variable</olink>">
+<!ENTITY umask "<olink targetdoc='glossary' targetptr='umask'>Umask</olink>">
+<!ENTITY mode "<olink targetdoc='glossary' targetptr='mode'>Mode</olink>">
+<!ENTITY filter "<olink targetdoc='glossary' targetptr='filter'>Filter</olink>">
+<!ENTITY dereferencing "<olink targetdoc='glossary' targetptr='deref'>Dereferencing</olink>">
 
 
 <!-- ENTITIES TO EASIER CONSTRUCT TAG PARAMETERS LIST -->
@@ -77,7 +89,7 @@ option) any later version.</para>">
 	</entry>
 	<entry></entry><entry></entry>
 	<entry>0</entry>
-	<entry><glossterm linkend='interpolate'>Interpolate</glossterm> input?</entry>
+	<entry>&interpolate; input?</entry>
 </row>
 ">
 <!ENTITY ROW_INTERPOLATE_1 "
@@ -90,7 +102,7 @@ option) any later version.</para>">
 	</entry>
 	<entry></entry><entry></entry>
 	<entry>1</entry>
-	<entry><glossterm linkend='interpolate'>Interpolate</glossterm> input?</entry>
+	<entry>&interpolate; input?</entry>
 </row>
 ">
 <!ENTITY ROW_HIDE_0 "
@@ -121,7 +133,7 @@ option) any later version.</para>">
 	<entry></entry><entry></entry>
 	<entry>None.</entry>
 	<entry>
-	<glossterm linkend='filter'>Interchange filter</glossterm> to apply.
+	&filter; to apply.
 	</entry>
 </row>
 ">
@@ -192,7 +204,7 @@ option) any later version.</para>">
 	</entry>
 	<entry></entry><entry></entry>
 	<entry></entry>
-	<entry>File creation <glossterm linkend='umask'>umask</glossterm>.</entry>
+	<entry>File creation &umask;.</entry>
 </row>
 ">
 <!ENTITY ROW_MODE_0644 "
@@ -203,7 +215,7 @@ option) any later version.</para>">
   <entry></entry><entry></entry>
   <entry><literal>0644</literal></entry>
   <entry>
-  File creation <glossterm linkend='mode'>mode</glossterm>.
+  File creation &mode;.
   </entry>
 </row>
 ">

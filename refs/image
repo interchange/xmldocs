@@ -136,7 +136,7 @@ __NAME__ synopsis2
 	If not found in the PATH, 
 	the location of the <command>mogrify</command> can be defined with the
 	<varname>IMAGE_MOGRIFY</varname> variable.
-	This would also temporarily set umask to 2 during the creation of files
+	This would also temporarily set &umask; to 2 during the creation of files
 	and directories.
 	The value is specified as
 	<literal><replaceable>A</replaceable>x<replaceable>B</replaceable></literal>.

@@ -18,8 +18,8 @@ __NAME__ synopsis2
 	<entry>
 	Copy all values from the current
 	namespace to the new one before switching to it?
-	(Nested data structures are not
-	<glossterm linkend='deref'>dereferenced</glossterm>).
+	(&dereferencing; on nested data structures is 
+	<emphasis role='bold'>not</emphasis> performed).
 	</entry>
 </row>
 <row>

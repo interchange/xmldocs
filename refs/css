@@ -145,8 +145,8 @@ __NAME__ example2
 <example>
 	<title>Using literal=</title>
 	<para>
-	You can either save your CSS in a <glossterm linkend='scratch-var'>Scratch
-	variable</glossterm>, or provide it 
+	You can either save your CSS in a &scratch;
+	variable, or provide it 
 	directly in-place. Here are both variants:
 	</para>
 	<programlisting>

@@ -80,6 +80,11 @@ commands.
 __END__
 
 
+__NAME__ notes
+See the &umask; glossary entry.
+__END__
+
+
 __NAME__ example
 <example>
 	<title>Basic static page example</title>

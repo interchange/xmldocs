@@ -11,11 +11,11 @@ __NAME__ synopsis
 	<entry>Yes</entry><entry></entry>
 	<entry><literal>default</literal></entry>
 	<entry>
-	For a <emphasis>weighted</emphasis> banner display, this field specifies
+	For a &weighted; banner display, this field specifies
 	category name; only database entries where the
 	<database class='field'>category</database>
 	field matches this value are taken as possible candidates for display.
-	In an <emphasis>unweighted</emphasis> display, this field specifies
+	In an unweighted display, this field specifies
 	banner code; only one database entry with the matching value in the
 	<database class='field'>code</database> field should exist.
 	</entry>
@@ -108,8 +108,7 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry>0</entry>
 	<entry>
-	Use 
-	<glossterm linkend="weighted_system">weighted</glossterm>
+	Use &weighted;
 	banner system? In a weighted system, the database is expected
 	to contain multiple entries with the same
 	<database class='field'>category</database>, and then the banners are
@@ -145,7 +144,7 @@ messages, according to optional categories and
 <glossterm linkend="weighting_system">weighting</glossterm>.
 All this functionality is accessible using the <tag>banner</tag> tag.
 </para><para>
-The <glossterm linkend="weighted_system">weighting system</glossterm>, 
+The &weighted; system,
 if used, will pre-built banners in the directory
 <filename class='directory'>Banners/*/</filename> under the catalog temporary
 directory (this will happen when the banners are first requested after

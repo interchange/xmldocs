@@ -1,0 +1,11 @@
+
+<glossentry id="img">
+<glossterm>Hypertext image</glossterm>
+
+<glossdef>
+<para>
+<ulink url='http://www.w3.org/MarkUp/html3/img.html'>&lt;img&gt;</ulink>
+</para>
+</glossdef>
+
+</glossentry>
