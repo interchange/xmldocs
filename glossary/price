@@ -50,7 +50,7 @@ having the default value of <literal>price</literal>.
 <listitem><para>
 If &conf-CommonAdjust; is set to <emphasis>any</emphasis> value (so, be it a
 valid &CAs; or not), extended price
-adjustments are enabled.
+adjustments are enabled
 <!-- TODO clarify: It may also hold the default pricing scheme. -->
 </para></listitem>
 
@@ -58,25 +58,25 @@ adjustments are enabled.
 If the <database class='field'>price</database> field in the
 <database>products</database> database contains a 
 &CAs;, it takes
-precedence over the default set with &conf-CommonAdjust;.
+precedence over the default set with &conf-CommonAdjust;
 </para></listitem>
 
 <listitem><para>
 If the value of the &conf-CommonAdjust; directive is set to a valid &CAs;,
 and the <database class='field'>price</database> field is empty or
 specifically <literal>0</literal>, then the &CAs;
-will be used to set the price of the item.
+will be used to set the price of the item
 </para></listitem>
 
 <listitem><para>
 If no &CAs;s are found, then the price will be <literal>0</literal>, and
-subject to any later application of discounts.
+subject to any later application of discounts
 </para></listitem>
 
 <listitem><para>
 If, as a result of &CAs; application, another &CAs; is found,
 it will be re-parsed and the result applied. Chaining is retained; a
-fallback may be passed and will take effect.
+fallback may be passed and will take effect
 </para></listitem>
 </itemizedlist>
 
@@ -86,13 +86,14 @@ fallback may be passed and will take effect.
 	<title>CommonAdjust Strings, Atoms and Settors</title>
 
 <para>
-Using &CAs;, prices may be adjusted in several ways, but we first need to 
+Using valid &CAs;s, prices may be adjusted in several ways, but we first
+need to 
 define "&CAs;" as we've promised in the introduction. &CAs;s are price
 definition strings which consist of individual actions called
 <emphasis>atoms</emphasis>. Atoms in turn consist of
 <emphasis>settors</emphasis>.
 Roughly, we could say atoms convey "control information" &mdash; they
-define <emphasis role='bold'>when</emphasis> is the containing settor 
+define <emphasis role='bold'>when</emphasis> are contained settors
 applied, and settors define <emphasis role='bold'>what</emphasis> is applied.
 </para>
 <para>
@@ -102,7 +103,7 @@ Price atoms can be of type <emphasis>final</emphasis>,
 
 <orderedlist>
 	<listitem><para>
-	<emphasis>Final</emphasis> price atom is always applied if it does not
+	<emphasis>Final</emphasis> price atom is applied if it does not
 	evaluate to zero
 	</para></listitem>
 	<listitem><para>
@@ -119,12 +120,12 @@ Atom types are recognizable from the syntax used to define them.
 A chained atom ends with a comma. A fallback atom has a
 leading semi-colon. Final atoms have no comma appended or semi-colon prepended.
 Atoms themselves are separated by whitespace and may be quoted, although there
-should normally be no whitespace in a setting and therefore quotes are 
-not necessary.
+should normally be no whitespace in a setting and therefore no quotes
+necessary.
 </para>
 <para>
 A <emphasis>settor</emphasis> is a mean by which the price is set. In other
-words, it is an expression contained in an atom, and when evaluated, it
+words, it is an expression contained in an atom which, when evaluated,
 affects the item price.
 Just as there are different types of atoms, there are different types of settors
 as well. Be aware that all settor types can yield new &CAs;s, and it's
@@ -147,7 +148,8 @@ into the following section.
 <para>
 Let's take a look at available settor types. Settor types do not have
 distinguishable symbolic names, but their type is recognizable from the
-syntax used.
+syntax used. Note that bold elements are required, while the rest are 
+optional.
 </para>
 
 <!-- 
@@ -198,7 +200,7 @@ I - integer
 	<literal>price</literal> unless you changed &conf-PriceField; or have 
 	some interesting ideas in mind.
 	<!-- TODO what means "key is item code except in attribute-based lookup?-->
-	Key argument defaults, of course, to the item code (except in a special
+	Key, of course, defaults to the item code (except in a special
 	case of attribute-based lookup). The database value returned is treated
 	as settor again, and is re-parsed accordingly.
 	</para></listitem>
@@ -248,8 +250,9 @@ pricing:p1..p5,p10:
 	<emphasis role='bold'><literal>==</literal><replaceable>attribute</replaceable><literal>:</literal></emphasis><replaceable>table</replaceable><literal>:</literal><replaceable>column</replaceable><literal>:</literal><replaceable>key</replaceable>
 	</para><para>
 	<!-- TODO what's default table for attribute based lookup?-->
-	Performs <emphasis>attribute-based</emphasis> lookup. The table the attribute
-	is looked up in. Column default to the same value as attribute.
+	Performs <emphasis>attribute-based</emphasis> lookup. Table
+	specifies the table for lookup. Column defaults to the name of the
+	attribute being looked for.
 	</para></listitem>
 
 	<listitem><para>
@@ -272,7 +275,7 @@ pricing:p1..p5,p10:
 $Vend::Interpolate::item          is the current item
 $Vend::Interpolate::item->{code}  gives key for current item
 $Vend::Interpolate::item->{mv_ib} gives database ordered from
-$Vend::Interpolate::item->{...}   gives attribute value
+$Vend::Interpolate::item->{...}   gives specified attribute's value
 ]]></programlisting>
 
 	</para></listitem>
@@ -315,12 +318,13 @@ $Vend::Interpolate::item->{...}   gives attribute value
 	<emphasis role='bold'><replaceable>word</replaceable></emphasis>
 	</para>
 	<para>
-	The value <literal><replaceable>word</replaceable></literal> which must
-	be unique (must not match any other settors) is available as a key only for
+	The value <literal><replaceable>word</replaceable></literal> (which must
+	<!-- TODO settors ? -->
+	be unique &mdash; not match any other settors) is available as a key only for
 	the next lookup.
 	If that next settor is a database lookup and it contains
 	a dollar sign (<literal>$</literal>),
-	<literal><replaceable>word</replaceable></literal> will will be substituted
+	<literal><replaceable>word</replaceable></literal> will be substituted
 	for it.
 	<!-- TODO above, are we talking settors or atoms? what means "must not
 	match any other settors" ? (does that mean its the same namespace as >>word
@@ -335,7 +339,7 @@ $Vend::Interpolate::item->{...}   gives attribute value
 	as key for the next lookup.
 	If that next settor is a database lookup and it contains
 	a dollar sign (<literal>$</literal>),
-	<literal><replaceable>word</replaceable></literal> will will be substituted
+	<literal><replaceable>word</replaceable></literal> will be substituted
 	for it.
 	<!-- TODO is this only if next is db lookup, or $ will always be 
 	substituted and db lookup is just an example? -->
@@ -343,8 +347,18 @@ $Vend::Interpolate::item->{...}   gives attribute value
 
 	</orderedlist>
 
+	<para>
+	For actual examples, please see the &conf-CommonAdjust; reference page.
+	</para>
+
+</section>
+
+<section>
+	<title>Product discounts</title>
+	<para>
+	For product discount settings, see the &glos-discount; glossary entry.
+	</para>
 </section>
 
 <para>
-For actual examples, please see the &conf-CommonAdjust; reference page.
 

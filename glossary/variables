@@ -1,0 +1,21 @@
+<!-- 
+TODO
+LI1: Global program variables
+
+If you are programming a GlobalSub or global UserTag, you have access
+to all Interchange facilities including all the preset variables and
+configuration directives.
+
+The C<Global> package is used to hold variables that are set at
+program start and whose value is retained.
+
+The C<Vend> package is used for variables that might be set at some
+point during program execution, but that will always be reset to 
+undefined at the end of the transaction.
+
+One example is C<$Vend::Cookie>, which holds the raw cookie value
+sent by the user. 
+
+If you are going to set or access these variables, you should be
+getting your documentation from the source code.  
+-->

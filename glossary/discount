@@ -1,0 +1,48 @@
+
+Product discounts in &IC; can be set at any time. The discounts
+apply only to the customer receiving them, and are of following types:
+
+<itemizedlist>
+
+	<listitem><para>
+	Discount on a specific item - a discount for one particular item.
+	Key to use with the &tag-discount; tag is the product's &glos-SKU;
+	</para></listitem>
+	<listitem><para>
+	Discount on all items - a discount applying to all items.
+	Key to use with the &tag-discount; tag is <literal>ALL_ITEMS</literal>
+	</para></listitem>
+	<listitem><para>
+	Discount on a particular item at particular time - 
+	a discount for an individual line item, applied if the <mv>mv_discount</mv>
+	attribute is set (usually with embedded &PERL;)
+	</para></listitem>
+	<listitem><para>
+	Order discount - a discount applied not on individual products, but on a
+	total order.
+	Key to use with the &tag-discount; tag is <literal>ENTIRE_ORDER</literal>
+	</para></listitem>
+
+</itemizedlist>
+
+The discounts are specified using a formula. The formula is scanned for
+the <varname>$q</varname> and <varname>$s</varname> variables which are
+first substituted for with the item quantity and subtotal respectively.
+The variable <varname>$s</varname> is saved between
+iterations, so that the discounts can be cumulative.
+</para><para>
+In case of individual item discounts, the formula must be defined in a way 
+that it produces a subtotal which includes <emphasis>all items</emphasis> of
+the same SKU that are found in the user's basket.
+In case of an entire order discount, the formula is usually simpler
+and defines a flat discount ammount or percentage.
+</para><para>
+<emphasis role='bold'>
+Discounts are applied to the <emphasis>effective</emphasis> price of the
+<!-- TODO does this include taxing or not -->
+product, that is &mdash; the price obtained after applying &glos-price;
+adjustments.
+</emphasis>
+</para><para>
+For examples, see the &tag-discount; reference page.
+

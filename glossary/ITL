@@ -42,6 +42,21 @@ In the above example, you can implicitly see that container tags are mostly
 useful only if some content is provided in their <emphasis>body</emphasis>
 (the place between the opening and corresponding ending tag).
 </para>
+<para>
+Additionally, container tags for which you do not provide any
+<emphasis>body</emphasis> can be closed using "XML-style", but make sure to
+add an extra space, to unambiguously separate <literal>/]</literal> from the
+tag arguments. The following two lines are identical in effect:
+<programlisting>
+[forum top="[item-code]" display_page="forum/display"][/forum]
+[forum top="[item-code]" display_page="forum/display" /]
+</programlisting>
+</para>
+<para>
+It's probably also useful to mention that there must be no whitespace
+between the left bracket ([) and the tag name; <code>[forum]</code> is
+valid, <code>[ forum]</code> is not!
+</para>
 </section>
 
 
@@ -69,13 +84,10 @@ conveniently write
 <code>[page <replaceable>href</replaceable>]
 <replaceable>Link text</replaceable>
 [/page]</code>, but &tag-page; is <emphasis>not</emphasis> a container
-tag, and link text is not treated as the corresponding body text.
+tag, and link text is not treated as the corresponding body text. Finally,
+since <code>[/page]</code> only adds unnecessary burden on the parser,
+simply writing <code>&lt;/a&gt;</code> is preferred.
 </para></note>
-
-</para><para>
-When using the <code>[<replaceable>tagname</replaceable>
-<replaceable>...</replaceable>]</code> syntax, there must be no whitespace
-between the left bracket ([) and the tag name.
 
 </para>
 
@@ -91,6 +103,13 @@ Both <code>[item-list]...[/item-list]</code> or
 <code>[item_list]...[/item_list]</code> are fine, but
 <code>[item-list]...[/item_list]</code> is
 <emphasis role='bold'>not</emphasis>.
+</para>
+<para>
+This is a very convenient feature. It is a common standard to use dashes
+(<literal>-</literal>) in &glos-ITL;, and underscores (<literal>_</literal>)
+in &PERL; code (because in Perl, dashes would be interpreted as minus operators,
+which is not what you'd expect).
+
 </para>
 </important>
 </section>
@@ -168,17 +187,20 @@ The positional-style tag that accomplishes the same thing but is more
 compact:
 
 <programlisting>
-[value variable_name]
+[value <replaceable>variable_name</replaceable>]
 </programlisting>
 
 Positional syntax, however, requires support by each tag individually. That
-is, set of arguments that can be specified in positional notation as
-well as their position in the set are fixed determined in advance. You can
+is, set of arguments that can be specified in positional notation (as
+well as their position in the set) are fixed and determined in advance. You can
 see a list of accepted positional arguments (and their implicit order) in
 each tag's SYNOPSIS reference section; try &tag-value; for example.
 </para><para>
 Additionally, <emphasis role='bold'>you cannot mix named and positional
 parameters in the same tag</emphasis>; use either all named, or all positional.
+<emphasis role='bold'>It seems I cannot stress this enough, this is a common
+beginners' mistake, especially when you copy/paste foreign code and combine
+with your own!</emphasis>
 </para><para>
 In any case, positional syntax is appropriate for simpler tags and 
 &IC; interprets positional arguments somewhat faster (but don't let your
@@ -187,15 +209,15 @@ In any case, positional syntax is appropriate for simpler tags and
 once said, "Premature optimization is the root of all programming evil").
 </para><para>
 In most cases, tag parameters specified in the positional fashion work
-the same as named parameters. However, there are a few situations where
-you must use named parameters:
+the same as named parameters. However, <emphasis role='bold'>there are a few
+situations where you must use named parameters</emphasis>:
 
 <itemizedlist>
   <listitem><para>
   When you want to specify a parameter that comes positionally after a
   parameter that you want to omit, e.g. omit the first parameter but specify
   the second. The parser would have no way of knowing which is which, so
-  you must switch to named syntax. This rarely happens, though, because the
+  you must revert to named syntax. This rarely happens, though, because the
   first positional parameter is usually required for a given tag anyway, and
   can't be omitted.
   </para></listitem>
@@ -203,11 +225,12 @@ you must use named parameters:
   <listitem><para>
   When there is some ambiguity as to which parameter is which, usually
   due to whitespace. If the argument value contains any whitespace 
-  (even if it's enclosed in quotes!), you must use named syntax.
+  (<emphasis role='bold'>even if it is enclosed in quotes!</emphasis>), you
+	must use named syntax.
   </para></listitem>
   
   <listitem><para>
-  When you need to use the output of a tag as the input argument for
+  When you need to use the output of a tag as <emphasis>argument</emphasis> for
   another tag.
   </para></listitem>
 </itemizedlist>
@@ -256,19 +279,25 @@ argument values? First answer is trivial; never omit the quotes and you'll
 never run into trouble.
 </para>
 <para>
+The other answer says, "omitting quotes earns you a bonus for style and achieves
+small parser speed improvement". However, if the value contains a whitespace,
+you must quote it.
+<!-- TODO whitespace and/or weird chars too? or it's matched by \S ? -->
 To quote values, you can use double quotes (<literal>"</literal>),
 single quotes (<literal>'</literal>) and 
-pipes (<literal>|</literal>). Pipes have the additional functionality of
+pipes (<literal>|</literal>) interchangeably.
+<!-- TODO mention `` -->
+Pipes have the additional functionality of
 removing leading and trailing whitespace, but generally you can use 
-them in combination to do three levels of quoting with ITL; for 
+all types in combination to do three levels of quoting with ITL; for 
 more deeply nested constructs, use direct &PERL; code.
 </para>
 <para>
-The above trivial answer to the quoting problem, however, is not the best
-you can get in terms of speed or 
-style. In general, looping <emphasis>subtags</emphasis> (covered some lines
-below) do not need quotes because they are parsed in a separate pass, before
-the general parser takes on.
+The above answers to the quoting problem, however, are still not all there is
+to know about quoting.
+In general, <emphasis>loop subtags</emphasis>, which we explain some lines
+below, do not need quotes (even though they sometimes contain whitespace)
+because they are parsed in a separate pass, before the general parser takes on.
 </para><para>
 Here's an example that would work properly with quotes omitted. (Pay attention
 to <code>[item-field url]</code> which, at first sight, looks like it is
@@ -283,7 +312,8 @@ invalid because it is not quoted and contains a space.)
 <para>
 <code>[page [value mypage]]</code>, however, would <emphasis>not</emphasis>
 work, because the &tag-value; tag shown is not one of the looping subtags
-which receive special treatment.
+(for the record, it's not even close). But as we said, we'll get back to
+subtags and their availability in a minute.
 </para>
 
 </section>
@@ -312,17 +342,14 @@ container tags (because its function is performed by
 
 </para><para>
 With container tags, the <arg choice='plain'>interpolate</arg> attribute
-specifies whether the tag body will be &glos-interpolate;d before being
-passed to the tag. 
-
-</para><para>
+specifies whether the <emphasis>tag body</emphasis> will be
+&glos-interpolate;d before being passed to the tag. 
+<!-- </para><para> -->
 With stand-alone tags, the <arg choice='plain'>interpolate</arg> attribute
-specifies whether the output of the tag will be &glos-reparse;d.
-This feature "overlap"
-between the two options occurred because <arg choice='plain'>interpolate</arg>
-already existed (and functioned as described) when the new
-<arg choice='plain'>reparse</arg> was added to &IC;.
-
+specifies whether the <emphasis>output</emphasis> of the tag will be
+&glos-interpolate;d. This is very confusing because it's not intuitive, but
+once you get to remember it a few times in practice, it will stop being a 
+problem.
 </para><para>
 Output of most of the stand-alone tags is not interpolated by default.
 Exceptions to this rule would include, for example, the &tag-include; tag.
@@ -378,8 +405,8 @@ tags, and specifies whether the tag <emphasis>output</emphasis> will be
 &glos-interpolate;d. This is basically the same as the
 <arg choice='plain'>interpolate</arg> attribute for stand-alone tags, but a
 new name had to be invented because <arg choice='plain'>interpolate</arg>
-performs a different function with container tags (it refers to interpolation
-of the tag <emphasis>body</emphasis> instead of the tag output).
+already performed a different function with container tags, when 
+this functionality was to be added.
 
 </para><para>
 Most container tags will have their output re-parsed for more
@@ -414,7 +441,9 @@ Kilroy was here
 
 
 </para><para> <sbr/><sbr/>
-The <arg choice='plain'>send</arg> attribute is deprecated.
+The third attribute, <arg choice='plain'>send</arg>, was deprecated long ago
+and will only be described for historical reference.
+<!-- TODO -->
 </para>
 </section>
 
@@ -427,6 +456,11 @@ The <arg choice='plain'>send</arg> attribute is deprecated.
 Each tag may accept additional arguments which vary from tag to
 tag. For each tag individually, you need to consult the 
 appropriate reference page to learn tag-specific parameters and attributes.
+Note, however, that the tag arguments do not necessarily have to be announced
+in the tag definition header; sometimes they're used pretty much
+<emphasis>ad-hoc</emphasis>, but we are making sure to keep the documentation
+up to date. We kindly ask you to inform us of any errors or omissions in the
+documentation.
 </para>
 </section>
 
@@ -437,8 +471,10 @@ appropriate reference page to learn tag-specific parameters and attributes.
 
 
 <para>
-Some tags allow you to pass a &PERL; &glos-array; or &glos-hash; as the
-value of an attribute. For an ordinary tag, the syntax is as follows:
+Instead of just plain values, for some tags it would be particularly convenient
+if they accepted &glos-array;s or &glos-hash;es of argument values, much like 
+you could do if you used &PERL; directly. Fortunately, &glos-ITL; supports
+that too! For an ordinary tag, the syntax is as follows:
 
 <programlisting>
 <replaceable>attribute</replaceable>.<replaceable>ARRAY_INDEX</replaceable>=<replaceable>value</replaceable>
@@ -560,7 +596,8 @@ In each of the above, <replaceable>PREFIX</replaceable> represents an
 arbitrary prefix that is used in that looping tag; this is needed to be able
 to support nesting in arbitrary order and to arbitrary level.
 <emphasis>All of the
-subtags are only interpreted within their container and only accept
+subtags are only interpreted within their container tags (they can only
+appear inside  their parent tags' bodies) and they only accept
 positional parameters</emphasis>. The default prefixes follow:
 
 
@@ -636,14 +673,17 @@ Sub-tag behavior is consistent among the looping tags.
 </para>
 
 <important><para>
-Subtags are parsed during evaluation of the enclosing loop; that means
-<emphasis>before any regular tags within the loop</emphasis>.
+As we've said already, subtags are parsed before the standard parsing routine
+takes on; that means <emphasis>before any regular tags within the
+loop</emphasis>. This has a subtle effect; it can, for example, prevent the
+usual tags from accepting looping tags' values as attributes. In such cases,
+look for "subtag" (prefixed) variants of the usual tags.
+<!-- TODO example -->
 </para></important>
 
 <para>
-Going back to &PERL; again, 
-there are two types of records that &IC; can return with looping lists:
-ARRAY and HASH.
+Speaking of loops and &PERL;, there are two types of records that &IC; can
+return with looping lists: ARRAY and HASH.
 
 </para><para>
 An array list is the normal output of the &tag-query; and &tag-loop; tags,
@@ -653,8 +693,7 @@ each selected row.
 The two queries below are essentially identical:
 
 <programlisting>
-[query sql="select foo, bar from products"]
-[/query]
+[query sql="select foo, bar from products" /]
 
 [loop search="
                 ra=yes
@@ -666,7 +705,9 @@ The two queries below are essentially identical:
 Both will return an array of arrays consisting of the 
 <database class='field'>foo</database> and
 <database class='field'>bar</database> columns.
-The corresponding &PERL; data structure would look like this:
+The corresponding &PERL; data structure would look like this 
+(familiarity with the output from <classname>Data::Dumper</classname> Perl
+module helps here):
 
 <programlisting>
 [
