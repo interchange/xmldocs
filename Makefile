@@ -12,6 +12,7 @@ export XML_CATALOG_FILES = $(DOCBOOKDIR)/catalog.xml
 DOCBOOKDIR = docbook
 XSLT = xsltproc
 XSLT_FLAGS = --xinclude
+IC_VERSIONS = cvs-head
 
 VPATH = guides
 
@@ -45,7 +46,7 @@ TREE_STATS = tree-cache tree-reports
 
 all: distclean $(BASE_OUTPUT) $(TREE_STATS) \
 	$(OLINKDBS_UNCHUNKED) $(OLINKDBS_CHUNKED) \
-	$(GUIDES) 
+	$(GUIDES) final
 
 #
 # XML documentation
@@ -64,7 +65,7 @@ $(OUTPUT)/%: %.xml $(DOCBOOKDIR)/* OUTPUT
 	$(XSLT) $(XSLT_FLAGS) \
 	        --stringparam current.docid $* \
 	        --stringparam target.database.document ../$(DOCBOOKDIR)/olinkdb.xml \
-	        -o $@/ \
+	        -o $(OUTPUT)/ \
 	        $(DOCBOOKDIR)/html-chunks.xsl $<
 
 #
@@ -95,51 +96,47 @@ cache: tree-stats objlists tags
 
 objlists:
 	# Generate human-readable ctags information
-	cd sources; for p in *; do \
-	  cd ..; \
-	  ctags -R -x --languages=perl --perl-kinds=cls sources/$$p/ \
-	  > $(CACHE)/$$p/.objectlist.perl.txt; \
-	  ctags -R -x --languages=c --c-kinds=cdf sources/$$p/ \
-	  > $(CACHE)/$$p/.objectlist.c.txt; \
-	  cd sources \
+	for p in $(IC_VERSIONS); do \
+		ctags -R -x --languages=perl --perl-kinds=cls sources/$$p/ \
+		> $(CACHE)/$$p/.objectlist.perl.txt; \
+		ctags -R -x --languages=c --c-kinds=cdf sources/$$p/ \
+		> $(CACHE)/$$p/.objectlist.c.txt; \
+		cd sources \
 	; done
 
 tags:
 	# Generate ctags information
-	cd sources; for p in *; do \
-	  cd ..; \
-	  ctags -f $(CACHE)/$$p/.tags -R --extra=fq --fields=afikKlmnsSz --line-directives sources/$$p; \
-	  cd sources \
+	for p in $(IC_VERSIONS); do \
+		ctags -f $(CACHE)/$$p/.tags -R --extra=fq --fields=afikKlmnsSz --line-directives sources/$$p; \
+		cd sources \
 	; done
 
 tree-stats:
 	# Generate stats to bin dump 
 	# Only do that when sources/ is populated
-	cd sources; for p in *; do \
-	  cd ..; \
-	  mkdir -p $(CACHE)/$$p; \
-	  ./bin/stattree sources/$$p \
+	for p in $(IC_VERSIONS); do \
+		mkdir -p $(CACHE)/$$p; \
+		./bin/stattree sources/$$p \
 	; done
 
 tree-reports:
 	# Make report from $(OUTPUT)/<ver>/.cache.bin
-	cd cache; for p in *; do \
-	  cd ..; \
-	  mkdir -p $(CACHE)/$$p; \
-	  ./bin/mkreport cache/$$p \
+	for p in $(IC_VERSIONS); do \
+		mkdir -p $(CACHE)/$$p; \
+		./bin/mkreport cache/$$p \
 	; done
 
 tree-cache:
 	# Copy tree stats to $(OUTPUT)
-	for p in cache/*; do \
-	  cp -a $$p $(OUTPUT) \
+	for p in $(IC_VERSIONS); do \
+		cp -a $(CACHE)/$$p $(OUTPUT) \
 	; done
 
 output-skel:
 	# Mirror cache/ structure in output (actually, determine releases)
 	mkdir -p $(OUTPUT)
-	cd cache; for p in *; do \
-	  mkdir -p ../$(OUTPUT)/$$p \
+	for p in $(IC_VERSIONS); do \
+	  mkdir -p $(OUTPUT)/$$p \
 	; done
 	mkdir -p $(OUTPUT)/images
 	mkdir -p $(OUTPUT)/files
@@ -154,11 +151,13 @@ support-files:
 	cp -a files/* $(OUTPUT)/files/
 	cp bin/dbgen $(OUTPUT)/files/
 	cd files; for p in *; do \
-	  if test -d $$p; then \
-	    tar cf ../$(OUTPUT)/files/$$p.tar $$p; \
-	    tar zcf ../$(OUTPUT)/files/$$p.tgz $$p; \
-	    tar jcf ../$(OUTPUT)/files/$$p.tbz2 $$p; \
-	  fi \
+		if test "$$p" != "CVS"; then \
+			if test -d "$$p"; then \
+				tar cf ../$(OUTPUT)/files/$$p.tar $$p; \
+				tar zcf ../$(OUTPUT)/files/$$p.tgz $$p; \
+				tar jcf ../$(OUTPUT)/files/$$p.tbz2 $$p \
+			; fi \
+		; fi \
 	; done
 
 css:
@@ -177,9 +176,12 @@ css:
 distclean clean:
 	-rm -r $(OUTPUT)
 	-rm $(DOCBOOKDIR)/*.db
-	-for p in $(CACHE)/*; do \
-	  rm $$p/* \
+	-for p in $(IC_VERSIONS); do \
+		  rm $(CACHE)/$$p/* \
 	; done
+
+final:
+	-rm -r `find $(OUTPUT) -name CVS`
 
 FORCE: ;
 
