@@ -10,7 +10,7 @@ __END__
 __NAME__ synopsis
 <group choice='req'>
 	<arg choice='plain'>0</arg>
-	<arg choice='plain'>seconds</arg>
+	<arg choice='plain'>interval</arg>
 </group>
 __END__
 
@@ -19,18 +19,9 @@ __NAME__ description
 If set to a positive non-zero value, enables check of running
 Interchange processes during the <option>HouseKeeping</option> routine.
 </para><para>
-If a process has been running (or is hung) for longer than
-<option>PIDcheck</option> seconds, then <userinput>kill -9</userinput> will
+If a process has been running (or is hung) for longer than the
+specified &glos-interval;, then <userinput>kill -9</userinput> will
 be issued and the server count decremented.
-</para><para>
-During the HouseKeeping routine,
-the number of servers checked by <option>MaxServers</option> will be
-recounted based on PID files.
-__END__
-
-
-__NAME__ missing
-The comment on MaxServers is confusing.
 __END__
 
 __NAME__ notes
@@ -44,6 +35,12 @@ __END__
 __NAME__ example: Setting PIDcheck
 <programlisting>
 PIDcheck 300
+</programlisting>
+__END__
+
+__NAME__ example: Setting PIDcheck in time interval other than seconds
+<programlisting>
+PIDcheck 5 minutes
 </programlisting>
 __END__
 
