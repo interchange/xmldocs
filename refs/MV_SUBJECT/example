@@ -1,0 +1,15 @@
+<example>
+
+<title>
+Reading the value of MV_SUBJECT
+</title>
+
+<para>
+Add the following to a test Interchange page:
+</para>
+
+<programlisting><![CDATA[
+Subject/title: @@MV_SUBJECT@@
+]]></programlisting>
+
+</example>

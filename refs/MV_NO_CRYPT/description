@@ -1,0 +1,2 @@
+If configured, it disables the use
+of crypt() function or MD5 password hashing server-wide.

@@ -1,0 +1,3 @@
+Currently, this variable only affects the "joiner" element when the links
+are created. &amp;amp; is used instead of plain &amp; when this variable
+is set.

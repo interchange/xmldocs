@@ -1,0 +1,15 @@
+<example>
+
+<title>
+Enabling the MV_NO_CRYPT feature
+</title>
+
+<para>
+Add the following to <filename>interchange.cfg</filename>:
+</para>
+
+<programlisting><![CDATA[
+Variable MV_NO_CRYPT 1
+]]></programlisting>
+
+</example>

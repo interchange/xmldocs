@@ -1,0 +1,15 @@
+<example>
+
+<title>
+Setting the MV_MAILFROM variable
+</title>
+
+<para>
+Add the following to <filename>interchange.cfg</filename>:
+</para>
+
+<programlisting><![CDATA[
+Variable MV_MAILFROM interchange
+]]></programlisting>
+
+</example>

@@ -1,0 +1,2 @@
+When using SMTP (Net::SMTP module) to send mail from Interchange,
+this variable specifies the default hostname to use.

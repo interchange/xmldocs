@@ -1,0 +1,15 @@
+<example>
+
+<title>
+Adjusting the MV_SESSION_READ_RETRY value
+</title>
+
+<para>
+Add the following to <filename>interchange.cfg</filename>:
+</para>
+
+<programlisting><![CDATA[
+Variable MV_SESSION_READ_RETRY 3
+]]></programlisting>
+
+</example>

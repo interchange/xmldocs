@@ -1,0 +1,15 @@
+<example>
+
+<title>
+Reading the value of MV_PREV_PAGE
+</title>
+
+<para>
+Add the following to a test Interchange page:
+</para>
+
+<programlisting><![CDATA[
+Previous filename: @@MV_PREV_PAGE@@
+]]></programlisting>
+
+</example>

@@ -1,0 +1,15 @@
+<example>
+
+<title>
+Setting the MV_SMTPHOST variable
+</title>
+
+<para>
+Add the following to <filename>interchange.cfg</filename>:
+</para>
+
+<programlisting><![CDATA[
+Variable MV_SMTPHOST myhost.mydomain.com
+]]></programlisting>
+
+</example>

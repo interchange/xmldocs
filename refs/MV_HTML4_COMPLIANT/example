@@ -1,0 +1,15 @@
+<example>
+
+<title>
+Enabling the MV_HTML4_COMPLIANT feature
+</title>
+
+<para>
+Add the following to <filename>interchange.cfg</filename>:
+</para>
+
+<programlisting><![CDATA[
+Variable MV_HTML4_COMPLIANT 0
+]]></programlisting>
+
+</example>
