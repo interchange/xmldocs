@@ -4,6 +4,7 @@ Outstanding:
 - Online examples only have to be standard examples, with actual work in
   practice if condition=online
   Code to do that is: <programlisting><textobject><textdata fileref="pathto.xml"/></textobject></programlisting>
+- Fix mess with entities
 
 - Ask ndw about including [NEW!] and [TODO!] in titles in TOC.
 
