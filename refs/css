@@ -72,7 +72,7 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>
-	The <arg choice='plain'>media=</arg> parameter for the &link; &HTML; tag.
+	The <arg choice='plain'>media=</arg> attribute for the &link; &HTML; tag.
 	For example, <literal>PRINT</literal>.
 	</entry>
 </row>

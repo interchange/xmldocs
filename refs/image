@@ -160,7 +160,7 @@ __NAME__ synopsis2
 	<entry>
 	</entry>
 	<entry>
-	Specify this parameter explicitly if you want to first try an image
+	Specify this attribute explicitly if you want to first try an image
 	from the <database class='field'>image</database> field in the
 	<database>products</database> database. If it does not exist, then a 
 	fallback to SKU-derived image filenames is performed.
@@ -174,7 +174,7 @@ __NAME__ synopsis2
 	</entry>
 	<entry>
 	Text to use for the &img;'s <arg choice='plain'>title=</arg>
-	parameter. This is supported by newer browsers to provide things like
+	attribute. This is supported by newer browsers to provide things like
 	rollover tips.
 	</entry>
 </row>

@@ -8,7 +8,6 @@ PRIMARY:
   multiple times within +- of first occurence, we treat it like one context.
   but the header says 'displaying 2/2 contexts', it doesn't remove
   'duplicates'. fix that.
-- Parameter is positional, all else are attributes [fix everywhere]
 - ./files/ directory is not properly referenced from chunked documents.
   Either use entities or XML catalog to solve that.
 

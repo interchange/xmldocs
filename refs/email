@@ -59,7 +59,7 @@ This tag simply feeds <option>SendMailProgram</option> with the
 e-mail body that you provide.
 </para><para>
 You do not need to provide the headers yourself, because you can pass
-all relevant information using tag parameters.
+all relevant information using tag attributes.
 The <arg choice='plain'>to</arg> parameter must be supplied and contain
 a valid e-mail address, or the message surely won't be delivered.
 __END__

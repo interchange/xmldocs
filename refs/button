@@ -65,7 +65,7 @@ __NAME__ synopsis2
 	<entry>
 	Use <classname>Image::Size</classname> Perl module to determine image size and
 	add <arg choice='plain'>width=</arg> and <arg choice='plain'>height=</arg>
-	parameters to the image definition?
+	attributes to the image definition?
 	</entry>
 </row>
 <row>
