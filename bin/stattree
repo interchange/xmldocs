@@ -347,7 +347,11 @@ sub wanted {
 					ctxpost => $ctx_n,
 					ctxs => 1,
 					ctxe => scalar @filedata,
-					ctx => [ format_ctx(@filedata) ] };
+					ctx => [ format_ctx(@filedata) ]
+				};
+
+				$hash{total}{$fsubtype . "s"}++;
+				$hash{total}{tags}++;
 
 				$hash{specific}{$tagname} = { # Append/update, don't overwrite
 					%{ $hash{specific}{$tagname} || {}},
@@ -453,6 +457,8 @@ sub line_findPragmas {
 		ctxe => $ptr{lnum} + $ptr{ctx_n},
 		ctx => [format_ctx(@{$ptr{filedata}}[$ptr{lnum}-$ptr{ctx_p}..$ptr{lnum}+$ptr{ctx_n}])]
 	};
+
+		$hash{total}{pragmas}++;
 	}
 }
 
@@ -474,6 +480,8 @@ sub line_findGlobVars {
 			ctxe => $c{lnum} + $c{ctx_n},
 			ctx => [format_ctx(@{$c{filedata}}[$c{lnum}-$c{ctx_p}..$c{lnum}+$c{ctx_n}])]
 		};
+
+		$hash{total}{globvars}++;
 	}
 }
 
@@ -486,6 +494,8 @@ sub line_findFunctionName {
 		$hash{total}{perl_functions}++;
 		@{ $c{gfunc} } = ( $1, $c{lnum} );
 	}
+
+	$hash{total}{functions}++;
 }
 
 
@@ -543,8 +553,17 @@ sub file_parseVendConfig {
 
 		if (! $opens) { # Read the whole thing
 			$multiline = 0;
-			push @globconf, $directive if $context eq 'globconf';
-			push @catconf, $directive if $context eq 'catconf';
+
+			# Register the directive and do some statistics
+			if ( $context eq 'globconf' ) {
+				push @globconf, $directive ;
+				$hash{total}{globconfs}++;
+			} elsif ( $context eq 'catconf' ){
+				push @catconf, $directive;
+				$hash{total}{catconfs}++;
+			}
+			$hash{total}{confs}++;
+
 			$directive = "";
 		} elsif ( $opens > 0 ) { # Directive continues
 			$multiline++;
@@ -578,5 +597,4 @@ sub file_parseVendConfig {
 		}
 	}
 }
-
 
