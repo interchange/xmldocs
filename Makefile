@@ -59,6 +59,17 @@ $O/%: %.xml skel
 
 
 #############################################################
+# OLINK DBs
+$T/%-nc.db: %.xml $T
+	$(PSR) $(PSR_FLAGS)                                               \
+	  --stringparam collect.xref.targets only                         \
+	  --stringparam targets.filename $@                               \
+	  docbook/html-nochunks.xsl $<
+	  tail +2 $@ > $T/tail
+	  mv $T/tail $@
+
+
+#############################################################
 # Skel
 skel: $T $O $O/files $O/images $O/xmldocs.css
 $T:
@@ -138,7 +149,8 @@ refs/%.xml: BNAME = $(subst refs/,,$@)
 $T/%.list: FNAME = $(subst .list,,$(BNAME))
 refs/%.xml: FNAME = $(subst .xml,,$(BNAME))
 $T/%.list refs/%.xml: bin/refs-autogen $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin)
-	bin/refs-autogen -g $(FNAME) -o $@ $(BOTH) $(IC_VERSIONS)
+	#bin/refs-autogen -g $(FNAME) -o $@ $(BOTH) $(IC_VERSIONS)
+	bin/refs-autogen -o $@ $(BOTH) $(IC_VERSIONS)
 
 
 #############################################################

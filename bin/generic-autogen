@@ -72,7 +72,7 @@ opendir DIR, $cat or die "Can't open $cat/ ($!)\n";
 readdir DIR; readdir DIR;
 
 while ( my $file = readdir DIR ) {
-	next if $file =~ /^\./;
+	next if $file =~ /^\.|\.xml$/;
 	open IN, "< $cat/$file" or die "Can't read-open $cat/$file ($!)\n";
 	$items{$file} = [ <IN> ];
 	$alphabet{ lc(substr($file, 0, 1)) }++;
