@@ -1,5 +1,10 @@
 #!/usr/bin/perl
 
+# Generic .xml generator
+# Currently builds glossary or howtos.
+# Invoke as: bin/generic-autogen NAME
+# (It creates NAME/NAME.xml with files from NAME/*)
+
 use warnings;
 use strict;
 

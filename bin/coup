@@ -1,5 +1,10 @@
 #!/usr/bin/perl
 
+# Manages your sources/ subdirectory inside xmldocs.
+# Automatically check-outs or updates source trees.
+# Run as: bin/coup REV, like bin/coup 5.2.0 or bin/coup cvs-head
+# bin/coup -u REV will run cvs update
+
 use warnings;
 use strict;
 use Fatal qw/chdir/;
