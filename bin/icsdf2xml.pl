@@ -26,7 +26,10 @@ for (my $i=0; $i<@input; $i++) {
 	s#^=item\s+.*#</para> <para>#;
 	s#^=back\s*.*#</para> <para>#;
 
-	!&in_pl and s/&/&amp;/g;
+	!&in_pl and do {
+		s/&/&amp;/g;
+		s/interchange/&IC;/gi;
+	}
 
 	s/(<[\w_-]+)/lc $1/ge and do {
 		s/( [A-Z]+=)/lc $1/ge;

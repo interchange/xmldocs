@@ -35,6 +35,12 @@
         alt="Valid XHTML 1.0!"
         class='w3cimg'/>
     </a>
+    <a href="http://www.icdevgroup.org/">
+      <img
+        src="../images/bb_interchange.png"
+        alt="Interchange!"
+        class='w3cimg'/>
+    </a>
   </p>
   </xsl:template>
 

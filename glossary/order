@@ -1,0 +1,504 @@
+&IC; sports a <emphasis>completely flexible</emphasis> item ordering scheme. One practical
+implementation can always be seen in the latest demo catalog shipping with Interchange; the latest
+demo catalog is called <literal>&Std-catalog;</literal>.
+</para>
+
+
+<!-- TODO: this is for checkout section 
+and
+<filename class='directory'>&glos-CATROOT;/etc</filename> directories.
+<listitem><para>
+<filename>&glos-CATROOT;/pages/ord/checkout.html</filename> - 
+customers' billing and shipping information
+</para></listitem>
+<listitem><para>
+<filename>&glos-CATROOT;/etc/receipt.html</filename> - 
+receipt page display 
+</para></listitem>
+<listitem><para>
+<filename>&glos-CATROOT;/pages/ord/checkout.html</filename> - 
+customers' billing and shipping information
+</para></listitem>
+<listitem><para>
+<filename>&glos-CATROOT;/pages/ord/checkout.html</filename> - 
+customers' billing and shipping information
+</para></listitem>
+
+<programlisting><![CDATA[
+receipt.html     The receipt displayed to the customer
+report           The order report mailed to you
+mail_receipt     The customer's email copy (if requested)
+]]></programlisting>
+
+<programlisting><![CDATA[
+<input  type="hidden"  name="mv_order_size" value="L">
+]]></programlisting>
+
+If the order is coming from a generated flypage, loop list, or search
+results page, you can get a canned select box from the 
+<code>[item-accessories size]</code> or <code>[item-accessories size]</code> tag. See
+<emphasis>Item Attributes</emphasis>.
+</para>
+-->
+
+<para>
+Just as in many other &IC; demo catalogs, order-related files are kept in the
+<filename class='directory'>&glos-CATROOT;/pages/ord</filename> directory.
+The most important file would probably be 
+<filename>&glos-CATROOT;/pages/ord/basket.html</filename> which shows
+order basket contents, and is displayed to the user every time an item is
+added to it, or the user explicitly requests it.
+</para>
+
+<note>
+<para>
+It is not strictly necessary to display the basket page every time an
+item is ordered, but most customers will be confused if you don't give them
+a clear visual consequence of their action.
+</para>
+<para>
+An alternative to a separate basket page could be a side-bar menu that would
+display cart contents in a summarized form, and be visible on all pages.
+However, it would still be useful to display the complete basket page to the
+users when they are about to stop ordering and proceed with the check-out
+routine.
+</para>
+</note>
+
+<para>
+Besides just listing electronic cart contents, the basket page usually also
+allows for item removal (or quantity selection in general) and total price
+recalculation.
+</para>
+
+<para>
+In general, the body of the basket page is a &glos-HTML; form. Strictly 
+speaking, it could just be a normal list of contents (without the 
+&lt;form&gt; element), but then you couldn't request any actions on the
+items (such as their removal from the cart).
+</para>
+<para>
+At minimum, the basket page will contain the &tag-item-list; tag that will
+loop over all items in the cart and display them. Any &IC; tags can be used
+on the page, and you can freely have multiple item lists (the basket page
+is in no way <emphasis>special</emphasis> and does not place any restrictions
+on content).
+</para>
+
+
+<section id="PlacingItemsintheBasket">
+	<title>Placing Items in the Basket</title>
+
+<para>
+&IC; supports a number of ways to add an item to the basket. You can
+order an item by using both form-based (button-clicking) and link-based
+(link-visiting) methods.
+</para>
+
+<section>
+	<title>Link-based ordering</title>
+
+<para>
+Link-based ordering is implemented through the &tag-order; tag. You should
+check the &tag-order; reference page for complete documentation, but let's
+give a summary of its functionality here. In general, &glos-ITL; code
+
+<!-- can quantity be decimal ? -->
+<programlisting>
+[order code=<replaceable>SKU</replaceable> quantity=<replaceable>NUMBER</replaceable> href=<replaceable>URL</replaceable> cart=<replaceable>NAME</replaceable> ]Link text&lt;/a&gt;
+</programlisting>
+
+expands into an appropriately-constructed &glos-HTML; &glos-link;. Clicking
+a link places the item of specified SKU number in the cart and displays
+the basket page. The <arg choice='plain'>code</arg> parameter should be a
+valid product SKU (listed in one of the <database>products</database> tables),
+and is the only required parameter. <arg choice='plain'>href</arg> allows
+some page other than the default basket to be displayed once the item has
+been added to the cart. <arg choice='plain'>cart</arg> selects the shopping
+cart the item will be placed in (you see, the default cart is called 
+<literal>main</literal>, but &IC; is always a step ahead).
+</para>
+<para>
+The &tag-order; tag supports a number of attributes (more than we've shown
+above), but the same effect as above can be achieved with the &tag-page;
+or &tag-area; tags as well. Here are a few lines, all equal in effect:
+
+<programlisting><![CDATA[
+Order a [order TK112]Toaster</a> today!
+Order a [page order TK112]Toaster</a> today!
+Order a <a href="[area order TK112]">Toaster</a> today!
+]]></programlisting>
+</para>
+<para>
+"This is all nice and well", you might say, "but how do I create the link
+when item data fields (such as SKU, description or price) are not known
+in advance?". Well, this will be the case if you're creating a &glos-flypage;
+or displaying results based on a user search operation. The procedure is, 
+of course, exactly the same; you could just be uncertain about where to
+stick in the additional &glos-ITL; tags. Here's a clarifying example:
+
+<programlisting><![CDATA[
+Order a [order [item-code]][item-field name]</a> today!
+]]></programlisting>
+</para>
+</section>
+
+<section>
+	<title>Form-based ordering</title>
+
+<para>
+Form-based ordering comes handy when you want to implement more complex
+ordering schemes. Consider the same ordering example as above (a toaster of
+product SKU <literal>TK112</literal>) implemented using forms:
+
+<programlisting><![CDATA[
+<form action="[process]" method="post">
+  <input name="mv_todo"           type="hidden" value="refresh"    />
+  <input name="mv_order_item"     type="hidden" value="TK112"      />
+  <input name="mv_order_quantity" type="text"   value="1" size="3" /> toasters 
+  <input value="Order!"           type="submit"                    />
+</form>
+]]></programlisting>
+
+Although the readability above suffers due to &glos-HTML; elements and quoting,
+it's easy to dissect it to components. &lt;form&gt; and &lt;input&gt; are
+standard &glos-HTML; elements. We care to supply <code>type="text"</code>
+with text fields for clarity, but that's the default type and can be
+safely omitted. What's left to note is that the &lt;input&gt;
+element names are of predetermined values, and that's only reasonable &mdash;
+you need to set those variables that you know &IC; will look for (otherwise
+this would be a waste of time). In our situation this includes setting
+<mv>mv_order_item</mv> (item SKU number),
+<mv>mv_order_quantity</mv> (item quantity) and
+<mv>mv_todo</mv> (desired form action).
+For a complete list of user &glos-mv; variables, see 
+<!-- TODO link to MV variables -->.
+
+</para>
+<para>
+You might notice we added the quantity field in the example above. From its
+implementation, you see that making special &glos-mv; variables contain user
+input is <emphasis>extremely</emphasis> easy. What's more, input placeholders
+do not have to be a text fields as in our example; it can be a list, checkbox
+or a complex set of &glos-HTML; widgets!
+</para>
+
+<para>
+&IC; supports "stacking" of variables. This allows us to order different
+items ("batches") at once:
+
+<programlisting><![CDATA[
+<form action="[process]" method="post">
+  <input name="mv_todo"           type="hidden" value="refresh"          />
+  <input name="mv_order_item"     type="hidden" value="TK112"            />
+  <input name="mv_order_quantity" type="text"   value="1"       size="3" /> Standard Toaster <br/>
+  <input name="mv_order_item"     type="hidden" value="TK200"            />
+  <input name="mv_order_quantity" type="text"   value="1"       size="3" /> Super Toaster
+  <input value="Order!"           type="submit"                          />
+</form>
+]]></programlisting>
+
+
+Items that have a quantity of zero (or blank) will be skipped, and only
+items with a positive quantity will be placed in the basket.
+</para>
+</section>
+</section>
+
+
+<section id="OnFlyItems">
+	<title>Items created "on fly"</title>
+
+<para>
+Note that "on fly" items are those that do not exist in any of the 
+<database>products</database> databases, and are literaly "put together"
+on the fly. This is unrelated to &IC; &glos-flypage; functionality.
+</para>
+<para>
+If you setup the &conf-OnFly; config directive, &IC; will be able to add
+items to user's basket even if they're not listed in any of the 
+<database>products</database> databases.
+</para>
+<para>
+A basic on-fly item can then be generated like this:
+
+<programlisting><![CDATA[
+<a href="[area form="
+  mv_todo=refresh
+  mv_order_item=000101
+  mv_order_fly=description=An on-the-fly item|price=100.01
+"]">Order item 000101</a>
+]]></programlisting>
+<!-- TODO is SKU an existing SKU, for which you modify values, or we "invent"
+a new item from scratch? -->
+
+A lot of things might look weird in the above example, but it is all valid
+&glos-ITL; code.
+</para>
+<para>
+The form parameter <mv>mv_order_fly</mv> can contain any number of fields
+which define attributes for our on-fly item. Fields are separated by the
+pipe (<literal>|</literal>) character and contain value-parameter
+pairs separated by an equal (<literal>=</literal>) sign.
+</para>
+<!-- Elaborate?
+The special attribute <literal>mv_price</literal> can be used in conjunction with the
+<literal>CommonAdjust</literal> atom <literal>$</literal> to set the price for checkout and display.
+
+
+If you wish to set up a UserTag to process on-the-fly items, it should
+accept a call of
+<programlisting><![CDATA[
+usertag(mv_item_code, mv_item_quantity, mv_order_fly)
+]]></programlisting>
+The <literal>mv_item_code</literal> and <literal>mv_order_fly</literal> parameters are required to trigger
+Interchange's <literal>add_item</literal> routine (along with  mv_todo="refresh" to set the action).
+
+The item will always act as if <literal>SeparateItems</literal> or <literal>mv_separate_items</literal> is
+set.
+
+
+
+
+<para>
+Iterates over the items in the specified cart - tags like &tag-item-quantity;
+ and &tag-item-price; will be evaluated accordingly;
+</para>
+<para>
+Returns the total number of items in the specified cart;
+</para>
+<para>
+Returns the monetary subtotal for the contents of specified cart;
+</para>
+<para>
+You get the idea. It is worth noting that tags which summarize
+cart contents do not need to be in used concert, or in conjunction with
+an &tag-item-list;. For instance, you can display just the grand
+total for a cart on the sidebar or bottom of each page, using 
+&tag-total-cost; by itself, if you wish.
+
+-->
+<note>
+<para>
+To show description for the on-fly item, you must use the &tag-item-description;
+tag; <code>[item-field description]</code> or <code>[item-data products
+description]</code> will <emphasis role='bold'>not</emphasis> work since both
+try referencing existing fields in <database>products</database> databases.
+</para>
+<para>
+Similarly, an attempt to generate a flypage for an on-fly item will fail,
+resulting in display of the &conf-SpecialPage;
+<literal>missing</literal> URL.
+</para>
+</note>
+
+<para>
+<!-- TODO this works if there is only one mv_order_item or also if there
+are more of them? -->
+Multiple items can be ordered at once by stacking the variables, as we've 
+shown already. However, if there is only one <mv>mv_order_item</mv> instance
+defined, then you can stack <mv>mv_order_fly</mv> variables which will result
+in their concatenation just as if you separated them with pipes. Here's 
+an example, equal in effect to the previous one:
+
+<programlisting><![CDATA[
+<a href="[area form="
+  mv_todo=refresh
+  mv_order_item=000101
+  mv_order_fly=description=An on-the-fly item
+  mv_order_fly=price=100.00
+"]">Order item 000101</a>
+]]></programlisting>
+</para>
+</section>
+
+
+<section id="OrderGroups">
+	<title>Order Groups</title>
+
+<para>
+We've seen variable stacking at work above, but there's more to it.
+Imagine you had a master item and accompanying accessories which only make
+sense together with the main item. You could order them at once using
+ordinary stacking - no problem there, but what if you also wanted
+accessories or options removed at the same time the master item is
+removed from the cart?
+In the simplest form, this is achieved by ordering items as usual, while
+defining <mv>mv_order_group</mv>. The first item in the list is then
+treated as the master item, and all other are sub-items.
+
+<programlisting><![CDATA[
+<form action="[process]"  method="post">
+  <input name="mv_todo"        type="hidden" value="refresh"   />
+  <input name="mv_order_group" type="hidden" value="1"         />
+  <input name="mv_order_item"  type="hidden" value="00-0011"   />
+  <input name="mv_order_item"  type="hidden" value="00-0011a"  />
+  <input value="Order Mona Lisa with frame" type="submit"      />
+</form>
+]]></programlisting>
+
+Incredible, but you can also define multiple master items! All you need to 
+do is define a <mv>mv_value_group</mv> for each individual item.
+Master item "owns" all subsequent sub-items until the next master
+is defined.
+
+<programlisting><![CDATA[
+<form action="[process]"  method="post">
+  <input name="mv_todo"        type="hidden" value="refresh"   />
+  <input name="mv_order_group" type="hidden" value="1"         />
+  <input name="mv_order_item"  type="hidden" value="00-0011"   />
+  <input name="mv_order_group" type="hidden" value="0"         />
+  <input name="mv_order_item"  type="hidden" value="00-0011a"  />
+  <input name="mv_order_group" type="hidden" value="1"         />
+  <input name="mv_order_item"  type="hidden" value="19-202"    />
+  <input name="mv_order_group" type="hidden" value="0"         />
+  <input name="mv_order_item"  type="hidden" value="99-102"    />
+  <input value="Order Mona Lisa and more!"   type="submit"     />
+</form>
+]]></programlisting>
+
+The example shows a 4-item order form. Items 1 and 3 are master items,
+items 2 and 4 are sub-items.
+If a master item of SKU <literal>00-0011</literal> is deleted from the
+basket, <literal>00-0011a</literal> will be deleted too. If
+<literal>19-202</literal> is deleted, then <literal>99-102</literal> will be
+deleted along.
+</para>
+
+<note>
+<para>
+Use of &glos-HTML; checkboxes for this type of thing could be inappropriate
+because they do not pass a value when unchecked. The value then remains
+defaulting to last used value. It is preferable to use radio groups or
+select/drop-down widgets instead. If you use checkboxes, make sure to 
+explicitly clear <mv>mv_order_group</mv> and <mv>mv_order_item</mv>
+somewhere on the form page. You can re-use the following code snippet:
+
+<programlisting><![CDATA[
+[value name=mv_order_group set='']
+[value name=mv_order_item  set='']
+]]></programlisting>
+</para>
+</note>
+
+<para>
+<mv>mv_mi</mv> and <mv>mv_si</mv> attributes are set to the group and
+sub-item status of each item. The group, contained in the attribute
+<mv>mv_mi</mv>, is a meaningless yet unique integer. All items
+in a group will have the same <mv>mv_mi</mv> value. The attribute
+<mv>mv_si</mv> is <literal>0</literal> if the item is
+a master item, and <literal>1</literal> if it is a sub-item.
+</para>
+</section>
+
+
+<section id="BasketDisplay">
+	<title>Basket display</title>
+
+<para>
+Basket pages list electronic cart contents and usually allow order
+contents to be adjusted; items can be removed, ordered in different 
+quantities etc.
+</para>
+<para>
+It is possible to have an <emphasis role='bold'>multiple
+(different) basket pages</emphasis>, because they're in no way
+<emphasis>special</emphasis>.
+It is also possible to have <emphasis role='bold'>multiple shopping
+carts</emphasis>, for example in cases where the same user maintains a 
+<emphasis>buy</emphasis> and <emphasis>sell</emphasis> list.
+Multiple basket pages could also be used where items have many accessories
+and, depending on the item ordered, you send customers to different,
+item-specific pages to choose accessories. The possibilities 
+are endless, it's just about evaluating your actual needs.
+</para>
+<para>
+The name of the basket page to be displayed upon item order can be
+defined in a few ways:
+</para>
+
+<itemizedlist>
+	<listitem><para>
+	You can set <literal>order</literal> value of the &conf-SpecialPage;
+	directive to the page you want displayed on item order
+	</para></listitem>
+	<listitem><para>
+  You could use the &tag-order; tag in form of
+	<code>[order code=<replaceable>SKU</replaceable>
+	page=<replaceable>NAME</replaceable>]Order it!&lt;/a&gt;</code>
+  to define the basket page
+	</para></listitem>
+	<listitem><para>
+	If you already <emphasis>are</emphasis> on the order page and want to
+	"jump" next, use the
+	standard form, setting some of <mv>mv_orderpage</mv>, <mv>mv_nextpage</mv>,
+	<mv>mv_successpage</mv> and <mv>mv_failpage</mv> variables.
+	</para></listitem>
+</itemizedlist>
+</section>
+
+
+<section id="MultipleShoppingCarts">
+	<title>Multiple Shopping Carts</title>
+
+<para>
+Interchange allows you to define and maintain multiple shopping carts
+for each user.
+The default shopping cart named <literal>main</literal> is created when
+the user session starts. If the user orders an item of SKU
+<literal>M1212</literal> through the following link:
+
+<programlisting><![CDATA[
+[order code=M1212 cart=layaway]Order this item!</a>
+]]></programlisting>
+
+then the item will be placed in the cart named <literal>layaway</literal>, and
+not <literal>main</literal>. Consequently, the use won't see the just-ordered
+item on the basket page because the default shopping basket displays contents
+of the <literal>main</literal> cart only. The easiest way to support multiple
+carts is to copy the default basket page
+(<filename><replaceable>CATROOT</replaceable>/pages/ord/basket.html</filename>)
+to a new file, insert <code>[cart layaway]</code> code snippet at the top,
+and specify it as the target page for the &tag-order; tag:
+
+<programlisting><![CDATA[
+[order code=M1212 cart=layaway page=ord/layaway_basket]Order this item!</a>
+]]></programlisting>
+
+Now the contents of the <literal>layaway</literal> cart would be displayed
+on the appropriate page. Most of the fundamental cart management &glos-ITL;
+tags support the <arg choice='plain'>nickname</arg> option, allowing
+cart name to be chosen. Using <arg choice='plain'>nickname</arg> is handy,
+and has no permanent effect, the default cart remains set at value of
+<literal>main</literal>.
+<!-- sticky is attribute to [cart] or what? -->
+A <arg choice='plain'>sticky</arg> attribute could be set to change the
+default cart name until further notice. This is convenient, 
+but you must remember to use <code>[cart main]</code> to get back to
+the primary cart!
+</para>
+
+<para>
+And for the sake of completness, here's the above example using form-based
+ordering:
+
+<programlisting><![CDATA[
+<form action="[process]" method="post">
+  <input name="mv_order_item"     type="checkbox" value="M1212"   /> Item M1212
+  <input name="mv_order_quantity" type="text"     value="1"       /> Quantity
+  <input name="mv_cartname"       type="hidden"   value="layaway" />
+  <input name="mv_doit"           type="hidden"   value="refresh" />
+  <input value="order this item!" type="submit">
+</form>
+]]></programlisting>
+</para>
+</section>
+
+<!--
+If you need to utilize an alternative item price in conjunction with 
+the use of a custom cart, see the section on <emphasis>PRODUCT PRICING</emphasis> for 
+pricing methods and strategies.
+</para>
+-->
+
+<para>

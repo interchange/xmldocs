@@ -727,3 +727,32 @@ PREFIX-field"]PREFIX-field (Optimization note- one query per field if you use th
 </section>
 
 <para>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- TODO
+
+Explain quoting here
+
+<programlisting><![CDATA[
+<a href="[area form="
+mv_todo=refresh
+mv_order_item=000101
+mv_order_fly=description=An on-the-fly item|price=100.01
+"]">Order item 000101</a>
+]]></programlisting>
+
+
+
+
+
+-->

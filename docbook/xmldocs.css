@@ -8,6 +8,10 @@
 /* General */
 body { background-color: #fff; }
 a { text-decoration: none; }
+
+/* Let's play nice */
+a:hover { text-decoration: underline; }
+
 .errortext { color: red }
 
 

@@ -2,6 +2,7 @@
 - See that if 'crypt' is put in see also, all symbols of that name appear
   in see also line and their type is distinguished visually.
 - Finish proper formatting for online examples
+- Add ROW_REPARSE along ROW_INTERPOLATE in tag refs
 
 Outstanding:
 - why email, email-raw, SendMailProgram produce errors about usertags olink ID
@@ -27,6 +28,7 @@ DOCUMENTATION SYSTEM:
 
 
  Mid-term:
+- List of mv_s, descriptions and shortcuts
 - for "online" docs, also provide a form where users can add comments or
   ask for clarification. (this could be done with either pure IC (forum?), or 
   XML forms capability, or wiki?)..
@@ -39,6 +41,7 @@ DOCUMENTATION SYSTEM:
 - If filter returns Vend::xxx::something(), include that function in context
   reports, and try to determine the "Uses" field (which also needs to be
   added to filter refentry template or something)
+- icsdf2xml.pl -> =item/=back should be <listitem><para> not, just <para>
 
 Tags:
   aliases
