@@ -1,0 +1,29 @@
+__NAME__ purpose
+specify states or jurisdictions that tax shipping costs
+__END__
+
+__NAME__ see also
+__END__
+
+__NAME__ notes
+For a complete introduction to taxes, please see the 
+&glos-tax; glossary entry.
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>region</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify states or jurisdictions that tax shipping costs.
+__END__
+
+__NAME__ example: Defining TaxShipping
+<programlisting>
+TaxShipping UT,NV,94024
+</programlisting>
+__END__
+

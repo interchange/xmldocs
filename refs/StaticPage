@@ -1,0 +1,33 @@
+__NAME__ purpose
+(obsolete) specify individual pages to build statically
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>page_name</replaceable></arg>
+</group>
+__END__
+
+__NAME__ see also
+Static, StaticAll, StaticDepth, StaticDir, StaticPath, StaticPattern,
+StaticIndex, StaticLogged, StaticPage, StaticDBM, StaticFly, 
+StaticSessionDefault, StaticSuffix, StaticTrack
+__END__
+
+__NAME__ description
+Specify pages that are to be built statically.
+</para><para>
+Filename is relative to &glos-CATROOT;.
+__END__
+
+__NAME__ notes
+The directive is obsolete since &IC; 4.9.
+__END__
+
+
+__NAME__ example: Setting StaticPage
+StaticPage info/about_us info/terms_and_conditions
+__END__
+
+

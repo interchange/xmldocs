@@ -1,0 +1,32 @@
+__NAME__ purpose
+(obsolete)
+__END__
+
+__NAME__ synopsis
+<!--
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+-->
+__END__
+
+__NAME__ see also
+Static, StaticAll, StaticDepth, StaticDir, StaticPath, StaticPattern,
+StaticIndex, StaticLogged, StaticPage, StaticDBM, StaticFly, 
+StaticSessionDefault, StaticSuffix, StaticTrack
+__END__
+
+__NAME__ description
+__END__
+
+__NAME__ notes
+The directive is obsolete since &IC; 4.9.
+__END__
+
+
+### disabled, see missing __ ##
+NAME__ example:
+END__
+
+

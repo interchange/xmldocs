@@ -1,0 +1,32 @@
+__NAME__ purpose
+(obsolete) specify number of levels of static 'search' building
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>count</replaceable></arg>
+</group>
+__END__
+
+__NAME__ see also
+Static, StaticAll, StaticDepth, StaticDir, StaticPath, StaticPattern,
+StaticIndex, StaticLogged, StaticPage, StaticDBM, StaticFly, 
+StaticSessionDefault, StaticSuffix, StaticTrack
+__END__
+
+__NAME__ description
+Specify the number of levels of static 'search' building that will be done
+if a search-results page contains a search.
+__END__
+
+__NAME__ notes
+The directive is obsolete since &IC; 4.9.
+__END__
+
+
+__NAME__ example: Enabling Static
+StaticDepth 2
+__END__
+
+

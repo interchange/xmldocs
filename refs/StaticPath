@@ -1,0 +1,26 @@
+__NAME__ purpose
+(obsolete) specify path to the statically built pages
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>path</replaceable></arg>
+</group>
+__END__
+
+__NAME__ notes
+The directive is obsolete since &IC; 4.9.
+__END__
+
+__NAME__ description
+Specify path to the statically built pages.
+</para><para>
+The path should be relative to the &glos-DOCROOT;.
+__END__
+
+
+__NAME__ example: Setting StaticPath
+StaticPath /catalog
+__END__
+

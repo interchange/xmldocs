@@ -1,0 +1,36 @@
+__NAME__ purpose
+specify file containing region-specific UPS zone information
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>filename</arg>
+</group>
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+Specify the file containing UPS zone information. It can be in the format
+distributed by <ulink url="http://www.ups.com/">UPS</ulink> or can be in a
+tab-delimited format, with the three-letter zip prefix of the customer used to
+determine the zone.
+</para><para>
+The directive works according to the <mv>mv_shipmode</mv> variable.
+User database named the same as the value of <mv>mv_shipmode</mv> must
+be present, or the lookup will return zero.
+</para><para>
+Zone information and updated pricing from UPS must be obtained in order for
+this to work properly. The zone information is specific to a region!
+__END__
+
+__NAME__ example: Setting UpsZoneFile
+<programlisting>
+UpsZoneFile /usr/interchange/data/ups_zone.asc
+</programlisting>
+__END__
+

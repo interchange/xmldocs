@@ -1,0 +1,35 @@
+__NAME__ purpose
+(obsolete) specify path of the directory which should be used as root for static pages
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>path</replaceable></arg>
+</group>
+__END__
+
+__NAME__ see also
+Static, StaticAll, StaticDepth, StaticDir, StaticPath, StaticPattern,
+StaticIndex, StaticLogged, StaticPage, StaticDBM, StaticFly, 
+StaticSessionDefault, StaticSuffix, StaticTrack
+__END__
+
+__NAME__ description
+Specify absolute path of the directory which should be used as the root
+for static pages.
+</para><para>
+The user ID executing Interchange must have write
+permission on the directory (and all files within) for this to work.
+__END__
+
+__NAME__ notes
+The directive is obsolete since &IC; 4.9.
+__END__
+
+
+__NAME__ example: Setting StaticDir
+StaticDir /home/user/www/catalog
+__END__
+
+

@@ -1,0 +1,29 @@
+__NAME__ purpose
+(obsolete) specify file extension for statically-built HTML pages
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>extension</arg>
+</group>
+__END__
+
+__NAME__ notes
+The directive is obsolete since &IC; 4.9.
+__END__
+
+
+__NAME__ description
+The directive specifies the page suffix for those
+<!-- in the <filename class='directory'>pages/</filename>
+directory and those -->
+that are built statically.
+__END__
+
+__NAME__ example: Setting StaticSuffix
+<programlisting>
+StaticSuffix .htm
+</programlisting>
+__END__
+

@@ -1,0 +1,40 @@
+__NAME__ purpose
+specify default attributes that can be attached to items
+__END__
+
+__NAME__ see also
+__END__
+
+__NAME__ notes
+For a complete introduction to item attributes, please see the 
+&glos-attribute; glossary entry.
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>modifier_name</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify item &glos-attribute;s (or <emphasis>modifiers</emphasis>) that can
+be be attached to items.
+</para><para>
+Some of the names are protected and can't be used as modifier names
+are 
+<literal>mv_*</literal> variables,
+<literal>group</literal>,
+<literal>code</literal>,
+<literal>quantity</literal> and
+<literal>item</literal>.
+Don't worry about it too much, however, as &IC; will warn you if you
+happen to accidentally use some of them.
+__END__
+
+__NAME__ example: Defining UseModifier
+<programlisting>
+UseModifier size,color
+</programlisting>
+__END__
+

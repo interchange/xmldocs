@@ -1,0 +1,23 @@
+__NAME__ purpose
+(obsolete) specify regular expression used to qualify pages that are to be built statically
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>regexp</replaceable></arg>
+</group>
+__END__
+
+__NAME__ description
+Specify regular expression used to qualify pages that are to be built
+statically.
+__END__
+
+__NAME__ notes
+The directive is obsolete since &IC; 4.9.
+__END__
+
+__NAME__ example: Setting StaticPattern
+StaticPattern ^info|^help
+__END__
