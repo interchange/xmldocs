@@ -289,6 +289,7 @@ sub wanted {
 
 			my %specific; # Item-specific data
 			my @tags; # Support multiple tags defined in the same file
+			my $maproutine; # Register if the tag MapRoutines, and to which func.
 
 			# This is where we parse the tag file. We should discover settings like
 			# HasEndTag, Order, and so on.
@@ -321,6 +322,23 @@ sub wanted {
 						line_findFunctionName(\%c);
 					}
 					next;
+
+				} elsif ( $tagopt =~ /^maproutine$/i ) {
+					@lis == 1 and $maproutine = "@lis" or die 
+					"$tn MapRoutines, but argc != 1 ?\n";
+
+					next if "@lis" =~ /^::/; # TODO
+
+					my @path = split /::/, "@lis";
+					my $func = pop @path;
+					my $path = join("/", @path) . ".pm";
+
+					open INF, "< lib/$path" or die "Can't open 'lib/$path' ($!)\n";
+					my @fc = <INF>;
+					close INF;
+
+					print "Checking $path\n";
+					file_extractSub($func, \@fc);
 				}
 				
 				if ( "@lis" =~ /<</ and $tagopt !~ /^routine/i ) {
@@ -602,5 +620,21 @@ sub file_parseVendConfig {
 			ctx => [ format_ctx(split(/\n/, $ln)) ],
 		}
 	}
+}
+
+
+sub file_extractSub {
+	my ($func, $fc) = @_;
+	my $done = 0;
+
+	#for my $line (@$fc) {
+	#	# Case1:
+	#	#/^sub $func {/;  # Extract this.
+	#	#
+	#	# Case2:
+	#	# /^\*func = \&Mod::Ule::func; # Follow and extract.
+	#}
+
+	#print "NOT FOUND FOR $func\n" unless $done;
 }
 

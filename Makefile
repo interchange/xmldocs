@@ -53,8 +53,7 @@ howtos:   $(foreach doc,$(HOWTOS),$O/$(doc).html  )            \
 symbols:  $(foreach doc,$(SYMBOL_TYPES),$O/$(doc).html  )      \
           $(foreach doc,$(SYMBOL_TYPES),$O/$(doc))
 
-glossary: $(foreach doc,$(GLOSSARY),$O/$(doc).html  )          \
-          $(foreach doc,$(GLOSSARY),$O/$(doc))
+glossary: $(foreach doc,$(GLOSSARY),$O/$(doc).html  )
 
 #############################################################
 # Skel
