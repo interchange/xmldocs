@@ -85,6 +85,8 @@
 			<dir name='catconfs'>
 				<document targetdoc="catconfs">
 				&catconfs;
+				</document>
+			</dir>
 
 		</dir>
 	</sitemap>

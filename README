@@ -20,17 +20,26 @@ To build the complete documentation set, run:
 To build specific targets, see Makefile for target names. Few useful
 targets would include:
 
-  make guides
-  make refs
+ - Those that you would have to run manually:
+  make cvs          (to auto-create complete sources/ directory)
+  make clean        (removes OUTPUT/)
+  make distclean    (remove OUTPUT/ and tmp/)
+  make look-clean   (clean + mv tmp tmp.temporary. Useful to only make
+                    the tree as if it is clean (to perform CVS operations
+                    without errors), but then automatically rename
+                    the directory back to 'tmp/' and avoid the overhead of
+                    regenerating OlinkDB files).
 
-  make OUTPUT/iccattut.html
-  make OUTPUT/iccattut
-  make OUTPUT/iccattut.man
-
+ - And those covered by 'make':
+  make skel
   make OUTPUT/xmldocs.css
-  make tmp/olinkdbs
-  make tmp/stattrees      (same as 'make cache')
-  make tmp/refs-autogen   (same as 'make refxmls')
+  make caches
+  make refxmls
+  make olinkdbs-nc
+  make olinkdbs-c
+  make OUTPUT/iccattut.html OUTPUT/iccattut ...
+
+See Makefile for a complete list, of course.
 
 
 PREREQUISITES
@@ -43,9 +52,7 @@ must be available:
   - docbook-xml
   - docbook-xsl
   - xsltproc
-  - xmlto
   - exuberant-ctags
-  - passivetex (for FO output - ps, pdf, ...) (not used yet)
 
 
 FINAL OUTPUT
@@ -53,7 +60,7 @@ FINAL OUTPUT
 During the invocation of 'make', few files will be created:
   
   tmp/*.db       - OLink DB files generated from source .xml files,
-                   and other temporary files.
+                   and other, on-the-fly .xmls. 
 
   cache/<ver>/*  - Various Interchange source tree statistics, available
                    over a filesystem interface. (For XInclusion in .xml
@@ -87,7 +94,7 @@ DEVELOPMENT NOTES
    refs          - Collection of reference pages
    glossary      - Collection of glossary items
    images        - All images
-   tmp           - (not in CVS) Scratch and temporary file space
+   tmp           - Scratch and temporary file space
    pending       - A "pending" directory.
                    If you have a chunk which you'd like to integrate in
                    the docset, but don't have the time to prepare it
@@ -96,7 +103,9 @@ DEVELOPMENT NOTES
    sources       - (not in CVS). If you create this directory, and fill it
                    in with subdirectories containing Interchange releases
                    (say, 4.8.0/, 5.0.0/, 5.2.0, cvs-head/), then you can run
-                   'make tmp/stattrees' to generate the source tree information.
+                   'make caches' to generate the source tree information.
+                   Now that we don't keep pre-generated cache files in the CVS,
+                   this will be automatically called during standard 'make'.
 
 
  Updating cache/:
@@ -114,22 +123,21 @@ DEVELOPMENT NOTES
    symbols there are considered "added" the first time they're encountered
    in the sources (so they'll appear more recent than they actually are).
 
-   As this is only rarely done (only when the release changes due to an
-   important backport or something - and even then it probably doesn't 
-   change any figures because the updates are small), the generated dotfiles
-   *are* kept in the CVS because they can be considered static.
-
    When bin/mkreport runs later, it parses the .cache.bin file and produces
    number of output files (interesting "leaf nodes" in a hash). Those 
    files are filesystem interface to tree-level statistics, and can be
    used in numerous ways, XInclude for example.
-   Like: Interchange consists of <xi:include file='.../total.files'> files.
-   (Currently this is not enabled).
+   Like: "Interchange consists of <xi:include file='.../total.files'> files".
+   (Currently this is not enabled; bin/mkreport is outdated).
 
 
  The XML "preprocessor" tool:
    There's bin/pp tool which you can use to write larger blocks of
    XML more conveniently. See the script itself for usage notes.
+
+ The "CVS CO/UP" script:
+   There's bin/coup tool that helps you manage sources/ directory.
+   See the script or the Makefile for invocation examples.
 
 
  Autogeneration of the reference pages: ** IMPORTANT **
@@ -137,7 +145,8 @@ DEVELOPMENT NOTES
 
    When bin/stattree runs, it collects information about all the "symbols"
    in the source it can find (symbols are anything: pragmas, global variables,
-   functions, tags, ...). It collects the symbol names together with all files
+   functions, tags, config directives ...).
+   It collects the symbol names together with all files
    and line numbers (and few lines of context around them) where they
    appear. This is the first step of reference pages autogeneration.
 
@@ -150,6 +159,13 @@ DEVELOPMENT NOTES
    o  refs/<symbol>/ directory, or
    o  refs/<symbol> file, where multiple sections are defined using the 
       __NAME__ <section> and __END__ tokens (similar to IC profiles ;-).
+      Everything outside __NAME__ <name> ... __END__ blocks is discarded
+      and can effectively be used as a comment area.
+
+   The refs/<symbol> file-based approach is now preferred. It's more
+   convenient and keeps the number of files in CVS at minimum. The bin/editem
+   script advises to use it.
+   Use refs/<symbol>/* only if you have special requirements.
    
    Regardless of the way you document an item, the following information
    is needed to consider the symbol documentation complete:
@@ -163,45 +179,45 @@ DEVELOPMENT NOTES
 
    All of those fields can both be overriden or appended with user-supplied
    information:
-   
-   o  refs/<symbol>/* method (one-directory, multiple-files):
-
-   To unconditionally override values and/or provide one-liner contents, use
-   refs/<symbol>/control file. It has pretty much inflexible "field: content"
-   line format, but # comments can be used.
-
-   To append with information, you use refs/<symbol>/<X>, where <X> is
-   the name of an existing section, maybe followed by an arbitrary string.
-   With the exception of example files, you generally only create one
-   file for each section.
-   To supply more examples, you could keep them in an informal structure
-   like this:
-   refs/post_page/example
-   refs/post_page/example2
-   refs/post_page/example-relative_pages
-   refs/post_page/example:used-often
-   refs/post_page/example.something
-
-   (also, nothing prevents you from having more <example>s in the same file
-   if you like).
-
-   You can't use # comments in the non-control files (they'd be left as-is),
-   but you can use XML comments <!-- commented section -->.
-   To avoid having to escape all HTML entities and everything, simply
-   enclose "dirty" blocks in <![CDATA[ ... ]]>.
 
    o  refs/<symbol> method (one-file):
 
-   All rules apply as above, except that instead of creating a new file
-   (say, refs/post_page/description), you add it to refs/post_page this way:
+     To fill the template of the reference page, you add content to sections
+     in the following way:
 
-   __NAME__ description
-   ...anything...
-   __END__
+     __NAME__ section name
+     section content
+     __END__
 
-   Over time it appeared we only want to append information and never
-   override it, so this method does not have a way to override a value
-   like refs/<symbol>/control file can do.
+     Over time it appeared we only want to append information and never
+     override it, so this method does not have a way to override a value
+     like refs/<symbol>/control (in multi-file method) can do.
+   
+   o  refs/<symbol>/* method (one-directory, multiple-files):
+
+     To unconditionally override values and/or provide one-liner contents, use
+     refs/<symbol>/control file. It has pretty much inflexible "field: content"
+     line format, but # comments can be used.
+
+     To append with information, you use refs/<symbol>/<X>, where <X> is
+     the name of an existing section, maybe followed by an arbitrary string.
+     With the exception of example files, you generally only create one
+     file for each section.
+     To supply more examples, you could keep them in an informal structure
+     like this:
+     refs/post_page/example
+     refs/post_page/example2
+     refs/post_page/example-relative_pages
+     refs/post_page/example:used-often
+     refs/post_page/example.something
+
+     (also, nothing prevents you from having more <example>s in the same file
+     if you like).
+
+     You can't use # comments in the non-control files (they'd be left as-is),
+     but you can use XML comments <!-- commented section -->.
+     To avoid having to escape all HTML entities and everything, simply
+     enclose "dirty" blocks in <![CDATA[ ... ]]>.
 
 
 ** To create the documentation for a yet non-existant item or modify an 

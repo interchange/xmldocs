@@ -29,6 +29,7 @@ VPATH       = guides refs howtos glossary
 .SILENT:
 .PHONY: all complete
 .PHONY: skel
+.PHONY: guides howtos symbols glossary
 .PHONY: olinkdbs-nc olinks-nc olinkdbs-c olinks-c
 .PHONY: clean clean-cache clean-refs distclean look-clean
 .PHONY: up-all cvs-sources srcs cvsrcs cvs cvss all-up cvsup
@@ -40,11 +41,20 @@ VPATH       = guides refs howtos glossary
 #############################################################
 # Complete build
 all: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) \
-  skel                                                         \
-  refxmls                                                      \
-  olinks-nc olinks-c                                           \
-  $(foreach doc,$(ALL_DOCS),$O/$(doc).html)                    \
-  $(foreach doc,$(ALL_DOCS),$O/$(doc))
+  skel refxmls olinks-nc olinks-c                              \
+  guides howtos symbols glossary
+
+guides:   $(foreach doc,$(GUIDES),$O/$(doc).html  )            \
+          $(foreach doc,$(GUIDES),$O/$(doc))
+
+howtos:   $(foreach doc,$(HOWTOS),$O/$(doc).html  )            \
+          $(foreach doc,$(HOWTOS),$O/$(doc))
+
+symbols:  $(foreach doc,$(SYMBOL_TYPES),$O/$(doc).html  )      \
+          $(foreach doc,$(SYMBOL_TYPES),$O/$(doc))
+
+glossary: $(foreach doc,$(GLOSSARY),$O/$(doc).html  )          \
+          $(foreach doc,$(GLOSSARY),$O/$(doc))
 
 #############################################################
 # Skel

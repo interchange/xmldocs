@@ -568,7 +568,7 @@
 	</sect2>
 </sect1>
 
-<sect1>
+<sect1 id="Conclusion">
 	<title>Conclusion</title>
 	<para>
 	I believe I have succeeded in making XMLDOCS fairly convenient to author
