@@ -1,0 +1,40 @@
+
+<glossentry id="scratch-var">
+<glossterm>Scratch variables</glossterm>
+<glossterm>Scratch space</glossterm>
+<glossterm>Scratchpad</glossterm>
+
+<!--<acronym></acronym>-->
+<!--<abbrev></abbrev>-->
+
+<glossdef>
+<para>
+To each new visitor, Interchange assigns an unique
+<firstterm>session ID</firstterm> and (among other things) creates a
+<firstterm>scratch space</firstterm> (also referred to as 
+the <emphasis>scratchpad</emphasis>) to hold various variables
+which are valid throughout the session.
+</para>
+<para>
+Once defined, a scratch variable will exist either until it is explicitly
+deleted, or the session terminates.
+</para>
+<para>
+The catalog programmer has complete control over the scratch variables.
+The following tags manipulate the scratch space:
+<tag>set</tag>,
+<tag>seti</tag>,
+<tag>tmp</tag>,
+<tag>tmpn</tag>,
+<tag>scratch</tag>,
+<tag>scratchd</tag>,
+</para>
+<para>
+Scratch variables are also used in form processing. See the 
+<tag>button</tag> tag for examples.
+</para>
+
+</glossdef>
+
+</glossentry>
+

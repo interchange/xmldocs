@@ -1,0 +1,64 @@
+
+<glossentry id="deref">
+<glossterm>Dereferencing</glossterm>
+
+<glossdef>
+<para>
+<emphasis>Dereferencing</emphasis> is strictly a computer-programming
+issue, but we will try to explain it in very brief and comprehensible terms,
+so that you understand the idea of <firstterm>dereferencing</firstterm> and
+its practical effect when data structures are copied.
+</para><para>
+Let's say we want to compose a list of a few automobiles. Each entry 
+in the list will contain the fields
+<database class='field'>model</database>,
+<database class='field'>year</database> and
+<database class='field'>mileage</database>.
+</para><para>
+Theoretically speaking, to solve this real-world problem with the help of a
+computer, we would create a template (containing the three fields), and
+produce one <emphasis>instance</emphasis> of the template for each car
+we add to our list. (How this list is created, how the elements are added
+and how they relate to each other is irrelevant here).
+</para><para>
+One imaginary list with three instances could be visually represented
+in the following way:
+</para>
+<programlisting>
+             Model     Year  Mileage
+  list[0] { 'Fiat',    1996, 177940 }
+  list[1] { 'Citroen', 2001, 66000  }
+  list[2] { 'Citroen', 2002, 23000  }
+</programlisting>
+
+<para>
+There is only one copy of this list in computer memory, and we read or modify
+the elements by obtaining <firstterm>references</firstterm>
+(or, <firstterm>pointers</firstterm>) to appropriate entries.
+</para><para>
+If we take <literal>list</literal> above to contain the list of references
+to the entries, we can 
+use <literal>list[0].Model</literal> to retrieve the value "Fiat", or
+<literal>list[2].Year</literal> to retrieve "2002". For both of those fields,
+a reference was first <emphasis>dereferenced</emphasis> (or,
+<emphasis>followed</emphasis>) to reach the actual data fields.
+</para><para>
+When list elements need to be copied to another location (usually as part of
+some bigger plan which, again, we are not interested in), they can be copied
+<emphasis>by value</emphasis> (with dereferencing) or
+<emphasis>by reference</emphasis> (obviously, without dereferencing).
+In former case, you would end up with 2 references and 2 different
+lists (initially they would be the same but afterwards you could modify
+each with no connection to the other). In the latter case, you would again
+have 2 references, but both pointing to the same list. Modifying data through
+any of the two references would have impact on both.
+</para><para>
+So, when a data structure (or its element) is said to be copied
+<emphasis>without dereferencing</emphasis>, then in case it was a reference,
+it is still copied in itself, but all copies point to the same location.
+</para>
+
+</glossdef>
+
+</glossentry>
+
