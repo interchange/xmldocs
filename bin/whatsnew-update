@@ -1,0 +1,82 @@
+#! /usr/bin/perl
+
+# docelic@icdevgroup.org
+
+# The script parses a directory which is a copy of interchange-cvs 
+# mail archives and extracts log messages to a whatsnew file.
+
+use warnings;
+use strict;
+use Data::Dumper;
+use Getopt::Long;
+use Fcntl qw/:DEFAULT :flock/;
+
+{ no warnings;
+$Data::Dumper::Indent = 1;
+$Data::Dumper::Terse++;
+$Data::Dumper::Sortkeys++;
+}
+
+my $archive_dir = "whatsnew/ml";
+my $verbose = 0;
+my $output = "whatsnew/whatsnew.xml";
+my $entry_string = "<!-- AUTO UPDATER -->";
+my @template = <DATA>;
+my $template = join "", @template;
+
+unless ( GetOptions ( 
+	"verbose|v!" => \$verbose,
+	"output|o=s" => \$output,
+	"archive-dir|a=s" => \$archive_dir,
+	"entry-string|e|s=s" => \$entry_string,
+)) { die "Error parsing options\n" }
+
+# Load list of received emails in @archive
+my @archive = `test -d $archive_dir && find $archive_dir -type f -print`;
+@archive or die "No files in '$archive_dir'?\n";
+chomp for @archive;
+
+# Load list of already parsed messages and delete parsed ones from %archive
+open IN, "< whatsnew/parsed" or die "Can't open whatsnew/parsed ($!)\n";
+while ($_ = <IN>) {
+	chomp;
+	@archive = grep{!/^$_$/} @archive;
+}
+close IN;
+
+for $_ (@archive) {
+	my ($user,$date,$log) = read_log($_);
+
+	my $sect = eval "\"$template\"";
+	print "Here's a cookie:\n$sect\n";
+}
+
+exit 0;
+
+###################################################################
+# Helpers below
+
+sub read_log {
+	open IN, "< $_[0]" or die "Can't open $_[0] ($!)\n";
+	my @file = <IN>;
+	close IN;
+	#chomp for @file;
+	my (@log, $user, $date);
+
+	my $run = 0;
+	for $_ (@file) {
+		/^User:\s+(\S+)$/ and $user = $1;
+		/^Date:\s+(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} GMT)$/ and $date = $1;
+		/^Log:$/ and $run++;
+		/^Revision\s+Changes\s+Path$/ and $run=0;
+		$run and push @log, $_;
+	}
+
+	( $user, $date, [ @log ])
+}
+
+
+__DATA__
+User: $user ($date)
+@$log
+
