@@ -1,10 +1,10 @@
 <cmdsynopsis>
-area
   <arg choice='plain'>
-    href='<replaceable>path</replaceable>'
+    <arg choice='opt'>href=</arg><replaceable>path</replaceable>
   </arg>
   <arg choice='opt'>
-    arg='<replaceable>arg1=value1/arg2=value2...</replaceable>'
+    <arg choice='opt'>arg=</arg>
+		<replaceable>arg1=value1/arg2=value2...</replaceable>
   </arg>
   <arg choice='opt'>
     secure='<group choice='plain'>
@@ -13,6 +13,6 @@ area
     </group>'
   </arg>
   <arg choice='opt'>
-    form='<replaceable>form variables</replaceable>'
+    form=<replaceable>form variables</replaceable>
   </arg>
 </cmdsynopsis>

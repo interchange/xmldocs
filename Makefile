@@ -23,7 +23,7 @@ VPATH = guides refs howtos
 
 .PHONY: all guides refs howtos %.man cache refxmls
 
-all: tmp/refs-autogen tmp/olinkdbs guides refs howtos
+all: $(LTMPDIR)/refs-autogen $(LTMPDIR)/olinkdbs guides refs howtos
 	echo all done
 
 guides: $(OUTPUT)/images $(OUTPUT)/files \
@@ -82,12 +82,12 @@ $(OUTPUT)/%: %.xml $(OUTPUT)/xmldocs.css
 #  $(patsubst refs/%.xml,$(LTMPDIR)/%-c.db,$(wildcard refs/*.xml))  \
 #  $(patsubst refs/%.xml,$(LTMPDIR)/%-nc.db,$(wildcard refs/*.xml))
 #	touch tmp/olinkdbs
-tmp/olinkdbs: $(LTMPDIR)
+$(LTMPDIR)/olinkdbs: $(LTMPDIR)
 	make $(patsubst guides/%.xml,$(LTMPDIR)/%-c.db,$(wildcard guides/*.xml))
 	make $(patsubst guides/%.xml,$(LTMPDIR)/%-nc.db,$(wildcard guides/*.xml))
 	make $(patsubst refs/%.xml,$(LTMPDIR)/%-c.db,$(wildcard refs/*.xml))
 	make $(patsubst refs/%.xml,$(LTMPDIR)/%-nc.db,$(wildcard refs/*.xml))
-	touch tmp/olinkdbs
+	touch $(LTMPDIR)/olinkdbs
 
 $(LTMPDIR)/%-nc.db: %.xml $(LTMPDIR)
 	$(XSLT) $(XSLT_FLAGS)                                          \
@@ -111,14 +111,14 @@ $(LTMPDIR)/%-c.db: %.xml $(TMPDIR)
 # Support targets
 #
 
-mkreport: tmp/mkreport $(LTMPDIR)
+mkreport: $(LTMPDIR)/mkreport $(LTMPDIR)
 	./bin/mkreport $(IC_VERSIONS)
-	touch tmp/mkreport
+	touch $(LTMPDIR)/mkreport
 
-refxmls: tmp/refs-autogen
-tmp/refs-autogen: $(LTMPDIR) bin/refs-autogen
+refxmls: $(LTMPDIR)/refs-autogen
+$(LTMPDIR)/refs-autogen: $(LTMPDIR) bin/refs-autogen
 	./bin/refs-autogen $(IC_VERSIONS)
-	touch tmp/refs-autogen
+	touch $(LTMPDIR)/refs-autogen
 
 $(OUTPUT): $(LTMPDIR)
 	mkdir -p $(OUTPUT)
@@ -151,8 +151,8 @@ $(LTMPDIR):
 
 
 # STATTREE
-cache: tmp/stattrees
-tmp/stattrees:
+cache: $(LTMPDIR)/stattrees
+$(LTMPDIR)/stattrees: $(LTMPDIR)
 	-for p in $(IC_VERSIONS); do \
 	./bin/stattree sources/$$p; \
 	ctags -R -x --languages=perl --perl-kinds=cls sources/$$p/ \
@@ -161,7 +161,7 @@ tmp/stattrees:
 	> cache/$$p/.objectlist.c.txt; \
 	ctags -f cache/$$p/.tags -R --extra=fq --fields=afikKlmnsSz --line-directives sources/$$p \
 	; done
-	touch tmp/stattrees
+	touch $(LTMPDIR)/stattrees
 
 
 #

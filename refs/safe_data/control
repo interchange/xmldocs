@@ -1,3 +1,3 @@
 purpose: allow reparsing of database values in search for Interchange tags
-default: 0
+default: <literal>0</literal>
 see also: restrict

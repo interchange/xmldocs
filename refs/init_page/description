@@ -1,4 +1,5 @@
-Defines a <literal>Sub</literal> or <literal>GlobalSub</literal> to run 
+This pragma defines a <literal>Sub</literal> or <literal>GlobalSub</literal>
+to run 
 <emphasis>before</emphasis> page <option>Variable</option> processing.
 A <emphasis>reference</emphasis> to the contents of the
 page is passed to the subroutine.

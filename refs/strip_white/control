@@ -1,2 +1,2 @@
 purpose: strip whitespace from the top of Interchange-served HTML pages
-default: 0
+default: <literal>0</literal>

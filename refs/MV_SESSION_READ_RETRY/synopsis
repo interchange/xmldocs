@@ -1,4 +1,3 @@
 <cmdsynopsis>
-Variable MV_SESSION_READ_RETRY
   <arg choice='req'><replaceable>count</replaceable></arg>
 </cmdsynopsis>

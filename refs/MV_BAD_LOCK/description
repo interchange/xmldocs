@@ -1,4 +1,5 @@
-Allow systems with broken locking mechanism to still work properly.
-The variable makes sure the <option>PIDFile</option> lock is not destroyed
-by reading the lock file. Alleviates inability to use
-<userinput>interchange -stop</userinput>.
+The variable allows systems with broken locking mechanism to still work
+properly.
+If the variable is set, it makes sure the <option>PIDFile</option> lock is
+not destroyed when the lock file is read.
+<userinput>interchange -stop</userinput> will then work properly.

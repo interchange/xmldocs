@@ -1,3 +1,3 @@
-Prevents image locations in Interchange pages from being altered.
+This pragma prevents image locations in Interchange pages from being altered.
 </para><para>
-Interchange normally rewrites image locations to point to <option>ImageDir</option> (or <option>ImageDirSecure</option>). This applies to image locations mentioned in <![CDATA[<img src="">, <input src="">, <body background="">, <table background=""> and table subelements (th, tr and td).]]>
+Interchange normally rewrites image locations to point to <option>ImageDir</option> (or <option>ImageDirSecure</option>). This applies to image locations mentioned in <![CDATA[<img src="">, <input src="">, <body background="">, <table background=""> and table subelements (<th>, <tr> and <td>).]]>

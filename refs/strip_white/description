@@ -1,1 +1,4 @@
-Set this to strip whitespace from the top of HTML pages output by Interchange. Such whitespace usually comes from the Interchange tags at the top of the page. The pragma's purpose is to make the <emphasis>view source</emphasis> option in a web browser a slightly more tolerable experience.
+This pragma strips whitespace from the top of HTML pages output by Interchange.
+Such whitespace usually comes from Interchange tags which get processed and
+leave empty space behind them. The purpose of this pragma is to make
+<emphasis>View source</emphasis> option in your web browser a slightly more tolerable experience.

@@ -1,2 +1,2 @@
 purpose: specifies the number of times to retry reading the session file
-default: 5
+default: <literal>5</literal>

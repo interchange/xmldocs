@@ -1,1 +1,1 @@
-Makes Interchange output <ulink url="http://www.w3.org/TR/REC-html40/">HTML4</ulink>-compliant HTML.
+This variable,if set, makes Interchange output <ulink url="http://www.w3.org/TR/REC-html40/">HTML4</ulink>-compliant HTML.

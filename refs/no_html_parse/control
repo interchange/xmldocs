@@ -1,2 +1,2 @@
 purpose: disable parsing of MV= arguments inside HTML tags
-default: 0
+default: <literal>0</literal>

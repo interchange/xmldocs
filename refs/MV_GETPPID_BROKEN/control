@@ -1,2 +1,2 @@
 purpose: fix getppid() which is broken on Linux systems with thread-enabled Perl
-default: 0
+default: <literal>0</literal>

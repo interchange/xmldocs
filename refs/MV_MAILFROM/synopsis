@@ -1,4 +1,6 @@
 <cmdsynopsis>
-Variable MV_MAILFROM
-  <arg choice='req'>user name</arg>
+	<group choice='req'>
+		<arg choice='plain'><replaceable>user name</replaceable></arg>
+		<arg choice='plain'><replaceable>e-mail address</replaceable></arg>
+	</group>
 </cmdsynopsis>

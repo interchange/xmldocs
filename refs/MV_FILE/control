@@ -1,2 +1,2 @@
 purpose: contains the name of the last file read or of an external Perl routine
-default: none
+default: None

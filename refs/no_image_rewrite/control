@@ -1,2 +1,2 @@
 purpose: prevent image locations from being altered
-default: 0
+default: <literal>0</literal>

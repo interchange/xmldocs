@@ -2,4 +2,4 @@ The <tag>env</tag> tag provides read-only access to the HTTP environment
 variables. It can both display a specific variable as-is, or produce a 
 complete list of variables and values in a simple HTML table.
 </para> <para>
-The list display is useful for simple debugging or diagnostics.
+List display is useful for simple debugging or diagnostics.

@@ -144,8 +144,8 @@
 		</para>
 	</sect2>
 		
-	<sect2 id='ImportantFileandDirectoryLocations'>
-		<title>Important File and Directory Locations</title>
+	<sect2 id='ImportantSettingsandPaths'>
+		<title>Important Settings and Paths</title>
 		<para>
 		In order to follow this tutorial you will need to know the locations of the following directories, and have write permissions on them:
 		</para>
@@ -154,7 +154,10 @@
 				The Interchange software directory (<firstterm>ICROOT</firstterm>): 
 				<itemizedlist>
 					<listitem><para>
-					<filename class='directory'>/usr/lib/interchange/</filename>
+					<filename class='directory'>/usr/lib/interchange/</filename> (Debian GNU and Red Hat)
+					</para></listitem>
+					<listitem><para>
+					<filename class='directory'>/usr/local/interchange/</filename> (tarball)
 					</para></listitem>
 				</itemizedlist>
 				</para></listitem>
@@ -182,6 +185,10 @@
 					<filename class='directory'>/var/www/cgi-bin/</filename>
 					(RPM-based systems)
 					</para></listitem>
+					<listitem><para>
+					<filename class='directory'>/usr/lib/cgi-bin/</filename>
+					(tarball)
+					</para></listitem>
 				</itemizedlist>
 				</para></listitem>
 			<listitem><para>
@@ -191,7 +198,7 @@
 					<ulink url="http://myhost.mydomain.local/cgi-bin/ic/standard/index.html"/> (Debian GNU)
 					</para></listitem>
 					<listitem><para>
-					<ulink url="http://myhost.mydomain.local/cgi-bin/standard/index.html"/> (RPM-based systems)
+					<ulink url="http://myhost.mydomain.local/cgi-bin/standard/index.html"/> (RPM-based systems and tarballs)
 					</para></listitem>
 				</itemizedlist>
 				</para></listitem>
@@ -262,7 +269,7 @@ chmod 775 tutorial
 		<para>
 		<command>For the rest of this tutorial, all file locations will be given relative to this tutorial catalog directory (CATROOT). For example, <filename>pages/ord/basket.html</filename> would be <filename>/var/lib/interchange/catalogs/tutorial/pages/ord/basket.html</filename> on Debian GNU, <filename>/var/lib/interchange/tutorial/pages/ord/basket.html</filename> on RPM-based systems, or another equivalent on your system. The only exception is <filename>interchange.cfg</filename>, which is implicitly meant to be edited in <filename class='directory'>/etc/interchange/</filename> (or in the Interchange software directory ICROOT, depending on the installation).</command>
 		</para> <para>
-		<command>In addition, at places which require full pathnames (or other "hard-coded" values, such as usernames), Debian defaults will be used to avoid duplication and preserve the natural text flow. RPM-based systems users, please translate Debian GNU paths and other names to your system equivalents by following the rules from the <xref linkend="ImportantFileandDirectoryLocations"/>. We think you have precise enough information that there should be no problem with this simple task.</command>
+		<command>In addition, at places which require full pathnames (or other "hard-coded" values, such as usernames), Debian defaults will be used to avoid duplication and preserve the natural text flow. RPM-based systems users, please translate Debian GNU paths and other names to your system equivalents by following the rules from the <xref linkend="ImportantSettingsandPaths"/>. We think you have precise enough information that there should be no problem with this simple task.</command>
 		</para>
 	</sect2>
 
@@ -308,7 +315,7 @@ ErrorFile /var/log/interchange/error.log
 		So the basic <filename>/var/lib/interchange/catalogs/tutorial/catalog.cfg</filename> config file should look like this:
 		</para> <para>
 		<programlisting>
-<xi:include parse='text'  href='../files/tutorial-phase1/catalog.cfg'></xi:include>
+<xi:include parse='text'  href='../files/tutorial-phase1/catalog.cfg'/>
 		</programlisting>
 		</para>
 	</sect2>
@@ -318,7 +325,7 @@ ErrorFile /var/log/interchange/error.log
 		<para>
 		The <database class='table'>products</database> database we mentioned, kept in <filename>products/products.txt</filename>, will serve two purposes. It will provide Interchange with the layout of the products database table and it will also provide the data. When Interchange comes around to parse the products.txt file, it will expect the first line to contain the names of the fields for the database table (the <database class='field'>sku</database>, <database class='field'>description</database> and <database class='field'>price</database> fields are mandatory for a products database, but you can add arbitrary other fields as you see fit). The first field in the list is expected to be the primary key (unique identifier) for the row. In most cases you are going to use the SKU (<firstterm>Stock Keeping Unit</firstterm>) as the unique identifier for each product. The simple store that we are going to build will sell tests. You can choose another sample product line, but it is recommended that you keep it simple. Create the file <filename>products/products.txt</filename>, separating fields <emphasis>with a single TAB</emphasis>:
 		<programlisting>
-<xi:include parse='text'  href='../files/tutorial-phase1/products/products.txt'></xi:include>
+<xi:include parse='text'  href='../files/tutorial-phase1/products/products.txt'/>
 		</programlisting>
 		</para> <para>
 		You may notice that the columns don't line up in your text editor. This is the nature of tab-delimited files. Do not try to fix these.
@@ -370,7 +377,7 @@ ErrorFile /var/log/interchange/error.log
 		<title>CATROOT/top</title>
 		<para>
 		<programlisting>
-<xi:include parse='text'  href='../files/tutorial-phase1/top'></xi:include>
+<xi:include parse='text'  href='../files/tutorial-phase1/top'/>
 		</programlisting>
 		</para>
 	</sect2>
@@ -379,7 +386,7 @@ ErrorFile /var/log/interchange/error.log
 		<title>CATROOT/left</title>
 		<para>
 		<programlisting>
-<xi:include parse='text'  href='../files/tutorial-phase1/left'></xi:include>
+<xi:include parse='text'  href='../files/tutorial-phase1/left'/>
 		</programlisting>
 		</para>
 	</sect2>
@@ -388,7 +395,7 @@ ErrorFile /var/log/interchange/error.log
 		<title>CATROOT/bottom</title>
 		<para>
 		<programlisting>
-<xi:include parse='text'  href='../files/tutorial-phase1/bottom'></xi:include>
+<xi:include parse='text'  href='../files/tutorial-phase1/bottom'/>
 		</programlisting>
 		</para>
 	</sect2>
@@ -428,7 +435,7 @@ ErrorFile /var/log/interchange/error.log
 		</para> <para>
 		Save the following text as <filename>pages/index.html</filename>. This will create a page to test that everything works so far.
 		<programlisting>
-<xi:include parse='text'  href='../files/tutorial-phase1/pages/index.html'></xi:include>
+<xi:include parse='text'  href='../files/tutorial-phase1/pages/index.html'/>
 		</programlisting>
 		</para> <para>
 		Interchange pages in the <filename class='directory'>pages/</filename> directory (or elsewhere) must have the .html suffix. You can omit the suffix in both your URLs when accessing pages, and in the tags you call (such as <tag>page</tag>), but the files on the disk must be properly named.
@@ -563,7 +570,7 @@ ErrorFile /var/log/interchange/error.log
 		</para> <para>
 		Your finished <filename>pages/index.html</filename> page should look like this:
 		<programlisting>
-<xi:include parse='text'  href='../files/tutorial-phase2/pages/index.html'></xi:include>
+<xi:include parse='text'  href='../files/tutorial-phase2/pages/index.html'/>
 		</programlisting>
 		</para> <para>
 		Test it by refreshing the <filename>index.html</filename> page in your browser.
@@ -577,7 +584,7 @@ ErrorFile /var/log/interchange/error.log
 		</para> <para>
 		For example, if you request the <filename>0198.html</filename> page, Interchange first checks if that specific page exists (<filename class='directory'>pages/0198.html</filename>). If one is not found, it searches the products database table for a product with that ID 0198. Interchange then creates that product page <emphasis>on the fly</emphasis> using <filename>pages/flypage.html</filename>. When constructing the flypage, the entire product record for the requested product is available through the <tag>item-field</tag> tag (similar to the <tag>loop-field</tag> tag). To create a fly page, type the following code and save it as <filename>pages/flypage.html</filename>.
 		<programlisting>
-<xi:include parse='text'  href='../files/tutorial-phase2/pages/flypage.html'></xi:include>
+<xi:include parse='text'  href='../files/tutorial-phase2/pages/flypage.html'/>
 		</programlisting>
 		</para>
 	</sect2>
@@ -589,7 +596,7 @@ ErrorFile /var/log/interchange/error.log
 		</para> <para>
 		It is a good idea to display an error page when Interchange is asked for an unknown page. To create a missing page for display, type the following and save it as <filename>special_pages/missing.html</filename>.
 		<programlisting>
-<xi:include parse='text'  href='../files/tutorial-phase2/special_pages/missing.html'></xi:include>
+<xi:include parse='text'  href='../files/tutorial-phase2/special_pages/missing.html'/>
 		</programlisting>
 		</para> <para>
 		The addition of this page ensures that users see your error message instead of a mysterious server error if they mistype the URL.
@@ -642,7 +649,7 @@ ErrorFile /var/log/interchange/error.log
 		</para> <para>
 		The standard demo catalog has a full-featured shopping basket available for use, but this tutorial teaches you to build your own simple one. The shopping basket items can be accessed using a set of tags that have an <tag>item</tag> prefix. Put the following code in the new <filename>pages/ord/basket.html</filename> file. The section that follows explains the tags used.
 		<programlisting>
-<xi:include parse='text'  href='../files/tutorial-phase3/pages/ord/basket.html'></xi:include>
+<xi:include parse='text'  href='../files/tutorial-phase3/pages/ord/basket.html'/>
 		</programlisting>
 		</para> <para>
 		The basket items can be accessed one at a time by using the <tag>item-list</tag> tag. So we will create a table by iterating through the basket items. The text within the <tag>item-list</tag> <tag>item-list</tag> tags is created for each item in the list.
@@ -698,7 +705,7 @@ ErrorFile /var/log/interchange/error.log
 		</para> <para>
 		To create a checkout page, type the following code and save it as <filename>pages/checkout.html</filename>. The section that follows explains the code.
 		<programlisting>
-<xi:include parse='text'  href='../files/tutorial-phase4/pages/checkout.html'></xi:include>
+<xi:include parse='text'  href='../files/tutorial-phase4/pages/checkout.html'/>
 		</programlisting>
 		</para> <para>
 		The HTML form begins with a method of 'post' (which sends the form data as its own stream, as opposed to the 'get' method which encodes the data as part of the URL). The <tag>process</tag> tag creates a special URL for form processing. Interchange has a built-in form processor that is configured by submitting certain fields in the form. The Finalize button will invoke this form processor and link the user to the <filename>special_pages/receipt.html</filename> page, which is described later.
@@ -718,7 +725,7 @@ ErrorFile /var/log/interchange/error.log
 		<para>
 		You need to set up verification for the order form by defining an order profile for the form. An order profile determines what fields are necessary for the form to be accepted. Create an order profile verification page by typing the following and saving it as <filename>etc/profiles.order</filename>. The section that follows explains the code used:
 		<programlisting>
-<xi:include parse='text'  href='../files/tutorial-phase4/etc/profiles.order'></xi:include>
+<xi:include parse='text'  href='../files/tutorial-phase4/etc/profiles.order'/>
 		</programlisting>
 		</para> <para>
 		A single file can contain multiple profile definitions. First the profile is named using the <pragma>__NAME__</pragma> pragma (but this is unrelated to the <varname>__VARIABLE__</varname> syntax seen elsewhere in Interchange). Then in the profile there is a list of the form fields that are required. The &amp;fatal setting indicates that validation will fail if any of the requirements are not met. &amp;final indicates that this form will complete the ordering process. This setting is helpful if you have a multi-page ordering process and you want to validate each page individually. The <pragma>__END__</pragma> pragma signals the end of this profile, after which you can begin another one.
@@ -737,7 +744,7 @@ OrderProfile etc/profiles.order
 		<para>
 		If the submitted form lacks a required field, Interchange will display an error page. The default location is <filename>special_pages/needfield.html</filename>. Here's the code for the page:
 		<programlisting>
-<xi:include parse='text'  href='../files/tutorial-phase4/special_pages/needfield.html'></xi:include>
+<xi:include parse='text'  href='../files/tutorial-phase4/special_pages/needfield.html'/>
 		</programlisting>
 		</para> <para>
 		The <tag>error</tag> tag is the most important tag on this page. The 'all' parameter tells the tag to iterate through all of the errors reported from the failed verification, and the 'show_var' parameter indicates that the failed variable name should be displayed. For example, if the first name was left empty, 'fname' would be shown. The 'show_error' parameter displays the actual error for the variable. The joiner parameter inserts an HTML &lt;br&gt; tag between each error message, so each error is displayed on its own line. In more complex configurations, the <tag>error</tag> tag can be even more expressive.
@@ -773,7 +780,7 @@ __END__
 		</para> <para>
 		The report should include at least the customer's name, address, and the items they ordered. The following is a simple report template; save it as <filename>etc/report</filename>:
 		<programlisting>
-<xi:include parse='text'  href='../files/tutorial-phase4/etc/report'></xi:include>
+<xi:include parse='text'  href='../files/tutorial-phase4/etc/report'/>
 		</programlisting>
 		</para> <para>
 		This file is in plain text format where, unlike HTML, white space is relevant. It is fairly straightforward, except that the <tag>if</tag> tag was added to only include the optional second address line if the customer filled it in.
@@ -790,7 +797,7 @@ __END__
 		<para>
 		Once the report has been run, Interchange will finish the order process on the customer side by displaying a success screen containing a receipt. The default location for this page is <filename>special_pages/receipt.html</filename>. To create a receipt page, type the following code and save it as <filename>special_pages/receipt.html</filename>.
 		<programlisting>
-<xi:include parse='text'  href='../files/tutorial-phase4/special_pages/receipt.html'></xi:include>
+<xi:include parse='text'  href='../files/tutorial-phase4/special_pages/receipt.html'/>
 		</programlisting>
 		</para> <para>
 		Once the order is processed, the customer's shopping cart is emptied.
@@ -1113,7 +1120,7 @@ Now add the following to the left template piece:
 		The search box will now appear on all catalog pages, but you still need to create the search results page. To create the search results page, type the following code and save it as <filename>pages/results.html</filename>.
 		</para> <para>
 		<programlisting>
-<xi:include parse='text'  href='../files/tutorial-phase5/pages/results.html'></xi:include>
+<xi:include parse='text'  href='../files/tutorial-phase5/pages/results.html'/>
 		</programlisting>
 		</para> <para>
 		The search results will be contained in the <tag>search-region</tag> <tag>/search-region</tag> tags. The text in the <tag>on-match</tag> <tag>/on-match</tag> container will be displayed only if matches were found for the search. The text in the <tag>no-match</tag> <tag>/no-match</tag> container will be displayed only if no matches were found. The <tag>search-list</tag> <tag>/search-list</tag> container functions just like <tag>loop</tag> <tag>/loop</tag>, iterating over its contents for each item in the search results list.

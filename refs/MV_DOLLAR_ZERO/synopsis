@@ -1,5 +1,4 @@
 <cmdsynopsis>
-Variable MV_DOLLAR_ZERO
   <group choice='req'>
     <arg choice='plain'>0</arg>
     <arg choice='plain'>1</arg>

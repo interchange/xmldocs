@@ -1,3 +1,4 @@
-Disallows tag parsing inside HTML tags. This was a <emphasis>big</emphasis>
-parser performance gain and was enabled in the demo catalog shipping with
+This pragma disallows tag parsing inside HTML tags. This once meant a
+<emphasis>big</emphasis>
+performance gain and was enabled in the demo catalogs that shipped with
 older Interchange releases.

@@ -1,1 +1,1 @@
-If SMTP is used to send mail, <varname>MV_HELO</varname> specifies the <emphasis><ulink url="http://cr.yp.to/smtp/helo.html#helo">HELO</ulink></emphasis> string to present to the remote system.
+If SMTP is used to send mail, <varname>MV_HELO</varname> variable specifies the <emphasis><ulink url="http://cr.yp.to/smtp/helo.html#helo">HELO</ulink></emphasis> string to present to the remote system.

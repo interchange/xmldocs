@@ -1,3 +1,4 @@
 <![CDATA[
-Rewrite image background paths in <table>, <th>, <tr> and <td> tags.
+This pragma rewrites image background paths in
+<table>, <th>, <tr> and <td> HTML elements.
 ]]>

@@ -1,4 +1,4 @@
-This is the a relative, system-wide path of the previous page served,
+This variable contains relative, system-wide path of the previous page served,
 without the suffix.
-This variable is not set in the configuration files, but is
+The variable is not set in the configuration files, but is
 manipulated by the Interchange daemon while it is runnning.

@@ -1,2 +1,2 @@
 purpose: control visual display of Interchange processes in the process list
-default: interchange
+default: <literal>interchange</literal>

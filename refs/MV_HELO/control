@@ -1,3 +1,3 @@
 purpose: the HELO string to send when using SMTP to send mail
-default: none
+default: None
 see also: MV_MAILFROM

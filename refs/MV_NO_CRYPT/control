@@ -1,2 +1,3 @@
 purpose: disable the use of password encryption server-wide
-default: 0
+default: <literal>0</literal>
+missing: add notes from -core archives

@@ -1,2 +1,2 @@
 purpose: output HTML4-compliant HTML code
-default: 0
+default: <literal>0</literal>

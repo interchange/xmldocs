@@ -93,7 +93,7 @@ Starting with Interchange 5.0, the <code>$::Pragma->{name}</code> syntax is used
 
 
 <!ENTITY % local.para.char.mix "|xi:include">
-<!ENTITY % local.tech.char.class "|tag|pragma">
+<!ENTITY % local.tech.char.class "|tag|pragma|xi:include">
 
 <!-- Load DocBook -->
 <!ENTITY % DocBookDTD PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"

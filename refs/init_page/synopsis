@@ -1,4 +1,3 @@
 <cmdsynopsis>
-Pragma init_page=
   <arg choice='req'><replaceable>subroutine name</replaceable></arg>
 </cmdsynopsis>

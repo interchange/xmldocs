@@ -1,3 +1,4 @@
-Note that this is set globally (and only once) when the Interchange daemon starts, so it is pointless to change the variable in runtime.
+Note that this variable is set globally once when the Interchange daemon starts.
+It is pointless to change the variable afterwards in runtime.
 </para><para>
 This variable will have <emphasis>no</emphasis> effect on BSD kernels.

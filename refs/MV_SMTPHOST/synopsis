@@ -1,4 +1,3 @@
 <cmdsynopsis>
-Variable MV_SMTPHOST
-  <arg choice='req'>host name</arg>
+  <arg choice='req'><replaceable>host name</replaceable></arg>
 </cmdsynopsis>
