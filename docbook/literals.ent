@@ -71,10 +71,12 @@ option) any later version.</para>">
 <!ENTITY GET "<olink targetdoc='glossary' targetptr='GET'>GET</olink>">
 <!ENTITY interval "<olink targetdoc='glossary' targetptr='interval'>Interval</olink>">
 <!ENTITY cgi-var "<olink targetdoc='glossary' targetptr='cgi-var'>CGI Variable</olink>">
+<!ENTITY cgi-vars "<olink targetdoc='glossary' targetptr='cgi-var'>CGI Variables</olink>">
 <!ENTITY umask "<olink targetdoc='glossary' targetptr='umask'>Umask</olink>">
 <!ENTITY mode "<olink targetdoc='glossary' targetptr='mode'>Mode</olink>">
 <!ENTITY filter "<olink targetdoc='glossary' targetptr='filter'>Filter</olink>">
 <!ENTITY dereferencing "<olink targetdoc='glossary' targetptr='deref'>Dereferencing</olink>">
+<!ENTITY prefork "<olink targetdoc='glossary' targetptr='ic-run-mode'>PreFork</olink>">
 
 
 <!-- ENTITIES TO EASIER CONSTRUCT TAG PARAMETERS LIST -->

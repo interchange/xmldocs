@@ -53,8 +53,7 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>
-	<glossterm linkend='cgi-var'>Interchange CGI variables</glossterm>
-	to pass. If you want to use this, the form
+	&cgi-vars; to pass. If you want to use this, the form
 	method should be <literal>POST</literal> or <literal>PUT</literal>.
 	The list can be ampersand-separated, like 
 	<literal><![CDATA[fname=Brev&lname=Patterson&state=UT]]></literal>, and
@@ -96,7 +95,7 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry>No timeout</entry>
 	<entry>Set timeout for the operation. Timeout can be specified
-	as a valid <glossterm linkend="interval">Interchange interval</glossterm>
+	as a valid &interval;
 	(such as "3 min").</entry>
 </row>
 __END__

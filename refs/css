@@ -108,8 +108,7 @@ __NAME__ synopsis
 	<entry></entry>
 	<entry>
 	Regenerate the file on a timed basis? Default unit are minutes,
-	but you can pass any standard
-	<glossterm linkend='interval'>Interchange interval</glossterm>.
+	but you can pass any standard &interval;.
 	</entry>
 </row>
 

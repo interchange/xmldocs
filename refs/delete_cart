@@ -22,9 +22,8 @@ __END__
 
 
 __NAME__ description
-This tag deletes a shopping cart from the
-<glossterm linkend="userdb">UserDB</glossterm>. This is basically the
-same as
+This tag deletes a shopping cart from the &userdb;.
+This is basically the same as
 <code>[userdb function=delete_cart
 nickname=<replaceable>CART_NAME</replaceable>]</code>.
 __END__

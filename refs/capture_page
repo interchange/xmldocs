@@ -66,10 +66,8 @@ __END__
 
 __NAME__ description
 This tag processes the page (as if the user visited it with the browser),
-and writes contents to disk.
-This is usually called from
-<glossterm linkend='jobs'>Interchange jobs</glossterm> but, of course, nothing
-enforces this.
+and writes contents to disk. This is usually called from &jobs; but of
+course, nothing enforces this.
 </para><para>
 The tag is able to reproduce both standard and search results pages.
 <!-- XXX link 'search results' -->
