@@ -1,12 +1,18 @@
 #!/usr/bin/perl
 #
-# Perl script to build Interchange source tree statistics.
+# docelic@icdevgroup.org
+#
+# Perl script to build Interchange source tree statistics,
+# contexts and symbols information.
 # Data is collected and dumped using Storable, that's where 
 # this script's job ends.
 #
 # Other tools can then only read the dump to get information,
 # they shouldn't parse the sources again.
 #
+# Now that I learned most of the requirements, looks like this
+# script is up to the task and is pretty decent altogether
+# 
 
 use warnings;
 use strict;
@@ -16,6 +22,7 @@ use Data::Dumper;
 use Getopt::Long;
 use Storable qw/nstore_fd fd_retrieve/;
 use Fcntl qw/:DEFAULT :flock/;
+use File::Basename;
 
 # Dumper behavior
 $Data::Dumper::Indent = 1;
@@ -30,6 +37,7 @@ my $cpath = $ENV{PWD};
 # Source contexts
 my $ctx_p = 10; # How much context lines to show before
 my $ctx_n = 4; #                                after
+my %cvsmap; # Each key (full filename) contains array: [ver, date]
 
 # All file types should be listed here or the stats wont. It should be
 # reported if an unknown file is found in the archive
@@ -87,8 +95,28 @@ $i{ver} =~ s/\/$//;
 `mkdir -p $cachedir/$dumpdir` unless -e "$cachedir/$dumpdir";
 $dumppath .= "/.cache.bin";
 
-# Convenient routine to just discover all files in a module
+# Ok, onto some work now
 chdir $path; # Go into the directory
+
+# Let's just pick CVS lines first:
+my @files = `find . -name Entries | cut -b 3-`;
+for my $entry ( @files ) {
+	chomp $entry;
+	my $dir;
+	( $dir = $entry ) =~ s#/?CVS/Entries$## or
+		warn "Can't remove Entries\$ ('$dir')?\n";
+	open CVSIN, "< $entry" or warn "Can't open '$entry' ($!)\n";
+	while ( my $cvsline = <CVSIN> ) {
+		next unless $cvsline =~ s#^/##;
+		my ($fn, $ver, $time) = split /\//, $cvsline;
+
+		$path = $dir ? "$dir/$fn" : $fn;
+		$hash{revision}{"$path"} = [ $ver, $time ];
+	}
+	close CVSIN;
+}
+
+# Convenient routine to just discover all files
 find({
 	wanted => \&wanted,
 	bydepth => 0,
@@ -190,22 +218,37 @@ sub wanted {
 
 	# Open text file, parse contents
 	open IN, "< $file" or die "Can't open $file ($!)\n";
-	my @file = <IN>;
-	unshift @file, ""; # Match index numbers with line numbers
+	my @filedata = <IN>;
+	unshift @filedata, ""; # Match index numbers with line numbers
 	close IN;
 
-	# Global variables to use from the loop below
-	my @gfunc = (qw/unknown -1/); # 2 elements: func name, line num
+	# Global variables to use in the loop below
+	my @gfunc = (qw/unknown 0/); # 2 elements: func name, line num
 
-	for (my $lnum = 1; $lnum < scalar @file; $lnum++) {
-		my $line = $file[$lnum];
+	# Prepare context hash so that all data is available to the
+	# line handler functions later
+	my %c = ( 
+		file => $file,
+		ftype => $ftype,
+		fsubtype => $fsubtype,
+		fext => $fext,
+		gfunc => \@gfunc,
+		filedata => \@filedata,
+		ctx_p => $ctx_p,
+		ctx_n => $ctx_n,
+	);
+
+
+	for (my $lnum = 1; $lnum < scalar @filedata; $lnum++) {
+		$c{line} = $filedata[$lnum];
+		$c{lnum} = $lnum;
 
 		$hash{tree}{$file}{lines}++ ;
 		$hash{total}{lines}++ ;
 
 		# It's the main configure file, pick up the ICVERSION variable
-		if ( $file eq 'configure' ) {
-			for $_ (@file) {
+		if ( $c{file} eq 'configure' ) {
+			for $_ (@filedata) {
 				if ( /^ICVERSION=(['"])(\d+\.\d+\.\d+)\1/ ) {
 					if ( !$hash{version} or "$hash{version}" eq "$2" ) {
 						$hash{version} = $2
@@ -218,98 +261,60 @@ sub wanted {
 			unless ( $hash{version} ) {
 				warn "Wasn't able to determine " .
 					'^ICVERSION=([\'"])(\d+\.\d+\.\d+)\1 from the main ' .
-					"./configure script. Will use one from directory name. " .
-					"(This is OK for pre-5.0 versions).\n";
+					"./configure script. Will use one from directory name ($i{ver}).\n"
+					unless $i{ver} =~ /^4/; # ignore warning for 4.x versions
 				$hash{version} = $i{ver};
 			}
 
 		# Perl program file
-		} elsif ( $fsubtype eq 'perl' ) {
+		} elsif ( $c{fsubtype} eq 'perl' ) {
 			my $pod = 0;
-			if ( $line =~ /^\s*#/ ) {
-				$hash{tree}{$file}{comments}++ ;
+			if ( $c{line} =~ /^\s*#/ ) {
+				$hash{tree}{$c{file}}{comments}++ ;
 				$hash{total}{perl_comments}++;
 				# TODO check if the comment contains ::log[A-Z]\w+
-				# to discover calls to logGlobal/logDebug
-			} elsif ( $line =~ /\s+#/ ) {
-				$hash{tree}{$file}{gray}++ ;
+				# to discover calls to logGlobal/logDebug/logError
+			} elsif ( $c{line} =~ /\s+#/ ) {
+				$hash{tree}{$c{file}}{gray}++ ;
 				$hash{total}{perl_gray}++;
-			} elsif ( $line =~ /^=(head|over|item)/) {
-				$hash{tree}{$file}{pod}++;
+			} elsif ( $c{line} =~ /^=(head|over|item)/) {
+				$hash{tree}{$c{file}}{pod}++;
 				$hash{total}{perl_pod}++;
 				$pod++;
-			} elsif ( $line =~ /^=cut/) {
-				$hash{tree}{$file}{pod}++;
+			} elsif ( $c{line} =~ /^=cut/) {
+				$hash{tree}{$c{file}}{pod}++;
 				$hash{total}{perl_pod}++;
 				$pod = 0;
-			} elsif ( $line =~ /^\s*$/ ) {
-				$hash{tree}{$file}{empty}++;
+			} elsif ( $c{line} =~ /^\s*$/ ) {
+				$hash{tree}{$c{file}}{empty}++;
 				$hash{total}{perl_empty}++;
 			} elsif ( ! $pod ) {
 				# The default is code
-				$hash{tree}{$file}{code}++;
+				$hash{tree}{$c{file}}{code}++;
 				$hash{total}{perl_code}++;
 
-				######################################################
-				# Discover pragmas
-				# Ph33r, PH33R my MaD R3G3X skiLLz! ;-)
-				# This matches $::Pragma->{} or $$::Pragma{}
-				#if ( $line =~ /(()|\$())\$::Pragma(->\2|\3){(\w+?)}/ ) {
-				if ( $line =~ /\$::Pragma->{(\w+?)}/ or 
-					$line =~ /\$Vend::Cfg->{Pragma}{(\w+?)}/ ) {
-					#push @{ $hash{symbols}{pragma}{$5} }, <- for use with above
-					push @{ $hash{symbols}{pragma}{$1} },
-						# TODO Here, and 2 places below: make sure if ctx is say, 5:5,
-						# it always shows that much (that is, workaround file beginning/
-						# file end problems - pad with empty lines or something).
-						[ "$i{ver}/$file", $lnum, "$gfunc[0]:$gfunc[1] $ctx_p\:$ctx_n", [format_ctx(@file[$lnum-$ctx_p..$lnum+$ctx_n])] ];
-				}
-				
-				######################################################
-				# Diskover global variables
-				if ( $line =~ /(()|\$())\$Global::Variable(->\2|\3){(\w+?)}/ ) {
-					push @{ $hash{symbols}{globvar}{$5} },
-						[ "$i{ver}/$file", $lnum, "$gfunc[0]:$gfunc[1] $ctx_p\:$ctx_n", [format_ctx(@file[$lnum-$ctx_p..$lnum+$ctx_n])] ];
-				}
-				# A little catch
-				if ( $line =~ /\$Tag->var\s*\(\s*(["'])(\S+?)\1(\s*,\s*(\d))?/ ) {
-					push @{ $hash{symbols}{globvar}{$5} },
-						[ "$i{ver}/$file", $lnum, "$gfunc[0]:$gfunc[1] $ctx_p\:$ctx_n", [format_ctx(@file[$lnum-$ctx_p..$lnum+$ctx_n])] ];
-					warn "\$Tag->var syntax never used in .pl/.pm files by now.
-						I'll register that, but is it a mistake? ($2, $4)\n";
-				}
-				
-				######################################################
-				# See if it's a beginning of a subroutine name, and remember the
-				# name/linenum.
-				if ( $line =~ m#^\s*sub\s+(\w+)\s*\{\s*$# ) {
-					$hash{total}{perl_functions}++;
-					@gfunc = ( $1, $lnum );
-				}
+				line_findPragmas(\%c);
+				line_findGlobVars(\%c);
+				line_findFunctionName(\%c);
 
 			} else {
-				warn "IMPOSSIBLE\n";
+				warn "IMPOSSIBLE case in $file\n";
 			}
-
-		# TODO:
-		# - parse contents, identify blocks and add to appropriate
-		#   counters.
-		# - code with inline comments or html with tags count as "gray area"
-		#   (adds 1 to both)
 
 		##########################################################
 		# Found a tag
-		} elsif ( $fsubtype =~ /^(user|ui|system)tag$/ )  {
+		} elsif ( $c{fsubtype} =~ /^(user|ui|system)tag$/ )  {
 			#$hash{total}{$fsubtype . "s"}++;
-			$file =~ m#(\w+?)\.(core)?tag$# or
-				warn "I know $file is a tag but regex doesn't match it\n";
+			$c{file} =~ m#(\w+?)\.(core)?tag$# or
+				warn "I know $c{file} is a tag but regex doesn't match it\n";
 
 			my %specific; # Item-specific data
 			my @tags; # Support multiple tags defined in the same file
 
 			# This is where we parse the tag file. We should discover settings like
 			# HasEndTag, Order, and so on.
-			for my $_l (@file) {
+			for (my $lnum = 1; $lnum < scalar @filedata; $lnum++) {
+				my $_l = $filedata[$lnum];
 				next unless $_l =~ /^usertag\s/i;
 				my @lis = split /\s+/, $_l;
 				shift @lis; # Remove "Usertag" which is first in the list
@@ -319,13 +324,33 @@ sub wanted {
 				my $tn = shift @lis;
 
 				my $tagopt = shift @lis;
-				next if $tagopt =~ /^(routine|documentation)$/i;
-				if ( "@lis" =~ /<</ ) {
-					warn "TODO: Unsupported << in $tn\n";
+				next if $tagopt =~ /^documentation$/i;
+
+				# See if it's a routine and parse routine lines as usual perl lines
+				if ( $tagopt =~ /^routine$/i and "@lis" =~ /\s*<<(\S+)\s*$/i ) {
+					my $ender = $1;
+					for (my $lnum2 = $lnum; $lnum2 < scalar @filedata; $lnum2++) {
+						my $_t = $filedata[$lnum2];
+						last if $_t =~ /^$ender$/;
+
+						$c{line} = $_t;
+						$c{lnum} = $lnum2;
+
+						# For example, this should find PGP_HOME
+						line_findPragmas(\%c);
+						line_findGlobVars(\%c);
+						line_findFunctionName(\%c);
+					}
+					next;
+				}
+				
+				if ( "@lis" =~ /<</ and $tagopt !~ /^routine/i ) {
+					warn "TODO: Unsupported << in $tn (in $i{ver})\n";
 					next;
 				}
 
-				# New tag name we didn't see yet (either first run or another tag defined)
+				# New tag name we didn't see yet
+				# (either first run or another tag definition in the same file)
 				{ no warnings;
 				if (!grep{/^$tn$/}@tags and $lis[0] !~ /^alias$/i) { push @tags, $tn }
 				}
@@ -335,9 +360,19 @@ sub wanted {
 			
 			# For each tag found in the file, create appropriate data in hash.
 			for my $tagname ( @tags ) {
-				push @{ $hash{symbols}{$fsubtype}{$tagname} }, 
-					[ "$i{ver}/$file", scalar @file, "1:" . scalar @file, [ format_ctx(@file) ] ];
-				$hash{specific}{$tagname} = $specific{$tagname};
+				push @{ $hash{symbols}{$c{fsubtype}}{$tagname} }, {
+					file => "$i{ver}/$c{file}",
+					lnum => scalar @filedata,
+					ctxpre => $ctx_p,
+					ctxpost => $ctx_n,
+					ctxs => 1,
+					ctxe => scalar @filedata,
+					ctx => [ format_ctx(@filedata) ] };
+
+				$hash{specific}{$tagname} = { # Append/update, don't overwrite
+					%{ $hash{specific}{$tagname} || {}},
+					%{ $specific{$tagname} || {}},
+				};
 			}
 			
 			last;
@@ -348,6 +383,23 @@ sub wanted {
 # Format the context lines before saving to the db
 sub format_ctx {
 	map { s/\t/  /g; chomp } @_;
+	# Find the number of starting whitespace common to all lines
+	# and trim it. XXX doesn't work
+	my $cs = 1000;
+	for my $ol ( @_ ) {
+		$ol =~ /^(\s*)/;
+		my $space_len = length $1;
+		$cs = $space_len if $space_len < $cs;
+		# Catch runaway lines (produces crapload of things, so refine
+		# search before starting to use it)
+		#if ( $ol =~ /\S\s{10,}/ ) {
+		#	warn "Runaway '$ol' ?\n";
+		#}
+	}
+	if ( $cs ) { # There is something to trim
+		#print "Trimming by $cs\n"; # XXX <- should be more of those ?!
+		map { s/^\s{$cs}// or warn "LTRIM: No $cs spaces?\n" } @_
+	}
 	return @_;
 }
 
@@ -366,5 +418,62 @@ sub dumpdb {
 	close OUT or
 		die "Can't properly close database ($dbpath) ($!).\n";
 
+}
+
+# HELPERS
+
+sub line_findPragmas {
+	my %ptr = %{ (shift) };
+	# This matches $::Pragma->{} or $$::Pragma{}
+	#if ( $line =~ /(()|\$())\$::Pragma(->\2|\3){(\w+?)}/ ) {
+	if ( $ptr{line} =~ /\$::Pragma->{(\w+?)}/ or         
+			$ptr{line} =~ /\$Vend::Cfg->{Pragma}{(\w+?)}/ ) {
+	#push @{ $hash{symbols}{pragma}{$5} }, <- for use with above
+		push @{ $hash{symbols}{pragma}{$1} }, {
+	# TODO Here, and 2 places below: make sure if ctx is say, 5:5,
+	# it always shows that much (that is, workaround file beginning/
+	# file end problems - pad with empty lines or something).
+		file => "$i{ver}/$ptr{file}",
+		lnum => $ptr{lnum},
+		func => ${$ptr{gfunc}}[0],
+		funclnum => ${$ptr{gfunc}}[1],
+		ctxpre => $ptr{ctx_p},
+		ctxpost => $ptr{ctx_n},
+		ctxs => $ptr{lnum} - $ptr{ctx_p},
+		ctxe => $ptr{lnum} + $ptr{ctx_n},
+		ctx => [format_ctx(@{$ptr{filedata}}[$ptr{lnum}-$ptr{ctx_p}..$ptr{lnum}+$ptr{ctx_n}])]
+	};
+	}
+}
+
+sub line_findGlobVars {
+	######################################################
+	# Diskover global variables
+	my %c = %{ (shift) };
+	if ( ( $c{line} =~ /(()|\$())\$Global::Variable(->\2|\3){(\w+?)}/ or
+		$c{line} =~ /\$Tag->var\s*\(\s*(["'])(\S+?)\1(\s*,\s*(\d))?/ ) and $5 ) {
+		push @{ $hash{symbols}{globvar}{$5} }, {
+			file => "$i{ver}/$c{file}",
+			lnum => $c{lnum},
+			func => ${$c{gfunc}}[0],
+			funclnum => ${$c{gfunc}}[1],
+			ctxpre => $c{ctx_p},
+			ctxpost => $c{ctx_n},
+			ctxs => $c{lnum} - $c{ctx_p},
+			ctxe => $c{lnum} + $c{ctx_n},
+			ctx => [format_ctx(@{$c{filedata}}[$c{lnum}-$c{ctx_p}..$c{lnum}+$c{ctx_n}])]
+		};
+	}
+}
+
+sub line_findFunctionName {
+	######################################################
+	# See if it's a beginning of a subroutine name, and remember the
+	# name/linenum.
+	my %c = %{ (shift) };
+	if ( $c{line} =~ m#^\s*sub\s+(\w+)\s*\{\s*$# ) {
+		$hash{total}{perl_functions}++;
+		@{ $c{gfunc} } = ( $1, $c{lnum} );
+	}
 }
 
