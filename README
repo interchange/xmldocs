@@ -24,6 +24,7 @@ targets would include:
   make OUTPUT/iccattut.man
 
   make OUTPUT/xmldocs.css
+  make tmp/stattrees
   make tmp/refs-autogen
   make tmp/olinkdbs
 
@@ -88,8 +89,8 @@ DEVELOPMENT NOTES
                    it up.
    sources       - (not in CVS). If you create this directory, and fill it
                    in with subdirectories containing Interchange releases
-                   (say, 4.8.0/, 5.0.0/, 5.2.0, cvs-head/), then you can 
-                   use bin/stattree to generate the source tree information.
+                   (say, 4.8.0/, 5.0.0/, 5.2.0, cvs-head/), then you can run
+                   'make tmp/stattrees' to generate the source tree information.
                    Both sources/ and its subdirectories can be symlinks.
 
 
@@ -117,6 +118,7 @@ DEVELOPMENT NOTES
    number of output files (interesting "leaf nodes" in a hash). Those 
    files are filesystem interface to tree-level statistics, and can be
    used in numerous ways, XInclude for example.
+   Like: Interchange consists of <xi:include file='.../total.files'> files.
 
 
  The XML "preprocessor" tool:
@@ -127,7 +129,7 @@ DEVELOPMENT NOTES
  Autogeneration of the reference pages: ** IMPORTANT **
  Creation of new documentation parts:   ** IMPORTANT **
 
-   When bin/stattree runs, it also collects information about all the "symbols"
+   When bin/stattree runs, it collects information about all the "symbols"
    in the source it can find (symbols are anything: pragmas, global variables,
    functions, tags, ...). It collects the symbol names together with all files
    and line numbers (and few lines of context around them) where they
@@ -163,9 +165,9 @@ DEVELOPMENT NOTES
    like this:
    refs/post_page/example
    refs/post_page/example2
-     refs/post_page/example-relative_pages
-     refs/post_page/example:used-often
-     refs/post_page/example.something
+   refs/post_page/example-relative_pages
+   refs/post_page/example:used-often
+   refs/post_page/example.something
 
    (also, nothing prevents you from having more <example>s in the same file
    if you like).
