@@ -1,0 +1,82 @@
+__NAME__ purpose
+use the "fortune" program to display random saying
+__END__
+
+
+__NAME__ synopsis
+<row>
+	<entry>
+		<arg choice='plain'>short</arg>
+	</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry>0</entry>
+	<entry>Display only short (less than 160 characters) fortune sayings?</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>no-computer</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>
+	Do not display computer-related fortunes.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>a</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>1</entry>
+	<entry>Select random of all (potentially offensive) fortunes.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>o</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>Select only offensive fortunes.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>raw</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>Do not apply basic HTML formating to the text output 
+	from the fortune program.</entry>
+</row>
+__END__
+
+
+__NAME__ description
+The <tag>fortune</tag> tag calls the popular Unix
+<application>fortune</application> program to display random saying.
+</para><para>
+If no <arg choice='plain'>raw</arg> option is specified, basic HTML
+formatting is applied to the output (using the text2html Interchange
+filter).
+</para><para>
+The fortune program path defaults to <literal>/usr/games/fortune</literal>.
+You can override that by setting the <varname>MV_FORTUNE_COMMAND</varname>
+variable.
+</para><para>
+Any single-character option supported by the fortune program can be
+passed to this tag. See <application>fortune</application> manual page
+for more information.
+__END__
+
+
+__NAME__ example
+<example>
+	<title>Display short fortune saying</title>
+	<para>
+	Put the following on your page:
+	</para>
+	<programlisting>
+[fortune 1]
+	</programlisting>
+</example>
+__END__
+
