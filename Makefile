@@ -1,4 +1,4 @@
-
+#
 # ICDEVGROUP Documentation Makefile
 # http://www.icdevgroup.org
 # http://www.icdevgroup.org/cgi-bin/cvsweb/xmldocs
@@ -27,6 +27,7 @@ VPATH       = guides refs howtos glossary
 .PHONY: guides refs howtos
 .PHONY: refxmls
 .PHONY: cache caches clean-cache up-all up-%
+
 
 #############################################################
 # Complete build
@@ -67,7 +68,7 @@ $O:
 	echo "U     $O/"
 	mkdir -p $O
 $O/files: $O $(shell find files)
-	echo "U     $@/"
+	echo "C     $@/"
 	rm -rf $@/
 	cp -a files $O/
 	#rm -rf `find $@ -name CVS`
@@ -83,12 +84,12 @@ $O/files: $O $(shell find files)
 	  ; fi                                                    \
 	; done
 $O/images: $(shell find images)
-	echo "U     $@/"
+	echo "C     $@/"
 	rm -rf $@/
 	cp -a images $O/
 	#rm -rf `find $@ -name CVS`
 $O/xmldocs.css: docbook/xmldocs.css $O
-	echo "U     $@"
+	echo "C     $@"
 	cp $< $@
 
 
@@ -122,7 +123,7 @@ up-% cvs-%: sources/% $T
 # Cache files
 cache caches: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) $T
 cache/%/.cache.bin: sources/%
-	echo "U     $@"
+	echo "C     $@"
 	bin/stattree $<
 
 
