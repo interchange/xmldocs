@@ -19,6 +19,7 @@
 	<xsl:param name="callout.graphics.path">./images/</xsl:param>
 
 	<xsl:param name="glossary.auto.link">0</xsl:param>
+	<xsl:param name="glossterm.auto.link">1</xsl:param>
 	<xsl:param name="glossentry.show.acronym">yes</xsl:param>
 	<xsl:param name="glossary.as.blocks">yes</xsl:param>
 

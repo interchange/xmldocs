@@ -111,7 +111,7 @@ $T/%-c.db: %.xml $T
 
 
 #############################################################
-# Standard targets || two-pass processing method
+# STANDARD TARGETS || two-pass processing method
 $O/%.html: %.xml docbook/autodefs.ent skel
 	echo "C     $@"
 	$(PSR) $(PSR_FLAGS)                                                \
