@@ -1,0 +1,32 @@
+__NAME__ purpose
+disable use of specified configuration directive in catalog.cfg
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>directive</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+This directive specifies the directives which are to be disabled during parse
+of the &ccf; files.
+</para><para>
+This can be effectively used to both save some memory on servers with many
+catalogs and prevent catalogs from setting some of the directives.
+__END__
+
+__NAME__ see also
+AddDirective
+__END__
+
+__NAME__ example: Setting DeleteDirective
+<programlisting>
+DeleteDirective DescriptionField OfflineDir
+</programlisting>
+__END__
+
+TODO: What happens when you delete, say, PriceField directive? Does IC
+      still properly fallbacks to default 'price' ?
+

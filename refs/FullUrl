@@ -1,0 +1,41 @@
+__NAME__ purpose
+use full URLs (those including hostnames) in catalog definition lines
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+&IC; determines the appropriate catalog to invoke by the 
+<literal>SCRIPT_NAME</literal> from the CGI call. This means that different
+(possibly virtual) hosts cannot use the same <literal>SCRIPT_NAME</literal>, as
+the catalogs would become indistinguishable. Set this directive to enable
+differentiation performed on the hostname as well.
+</para><para>
+See the &conf-Catalog; directive for more on the subject and concrete
+examples.
+__END__
+
+__NAME__ notes
+If &conf-FullUrl; is defined, <emphasis role='bold'>all> catalogs must be
+defined with hostnames included</emphasis>. Per-catalog setting will not work,
+as this is used before the catalog name is known.
+__END__
+
+__NAME__ see also
+Catalog
+__END__
+
+
+__NAME__ example: Enabling FullUrl
+<programlisting>
+FullUrl yes
+</programlisting>
+__END__
+

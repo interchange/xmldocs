@@ -1,0 +1,67 @@
+__NAME__ purpose
+list config directives that are to be made available through the Variable space
+__END__
+
+
+__NAME__ see also
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>directive</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify list of &glos-configuration; directives that are to be automatically
+created as variable/value pairs. This allows you to conveniently
+write say, <code>__<replaceable>DIRECTIVENAME</replaceable>__</code> and 
+retrieve the corresponding configuration directive's value.
+</para><para>
+The above example, however, only works for scalar values. Since &IC; 
+also supports &glos-array;s and &glos-hash;es of values (so, all three
+basic &PERL; types), the syntax had to be extended a little. With 
+array or hashes, you need to append the index number or hash key respectively.
+See <xref linkend="AutoVariable_examples"/> for clarification.
+__END__
+
+
+__NAME__ notes
+The directive does not support &glos-hash; keys that contain non-word
+characters or whitespace. Also, only the first-level of array and hash
+indices/keys is translated properly.
+__END__
+
+__NAME__ example: Enabling AutoVariable
+Put the following in &ccf;:
+<programlisting>
+# The following two are present to form a standalone example
+SafeUntrap sort
+SysLog command /usr/bin/logger
+
+AutoVariable VendURL SecureURL MailOrderTo SafeUnutrap SysLog
+</programlisting>
+__END__
+
+__NAME__ example: Display a scalar value
+Put the following on a page:
+<programlisting>
+Orders are e-mailed to: __MailOrderTo__
+</programlisting>
+__END__
+
+__NAME__ example: Display an array value
+Put the following on a page:
+<programlisting>
+First SafeUntrap value is: __SafeUntrap_0__
+</programlisting>
+__END__
+
+__NAME__ example: Display a hash value
+Put the following on a page:
+<programlisting>
+Syslog command is: __SysLog_command__
+</programlisting>
+__END__
+

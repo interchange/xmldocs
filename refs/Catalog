@@ -1,0 +1,103 @@
+__NAME__ purpose
+register catalog with the Interchange server
+__END__
+
+__NAME__ see also
+FullUrl
+__END__
+
+__NAME__ synopsis
+	<arg choice='plain'><replaceable>name</replaceable></arg>
+	<arg choice='plain'><replaceable>&glos-CATROOT;</replaceable></arg>
+	<arg choice='plain' rep='repeat'><replaceable>&glos-link-program;</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive registers a catalog that will run on the corresponding &IC;
+installation.
+</para><para>
+The directive expects three or more arguments.
+</para><para>
+First expected is the name of the catalog. It will be referred to by the specified
+name in error, warning, and informational messages. It must contain only
+alphanumeric characters, hyphens, and underscores. It is highly recommended that
+it is also all lowercase.
+</para><para>
+Second argument specifies the local filesystem base directory of the catalog.
+If the directory does not exist, the required &ccf; is not there, or &IC;
+detects any other problem, catalog configuration will be skipped and the catalog
+won't be activated.
+</para><para>
+Third argument is the so called <literal>SCRIPT_NAME</literal> of the 
+&glos-link-program;. It is a webserver path by which the catalog can be 
+accessed. It can be followed by different
+<emphasis role='bold'>aliases</emphasis>, all allowing you to access
+the same catalog. For example, this is useful when calling an SSL server or a
+members-only alias that requires a Basic HTTP authorization using the 
+username/password pair. All subsequently generated links would be called using
+the aliased URL.
+</para><para>
+The script name must be unique among CGI program paths that run on the 
+&IC; server, unless the &conf-FullUrl; directive is specified. In this case,
+hostnames can be added to differentiate otherwise same paths; as usual, see 
+<xref linkend="Catalog_examples"/> for clarification.
+</para><para>
+It is also possible to define catalog-specific &glos-configuration; directives
+from the global &gcf; file. Again, see <xref linkend="Catalog_examples"/>.
+__END__
+
+__NAME__ notes
+&conf-Catalog; is one of the basic &IC; &glos-configuration; directives.
+</para><para>
+<command>makecat</command>, the catalog creation helper script, automatically inserts
+the &conf-Catalog; line in the &gcf; file as part of the standard procedure.
+</para><para>
+If the &ccf; file, expected in the catalog base directory, is not found, or is
+unreadable by the &IC; server, somewhat misguiding error message will be reported.
+Namely, instead of the appropriate permissions-problem message, the mandatory
+&conf-MailOrderTo; directive will be reported undefined.
+__END__
+
+__NAME__ example: Registering a catalog
+<programlisting>
+Catalog simple /home/catalogs/simple /cgi-bin/ic/simple
+</programlisting>
+__END__
+
+__NAME__ example: Using FullUrl to differentiate same-named catalogs on different hosts
+<programlisting>
+FullUrl yes
+
+Catalog simple1 /home/catalogs/simple1 www.company1.com/cgi-bin/ic/simple
+Catalog simple2 /home/catalogs/simple2 www.company2.com/cgi-bin/ic/simple
+</programlisting>
+Make sure to read the &conf-FullUrl; directive reference before just
+including it in your &glos-configuration;.
+__END__
+
+__NAME__ example: Elaborate Catalog directive definition
+Given the nature of the &conf-Catalog; directive, a catalog can be somewhat
+verbosely registered as:
+<programlisting>
+Catalog simple  directory /home/catalogs/simple
+Catalog simple  script    /cgi-bin/ic/simple
+Catalog simple  alias     /simple
+</programlisting>
+__END__
+
+__NAME__ example: Defining catalog-specific directives in the global config file
+Re-using the elaborate example from just above, it is also possible to define
+catalog-specific directives in the global &gcf; file.
+This is most useful to do with the &glos-ErrorFile; and &glos-DisplayErrors; 
+directives:
+<programlisting>
+Catalog simple  directive ErrorFile /var/log/interchange/simple-error.log
+</programlisting>
+__END__
+
+TODO: Can catalog.cfg override cat-specific directives set in interchange.cfg ?
+TODO: How if catalog names supported regexps, so you could do like:
+      Catalog \S+  directive ErrorFile /var/log/interchange/$1-error.log
+      
+

@@ -1,0 +1,32 @@
+__NAME__ purpose
+specify default encryption program
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>filename</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify default encryption program. It will be called to perform tasks such
+as encrypting credit card numbers (<emphasis role='bold'>if</emphasis> they 
+are stored on the server).
+</para><para>
+If &IC; can found a variant of <command>gpg</command>/<command>pgp</command>
+on your system, it is the default. Setting of <literal>none</literal> disables
+encryption.
+__END__
+
+__NAME__ see also
+DEBUG, DataTrace, DebugFile
+__END__
+
+__NAME__ example: Enabling DumpStructure
+<programlisting>
+DumpStructure Yes
+</programlisting>
+__END__
+
