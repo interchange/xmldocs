@@ -16,37 +16,37 @@ Pragma   post_page=relative_urls
 ### Take hrefs like <A HREF="about.html"> and make relative to current
 ### directory
 Sub <<EOR
-	sub relative_urls {
-		my $page = shift;
-		my @dirs = split "/", $Tag->var('MV_PAGE', 1);
-		pop @dirs;
-		my $basedir = join  "/", @dirs;
-		$basedir ||= '';
-		$basedir .= '/' if $basedir;
+  sub relative_urls {
+    my $page = shift;
+    my @dirs = split "/", $Tag->var('MV_PAGE', 1);
+    pop @dirs;
+    my $basedir = join  "/", @dirs;
+    $basedir ||= '';
+    $basedir .= '/' if $basedir;
 
-		my $sub = sub {
-			my ($entire, $pre, $url) = @_;
-			return $entire if $url =~ /^\w+:/;
-			my($page, $form) = split /\?/, $url, 2;
-			my $u = $Tag->area({
-				href => "$basedir$page",
-				form => $form,
-			});
-			return qq{$pre"$u"};
-		};
-		$$page =~ s{(
-				(
-				<a \s+ (?:[^>]+?\s+)?
-					href \s*=\s*
-				)
-				(["']) ([^\s"'>]+) \3
-			)}
-			{
-				$sub->($1,$2,$4)
-			}gsiex;
+    my $sub = sub {
+      my ($entire, $pre, $url) = @_;
+      return $entire if $url =~ /^\w+:/;
+      my($page, $form) = split /\?/, $url, 2;
+      my $u = $Tag->area({
+        href => "$basedir$page",
+        form => $form,
+      });
+      return qq{$pre"$u"};
+    };
+    $$page =~ s{(
+        (
+        <a \s+ (?:[^>]+?\s+)?
+          href \s*=\s*
+        )
+        (["']) ([^\s"'>]+) \3
+      )}
+      {
+        $sub->($1,$2,$4)
+      }gsiex;
 
-		return;
-	}
+    return;
+  }
 EOR
 ]]></programlisting>
 

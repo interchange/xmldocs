@@ -19,13 +19,13 @@ targets would include:
   make guides
   make refs
 
-	make OUTPUT/iccattut.html
-	make OUTPUT/iccattut
-	make OUTPUT/iccattut.man
+  make OUTPUT/iccattut.html
+  make OUTPUT/iccattut
+  make OUTPUT/iccattut.man
 
   make OUTPUT/xmldocs.css
-	make tmp/refs-autogen
-	make tmp/olinkdbs
+  make tmp/refs-autogen
+  make tmp/olinkdbs
 
 
 PREREQUISITES
@@ -39,8 +39,8 @@ must be available:
   - docbook-xsl
   - xsltproc
   - xmlto
-	- exuberant-ctags
-	- passivetex (for FO output - ps, pdf, ...)
+  - exuberant-ctags
+  - passivetex (for FO output - ps, pdf, ...) (not used yet)
 
 
 FINAL OUTPUT
@@ -161,8 +161,8 @@ DEVELOPMENT NOTES
    file for each section.
    To supply more examples, you could keep them in an informal structure
    like this:
-	 refs/post_page/example
-	 refs/post_page/example2
+   refs/post_page/example
+   refs/post_page/example2
      refs/post_page/example-relative_pages
      refs/post_page/example:used-often
      refs/post_page/example.something

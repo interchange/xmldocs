@@ -17,7 +17,7 @@ a { text-decoration: none; }
     .reference .refsect1 <h2/> /
 */
 
-.reference .titlepage h1, .article .titlepage h1 {
+.titlepage h1 {
 	background-color: #208cbd; /* #6CA6C8; */
 	margin: 0;
 	margin-bottom: 20px;
@@ -30,7 +30,15 @@ a { text-decoration: none; }
 	background-repeat: no-repeat; */
 }
 
-.reference hr {
+/* 
+	Book:
+	.book .titlepage . . h1.title / / . .legalnotice p / / / / . / hr /
+		.toc p b / / dl dt .chapter / /
+		                dt .sect1 / /
+		.chapter .titlepage h1
+*/
+
+.reference hr, .book hr {
 	margin: 0;
 	padding: 2px 4px 2px 4px;
 	height: 4px;
@@ -40,7 +48,7 @@ a { text-decoration: none; }
 	visibility: hidden;
 }
 
-.reference .toc, .article .toc {
+.reference .toc, .article .toc, .book .toc {
 	margin: 0;
 	margin-bottom: 40px;
 	border: 1px dashed #cee7f6;
@@ -55,7 +63,16 @@ a { text-decoration: none; }
 	color: #FFF;
 }
 
-.reference .toc dl, .article .toc dl {
+.book .toc p {
+	margin: 0;
+	padding: 0;
+	background-color: #cee7f6;
+	border-bottom: 1px dashed #fff;
+	padding: 1px 4px 1px 4px;
+	/*color: #FFF;*/
+}
+
+.toc dl {
 	padding: 2px 4px 2px 4px;
 }
 
@@ -112,21 +129,21 @@ a { text-decoration: none; }
 		  .sect2 .titlepage . . h3.title / / . / / <p/>
 */
 
-.article .authorgroup {
+.authorgroup {
 	margin: 0;
 	margin-bottom: 40px;
-	border: 1px dashed #cee7F6;
+	border: 1px dashed #cee7f6;
 	padding: 2px 4px 8px 4px;
 }
 
-.article .abstract {
+.abstract {
 	margin: 0;
 	margin-bottom: 40px;
-	border: 1px dashed #cee7F6;
+	border: 1px dashed #cee7f6;
 	border-bottom: none;
 }
 
-.article .abstract p.title {
+.abstract p.title {
 	margin: 0;
 	padding: 0;
 	background-color: #6ca6c8;
@@ -135,11 +152,11 @@ a { text-decoration: none; }
 	color: #fff;
 }
 
-.article .abstract p {
+.abstract p {
 	padding: 1px 4px 1px 4px;
 }
 
-.article .sect1 .titlepage h2.title {
+.titlepage h2.title {
 	margin: 0;
 	padding: 0;
 	background-color: #6ca6c8;
@@ -150,17 +167,17 @@ a { text-decoration: none; }
 	margin-bottom: 20px;
 }
 
-.article .sect2 .titlepage h3.title {
+.titlepage h3.title {
 	margin: 0;
 	padding: 0;
-	background-color: #cee7F6;
+	background-color: #cee7f6;
 	border: 1px dashed #fff;
 	padding: 4px 4px 4px 4px;
 	color: #000;
 	font-weight: bold;
 }
 
-.article .footnotes hr {
+.footnotes hr {
 	margin: 0;
 	padding: 2px 4px 2px 4px;
 	width: 100%;
@@ -243,7 +260,7 @@ a { text-decoration: none; }
 }
 
 .filename {
-	background-color: #cee7F6;
+	background-color: #cee7f6;
 	padding: 1px 1px 1px 1px;
 	border: dashed 1px white;
 }
@@ -266,5 +283,9 @@ a { text-decoration: none; }
 	background-color: #d2aa55;
 	padding: 1px 1px 1px 1px;
 	border: dashed 1px white;
+}
+
+a {
+	color: #208cbd;
 }
 

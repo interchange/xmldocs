@@ -16,14 +16,14 @@ XMLTO = xmlto
 XMLTO_FLAGS = --skip-validation
 IC_VERSIONS = 4.6.0 4.8.0 5.0.0 5.2.0 cvs-head
 
-VPATH = guides refs
+VPATH = guides refs howtos
 .SILENT:
 
 ############## No need to modify below ##############
 
-.PHONY: all guides refs %.man
+.PHONY: all guides refs howtos %.man
 
-all: tmp/refs-autogen tmp/olinkdbs guides refs
+all: tmp/refs-autogen tmp/olinkdbs guides refs howtos
 	echo all done
 
 guides: $(OUTPUT)/images $(OUTPUT)/files \
@@ -34,6 +34,9 @@ refs: $(OUTPUT)/images $(OUTPUT)/files
 	make $(OUTPUT)/pragmas.html $(OUTPUT)/pragmas $(OUTPUT)/pragmas.man
 	make $(OUTPUT)/globvars.html $(OUTPUT)/globvars $(OUTPUT)/globvars.man
 
+howtos: howtos/howtos.xml howtos/*.xml
+	make $(OUTPUT)/howtos.html
+	make $(OUTPUT)/howtos
 
 #
 # All documents

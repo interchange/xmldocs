@@ -5,7 +5,7 @@
 <!ENTITY RH "<ulink url='http://www.redhat.com'>Red Hat</ulink>">
 <!ENTITY DEB "<ulink url='http://www.debian.org'>Debian</ulink>">
 <!ENTITY DEBGNU "<ulink url='http://www.debian.org'>Debian GNU</ulink>">
-<!ENTITY ICTBALL "<ulink url='http://www.icdevgroup.org/i/dev/download.html'>tarball</ulink>">
+<!ENTITY ICDL "<ulink url='http://www.icdevgroup.org/i/dev/download.html'>download</ulink>">
 <!ENTITY ICCVS "<ulink url='http://www.icdevgroup.org/i/dev/cvs.html'>CVS</ulink>">
 <!ENTITY APACHE "<ulink url='http://www.apache.org/'>Apache</ulink>">
 

@@ -16,11 +16,11 @@ The following is needed in <filename>catalog.cfg</filename>:
 Pragma  init_page=wrap_page
 
 Sub <<EOS
-	sub wrap_page {
-	my $pref = shift;
-	return if $$pref =~ m{\@_[A-Z]\w+_\@};
-	$$pref =~ m{<!--+ title:\s*(.*?)\s+-->} and $Scratch->{page_title} = $1;
-	$$pref = <<EOF;
+  sub wrap_page {
+  my $pref = shift;
+  return if $$pref =~ m{\@_[A-Z]\w+_\@};
+  $$pref =~ m{<!--+ title:\s*(.*?)\s+-->} and $Scratch->{page_title} = $1;
+  $$pref = <<EOF;
 \@_MYTEMPLATE_TOP_\@
 <!--BEGIN CONTENT -->
 $$pref
@@ -28,8 +28,8 @@ $$pref
 \@_MYTEMPLATE_BOTTOM_\@
 EOF
 
-	return;
-	}
+  return;
+  }
 EOS
 ]]></programlisting>
 </example>

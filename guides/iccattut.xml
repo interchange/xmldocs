@@ -112,12 +112,12 @@
 	<sect2 id='InterchangeandtheStandardDemoCatalogInstallation'>
 		<title>Interchange and the Standard Demo Catalog Installation</title>
 		<para>
-		The easiest way to prepare the environment (that is, install Interchange and the standard catalog) is to use installable packages prepared for you in <firstterm>RPM</firstterm> (&RH;, SuSE or Mandrake Linux systems) or <firstterm>DEB</firstterm> (&DEBGNU;) formats. Try running <userinput>apt-get install interchange interchange-ui interchange-cat-standard interchange-doc</userinput> on Debian GNU systems.
+		The easiest way to prepare the environment (that is, install Interchange and the standard catalog) is to use installable packages prepared for you in the <firstterm>RPM</firstterm> (&RH;, SuSE or Mandrake Linux systems) or <firstterm>DEB</firstterm> (&DEBGNU;) formats. On Debian systems, run <userinput>apt-get install interchange interchange-ui interchange-cat-standard interchange-doc</userinput>. For other formats, see the Interchange &ICDL; page.
 		</para>
 		<note><para>
 		Interchange version 5.2.0 is the last one to ship with the <emphasis>Foundation</emphasis> demo catalog. If you suspect you only have the old packages, install interchange-cat-foundation instead of interchange-cat-standard.</para></note>
 		<para>
-		You can also get Interchange by downloading and unpacking the basic Interchange &ICTBALL; or checking out a copy of the &ICCVS; repository, and performing manual installation yourself. These installations can be done either as a regular user, or as root installing for a special Interchange user, but are out of scope of this tutorial.
+		You can also get Interchange by downloading and unpacking the basic Interchange tarball or checking out a copy of the &ICCVS; repository, and performing manual installation yourself. These installations can be done either as a regular user, or as root installing for a special Interchange user, but are out of scope of this tutorial.
 		</para> <para>
 		During the RPM or DEB installation, you will be asked to select the Interchange username. To eliminate basic security issues, the Interchange daemon will not run as root, and it should not run as the web server user either. Therefore, a new system account to run the Interchange daemon will be created ("interchange" by default).
 		</para> <para>
@@ -201,8 +201,8 @@
 		<para>
 		You need to locate the existing link program (found in the <filename class='directory'>cgi-bin</filename> directory) and copy it to a new name, making sure the permissions stay intact. Run <userinput>cd /usr/lib/cgi-bin/ic; cp -p vlink tutorial</userinput>.  If everything is working correctly, typing <userinput>ls -l /usr/lib/cgi-bin/ic/</userinput> should describe your files roughly like this:
 		<screen>
--rwsr-xr-x    1 interch  interch      7708 Dec 16 22:47 tlink
--rwsr-xr-x    1 interch  interch      7708 Dec 16 22:47 tutorial
+-rwsr-xr-x    1 interchange  interchange      7708 Dec 16 22:47 tlink
+-rwsr-xr-x    1 interchange  interchange      7708 Dec 16 22:47 tutorial
 		</screen>
 		</para> <para>
 		The link program enables communication with the Interchange daemon.
@@ -277,7 +277,7 @@ ErrorFile /var/log/interchange/error.log
 		</para> <para>
 		You may notice that the columns don't line up in your text editor. This is the nature of tab-delimited files. Do not try to fix these.
 		</para> <para>
-		If you need more entries for the sample products database, you can use the <ulink url="files/dbgen">dbgen</ulink> Perl script to automatically create random database files for testing. It's output is much more meaningful if you provide it a list of words to work on (instead of just random characters) so make sure you have the <filename>/usr/share/dict/words</filename> file (in Debian, it's provided by the wenglish package), and then run <userinput>perl dbgen -c 10 -r /usr/share/dict/words > products/products.txt</userinput>. See the script source for available options and the complete usage syntax.
+		If you need more entries for the sample products database, you can use the <ulink url="files/dbgen">dbgen</ulink> Perl script to automatically create random database files for testing. It's output is much more meaningful if you provide it a list of words to work on (instead of just random characters) so make sure you have the <filename>/usr/share/dict/words</filename> file (in Debian, it's provided by the <literal>wenglish</literal> package), and then run <userinput>perl dbgen -c 10 -r /usr/share/dict/words > products/products.txt</userinput>. See the script source for available options and the complete usage syntax.
 		</para> <para>
 		Now that we have the majority of base files ready, we just need to create the HTML page templates.
 		</para>
@@ -431,7 +431,7 @@ ErrorFile /var/log/interchange/error.log
 				Have you created directories with the proper names in the proper locations? (See Appendix A for a full directory and file structure of the tutorial catalog.)  <!-- todo link to appendix -->
 				</para></listitem>
 			<listitem><para>
-				Have you misspelled any file names or put them in the wrong directories? Are the files and parent directories readable by the interch user? Double-check with the <command>ls</command> command.  
+				Have you misspelled any file names or put them in the wrong directories? Are the files and parent directories readable by the interchange user? Double-check with the <command>ls</command> command.  
 				</para></listitem>
 			<listitem><para>
 				Did you type letters in the proper case? Remember that both Unix and Interchange are case-sensitive, and for the most part you may not switch upper- and lower-case letters.  
