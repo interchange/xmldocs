@@ -23,7 +23,7 @@ DC          = "/etc/xml/catalog"
 
 # XSLT processor-specific
 PSR         = xsltproc
-PSR_FLAGS   = --xinclude --nonet
+PSR_FLAGS   = --xinclude
 
 VPATH       = guides refs howtos glossary
 .SILENT:
@@ -100,14 +100,14 @@ $T/%-nc.db: %.xml $T
 	  --stringparam collect.xref.targets only                         \
 	  --stringparam targets.filename $@                               \
 	  docbook/html-nochunks.xsl $<
-	  perl -ni -e'print if $$. > 1 or $$.==1 and !/^<!DOCTYPE/' $@
+	  perl -ni -e'print unless $$.==1 and /^<!DOCTYPE/' $@
 olinkdbs-c olinks-c: $(foreach f,$(ALL_DOCS),$T/$f-c.db)
 $T/%-c.db: %.xml $T
 	$(PSR) $(PSR_FLAGS)                                               \
 	  --stringparam collect.xref.targets only                         \
 	  --stringparam targets.filename $@                               \
 	  docbook/html-chunks.xsl $<
-	  perl -ni -e'print if $$. > 1 or $$.==1 and !/^<!DOCTYPE/' $@
+	  perl -ni -e'print unless $$.==1 and /^<!DOCTYPE/' $@
 
 
 #############################################################

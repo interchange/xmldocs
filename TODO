@@ -20,10 +20,6 @@ PRIMARY:
 - Double-linked SeeAlso doesn't work. ConfigAllBefore points to ConfigAllAfter,
   but the latter doesn't return love.
 
-- Switch to double-pass document generation. This will make PROPER
-  <glossterm> links work again and will allow for profiles which we must
-  have (for online examples etc..).
-
 - In iccattut:
   - make a "translation map" of /etc/interchange/* to RPM-equivs.
   - item for package names, like interchange-cat-foundation, wenglish, etc..
@@ -79,8 +75,6 @@ iccattut:
 
 
  Mid-term:
-- Think about adding "online example" (role=html in combination with 
-  a flag that says if html is to be static or for hosting on IC-enabled site) 
 - for "online" docs, also provide a form where users can add comments or
   ask for clarification. (this could be done with either pure IC (forum?), or 
   XML forms capability, or wiki?)..
