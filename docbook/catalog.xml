@@ -9,11 +9,11 @@
 	<public publicId="-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
 	        uri="../docbook/docbookxi.dtd"/>
 
-	<system systemId="iccattut-nochunks-targets"
-		uri="iccattut-nochunks-targets.db" />
+	<system systemId="iccattut-nc"
+		uri="../tmp/iccattut-nc.db" />
 
-	<system systemId="iccattut-chunks-targets"
-		uri="iccattut-chunks-targets.db" />
+	<system systemId="iccattut-c"
+		uri="../tmp/iccattut-c.db" />
 
 	<system systemId="xmldocs.css"
 		uri="xmldocs.css" />

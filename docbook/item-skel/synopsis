@@ -7,7 +7,10 @@
       <text>  - mandatory value
       [text]  - optional text
 
-     Describe various options inside 'description' file.
+     Where applicable, show syntax in a way which is opposite of the
+     default value.
+
+     Describe various options inside 'description' file, not here.
      Delete those comment lines                                       -->
 
 <synopsis><![CDATA[

@@ -12,3 +12,4 @@ author:
 #  leave empty; GPL is the default
 copyright:
 see also: init_page, pre_page, post_page
+default: none

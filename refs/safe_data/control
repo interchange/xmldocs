@@ -3,7 +3,7 @@
 # To let it through unmodified, simply leave the fields empty
 
 #  purpose: oneline description (MUST FILL IN)
-purpose:
+purpose: allow reparsing of database values in search for Interchange tags
 # Please take time to fill in the See Also line.
 #  Just name the related symbols. The system will work everything out.
 #  (Note that if you link some item from here, that item will auto-point

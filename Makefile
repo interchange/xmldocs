@@ -103,6 +103,12 @@ $(LTMPDIR):
 	mkdir -p $(LTMPDIR)
 
 
+# STATTREE
+tmp/stattrees:
+	-for p in $(IC_VERSIONS); do \
+	./bin/stattree sources/$$p \
+	; done
+
 #
 # Cleanup
 #

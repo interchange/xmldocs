@@ -1,0 +1,11 @@
+Pragmas are used to control various aspects of page and data parsing and display.
+</para><para>
+Pragma values can be defined catalog-wide, page-wide and ITL-block wide.
+</para><para>
+To define a pragma catalog-wide, use a <filename>catalog.cfg</filename> directive: <synopsis>Pragma NAME</synopsis>
+</para><para>
+To define a pragma value for a particular page, use the [pragma] tag on a page: <synopsis>[pragma NAME]</synopsis> to enable, or <synopsis>[pragma NAME 0]</synopsis> to disable.
+</para><para>
+To define a pragma for a small ITL block, enclose the page block in [tag pragma]: <synopsis>[tag pragma NAME]1[/tag]...[tag pragma NAME]0[/tag]</synopsis>
+</para><para>
+Starting with Interchange 5.0, the \$Vend::Cfg->{Pragma}{name} syntax in the Interchange source is abandoned in favor of \$::Pragma->{name}.

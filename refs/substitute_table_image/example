@@ -1,0 +1,15 @@
+<example>
+
+<title>
+Enabling table image paths rewriting
+</title>
+
+<para>
+In the <filename>catalog.cfg</filename> file, add:
+</para>
+
+<programlisting><![CDATA[
+Pragma substitute_table_images
+]]></programlisting>
+
+</example>

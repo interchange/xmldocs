@@ -1,0 +1,1 @@
+Watch out for parse order with [tag pragma] or [restrict] when used with lists that retrieve data from the database (such as [PREFIX-*] or the flypage). Loops parse before regular tags like [tag] and [restrict], and thus aren't affected by it.

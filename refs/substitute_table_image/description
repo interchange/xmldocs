@@ -1,0 +1,4 @@
+<![CDATA[
+Rewrite image background paths in <table>, <tr>, <td>, and <th> tags
+according to ImageDir/ImageSecureDir by default.
+]]>

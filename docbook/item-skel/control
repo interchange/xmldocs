@@ -4,6 +4,8 @@
 
 #  purpose: oneline description (MUST FILL IN)
 purpose:
+#  default value if applicable (make it short, just like: 0, none, ...)
+default:
 # Please take time to fill in the See Also line.
 #  Just name the related symbols. The system will work everything out.
 #  (Note that if you link some item from here, that item will auto-point

@@ -1,0 +1,15 @@
+<example>
+
+<title>
+Strip whitespace
+</title>
+
+<para>
+Simply add the following to <filename>catalog.cfg</filename>
+</para>
+
+<programlisting><![CDATA[
+Pragma strip_white
+]]></programlisting>
+
+</example>
