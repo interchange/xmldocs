@@ -132,7 +132,7 @@
 		Guides (easy reading, mostly prose and not overly technical documents serving as an "illustrated introduction" to the subject, take iccattut for example)
 		</para></listitem>
 		<listitem><para>
-		HOWTOs (quick, on-topic, technical solutions)
+		HOW-TOs (quick, on-topic, technical solutions)
 		</para></listitem>
 		<listitem><para>
 		References (quick, on-topic refentry pages describing
@@ -194,7 +194,7 @@
 	</para>
 
 	<sect2>
-		<title>Guides</title>
+		<title>Modifying Guides</title>
 		<para>
 		To modify an existing guide, simply edit
 		<filename>guides/<replaceable>name</replaceable>.xml</filename>.
@@ -217,15 +217,15 @@
 		</command>, where 'format' represents typical filename extensions (such
 		as .html or .ps). If you leave ".<replaceable>format</replaceable>"
 		unspecified, the chunked HTML version will be built and, of course,
-		saved to<filename class='directory'>OUTPUT/<replaceable>name
-		</replaceable>/</filename>.
+		saved to
+		<filename class='directory'>OUTPUT/<replaceable>name</replaceable>/</filename>.
 		</para>
 	</sect2>
 
 	<sect2>
-		<title>HOWTOs</title>
+		<title>Modifying HOW-TOs</title>
 		<para>
-		To modify an existing HOWTO item, simply edit
+		To modify an existing HOW-TO item, simply edit
 		<filename>howtos/<replaceable>name</replaceable>.xml</filename>.
 		</para>
 		<para>
@@ -236,25 +236,25 @@
 		the current standard.
 		</para>
 		<para>
-		To make the new HOWTO entry build as part of the global
+		To make the new HOW-TO entry build as part of the global
 		<command>make</command> procedure, you don't have to do anything;
 		the <filename>howtos/howtos.xml</filename> is automatically regenerated
 		(by following Makefile dependencies). If you need to trigger .xml file
 		regeneration manually, invoke <userinput>make howtos/howtos.xml</userinput>.
 		</para>
 		<para>
-		To build the HOWTO collection, 
+		To build the HOW-TO collection, 
 		invoke <command>make OUTPUT/howtos.<replaceable>format</replaceable>
 		</command>, where 'format' represents typical filename extensions (such
 		as .html or .ps). If you leave ".<replaceable>format</replaceable>"
-		unspecified, the chunked HTML version of the HOWTO collection will be
+		unspecified, the chunked HTML version of the HOW-TO collection will be
 		built and, of course, saved to <filename>OUTPUT/howtos/</filename>.
 		</para>
 	</sect2>
 
 	<sect2>
 		<title>
-		Symbols (pragmas, globvars, *tags, globconfs, catconfs, filters)
+		Modifying Symbols (pragmas, globvars, *tags, globconfs, catconfs, filters)
 		</title>
 		<para>
 		To modify an existing symbol, simply edit <filename>refs/*</filename>
@@ -279,7 +279,7 @@
 		use <command>make clean-refs refxmls</command>.
 		</para>
 		<para>
-		Note that the refentries can (and are) built in manpage format as well.
+		Note that the refentries can be built in manpage format as well.
 		To generate the manpages, run
 		<command>make OUTPUT/<replaceable>group</replaceable>.man</command>,
 		where <literal>group</literal> is one of
@@ -290,7 +290,7 @@
 	</sect2>
 
 	<sect2>
-		<title>Glossary</title>
+		<title>Modifying Glossary</title>
 		<para>
 		To modify an existing item, simply edit the appropriate
 		<filename>glossary/*</filename> file.
@@ -301,195 +301,10 @@
 		(copy the structure from <filename>glossary/pragma</filename>).
 		</para>
 		<para>
-		To generate the glossary XML source, run
+		To generate the glossary XML source manually, run
 		<command>make glossary/glossary.xml</command>. To build the glossary,
 		run <command>make OUTPUT/glossary.<replaceable>format</replaceable>
 		</command>.
-		</para>
-	</sect2>
-	
-</sect1>
-
-<sect1 id='FileFormats'>
-	<title>File Formats</title>
-
-	<para>
-	There are few different file types whose structure needs to be specified:
-	</para>
-
-	<sect2>
-		<title>Guides</title>
-		<para>
-		Guides use no pre-processing and are written in pure XML. There
-		is a simple "preprocessor" script I wrote in <filename>bin/pp</filename>,
-		but it's up to you to put the source through it and commit valid XML
-		to the CVS. For the usage examples and features, see script header.
-		(It comes handy when you're writing large portions of XML from scratch).
-		What you can use are, of course - just like in any other XML chunk,
-		the XML entities defined in <filename>docbook/docbookxi.dtd</filename>.
-		</para>
-	</sect2>
-
-	<sect2>
-		<title>HOWTOs</title>
-		<para>
-		HOWTOs do not use any preprocessing/autogenerating layer either, but 
-		are included in the main <filename>howtos/howtos.xml</filename> file, so
-		the chunks you write must not be standalone. The parent element you need
-		to use is the XML's &lt;chapter&gt; tag, without any XML document type.
-		In it, you use valid XML and entities.
-		</para>
-	</sect2>
-
-	<sect2>
-		<title>Symbols</title>
-		<para>
-		Symbols are a little different. In general, the symbol refentry pages
-		already contain all the fields, you only need to provide contents for
-		them. To minimize overhead, fields have some default headers and footers
-		which you then must omit from your chunks.
-		</para>
-		<para>
-		You can also create more files that begin with the same name, and
-		are then appended to the section one after another. This is most suitable
-		for examples, so see <xref linkend='Example'/>.
-		</para>
-		<para>
-		In general, all files are handled generically and will be included
-		if you name them after the appropriate refentry page section that you want
-		to modify. Keep in mind that all files (other than the "strong" 
-		<filename>control</filename> one) append instead of overriding existing
-		information.
-		</para>
-
-		<sect3>
-			<title>control</title>
-			<para>
-			The <filename>control</filename> file contains "key: value" pairs
-			on each line. Comments (#....) can be used at the beginning of the line.
-			Otherwise, 'value's are left-trimmed and then recorded <literal>verbatim
-			</literal>.
-			</para>
-			<para>
-			Note that the values in this file override (do not append!)
-			information already known to the generator script (if any).
-			</para>
-			<para>
-			"Keys" can be anything, but some of them have a special meaning (and
-			defining any others makes no sense except for future functionality),
-			and some of them must be specified because they have no useful
-			defaults:
-
-			<itemizedlist>
-				<listitem><para>
-					purpose: one-line description. No default, must be specified.
-				</para></listitem>
-				<listitem><para>
-					default: default value. This is symbol-dependent (it makes sense
-					with, for example, pragmas or global variables). For other symbols
-					(say, tags), this is unused.
-				</para></listitem>
-				<listitem><para>
-					missing: A free-form text that is appended to <filename>tmp/missing</filename> entry for a particular item. Good for a per-item TODO list and important notes. While <filename>tmp/missing</filename> is not empty, you must not feel bored :)
-				</para></listitem>
-				<listitem><para>
-					author: specific symbol's/feature's author. 3rd party people need a
-					name and email, such as Mirko Star &lt;mstar@aol.com&gt;; 
-					ICDEVGROUP members are specified like "Davor Ocelic,
-					&amp;ICDEVGROUP;", where the ICDEVGROUP entity expands to a suitable
-					string (full team name and link currently). If no author is
-					specified, the default shows the team name, not mentioning any
-					individual specifically.
-				</para></listitem>
-				<listitem><para>
-					ignore: Usually you specify it only if you want to ignore an item
-					(cause it not to be autogenerated and visible). "ignore: yes" works
-					fine.
-				</para></listitem>
-				<listitem><para>
-					see also: very powerful feature. List related symbol names, system
-					commands or other arbitrary items. Non-IC symbols listed get passed
-					as-is, IC symbols get rendered with a clickable link to the item
-					and the connection is automatically 2-way (if you mention "B" in 
-					"A"'s See Also list, the B's list will automatically get A in its
-					see also list).
-				</para></listitem>
-			</itemizedlist>
-			</para>
-		</sect3>
-
-		<sect3>
-			<title>synopsis</title>
-			<para>
-			The <filename>synopsis</filename> file needs tyo contain complete
-			&lt;cmdsynopsis&gt; block. See the
-			<ulink url="http://www.docbook.org/tdg/en/html/cmdsynopsis.html">
-			docbook's cmdsynopsis element</ulink> for a complete description.
-			</para>
-			<para>
-			The synopsis must be provided, or the appropriate "missing"
-			entry appears in <filename>tmp/missing</filename>.
-			</para>
-		</sect3>
-
-		<sect3 id='Description'>
-			<title>description</title>
-			<para>
-			This file is meant to contain prose and is pre-wrapped in 
-			the &lt;para&gt; tag. If, for the purpose of your description, you
-			need new paragraphs, simply use &lt;/para&gt;&lt;para&gt; to 
-			separate them, but always omit the starting &lt;para&gt; and 
-			ending &lt;/para&gt;.
-			</para>
-			<para>
-			Note that this is only possible because our Perl scripts do the 
-			merging before the source XML is passed to the XML tools; if XML
-			tools had to deal with this directly, you'd get a "chunk not balanced"
-			error and it wouldn't be possible.
-			</para>
-			<para>
-			The description must be provided, or the appropriate "missing"
-			entry appears in <filename>tmp/missing</filename>.
-			</para>
-		</sect3>
-
-		<sect3>
-			<title>notes</title>
-			<para>
-			Same as <xref linkend='Description'/>. May be left empty.
-			</para>
-		</sect3>
-
-		<sect3 id='Example'>
-			<title>example*</title>
-			<para>
-			The example files must contain an &lt;example&gt; element (which 
-			usually contains the &lt;title&gt;, short &lt;para&gt; with description
-			and &lt;programlisting&gt; with the actual code or syntax to be shown).
-			</para>
-			<para>
-			It is possible (and welcomed) to have multiple example files. They will
-			all be added as separate examples, and their order in the documentation
-			will be dictated by their alphabetical order on the filesystem
-			(the order in which readdir() reads them). Simply name additional files
-			following the regex: /example[\-\.\+_:\d].*/.
-			</para>
-			<para>
-			At least one example must be provided, or the appropriate "missing"
-			entry appears in <filename>tmp/missing</filename>.
-			</para>
-		</sect3>
-			
-	</sect2>
-
-	<sect2>
-		<title>Glossary</title>
-		<para>
-		The glossary skeleton is autogenerated. All you need to do is place
-		items in the <filename class='directory'>glossary/</filename>
-		directory. Each file there (filename is irrelevant) must contain a
-		valid &lt;glossentry&gt; element. See <filename>glossary/pragma</filename>
-		for an example.
 		</para>
 	</sect2>
 	
@@ -529,7 +344,7 @@
 			If you have a longer phrase that keeps repeating every now and then
 			(and especially if it's also wrapped in some kind of a link element),
 			consider adding it as an XML entity to
-			<filename>docbook/docbookxi.dtd</filename> and then just refer to it
+			<filename>docbook/literals.ent</filename> and then just refer to it
 			using the entity name; like you can write &amp;IC; to produce &IC;.
 			</para></listitem>
 			<listitem><para>
@@ -693,6 +508,213 @@
 	<filename class='directory'>pending/</filename>.
 	</para>
 
+</sect1>
+
+
+<sect1 id='FileFormats'>
+	<title>File Formats</title>
+
+	<para>
+	<emphasis role='bold'>
+	This is an irrelevant section. Read it only if the examples from the
+	already written documentation are not enough, and you need some more 
+	hints.
+	</emphasis>
+	</para>
+
+	<para>
+	There are few different file types whose structure needs to be specified:
+	</para>
+
+	<sect2>
+		<title>Guides</title>
+		<para>
+		Guides use no pre-processing and are written in pure XML. There
+		is a simple "preprocessor" script I wrote in <filename>bin/pp</filename>,
+		but it's up to you to put the source through it and commit valid XML
+		to the CVS. For the usage examples and features, see script header.
+		(It comes handy when you're writing large portions of XML from scratch).
+		What you can use are, of course - just like in any other XML chunk,
+		the XML entities defined in <filename>docbook/literals.ent</filename> and
+		<filename>docbook/autodefs.ent</filename>. For manual entity definitions,
+		always use the former file; the latter is autogenerated and automaintained.
+		</para>
+	</sect2>
+
+	<sect2>
+		<title>HOW-TOs</title>
+		<para>
+		HOW-TOs do not use any preprocessing/autogenerating layer either, but 
+		are included in the main <filename>howtos/howtos.xml</filename> file, so
+		the chunks you write must not be standalone. The parent element you need
+		to use is the XML's &lt;chapter&gt; tag, without any XML document type.
+		Existing HOW-TOs provide excellent quickstarts.
+		</para>
+	</sect2>
+
+	<sect2>
+		<title>Symbols</title>
+		<para>
+		Symbols are a little different. In general, the symbol refentry pages
+		already contain all the fields, you only need to provide contents for
+		them. To minimize overhead, fields have some default headers and footers
+		which you then can (and, infact, must) omit from your chunks.
+		</para>
+		<para>
+		You can also create more sections that begin with the same name, and
+		are then appended one after another. This is most suitable
+		for examples, so see <xref linkend='Example'/>.
+		</para>
+		<para>
+		In general, all files are handled generically and will be included
+		if you name them after the appropriate refentry page section that you want
+		to modify. Keep in mind that all files (other than the "strong" 
+		<filename>control</filename> one, which is available with multi-file
+		method only) append instead of overriding existing
+		information.
+		</para>
+
+		<sect3>
+			<title>control</title>
+			<para>
+			The <filename>control</filename> file contains "key: value" pairs
+			on each line. Comments (#....) can be used at the beginning of the line.
+			Otherwise, 'value's are left-trimmed and then recorded <literal>verbatim
+			</literal>.
+			</para>
+			<para>
+			Note that the values in this file override (do not append!)
+			information already known to the generator script (if any).
+			</para>
+			<para>
+			"Keys" can be anything, but some of them have a special meaning (and
+			defining any others makes no sense except for future functionality),
+			and some of them must be specified because they have no useful
+			defaults:
+
+			<itemizedlist>
+				<listitem><para>
+					purpose: one-line description. No default, must be specified.
+				</para></listitem>
+				<listitem><para>
+					default: default value. This is symbol-dependent (it makes sense
+					with, for example, pragmas or global variables). For other symbols
+					(say, tags), this is unused.
+				</para></listitem>
+				<listitem><para>
+					missing: A free-form text that is appended to <filename>tmp/missing</filename> entry for a particular item. Good for a per-item TODO list and important notes. While <filename>tmp/missing</filename> is not empty, you must not feel bored :)
+				</para></listitem>
+				<listitem><para>
+					author: specific symbol's/feature's author.
+					ICDEVGROUP members are specified like "&amp;docelic;amp;,
+					&amp;ICDEVGROUP;", where the username and ICDEVGROUP entities expand
+					to a suitable
+					strings (full name, and full team name with link currently - this
+					is defined in <filename>docbook/literals.ent</filename>).
+					If no author is
+					specified, the default shows the team name, not mentioning any
+					individual specifically.<sbr/>
+					3rd party people need to be specified in the same way (
+					name and email with optional group name), such as in a silly 
+					example of "Mirko Star &lt;mstar@aol.com&gt;". If the person
+					is expected to contribute more often, adding an entity in
+					the <filename>literals</filename> for him/her is okay.
+				</para></listitem>
+				<listitem><para>
+					ignore: Usually you specify it only if you want to ignore an item
+					(cause it not to be autogenerated and visible). "ignore: yes" works
+					fine.
+				</para></listitem>
+				<listitem><para>
+					see also: very powerful feature. List related symbol names, system
+					commands or other arbitrary items. Non-IC symbols listed get passed
+					as-is, IC symbols get rendered with a clickable link to the item
+					and the connection is automatically 2-way (if you mention "B" in 
+					"A"'s See Also list, the B's list will automatically get A in its
+					see also list).<sbr/>
+					On items that begin with "&lt;" (that is, on those that seem to be
+					formatted already), no special processing is done and are included
+					verbatim.
+				</para></listitem>
+			</itemizedlist>
+			</para>
+		</sect3>
+
+		<sect3>
+			<title>synopsis</title>
+			<para>
+			The <filename>synopsis</filename> file needs to contain a block
+			that depends on the symbol type being documented. Just copy an 
+			existing one from the same symbol group.
+			</para>
+			<para>
+			The synopsis must be provided, or the appropriate "missing"
+			entry appears in <filename>tmp/missing</filename>.
+			</para>
+		</sect3>
+
+		<sect3 id='Description'>
+			<title>description</title>
+			<para>
+			This file is meant to contain prose and is pre-wrapped in 
+			the &lt;para&gt; tag. If, for the purpose of your description, you
+			need new paragraphs, simply use &lt;/para&gt;&lt;para&gt; to 
+			separate them, but always omit the starting &lt;para&gt; and 
+			ending &lt;/para&gt;.
+			</para>
+			<para>
+			Note that this is only possible because our Perl scripts do the 
+			merging before the source XML is passed to the XML tools; if XML
+			tools had to deal with this directly, you'd get a "chunk not balanced"
+			error and it wouldn't be possible (well, at least not without
+			entities).
+			</para>
+			<para>
+			The description must be provided, or the appropriate "missing"
+			entry appears in <filename>tmp/missing</filename>.
+			</para>
+		</sect3>
+
+		<sect3>
+			<title>notes</title>
+			<para>
+			Same as <xref linkend='Description'/>. May be left empty.
+			</para>
+		</sect3>
+
+		<sect3 id='Example'>
+			<title>example*</title>
+			<para>
+			The example files must contain an &lt;example&gt; element (which 
+			usually contains the &lt;title&gt;, short &lt;para&gt; with description
+			and &lt;programlisting&gt; with the actual code or syntax to be shown).
+			</para>
+			<para>
+			It is possible (and welcomed) to have multiple example files. They will
+			all be added as separate examples, and their order in the documentation
+			will be dictated by their alphabetical order on the filesystem
+			(the order in which readdir() reads them). Simply name additional files
+			following the regex: /example[\-\.\+_:\d].*/.
+			</para>
+			<para>
+			At least one example must be provided, or the appropriate "missing"
+			entry appears in <filename>tmp/missing</filename>.
+			</para>
+		</sect3>
+			
+	</sect2>
+
+	<sect2>
+		<title>Glossary</title>
+		<para>
+		The glossary skeleton is autogenerated. All you need to do is place
+		items in the <filename class='directory'>glossary/</filename>
+		directory. Each file there (filename is irrelevant) must contain a
+		valid &lt;glossentry&gt; element. See <filename>glossary/pragma</filename>
+		for an example.
+		</para>
+	</sect2>
+	
 </sect1>
 
 </article>

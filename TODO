@@ -11,6 +11,10 @@ PRIMARY:
 - ./files/ directory is not properly referenced from chunked documents.
   Solve by using entities?
 
+- It's now obvious that multiple symbols will have the same names. This
+  calls for renaming every refs/* file to refs/*.<symbolType> (and all
+  other changes following from that).
+
 - In iccattut:
   - make a "translation map" of /etc/interchange/* to RPM-equivs.
   - item for package names, like interchange-cat-foundation, wenglish, etc..

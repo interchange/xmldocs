@@ -178,7 +178,9 @@ $T/%.list: BNAME = $(subst $T/,,$@)
 refs/%.xml: BNAME = $(subst refs/,,$@)
 $T/%.list: FNAME = $(subst .list,,$(BNAME))
 refs/%.xml: FNAME = $(subst .xml,,$(BNAME))
-$T/%.list refs/%.xml: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) bin/refs-autogen
+# A little 'overwork' here: we reegenerate all .xml files even if just
+# one file changes.
+$T/%.list refs/%.xml: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) $(shell find refs/ -regex '.+[^(\.xml)]$$') bin/refs-autogen
 	# PEH, -g is useless since tags migrate between tag groups
 	#bin/refs-autogen -g $(FNAME) -o $@ $(BOTH) $(IC_VERSIONS)
 	bin/refs-autogen -o $@ $(BOTH) $(IC_VERSIONS)
