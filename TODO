@@ -1,6 +1,9 @@
 
+- See that if 'crypt' is put in see also, all symbols of that name appear
+  in see also line and their type is distinguished visually.
+- Finish proper formatting for online examples
+
 Outstanding:
-- filters/confs: fill $ag{structure}, automatic for confs, manual for filters
 - why email, email-raw, SendMailProgram produce errors about usertags olink ID
 - Add docbook element to reference mailing list posts. Something like
   <ml list='users'>2004-December/041539</ml>, it expands to:
@@ -9,8 +12,11 @@ Outstanding:
 - match style (no starting verb or all starting verbs) in all Example titles
 - check if all Default fields are properly formated (<literal> or none)
 - s/a HTML/an HTML/
+
+Coding:
 - script to [un]comment debug lines!!
 - use Interchange.pm to make an Interchange shell
+- finish ML stats
 
 DOCUMENTATION SYSTEM:
 - Add support to document tags which are NOT found in separate files
@@ -30,6 +36,9 @@ DOCUMENTATION SYSTEM:
   of a 300-lines usertag. Example for this could be taken directly out of
   mwforum demo on mwforum.org
 - Generate leaf nodes (put bin/mkreport back in action)
+- If filter returns Vend::xxx::something(), include that function in context
+  reports, and try to determine the "Uses" field (which also needs to be
+  added to filter refentry template or something)
 
 Tags:
   aliases

@@ -1,0 +1,21 @@
+__NAME__ purpose
+replace double colons "::" with \0 (null) character
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter replaces double colons (<literal>::</literal>)
+with a <literal>\0</literal> (null) character.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+

@@ -1,0 +1,20 @@
+__NAME__ purpose
+add thousands separator to a number, and trim to specified number of decimal places
+__END__
+
+
+__NAME__ description
+The filter adds thousands separator (a comma "<literal>,</literal>", usually)
+to a number, and trims decimal places to a specified maximum length.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[set online_commify_test]1234567890.123456[/set]
+
+My commified value, trimed to 2 decimal places is:
+[filter commify.2]online_commify_test[/filter]
+</programlisting>
+__END__
+

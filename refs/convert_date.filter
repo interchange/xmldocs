@@ -1,0 +1,41 @@
+__NAME__ purpose
+convert date to a specified format
+__END__
+
+__NAME__ description
+The filter calls &tag-convert-date; to output date according to the
+specified format string.
+</para><para>
+For the accepted formats in which the input date needs to be specified,
+see &tag-convert-date;.
+__END__
+
+
+__NAME__ see also
+convert_date
+__END__
+
+
+__NAME__ notes
+Although this filter looks almost exactly like the &tag-convert-date; tag, 
+there's one simple difference in the implementation which is interesting
+to mention. If you call the &tag-convert-date; tag with empty 
+(or invalid) time string, it will default to the current
+time; if you call this &filter-convert_date; filter with an empty time string,
+then the current time will <emphasis role='bold'>not</emphasis> be assumed
+(because &filter-convert_date; won't call &tag-convert-date; with no data)
+and empty string will stay an empty string.
+__END__
+
+
+__NAME__ missing
+I am being stupid and I can't remember where to see a list of accepted time format strings (%Y, %m, etc...)
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+Year is [filter convert_date.%Y][time][/filter].
+</programlisting>
+__END__
+

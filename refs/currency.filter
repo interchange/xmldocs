@@ -1,0 +1,14 @@
+__NAME__ purpose
+format number as currency, honoring default or specified locale
+__END__
+
+__NAME__ description
+The filter formats input number as a currency. The default locale is honored,
+but a specific locale can also be specified. &IC; currency-related options
+are honored too, of course.
+__END__
+
+__NAME__ see also
+PriceDivide,Locale,PriceCommas
+__END__
+

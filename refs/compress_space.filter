@@ -1,0 +1,24 @@
+__NAME__ purpose
+eliminate leading and trailing whitespace and compress all "in-string" whitespace occurences to exactly 1 space each
+__END__
+
+__NAME__ description
+The filter eliminates leading and trailing whitespace, and 
+<emphasis>compresses</emphasis> all occurences of whitespace in a string to
+exactly 1 space on each occurence.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[filter compress_space]   LEADING   Hello,  World!   TRAILING  [/filter]
+</programlisting>
+__END__
+

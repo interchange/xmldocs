@@ -1,0 +1,33 @@
+__NAME__ purpose
+run Unix crypt() function on input data
+__END__
+
+__NAME__ description
+The filter calls &PERL; <function>crypt</function> function
+to encrypt input data.
+__END__
+
+__NAME__ see also
+crypt
+__END__
+
+
+__NAME__ online: Filter example with random salt
+The encrypted string should be different each time you run the code
+because the salt is random.
+<programlisting>
+Encrypted string <literal>TEST</literal> with random salt is: 
+[filter crypt]TEST[/filter].
+</programlisting>
+__END__
+
+__NAME__ online: Filter example with hand-specified salt
+The encrypted string should be the same each time you run the code
+because the salt does not change.
+<programlisting>
+Encrypted string <literal>TEST</literal> with salt of 
+<literal>AB</literal> is: 
+[filter crypt.AB]TEST[/filter].
+</programlisting>
+__END__
+
