@@ -19,25 +19,9 @@ __END__
 
 
 __NAME__ description
-Allows setting of Interchange form actions, usually with a Perl subroutine.
+The directive allows the definition of &IC; form actions, and its content is 
+usually with a &PERL; subroutine.
 </para><para>
-Some of the predefined actions (which you might recognize from special
-page names that you access in your catalog) are:
-<itemizedlist>
-<listitem><para>
-<literal>process</literal> - Perform a processing function
-</para></listitem>
-<listitem><para>
-<literal>order</literal>  -  Order items
-</para></listitem>
-<listitem><para>
-<literal>scan</literal>   -  Search based on path info
-</para></listitem>
-<listitem><para>
-<literal>search</literal> -  Search based on submitted form variables
-</para></listitem>
-</itemizedlist>
-
 For an introduction to Action Maps, see &glos-form-action;s glossary
 entry.
 __END__
@@ -54,3 +38,6 @@ order link such as
 would be equivalent to <code><![CDATA[[page order/nextpage]Go to the next page</a>]]></code>.
 __END__
 
+__NAME__ missing
+In the example, I provided some erroneous comment.
+__END__

@@ -139,12 +139,15 @@ my %preamble = (
 	#tag => scalar readfile('glossary/ITL'),
 	tag => "For a complete introduction to the &IC; Tag Language and " .
 	"the supported syntax, please see the &glos-ITL; glossary entry.",
-	conf => "",
+	conf => "For a complete introduction to &IC; config files and " .
+	"the supported syntax, please see the &glos-configuration; glossary entry.",
 	globvar => "",
 	catvar => "",
 	pragma => "",
-	filter => "",
-	var => "",
+	filter => "For a complete introduction to &IC; filters, " .
+	"please see the &glos-filter; glossary entry.",
+	var => "For a complete introduction to &IC; variables, " .
+	"please see the &glos-variable; glossary entry.",
 );
 
 my @paths = @ARGV; # Versions requested

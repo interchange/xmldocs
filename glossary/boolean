@@ -1,0 +1,15 @@
+A <emphasis>boolean</emphasis> variable is one that can only represent
+a &glos-true; or &glos-false; value.
+</para><para>
+The variable type was named after
+<ulink url="http://en.wikipedia.org/wiki/Boole">George Boole</ulink>.
+</para><para>
+Note that, in Interchange &glos-configuration; directives parlance,
+<literal>boolean</literal> is used somewhat awkwardly. Instead of adhering
+to above definition of <literal>boolean</literal>, it actually signifies
+an &glos-array; in which you can search for the presence or absence of
+a value. Real boolean variables are called <literal>yesno</literal>s in
+Interchange.
+</para><para>
+This naming confusion is unfortunate, but is fortunately quarantined
+to the configuration directives "space".
