@@ -24,6 +24,10 @@ a { text-decoration: none; }
 	padding: 2px 4px 2px 4px;
 	border: dashed 1px #FFFFFF;
 	color: #FFF;
+
+	/* background-image: url(../images/icon_ic2.png);
+	background-position: center right;
+	background-repeat: no-repeat; */
 }
 
 .reference hr {
@@ -190,5 +194,6 @@ a { text-decoration: none; }
 
 .w3c .w3cimg {
 	border: 0;
+	padding-right: 4px;
 }
 

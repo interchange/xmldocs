@@ -18,14 +18,14 @@
   <p class='w3c'>
     <a href="http://jigsaw.w3.org/css-validator/">
       <img
-        src="images/valid-css.png"
+        src="images/colophon_css.png"
         alt="Valid CSS!"
         class='w3cimg'/>
     </a>
     <a href="http://validator.w3.org/check?uri=referer">
       <img
-        src="images/valid-xhtml10.png"
-        alt="Valid XHTML 1.0!" height="31" width="88"
+        src="images/colophon_xhtml.png"
+        alt="Valid XHTML 1.0!"
         class='w3cimg'/>
     </a>
   </p>
