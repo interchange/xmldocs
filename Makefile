@@ -152,7 +152,7 @@ distclean: clean clean-cache
 	-rm -rf $T
 	-rm -rf {refs,glossary,howtos}/*.xml
 	-rm -rf docbook/auto{refs,glossary,howtos}.ent
-look-clean: clean clean-cache
+look-clean:
 	-mv $T $T.temporary 2>/dev/null
 
 

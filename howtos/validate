@@ -1,0 +1,80 @@
+<chapter id="validate">
+
+	<chapterinfo>
+		<title>Validate Interchange-produced Markup</title>
+		<titleabbrev>validate</titleabbrev>
+
+		<keywordset>
+			<keyword>markup</keyword>
+			<keyword>html</keyword>
+			<keyword>valid</keyword>
+			<keyword>validation</keyword>
+			<keyword>validator</keyword>
+			<keyword>validate</keyword>
+			<keyword>w3c</keyword>
+			<keyword>jigsaw</keyword>
+			<keyword>xhtml</keyword>
+			<keyword>xml</keyword>
+			<keyword>css</keyword>
+			<keyword>rdf</keyword>
+		</keywordset>
+
+		<authorgroup>
+			<author>
+				<firstname>Davor</firstname>
+				<surname>Ocelic</surname>
+				<affiliation>
+					<email>docelic@icdevgroup.org</email>
+				</affiliation>
+			</author>
+		</authorgroup>
+
+	</chapterinfo>
+
+	<sect1 id='validate_introduction'>
+		<title>Introduction</title>
+		<para>
+		HOW-TO version: $Id: validate,v 1.1 2004-11-23 00:29:44 docelic Exp $
+		</para>
+		<para>
+		Validate pages at W3C.
+		</para>
+	</sect1>
+
+	<sect1 id='validate_solution'>
+		<title>Solution</title>
+
+		<para>
+		testing your pages with
+		&css-validator; or &markup-validator;.
+		</para>
+		<para>
+		&IC; does not output any CSS on its own, so the CSS validation outcome
+		will depend solely on your CSS skills.
+		</para>
+		<para>
+		&IC; does, however, output a lot of HTML markup.
+		That produced markup is, we can say, pretty inconsistent in
+		letter case (uppercase/lowecase) and argument quoting.
+		In later 2004., and in the spirit of the upcoming XHTML standards, a
+		consensus was reached among &ICDEVGROUP; members to start a long-term
+		process of converting all
+		output markup to lowercase and quoting all arguments using double quotes.
+		</para>
+		<para>
+		The above does not harm any compatiblity with ancient Web browser 
+		programs, and is a nice step towards strict XHTML compliance.
+		If you are interested in helping out, please contact &docelic;.
+		</para>
+		<para>
+		For the complete XHTML compliance, non-container markup tags should
+		be closed with
+		<literal>/&gt;</literal> instead of just
+		<literal>&gt;</literal>. 
+		We plan to establish a new &glos-pragma; that will adjust the output
+		markup for the few non-container HTML tags.
+		</para>
+	</sect1>
+
+</chapter>
+
