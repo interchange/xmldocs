@@ -42,7 +42,47 @@
 	<xsl:include href="html-common.xsl"/>
 
 	<!-- Norman Walsh gave me a nice idea and code. Since chunked documents
-		need ../ prefix in relative links, add it with XSL.	-->
+		need ../ prefix in relative links, add it with XSL. And boy, here's 
+		the winner! ;-) -->
+	<xsl:template match="ulink" name="ulink">
+		<xsl:variable name="link">
+			<a>
+				<xsl:if test="@id">
+					<xsl:attribute name="name">
+						<xsl:value-of select="@id"/>
+					</xsl:attribute>
+				</xsl:if>
+				<xsl:attribute name="href">
+		<xsl:if test="starts-with(@url, 'files/')">../</xsl:if>
+		<xsl:value-of select="@url"/>
+				</xsl:attribute>
+				<xsl:if test="$ulink.target != ''">
+					<xsl:attribute name="target">
+						<xsl:value-of select="$ulink.target"/>
+					</xsl:attribute>
+				</xsl:if>
+				<xsl:choose>
+					<xsl:when test="count(child::node())=0">
+						<xsl:value-of select="@url"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:apply-templates/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</a>
+		</xsl:variable>
+		<!--
+		<xsl:choose>
+			<xsl:when test="function-available('suwl:unwrapLinks')">
+				<xsl:copy-of select="suwl:unwrapLinks($link)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:copy-of select="$link"/>
+			</xsl:otherwise>
+		</xsl:choose>
+		-->
+		<xsl:copy-of select="$link"/>
+	</xsl:template>
 
 </xsl:stylesheet>
 

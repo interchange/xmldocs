@@ -188,7 +188,7 @@ cache/%/.cache.bin: sources/% bin/stattree
 # Silly, rewrite this, I forgot about $*. Or $* wouldn't help? I'm not 
 # willing to think about it right now.
 refxmls: BOTH = --both
-refxmls: bin/refs-autogen $(foreach stype,$(SYMBOL_TYPES),refs/$(stype).xml) glossary/glossary.xml howtos/howtos.xml
+refxmls: bin/refs-autogen glossary/glossary.xml howtos/howtos.xml $(foreach stype,$(SYMBOL_TYPES),refs/$(stype).xml)
 	:
 $T/%.list: BNAME = $(subst $T/,,$@)
 refs/%.xml: BNAME = $(subst refs/,,$@)
