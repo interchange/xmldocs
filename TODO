@@ -138,3 +138,6 @@ how to:
 check if all Default fields are properly formated (<literal> or none)
 s/a HTML/an HTML/
 
+Makefile:
+ - olinkdbs targets need to have literal depends, not $(shell )
+

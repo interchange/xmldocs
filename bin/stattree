@@ -388,7 +388,7 @@ sub wanted {
 	####################################################################
 	# lib/Vend/Config.pm
 	if ( $c{file} eq 'lib/Vend/Config.pm' ) {
-		file_parseVendConfig(\@filedata);
+		file_parseVendConfig(\%c, \@filedata);
 	}
 }
 
@@ -490,6 +490,7 @@ sub line_findFunctionName {
 
 
 sub file_parseVendConfig {
+	my %c = %{ (shift) };
 	my $content = shift; # Complete lib/Vend/Config.pm file
 
 	my $linenr = 0;      # Increases as we parse Config.pm
@@ -551,7 +552,7 @@ sub file_parseVendConfig {
 		} else { # Too many closing brackets
 			$globalclose++;
 			$run = 0;
-			$opens = 0; # BLAM! Took me a while to figure it out
+			$opens = 0; $directive = ""; # BLAM! Took me a while to figure those two out
 			# This is okay, verified to only happen at closing of the 
 			# opening of "my $directives = [" which is not counted.
 			#die "Holy moustache! at $linenr: $line\n";
@@ -561,7 +562,21 @@ sub file_parseVendConfig {
 	$globalclose == 2 or die "Assert globalclose == 2: $globalclose\n";
 
 	# Well, let's congratulate ourselves.
-	#print Dumper @globconf;
+
+	for my $ln (@globconf) {
+		$ln =~ /^\s*\['(\S+?)'/ or die "Can't match global directive name in '$ln'?\n";
+		push @{ $hash{symbols}{globconf}{$1} }, {
+			%c,
+			ctx => [ split /\n/, $ln ],
+		}
+	}
+	for my $ln (@catconf) {
+		$ln =~ /^\s*\['(\S+?)'/ or die "Can't match catalog directive name in '$ln'?\n";
+		push @{ $hash{symbols}{catconf}{$1} }, {
+			%c,
+			ctx => [ split /\n/, $ln ],
+		}
+	}
 }
 
 
