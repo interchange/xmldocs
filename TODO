@@ -20,6 +20,7 @@ PRIMARY:
   - explain syntax accepted in profile files
   - Fix ImageDir and include one picture for example
 
+- commit files/area/test.html from denali
 - refresh docbook/item-skel/* and provide support for one-file docs in
   bin/editem
 - in source contexts, wrap runaway lines
