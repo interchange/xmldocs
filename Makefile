@@ -1,4 +1,4 @@
-#
+
 # ICDEVGROUP Documentation Makefile
 # http://www.icdevgroup.org
 # http://www.icdevgroup.org/cgi-bin/cvsweb/xmldocs
@@ -21,21 +21,45 @@ DC          = "/etc/xml/catalog"
 PSR         = xsltproc
 PSR_FLAGS   = --xinclude --nonet
 
-#VPATH       = guides refs howtos glossary
+VPATH       = guides refs howtos glossary
 .SILENT:
-.PHONY: all skel
-.PHONY: refs
-.PHONY: cache clean-cache up-all up-%
-.PHONY: clean distclean
-
+.PHONY: all complete skel clean distclean
+.PHONY: guides refs howtos
+.PHONY: refxmls
+.PHONY: cache caches clean-cache up-all up-%
 
 #############################################################
 # Complete build
-all: skel refs howtos/howtos.xml glossary/glossary.xml
+all: skel refxmls howtos/howtos.xml glossary/glossary.xml
+complete: skel srcs caches all
+
+
+#############################################################
+# Group targets
+#guides: $(foreach doc,$(subst .xml,,$(shell find guides -name '*.xml'| awk -F/ '{ print $$2 }')),$O/$(doc).html $O/$(doc))
+#howtos: $(foreach doc,$(subst .xml,,$(shell find howtos -name '*.xml'| awk -F/ '{ print $$2 }')),$O/$(doc).html $O/$(doc))
+#refs: $(foreach doc,$(subst .xml,,$(shell find refs -name '*.xml'| awk -F/ '{ print $$2 }')),$O/$(doc).html $O/$(doc))
+
+
+#############################################################
+# Standard targets
+$O/%.html: %.xml skel
+	echo "C     $@"
+	$(PSR) $(PSR_FLAGS)                                                \
+	  --stringparam current.docid $*                                   \
+	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
+	  -o $@ docbook/html-nochunks.xsl $<
+$O/%: %.xml skel
+	echo "C     $@/"
+	$(PSR) $(PSR_FLAGS)                                                \
+	  --stringparam current.docid $*                                   \
+	  --stringparam target.database.document ../docbook/olinkdb-c.xml  \
+	  -o $@/ docbook/html-chunks.xsl $<
+
 
 #############################################################
 # Skel
-skel: $T $O $O/files $O/images
+skel: $T $O $O/files $O/images $O/xmldocs.css
 $T:
 	echo "U     $T/"
 	mkdir -p $T
@@ -46,25 +70,25 @@ $O/files: $O $(shell find files)
 	echo "U     $@/"
 	rm -rf $@/
 	cp -a files $O/
-	rm -rf `find $@ -name CVS`
+	#rm -rf `find $@ -name CVS`
 	cp bin/dbgen $O/files/
 	cd files; for p in *; do                                  \
-		if test "$$p" != "CVS"; then                            \
-			if test -d "$$p"; then                                \
-				cp -a $$p ../$O/files/;                             \
-				tar --exclude=CVS -cf ../$O/files/$$p.tar $$p;      \
-				tar --exclude=CVS -zcf ../$O/files/$$p.tar.gz $$p;  \
-				tar --exclude=CVS -jcf ../$O/files/$$p.tar.bz2 $$p  \
-			; fi                                                  \
-		; fi                                                    \
+	  if test "$$p" != "CVS"; then                            \
+	    if test -d "$$p"; then                                \
+	      cp -a $$p ../$O/files/;                             \
+	      tar --exclude=CVS -cf ../$O/files/$$p.tar $$p;      \
+	      tar --exclude=CVS -zcf ../$O/files/$$p.tar.gz $$p;  \
+	      tar --exclude=CVS -jcf ../$O/files/$$p.tar.bz2 $$p  \
+	    ; fi                                                  \
+	  ; fi                                                    \
 	; done
 $O/images: $(shell find images)
 	echo "U     $@/"
 	rm -rf $@/
 	cp -a images $O/
-	rm -rf `find $@ -name CVS`
+	#rm -rf `find $@ -name CVS`
 $O/xmldocs.css: docbook/xmldocs.css $O
-	echo "U     $@/"
+	echo "U     $@"
 	cp $< $@
 
 
@@ -72,6 +96,8 @@ $O/xmldocs.css: docbook/xmldocs.css $O
 # Cleaning
 clean:
 	-rm -rf $O
+clean-cache:
+	-rm cache/*/.cache.bin
 distclean: clean
 	-rm -rf $T
 	-rm -rf {refs,glossary}/*.xml
@@ -84,27 +110,27 @@ sources:
 	mkdir -p $@
 sources/%: sources $T
 	bin/coup $(subst sources/,,$@)
-up-all cvs-sources srcs: $(foreach icver,$(IC_VERSIONS),sources/$(icver)/) $T
+up-all cvs-sources srcs cvsrcs cvs cvss: sources $T
 	for p in $(IC_VERSIONS); do      \
-		bin/coup -u $$p                \
+	  bin/coup -u $$p                \
 	; done
-up-% cvs-%: sources/%
+up-% cvs-%: sources/% $T
 	bin/coup -u $(subst sources/,,$<)
+
 
 #############################################################
 # Cache files
-cache caches: 
+cache caches: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) $T
 cache/%/.cache.bin: sources/%
 	echo "U     $@"
 	bin/stattree $<
-clean-cache:
-	-rm -rf cache/*/.cache.bin
 
 
 #############################################################
 # Reference .xmls
-refs: BOTH = --both
-refs: bin/refs-autogen $(foreach stype,$(SYMBOL_TYPES),refs/$(stype).xml)
+# Silly, rewrite this, I forgot about $*
+refxmls: BOTH = --both
+refxmls: bin/refs-autogen $(foreach stype,$(SYMBOL_TYPES),refs/$(stype).xml)
 	:
 $T/%.list: BNAME = $(subst $T/,,$@)
 refs/%.xml: BNAME = $(subst refs/,,$@)
@@ -122,37 +148,6 @@ howtos/howtos.xml: $(shell find howtos/ -regex '.+[^(\.xml)]$$')
 	bin/generic-autogen howtos
 
 
-
-
-# Not needed right now
-# ctags -R -x --languages=perl --perl-kinds=cls sources/$$p/ \
-# > cache/$$p/.objectlist.perl.txt; \
-# ctags -R -x --languages=c --c-kinds=cdf sources/$$p/ \
-# > cache/$$p/.objectlist.c.txt; \
-# ctags -f cache/$$p/.tags -R --extra=fq --fields=afikKlmnsSz --line-directives sources/$$p \
-#
-#mkreport: $(LTMPDIR)/mkreport $(LTMPDIR)
-#./bin/mkreport $(IC_VERSIONS)
-#  touch $(LTMPDIR)/mkreport
-#
-#guides: $(OUTPUT)/images $(OUTPUT)/files \
-#  $(patsubst guides/%.xml,OUTPUT/%.html,$(wildcard guides/*.xml))  \
-#  $(patsubst guides/%.xml,OUTPUT/%,$(wildcard guides/*.xml))
-#
-#refs: $(OUTPUT)/images $(OUTPUT)/files
-#	make $(OUTPUT)/pragmas.html $(OUTPUT)/pragmas $(OUTPUT)/pragmas.man
-#	make $(OUTPUT)/globvars.html $(OUTPUT)/globvars $(OUTPUT)/globvars.man
-#	make $(OUTPUT)/usertags.html $(OUTPUT)/usertags $(OUTPUT)/usertags.man
-#	make $(OUTPUT)/systemtags.html $(OUTPUT)/systemtags $(OUTPUT)/systemtags.man
-#	make $(OUTPUT)/uitags.html $(OUTPUT)/uitags $(OUTPUT)/uitags.man
-#
-## Unchunked documents
-#$(OUTPUT)/%.html: %.xml $(OUTPUT)/xmldocs.css
-#	$(XSLT) $(XSLT_FLAGS)                                          \
-#	--stringparam current.docid $*                                 \
-#	--stringparam target.database.document ../docbook/olinkdb-nc.xml  \
-#	-o $@ docbook/html-nochunks.xsl $<
-#
 ## Man pages
 #$(OUTPUT)/%.man: %.xml
 #	mkdir -p $(OUTPUT)/man
@@ -160,16 +155,6 @@ howtos/howtos.xml: $(shell find howtos/ -regex '.+[^(\.xml)]$$')
 #	-x docbook/reference.xsl                                       \
 #	-o $(OUTPUT)/man/                                              \
 #	man $<
-#
-## Chunked documents
-#$(OUTPUT)/%: %.xml $(OUTPUT)/xmldocs.css
-#	$(XSLT) $(XSLT_FLAGS)                                          \
-#	--stringparam current.docid $*                                 \
-#	--stringparam target.database.document ../docbook/olinkdb-c.xml  \
-#	-o $@/ docbook/html-chunks.xsl $<
-#	touch $@
-#
-#
 ##
 ## OlinkDBs
 ##
@@ -203,3 +188,23 @@ howtos/howtos.xml: $(shell find howtos/ -regex '.+[^(\.xml)]$$')
 #	docbook/html-chunks.xsl $<
 #	tail +2 $@ > $(LTMPDIR)/tail
 #	mv $(LTMPDIR)/tail $@
+#
+#	TODO:
+#	- make cache
+#	- make sources <-- sources as phony, sources-dir creates source/
+#	- s/U/C/ when files are overriden unconditionally
+#	- why make $O/iccattut.html goes some things twice
+#	- make guides/refs/howtos doesn't see proper deps
+#
+
+# Not needed right now
+# ctags -R -x --languages=perl --perl-kinds=cls sources/$$p/ \
+# > cache/$$p/.objectlist.perl.txt; \
+# ctags -R -x --languages=c --c-kinds=cdf sources/$$p/ \
+# > cache/$$p/.objectlist.c.txt; \
+# ctags -f cache/$$p/.tags -R --extra=fq --fields=afikKlmnsSz --line-directives sources/$$p \
+#
+#mkreport: $(LTMPDIR)/mkreport $(LTMPDIR)
+#./bin/mkreport $(IC_VERSIONS)
+#  touch $(LTMPDIR)/mkreport
+#

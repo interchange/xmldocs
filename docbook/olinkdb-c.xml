@@ -2,8 +2,13 @@
 <!DOCTYPE targetset 
 	SYSTEM "/usr/share/xml/docbook/stylesheet/nwalsh/common/targetdatabase.dtd" [
 	<!ENTITY iccattut SYSTEM "../tmp/iccattut-c.db"> 
+	<!ENTITY xmldocs SYSTEM "../tmp/xmldocs-c.db"> 
+	<!ENTITY howtos SYSTEM "../tmp/howtos-c.db"> 
 	<!ENTITY pragmas SYSTEM "../tmp/pragmas-c.db"> 
 	<!ENTITY globvars SYSTEM "../tmp/globvars-c.db"> 
+	<!ENTITY uitags SYSTEM "../tmp/uitags-c.db"> 
+	<!ENTITY usertags SYSTEM "../tmp/usertags-c.db"> 
+	<!ENTITY systemtags SYSTEM "../tmp/systemtags-c.db"> 
 ]>
 
 <targetset>
@@ -20,6 +25,18 @@
 				</document>
 			</dir>
 			
+			<dir name='xmldocs'>
+				<document targetdoc="xmldocs">
+				&xmldocs;
+				</document>
+			</dir>
+			
+			<dir name='howtos'>
+				<document targetdoc="howtos">
+				&howtos;
+				</document>
+			</dir>
+			
 			<dir name='pragmas'>
 				<document targetdoc="pragmas">
 				&pragmas;
@@ -29,6 +46,24 @@
 			<dir name='globvars'>
 				<document targetdoc="globvars">
 				&globvars;
+				</document>
+			</dir>
+			
+			<dir name='uitags'>
+				<document targetdoc="uitags">
+				&uitags;
+				</document>
+			</dir>
+			
+			<dir name='usertags'>
+				<document targetdoc="usertags">
+				&usertags;
+				</document>
+			</dir>
+			
+			<dir name='systemtags'>
+				<document targetdoc="systemtags">
+				&systemtags;
 				</document>
 			</dir>
 

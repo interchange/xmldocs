@@ -237,7 +237,7 @@ while ( $path = shift @paths) { # For each version specified
 <example>
 <title>$loc (rev. $r from $d)<sbr/>$ctxmeta</title>
 
-<screen><![CDATA[
+<screen linenumbering='numbered' startinglinenumber='$ls'><![CDATA[
 $ctxsdata
 ]]></screen>
 </example>
