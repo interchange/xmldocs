@@ -29,6 +29,9 @@
 	<sect1 id='implementbanners_introduction'>
 		<title>Introduction</title>
 		<para>
+		HOW-TO version: $Id: implement-banners,v 1.4 2004-11-12 22:26:26 docelic Exp $
+		</para>
+		<para>
 		Banner display in &IC; is implemented using the <tag>banner</tag> tag.
 		There are two terms which need to be understood first:
 		</para>
