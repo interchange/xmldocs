@@ -21,7 +21,7 @@ VPATH = guides refs howtos
 
 ############## No need to modify below ##############
 
-.PHONY: all guides refs howtos %.man
+.PHONY: all guides refs howtos %.man cache refxmls
 
 all: tmp/refs-autogen tmp/olinkdbs guides refs howtos
 	echo all done
@@ -115,6 +115,7 @@ mkreport: tmp/mkreport $(LTMPDIR)
 	./bin/mkreport $(IC_VERSIONS)
 	touch tmp/mkreport
 
+refxmls: tmp/refs-autogen
 tmp/refs-autogen: $(LTMPDIR) bin/refs-autogen
 	./bin/refs-autogen $(IC_VERSIONS)
 	touch tmp/refs-autogen
@@ -150,6 +151,7 @@ $(LTMPDIR):
 
 
 # STATTREE
+cache: tmp/stattrees
 tmp/stattrees:
 	-for p in $(IC_VERSIONS); do \
 	./bin/stattree sources/$$p; \
