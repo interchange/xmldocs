@@ -30,15 +30,10 @@ The directive is only used when &IC; is in <literal>PreFork</literal>
 __END__
 
 
-__NAME__ example
-<example>
-  <title>Setting MaxRequestsPerChild </title>
-	<para>
-	Put the following in &gcf;:
-	</para>
+__NAME__ example: Setting MaxRequestsPerChild
+Put the following in &gcf;:
 <programlisting>
 MaxRequestsPerChild 100
 </programlisting>
-</example>
 __END__
 

@@ -33,15 +33,10 @@ be automatically logged back in with the next request. Note, however, that
 the customer's cart and session values will be reset.
 __END__
 
-__NAME__ example
-<example>
-  <title>Setting SessionExpire</title>
-	<para>
-	Put the following in &ccf;:
-	</para>
+__NAME__ example: Setting SessionExpire
+Put the following in &ccf;:
 <programlisting>
 SessionExpire  20 minutes
 </programlisting>
-</example>
 __END__
 

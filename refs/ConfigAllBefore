@@ -18,13 +18,10 @@ __NAME__ description
 Specify configuration files to read as a part of every catalog's configuration, before any other corresponding catalog config files are processed.
 __END__
 
-__NAME__ example
-<example>
-  <title></title>
-  <programlisting>
+__NAME__ example: Setting ConfigAllBefore
+<programlisting>
 ConfigAllBefore set_actions.cfg set_variables.cfg
-  </programlisting>
-</example>
+</programlisting>
 __END__
 
 

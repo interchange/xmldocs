@@ -21,12 +21,9 @@ __NAME__ see also
 DEBUG, DataTrace, DebugFile
 __END__
 
-__NAME__ example
-<example>
-  <title></title>
-  <programlisting>
+__NAME__ example: Enabling DumpStructure
+<programlisting>
 DumpStructure Yes
-  </programlisting>
-</example>
+</programlisting>
 __END__
 

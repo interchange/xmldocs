@@ -16,13 +16,10 @@ This is useful to catch user configuration errors, supply missing values,
 or force your settings over user's configuration.
 __END__
 
-__NAME__ example
-<example>
-  <title></title>
-  <programlisting>
+__NAME__ example: Setting ConfigAllAfter
+<programlisting>
 ConfigAllAfter check_actions.cfg check_variables.cfg
-  </programlisting>
-</example>
+</programlisting>
 __END__
 
 

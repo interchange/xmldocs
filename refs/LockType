@@ -37,15 +37,10 @@ directive to <literal>NFS</literal> instead. That would enable
 <literal>fcntl</literal> locking for sessions on a per-catalog basis only.
 __END__
 
-__NAME__ example
-<example>
-  <title>Setting LockType</title>
-	<para>
-	Put the following in &gcf;:
-	</para>
+__NAME__ example: Setting LockType
+Put the following in &gcf;:
 <programlisting>
 LockType fcntl
 </programlisting>
-</example>
 __END__
 

@@ -35,15 +35,10 @@ Is this only in PreFork? if not, fix Notes section.
 __END__
 
 
-__NAME__ example
-<example>
-  <title>Setting MaxServers</title>
-	<para>
-	Put the following in &gcf;:
-	</para>
+__NAME__ example: Setting MaxServers
+Put the following in &gcf;:
 <programlisting>
 MaxServers 20
 </programlisting>
-</example>
 __END__
 

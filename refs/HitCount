@@ -22,12 +22,9 @@ __NAME__ see also
 TrackFile
 __END__
 
-__NAME__ example
-<example>
-  <title></title>
-  <programlisting>
+__NAME__ example: Enabling HitCount
+<programlisting>
 HitCount Yes
-  </programlisting>
-</example>
+</programlisting>
 __END__
 

@@ -48,17 +48,10 @@ with a capital letter (unlike the documentation prior to
 __END__
 
 
-__NAME__ example
-<example>
-  <title>Defining a variable</title>
-	<para>
-	Put the following in &ccf;:
-	</para>
+__NAME__ example: Defining a variable
+Put the following in &ccf;:
 <programlisting>
 Variable EMAIL root@&def-domain;
 </programlisting>
-<para>
-</para>
-</example>
 __END__
 

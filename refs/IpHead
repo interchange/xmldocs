@@ -31,16 +31,11 @@ __NAME__ notes
 host name lookups.
 __END__
 
-__NAME__ example
-<example>
-  <title>Enabling IpHead directive</title>
-	<para>
-	Put the following in &gcf;:
-	</para>
+__NAME__ example: Enabling IpHead
+Put the following in &gcf;:
 <programlisting>
 DomainTail No
 IpHead     Yes
 </programlisting>
-</example>
 __END__
 

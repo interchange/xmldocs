@@ -26,15 +26,10 @@ variable <literal>mv_separate_items</literal>.
 __END__
 
 
-__NAME__ example
-<example>
-  <title>Enabling SeparateItems</title>
-	<para>
-	Put the following in &ccf;:
-	</para>
+__NAME__ example: Enabling SeparateItems
+Put the following in &ccf;:
 <programlisting>
 SeparateItems       Yes
 </programlisting>
-</example>
 __END__
 

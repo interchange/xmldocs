@@ -18,12 +18,9 @@ to a stop command.
 __END__
 
 
-__NAME__ example
-<example>
-  <title></title>
-  <programlisting>
-HouseKeepign 5
-  </programlisting>
-</example>
+__NAME__ example: Adjusting the HouseKeeping interval
+<programlisting>
+HouseKeeping 5
+</programlisting>
 __END__
 

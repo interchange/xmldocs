@@ -22,15 +22,10 @@ to be shared. This is only used with DBM-based sessions, and
 the pathname can be absolute if desired.
 __END__
 
-__NAME__ example
-<example>
-  <title>Setting SessionLockFile</title>
-	<para>
-	Put the following in &ccf;:
-	</para>
+__NAME__ example: Setting SessionLockFile
+Put the following in &ccf;:
 <programlisting>
-SessionExpire  session-data.lock
+SessionLockFile  session-data.lock
 </programlisting>
-</example>
 __END__
 

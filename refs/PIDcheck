@@ -41,12 +41,9 @@ script.
 __END__
 
 
-__NAME__ example
-<example>
-  <title></title>
-  <programlisting>
+__NAME__ example: Setting PIDcheck
+<programlisting>
 PIDcheck 300
-  </programlisting>
-</example>
+</programlisting>
 __END__
 

@@ -15,15 +15,13 @@ The directive specifies the global &glos-locale; for error messages.
 The content is usually loaded from a file.
 __END__
 
-__NAME__ example
-<example>
-  <title>Defining Locale</title>
-	<para>
-	Put the following in &gcf;:
-	</para>
+__NAME__ example: Defining Locale
+Put the following in &gcf;:
 <programlisting>
 Locale &lt;locale.error
 </programlisting>
-</example>
 __END__
 
+__NAME__ missing
+The description doesnt seem to match the description of the same variable when set in catalog.cfg
+__END__

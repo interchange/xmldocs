@@ -1,0 +1,148 @@
+
+<glossentry id="form-action">
+<glossterm>form action</glossterm>
+
+<glossdef>
+<para>
+<![CDATA[
+TODO format
+Interchange form processing is based on an C<action> and a C<todo>. The 
+predefined actions at the first level are:
+
+    process       process a todo
+    search        form-based search
+    scan          path-based search
+    order         order an item
+    minimate      get access to a database via MiniMate
+
+You can define any action you desire with C<ActionMap>.
+
+The C<process> action has a second C<todo> level called with C<mv_todo>
+or C<mv_doit>. The C<mv_todo> takes preference over C<mv_doit>, which 
+can be used to set a default if no C<mv_todo> is set.
+
+The action can be specified either with:
+
+=over 4
+
+=item page name
+
+Calling the page "search" will cause the search action, C<process>
+will cause a form process action, etc. Examples:
+
+    <FORM ACTION="/cgi-bin/simple/search" METHOD=POST>
+    <INPUT NAME=mv_searchspec>
+    </FORM>
+
+The above is a complete search in Interchange - it causes a simple text
+search of the default products database(s). Normally you don't use
+hard-coded paths, but use a minivend tag to specify it for portability:
+
+    <FORM ACTION="[area search]" METHOD=POST>
+    <INPUT NAME=mv_searchspec>
+    </FORM>
+
+You will often see the tag C<[process]> in Interchange forms. The above
+can be called equivalently with:
+
+    <FORM ACTION="[process]" METHOD=POST>
+    <INPUT TYPE=hidden NAME=mv_todo VALUE=search>
+    <INPUT NAME=mv_searchspec>
+    </FORM>
+
+=item mv_action
+
+Setting the special variable C<mv_action> causes the page name to
+be ignored as the action source. The above forms can use this as
+a synonym:
+
+    <FORM ACTION="[area foo]" METHOD=post>
+    <INPUT TYPE=hidden NAME=mv_action VALUE=search>
+    <INPUT NAME=mv_searchspec>
+    </FORM>
+
+The page name will be used to set C<mv_nextpage> if it is not
+otherwise defined; if C<mv_nextpage> is present in the form it
+will be ignored. 
+
+=back
+
+The second level C<todo> for the C<process> action has these
+defined by default:
+
+    search   Trigger a search
+    submit   submit a form for validation (and possibly a final order)
+    go       Go to C<mv_nextpage>
+    return   Go to C<mv_nextpage>
+    set      Update a database table
+    refresh  Go to C<mv_orderpage|mv_nextpage> and check for
+             ordered items
+    cancel   Erase the user session
+
+If you define a page name as an action with C<ActionMap>, or use 
+of Interchange's predefined action C<process>, it will cause form processing.
+first level is setting the special page name C<process>, or speciis set to do a form C<process>, the for
+Interchange form can be used for any number of actions. The actions
+are mapped by the I<ActionMap> directive in the catalog configuration
+file, and are selected on the form with either the F<mv_todo> or F<mv_doit>
+variables.
+
+To set a default action for a C<process> form, set the variable C<mv_doit> as
+a hidden variable:
+
+    <INPUT TYPE=hidden NAME=mv_doit VALUE=refresh>
+
+When the F<mv_todo> value is not found, the I<refresh> action defined
+in F<mv_doit> will be used instead.
+
+More on the defined actions:
+
+=over 4
+
+=item cancel
+
+All user information is erased, and the shopping cart is emptied. The
+user is then sent to mv_nextpage.
+
+=item refresh
+
+Checks for newly-ordered items in C<mv_order_item>, looking for on-the-fly
+items if that is defined, then updates the shopping cart with any changed
+quantities or options.  Finally updates the user variables and returns
+to the page defined in mv_orderpage or mv_nextpage (in that order of
+preference).
+
+=item return
+
+Updates the user variables and returns to the page defined
+in mv_nextpage.
+
+=item search
+
+The shopping cart and user variables are updated, then the form
+variables are interpreted and the search specification contained
+therein is dispatched to the search engine - results are returned
+on the defined search page (set by F<mv_search_page> or the search
+page directives).
+
+=item submit
+
+Submit the form for order processing. If no order profile is defined
+with the C<mv_order_profile> variable, the order is checked to see
+if the current cart contains any items and the order is submitted.
+
+If there is an order profile defined, the form will be checked against
+the definition in the order profile and submitted if the pragma &final
+is set to B<yes>. If &final is set to B<no> (the default), and the
+check succeeds, the user will be routed to the Interchange page defined in
+mv_successpage, or mv_nextpage. Finally, if the check fails, the user
+will be routed to mv_failpage or mv_nextpage in that order.
+
+=back
+]]>
+</para>
+
+</glossdef>
+
+</glossentry>
+

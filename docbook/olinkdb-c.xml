@@ -8,13 +8,9 @@
 	<!ENTITY pragmas SYSTEM "../tmp/pragmas-c.db"> 
 	<!ENTITY globvars SYSTEM "../tmp/globvars-c.db"> 
 	<!ENTITY catvars SYSTEM "../tmp/catvars-c.db"> 
-	<!ENTITY uitags SYSTEM "../tmp/uitags-c.db"> 
-	<!ENTITY usertags SYSTEM "../tmp/usertags-c.db"> 
-	<!ENTITY systemtags SYSTEM "../tmp/systemtags-c.db"> 
-	<!ENTITY globconfs SYSTEM "../tmp/globconfs-c.db"> 
-	<!ENTITY catconfs SYSTEM "../tmp/catconfs-c.db"> 
 	<!-- COMPOUNDS -->
 	<!ENTITY tags SYSTEM "../tmp/tags-c.db"> 
+	<!ENTITY confs SYSTEM "../tmp/confs-c.db"> 
 ]>
 
 <targetset>
@@ -66,42 +62,16 @@
 				&catvars;
 				</document>
 			</dir>
-			
-			<!--
-			<dir name='uitags'>
-				<document targetdoc="uitags">
-				&uitags;
-				</document>
-			</dir>
-			
-			<dir name='usertags'>
-				<document targetdoc="usertags">
-				&usertags;
-				</document>
-			</dir>
-			
-			<dir name='systemtags'>
-				<document targetdoc="systemtags">
-				&systemtags;
-				</document>
-			</dir>
-			-->
 
-			<dir name='ictags'>
+			<dir name='tags'>
 				<document targetdoc="tags">
 				&tags;
 				</document>
 			</dir>
-			
-			<dir name='globconfs'>
-				<document targetdoc="globconfs">
-				&globconfs;
-				</document>
-			</dir>
-			
-			<dir name='catconfs'>
-				<document targetdoc="catconfs">
-				&catconfs;
+
+			<dir name='confs'>
+				<document targetdoc="confs">
+				&confs;
 				</document>
 			</dir>
 

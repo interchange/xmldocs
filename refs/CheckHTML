@@ -42,15 +42,17 @@ Leaving this directive enabled on a production server usually leads to
 unneccesary performance degradation. The additional process spawn
 (and the time it takes to complete) every time a page is visited is
 very costly.
+</para><para>
+<emphasis role='bold'>
+Additionally, this directive currently appears to be broken 
+(it simply never gets called).
+</emphasis>
 __END__
 
-__NAME__ example
-<example>
-  <title></title>
-  <programlisting>
+__NAME__ example: Enabling CheckHTML
+<programlisting>
 CheckHTML /usr/local/bin/weblint -s -
-  </programlisting>
-</example>
+</programlisting>
 __END__
 
 

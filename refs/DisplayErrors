@@ -25,13 +25,10 @@ This should <emphasis role='bold'>never</emphasis> be used for normal
 operation.
 __END__
 
-__NAME__ example
-<example>
-  <title>Enabling DisplayErrors</title>
-	<para>Put the following in &gcf;</para>
+__NAME__ example: Enabling DisplayErrors
+<para>Put the following in &gcf;</para>
 <programlisting>
 DisplayErrors Yes
 </programlisting>
-</example>
 __END__
 

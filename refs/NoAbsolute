@@ -28,15 +28,10 @@ allowed regardless of &conf-NoAbsolute;.
 __END__
 
 
-__NAME__ example
-<example>
-  <title>Enabling NoAbsolute</title>
-	<para>
-	Put the following in &gcf;:
-	</para>
+__NAME__ example: Enabling NoAbsolute
+Put the following in &gcf;:
 <programlisting>
 NoAbsolute Yes
 </programlisting>
-</example>
 __END__
 

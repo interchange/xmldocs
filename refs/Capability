@@ -24,12 +24,9 @@ and a program can later check for the capability and dynamically adapt to the
 configuration.
 __END__
 
-__NAME__ example
-<example>
-  <title>Testing for existence of Archive::Zip Perl module</title>
-  <programlisting>
+__NAME__ example: Testing for existence of Archive::Zip Perl module
+<programlisting>
 Capability module Archive::Zip
-  </programlisting>
-</example>
+</programlisting>
 __END__
 

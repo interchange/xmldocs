@@ -8,13 +8,9 @@
 	<!ENTITY pragmas SYSTEM "../tmp/pragmas-nc.db"> 
 	<!ENTITY globvars SYSTEM "../tmp/globvars-nc.db"> 
 	<!ENTITY catvars SYSTEM "../tmp/catvars-nc.db"> 
-	<!ENTITY usertags SYSTEM "../tmp/usertags-nc.db"> 
-	<!ENTITY uitags SYSTEM "../tmp/uitags-nc.db"> 
-	<!ENTITY systemtags SYSTEM "../tmp/systemtags-nc.db"> 
-	<!ENTITY globconfs SYSTEM "../tmp/globconfs-nc.db"> 
-	<!ENTITY catconfs SYSTEM "../tmp/catconfs-nc.db"> 
 	<!-- COMPOUNDS -->
 	<!ENTITY tags SYSTEM "../tmp/tags-nc.db"> 
+	<!ENTITY confs SYSTEM "../tmp/confs-nc.db"> 
 ]>
 
 <targetset>
@@ -31,15 +27,9 @@
 			<document targetdoc="pragmas" baseuri="pragmas.html"> &pragmas; </document>
 			<document targetdoc="globvars" baseuri="globvars.html"> &globvars; </document>
 			<document targetdoc="catvars" baseuri="catvars.html"> &catvars; </document>
-			<!--
-			<document targetdoc="usertags" baseuri="usertags.html"> &usertags; </document>
-			<document targetdoc="uitags" baseuri="uitags.html"> &uitags; </document>
-			<document targetdoc="systemtags" baseuri="systemtags.html"> &systemtags; </document>
-			-->
-			<document targetdoc="globconfs" baseuri="globconfs.html"> &globconfs; </document>
-			<document targetdoc="catconfs" baseuri="catconfs.html"> &catconfs; </document>
 			<!-- COMPOUNDS -->
 			<document targetdoc="tags" baseuri="tags.html"> &tags; </document>
+			<document targetdoc="confs" baseuri="confs.html"> &confs; </document>
 		</dir>
 	</sitemap>
 

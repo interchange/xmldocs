@@ -32,10 +32,8 @@ but you should omit the '#' (hash) in new configuration files.
 __END__
 
 
-__NAME__ example
-<example>
-  <title></title>
-  <programlisting>
+__NAME__ example: Config parser behavior with ConfigParseComments disabled
+<programlisting>
 ConfigParseComments No
 
 #include comment
@@ -43,7 +41,6 @@ ConfigParseComments No
 
 # You better prepare the file named 'comment' for the following one:
 include comment
-  </programlisting>
-</example>
+</programlisting>
 __END__
 

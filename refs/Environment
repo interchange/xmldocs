@@ -15,12 +15,9 @@ Specify environment variables to inherit from the calling CGI link program.
 __END__
 
 
-__NAME__ example
-<example>
-  <title></title>
-  <programlisting>
+__NAME__ example: Setting Environment directive
+<programlisting>
 Environment MOD_PERL REMOTE_USER PGPPATH
-  </programlisting>
-</example>
+</programlisting>
 __END__
 

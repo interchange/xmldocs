@@ -34,15 +34,10 @@ only 48 * 48 hashing is done.
 __END__
 
 
-__NAME__ example
-<example>
-  <title>Setting SessionDatabase</title>
-	<para>
-	Put the following in &ccf;:
-	</para>
+__NAME__ example: Setting SessionDatabase
+Put the following in &ccf;:
 <programlisting>
 SessionDatabase session-data
 </programlisting>
-</example>
 __END__
 

@@ -22,8 +22,8 @@ the session qualifier will look at, if &conf-IpHead; is enabled.
 In other words, with an IPV4 address (32 bit address, consisting of 
 four dot-quads) of value
 <systemitem class='ipadress'>127.0.0.1</systemitem> and &conf-IpQuad; of 
-<literal>2</literal>, 
-<systemitem class='ipadress'><emphasis role='bold'>127.0.</emphasis></systemitem>
+<literal>3</literal>, 
+<systemitem class='ipadress'><emphasis role='bold'>127.0.0.</emphasis></systemitem>
 would be enough to qualify the user session.
 __END__
 
@@ -32,16 +32,12 @@ __NAME__ notes
 host name lookups.
 __END__
 
-__NAME__ example
-<example>
-  <title>Enabling IpHead directive</title>
-	<para>
-	Put the following in &gcf;:
-	</para>
+__NAME__ example: Setting IpQuad
+Put the following in &gcf;:
 <programlisting>
 DomainTail No
 IpHead     Yes
+IpQuad     3
 </programlisting>
-</example>
 __END__
 

@@ -4,7 +4,7 @@
 
 <glossdef>
 <para>
-The standard C<process> action has a number of associated C<FormAction> settings. Besides using Perl, Interchange tags may be used in an action, though they are not nearly as efficient.
+The standard process action has a number of associated FormAction settings. Besides using Perl, Interchange tags may be used in an action, though they are not nearly as efficient.
 
 </para>
 

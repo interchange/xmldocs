@@ -17,15 +17,10 @@ pages in that directory (or any below it) will be cached or built statically.
 __END__
 
 
-__NAME__ example
-<example>
-  <title>Setting NoCache</title>
-	<para>
-	Put the following in &ccf;:
-	</para>
+__NAME__ example: Setting NoCache
+Put the following in &ccf;:
 <programlisting>
 NoCache ord special
 </programlisting>
-</example>
 __END__
 

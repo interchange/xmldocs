@@ -35,16 +35,13 @@ you need to have the <varname>DEBUG</varname> global variable
 defined, and <option>DebugFile</option> properly set.
 __END__
 
-__NAME__ example
-<example>
-  <title></title>
-  <programlisting>
+__NAME__ example: Enabling DataTrace
+<programlisting>
 Variable DEBUG 1
 DebugFile /tmp/icdebug
 
 DataTrace 1
-  </programlisting>
-</example>
+</programlisting>
 __END__
 
 

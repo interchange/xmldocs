@@ -39,15 +39,10 @@ much better under such a flood.
 __END__
 
 
-__NAME__ example
-<example>
-  <title>Enabling AcceptRedirect</title>
-	<para>
-	Put any of the following lines in &ccf;:
-	</para>
+__NAME__ example: Enabling AcceptRedirect
+Put any of the following lines in &ccf;:
 <programlisting>
 AcceptRedirect Yes
 </programlisting>
-</example>
 __END__
 

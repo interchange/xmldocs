@@ -40,20 +40,13 @@ would work as well.
 __END__
 
 
-__NAME__ example
-<example>
-  <title>Preventing access to the system with ipfwadm</title>
-	<para>
-	Put the following in &gcf;:
-	</para>
+__NAME__ example: Preventing access to the system with ipfwadm
+Put the following in &gcf;:
 <programlisting>
 LockoutCommand ipfwadm -I -i deny -S %s
 </programlisting>
-	<para>
-	Note that the <command>ipfwadm</command> filtering system was used in Linux
-	2.0.* kernels, and is now largely obsolete.
-	</para>
-</example>
+Note that the <command>ipfwadm</command> filtering system was used in Linux
+2.0.* kernels, and is now largely obsolete.
 __END__
 
 __NAME__ missing

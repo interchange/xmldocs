@@ -23,12 +23,9 @@ The location must be writable by the Interchange daemon.
 __END__
 
 
-__NAME__ example
-<example>
-  <title></title>
-  <programlisting>
+__NAME__ example: Setting PIDfile
+<programlisting>
 PIDfile /var/run/interchange/interchange.pid
-  </programlisting>
-</example>
+</programlisting>
 __END__
 

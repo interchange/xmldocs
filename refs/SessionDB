@@ -24,15 +24,10 @@ __NAME__ notes
 Using this directive (and DBI sessions in general) is not recommended.
 __END__
 
-__NAME__ example
-<example>
-  <title>Setting SessionDB</title>
-	<para>
-	Put the following in &ccf;:
-	</para>
+__NAME__ example: Setting SessionDB
+Put the following in &ccf;:
 <programlisting>
 SessionDB sessions
 </programlisting>
-</example>
 __END__
 

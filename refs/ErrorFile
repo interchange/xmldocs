@@ -22,12 +22,9 @@ SysLog
 __END__
 
 
-__NAME__ example
-<example>
-  <title></title>
-  <programlisting>
+__NAME__ example: Setting ErrorFile
+<programlisting>
 ErrorLog /var/log/interchange/error.log
-  </programlisting>
-</example>
+</programlisting>
 __END__
 

@@ -1,0 +1,56 @@
+UNVERIFIED
+
+__NAME__ purpose
+modify or define custom Interchange form actions
+__END__
+
+
+__NAME__ see also
+AddDirective,CodeDef,UserTag
+__END__
+
+
+#__NAME__ synopsis
+#<group choice='req'>
+#	<arg choice='plain'>No</arg>
+#	<arg choice='plain'>Yes</arg>
+#</group>
+#__END__
+
+
+__NAME__ description
+Allows setting of Interchange form actions, usually with a Perl subroutine.
+</para><para>
+Some of the predefined actions (which you might recognize from special
+page names that you access in your catalog) are:
+<itemizedlist>
+<listitem><para>
+<literal>process</literal> - Perform a processing function
+</para></listitem>
+<listitem><para>
+<literal>order</literal>  -  Order items
+</para></listitem>
+<listitem><para>
+<literal>scan</literal>   -  Search based on path info
+</para></listitem>
+<listitem><para>
+<literal>search</literal> -  Search based on submitted form variables
+</para></listitem>
+</itemizedlist>
+
+For an introduction to Action Maps, see &glos-form-action;s glossary
+entry.
+__END__
+
+
+__NAME__ example: Ignoring the Order action
+Put the following in &ccf;:
+<programlisting>
+ActionMap order sub { 1 }
+</programlisting>
+Since we effectively turned Order into a no-operation action, the usual
+order link such as
+<code><![CDATA[<A HREF="[area order/nextpage]">Go to the next page</A>]]></code>
+would be equivalent to <code><![CDATA[[page order/nextpage]Go to the next page</a>]]></code>.
+__END__
+

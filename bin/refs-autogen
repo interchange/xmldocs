@@ -116,6 +116,17 @@ my %defaults = (
 
 my @mandatory = (qw/synopsis example description purpose/);
 
+# General section intros and "outros"; they are set per-item and not
+# only per-section as you could achieve with putting them in a template.
+# The header is inserted
+# *after* <title>, if title was specified in section definition.
+my %item_header = (
+	example => "<example>\n%s<para>",
+);
+my %item_footer = (
+	example => "</para>\n</example>",
+);
+
 my @paths = @ARGV; # Versions requested
 my $path; # Current path, used in loop for each version requested
 my $dumppath; # Path to cache dump file
@@ -791,14 +802,32 @@ sub populate {
 			my @c = <IN>;
 			close IN;
 
-			my ( $section, $content );
+			my ( $section, $title, $pre_content, $content, $post_content );
 			# XXX check if it's empty, then don't update
 			for my $line (@c) {
-				if ( $line =~ /^__NAME__ (.+)\s*$/ ) { $section = $1; next }
-				if ( $line =~ /^__END__/ ) {
-					update_field("append", $group, $name, $ref, "$refpath", $section, $content);
+				# Here we support format of this kind:
+				# __NAME__ section name: section title
+				# The 'title' part will be automatically wrapped in a 
+				# <title> element.
+				if ( $line =~ /^__NAME__\s+(.+)\s*$/ ) {
+					# Support for this exists only in this format, it's not
+					# supported in control files or name/*. And fortunately, since
+					# we didn't modify the templates to do this trick, those old files
+					# can remain as-they-are and work properly !! Excellent.
+					my ( $sec, $title) = split /\s*:\s*/, $1, 2;
+					$section = $sec;
+					$title = $title ? "<title>$title</title>" : "";
+					$pre_content =  sprintf($item_header{$section}||"", $title);
+					$post_content = sprintf($item_footer{$section}||"", $title);
+					next
+
+				} elsif ( $line =~ /^__END__/ ) {
+					update_field("append", $group, $name, $ref, "$refpath", $section, $content, $pre_content, $post_content);
 					$section = "";
+					$title = "";
+					$pre_content = "";
 					$content = "";
+					$post_content = "";
 				}
 				# If not a beginning or end of section, simply add line to content
 				$content .= $line if $section;
@@ -814,11 +843,14 @@ sub populate {
 }
 
 sub update_field {
-	my ($mode, $group, $name, $sref, $fn, $sect, $content) = @_;
+	my ($mode, $group, $name, $sref, $fn, $sect, $content, $pre, $post) = @_;
 
 	$sect =~ s/[\-\.\+_:\d].*//;
 	$sect =~ s/([a-z])([A-Z])/$1 $2/g;
 	$sect = lc $sect;
+
+	$pre ||= "";
+	$post ||= "";
 
 	if ( $sect ne 'missing' ) {
 
@@ -860,12 +892,12 @@ sub update_field {
 		}
 		
 		if ( $mode eq 'override' ) {
-			$$sref{lc $sect} = $content;
+			$$sref{lc $sect} = $pre . $content . $post if $content;
 		} else {
 			# Causes problems
 			#$$sref{lc $sect} .= $$sref{lc $sect} ?
 			#	'</para><para>' . $content : $content;
-			$$sref{lc $sect} .= $content if $content;
+			$$sref{lc $sect} .= $pre . $content . $post if $content;
 		}
 
 	} else { # "Missing" section

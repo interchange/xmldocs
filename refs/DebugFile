@@ -39,13 +39,10 @@ by default in Interchange sources, you'll probably want to use a special
 script for managing debug statements.
 __END__
 
-__NAME__ example
-<example>
-  <title></title>
-  <programlisting>
+__NAME__ example: Setting DebugFile
+<programlisting>
 Variable DEBUG 1
 DebugFile /tmp/icdebug
-  </programlisting>
-</example>
+</programlisting>
 __END__
 

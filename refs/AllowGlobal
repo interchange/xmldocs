@@ -24,13 +24,10 @@ Specify catalogs that may define subroutines and tags that can operate with the 
 Don't use this directive unless the catalog user is completely trusted.
 __END__
 
-__NAME__ example
-<example>
-  <title></title>
-  <programlisting>
+__NAME__ example: Defining AllowGlobal
+<programlisting>
 AllowGlobal tutorial1 tutorial2
-  </programlisting>
-</example>
+</programlisting>
 __END__
 
 
