@@ -244,8 +244,19 @@ sub wanted {
 		$c{line} = $filedata[$lnum];
 		$c{lnum} = $lnum;
 
+		# Should never happen. If it does, it's critical problem.
+		defined $c{line} or do {
+			print STDERR "Undefined line: \n";
+			print STDERR Dumper \%c;
+			die;
+		};
+
 		$hash{tree}{$file}{lines}++ ;
 		$hash{total}{lines}++ ;
+
+		# BLEH!
+		last if $i{ver} eq '4.6.0'
+			and $c{file} =~ /Tagref\.pm$/ and $c{line} =~ /^__DATA__$/;
 
 		# Perl program file
 		if ( $c{fsubtype} eq 'perl' ) {
@@ -276,6 +287,7 @@ sub wanted {
 
 				line_findPragmas(\%c);
 				line_findGlobVars(\%c);
+				line_findCatVars(\%c);
 				line_findFunctionName(\%c);
 
 			} else {
@@ -320,6 +332,7 @@ sub wanted {
 						line_findPragmas(\%c);
 						# For example, this should find PGP_HOME
 						line_findGlobVars(\%c);
+						line_findCatVars(\%c);
 						line_findFunctionName(\%c);
 					}
 					next;
@@ -499,13 +512,51 @@ sub line_findPragmas {
 	}
 }
 
+sub line_findCatVars {
+	######################################################
+	# Diskover global variables
+	my %c = %{ (shift) };
+	my $name;
+
+	if (
+		($c{line} =~ /(()|\$())\$(::)?Variable(->\2|\3){(\w+?)}/ and $name=$6)
+		or ($c{line}=~/\$Tag->var\s*\(\s*(["'])(\S+?)\1(\s*,\s*(2))?/ and $name=$5)
+		or ($c{line} =~ /[^_\/]__([^_]\w+?)__[^_\/]/ and
+			( $1 !~ /^(END|DIE|MYVAR|PACKAGE|NAME|none|WARN)$/) and $name=$1)
+		or ($c{line} =~ /\[var (\S+?)\]/i and $name=$1)
+		or ($c{line} =~ /\[var (\S+?)\s+2\s*\]/i and $name=$1)
+		) {
+
+		push @{ $hash{symbols}{catvar}{$name} }, {
+			%c,
+			file => "$i{ver}/$c{file}",
+			lnum => $c{lnum},
+			func => ${$c{gfunc}}[0],
+			funclnum => ${$c{gfunc}}[1],
+			ctxpre => $c{ctx_p},
+			ctxpost => $c{ctx_n},
+			ctxs => $c{lnum} - $c{ctx_p},
+			ctxe => $c{lnum} + $c{ctx_n},
+			ctx => [format_ctx(@{$c{filedata}}[$c{lnum}-$c{ctx_p}..$c{lnum}+$c{ctx_n}])]
+		};
+
+		$hash{total}{catvars}++;
+	}
+}
+
 sub line_findGlobVars {
 	######################################################
 	# Diskover global variables
 	my %c = %{ (shift) };
-	if ( ( $c{line} =~ /(()|\$())\$Global::Variable(->\2|\3){(\w+?)}/ or
-		$c{line} =~ /\$Tag->var\s*\(\s*(["'])(\S+?)\1(\s*,\s*(\d))?/ ) and $5 ) {
-		push @{ $hash{symbols}{globvar}{$5} }, {
+	my $name;
+
+	if (
+		($c{line} =~ /(()|\$())\$Global::Variable(->\2|\3){(\w+?)}/ and $name=$5)
+		or ($c{line}=~/\$Tag->var\s*\(\s*(["'])(\S+?)\1(\s*,\s*(\d))?/ and $name=$5)
+		or ($c{line} =~ /[^\/]\@[_\@](\w+?)[_\@]\@[^\/]/ and $name=$1)
+		or ($c{line} =~ /\[var (\S+?)\s+1\s*\]/i and $name=$1)
+		) {
+		push @{ $hash{symbols}{globvar}{$name} }, {
 			%c,
 			file => "$i{ver}/$c{file}",
 			lnum => $c{lnum},

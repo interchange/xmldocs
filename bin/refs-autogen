@@ -91,6 +91,7 @@ $specific_only and $specific_only =~ s/s$//;
 
 my %longname = (
 	globvar => "Global Variable",
+	catvar => "Catalog Variable",
 	pragma => "Pragma",
 	usertag => "User Tag",
 	uitag => "User Interface Tag",
@@ -225,20 +226,10 @@ while ( $path = shift @paths) { # For each version specified
 
 			if ( $ar ) {$$ag{source} = "" }
 
-			$$ag{"ctxs total"} = scalar @$ar;
-			$$ag{"ctxs shown"} = @$ar < $max_ctxs ? @$ar : $max_ctxs;
-
-			my $ctxcount = 0;
+			my $ctxtotal = scalar @$ar;
+			my $ctxshown = 0;
 			for my $ctx ( @$ar ) {
 				
-				# Make sure we don't overdo it with source contexts.
-				# MV_PAGE appears on like 31 place. We definitely don't need to
-				# see more than 10.
-				if ( $ctxcount++ > $max_ctxs ) {
-					print STDERR "$$ag{name} has ", scalar @$ar,
-						" contexts, limiting to $max_ctxs\n" if $verbose;
-					last;
-				}
 #					my $hidden = @$ar - $max_ctxs;
 #					$$ag{source} .= <<ENDD;
 #<para>
@@ -254,8 +245,22 @@ while ( $path = shift @paths) { # For each version specified
 				# Support item types with only context info in this field
 				for my $arr ( @{ $covered{$key}{$fi} } ) {
 					next if !$ln or !$$arr[0] or !$$arr[1];
-					goto DONELOOP if $ln > $$arr[0] and $ln < $$arr[1];
+					if ($ln > $$arr[0] and $ln < $$arr[1]) {
+						$ctxtotal--;
+						goto DONELOOP;
+					}
 				}
+
+
+				# Make sure we don't overdo it with source contexts.
+				# MV_PAGE appears on like 31 place. We definitely don't need to
+				# see more than 10.
+				if ( $ctxshown++ > 10 ) {
+					print STDERR "$$ag{name} has ", scalar @$ar,
+						" contexts, limiting to $max_ctxs\n" if $verbose;
+					goto DONELOOP;
+				}
+
 				# We 'shift' here because we unshifted 1 row to match line
 				# numbers with array indexes
 				my $ctxsdata = join "\n", @{ $$ctx{ctx} };
@@ -314,6 +319,8 @@ while ( $path = shift @paths) { # For each version specified
 							$revinfo = "(rev. $r from $d)";
 							}
 					}
+
+
 					{ no warnings; # XXX If someone can figure out which of the used vars here is undefined...
 					$$ag{source} .= <<ENDD;
 <para>
@@ -333,6 +340,9 @@ ENDD
 				push @{ $covered{$key}{$fi} }, [ $$ctx{ctxs}, $$ctx{ctxe} ];
 				DONELOOP:
 			}
+
+			$$ag{"ctxs total"} = $ctxtotal;
+			$$ag{"ctxs shown"} = $ctxshown < $max_ctxs ? $ctxshown : $max_ctxs;
 		}
 	}
 }
@@ -646,7 +656,8 @@ sub populate {
 		$dups{$name} and     # Symbol name is non-unique
 		-e $genpath and      # Generic file exists (refs/<name>)
 		!-e $specpath and    # But special files don't (refs/<name>.<group>)
-		$group !~ /conf$/ ) {# And it's not a config directive for which we tolerate
+		$group !~ /conf|var$/ ) {# And it's not a cfg directive or globvar/catvar
+		                         #for which we tolerate
 		local $" = " AND ";
 		die "Symbol '$name' is: @{ $dups{$name} }. Must have refs/<name>.<type>\n";
 	}
@@ -1088,6 +1099,7 @@ $ag{source}
 __ENDP__
 
 $templates{globvar} = $templates{pragma};
+$templates{catvar} = $templates{pragma};
 $templates{uitag} = $templates{usertag};
 $templates{systemtag} = $templates{usertag};
 $templates{catconf} = $templates{globconf};
