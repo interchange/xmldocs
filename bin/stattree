@@ -32,12 +32,11 @@ $Data::Dumper::Sortkeys++;
 # Vars
 my $verbose = 0;
 my $cachedir = $ENV{CACHE} || "cache";
-my %hash; # Will contain data to be dumped
+my %hash; # Will contain complete data that gets dumped using Storable
 my $cpath = $ENV{PWD};
 # Source contexts
 my $ctx_p = 10; # How much context lines to show before
 my $ctx_n = 4; #                                after
-my %cvsmap; # Each key (full filename) contains array: [ver, date]
 
 # All file types should be listed here or the stats wont. It should be
 # reported if an unknown file is found in the archive
@@ -89,8 +88,8 @@ unless ( GetOptions (
 # sources/cvs-head becomes output/cvs-head/cache
 my $path = shift;
 ( my $dumppath = $path ) =~ s#.+?/##;
-my $dumpdir = $dumppath;
-my %i = ( ver => $dumpdir );
+my $dumpdir = $dumppath; # Directory to dump to, without file name
+my %i = ( ver => $dumpdir ); # Version as read from directory name
 $i{ver} =~ s/\/$//;
 `mkdir -p $cachedir/$dumpdir` unless -e "$cachedir/$dumpdir";
 $dumppath .= "/.cache.bin";
@@ -191,7 +190,7 @@ sub wanted {
 			}
 		}
 	}
-	# Unknown // TODO pay more attention to this, this should rarely happen,
+	# Unknown // pay more attention to this, this should rarely happen,
 	# even if we're not interested in some files, they *should* be matched
 	# in %ascii_types/%binary_types above to provide accurate statistics.
 	print STDERR "$file UNKNOWN\n" if $verbose;
@@ -316,8 +315,8 @@ sub wanted {
 						$c{line} = $_t;
 						$c{lnum} = $lnum2;
 
-						# For example, this should find PGP_HOME
 						line_findPragmas(\%c);
+						# For example, this should find PGP_HOME
 						line_findGlobVars(\%c);
 						line_findFunctionName(\%c);
 					}
@@ -361,6 +360,9 @@ sub wanted {
 		}
 	} # END IF
 
+	# Now in addition to above general line-by-line processing, do some more
+	# processing on exactly *some* files:
+
 	####################################################################
 	# It's the main configure file, pick up the ICVERSION variable
 	if ( $c{file} eq 'configure' ) {
@@ -384,8 +386,7 @@ sub wanted {
 	}
 
 	####################################################################
-	# lib/Vend/Config.pm (outside elsif{} because we want this even after
-	# it first matches a requirement for a Perl file
+	# lib/Vend/Config.pm
 	if ( $c{file} eq 'lib/Vend/Config.pm' ) {
 		file_parseVendConfig(\@filedata);
 	}
@@ -401,7 +402,7 @@ sub format_ctx {
 		if (/\S/ and /^( +)/) {
 			$common = length($1) if !defined $common || length($1) < $common
 		}
-		# Catch runaway lines (produces crapload of things, so refine
+		# TODO Catch runaway lines (produces crapload of things, so refine
 		# search before starting to use it)
 		#if ( $_ =~ /\S\s{10,}/ ) {
 		#	warn "Runaway '$_' ?\n";
@@ -489,44 +490,78 @@ sub line_findFunctionName {
 
 
 sub file_parseVendConfig {
-	my $content = shift;
+	my $content = shift; # Complete lib/Vend/Config.pm file
 
-	my $context = "";
-	my $run = 0;
+	my $linenr = 0;      # Increases as we parse Config.pm
+	my $context = "";    # Globconf (global) or catconf (catalog) config array
+	my $run = 0;         # Engine turned on?
+	my $multiline;       # Directive definition spans multiple lines?
+	my $opens;           # Open brackets. When 0, complete directive is read
+	my $directive;       # Directive text
+	my $globalclose;     # Just used for simple error catching
+	my @globconf;        # Directives, each directive in its own entry
+	my @catconf;         # Directives, each directive in its own entry
 
 	for my $line (@$content) {
+		$linenr++;
+
+		goto MULTILINE if $multiline;
 		
 		# Determine context
 		if ( $line =~ /^sub\s+global_directives\s+{\s*$/ ) {
-			$context = "globconf"; next;
+			$context = "globconf";
+			next;
 		}
 		if ( $line =~ /^sub\s+catalog_directives\s+{\s*$/ ) {
-			$context = "catconf"; next;
+			$context = "catconf";
+			next;
 		}
+		# The following check is redundant with "} else { ...; $run = 0 }" below
 		if ( $line =~ /return \$directives/ ) {
-			$context = ""; $run = 0; next
+			$context = "";
+			$run = 0;
+			next
 		}
 		if ( $context and $line =~ /my \$directives = \[/ ){
 			$run++; next
 		}
+		#}} unconfuse vim
 
+		next unless $context and $run;
+
+		MULTILINE:
 		next unless $context;
 		next unless length $line;
 		next if $line =~ /^\s*$/;
 		next if $line =~ /^\s*#/;
 
 		# Count braces
-		my $opens = ( $line =~ s/([\(\[\{])/$1/g );
-		my $closes = ( $line =~ s/([\)\]\}])/$1/g );
+		$opens += ( $line =~ s/([\(\[\{])/$1/g );
+		$opens -= ( $line =~ s/([\)\]\}])/$1/g );
+		$directive .= $line;
 
-		unless ( $opens - $closes) { # Directive is contained on one line
-			# TODO
-		} else {
-			print "TODO: COMBO LINE $line" if $verbose;
+		if (! $opens) { # Read the whole thing
+			$multiline = 0;
+			push @globconf, $directive if $context eq 'globconf';
+			push @catconf, $directive if $context eq 'catconf';
+			$directive = "";
+		} elsif ( $opens > 0 ) { # Directive continues
+			$multiline++;
+			next;
+		} else { # Too many closing brackets
+			$globalclose++;
+			$run = 0;
+			$opens = 0; # BLAM! Took me a while to figure it out
+			# This is okay, verified to only happen at closing of the 
+			# opening of "my $directives = [" which is not counted.
+			#die "Holy moustache! at $linenr: $line\n";
 		}
+	} # END for()
 
-	}
+	$globalclose == 2 or die "Assert globalclose == 2: $globalclose\n";
 
+	# Well, let's congratulate ourselves.
+	#print Dumper @globconf;
 }
 
 
