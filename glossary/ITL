@@ -248,7 +248,7 @@ contained a whitespace.
 
 
 <section>
-<title>Deeper look at argument quoting</title>
+<title>Deeper Look at Argument Quoting</title>
 
 <para>
 The question is &mdash; exactly when can you omit the quotes around
@@ -479,7 +479,7 @@ it an attribute array or hash value.
 
 
 <section>
-<title>Perl calls</title>
+<title>Perl Calls</title>
 
 <para>
 You can simply ignore this section if you don't know the &PERL; 

@@ -1,0 +1,252 @@
+
+Interchange allows taxing in a number of ways.
+<!-- TO what price is taxing applied, and how it's available ? price
+without and with tax included, for each product and total? -->
+</para>
+
+<!-- TODO what about that racke's TaxInclusive or what? -->
+
+<section>
+	<title>Simple "salestax.asc" Method</title>
+<para>
+In this simple taxing method, &conf-SalesTax; directive is
+set to form fields whose values will be used as keys to look up
+the tax rate in <filename>CATROOT/products/salestax.asc</filename>.
+</para>
+<para>
+Sales tax calculation in this simple scheme is performed on a straight
+percentage basis,
+with certain items allowed to be tax-exempt. Simply initialize the
+&conf-SalesTax; directive to the name of lookup fields. Those lookup fields
+are the ones that are available on the final order form and indicate
+geographical locality. Usually, the fields are zip and state codes:
+
+<programlisting><![CDATA[
+SalesTax    zip,state
+]]></programlisting>
+
+Each line of the mentioned <filename>CATROOT/products/salestax.asc</filename>
+file should contain a code (again, usually 5-digit zip or 2-letter state
+ID), followed by a TAB character and a desired percentage.
+
+<programlisting><![CDATA[
+default	0.0
+45056	.0525
+61821	.0725
+61801	.075
+IL	.0625
+OH	.0525
+VAT	.15
+WA	.08
+]]></programlisting>
+
+<!-- TODO salestax.asc - lookup by many values.. they get added together
+or first or last takes precendence -->
+Based on user information given on the order form (and given our
+sample &conf-SalesTax; setting), &IC; will attempt a tax lookup by
+zip and state (in that order), and apply the percentage found to the
+<emphasis>subtotal</emphasis> of the order.
+<!-- TODO subtotal is without taxing or not? (you can always see the
+price without taxing applied by calling &tag-subtotal;). -->
+<!-- TODO comment this - is subtotal plain, and [salestax] only salestax
+or what? -->
+The subtotal will include item prices, taxes and shipping costs (if
+&conf-TaxShipping; was set up).
+It will add the percentage, then make that available with the &tag-salestax;
+tag for display on the order form.
+If no match is found in <filename>CATROOT/products/salestax.asc</filename>,
+the entry <literal>DEFAULT</literal> (case-<emphasis>insensitive</emphasis>)
+will be applied &mdash; which is usually <emphasis>zero</emphasis>.
+</para>
+<!--
+If business is being done on a national basis, it is now common to have
+to collect sales tax for multiple states. If you are doing so, it is possible
+to subscribe to a service which issues regular updates of the sales tax
+percentages - usually by quarterly or monthly subscription. Such a
+database should be easily converted to Interchange format - but some systems
+are rather convoluted, and it will be well to check and see if the
+program can export to a flat ASCII file format based on zip code.
+-->
+<para>
+If some items are not taxable, then you must set up a field in your
+database which indicates that. Announce this field name by using the 
+&conf-NonTaxableField; directive. If the specifield field for that item
+evaluates to a &glos-true; value, sales tax will not be applied to the item.
+</para>
+
+<!--
+If your state taxes shipping, use the <emphasis>TaxShipping</emphasis>
+directive. Utah and Nevada are known to tax shipping - there may be others.
+-->
+
+<para>
+If you want to set a fixed tax for all orders, as might occur for VAT
+in some countries, then &conf-SalesTax; set to the zip or state codes is
+not optimal for the purpose of sales tax calculation. The solution is to
+introduce an arbitrary variable that, unlike
+<database class='field'>zip</database> or 
+<database class='field'>state</database>, does not change from user to user.
+Then, you would set that variable in user session to point to a fixed entry
+in the
+<filename>CATROOT/products/salestax.asc</filename> file.
+Exactly how you're going to set a session variable is not important; 
+you could use the &conf-ValuesDefault; directive (
+<code>ValuesDefault tax_code VAT</code>), a hidden form variable
+(<code><![CDATA[<input type="hidden" name="tax_code" value="VAT" />]]></code>),
+or a simple &PERL; code block
+(<code><![CDATA[[perl] $Values->{tax_code} = 'VAT'; return [/perl]]]></code>).
+</para>
+</section>
+
+<section>
+	<title>"Fly Tax" Method</title>
+<para>
+This is one of the simpler taxing methods as well. A series of Interchange
+&conf-Variable; settings are read to develop a salestax rate for one or more
+geographical localities.
+</para>
+<para>
+With this method, you implement the simple SalesTax method explained above,
+but only put one entry in 
+<filename>CATROOT/products/salestax.asc</filename>. Then
+&var-TAXAREA;, &var-TAXRATE;
+and &var-TAXSHIPPING; catalog variables would be used to build
+the tax rates.
+</para>
+<para>
+The single entry in <filename>CATROOT/products/salestax.asc</filename>
+should be default with a value of &tag-fly-tax;:
+<programlisting>
+DEFAULT	[fly-tax]
+</programlisting>
+
+<!--
+To set the field that is used for the state code, you use the
+standard Interchange {{CMD[jump="icconfig.html#SalesTax"]SalesTax}} directive. It would almost always
+be set to <literal>state</literal>.
+-->
+</para>
+</section>
+
+<section>
+	<title>"Salestax Multi" or "VAT Taxing" Method</title>
+<para>
+With this method, <database>country</database> and <database>state</database>
+databases are used to develop complex VAT or salestax rate calculations,
+based on country and state, possibly with different rates based on product
+type.
+</para>
+<para>
+The &conf-SalesTax; directive must be set to <literal>multi</literal>, and
+then the type of tax to apply will be read from the
+<database>country</database> database. Since this is a standard database, to
+display taxing for say, Croatia (code <literal>HR</literal>), you'd 
+simply call:
+
+<programlisting>
+[data table=country col=tax key=HR]
+</programlisting>
+
+We've mentioned some hard-coded values above (the country table, column names
+etc.), but this is all configurable using 
+&var-MV_COUNTRY_TABLE;,
+&var-MV_COUNTRY_FIELD;,
+&var-MV_COUNTRY_TAX_FIELD;,
+&var-MV_STATE_TABLE;,
+&var-MV_STATE_FIELD;,
+&var-MV_STATE_TAX_FIELD;,
+&var-MV_TAX_TYPE_FIELD; and 
+&var-MV_TAX_CATEGORY_FIELD; variables.
+</para>
+<para>
+So, with this <emphasis>multi</emphasis> approach, &IC; first performs a lookup
+in the <database>country</database> database. The default key for the lookup
+is, of course, <code>[value country]</code> (value of the
+<literal>country</literal> form variable), and the column retrieved is 
+<database class='field'>tax</database>. At that point, the following rules
+are applied:
+
+<itemizedlist>
+	<listitem><para>
+	If no string is found, tax returns <literal>0</literal>
+	</para></listitem>
+	<listitem><para>
+	If string <literal>simple:<replaceable>COUNTRY_CODE</replaceable></literal>
+	is found, &tag-fly-tax; is used for the appropriate country.
+	</para></listitem>
+	<listitem><para>
+	If string <literal>state</literal> is found, then another lookup
+	in the <database>country</database> databaseis done; it's something along
+	the lines of 
+<programlisting>
+select tax from state where country = [value country] and state = [value state]
+</programlisting>
+	The value is then applied as explained in the following steps
+	</para></listitem>
+	<listitem><para>
+	If a pure (integer or decimal) number is found (such as
+	<literal>0.05</literal>), the rate is applied directly
+	</para></listitem>
+	<listitem><para>
+	If a percentage is found, such as <literal>22.2%</literal>, the rate is,
+	obviously, applied as a percentage
+	</para></listitem>
+	<listitem><para>
+	<!-- is default= necessary, or just allowed to be specified? -->
+	If a string <literal>category = <replaceable>D</replaceable>%, default = <replaceable>D</replaceable>%</literal> is found, the
+	<database class='field'>tax_category</database> field in the 
+	<database>products</database> database is used to determine tax rate.
+	(The default option is there to be applied if the
+	<database class='field'>tax_category</database> for a product is zero
+	or unspecified.)
+	</para></listitem>
+</itemizedlist>
+
+<!-- Move to appropriate tag's examples
+This product data
+
+!block example
+    sku      price     tax_category
+    os28003  10.00     tools
+    os28004  20.00     food
+!endblock
+
+with this country and state data:
+
+!block example
+    code     name     tax
+    US       U.S.A.   state
+    JP       Japan    tools=10%, default=15%
+
+
+    code   country   state   name      tax
+    0001   US        IL      Illinois  6.5%
+    0002   US        OH      Ohio      default = 5.5%, food = 1%
+    0003   US        AZ      Arizona
+!endblock
+
+Will yield tax for one each of os28003 and os28004 of:
+
+!block example
+    Japan   $4.00
+    US/IL   $1.95
+    US/OH   $0.75
+    US/AZ   $0.00
+!endblock
+-->
+
+</para>
+</section>
+
+<section>
+	<title>"Levies" or "Multiple Tax" Method</title>
+<para>
+Using &conf-Levies; and &conf-Levy; structure, any or all of
+the above methods are used in combination to implement the a 
+taxing scheme of truly arbitrary complexity.
+</para>
+<!-- TODO missing info on levies -->
+<!-- TODO where does "Levy" come from? -->
+</section>
+
+<para>

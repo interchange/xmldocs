@@ -96,7 +96,7 @@ order an item by using both form-based (button-clicking) and link-based
 </para>
 
 <section>
-	<title>Link-based ordering</title>
+	<title>Link-based Ordering</title>
 
 <para>
 Link-based ordering is implemented through the &tag-order; tag. You should
@@ -144,7 +144,7 @@ Order a [order [item-code]][item-field name]</a> today!
 </section>
 
 <section>
-	<title>Form-based ordering</title>
+	<title>Form-based Ordering</title>
 
 <para>
 Form-based ordering comes handy when you want to implement more complex

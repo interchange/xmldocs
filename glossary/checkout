@@ -1,0 +1,169 @@
+
+The check-out process consists of users filling in information via &glos-HTML;
+forms, and &IC; verifying their input on arbitrary number of levels using 
+so-called <emphasis>profiles</emphasis>.
+</para>
+
+<para>
+Profiles can be defined in external files (and activated using 
+&conf-OrderProfile;) or in &glos-scratch; variables. External files are,
+by convention, kept in <filename class='directory'>CATROOT/etc/</filename> and 
+begin with <literal>profiles.</literal>. Multiple profiles
+can be defined in each file.
+</para>
+
+<para>
+You can learn about the principle and syntax of the profile files in the
+&glos-profile; glossary entry.
+Only when the input "passes" the profile check, is the check-out process
+able to proceed.
+</para>
+
+
+<section id="SimpleOrderReportFile">
+	<title>Simple Order Report File</title>
+
+<para>
+Most of the time, you will want the successful check-out operation (order
+completion) to generate some kind of notification. In most common setups,
+this will include e-mailing order reports.
+</para>
+<para>
+Simple order report file, <filename>CATROOT/etc/report</filename>, defines
+the layout (template) of the order report. All form variables are accessible
+from the report file by using the familiar &PERL; <literal>$</literal> syntax.
+
+<programlisting><![CDATA[
+         Order Date: $date
+  
+               Name: $name
+      Email address: $email
+  
+   Shipping address: $addr
+   Town, State, Zip: $town, $state $zip
+            Country: $country
+]]></programlisting>
+
+<!-- TODO what's the mental line for this?
+Interchange defines some values for use in the search form - they begin
+with <literal>mv_</literal> and are automatically ignored.
+The order number as set by backend ordering is in the variable mv_order_number,
+and available for your use.
+-->
+
+</para>
+</section>
+
+
+<section id="FullyConfigurableOrderReports">
+	<title>Fully-configurable Order Reports</title>
+
+<para>
+You can specify fully-configurable order reports by setting the hidden
+form variable <mv>mv_order_report</mv> to an existing &IC; catalog page.
+This page will be processed (interpolated and all) as standard Interchange
+page before being sent by email. That said,
+you see you could include &glos-HTML; in the file. Although many mail clients
+<emphasis>will</emphasis> parse HTML, it seems that the initial excitement
+among the ordinary people vanished and they
+again prefer plain-text e-mails. If you wanted to provide a &glos-HTML; 
+version, you could always provide a link to a copy on your web server.
+<!-- TODO copy example to files/ and create link
+An example report is provided in the demo file
+<filename>pages/ord/report.html</filename>.
+ -->
+</para>
+</section>
+
+
+<!-- TODO work on this
+<section id="OrderReceipts">
+	<title>Order Receipts</title>
+<para>
+The file can of course be configured with all Interchange tags, and
+will be interpolated for the ordered items before they are deleted from
+the user session. You can set the default receipt with the <literal>receipt</literal>
+key in SpecialPage. If using order <emphasis>Route</emphasis>s, as in the <literal>foundation</literal> demo,
+you set it with the <literal>receipt</literal> key to <literal>Route</literal>.
+</para>
+</section>
+-->
+
+
+<section id="OrderCounter">
+	<title>Order Counter</title>
+<para>
+An order counter can be enabled simply &mdash; just set the &conf-OrderCounter;
+directive to the appropriate file name.
+An incrementing count of all orders will be
+kept and assigned as orders are placed. By default, the number
+starts at <literal>0</literal>, but you can edit the file and change the
+starting or current number at any time.
+This feature is made possible by the <classname>File::CounterFile</classname>
+&PERL; module.
+</para>
+</section>
+
+
+<section id="CustomerFormFields">
+	<title>Custom Form Fields</title>
+
+<para>
+The default basket and order pages contain a number of form fields, 
+allowing customers to enter the necessary information. This, however, can't
+satisfy all individual needs. To remove some of the fields, simply delete
+them from the &glos-HTML; pages (or, better yet, disable by using the
+&tag-comment; tag). Do not forget to also deactivate any entries in 
+the profile files.
+</para>
+<para>
+<!-- TODO does this work for order.html only or basket.html too ? -->
+To add new fields, simply add them to the pages. The information will
+automatically be included in the report files. Here's a template you
+could re-use for your own fields, replacing <literal>town</literal>
+with your values:
+
+<!-- TODO is <input> arg maxlen= or maxlength= ? -->
+<programlisting><![CDATA[
+<input type="text" name="town" value="[value town]" size="30" maxlen="40" />
+]]></programlisting>
+</para>
+
+<note>
+<para>
+Using <literal>maxlen</literal> &glos-HTML; &lt;input&gt; attribute to
+limit the length of incoming
+input is insecure, since that check is performed client-side only.
+It is surely an element of good programming on all levels, but don't forget
+to perform real length check in the appropriate form profile.
+<!-- TODO link to glos-profile-->
+</para>
+</note>
+
+<!-- This is obvious, isn't it? 
+Choose a name for this input field such as "email" for an email
+address. Set the name attribute to the name you have chosen.
+The value attribute specifies the default value to give the field when
+the page is displayed. Because the customer may enter information on
+the order page, return to browsing, and come back to the order page,
+you want the default value to be what was entered the first time. This
+is done with the <code>[value var]</code> element, which returns the last value of an
+input field. Thus,
+<programlisting><![CDATA[
+value="[value name]"
+]]></programlisting>
+will evaluate to the name entered on the previous order screen, such
+as:
+<programlisting><![CDATA[
+value="Jane Smith"
+]]></programlisting>
+which will be displayed by the browser.
+The size attributes specifies how many characters wide the input field
+should be on the browser. You do not need to set this to fit the
+longest possible value since the browser will scroll the field, but
+you should set it large enough to be comfortable for the customer.
+-->
+
+</section>
+
+<para>

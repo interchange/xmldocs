@@ -1,0 +1,166 @@
+
+&IC; form <emphasis>profiles</emphasis> are used to validate form inputs and
+eventually trigger additional actions. Input fields validation usually contains
+of requireing some of the fields to be non-empty or match a specific regular
+expression pattern at time of submit.
+</para>
+<para>
+Actions, for example, can be used to signalize the completion of an order
+process. Profiles are not specific to order checkout or something; they are
+an integral part of all form processing in &IC;. You will also see actions
+such as &IC; account creation, login, logout or password change being at least
+partly handled using profiles.
+</para>
+<para>
+Profiles can be defined in external files (and activated using 
+&conf-OrderProfile;) or in &glos-scratch; variables. External files are,
+by convention, kept in <filename class='directory'>CATROOT/etc/</filename> and 
+begin with <literal>profiles.</literal>. Multiple profiles
+can be defined in each file.
+</para>
+<para>
+<!-- TODO move profiles description to separate file -->
+A very simple &glos-hello-world;-like profile example follows:
+
+<programlisting>
+__NAME__  test_profile
+
+fname=required
+lname=required
+
+__END__
+</programlisting>
+
+The above profile requires customers' first and last names to be
+entered.
+</para>
+
+<note>
+<para>
+The <literal>__NAME__</literal> and <literal>__END__</literal> markers
+must start at the beginning of line, not even whitespace is allowed. This
+is very important because the profile would be ignored otherwise.
+</para>
+</note>
+
+<para>
+If users leave some of the required fields empty (or there's some other
+reason why you'd want them to correct their input), you'll probably want
+to show them the form page again and display some kind of an error
+message. To override the default messages, simply specify your own strings
+after the format check specification. Here's an example:
+
+<programlisting>
+__NAME__  test_profile
+
+fname=required First name is required!
+lname=required Last name is required!
+
+__END__
+</programlisting>
+</para>
+
+<section>
+	<title>Format-check Specification</title>
+
+<para>
+From the examples above, you can see that the format check specifications are
+specified as <literal><replaceable>FORM_VARIABLE_NAME</replaceable>=<replaceable>CHECK_TYPE</replaceable></literal>. Form variable names are obvious; in our
+example they were <literal>fname</literal> and <literal>lname</literal>.
+Check types, however, can take on one of the following values:
+</para>
+
+<itemizedlist>
+
+	<listitem><para>
+		<literal>required</literal> - form field must end up with non-empty content.
+		If no direct &glos-CGI; variable exists, variable is searched in the
+		the &glos-value;s space (form fields submitted at some past time during
+		the session) and &glos-UserDB;
+	</para></listitem>
+	<listitem><para>
+		<literal>mandatory</literal> - form field must contain a non-blank value,
+		and it must
+		exist directly on the form being checked. In other words, it must be 
+		a &glos-CGI; variable and not a &glos-value; variable coming from some
+		previous form input or &glos-UserDB;
+	</para></listitem>
+	<listitem><para>
+		<!-- TODO exactly what regex is allowed for 'phone' type? -->
+		<literal>phone</literal> - form field must look like a phone number
+		(by a very loose specification), allowing numbers from all countries
+	</para></listitem>
+	<listitem><para>
+		<literal>phone_us</literal> - form field must have US phone number
+		formatting with area code included
+	</para></listitem>
+	<listitem><para>
+		<!-- TODO is state checked in state DB or what ? -->
+		<literal>state</literal> - form field must contain an US state,
+		including DC and Puerto Rico
+	</para></listitem>
+	<listitem><para>
+		<!-- TODO is province checked in state DB or what ? and same for
+		other options below -->
+		<literal>province</literal> - form field must contain a canadian
+		province or pre-1997 territory
+	</para></listitem>
+	<listitem><para>
+		<literal>state_province</literal> - form field must contain an US state
+		or canadian province
+	</para></listitem>
+	<listitem><para>
+		<literal>zip</literal> - form field must contain
+		an US postal code formatting, with optional ZIP+4.
+		This is also called by the alias <literal>us_postcode</literal>
+	</para></listitem>
+	<listitem><para>
+		<literal>ca_postcode</literal> - form field must contain a canadian
+		postal code formatting (check for a valid first letter is performed)
+	</para></listitem>
+	<listitem><para>
+		<literal>postcode</literal> - form field must contain a valid
+		US or Canada postal code formatting
+	</para></listitem>
+	<listitem><para>
+		<literal>true</literal> - form field content must begin with
+		<literal>y</literal>, <literal>1</literal> or <literal>t</literal>
+		(case-<emphasis>insensitive</emphasis>)
+	</para></listitem>
+	<listitem><para>
+		<literal>false</literal> - form field content must begin with
+		<literal>n</literal>, <literal>0</literal> or <literal>f</literal>
+		(case-<emphasis>insensitive</emphasis>)
+	</para></listitem>
+	<listitem><para>
+		<literal>email</literal> - form field content must pass rudimentary
+		e-mail address check; it must contain "AT" 
+		(<literal>@</literal>), a name, and a minimal domain 
+	</para></listitem>
+	<listitem><para>
+		<literal>regex <replaceable>REGEX_PATTERNs</replaceable></literal> -
+		form field content must match regular
+		<!-- TODO whitespace or space? -->
+		expression patterns. Multiple patterns can be specified, separated by
+		whitespace 
+	</para></listitem>
+	<listitem><para>
+		<literal>length <replaceable>RANGE</replaceable></literal>
+		<!-- TODO can it be 4,8? -->
+		- form field content must satisfy the allowed length range
+	</para></listitem>
+	<listitem><para>
+		<literal>unique <replaceable>DATABASE</replaceable></literal>
+		- form field content must not exist in a given DATABASE.
+	</para></listitem>
+	<listitem><para>
+		<literal>filter <replaceable>FILTER</replaceable></literal>
+		- form field content should be equal to the original value after
+		being ran through the specified FILTER
+	</para></listitem>
+</itemizedlist>
+
+</section>
+
+<para>
+

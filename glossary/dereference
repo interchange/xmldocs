@@ -41,12 +41,13 @@ When list elements need to be copied to another location (usually as part of
 some bigger plan which, again, we are not interested in), they can be copied
 <emphasis>by value</emphasis> (with dereferencing) or
 <emphasis>by reference</emphasis> (obviously, without dereferencing).
-In former case, you would end up with 2 references and 2 different
+With copy by value, you would end up with 2 references and 2 different
 lists (initially they would be the same but afterwards you could modify
-each with no connection to the other). In the latter case, you would again
-have 2 references, but both pointing to the same list. Modifying data through
-any of the two references would have impact on both.
+each with no connection to the other). In case of copy by reference, you would
+again have 2 references, but both pointing to the same list. Modifying data
+through any of the two references would have impact on both.
 </para><para>
 So, when a data structure (or its element) is said to be copied
 <emphasis>without dereferencing</emphasis>, then in case it was a reference,
 it is still copied in itself, but all copies point to the same location.
+In other words, the data is not duplicated, only the access points are.

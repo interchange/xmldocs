@@ -1,6 +1,5 @@
 In general programming terms, a <emphasis>true</emphasis> value is 
-anything, except <literal>0</literal> (zero), <literal>""</literal>
-(an empty string) and undefined value.
+anything that is not &glos-false;.
 </para><para>
-Note that a value of a string containing only whitespace
+Note that a string containing only whitespace
 (say, one TAB or space) is also considered 'true'.
