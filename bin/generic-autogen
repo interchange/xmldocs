@@ -1,0 +1,115 @@
+#!/usr/bin/perl
+
+use warnings;
+use strict;
+
+my %items;
+my %alphabet;
+my $verbose = 0;
+my $cat = shift;
+my @loaded;
+my $document;
+
+# HEAD
+my $glossary = <<__ENDP__;
+<?xml version="1.0" standalone="no"?>
+
+<!DOCTYPE glossary PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+  "docbook/docbookix.dtd">
+
+<glossary>
+	<title>Interchange Documentation: Glossary</title>
+
+__ENDP__
+my $howtos = <<__ENDP__;
+<?xml version="1.0" standalone="no"?>
+
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+  "../docbook/docbookxi.dtd">
+
+<book id="howtos">
+
+	<bookinfo>
+
+		<title>Interchange HOWTOs collection</title>
+		<titleabbrev>howtos</titleabbrev>
+
+		<legalnotice>
+			<para>
+			Copyright (C) 2004, Interchange Development Group
+			</para>
+			<para>
+			This documentation is free; you can redistribute it and/or modify
+			it under the terms of the GNU General Public License as published by
+			the Free Software Foundation; either version 2 of the License, or
+			(at your option) any later version.
+			</para>
+			<para>
+			It is distributed in the hope that it will be useful,
+			but WITHOUT ANY WARRANTY; without even the implied warranty of
+			MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+			GNU General Public License for more details.
+			</para>
+		</legalnotice>
+
+	</bookinfo>
+
+	<!--
+	<preface>
+		<title>Foreword</title>
+		<para></para>
+	</preface>
+	-->
+__ENDP__
+
+# LOAD ITEMS
+opendir DIR, $cat or die "Can't open $cat/ ($!)\n";
+readdir DIR; readdir DIR;
+
+while ( my $file = readdir DIR ) {
+	next if $file =~ /^\./;
+	open IN, "< $cat/$file" or die "Can't read-open $cat/$file ($!)\n";
+	$items{$file} = [ <IN> ];
+	$alphabet{ lc(substr($file, 0, 1)) }++;
+	push @loaded, $file;
+	print "Added $file\n" if $verbose;
+	close IN or warn "Error closing $cat/$file ($!)\n";
+}
+closedir DIR or warn "Error closing $cat/ ($!)\n";
+
+
+# ADD ITEMS TO HEAD  (TYPE-SPECIFIC)
+if ( $cat eq 'glossary' ) {
+	$document = $glossary;
+	for my $letter ( sort keys %alphabet ) {
+		next unless $alphabet{$letter}; # Next if no entries on that letter
+		print "Passed on $letter\n" if $verbose;
+
+		$document .= '<glossdiv><title>' . uc($letter) . '</title>' . "\n";
+
+		my @keys = sort grep {/^$letter/i} keys %items;
+		for my $key ( @keys ) {
+			print "FOUND KEY $key\n" if $verbose;
+			$document .= join "", @{ $items{$key} };
+		}
+		$document .= '</glossdiv>' . "\n";
+	}
+	$document .= '</glossary>';
+
+} elsif ( $cat eq 'howtos' ) {
+	$document = $howtos;
+	for my $howto ( @loaded ) { # order is as on filesystem
+		print "Processing $howto\n" if $verbose;
+		$document .= join "", @{ $items{$howto} };
+	}
+	$document .= '</book>';
+}
+
+
+# SAVE OUT
+print "GEN: $cat/$cat.xml\n";
+open OUT, "> $cat/$cat.xml" or
+die "Can't wropen $cat/$cat.xml ($!)\n";
+print OUT $document;
+close OUT or warn "Cant close $cat/$cat.xml ($!)\n";
+

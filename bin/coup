@@ -1,0 +1,39 @@
+#!/usr/bin/perl
+
+use warnings;
+use strict;
+use Fatal qw/chdir/;
+use Getopt::Long;
+
+my $home = $ENV{PWD};
+my $update = 0;
+unless ( GetOptions ( 
+	"update|u" => \$update,
+)) { die "Error parsing options\n" }
+
+my $rev = shift;
+$rev or die "Usage: $0 <IC version>\n";
+
+my $rev_no_minor;
+my $cvs_r = "";
+
+if ( $rev =~ /^\d/ ) { # Everything except 'cvs-head'
+	( $rev_no_minor = reverse $rev ) =~ s/.+?\.//;
+	$rev_no_minor = reverse $rev_no_minor;
+	( $cvs_r = $rev_no_minor ) =~ s/\./_/g;
+	$cvs_r = "-r STABLE_$cvs_r-branch";
+}
+
+if ( -d ($_ = "sources/$rev") ) { # Source is here, only update
+	if ( $update ) {
+		chdir $_;
+		print STDERR "CUP   $rev\n";
+		system("cvs -z9 update >& ../../tmp/cup.$rev");
+	}
+}
+else { # Need to perform checkout
+	chdir "sources";
+	print STDERR "CO    $rev\n";
+	system("cvs -z9 -d:pserver:cvs\@cvs.icdevgroup.org:/var/cvs checkout -d $rev $cvs_r interchange >& ../../tmp/co.$rev");
+}
+
