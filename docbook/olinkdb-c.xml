@@ -2,6 +2,7 @@
 <!DOCTYPE targetset 
 	SYSTEM "/usr/share/xml/docbook/stylesheet/nwalsh/common/targetdatabase.dtd" [
 	<!ENTITY iccattut SYSTEM "../tmp/iccattut-c.db"> 
+	<!ENTITY upgrade SYSTEM "../tmp/upgrade-c.db"> 
 	<!ENTITY xmldocs SYSTEM "../tmp/xmldocs-c.db"> 
 	<!ENTITY howtos SYSTEM "../tmp/howtos-c.db"> 
 	<!ENTITY glossary SYSTEM "../tmp/glossary-c.db"> 
@@ -23,6 +24,12 @@
 			<dir name='iccattut'>
 				<document targetdoc="iccattut">
 				&iccattut;
+				</document>
+			</dir>
+			
+			<dir name='upgrade'>
+				<document targetdoc="upgrade">
+				&upgrade;
 				</document>
 			</dir>
 			

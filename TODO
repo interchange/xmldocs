@@ -1,12 +1,10 @@
-
 - Skripta ce pratiti koji $opt->{} se koristi u tagu, i skrenuti pozornost
   na one koji ne koriste ime $opt->{}, a trebali bi. Onda item mora imati
   u refs/ listu opcija i opisa, a skripta sama nadje jesu li obavezni,
   pozicioni, i warnira ako se u sourceu koriste neki koji nisu 
   zavedeni u listu. I autogenerira cijeli onaj crapload XMLa.
-- Suppress inline docs (in source)  for items that have xmldocs docs
-- In source contexts, for tags, highlight tagCanon and provide <acronym> with
-  short explanation and example
+
+
 - See that if 'crypt' is put in see also, all symbols of that name appear
   in see also line and their type is distinguished visually.
 - Add ROW_REPARSE along ROW_INTERPOLATE in tag refs
@@ -153,3 +151,11 @@ desktop machine for ultimate convenience.
 
 NON DOCS RELATED
 - Image tag, sort out mgkpath thing
+
+
+
+Nice but not fitting the idea
+- CVS 'ident' command
+- Suppress inline docs (in source)  for items that have xmldocs docs
+- In source contexts, for tags, highlight tagCanon and provide <acronym> with
+  short explanation and example

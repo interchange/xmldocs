@@ -1,0 +1,1032 @@
+<?xml version="1.0" standalone="no"?>
+
+<!-- catalog not working ? -->
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+	"../docbook/docbookxi.dtd">
+
+<article id='upgrade'>
+
+<articleinfo>
+	<title>Interchange Guides: Upgrading</title>
+	<titleabbrev>upgrade</titleabbrev>
+
+	<copyright>
+		<year>2003</year><year>2004</year><year>2005</year>
+		<holder>Interchange Development Group</holder>
+	</copyright>
+	<copyright>
+		<year>2002</year>
+		<holder>Red Hat, Inc.</holder>
+	</copyright>
+
+	<authorgroup>
+		<author>
+			<firstname>Davor</firstname><surname>Ocelic</surname>
+			<email>docelic@icdevgroup.org</email>
+		</author>
+		<author>
+			<firstname>Jon</firstname><surname>Jensen</surname>
+			<email>jon@endpoint.com</email>
+		</author>
+		<author><firstname>Mike</firstname><surname>Heins</surname>
+			<email>mike@perusion.com</email>
+		</author>
+	</authorgroup>
+
+	<legalnotice>
+		<para>
+		This documentation is free; you can redistribute it and/or modify
+		it under the terms of the &GNU; General Public License as published by
+		the Free Software Foundation; either version 2 of the License, or
+		(at your option) any later version.
+		</para>
+		<para>
+		It is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+		</para>
+	</legalnotice>
+
+	<abstract>
+		<para>
+		The purpose of this document is to provide general notes for upgrading
+		from Minivend 3 to Minivend 4, and from Minivend 4 to current 
+		&IC;.
+		</para>
+	</abstract>
+
+</articleinfo>
+
+<sect1 id="pod2docbook-ch-1-sect-3">
+<title>Interchange 4.8 Deprecated Features</title>
+<para>
+This document describes features of &IC; 4.8 that have been
+deprecated. Any use of these features should be discontinued. In most cases
+we have provided an alternative mechanism to accomplish the same results.
+These deprecated features may be removed at some point in the future. You
+should change to the new mechanism to avoid breakage.
+</para>
+
+<sect2 id="pod2docbook-ch-1-sect-3-a">
+<title>Deprecated Features Previous to Interchange 4</title>
+<para>
+This section needs some serious work.
+</para>
+
+<variablelist>
+<varlistentry><term><emphasis>cart/page from path
+
+</emphasis></term>
+<listitem><para></para>
+
+<para>
+<filename>interchange.PL</filename> 308,313</para>
+
+<para>
+<screen>
+        if($path =~ s:/(.*)::) {
+                $cart = $1;
+                if($cart =~ s:/(.*)::) {
+                        $page = $1;
+                }
+        }
+</screen></para>
+
+</listitem></varlistentry>
+<varlistentry><term><emphasis>mv_orderpage
+
+</emphasis></term>
+<listitem><para></para>
+
+<para>
+<filename>interchange.PL</filename> 321,323</para>
+
+<para>
+<screen>
+        $CGI::values{mv_nextpage} = $CGI::values{mv_orderpage}
+                                   || find_special_page('order')
+                if ! $CGI::values{mv_nextpage};
+</screen></para>
+
+</listitem></varlistentry>
+<varlistentry><term><emphasis>$decode
+
+</emphasis></term>
+<listitem><para></para>
+
+<para>
+<filename>interchange.PL</filename> 493</para>
+
+<para>
+<screen>
+      HTML::Entities::decode($value) if $decode;
+</screen></para>
+
+</listitem></varlistentry>
+<varlistentry><term><emphasis>mv_orderpage
+
+</emphasis></term>
+<listitem><para></para>
+
+<para>
+<filename>interchange.PL</filename> 854,855</para>
+
+<para>
+<screen>
+      $CGI::values{mv_nextpage} = $CGI::values{mv_orderpage}
+                                    if $CGI::values{mv_orderpage};
+</screen></para>
+
+</listitem></varlistentry>
+<varlistentry><term><emphasis>ROUTINES and LANG
+
+</emphasis></term>
+<listitem><para></para>
+
+<para>
+<filename>interchange.PL</filename> 1552,1579</para>
+
+<para>
+<screen>
+   ROUTINES: {
+       last ROUTINES
+            unless index($Vend::FinalPath, '/process/') == 0;
+       while (
+           $Vend::FinalPath =~
+              s{/process/(locale|language|currency)/([^/]*)/}
+               {/process/}
+          )
+       {
+               $::Scratch-&gt;{"mv_$1"} = $2;
+       }
+       $Vend::FinalPath =~ s:/process/page/:/:;
+   }
+   my $locale;
+   if($locale = $::Scratch-&gt;{mv_language}) {
+           $Global::Variable-&gt;{LANG}
+                   = $::Variable-&gt;{LANG} = $locale;
+   }
+</screen></para>
+
+<para>
+<screen>
+   if ($Vend::Cfg-&gt;{Locale}
+                and $locale = $::Scratch-&gt;{mv_locale}
+                and defined $Vend::Cfg-&gt;{Locale_repository}-&gt;{$locale}
+       )
+   {
+           $Global::Variable-&gt;{LANG}
+                           = $::Variable-&gt;{LANG}
+                           = $::Scratch-&gt;{mv_language}
+                           = $locale
+                    if ! $::Scratch-&gt;{mv_language};
+           Vend::Util::setlocale(  $locale,
+                                   ($::Scratch-&gt;{mv_currency} || undef),
+                                   { persist =&gt; 1 }
+                                                                );
+   }
+</screen></para>
+
+</listitem></varlistentry>
+<varlistentry><term><emphasis>list_compat
+
+</emphasis></term>
+<listitem><para></para>
+
+<para>
+<filename>lib/Vend/Interpolate.pm</filename> 2808</para>
+
+<para>
+<screen>
+         list_compat($opt-&gt;{prefix}, \$text);
+</screen></para>
+
+<para>
+<filename>lib/Vend/Interpolate.pm</filename> 3538</para>
+
+<para>
+<screen>
+        list_compat($opt-&gt;{prefix}, \$text);
+</screen></para>
+
+<para>
+<filename>lib/Vend/Interpolate.pm</filename> 3874</para>
+
+<para>
+<screen>
+        list_compat($opt-&gt;{prefix}, \$page);
+</screen></para>
+
+</listitem></varlistentry>
+<varlistentry><term><emphasis>find_sort
+
+</emphasis></term>
+<listitem><para></para>
+
+<para>
+<filename>lib/Vend/Interpolate.pm</filename> 3270,3271</para>
+
+<para>
+<screen>
+        $text =~ /^\s*\[sort\s+.*/si
+                and $opt-&gt;{sort} = find_sort(\$text);
+</screen></para>
+
+</listitem></varlistentry>
+<varlistentry><term><emphasis>mv_order_report
+
+</emphasis></term>
+<listitem><para></para>
+
+<para>
+<filename>lib/Vend/Order.pm</filename> 867,868</para>
+
+<para>
+<screen>
+    $body = readin($::Values-&gt;{mv_order_report})
+                if $::Values-&gt;{mv_order_report};
+</screen></para>
+
+</listitem></varlistentry>
+<varlistentry><term><emphasis>mv_error_$var
+
+</emphasis></term>
+<listitem><para></para>
+
+<para>
+<filename>lib/Vend/Order.pm</filename> 1030</para>
+
+<para>
+<screen>
+                        $::Values-&gt;{"mv_error_$var"} = $message;
+</screen></para>
+
+</listitem></varlistentry></variablelist>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-3-b"><title>Interchange 4 Deprecated Features</title>
+<variablelist>
+<varlistentry><term><emphasis>Vend::Util::send_mail Vend::Order::send_mail send_mail
+
+</emphasis></term>
+<listitem><para></para>
+
+<para>
+The <function>send_mail</function> routine has been replaced by the
+<function>Vend::Mail::send</function>.
+</para>
+
+</listitem></varlistentry></variablelist>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="pod2docbook-ch-1-sect-4"><title>Upgrading from Minivend 4.0 to Interchange 4.6</title>
+<para>
+if &tag-item-price; suddenly starts returning <literal>0</literal>,
+check &conf-PriceField; in the &ccf;</para>
+
+<sect2 id="pod2docbook-ch-1-sect-4-a"><title>minivend.cfg</title>
+<itemizedlist>
+
+<listitem>
+<para>Remove references to MiniMate.</para>
+</listitem>
+
+<listitem>
+<para>Add this line to minivend.cfg:</para> 
+<programlisting>#include lib/UI/ui.cfg</programlisting>
+</listitem>
+
+</itemizedlist>
+
+<para>
+Make sure the files <filename>catalog_before.cfg</filename> and
+<filename>catalog_after.cfg</filename> are there, or
+add their contents to
+<filename>etc/<replaceable>your_cat_name</replaceable>.before</filename>
+and <filename>etc/<replaceable>your_cat_name</replaceable>.after</filename>
+only for some catalogs.
+</para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-4-b"><title>Access Manager</title>
+<para>
+You need to get the <filename>minimate.asc</filename> file renamed
+to <filename>access.asc</filename> and add the following fields to
+the first line:</para>
+
+<para>
+<programlisting>
+groups
+last_login
+name
+password
+</programlisting></para>
+
+<para>
+Remove these &ccf; lines:</para>
+
+<para>
+<programlisting>
+Variable   MINIMATE_META   mv_metadata
+Variable   MINIMATE_TABLE  minimate
+Database   minimate        minimate.asc      TAB
+</programlisting></para>
+
+<para>
+Add this one:
+
+<programlisting>
+  Database   affiliate       affiliate.txt     TAB
+</programlisting></para>
+
+<para>
+Authentication for admin users is now done from a separate table than
+customers, and passwords are encrypted.</para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-4-c"><title>Database Editing</title>
+<para>
+Update the <filename>mv_metadata.asc</filename> file as appropriate.</para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-4-d"><title>Order Manager</title>
+<para>
+Some things that are needed for the order manager:
+</para>
+
+<itemizedlist>
+
+<listitem>
+<para>
+Add these fields to transactions:
+<programlisting>
+affiliate  approx. char(32)
+</programlisting>
+</para>
+</listitem>
+
+<listitem>
+<para>Add these fields to transactions:
+<programlisting>
+affiliate  approx. char(32)
+</programlisting>
+</para>
+</listitem>
+
+<listitem>
+<para>
+Remove this field from userdb:</para>
+<para>
+<literal>mv_credit_card_info</literal></para>
+</listitem>
+
+<listitem>
+<para>
+Add these fields to userdb:
+<programlisting>
+inactive char(1)
+</programlisting>
+</para>
+</listitem>
+
+<listitem>
+<para>
+Create the directory <filename class="directory">logs/</filename>.
+</para>
+</listitem>
+
+<listitem>
+<para>
+Create the directory <filename class="directory">orders/</filename> if it
+doesn't already exist.
+</para>
+</listitem>
+
+<listitem>
+<para>
+Update your order routes to those in the &IC; distribution. Note
+that the route <literal>log_entry</literal> is necessary if you want
+to enter orders from the &IC; UI.</para>
+</listitem>
+
+<listitem>
+<para>
+Update the <filename>etc/log_transaction</filename> file.</para>
+</listitem>
+
+<listitem>
+<para>
+Add the <filename>etc/log_entry</filename> file.</para>
+</listitem>
+
+<listitem>
+<para>
+Add this to &ccf;:
+<programlisting>
+## Don't want people setting their credit_limit directly
+</programlisting></para>
+</listitem>
+
+</itemizedlist>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-4-e"><title>Affiliates</title>
+<para>
+Add a tab-delimited affiliate table:</para>
+
+<para>
+<programlisting>
+affiliate name    campaigns   join_date   url timeout active  password
+</programlisting></para>
+
+<para>
+You can find a recommended database configuration in
+<filename>&std-catalog;/dbconf/*/affiliate.*</filename>.</para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-4-f"><title>Page Editor</title>
+<para>
+Add the directories 
+<filename class="directory">templates/</filename> and
+<filename class="directory">backup/</filename>.
+Copy the contents of the
+&IC; <filename class="directory">simple/templates/</filename> to
+<filename class="directory">templates/</filename>.</para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-4-g"><title>Item Editor</title>
+<para>
+Add a merchandising table with the following fields:</para>
+
+<para>
+<programlisting>
+Database  merchandising  merchandising.txt __SQLDSN__
+Database  merchandising  DEFAULT_TYPE text
+</programlisting>
+</para>
+
+<para>
+sku <literal>char(32)</literal> featured <literal>char(32)</literal>
+banner_text banner_image blurb_begin blurb_end timed_promotion
+<literal>char(16)</literal> start_date <literal>char(24)</literal>
+finish_date <literal>char(24)</literal> upsell_to cross_sell cross_category
+<literal>char(64)</literal> others_bought times_ordered</para>
+
+<para>
+Index the fields with <literal>char(*)</literal> types. You can find the
+recommended database configuration in
+<filename>&std-catalog;/dbconf/*/merchandising.*</filename></para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-4-h"><title>Preferences Editor (KNAR)</title>
+<para>
+Create the tab-delimited file <filename>variable.txt</filename> with
+these fields:</para>
+
+<para>
+<programlisting>
+code  Variable  pref_group
+</programlisting></para>
+
+<para>
+Add this as the <emphasis role="bold">first</emphasis> line of &ccf;:</para>
+
+<para>
+<programlisting>
+VariableDatabase variable
+</programlisting></para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-4-i"><title>Route Editor</title>
+<para>
+Create the file <filename>route.txt</filename> with these fields:</para>
+
+<para>
+<programlisting>
+code
+report
+receipt
+encrypt_program
+encrypt
+pgp_key
+pgp_cc_key
+cyber_mode
+credit_card
+profile
+inline_profile
+email
+attach
+counter
+increment
+continue
+partial
+supplant
+track
+errors_to
+</programlisting>
+</para>
+
+<para>
+Add this line in &ccf;:
+<screen>
+RouteDatabase route
+</screen></para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-4-j"><title>Transactions database</title>
+<para>
+The back office UI should work fine for editing database tables. Obviously
+the things which are specific to the order transaction setup will break
+unless you have the right fields, but even these can be controlled by
+configuring the UI.</para>
+
+<para>
+Add a new field to <filename>transaction.txt</filename> called
+<literal>archived</literal>.
+</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="pod2docbook-ch-1-sect-5"><title>Upgrading from Minivend 3 to Minivend 4</title>
+<para>
+There were big changes from Minivend 3 to Minivend 4, some of which were
+incompatible.</para>
+
+<para>
+Many things were removed as redundant, deprecated, or just plain crufty:</para>
+
+<sect2 id="pod2docbook-ch-1-sect-5-a"><title>Nested [loop]s</title>
+<para>
+MV3 used a different scheme for creating nested loop lists:</para>
+
+<programlisting>
+[loop with="-a"* arg="item item item" search="se=whatever"]
+</programlisting>
+
+<para>
+which allowed you to refer to the nested values with a [loop-code-a] construct.
+In Minivend 4, the form is:</para>
+
+<para>
+<programlisting>
+    [loop prefix=size list="Small Medium Large"]
+        [loop prefix=color list="Red White Blue"]
+            [color-code]-[size-code]&lt;BR&gt;
+        [/loop]
+        &lt;P&gt;
+    [/loop]
+</programlisting></para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-5-b"><title>All frame features removed</title>
+<para>
+Frames are now managed by the user in &glos-HTML;.</para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-5-c"><title>Tags removed</title>
+<para>
+buttonbar</para>
+
+<para>
+Replace with &conf-Variable; defined in &ccf;. buttonbar was previously used
+as an SSI-like command for catalog-wide standardized features like
+navigation bars. In the 3.x &ccf; the ButtonBars parameter defines a
+list of &glos-HTML; snippets, like</para>
+
+<para>
+<programlisting>
+ButtonBars header.html footer.html copyright.html
+</programlisting></para>
+
+<para>
+So <code>[buttonbar 0]</code> substitutes <literal>header.html</literal>,
+<code>[buttonbar 1]</code> substitutes <literal>footer.html</literal>,
+etc.</para>
+
+<para>
+In 4.x &ccf;, define variables, like</para>
+
+<para>
+<programlisting>
+Variable HEADER    &lt;pages/header
+Variable FOOTER    &lt;pages/footer
+Variable COPYRIGHT &lt;pages/copyright
+</programlisting></para>
+
+<para>
+Then replace all occurrences of <code>[buttonbar 0]</code> with 
+<code>__HEADER__</code>, <code>[buttonbar 1]</code> with
+<code>__FOOTER__</code>, etc.</para>
+
+<para>
+Note that the old <filename>header.html</filename>,
+<filename>footer.html</filename>, etc. contained &glos-HTML; code, but
+were not actually html pages with &lt;html&gt;&lt;body&gt; etc, tags. Thus
+the current practice is to use filenames with no extension or perhaps
+<literal>.txt</literal> to differentiate them from complete &glos-HTML;
+pages.</para>
+
+<para>
+random</para>
+
+<para>
+Replace with [ad random=1] or custom code. See the [ad] tag docs. Random
+and rotate were used to place random or rotating regions on pages, such as
+banner ads.</para>
+
+<para>
+The Random directive in &ccf; defines the numbered HTML snippet
+files, similar to buttonbars above.</para>
+
+<para>
+rotate</para>
+
+<para>
+Replace with [ad ...]. See [random] above.</para>
+
+<para>
+help</para>
+
+<para>
+No replacement. Use data functions or variables.</para>
+
+<para>
+body</para>
+
+<para>
+Replace with templates. Again the body tag [body 1] etc. defines numbered
+body definitions that could be applied site-wide. However, in this case
+minivend actually built up the &lt;body ....&gt; substitution using the
+Mv_* directives in &ccf;.</para>
+
+<para>
+finish_order</para>
+
+<para>
+[finish_order] was a conditional tag; if the basket contained anything a
+'checkout' graphic would be displayed. No replacement; use [if
+items]Message[/if].</para>
+
+<para>
+last_page</para>
+
+<para>
+No replacement - this can be emulated by setting a scratch variable on one
+page, then using it to build the return URL.</para>
+
+<para>
+item-link</para>
+
+<para>
+No replacement, just use [page [item-code]].</para>
+
+<para>
+loop-link</para>
+
+<para>
+No replacement, just use [page [loop-code]].</para>
+
+<para>
+sql-link</para>
+
+<para>
+No replacement, just use [page [sql-code]].</para>
+
+<para>
+accessories</para>
+
+<para>
+Replace with normal data functions.</para>
+
+<para>
+Compatibility routines</para>
+
+<para>
+Compatibility routines for many popular tags like [random], [rotate], etc.
+are provided in the appendix of this document. To use one, copy it to a
+file and put it in your usertag directory. (Tags in the usertag directory
+are read in by &gcf; by default).</para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-5-d"><title>Directives removed</title>
+<para>
+<programlisting>
+    ActionMap
+    AdminDatabase
+    AdminPage
+    AsciiBackend
+    BackendOrder
+    ButtonBars
+    CheckoutFrame
+    CheckoutPage
+    CollectData
+    DataDir
+    Delimiter
+    DescriptionTrim
+    FieldDelimiter
+    FrameFlyPage
+    FrameLinkDir
+    FrameOrderPage
+    FrameSearchPage
+    ItemLinkDir
+    ItemLinkValue
+    MsqlDB
+    MsqlProducts
+    Mv_AlinkColor
+    Mv_Background
+    Mv_BgColor
+    Mv_LinkColor
+    Mv_TextColor
+    Mv_VlinkColor
+    NewReport
+    NewTags
+    OldShipping
+    OrderFrame
+    PageCache
+    PriceDatabase
+    Random
+    ReceiptPage
+    RecordDelimiter
+    ReportIgnore
+    Rotate
+    SearchFrame
+    SearchOverMsg
+    SecureOrderMsg
+    SpecialFile
+    SubArgs
+    Tracking
+</programlisting></para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-5-e"><title>Minor operations removed</title>
+<itemizedlist>
+<listitem><para>
+</para>
+
+<para>
+auto-substitution of mp= on [loop search=profile], [search-region
+arg=profile]</para>
+
+</listitem>
+<listitem><para>
+</para>
+
+<para>
+[tag scan]...</para>
+
+</listitem>
+<listitem><para>
+</para>
+
+<para>
+[tag sql]...</para>
+
+</listitem></itemizedlist>
+
+<para>
+Many of these are related to one of:</para>
+
+<itemizedlist>
+<listitem><para>
+</para>
+
+<para>
+Removal of frames logic</para>
+
+</listitem>
+<listitem><para>
+</para>
+
+<para>
+Removed tags</para>
+
+</listitem>
+<listitem><para>
+</para>
+
+<para>
+Obsolete methods</para>
+
+</listitem>
+<listitem><para>
+</para>
+
+<para>
+Old routines for 2.0x compatibility</para>
+
+</listitem></itemizedlist>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-5-f"><title>Search lists</title>
+<para>
+Search tags must now be surrounded by &tag-search-region; tag.
+This is because multiple searches can be done in a page, with multiple
+[more-list] entries, multiple [no-match] areas, etc. It was not really
+possible to avoid this and add the feature.</para>
+
+<para>
+To find all files containing the search list, do:</para>
+
+<para>
+<programlisting>
+ find pages -type f | xargs grep -l '\[search.list'
+</programlisting></para>
+
+<para>
+That will yield a set of files that need to be updated. You should surround
+all parts of the search area, i.e.:</para>
+
+<para>
+<programlisting>
+    [search-region]
+</programlisting></para>
+
+<para>
+<programlisting>
+  [search-list]
+    your search iteration stuff, [item-code], etc.
+  [/search-list]
+</programlisting></para>
+
+<para>
+<programlisting>
+  [more-list]
+    [more]
+  [/more-list]
+</programlisting></para>
+
+<para>
+<programlisting>
+  [/search-region]
+</programlisting></para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-5-g"><title>Search conditionals</title>
+<para>
+Search conditionals should now say [if-item-field field] [/if-item-field]
+and [if-item-data table column] [/if-item-data]. This allows mixing and
+nesting of lists. You may find that the old works in some situations, but
+it will not work in all situations.</para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-5-h"><title>Form data updates</title>
+<para>
+Added Scratch variable mv_data_enable to gate the update_data function. You
+must set it before doing a form update. Prior to this it was possible to
+update a SQL database willy-nilly.</para>
+
+<para>
+A quick fix like this will allow the update on a single page:</para>
+
+<para>
+<programlisting>
+  [set update_database]
+  [set mv_data_enable]1[/set]
+  [/set]
+  &lt;INPUT TYPE=hidden NAME=mv_click VALUE=update_database&gt;
+</programlisting></para>
+
+<para>
+It will ensure at least that the user loads one form from you for each
+update. For best security, gate with a userdb entry like this:</para>
+
+<para>
+<programlisting>
+  [set update_database]
+  [if type=data term="userdb::trusted::[data session username]"]
+      [set mv_data_enable]1[/set]
+  [else]
+      [set mv_data_enable]0[/set]
+  [/else]
+  [/if]
+  [/set]
+</programlisting></para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-5-i"><title>Checkout changes</title>
+<para>
+Minivend 4 uses in-page error-flagging on the checkout page. Simplest way
+to convert is probably to use the checkout.html from the simple demo as a
+start, and move in any customization from the existing site's catalog.html
+(headers, footers, logos, etc.) A line-by-line comparison of the data
+fields in the checkout page should be performed, adding any custom fields
+as needed. Custom error checking in etc/order.profiles may have to be
+re-worked, or can be added into checkout.html using the in-page order
+profile capability. (Note that etc/order.profiles is called
+etc/profiles.order in newly-built &IC; catalogs.)</para>
+
+<para>
+Remember to update receipt.html and report/report.html with any custom
+fields, as well.</para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-5-j"><title>[if-field] etc.</title>
+<para>
+The least-compatible things in the tag area are [if-field] (needs to be
+[if-PREFIX-field], where prefix might be item|loop by default depending on
+the tag. Likewise:</para>
+
+<para>
+<programlisting>
+  [if-data table col]  --&gt; [if-PREFIX-data table col]
+  [on-change mark]     --&gt; [PREFIX-change mark]
+  [if-param param]     --&gt; [if-PREFIX-param param]
+  [PREFIX-param N]     --&gt; [PREFIX-pos N] (where N is a digit)
+</programlisting></para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-5-k"><title>[search-list]</title>
+<para>
+You must always surround &tag-search-list; with
+&tag-search-region;.</para>
+
+<para>
+Embedded Perl changes quite a bit. While there are the $Safe{values} and
+other variable settings, they are automatically shared (no arg="values")
+and move to:</para>
+
+<para>
+<programlisting>
+  $Safe{values}   --&gt;  $Values
+  $Safe{cgi}      --&gt;  $CGI
+  $Safe{carts}    --&gt;  $Carts
+  $Safe{items}    --&gt;  $Items
+  $Safe{config}   --&gt;  $Config
+  $Safe{scratch}  --&gt;  $Scratch
+</programlisting></para>
+
+<para>
+There are a number of other objects, see the docs.</para>
+
+<para>
+Most other issues have more to do with the catalog skeleton (i.e. simple or
+barry or basic or art) than they do the core. For instance, the "basic"
+catalog produced for MV3 ran unchanged except for the issues discussed
+above.</para>
+
+</sect2>
+
+<sect2 id="pod2docbook-ch-1-sect-5-l"><title>Global subs</title>
+<para>
+Accessing globalsubs from &tag-perl; tags is done slightly differently.</para>
+
+<para>
+Minivend 3 method:</para>
+
+<para>
+<programlisting>
+[perl sub]
+  myfunsub();
+[/perl]
+</programlisting></para>
+
+<para>
+Minivend 4/&IC; method:</para>
+
+<para>
+<programlisting>
+[perl subs=1]
+  myfunsub();
+[/perl]
+</programlisting></para>
+
+<para>
+If you do this wrong, you'll get an error that looks like this:</para>
+
+<para>
+<programlisting>
+ 115.202.115.237 H8gbq6oK:115.202.115.237 - \
+  [28/February/2001:18:58:50 -0500] testcat /cgi-bin/testcat.cgi \
+  Safe: Undefined subroutine &amp;MVSAFE::myfunsub called at (eval 283) line 2.
+</programlisting></para>
+
+</sect2>
+
+</sect1>
+
+</article> 

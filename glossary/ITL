@@ -315,6 +315,12 @@ work, because the &tag-value; tag shown is not one of the looping subtags
 (for the record, it's not even close). But as we said, we'll get back to
 subtags and their availability in a minute.
 </para>
+<para>
+You might wonder why unquoted tags are even allowed. The answer is
+<emphasis>performance</emphasis>. If you have large lists of tagsm you can
+achieve significant speed-ups by using positional parameters. Parsing and
+disassembling named parameters takes some more CPU cycles.
+</para>
 
 </section>
 

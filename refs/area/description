@@ -4,7 +4,8 @@ the targeted page. The target page argument you supply is treated relatively
 to the <filename class='directory'>pages/</filename> directory inside your
 catalog root directory (CATROOT).
 </para><para>
-The enclosing &lt;a href=""&gt;&lt;/a&gt; HTML tag is not included. This makes
+The enclosing &lt;a href=""&gt;&lt;/a&gt; HTML tag is not included, only the
+pure link is output. This makes
 <tag>area</tag> suitable for use in custom &lt;a&gt; links,
 Javascript constructs, <ulink url="http://www.ihip.com/">imagemaps</ulink>
 and elsewhere.
