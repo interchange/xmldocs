@@ -1,0 +1,23 @@
+__NAME__ purpose
+group Interchange code declarations in groups, for later convenient inclusion or exclusion from the setup
+__END__
+
+
+__NAME__ synopsis
+	<arg choice='plain'><literal>:</literal>group</arg>
+	<arg choice='plain' rep='repeat'>code_declaration_names</arg>
+__END__
+
+
+__NAME__ description
+The directive groups symbols (usually depending on their type) under
+group names. This allows for very convenient inclusion or exclusion
+of whole tag groups from the &IC; server.
+__END__
+
+__NAME__ example: Defining TagGroup
+<programlisting>
+TagGroup :file "counter file include log value_extended"
+</programlisting>
+__END__
+

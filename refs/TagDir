@@ -1,0 +1,28 @@
+__NAME__ purpose
+directory containing code declaration blocks
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'>directory</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify directories containing tag, filter, widget, actionmap and other
+code declarations.
+__END__
+
+__NAME__ notes
+The specified location is treated relative to the &glos-ICROOT;.
+__END__
+
+
+__NAME__ example: Setting TagDir
+<programlisting>
+TagDir code etc/other_code
+</programlisting>
+__END__
+

@@ -1,0 +1,36 @@
+__NAME__ purpose
+include (a group of) tags in Interchange
+__END__
+
+__NAME__ see also
+TagGroup, TagExclude
+__END__
+
+__NAME__ synopsis
+	<arg choice='opt'><literal>!</literal></arg>
+	<group choice='opt' rep='repeat'>
+		<arg choice='plain'><literal>:</literal>group</arg>
+		<arg choice='plain'>tag</arg>
+	</group>
+__END__
+
+
+__NAME__ description
+Include a set of tags for compilation and use under the &IC; server.
+&conf-TagDir;s are scanned for files, then they're assigned to groups
+according to &conf-TagGroup; directives, and finally they're included
+using &conf-TagInclude;.
+</para><para>
+The syntax supports the use of <literal>!</literal> to exclude items,
+and keyword <literal>ALL</literal>. Tag group names should be prefixed
+with <literal>:</literal>. See <xref linkend="TagInclude_examples"/>.
+__END__
+
+__NAME__ example: Defining TagInclude
+The following would include all tags, except those in group
+<literal>crufty</literal> and tag &tag-get-url; specifically.
+<programlisting>
+TagInclude ALL !:crufty !get_url
+</programlisting>
+__END__
+

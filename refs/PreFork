@@ -1,0 +1,43 @@
+__NAME__ purpose
+specify whether Interchange server should pre-fork processes that wait for client connections
+__END__
+
+
+__NAME__ see also
+StartServers
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+For each new client connection, &IC; must spawn a new process that will 
+handle communication with the client.
+By using &conf-PreFork; it is possible to <emphasis>pre-fork</emphasis>
+(or in other words, "start ahead of time") some number of &IC; servers
+that will be ready to serve client requests immediately as they come in.
+</para><para>
+This method reduces system overhead due to forking and is the fastest and
+best way to run a busy &IC; server.
+__END__
+
+__NAME__ notes
+Regardless of the &conf-PreFork; setting, each spawned server will serve
+&conf-MaxRequestsPerChild; requests, before being shut down and respawned.
+(This technique is used to prevent any memory leaks).
+</para><para>
+For an introduction to &IC; run modes and practical implications, please
+see the &glos-ic-run-mode; glossary entry.
+__END__
+
+__NAME__ example: Enabling PreFork
+<programlisting>
+PreFork yes
+</programlisting>
+__END__
+

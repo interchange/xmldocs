@@ -1,0 +1,32 @@
+__NAME__ purpose
+specify the number of Interchange servers to prefork when running in PreFork mode
+__END__
+
+
+__NAME__ see also
+PreFork
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>count</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies the number of &IC; servers that should be 
+preforked when &IC; is run in &conf-PreFork; mode.
+__END__
+
+__NAME__ notes
+For an introduction to &IC; run modes and practical implications, please
+see the &glos-ic-run-mode; glossary entry.
+__END__
+
+__NAME__ example: Defining StartServers
+<programlisting>
+StartServers 10
+</programlisting>
+__END__
+

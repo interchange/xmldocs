@@ -1,0 +1,34 @@
+__NAME__ purpose
+specify operation codes to untrap in Safe.pm compartments
+__END__
+
+__NAME__ see also
+Require,Suggest
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'>opcode</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive defines the opcodes that will be untrapped in the
+<classname>Safe</classname> compartments, for use in
+embedded &PERL; and conditional operations. 
+Define it as blank to prevent any operators but the default restrictive ones.
+__END__
+
+__NAME__ notes
+Please see the &glos-safe; glossary entry for the introduction and guidelines
+to programming under <classname>Safe.pm</classname> restrictions.
+__END__
+
+__NAME__ example: Disabling all but most restrictive opcodes
+<programlisting>
+SafeUntrap
+</programlisting>
+__END__
+
+TODO: enabling all

@@ -48,7 +48,7 @@ from the global &gcf; file. Again, see <xref linkend="Catalog_examples"/>.
 __END__
 
 __NAME__ notes
-&conf-Catalog; is one of the basic &IC; &glos-configuration; directives.
+&conf-Catalog; is one of the basic Interchange &glos-configuration; directives.
 </para><para>
 <command>makecat</command>, the catalog creation helper script, automatically inserts
 the &conf-Catalog; line in the &gcf; file as part of the standard procedure.

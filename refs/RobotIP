@@ -1,0 +1,53 @@
+__NAME__ purpose
+specify IP numbers or ranges that will be classified as crawler bots (search engines) visiting the site
+__END__
+
+
+__NAME__ see also
+RobotUA, RobotIP, RobotHost
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>IP address</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The &conf-RobotIP; directive defines a list of IP numbers which will be
+classified as crawler robots (search engines), and cause &IC; to alter its
+behavior to improve the chance of &IC;-served content being crawled
+and indexed.
+</para><para>
+Note that this directive (and all other work done to identify robots)
+only serves to improve the way in which &IC; pages are indexed, and to 
+reduce server overhead for clients that don't require our full attention
+in the way humans do (for example, session information is not kept around
+for spider bots).
+Using this to "tune" the actual page content depending on a crawler
+visiting does not earn you extra points, and may in fact be
+detected by the robot and punished.
+</para><para>
+It's important to note that the directive accepts a wildcard list -
+<literal>*</literal> represents any number of characters, while
+<literal>?</literal> represents a single character.
+__END__
+
+__NAME__ notes
+For more details regarding web spiders/bots and &IC; see
+&glos-robot; glossary entry.
+__END__
+
+
+__NAME__ example: Defining RobotIP
+<programlisting><![CDATA[
+RobotIP <<EOR
+  202.9.155.123,      204.152.191.41,         208.146.26.19,
+  208.146.26.233,     209.185.141.209,        209.185.141.211,
+  209.202.148.36,     209.202.148.41,         216.200.130.207,
+  216.35.103.6?,      216.35.103.70,
+EOR
+]]></programlisting>
+__END__
+

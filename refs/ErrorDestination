@@ -5,7 +5,7 @@ __END__
 
 __NAME__ synopsis
 <group choice='req'>
-	<arg choice='plain'>tag or message</arg>
+	<arg choice='plain'>tag_or_message</arg>
 	<arg choice='plain'>filename</arg>
 </group>
 __END__

@@ -1,0 +1,36 @@
+__NAME__ purpose
+specify whether Interchange server should open an UNIX socket
+__END__
+
+
+__NAME__ see also
+Unix_Mode,Inet_Mode
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>Yes</arg>
+	<arg choice='plain'>No</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify whether the &IC; server should listen on an UNIX-domain socket.
+</para><para>
+This &glos-configuration; directive can be overriden using 
+<literal>interchange -u</literal> switch on the command line.
+</para><para>
+__END__
+
+__NAME__ notes
+In most cases, you will want &IC; running in UNIX mode, so it is 
+enabled by default.
+__END__
+
+__NAME__ example: Disabling Inet_Mode
+<programlisting>
+Unix_Mode No
+</programlisting>
+__END__
+

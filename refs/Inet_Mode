@@ -1,0 +1,37 @@
+__NAME__ purpose
+specify whether Interchange server should open an Inet socket and listen on a port
+__END__
+
+
+__NAME__ see also
+Unix_Mode
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify whether the &IC; server should open an INET-domain socket and
+listen on some port.
+</para><para>
+This &glos-configuration; directive can be overriden using 
+<literal>interchange -i</literal> switch on the command line.
+</para><para>
+__END__
+
+__NAME__ notes
+You will need &IC; Inet mode in only rare circumstances (that is, only if your
+Web and &IC; server are not the same machine).
+__END__
+
+__NAME__ example: Enabling Inet_Mode
+<programlisting>
+Inet_Mode Yes
+</programlisting>
+__END__
+

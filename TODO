@@ -1,10 +1,4 @@
-- Skripta ce pratiti koji $opt->{} se koristi u tagu, i skrenuti pozornost
-  na one koji ne koriste ime $opt->{}, a trebali bi. Onda item mora imati
-  u refs/ listu opcija i opisa, a skripta sama nadje jesu li obavezni,
-  pozicioni, i warnira ako se u sourceu koriste neki koji nisu 
-  zavedeni u listu. I autogenerira cijeli onaj crapload XMLa.
-
-
+On config directives, include parse_<> function in source context
 - See that if 'crypt' is put in see also, all symbols of that name appear
   in see also line and their type is distinguished visually.
 - Add ROW_REPARSE along ROW_INTERPOLATE in tag refs

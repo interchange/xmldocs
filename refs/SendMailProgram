@@ -25,7 +25,8 @@ options).
 </para><para>
 If this directive is not defined (and none of the defaults are available at
 startup), it won't be possible to send any e-mails using standard &IC;
-facilities.
+facilities. In that case, you'll have to pick orders from a tracking
+file, logs, or some other means.
 __END__
 
 __NAME__ example: Setting SendMailProgram
