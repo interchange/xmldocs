@@ -5,9 +5,662 @@
 
 <glossdef>
 <para>
+&IC; functions can be accessed via the Interchange Tag Language (&glos-ITL;).
+The pages in a catalog may be mostly &glos-HTML;, but they will use ITL tags
+to provide dynamic content and access Interchange functions in general.
+ITL is a superset of MML, or Minivend Markup Language.
+Minivend was the predecessor to Interchange.  
+</para><para>
+These ITL tags perform various display and modification operations for
+the user session. There's more than 200 standard predefined tags, and the
+&conf-UserTag; facility allows you to create custom tags that perform your own
+functions and can be just as powerful as the built-in tags.
+</para>
+
+<section>Tag Syntax</section>
+
+<para>
+&glos-ITL; tags are similar to HTML, in that they accept
+parameters or attributes and that there are both
+<emphasis>standalone</emphasis> and <emphasis>container</emphasis> tags.
+</para><para>
+We will call an attribute a <emphasis>parameter</emphasis> if it may be
+called <emphasis>positionally</emphasis> or if it is required.
+</para><para>
+A standalone tag has no ending element, such as
+
+<programlisting>
+[value name]
+</programlisting>
+
+The tag, as seen in the above example, will insert the user's name (provided
+they supplied one in the first place).
+</para><para>
+A container tag has both beginning and ending elements, such as
+
+<programlisting>
+[if value name]
+  You have provided us with your name. It is [value name].
+[/if]
+</programlisting>
+
+In the above example, you can implicitly see that container tags are mostly
+useful only if some content is provided in their <emphasis>body</emphasis>
+(the place between the opening and corresponding ending tag).
+</para>
+
+
+<section>Standard Syntax</section>
+
+<para>
+We've covered the most basic syntax above. If you need to pass parameters
+or attributes (let's call them <emphasis>arguments</emphasis> when their 
+nature is irrelevant) to the tag, you do that in the opening section.
+If the tag is a container, then body text can additionally be specified
+between the opening and closing marker:
+
+<programlisting>
+[<replaceable>tagname</replaceable> <replaceable>parameters</replaceable> <replaceable>attributes</replaceable>]
+  <replaceable>Body Text</replaceable>
+[/<replaceable>tagname</replaceable>]
+</programlisting>
+
+<note><para>
+Some &IC; <emphasis>macros</emphasis> (plain drop-in text replacements)
+may look like tags or end tags. For example, <code>[/page]</code> is a 
+macro that expands to <literal>&lt;/a&gt;</literal>. This allows you to 
+conveniently write
+<code>[page <replaceable>href</replaceable>]
+<replaceable>Link text</replaceable>
+[/page]</code>, but &tag-page; is <emphasis>not</emphasis> a container
+tag, and link text is not treated as the corresponding body text.
+</para></note>
+
+</para><para>
+When using the <code>[<replaceable>tagname</replaceable>
+<replaceable>...</replaceable>]</code> syntax, there must be no whitespace
+between the left bracket ([) and the tag name.
+
+</para>
+
+<important>
+<para>
+It is very important to mention that
+<emphasis>if a tag <emphasis role='bold'>or</emphasis> argument name
+includes an underscore or dash (such as in &tag-item-list;), then you can
+always choose between the dash <emphasis role='bold'>and</emphasis>
+underscore</emphasis>! The two forms are interchangeable, except that you
+must be consistent with tag markers; an ending tag must match the opening tag.
+<code>[item-list]...[/item-list]</code> is okay, 
+<code>[item-list]...[/item_list]</code> is
+<emphasis role='bold'>not</emphasis>.
+</para>
+</important>
+
+<section>HTML Comments</section>
+
+<para>
+&glos-ITL; also allows you to use <literal>&lt;!--[</literal> and 
+<literal>]--&gt;</literal> as an alternative to plain square
+brackets. In other words, 
+<code>[<replaceable>tagname</replaceable> <replaceable>...</replaceable>]</code>
+and <code>&lt;--[<replaceable>tagname</replaceable>
+ <replaceable>...</replaceable>]--&gt;</code> are equivalent.
+</para><para>
+This allows you to make your raw ITL tags appear as comments in &glos-HTML;
+browsers, and especially in HTML editors which might not like non-HTML markup
+at random positions.
+You might want to use this if your editor has trouble with
+&glos-ITL; tags when editing &IC; page templates, or alternatively, if
+you want to use one <literal>.html</literal> file both as an Interchange
+template and as a static page delivered directly by your web server, without
+performing any Interchange processing.
+</para><para>
+If you really wish to treat HTML comments as plain comments, then you must
+include a whitespace between the HTML comment delimiters and the &glos-ITL;
+square brackets:
+
+<programlisting><![CDATA[
+<!--[value name]-->       becomes  Bill
+<!-- [value name] -->     becomes  <!-- Bill -->
+]]></programlisting>
+
+To prevent &glos-ITL; tags from being &glos-interpolate;d at all, you 
+either need to see the &pragma-no_html_comment_embed; pragma, or enclose
+the block in a special &glos-ITL; &tag-comment; tag:
+
+<programlisting><![CDATA[
+[comment] [value name] [/comment]
+]]></programlisting>
+
+Besides not being interpolated at all, &tag-comment; blocks do not
+appear in the final HTML sent to the client either, so you can be completely
+safe regarding any unintentional code or information leakage.
+</para><para>
+While <literal>&lt;!--[</literal> and <literal>[</literal> are completely
+interchangeable, the &IC; parser does not replace <literal>]--&gt;</literal>
+with <literal>]</literal> unless it also sees <literal>&lt;!--[</literal>
+<emphasis>at least once somewhere on the page</emphasis>.
+This is a small parsing speed optimization and shouldn't cause you any
+trouble as you're supposed to be consistent in your syntax anyway.
+<!-- TODO there's more theoretical stuff in APPENDICES in ictags -->
+</para>
+
+<section>Named and Positional Parameters</section>
+
+<para>
+There are two styles of supplying parameters to a tag:
+<emphasis>named</emphasis> and <emphasis>positional</emphasis>.
+</para><para>
+In the named style, you supply parameters using
+<literal><replaceable>key</replaceable>=<replaceable>value</replaceable></literal>
+pairs,  just as with HTML:
+
+<programlisting>
+[value name=<replaceable>variable_name</replaceable>]
+</programlisting>
+
+The positional-style tag that accomplishes the same thing but is more 
+compact:
+
+<programlisting>
+[value variable_name]
+</programlisting>
+
+Positional syntax, however, requires support by each tag individually. That
+is, set of arguments that can be specified in positional notation as
+well as their position in the set are fixed determined in advance. You can
+see a list of accepted positional arguments (and their implicit order) in
+each tag's SYNOPSIS reference section; try &tag-value; for example.
+</para><para>
+Additionally, <emphasis role='bold'>you cannot mix named and positional
+parameters in the same tag</emphasis>; use either all named, or all positional.
+</para><para>
+In any case, positional syntax is appropriate for simpler tags and 
+&IC; interprets positional arguments somewhat faster (but don't let your
+<emphasis>need for speed</emphasis> drive you here; as 
+<ulink url="http://www.thocp.net/biographies/dijkstra_edsger.htm">Edsger W. Dykstra</ulink>
+once said, "Premature optimization is the root of all programming evil").
+</para><para>
+In most cases, tag parameters specified in the positional fashion work
+the same as named parameters. However, there are a few situations where
+you must use named parameters:
+
+<itemizedlist>
+  <listitem><para>
+  When you want to specify a parameter that comes positionally after a
+  parameter that you want to omit, e.g. omit the first parameter but specify
+  the second. The parser would have no way of knowing which is which, so
+  you must switch to named syntax. This rarely happens, though, because the
+  first positional parameter is usually required for a given tag anyway, and
+  can't be omitted.
+  </para></listitem>
+  
+  <listitem><para>
+  When there is some ambiguity as to which parameter is which, usually
+  due to whitespace. If the argument value contains any whitespace 
+  (even if it's enclosed in quotes!), you must use named syntax.
+  </para></listitem>
+  
+  <listitem><para>
+  When you need to use the output of a tag as the input argument for
+  another tag.
+  </para></listitem>
+</itemizedlist>
+</para>
+
+<section>Argument Interpolation</section>
+
+<para>
+When ITL tags are <emphasis>expanded</emphasis>, for example when 
+<code>[value name]</code> yields the actual user's name, we say the tags 
+are &glos-interpolate;d.
+</para><para>
+If you want to use one tag's output as another tag's input, you
+cannot use positional syntax and you must double-quote the
+argument. For example, this will not work:
+
+<programlisting>
+[page scan se=[scratch <replaceable>variable_name</replaceable>]]
+</programlisting>
+
+Actually, the above example is in a really bad shape. To make it work, we
+need to switch to named syntax and properly quote arguments containing
+whitespace.
+
+<programlisting>
+[page href=scan arg="se=[scratch <replaceable>variable_name</replaceable>]"]
+</programlisting>
+
+Note that the <arg choice='plain'>href</arg> argument did not need to be
+quoted; only <arg choice='plain'>arg</arg> did because it
+contained a whitespace.
+</para>
+
+
+<section>Universal Attributes</section>
+
+<para>
+Universal attributes apply to all tags, although tags might specify
+their own defaults for the attribute. The code implementing universal
+attributes is independent of the routines that implement specific
+tags.
+
+</para><para>
+We will explain <arg choice='plain'>interpolate</arg> and 
+<arg choice='plain'>reparse</arg> attributes here. <emphasis role='bold'>
+It is very important to remember that the behavior of the
+<arg choice='plain'>interpolate</arg> attribute (unfortunately) differs
+depending on whether a tag is stand-alone or a container. In addition,
+the <arg choice='plain'>reparse</arg> attribute is only used with
+container tags (because its function is performed by
+<arg choice='plain'>interpolate</arg> in stand-alone tags).
+</emphasis>
+
+</para><para>
+With container tags, the <arg choice='plain'>interpolate</arg> attribute
+specifies whether the tag body will be &glos-interpolate;d before being
+passed to the tag. 
+
+</para><para>
+With stand-alone tags, the <arg choice='plain'>interpolate</arg> attribute
+specifies whether the output of the tag will be &glos-reparse;d.
+This feature "overlap"
+between the two options occurred because <arg choice='plain'>interpolate</arg>
+already existed (and functioned as described) when the new
+<arg choice='plain'>reparse</arg> was added to &IC;.
+
+</para><para>
+Output of most of the stand-alone tags is not interpolated by default.
+Exceptions to this rule would include, for example, the &tag-include; tag.
+
+<!-- TODO
+- mention that users can see behavior in source context header (UserTag lines)
+-->
+
+</para><para>
+For an interpolation example with container tags, let's assume the
+user's name is Kilroy:
+
+<programlisting>
+[log interpolate=1][value name] was here[/log]
+
+[log interpolate=0][value name] was here[/log]
+</programlisting>
+
+The first line would log "Kilroy was here" to
+<filename><replaceable>&glos-CATROOT;</replaceable>/etc/log</filename>,
+while the second line would log pretty useless "[value name] was here".
+</para><para>
+
+For an interpolation example with stand-alone tags, consider the following:
+
+<programlisting>
+[set name=now interpolate=0][time]%A, %B %d, %Y[/time][/set]
+</programlisting>
+
+We've set the scratch variable <varname>new</varname> to not contain the
+actual date, but the ITL code to calculate and display the date each time
+it's called. Let's assume today is Monday, January 1, 2001, and we have the
+following code:
+
+<programlisting>
+[scratch name=now interpolate=1]
+
+[scratch name=now interpolate=0]
+</programlisting>
+
+The first line would then produce the expected
+<literal>Monday, January 1, 2001</literal>, while the second would
+leave us with unusable <literal>[time]%A, %B %d, %Y[/time]</literal>.
+</para><para>
+The example above serves to show <arg choice='plain'>interpolate</arg> used
+with a stand-alone tag. This behavior can only be achieved by using
+<arg choice='plain'>reparse</arg> attribute if you're having a container 
+instead of the stand-alone tag.
+
+</para><para> <sbr/><sbr/>
+The <arg choice='plain'>reparse</arg> attribute is only used with container
+tags, and specifies whether the tag <emphasis>output</emphasis> will be
+&glos-interpolate;d. This is basically the same as the
+<arg choice='plain'>interpolate</arg> attribute for stand-alone tags, but a
+new name had to be invented because <arg choice='plain'>interpolate</arg>
+performs a different function with container tags (it refers to interpolation
+of the tag <emphasis>body</emphasis> instead of the tag output).
+
+</para><para>
+Most container tags will have their output re-parsed for more
+Interchange tags by default. If you wish to prevent this behavior, you
+must explicitly set the <arg choice='plain'>reparse</arg>
+attribute to a &glos-false; value. Note, however, that you will
+almost always want the default action. Probably the only ITL tag that
+doesn't reparse by default is &tag-mvasp;.
+
+</para><para>
+Here's an example. Again, assuming the user's name is Kilroy,
+
+<programlisting>
+[perl reparse=1]
+   my $tagname = 'value';
+   return "[$tagname name] was here\n"
+[/perl]
+
+[perl reparse=0]
+   my $tagname = 'value';
+   return "[$tagname name] was here\n"
+[/perl]
+</programlisting>
+
+expands to
+
+<programlisting>
+Kilroy was here
+
+[value name] was here
+</programlisting>
+
+
+</para><para> <sbr/><sbr/>
+The <arg choice='plain'>send</arg> attribute is deprecated.
+</para>
+
+
+<section>Tag-specific Attributes</section>
+
+<para>
+Each tag may accept additional arguments which vary from tag to
+tag. For each tag individually, you need to consult the 
+appropriate reference page to learn tag-specific parameters and attributes.
+</para>
+
+
+<section>Attribute Arrays and Hashes</section>
+
+<para>
+Some tags allow you to pass a &PERL; &glos-array; or &glos-hash; as the
+value of an attribute. For an ordinary tag, the syntax is as follows:
+
+<programlisting>
+<replaceable>attribute</replaceable>.<replaceable>ARRAY_INDEX</replaceable>=<replaceable>value</replaceable>
+
+<replaceable>attribute</replaceable>.<replaceable>HASH_KEY</replaceable>=<replaceable>value</replaceable>
+</programlisting>
+
+<replaceable>ARRAY_INDEX</replaceable> is an integer array index starting
+from <literal>0</literal> (this is due to standard programming practice and
+&PERL; behavior). Note that you cannot have both an array and a hash 
+attribute of the same name (even though that would be possible in pure
+&PERL;).
+
+</para><para>
+Here is an example of an attribute array:
+
+<programlisting>
+search.0="se=hammer
+          fi=products
+          sf=description"
+
+search.1="se=plutonium
+          fi=products
+          sf=comment"
+</programlisting>
+
+</para><para>
+The &tag-page; tag, for example, treats a search specification array as
+a joined search. <!-- TODO link to something on joined searches or
+searching in general; we can't leave the reader dry -->
+
+</para><para>
+Note that it is up to the tag to handle an array or hash value
+properly. See the documentation for the specific tag before passing
+it an attribute array or hash value.
+</para>
+
+
+<section>Perl calls</section>
+
+<para>
+You can simply ignore this section if you don't know the &PERL; 
+programming language and this looks all too messy for you.
+
+</para><para>
+Before passing attributes to a tag, the &IC; parser would
+convert the above example to an anonymous array reference. It would
+use the resulting arrayref as the value for the 
+<arg choice='plain'>search</arg> attribute in this example.
+
+</para><para>
+If you were passing the above example directly to a tag routine
+within a &tag-perl; block or your custom tag, you would actually pass an
+anonymous array as the value of the attribute:
+
+
+<programlisting><![CDATA[
+my $arrayref = [ "se=hammer/fi=products/sf=description",
+                 "se=plutonium/fi=products/sf=description", ];
+
+$Tag->routine( { search => $arrayref, } );
+]]></programlisting>
+
+Similarly, to use a hash reference for the same attribute:
+
+<programlisting><![CDATA[
+my $hashref = { name   => "required",
+                date   => 'default="%B %d, %Y"', };
+
+$Tag->routine( { entry => $hashref } );
+]]></programlisting>
+</para>
+
+
+<section>Looping Tags and Sub-tags</section>
+
+<para>
+Certain tags can only appear in a special context, usually nested within
+other, parent tags. Those include, for example, the ones interpreted as part
+of a surrounding loop tags, such as 
+&tag-loop;, &tag-item-list;, &tag-query; or &tag-search-region;.
+
+</para><para>
+Some of those subtags are 
+<replaceable>PREFIX</replaceable>-accessories,
+<replaceable>PREFIX</replaceable>-alternate,
+<replaceable>PREFIX</replaceable>-calc,
+<replaceable>PREFIX</replaceable>-change,
+<replaceable>PREFIX</replaceable>-code,
+<replaceable>PREFIX</replaceable>-data,
+<replaceable>PREFIX</replaceable>-description,
+<replaceable>PREFIX</replaceable>-discount,
+<replaceable>PREFIX</replaceable>-discount-subtotal,
+<replaceable>PREFIX</replaceable>-field,
+<replaceable>PREFIX</replaceable>-increment,
+<replaceable>PREFIX</replaceable>-last,
+<replaceable>PREFIX</replaceable>-line,
+<replaceable>PREFIX</replaceable>-modifier,
+<replaceable>PREFIX</replaceable>-next,
+<replaceable>PREFIX</replaceable>-param,
+<replaceable>PREFIX</replaceable>-pos,
+<replaceable>PREFIX</replaceable>-price,
+<replaceable>PREFIX</replaceable>-quantity,
+<replaceable>PREFIX</replaceable>-subtotal,
+if-<replaceable>PREFIX</replaceable>-data,
+if-<replaceable>PREFIX</replaceable>-field,
+if-<replaceable>PREFIX</replaceable>-param,
+if-<replaceable>PREFIX</replaceable>-pos,
+<replaceable>PREFIX</replaceable>-modifier-name and
+<replaceable>PREFIX</replaceable>-quantity-name.
+
+</para><para>
+In each of the above, <replaceable>PREFIX</replaceable> represents an
+arbitrary prefix that is used in that looping tag; this is needed to be able
+to support nesting in arbitrary order and to arbitrary level.
+<emphasis>All of the
+subtags are only interpreted within their container and only accept
+positional parameters</emphasis>. The default prefixes follow:
+
+
+<informaltable pgwide='1' frame='none'>
+<tgroup cols='3' align='left'>
+<colspec colname='tag'/>
+<colspec colname='prefix'/>
+<colspec colname='example'/>
+
+<thead>
+<row>
+<entry>Parent tag</entry>
+<entry>Default prefix</entry>
+<entry>Example sub-tag</entry>
+</row>
+</thead>
+<tbody>
+
+<row>
+  <entry>&tag-loop;
+  </entry>
+  <entry><literal>loop</literal>
+  </entry>
+  <entry>
+	<code>[loop-code]</code><sbr/>
+	<code>[loop-field price]</code><sbr/>
+	<code>[loop-increment]</code><sbr/>
+  </entry>
+</row>
+
+<row>
+  <entry>&tag-item-list;
+  </entry>
+  <entry><literal>item</literal>
+  </entry>
+  <entry>
+	<code>[item-code]</code><sbr/>
+	<code>[item-field price]</code><sbr/>
+	<code>[item-increment]</code><sbr/>
+  </entry>
+</row>
+
+<row>
+  <entry>&tag-search-list;
+  </entry>
+  <entry><literal>item</literal>
+  </entry>
+  <entry>
+	<code>[item-code]</code><sbr/>
+	<code>[item-field price]</code><sbr/>
+	<code>[item-increment]</code><sbr/>
+  </entry>
+</row>
+
+<row>
+  <entry>&tag-query;
+  </entry>
+  <entry><literal>sql</literal>
+  </entry>
+  <entry>
+	<code>[sql-code]</code><sbr/>
+	<code>[sql-field price]</code><sbr/>
+	<code>[sql-increment]</code><sbr/>
+  </entry>
+</row>
+
+</tbody>
+</tgroup>
+</informaltable>
+
+</para><para>
+Sub-tag behavior is consistent among the looping tags. 
+</para>
+
+<important><para>
+Subtags are parsed during evaluation of the enclosing loop; that means
+<emphasis>before any regular tags within the loop</emphasis>.
+</para></important>
+
+<para>
+Going back to &PERL; again, 
+there are two types of records that &IC; can return with looping lists:
+ARRAY and HASH.
+
+</para><para>
+An array list is the normal output of the &tag-query; and &tag-loop; tags,
+or of a search operation. In those cases, fields specified in 
+<mv>mv_return_fields</mv> (or those specified in SQL) are returned for
+each selected row.
+The two queries below are essentially identical:
+
+<programlisting>
+[query sql="select foo, bar from products"]
+[/query]
+
+[loop search="
+                ra=yes
+                fi=products
+                rf=foo,bar
+"]
+</programlisting>
+
+Both will return an array of arrays consisting of the 
+<database class='field'>foo</database> and
+<database class='field'>bar</database> columns.
+The corresponding &PERL; data structure would look like this:
+
+<programlisting>
+[
+    ['foo0', 'bar0'],
+    ['foo1', 'bar1'],
+    ['foo2', 'bar2'],
+    ['fooN', 'barN'],
+]
+</programlisting>
+
+A hash list is the normal output of the &tag-item-list; tag. It returns
+the value of all return fields in an array of hashes. A normal return
+might look like this:
+
+<programlisting>
+[
+    {
+        code     => '99-102',
+        quantity => 1,
+        size     => 'XL',
+        color    => 'blue',
+        mv_ib    => 'products',
+    },
+    {
+        code     => '00-341',
+        quantity => 2,
+        size     => undef,
+        color    => undef,
+        mv_ib    => 'products',
+    },
+
+]
+</programlisting>
+
+However, you can explicitely request hash lists to be returned from
+queries:
+
+<programlisting>
+[query sql="select foo, bar from products" type=hashref]
+[/query]
+</programlisting>
+
+The data structure would then be:
+
+<programlisting>
+[
+    { foo => 'foo0', bar => 'bar0' },
+    { foo => 'foo1', bar => 'bar1' },
+    { foo => 'foo2', bar => 'bar2' },
+    { foo => 'fooN', bar => 'barN' },
+]
+</programlisting>
+
 </para>
 
 </glossdef>
 
 </glossentry>
 
+<!-- TODO put somewhere
+PREFIX-field"]PREFIX-field (Optimization note- one query per field if you use this; we optimize around this if only one products table) 
+-->

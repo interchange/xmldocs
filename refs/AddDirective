@@ -1,0 +1,59 @@
+__NAME__ purpose
+add a new configuration directive
+__END__
+
+__NAME__ synopsis
+	<arg choice='req'>name</arg>
+	<arg>parse function</arg>
+	<arg>default value</arg>
+__END__
+
+
+__NAME__ description
+The directive allows you to extend the set of regular configuration
+directives accepted in each &ccf; with your custom ones, which are then
+treated the same as the "built-in" ones.
+</para><para>
+The 3 standard arguments can be specified, just as you can see in 
+<filename>lib/Vend/Config.pm</filename>: the new directive name, name of
+the parser/validating function, and a default value.
+</para><para>
+If the parser function is not defined, then no parser will be called at all,
+and the value of the directive will be exactly what users specify in their
+&ccf; files (which is usually a &PERL; scalar value). If the parser
+argument <emphasis>is</emphasis> supplied, then the parser must already be
+defined because it can't be referenced <emphasis>in advance</emphasis>.
+</para><para>
+<filename>lib/Vend/Config.pm</filename> contains all the default 
+parser functions, which are recognized by the mandatory prefix
+<literal>parse_</literal>.
+</para><para>
+Directly modifying <filename>Config.pm</filename> (or any other 
+files from the &IC; installation) is discouraged for portability and other
+reasons. Therefore, to add your custom parsing function, you should
+modify &gcf; as seen in <xref linkend="AddDirective_examples"/>
+(note that the parser definition
+must logically come before &conf-AddDirective;).
+__END__
+
+__NAME__ notes
+Note that <literal>boolean</literal>, one of the default parse functions, is
+actually
+a boolean list, and not a true boolean value. The list achieves the effect
+of being boolean by logically returning &glos-true; or &glos-false;,
+depending on whether the searched item is present in the list or not.
+True boolean values are called <literal>yesno</literal>s in &IC; parlance.
+__END__
+
+__NAME__ example: Adding a new catalog configuration directive
+Let's add the <literal>DocRoot</literal> directive. Put the following 
+in your &gcf;:
+<programlisting>
+AddDirective Foo bar "Hello, World!"
+</programlisting>
+__END__
+
+__NAME__ missing
+Make better example, and exactly show how to define a new parser function without modifying Config.pm directly.
+__END__
+

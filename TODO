@@ -8,6 +8,9 @@ Outstanding:
 - See why email and email-raw produce some errors about usertags olink ID
 - Since directives are in the same file, catconfs and globconfs which 
   are common need to have 2 source contexts instead of one.
+- Add docbook element to reference mailing list posts. Something like
+  <ml list='users'>2004-December/041539</ml>, it expands to:
+	<ulink url="http://www.icdevgroup.org/pipermail/interchange-users/2004-December/041539.html">2004-December/041539</ulink>.
 
 Later:
 - Ask ndw about including [NEW!] and [TODO!] in titles in TOC.
