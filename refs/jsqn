@@ -1,0 +1,48 @@
+__NAME__ purpose
+return a string for use in JavaScript, quoted, without variables substituted
+__END__
+
+__NAME__ see also
+jsq
+__END__
+
+__NAME__ author
+&mheins;, &ICDEVGROUP;
+__END__
+
+__NAME__ description
+<tag>jsqn</tag> tag quotes (escapes) strings (without performing variable
+substitution), for use in JavaScript code blocks.
+</para><para>
+This is mostly used for long string which are hard to prepare manually.
+__END__
+
+__NAME__ example
+<example>
+  <title>Basic example</title>
+	<para>
+	Here's an example of JavaScript code and the output it would generate,
+	once expanded by Interchange:
+	</para>
+  <programlisting> 
+<script>
+  var astring = 'just an insert';
+  var somevar = [jsqn] Big long string you don't
+  want to have to quote for JS, and you want to
+  insert the variable $astring.[/jsqn];
+</script>
+  </programlisting>
+	<para>
+	Expands to:
+	</para>
+  <programlisting>
+<script>
+var astring = 'just an insert';
+var somevar = " Big long string you don't" +
+  '  want to have to quote for JS, and you want to' +
+  '  insert the variable $astring.';
+</script>
+  </programlisting>
+</example>
+__END__
+
