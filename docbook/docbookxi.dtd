@@ -1,5 +1,6 @@
 
 <!ENTITY % literals	SYSTEM "literals.ent">  %literals;
+<!ENTITY % autodefs	SYSTEM "autodefs.ent">  %autodefs;
 
 <!-- Remove MsgSet -->
 <!ENTITY % compound.class "procedure|sidebar">

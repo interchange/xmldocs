@@ -62,6 +62,8 @@ my $specific_only;
 my $output_spec;
 my $output_both;
 my %first; # Keep track if symbol group appears first time or not. (! logic)
+my $no_autodefs; # Generate autodefs.ent collection of entities by default
+my $autopath = "docbook/autodefs.ent";
 
 my @page_order = (qw/purpose default structure synopsis description example notes bugs/, "symbol type", "source", "author", "copyright", "see also");
 
@@ -71,6 +73,7 @@ unless ( GetOptions (
 	"group|type|g|t=s" => \$specific_only,
 	"output|o=s" => \$output_spec,
 	"both|b!"    => \$output_both,
+	"noentities|noents!" => \$no_autodefs,
 )) { die "Error parsing options\n" }
 
 # Determine which stuff to output
@@ -503,6 +506,39 @@ open INVOUT, "> tmp/missing" or
 	die "Can't open tmp/missing ($!)\n";
 print INVOUT Dumper \%invalid;
 close INVOUT;
+
+# Output autodefs.ent
+unless ( $no_autodefs ) {
+	open ATD, "> $autopath" or die "Can't wropen $autopath ($!)\n";
+	print "GEN: $autopath\n";
+
+	while (my($g,$kr) = each %symbol_lists) {
+		for $_ (@$kr) {
+			my $tag;
+
+			if ( $g =~ /tag$/ ) {
+				$tag = 'tag';
+			} elsif ( $g =~ /pragma$/ ) {
+				$tag = 'pragma';
+			} elsif ( $g =~ /var$/ ) {
+				$tag = 'varname';
+			} elsif ( $g =~ /conf$/ ) {
+				$tag = 'option';
+			} elsif ( $g =~ /filter$/ ) {
+				$tag = 'filter';
+			} else {
+				die "UNKNOWN $g\n";
+			}
+
+#<!ENTITY $_ "<olink targetdoc='${g}s' targetptr='$_'>$_</olink>">
+			print ATD <<ENDD;
+<!ENTITY $_ "<$tag>$_</$tag>">
+ENDD
+		}
+	}
+
+	close ATD;
+}
 
 exit 0;
 

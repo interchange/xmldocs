@@ -114,7 +114,7 @@ $T/%-c.db: %.xml $T
 
 #############################################################
 # Standard targets
-$O/%.html: %.xml skel
+$O/%.html: %.xml docbook/autodefs.ent skel
 	echo "C     $@"
 	$(PSR) $(PSR_FLAGS)                                                \
 	  --stringparam current.docid $*                                   \
