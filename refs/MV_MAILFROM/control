@@ -1,3 +1,3 @@
 purpose: specifies the default sender e-mail address when SMTP is used to send mail
-default: value of the MailOrderTo config directive
+default: Value of the <option>MailOrderTo</option> config directive
 see also: MV_SMTPHOST, MV_HELO, MailOrderTo

@@ -10,7 +10,7 @@ Add the following to <filename>interchange.cfg</filename>:
 
 <programlisting><![CDATA[
 SendMailProgram Net::SMTP
-Variable MV_HELO myhost.mydomain.com
+Variable MV_HELO myhost.mydomain.local
 ]]></programlisting>
 
 </example>

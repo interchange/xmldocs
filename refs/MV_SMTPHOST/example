@@ -9,7 +9,7 @@ Add the following to <filename>interchange.cfg</filename>:
 </para>
 
 <programlisting><![CDATA[
-Variable MV_SMTPHOST myhost.mydomain.com
+Variable MV_SMTPHOST myhost.mydomain.local
 ]]></programlisting>
 
 </example>
