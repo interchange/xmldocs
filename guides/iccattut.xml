@@ -101,11 +101,11 @@
 		<para>
 		Welcome to the &IC; Catalog Building Tutorial. Interchange originally started as an electronic cart and database display system, but over time it developed into a general application server.
 		</para> <para>
-		The simple Interchange <firstterm>catalog</firstterm> you will create during this tutorial should give you a feel of the basic Interchange system. It should also be considered a stepping stone to a more complete and functional Interchange-enabled website. The tutorial will rely as much as possible on default settings to accentuate ideas instead of implementation. It will use as few of Interchange's capabilities as possible, while still building a usable website (an on-line store in our example). <emphasis>The resulting site will be simple but usable</emphasis>. The value of this tutorial is in the explanations of the general Interchange ideas and small <emphasis>ready to use</emphasis> examples to get you up to speed.
+		The simple Interchange <firstterm>catalog</firstterm> you will create during this tutorial should give you a feel of the basic Interchange system. The catalog should also be considered a stepping stone to a more complete and functional Interchange-enabled website. We will rely on default settings as much as possible, to accentuate ideas instead of implementation. We will use a small number of Interchange features and still create a usable website (an on-line store in our example). <emphasis>The resulting site will be simple but usable</emphasis>. The value of this tutorial is in the explanations of the general Interchange ideas and small <emphasis>ready to use</emphasis> examples to get you up to speed.
 		</para> <para>
-		It is recommended that you create the files used in this tutorial yourself. You will learn more by creating the directory structure and using your favorite text editor to create files in the proper places on your own system as they are discussed.
+		We recommend that you create the files used in this tutorial yourself. You will learn more by creating the directory structure and using your favorite text editor to create files in the proper places on your own system as they are discussed.
 		</para> <para>
-		It's hard to write a complete tutorial without the feedback from the audience. Please jot down your notes and remarks as you digest this tutorial and e-mail docs@icdevgroup.org with your thoughts; which sections need clarification or examples, which parts were useful to you, or what was the weather like over there yesterday afternoon :).
+		Writing a complete tutorial without the feedback from the audience is hard. Please jot down your notes and remarks as you digest this tutorial and e-mail docs@icdevgroup.org with your thoughts; which sections need clarification or examples, which parts were useful to you, or what was the weather like over there yesterday afternoon :).
 		</para>
 	</sect2>
 
@@ -128,7 +128,7 @@
 	<sect2 id='TestServerHostname'>
 		<title>Test Server Hostname</title>
 		<para>
-		It is recommended that you always use your full system name (such as <systemitem class='systemname'>myhost.mydomain.local</systemitem>) instead of <systemitem class='systemname'>localhost</systemitem>. The HTTP State Management Mechanism (<ulink url="http://www.ietf.org/rfc/rfc2109.txt">RFC 2109</ulink>) specifies that cookies can only be set when the domain name contains at least two dots. Interchange does work even with client cookies disabled, but your session will be dropped every time you leave the catalog, since the session ID (which Interchange then embeds in the URL) will be lost.
+		We recommend that you always use your full system name (such as <systemitem class='systemname'>myhost.mydomain.local</systemitem>) instead of <systemitem class='systemname'>localhost</systemitem>. The HTTP State Management Mechanism (<ulink url="http://www.ietf.org/rfc/rfc2109.txt">RFC 2109</ulink>) specifies that cookies can only be set when the domain name contains at least two dots. Interchange does work even with client cookies disabled, but your session will be dropped every time you leave the catalog, since the session ID (which Interchange then embeds in the URL) will be lost.
 		</para> <para>
 		If your system does not have a suitable name, and you're not going to bother yourself with establishing one, there's the <filename>/etc/hosts</filename> file you can tune for the desired effect. Simply modify:
 		<programlisting>
@@ -198,12 +198,12 @@
 		</itemizedlist>
 
 		<important><para>
-			The Interchange installation routine is very flexible and the resulting file locations on your system may vary, depending on how your system was set up. It is recommended that you do not proceed until you are sure you have this information and the necessary permissions to write to the directories used. The locations mentioned here are valid for prepackaged RPM or DEB installations. If you did not install those packages, substitute the paths for your values appropriately.
+			The Interchange installation routine is very flexible and the resulting file locations on your system may vary, depending on how your system was set up. We recommend that you do not proceed until you are sure you have this information and the necessary permissions to write to the directories used. The locations mentioned here are valid for prepackaged RPM or DEB installations. If you did not install those packages, substitute the paths for your values appropriately.
 		</para></important>
 	</sect2>
 
-	<sect2 id='StartingtheInterchangeDaemon_ReconfiguringCatalogs'>
-		<title>Starting the Interchange Daemon, Reconfiguring Catalogs</title>
+	<sect2 id='InterchangeDaemonandCatalogs'>
+		<title>Interchange Daemon and Catalogs</title>
 		<para>
 		To control the Interchange daemon, use the <filename class='directory'>init.d</filename> script supplied with the RPM and DEB packages. For example, to start Interchange, run <userinput>/etc/init.d/interchange start</userinput> or <userinput>/etc/rc.d/init.d/interchange start</userinput>. To stop or restart Interchange, simply use <userinput>stop</userinput> or <userinput>restart</userinput> as arguments.
 		</para> <para>
@@ -215,8 +215,8 @@
 
 
 
-<sect1 id='BuildingtheMinimalCatalog'>
-	<title>Building the Minimal Catalog</title>
+<sect1 id='MinimalCatalog'>
+	<title>Minimal Catalog</title>
 
 	<sect2 id='CatalogFiles'>
 		<title>Catalog Files</title>
@@ -225,8 +225,8 @@
 		</para>
 	</sect2>
 
-	<sect2 id='TheLinkProgram'>
-		<title>The Link Program</title>
+	<sect2 id='LinkProgram'>
+		<title>Link Program</title>
 		<para>
 		You need to locate the existing link program (found in the <filename class='directory'>cgi-bin</filename> directory) and copy it to a new name, making sure the permissions stay intact. Run
 		<itemizedlist>
@@ -249,8 +249,8 @@
 		</para>
 	</sect2>
 
-	<sect2 id='TheCatalogRootDirectory'>
-		<title>The Catalog Root Directory (CATROOT)</title>
+	<sect2 id='CatalogRootDirectory'>
+		<title>Catalog Root Directory (CATROOT)</title>
 		<para>
 		In the <link linkend="catdir">Interchange (base) catalogs directory</link>, you need to create a new subdirectory for the tutorial catalog. This is where all of your catalog-specific files will go. The directory needs to be readable, writable, and executable by the Interchange user. This will be referred to as your <emphasis>catalog directory</emphasis><footnote><para>Please note the difference between <emphasis>Interchange catalogs directory</emphasis> which holds all of the catalogs, and the <emphasis>catalog directory</emphasis> which, always in a context, designates one of the subdirectories.</para></footnote> or CATROOT. Type the following from the corresponding base catalogs directory on your system:
 		<programlisting>
@@ -269,7 +269,7 @@ chmod 775 tutorial
 	<sect2 id='Interchange_managedCatalogSubdirectories'>
 		<title>Interchange-managed Catalog Subdirectories</title>
 		<para>
-		Now switch from the superuser to the Interchange user (<systemitem class='username'>interchange</systemitem> by default), by typing <userinput>su -s /bin/sh - interchange</userinput>. It's important to complete the rest of the steps under the "interchange" account or you'll run into permission problems later. (By the way, also make sure your <firstterm>umask</firstterm> setting is correct by running <userinput>umask 022</userinput>).
+		Now switch from the superuser to the Interchange user (<systemitem class='username'>interchange</systemitem> by default), by typing <userinput>su -s /bin/sh - interchange</userinput>. It is important to complete the rest of the steps under the "interchange" account or you'll run into permission problems later. (By the way, also make sure your <firstterm>umask</firstterm> setting is correct by running <userinput>umask 022</userinput>).
 		</para> <para>
 		Move to the catalog root directory (with the <userinput>cd /var/lib/interchange/catalogs/tutorial</userinput> or <userinput>cd /var/lib/interchange/tutorial</userinput> command).
 		</para> <para>
@@ -303,7 +303,7 @@ ErrorFile /var/log/interchange/error.log
 	<sect2 id='CatalogConfiguration:Catalog_cfg'>
 		<title>Catalog Configuration: catalog.cfg</title>
 		<para>
-		There are few <filename>catalog.cfg</filename> directives that Interchange expects to see in order to complete the minimum configuration. They are <option>VendURL</option> (your catalog's base URL), <option>SecureURL</option> (HTTPS base URL), <option>MailOrderTo</option>, <option>Database</option> and <option>ProductFiles</option>. If you do not have a suitable HTTPS location for your catalog (if you're not running https, for example), simply use the same value as for <option>VendURL</option>. In our catalog, we will use a minimal <database class='table'>products</database> table<footnote><para>Keep in mind that Interchange uses both terms "database" and "table" to identify the same thing - a table. This terminology is a historic leftover from the time when Interchange only used a single table.</para></footnote> with only the three necessary fields. It will be TAB delimited text file, stored in <filename>products/products.txt</filename>. In general, you can specify unlimited number of databases of any type (for unlimited purposes), but at least one must be considered a <firstterm>Product Files</firstterm> database, reflecting Interchange's e-commerce roots.
+		There are few <filename>catalog.cfg</filename> directives that Interchange expects to see in order to complete the minimum configuration. Those directives are <option>VendURL</option> (your catalog's base URL), <option>SecureURL</option> (HTTPS base URL), <option>MailOrderTo</option>, <option>Database</option> and <option>ProductFiles</option>. If you do not have a suitable HTTPS location for your catalog (if you're not running https, for example), simply use the same value as for <option>VendURL</option>. In our catalog, we will use a minimal <database class='table'>products</database> table<footnote><para>Keep in mind that Interchange uses both terms "database" and "table" to identify the same thing - a table. This terminology is a historic leftover from the time when Interchange only used a single table.</para></footnote> with only the three necessary fields. The table will be TAB delimited text file, stored in <filename>products/products.txt</filename>. In general, you can specify unlimited number of databases of any type (for unlimited purposes), but at least one must be considered a <firstterm>Product Files</firstterm> database, reflecting Interchange's e-commerce roots.
 		</para> <para>
 		So the basic <filename>/var/lib/interchange/catalogs/tutorial/catalog.cfg</filename> config file should look like this:
 		</para> <para>
@@ -313,8 +313,8 @@ ErrorFile /var/log/interchange/error.log
 		</para>
 	</sect2>
 
-	<sect2 id='TheProductsDatabase'>
-		<title>The Products Database</title>
+	<sect2 id='ProductsDatabase'>
+		<title>Products Database</title>
 		<para>
 		The <database class='table'>products</database> database we mentioned, kept in <filename>products/products.txt</filename>, will serve two purposes. It will provide Interchange with the layout of the products database table and it will also provide the data. When Interchange comes around to parse the products.txt file, it will expect the first line to contain the names of the fields for the database table (the <database class='field'>sku</database>, <database class='field'>description</database> and <database class='field'>price</database> fields are mandatory for a products database, but you can add arbitrary other fields as you see fit). The first field in the list is expected to be the primary key (unique identifier) for the row. In most cases you are going to use the SKU (<firstterm>Stock Keeping Unit</firstterm>) as the unique identifier for each product. The simple store that we are going to build will sell tests. You can choose another sample product line, but it is recommended that you keep it simple. Create the file <filename>products/products.txt</filename>, separating fields <emphasis>with a single TAB</emphasis>:
 		<programlisting>
@@ -323,7 +323,7 @@ ErrorFile /var/log/interchange/error.log
 		</para> <para>
 		You may notice that the columns don't line up in your text editor. This is the nature of tab-delimited files. Do not try to fix these.
 		</para> <para>
-		If you need more entries for the sample products database, you can use the <ulink url="files/dbgen">dbgen</ulink> Perl script to automatically create random database files for testing. It's output is much more meaningful if you provide it a list of words to work on (instead of just random characters) so make sure you have the <filename>/usr/share/dict/words</filename> file (in Debian, it's provided by the <literal>wenglish</literal> package), and then run <userinput>perl dbgen -c 10 -r /usr/share/dict/words > products/products.txt</userinput>. See the script source for available options and the complete usage syntax.
+		If you need more entries for the sample products database, you can use the <ulink url="files/dbgen">dbgen</ulink> Perl script to automatically create random database files for testing. The output of the script is much more meaningful if you provide it a list of words to work on (instead of just random characters) so make sure you have the <filename>/usr/share/dict/words</filename> file (in Debian, it's provided by the <literal>wenglish</literal> package), and then run <userinput>perl dbgen -c 10 -r /usr/share/dict/words > products/products.txt</userinput>. See the script source for available options and the complete usage syntax.
 		</para> <para>
 		It is important to know that Interchange does not use plain-text databases (such as our <systemitem class='database'>products</systemitem> database) as-is; the data is imported and internally stored in a variant of the DBM database (depending on which variant is available on your system). That's why on most Linux systems, you will see the <filename>products/products.gdbm</filename> file created once you put the catalog on-line.
 		</para> <para>
@@ -404,7 +404,7 @@ ErrorFile /var/log/interchange/error.log
 			</para>
 		</tip>
 		<para>
-		ITL is at the heart of almost all Interchange catalog pages. It's how you use Interchange's functionality. The ITL tags appear between square brackets, and accept all <emphasis>named</emphasis> or all <emphasis>positional</emphasis> parameters; here's an example:
+		ITL is at the heart of almost all Interchange catalog pages: ITL is the way you use Interchange's functionality. The ITL tags appear between square brackets, and accept all <emphasis>named</emphasis> or all <emphasis>positional</emphasis> parameters; here's an example:
 		<programlisting>
 [data table="products" column="price" key="1299"]  (named parameters)
 
@@ -421,8 +421,8 @@ ErrorFile /var/log/interchange/error.log
 	</para>
 	</sect2>
 
-	<sect2 id='TheWelcomePage'>
-		<title>The Welcome Page</title>
+	<sect2 id='WelcomePage'>
+		<title>Welcome Page</title>
 		<para>
 		Create a directory called <filename class='directory'>pages/</filename> in your tutorial catalog directory (the CATROOT).
 		</para> <para>
@@ -435,8 +435,8 @@ ErrorFile /var/log/interchange/error.log
 		</para>
 	</sect2>
 
-	<sect2 id='BrowsingtheTutorialCatalogfortheFirstTime'>
-		<title>Browsing the Tutorial Catalog for the First Time</title>
+	<sect2 id='TutorialCataloginAction'>
+		<title>Tutorial Catalog in Action</title>
 		<para>
 		As the superuser, first restart Interchange to make sure all the <filename>catalog.cfg</filename> changes get applied to the running catalog.
 		</para> <para>
@@ -522,8 +522,8 @@ ErrorFile /var/log/interchange/error.log
 <sect1 id='ProductDisplay'>
 	<title>Product Display</title>
 
-	<sect2 id='ListingAllProducts'>
-		<title>Listing All Products</title>
+	<sect2 id='ProductListing'>
+		<title>Product Listing</title>
 
 		<para>
 		Now that your sample catalog is up and running, we'll display your products on the welcome page. We will loop over all of the products in our database and produce an entry for each product in the table. Replace the line "This is where your content goes" line in <filename>pages/index.html</filename> with the following:
@@ -575,7 +575,7 @@ ErrorFile /var/log/interchange/error.log
 		<para>
 		The next step is to create an individual page for each item. You could theoretically create each page manually, but that approach isn't worth considering. So to do this the right way, we need to create a <emphasis>special generic page</emphasis> called <firstterm>the flypage</firstterm> (<filename>pages/flypage.html</filename>). When a page is requested that does not exist in the <filename class='directory'>pages/</filename> directory, Interchange will check and see if the requested page has the same name as a product ID from the product database table (in this case a SKU). If it does, it will then show the flypage for that product. If there's no product with that ID, the special error page <filename>special_pages/missing.html</filename> (described in the next section) will be displayed.
 		</para> <para>
-		For example, if you request the <filename>0198.html</filename> page, Interchange first checks if that specific page exists (<filename class='directory'>pages/0198.html</filename>). If one is not found, it searches the products database table for a product with that ID 0198. It then creates that product page <emphasis>on the fly</emphasis> using <filename>pages/flypage.html</filename>. When constructing the flypage, the entire product record for the requested product is available through the <tag>item-field</tag> tag (similar to the <tag>loop-field</tag> tag). To create a fly page, type the following code and save it as <filename>pages/flypage.html</filename>.
+		For example, if you request the <filename>0198.html</filename> page, Interchange first checks if that specific page exists (<filename class='directory'>pages/0198.html</filename>). If one is not found, it searches the products database table for a product with that ID 0198. Interchange then creates that product page <emphasis>on the fly</emphasis> using <filename>pages/flypage.html</filename>. When constructing the flypage, the entire product record for the requested product is available through the <tag>item-field</tag> tag (similar to the <tag>loop-field</tag> tag). To create a fly page, type the following code and save it as <filename>pages/flypage.html</filename>.
 		<programlisting>
 <xi:include parse='text'  href='../files/tutorial-phase2/pages/flypage.html'></xi:include>
 		</programlisting>
@@ -615,10 +615,10 @@ ErrorFile /var/log/interchange/error.log
 <sect1 id='TheShoppingBasket'>
 	<title>The Shopping Basket</title>
 
-	<sect2 id='TheOrderLink'>
-		<title>The Order Link</title>
+	<sect2 id='OrderLink'>
+		<title>Order Link</title>
 		<para>
-		Now that you have your products available, let's add a shopping cart so customers can purchase them. This is simply created using the <tag>order</tag> tag. It creates an HTML link that causes the specified item to be ordered and takes the shopper to her basket page. This is a built-in shortcut to the complete order process which uses an HTML form submission process. The parameter for the <tag>order</tag> tag is the product ID. To add these tags to the catalog, make the following change to <filename>pages/index.html</filename>:
+		Now that you have your products available, let's add a shopping cart so customers can purchase them. This is simply created using the <tag>order</tag> tag. The tag creates an HTML link that causes the specified item to be ordered and takes the shopper to her basket page. This is a built-in shortcut to the complete order process which uses an HTML form submission process. The parameter for the <tag>order</tag> tag is the product ID. To add these tags to the catalog, make the following change to <filename>pages/index.html</filename>:
 		<programlisting><![CDATA[
       [loop-field description]
       </a>
@@ -703,9 +703,9 @@ ErrorFile /var/log/interchange/error.log
 		</para> <para>
 		The HTML form begins with a method of 'post' (which sends the form data as its own stream, as opposed to the 'get' method which encodes the data as part of the URL). The <tag>process</tag> tag creates a special URL for form processing. Interchange has a built-in form processor that is configured by submitting certain fields in the form. The Finalize button will invoke this form processor and link the user to the <filename>special_pages/receipt.html</filename> page, which is described later.
 		</para> <para>
-		You are submitting some hidden form values that will tell Interchange how to process this form. The first value, mv_todo was set as submit. This causes the form to be submitted for validation. The second value, mv_order_profile was set as order_profile. This determines the validation process for the form. It is explained further in the next section.
+		You are submitting some hidden form values that will tell Interchange how to process this form. The first value, <mv>mv_todo</mv> was set as submit. This causes the form to be submitted for validation. The second value, <mv>mv_order_profile</mv> was set as <literal>order_profile</literal>. This determines the validation process for the form which is explained further in the next section.
 		</para> <para>
-		The last value, mv_cyber_mode, was set to be minivend_test. The mv_cyber_mode value determines what method will be used to charge a credit card. The value of minivend_test uses the internal test method, which calculates a simple checksum against the card to determine if it is a valid number.
+		The last value, <mv>mv_cyber_mode</mv>, was set to be <literal>minivend_test</literal>. The <mv>mv_cyber_mode</mv> value determines what method will be used to charge a credit card. The value of <literal>minivend_test</literal> uses the internal test method, which calculates a simple checksum against the card to determine if it is a valid number.
 		</para> <para>
 		When preparing an order for processing, Interchange looks for certain named fields in the form to obtain name, address, and credit card information. We are using all expected (default) field names in this form so that no translation needs to take place.
 		</para> <para>
@@ -778,7 +778,7 @@ __END__
 		</para> <para>
 		This file is in plain text format where, unlike HTML, white space is relevant. It is fairly straightforward, except that the <tag>if</tag> tag was added to only include the optional second address line if the customer filled it in.
 		</para> <para>
-		One of the special properties of the mv_credit_card_number field is that Interchange specifically precludes the credit card number from being saved. This makes it unavailable to you in the <tag>value</tag> tag. The <tag>cgi</tag> tag is used to circumvent this important security measure in order to get the value submitted from the last form.
+		One of the special properties of the <mv>mv_credit_card_number</mv> field is that Interchange specifically precludes the credit card number from being saved. This makes it unavailable to you in the <tag>value</tag> tag. The <tag>cgi</tag> tag is used to circumvent this important security measure in order to get the value submitted from the last form.
 		</para>
 		<warning><para>
 			Obviously it is a bad idea to send a real credit card number over an insecure channel like email. In a real configuration, you would encrypt the number securely before emailing or storing it.
@@ -896,8 +896,8 @@ Variable SOMENAME whatever value you want
 		</para>
 	</sect2>
 
-	<sect2 id='AMoreInterestingPageFooter'>
-		<title>A More Interesting Page Footer</title>
+	<sect2 id='MoreInterestingPageFooter'>
+		<title>More Interesting Page Footer</title>
 		<para>
 		You can put a contact email address at the bottom of each page in case your customers want to contact you. You could just add it to the footer, but by putting it into a variable you can use it in contact pages as well. This allows you to easily change the variable information and have that change reflected in all instances of that variable. The following is an example of how to set a catalog variable in <filename>catalog.cfg</filename>:
 		<programlisting>
@@ -940,10 +940,10 @@ Now add the following to the left template piece:
 		</para>
 	</sect2>
 
-	<sect2 id='AdvancedCreditCardExpirationDateSelection'>
-		<title>Advanced Credit Card Expiration Date Selection</title>
+	<sect2 id='AdvancedCreditCardExpirationDateOptions'>
+		<title>Advanced Credit Card Expiration Date Options</title>
 		<para>
-		To reduce the possibility of human error at checkout time, most on-line stores use a pull-down option menu to list the months and the years for the credit card expiration date, instead of having the user to type the numbers by hand. It also lets you avoid explaining whether the user should enter a 2- or 4-digit year.
+		To reduce the possibility of human error at checkout time, most on-line stores use a pull-down option menu to list the months and the years for the credit card expiration date, instead of having the user to type the numbers by hand. The menu also lets you avoid explaining whether the user should enter a 2- or 4-digit year.
 		<!-- TODO: discuss security here -->
 		</para> <para>
 		Make the following change to your <filename>pages/checkout.html</filename> page. The section that follows explains the code. <command>Read the explanation section below before typing the code to be sure you know where tabs should be used instead of spaces and where to watch out for `back-ticks`</command>.
@@ -1108,7 +1108,7 @@ Now add the following to the left template piece:
 		</para> <para>
 		This is a simple HTML form with a single input box for text. The action goes to a special Interchange processor called 'search' that will perform the search and pass the results to a page called <filename>pages/results.html</filename> (that has not been created yet). The search will be case-insensitive, but will only match complete words, not substrings.
 		</para> <para>
-		The <code>[set testname]...[/set]</code> tags set an Interchange scratch variable that will be (in this case, of course) used as a predefined search profile. We specify all the search parameters except the one the user will enter, 'mv_searchspec' (the long name for 'se'). We then tell Interchange we want to use this search profile in a hidden form variable named 'mv_profile'.
+		The <code>[set testname]...[/set]</code> tags set an Interchange scratch variable that will be (in this case, of course) used as a predefined search profile. We specify all the search parameters except the one the user will enter, <mv>mv_searchspec</mv> (the long name for 'se'). We then tell Interchange we want to use this search profile in a hidden form variable named <mv>mv_profile</mv>.
 		</para> <para>
 		The search box will now appear on all catalog pages, but you still need to create the search results page. To create the search results page, type the following code and save it as <filename>pages/results.html</filename>.
 		</para> <para>
@@ -1120,8 +1120,8 @@ Now add the following to the left template piece:
 		</para>
 	</sect2>
 
-	<sect2 id='TheDefaultCatalogPage'>
-		<title>The Default Catalog Page</title>
+	<sect2 id='DefaultCatalogPage'>
+		<title>Default Catalog Page</title>
 		<para>
 		As you know, a standard Interchange catalog page URL looks like <ulink url="http://myhost.mydomain.local/cgi-bin/ic/tutorial/index.html"/>.
 		</para> <para>
