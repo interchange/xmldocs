@@ -1,0 +1,91 @@
+__NAME__ purpose
+send e-mail using SendMailProgram
+__END__
+
+
+__NAME__ synopsis
+<row>
+	<entry>
+		<arg choice='plain'>to</arg>
+	</entry>
+	<entry>Yes</entry><entry>Yes</entry>
+	<entry></entry>
+	<entry>E-mail address of the recipient.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>subject</arg>
+	</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry><literal><![CDATA[<no subject>]]></literal></entry>
+	<entry>Subject of the e-mail.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>reply</arg>
+	</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry></entry>
+	<entry>E-mail address for reply.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>from</arg>
+	</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry>First address from the <option>MailOrderTo</option> configuration directive.</entry>
+	<entry>E-mail address of the sender.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>extra</arg>
+	</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry>None</entry>
+	<entry>Additional e-mail headers to include. For example,
+	<literal>Errors-To: errors@mydomain.local</literal>.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>hide</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>Hide tag return value?</entry>
+</row>
+__END__
+
+
+__NAME__ see also
+email-raw, SendMailProgram, customsendmail
+__END__
+
+
+__NAME__ description
+This tag simply feeds <option>SendMailProgram</option> with the 
+e-mail body that you provide.
+</para><para>
+You do not need to provide the headers yourself, because you can pass
+all relevant information using tag parameters.
+The <arg choice='plain'>to</arg> parameter must be supplied and contain
+a valid e-mail address, or the message surely won't be delivered.
+__END__
+
+
+__NAME__ example
+<example>
+	<title>Simple e-mail message</title>
+	<para>
+	Put the following on a test page:
+	</para>
+	<programlisting>
+[email
+  to="root@mydomain.local"
+  subject="Greetings"
+]
+Hello, World!
+[/email]
+	</programlisting>
+</example>
+__END__
+

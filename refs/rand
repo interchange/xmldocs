@@ -1,0 +1,63 @@
+__NAME__ purpose
+return random element from an arbitrarily-separated list
+__END__
+
+
+__NAME__ synopsis
+<row>
+	<entry>
+		<arg choice='plain'>file</arg>
+	</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry></entry>
+	<entry>File to load elements from.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>separator</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry><literal>[alt]</literal></entry>
+	<entry>Separator to split elements on.</entry>
+</row>
+__END__
+
+
+__NAME__ description
+This tag read the list of elements, separated by
+<arg choice='plain'>separator</arg>, and returns one random element.
+</para><para>
+The list of elements can be either passed in from the 
+<arg choice='plain'>file</arg> argument or it can be specified in-place,
+in the tag body.
+</para><para>
+If the <arg choice='plain'>file</arg> argument is specified, it takes
+precendence over the tag body content. Note that using large files
+can impact performance, since they are read in to memory before a random
+element is selected.
+__END__
+
+
+__NAME__ notes
+During the split operation (performed on the list to extract single elements),
+the whitespace <emphasis role='bold'>is</emphasis> significant, so make sure
+you do not have excessive spaces around elements. If you do, and especially
+if the separator used is a space character itself, you will sometimes get
+empty elements in return.
+__END__
+
+
+__NAME__ example
+<example>
+	<title>Return one random word</title>
+	<para>
+	Put the following on a test page:
+	</para>
+	<programlisting>
+[rand separator=" "]
+Foo Bar Baz Quux Toad Stool
+[/rand]
+	</programlisting>
+</example>
+__END__
+
