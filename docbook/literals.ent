@@ -20,6 +20,7 @@
 <!ENTITY DEF_DESCRIPTION "No more specific information was supplied. We know
 this piece is missing and we'll try to update it.">
 <!ENTITY DEF_EXAMPLE "No examples are available at this time. We do consider this a problem and will try to supply some.">
+<!ENTITY DEF_ONLINE "No online examples are available at this time. We do consider this a problem and will try to supply some.">
 <!ENTITY DEF_NOTES "None.">
 <!ENTITY DEF_BUGS "<para>There are no known bugs.</para><para>If you believe you've found a bug, please write to interchange-users@icdevgroup.org or use <application>reportbug</application> to submit bugs in Debian GNU.</para>">
 <!ENTITY DEF_SYMBOLTYPE "No symbol type information, this is strange.">
@@ -74,7 +75,7 @@ option) any later version.</para>">
 <!ENTITY interval "<olink targetdoc='glossary' targetptr='interval'>Interval</olink>">
 <!ENTITY cgi-var "<olink targetdoc='glossary' targetptr='cgi-var'>CGI Variable</olink>">
 <!ENTITY cgi-vars "<olink targetdoc='glossary' targetptr='cgi-var'>CGI Variables</olink>">
-<!ENTITY umask "<olink targetdoc='glossary' targetptr='umask'>Umask</olink>">
+<!ENTITY umask "<glossterm baseform='umask'>umask</glossterm>">
 <!ENTITY mode "<olink targetdoc='glossary' targetptr='mode'>Mode</olink>">
 <!ENTITY filter "<olink targetdoc='glossary' targetptr='filter'>Filter</olink>">
 <!ENTITY dereferencing "<olink targetdoc='glossary' targetptr='deref'>Dereferencing</olink>">

@@ -43,7 +43,7 @@ my $no_autodefs; # Generate autodefs.ent collection of entities by default
 my $autopath = "docbook/autodefs.ent";
 my %dups; # List of symbols names that are not unique
 
-my @page_order = (qw/purpose default structure synopsis description example notes bugs/, "symbol type", "source", "author", "copyright", "see also");
+my @page_order = (qw/purpose default structure synopsis description online example notes bugs/, "symbol type", "source", "author", "copyright", "see also");
 
 unless ( GetOptions ( 
 	"verbosedb|dumpdb|d!" => \$dumpdb,
@@ -82,6 +82,7 @@ my %defaults = (
 	synopsis => "&DEF_SYNOPSIS;",
 	description => "&DEF_DESCRIPTION;",
 	example => "&DEF_EXAMPLE;",
+	online => "&DEF_ONLINE;",
 	notes => "&DEF_NOTES;",
 	bugs => "&DEF_BUGS;",
 	source => '&DEF_SOURCE;',
@@ -812,6 +813,11 @@ $ag{"synopsis"}
 <para>$ag{"description"}</para>
 </refsect1>
 
+<refsect1 id='$ag{"name"}_online' condition='online'>
+<title>ONLINE EXAMPLES</title>
+$ag{"online"}
+</refsect1>
+
 <refsect1 id='$ag{"name"}_examples'>
 <title>EXAMPLES</title>
 $ag{"example"}
@@ -874,6 +880,11 @@ $templates{filter} = <<'__ENDP__';
 <refsect1 id='$ag{"name"}_description'>
 <title>DESCRIPTION</title>
 <para>$ag{"description"}</para>
+</refsect1>
+
+<refsect1 id='$ag{"name"}_online' condition='online'>
+<title>ONLINE EXAMPLES</title>
+$ag{"online"}
 </refsect1>
 
 <refsect1 id='$ag{"name"}_examples'>
@@ -961,8 +972,13 @@ $ag{"synopsis"}
 </refsect1>
 
 <refsect1 id='$ag{"name"}_structure"}'>
-<title>TAG STRUCTURE</title>
+<title>BEHAVIOR</title>
 <para>$ag{"structure"}</para>
+</refsect1>
+
+<refsect1 id='$ag{"name"}_online' condition='online'>
+<title>ONLINE EXAMPLES</title>
+$ag{"online"}
 </refsect1>
 
 <refsect1 id='$ag{"name"}_examples'>
@@ -1035,6 +1051,11 @@ $ag{"synopsis"}
 <refsect1 id='$ag{"name"}_description'>
 <title>DESCRIPTION</title>
 <para>$ag{"description"}</para>
+</refsect1>
+
+<refsect1 id='$ag{"name"}_online' condition='online'>
+<title>ONLINE EXAMPLES</title>
+$ag{"online"}
 </refsect1>
 
 <refsect1 id='$ag{"name"}_examples'>

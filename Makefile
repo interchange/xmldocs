@@ -97,6 +97,7 @@ $O/xmldocs.css: docbook/xmldocs.css
 olinkdbs-nc olinks-nc: $(foreach f,$(ALL_DOCS),$T/$f-nc.db)
 $T/%-nc.db: %.xml $T
 	$(PSR) $(PSR_FLAGS)                                               \
+	  $(PROFILE)                                                      \
 	  --stringparam collect.xref.targets only                         \
 	  --stringparam targets.filename $@                               \
 	  docbook/html-nochunks.xsl $<
@@ -104,6 +105,7 @@ $T/%-nc.db: %.xml $T
 olinkdbs-c olinks-c: $(foreach f,$(ALL_DOCS),$T/$f-c.db)
 $T/%-c.db: %.xml $T
 	$(PSR) $(PSR_FLAGS)                                               \
+	  $(PROFILE)                                                      \
 	  --stringparam collect.xref.targets only                         \
 	  --stringparam targets.filename $@                               \
 	  docbook/html-chunks.xsl $<
@@ -115,20 +117,24 @@ $T/%-c.db: %.xml $T
 $O/%.html: %.xml docbook/autodefs.ent skel
 	echo "C     $@"
 	$(PSR) $(PSR_FLAGS)                                                \
+	  $(PROFILE)                                                       \
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
 	  -o $T/$*-nc.profiled docbook/profile.xsl $<
 	$(PSR) $(PSR_FLAGS)                                                \
+	  $(PROFILE)                                                       \
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
 	  -o $@ docbook/html-nochunks.xsl $T/$*-nc.profiled
 $O/%: %.xml skel
 	echo "C     $@/"
 	$(PSR) $(PSR_FLAGS)                                                \
+	  $(PROFILE)                                                       \
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
 	  -o $T/$*-c.profiled docbook/profile.xsl $<
 	$(PSR) $(PSR_FLAGS)                                                \
+	  $(PROFILE)                                                       \
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
 	  -o $@/ docbook/html-chunks.xsl $T/$*-c.profiled
@@ -144,7 +150,7 @@ clean-refs:
 	-rm -f refs/*.xml
 distclean: clean clean-cache
 	-rm -rf $T
-	-rm -rf {refs,glossary}/*.xml
+	-rm -rf {refs,glossary,howtos}/*.xml
 look-clean: clean clean-cache
 	-mv $T $T.temporary 2>/dev/null
 
