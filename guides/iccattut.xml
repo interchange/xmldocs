@@ -71,7 +71,7 @@
 	<legalnotice>
 		<para>
 		This documentation is free; you can redistribute it and/or modify
-		it under the terms of the GNU General Public License as published by
+		it under the terms of the &GNU; General Public License as published by
 		the Free Software Foundation; either version 2 of the License, or
 		(at your option) any later version.
 		</para>
@@ -85,7 +85,7 @@
 
 	<abstract>
 		<para>
-		The purpose of this document is to guide you through constructing a simple <ulink url="http://www.icdevgroup.org">Interchange</ulink> catalog <command>from scratch</command>. The standard catalogs that ship with Interchange are quite complex since they are ready to be used for business and highlight many of the capabilities that Interchange offers. Those catalogs can be too intimidating<footnote><para>Intimidate: to make timid or fearful; to frighten into submission.</para></footnote> places to start the journey if you're interested in learning the basic Interchange building blocks.
+		The purpose of this document is to guide you through constructing a simple &IC; catalog <command>from scratch</command>. The standard catalogs that ship with Interchange are quite complex since they are ready to be used for business and highlight many of the capabilities that Interchange offers. Those catalogs can be too intimidating<footnote><para>Intimidate: to make timid or fearful; to frighten into submission.</para></footnote> places to start the journey if you're interested in learning the basic Interchange building blocks.
 		</para>
 	</abstract>
 
@@ -99,7 +99,7 @@
 	<sect2 id='Introduction'>
 		<title>Introduction</title>
 		<para>
-		Welcome to the Interchange Catalog Building Tutorial. Interchange originally started as an electronic cart and database display system, but over time it developed into a general application server.
+		Welcome to the &IC; Catalog Building Tutorial. Interchange originally started as an electronic cart and database display system, but over time it developed into a general application server.
 		</para> <para>
 		The simple Interchange <firstterm>catalog</firstterm> you will create during this tutorial should give you a feel of the basic Interchange system. It should also be considered a stepping stone to a more complete and functional Interchange-enabled website. The tutorial will rely as much as possible on default settings to accentuate ideas instead of implementation. It will use as few of Interchange's capabilities as possible, while still building a usable website (an online store in our example). <emphasis>The resulting site will be simple but usable</emphasis>. The value of this tutorial is in the explanations of the general Interchange ideas and small <emphasis>ready to use</emphasis> examples to get you up to speed.
 		</para> <para>
@@ -112,23 +112,23 @@
 	<sect2 id='InterchangeandtheStandardDemoCatalogInstallation'>
 		<title>Interchange and the Standard Demo Catalog Installation</title>
 		<para>
-		The easiest way to prepare the environment (that is, install Interchange and the standard catalog) is to use installable packages prepared for you in RPM (<ulink url="http://www.redhat.com">Red Hat</ulink>, SuSE or Mandrake Linux systems) or DEB (<ulink url="http://www.debian.org">Debian</ulink> <ulink url="http://www.gnu.org">GNU</ulink>) formats. Try running <userinput>apt-get install interchange interchange-ui interchange-cat-standard interchange-doc</userinput> on Debian GNU systems.
+		The easiest way to prepare the environment (that is, install Interchange and the standard catalog) is to use installable packages prepared for you in <firstterm>RPM</firstterm> (&RH;, SuSE or Mandrake Linux systems) or <firstterm>DEB</firstterm> (&DEBGNU;) formats. Try running <userinput>apt-get install interchange interchange-ui interchange-cat-standard interchange-doc</userinput> on Debian GNU systems.
 		</para>
 		<note><para>
-		Interchange version 5.2-stable is the last one to ship with the <emphasis>Foundation</emphasis> demo catalog. If you suspect you have the old packages, install interchange-cat-foundation instead of interchange-cat-standard.</para></note>
+		Interchange version 5.2.0 is the last one to ship with the <emphasis>Foundation</emphasis> demo catalog. If you suspect you only have the old packages, install interchange-cat-foundation instead of interchange-cat-standard.</para></note>
 		<para>
-		You can also get Interchange by downloading and unpacking the basic Interchange <ulink url="http://http://www.icdevgroup.org/i/dev/download.html">tarball</ulink> or checking out a copy of the <ulink url="http://www.icdevgroup.org/i/dev/cvs.html">CVS</ulink> repository, and performing manual installation yourself. These installations can be done either as a regular user, or as root installing for a special Interchange user, but are out of scope of this tutorial.
+		You can also get Interchange by downloading and unpacking the basic Interchange &ICTBALL; or checking out a copy of the &ICCVS; repository, and performing manual installation yourself. These installations can be done either as a regular user, or as root installing for a special Interchange user, but are out of scope of this tutorial.
 		</para> <para>
 		During the RPM or DEB installation, you will be asked to select the Interchange username. To eliminate basic security issues, the Interchange daemon will not run as root, and it should not run as the web server user either. Therefore, a new system account to run the Interchange daemon will be created ("interchange" by default).
 		</para> <para>
-		You must access the demo catalog to verify that your Interchange installation was successful. The interchange-cat-standard catalog was supposed to install itself and register with Interchange by modifying the main <filename moreinfo='refentry'>interchange.cfg</filename> config file (or some other file, such as <filename>/etc/interchange/catalogs.cfg</filename>, which logically puts all catalog definitions in a separate file and is read by <filename>interchange.cfg</filename>). The catalog should have also placed the <firstterm>link program</firstterm> in your cgi-bin directory - the link program connects the web server software with the Interchange daemon. The demo catalog should be accessible by visiting the <ulink url="http://localhost/cgi-bin/ic/standard/index.html">Standard</ulink> (or <ulink url="http://localhost/cgi-bin/ic/foundation/index.html">Foundation</ulink>) Demo index page on your local host.
+		You must access the demo catalog to verify that your Interchange installation was successful. The interchange-cat-standard catalog was supposed to install itself and register with Interchange by modifying the main <filename moreinfo='refentry'>interchange.cfg</filename> config file (or some other file, such as <filename>/etc/interchange/catalogs.cfg</filename>, which logically puts all catalog definitions in a separate file and is read by <filename>interchange.cfg</filename>). The catalog should have also placed the <firstterm>link program</firstterm> in your <filename class='directory'>cgi-bin</filename> directory - the link program connects the web server software with the Interchange daemon. The demo catalog should be accessible by visiting the <ulink url="http://localhost/cgi-bin/ic/standard/index.html">Standard</ulink> (or <ulink url="http://localhost/cgi-bin/ic/foundation/index.html">Foundation</ulink>) Demo index page on your local host.
 		</para>
 	</sect2>
 		
 	<sect2 id='TestServerHostname'>
 		<title>Test Server Hostname</title>
 		<para>
-		It is recommended that you always use your full system name (such as myhost.mydomain.com) instead of localhost. The HTTP State Management Mechanism (<ulink url="http://www.ietf.org/rfc/rfc2109.txt">RFC 2109</ulink>) specifies that cookies can only be set when the domain name contains at least two dots. Interchange does work even with client cookies disabled, but your session will be dropped everytime you leave the catalog, since the session ID (which Interchange then embeds in the URL) will be lost.
+		It is recommended that you always use your full system name (such as <systemitem class='systemname'>myhost.mydomain.com</systemitem>) instead of <systemitem class='systemname'>localhost</systemitem>. The HTTP State Management Mechanism (<ulink url="http://www.ietf.org/rfc/rfc2109.txt">RFC 2109</ulink>) specifies that cookies can only be set when the domain name contains at least two dots. Interchange does work even with client cookies disabled, but your session will be dropped everytime you leave the catalog, since the session ID (which Interchange then embeds in the URL) will be lost.
 		</para> <para>
 		If your system does not have a suitable name, and you're not going to bother yourself with establishing one, there's the <filename>/etc/hosts</filename> file you can tune for the desired effect. Simply modify:
 		<programlisting>
@@ -140,7 +140,7 @@
 127.0.0.1       localhost myhost.mydomain.com
 		</programlisting>
 		</para> <para>
-		and you'll be able to use myhost.mydomain.com as your server name.
+		and you'll be able to use <systemitem class='systemname'>myhost.mydomain.com</systemitem> as your server name.
 		</para>
 	</sect2>
 		
@@ -151,7 +151,7 @@
 		</para>
 		<itemizedlist>
 			<listitem><para>
-				The Interchange software directory (ICROOT): 
+				The Interchange software directory (<firstterm>ICROOT</firstterm>): 
 				<filename class='directory'>/usr/lib/interchange/</filename>
 				</para></listitem>
 			<listitem><para>
@@ -159,24 +159,24 @@
 				<filename class='directory'>/var/lib/interchange/catalogs/</filename>
 				</para></listitem>
 			<listitem><para>
-				Interchange cgi-bin directory: 
+				Interchange <filename class='directory'>cgi-bin</filename> directory: 
 				<filename class='directory'>/usr/lib/cgi-bin/ic/</filename>
 				</para></listitem>
 			<listitem><para>
 				Standard demo catalog URL: 
-				http://myhost.mydomain.com/cgi-bin/ic/standard/index.html
+				<ulink url="http://myhost.mydomain.com/cgi-bin/ic/standard/index.html"/>
 				</para></listitem>
 		</itemizedlist>
 
 		<important><para>
-			The installation of Interchange is very flexible and the file locations on your system may vary, depending on how your system was set up. It is recommended that you not proceed until you are sure you have this information and the necessary permissions to write to these directories. The locations mentioned here are valid if you used the RPM/DEB packages. If you did not install those packages, substitute the paths with values correct for your system.
+			The Interchange installation routine is very flexible and the resulting file locations on your system may vary, depending on how your system was set up. It is recommended that you not proceed until you are sure you have this information and the necessary permissions to write to these directories. The locations mentioned here are valid for prepackaged RPM or DEB installations. If you did not install those packages, substitute the paths for your values appropriately.
 		</para></important>
 	</sect2>
 
 	<sect2 id='StartingtheInterchangeDaemon_ReconfiguringCatalogs'>
 		<title>Starting the Interchange Daemon, Reconfiguring Catalogs</title>
 		<para>
-		To control the Interchange daemon, use the <filename class='directory'>init.d</filename> script supplied in the RPM/DEB packages. For example, to start interchange, run <userinput>/etc/init.d/interchange start</userinput> or <userinput>/etc/rc.d/init.d/interchange start</userinput>. To stop or restart Interchange, simply use stop or restart as arguments.
+		To control the Interchange daemon, use the <filename class='directory'>init.d</filename> script supplied with the RPM and DEB packages. For example, to start Interchange, run <userinput>/etc/init.d/interchange start</userinput> or <userinput>/etc/rc.d/init.d/interchange start</userinput>. To stop or restart Interchange, simply use <userinput>stop</userinput> or <userinput>restart</userinput> as arguments.
 		</para> <para>
 		To reconfigure a catalog (re-read the appropriate <filename>catalog.cfg</filename>), run <userinput>/usr/sbin/interchange -reconfig CATNAME</userinput>.
 		</para>
@@ -192,14 +192,14 @@
 	<sect2 id='CatalogFiles'>
 		<title>Catalog Files</title>
 		<para>
-		This section describes the minimum of pages and directories that need to be established to create a properly functioning catalog named "tutorial". Start creating the files with superuser privileges; you'll be notified when we move to regular users space.
+		This section describes the minimum of pages and directories that need to be established to create a properly functioning catalog named "<firstterm>tutorial</firstterm>". Start creating the files with superuser privileges; you'll be notified when we move to regular users space.
 		</para>
 	</sect2>
 
 	<sect2 id='TheLinkProgram'>
 		<title>The Link Program</title>
 		<para>
-		You need to locate the existing link program (found in the cgi-bin directory) and copy it to a new name, making sure the permissions stay intact. Run <userinput>cd /usr/lib/cgi-bin/ic; cp -p vlink tutorial</userinput>.  If everything is working correctly, typing <userinput>ls -l /usr/lib/cgi-bin/ic/</userinput> should describe your files roughly like this:
+		You need to locate the existing link program (found in the <filename class='directory'>cgi-bin</filename> directory) and copy it to a new name, making sure the permissions stay intact. Run <userinput>cd /usr/lib/cgi-bin/ic; cp -p vlink tutorial</userinput>.  If everything is working correctly, typing <userinput>ls -l /usr/lib/cgi-bin/ic/</userinput> should describe your files roughly like this:
 		<screen>
 -rwsr-xr-x    1 interch  interch      7708 Dec 16 22:47 tlink
 -rwsr-xr-x    1 interch  interch      7708 Dec 16 22:47 tutorial
@@ -221,12 +221,12 @@ chmod 770 tutorial
 		</para>
 	</sect2>
 
-	<sect2 id='CatalogRegistration:Interchange_cfg'>
-		<title>Catalog Registration: Interchange.cfg</title>
+	<sect2 id='CatalogRegistration:interchange_cfg'>
+		<title>Catalog Registration: interchange.cfg</title>
 		<para>
 		Interchange configuration is controlled by a number of directives, which are specified in two files. Global configuration directives go to the main <filename>interchange.cfg</filename> file. Catalog-specific configuration directives go to <filename>catalog.cfg</filename> in the catalog directory.
 		</para> <para>
-		The first directive we need to add is the global "Catalog" directive, telling Interchange the details for the new catalog. Open the <filename>/etc/interchange/catalogs.cfg</filename> file and add the following:
+		The first directive we need to add is the global <option>Catalog</option> directive, telling Interchange the details for the new catalog. Open the <filename>/etc/interchange/catalogs.cfg</filename> file and add the following:
 		<programlisting>
 Catalog  tutorial  /var/lib/interchange/catalogs/tutorial  /cgi-bin/ic/tutorial
 		</programlisting>
@@ -255,9 +255,9 @@ ErrorFile /var/log/interchange/error.log
 	</sect2>
 
 	<sect2 id='CatalogConfiguration:Catalog_cfg'>
-		<title>Catalog Configuration: Catalog.cfg</title>
+		<title>Catalog Configuration: catalog.cfg</title>
 		<para>
-		There are few <filename>catalog.cfg</filename> directives that Interchange expects to see in order to complete the minimum configuration. They are VendURL (your catalog's base URL), SecureURL (secure base URL), MailOrderTo, Database and ProductFiles. In our catalog, we will use a minimal <database class='table'>products</database> table<footnote><para>Keep in mind that Interchange uses both terms "database" and "table" to identify the same thing - a table. This terminology is a historic leftover from the time when Interchange only used a single table.</para></footnote> with only the necessary fields. It will be TAB delimited text file, stored in <filename>products/products.txt</filename>. In general, you can specify unlimited number of databases (for unlimited purposes), but some of them will considered <firstterm>Product Files</firstterm>, reflecting Interchange's E-commerce roots.
+		There are few <filename>catalog.cfg</filename> directives that Interchange expects to see in order to complete the minimum configuration. They are <option>VendURL</option> (your catalog's base URL), <option>SecureURL</option> (HTTPS base URL), <option>MailOrderTo</option>, <option>Database</option> and <option>ProductFiles</option>. In our catalog, we will use a minimal <database class='table'>products</database> table<footnote><para>Keep in mind that Interchange uses both terms "database" and "table" to identify the same thing - a table. This terminology is a historic leftover from the time when Interchange only used a single table.</para></footnote> with only the necessary fields. It will be TAB delimited text file, stored in <filename>products/products.txt</filename>. In general, you can specify unlimited number of databases of any type (for unlimited purposes), but at least one must be considered a <firstterm>Product Files</firstterm> database, reflecting Interchange's e-commerce roots.
 		</para> <para>
 		So the basic <filename>/var/lib/interchange/catalogs/tutorial/catalog.cfg</filename> config file should look like this:
 		</para> <para>
@@ -350,7 +350,7 @@ ErrorFile /var/log/interchange/error.log
 		</para>
 		<tip>
 			<para>
-			We use "tags" (enclosed in <tag>tag</tag> brackets) in Interchange much like the HTML uses tags enclosed in ltgt. The major difference, however, is in the hierarchy where the tags are parsed. ITL tags, parsed on the server side by the Interchange daemon, are expanded into the plaintext and HTML which is then (over the web server) delivered to the end user and parsed there for presentation in a browser.
+			We use "tags" (enclosed in <tag>tag</tag> brackets) in Interchange much like the HTML uses tags enclosed in &lt;tag&gt;. The major difference, however, is in the hierarchy where the tags are parsed. ITL tags, parsed on the server side by the Interchange daemon, are expanded into the plaintext and HTML which is then (over the web server) delivered to the end user and parsed there for presentation in a browser.
 			</para>
 		</tip>
 		<para>
@@ -392,7 +392,7 @@ ErrorFile /var/log/interchange/error.log
 		</para> <para>
 		Monitor the log files: <userinput>tail -f /var/log/{interchange,apache2}/*log</userinput>
 		</para> <para>
-		Open the web browser and load the page. Your URL should be http://myhost.mydomain.com/cgi-bin/ic/tutorial/index.html. Since the <filename>catalog.cfg</filename> only contains minimal configuration, "index.html" is not defined as the default page, so you can't leave it out of the URL.
+		Open the web browser and load the page. Your URL should be <ulink url="http://myhost.mydomain.com/cgi-bin/ic/tutorial/index.html"/>. Since the <filename>catalog.cfg</filename> only contains minimal configuration, <filename>index.html</filename> is not defined as the default page, so you can't leave it out of the URL.
 		</para> <para>
 		<command>Congratulations!</command> Your basic, "phase 1" catalog is now finished and working ;)
 		</para>
@@ -443,7 +443,7 @@ ErrorFile /var/log/interchange/error.log
 				Did you use whitespace correctly in the cases where it mattered? Remember to use tabs when tabs are called for (in lists and database text files).
 				</para></listitem>
 			<listitem><para>
-				Did you restart Interchange if you changed anything in interchange.cfg or catalog.cfg, or if you're in a high-traffic mode?
+				Did you restart Interchange if you changed anything in <filename>interchange.cfg</filename> or <filename>catalog.cfg</filename>, or if you're in a high-traffic mode?
 				</para></listitem>
 			<listitem><para>
 			Check your catalog error log, error.log in your tutorial catalog directory, to see if Interchange reported any errors.
@@ -509,7 +509,7 @@ ErrorFile /var/log/interchange/error.log
 	</tr>
 		]]></programlisting>
 		</para> <para>
-		The [loop-code] tag refers to the primary key (unique identifier) for the current row of the database table in question. In this case, it will produce the same output as the [loop-field sku] tag, because the 'sku' field is the primary key for products table. In each case, the tag is replaced by the appropriate element. When put together, Interchange generates a page with your products table on it.
+		The <tag>loop-code</tag> tag refers to the primary key (unique identifier) for the current row of the database table in question. In this case, it will produce the same output as the <tag>loop-field sku</tag> tag, because the 'sku' field is the primary key for products table. In each case, the tag is replaced by the appropriate element. When put together, Interchange generates a page with your products table on it.
 		</para> <para>
 		Your finished <filename>pages/index.html</filename> page should look like this:
 		<programlisting>
@@ -607,7 +607,7 @@ ErrorFile /var/log/interchange/error.log
 		</para> <para>
 		<tag>subtotal</tag> shows the calculated shopping basket subtotal.
 		</para> <para>
-		<tag>page index</tag> creates the starting HTML lta href=...gt for a link to the catalog welcome page.
+		<tag>page index</tag> creates the starting HTML &lt;a href=...&gt; for a link to the catalog welcome page.
 		</para> <para>
 		You also need to put a link in the index page so that shoppers can go to their shopping cart without ordering something. Modify the end of <filename>pages/index.html</filename> by adding the following lines:
 		<programlisting><![CDATA[
@@ -671,14 +671,14 @@ ErrorFile /var/log/interchange/error.log
 <xi:include parse='text'  href='../files/tutorial-phase4/etc/profiles.order'></xi:include>
 		</programlisting>
 		</para> <para>
-		A single file can contain multiple profile definitions. First the profile is named using the __NAME__ pragma (but this is unrelated to the __VARIABLE__ syntax seen elsewhere in Interchange). Then in the profile there is a list of the form fields that are required. The ampfatal setting indicates that validation will fail if any of the requirements are not met. ampfinal indicates that this form will complete the ordering process. This setting is helpful if you have a multi-page ordering process and you want to validate each page individually. The __END__ pragma signals the end of this profile, after which you can begin another one.
+		A single file can contain multiple profile definitions. First the profile is named using the <literal>__NAME__</literal> pragma (but this is unrelated to the <varname>__VARIABLE__</varname> syntax seen elsewhere in Interchange). Then in the profile there is a list of the form fields that are required. The ampfatal setting indicates that validation will fail if any of the requirements are not met. ampfinal indicates that this form will complete the ordering process. This setting is helpful if you have a multi-page ordering process and you want to validate each page individually. The <literal>__END__</literal> pragma signals the end of this profile, after which you can begin another one.
 		</para> <para>
-		In order to activate your order profile, add the OrderProfile directive to the <filename>catalog.cfg</filename>:
+		In order to activate your order profile, add the <option>OrderProfile</option> directive to the <filename>catalog.cfg</filename>:
 		<programlisting>
 OrderProfile etc/profiles.order
 		</programlisting>
 		</para> <para>
-		Watch for white space in front of the __NAME__ pragma, it can cause your profile to be ignored. Rember to reconfigure the catalog or simply restart Interchange altogether after modifying <filename>catalog.cfg</filename> or the profiles.
+		Watch for white space in front of the <literal>__NAME__</literal> pragma, it can cause your profile to be ignored. Rember to reconfigure the catalog or simply restart Interchange altogether after modifying <filename>catalog.cfg</filename> or the profiles.
 		</para>
 	</sect2>
 
@@ -690,7 +690,7 @@ OrderProfile etc/profiles.order
 <xi:include parse='text'  href='../files/tutorial-phase4/special_pages/needfield.html'></xi:include>
 		</programlisting>
 		</para> <para>
-		The <tag>error</tag> tag is the most important tag on this page. The 'all' parameter tells the tag to iterate through all of the errors reported from the failed verification, and the 'show_var' parameter indicates that the failed variable name should be displayed. For example, if the first name was left empty, fname would be shown. The 'show_error' parameter displays the actual error for the variable. The joiner parameter inserts an HTML ltbrgt tag between each error message, so each error is displayed on its own line. In more complex configurations, the <tag>error</tag> tag can be even more expressive.
+		The <tag>error</tag> tag is the most important tag on this page. The 'all' parameter tells the tag to iterate through all of the errors reported from the failed verification, and the 'show_var' parameter indicates that the failed variable name should be displayed. For example, if the first name was left empty, fname would be shown. The 'show_error' parameter displays the actual error for the variable. The joiner parameter inserts an HTML &lt;br&gt; tag between each error message, so each error is displayed on its own line. In more complex configurations, the <tag>error</tag> tag can be even more expressive.
 		</para>
 	</sect2>
 
@@ -719,7 +719,7 @@ __END__
 	<sect2 id='etc_report'>
 		<title>etc/report</title>
 		<para>
-		When the customer's involvement in the order is complete, Interchange composes an email and sends it to the recipient defined in the MailOrderTo directive in <filename>catalog.cfg</filename>. The default location for this email report template is <filename>etc/report</filename>. Interchange tags can be used to fill in the body of the message.
+		When the customer's involvement in the order is complete, Interchange composes an email and sends it to the recipient defined in the <option>MailOrderTo</option> directive in <filename>catalog.cfg</filename>. The default location for this email report template is <filename>etc/report</filename>. Interchange tags can be used to fill in the body of the message.
 		</para> <para>
 		The report should include at least the customer's name, address, and the items they ordered. The following is a simple report template; save it as <filename>etc/report</filename>:
 		<programlisting>
@@ -811,7 +811,7 @@ Locale en_US currency_symbol $
 		<para>
 		A similar change to the <tag>item-field price</tag> tag in the <filename>pages/flypage.html</filename> page will fix that currency display. View the page in your browser. All your prices should be formatted for U.S. currency.
 		</para> <para>
-		If your prices are not being formatted correctly, your default system locale may be set up differently or your en_US locale settings may be wrong. There are a few other catalog.cfg directives you can use to correct the situation:
+		If your prices are not being formatted correctly, your default system locale may be set up differently or your en_US locale settings may be wrong. There are a few other <filename>catalog.cfg</filename> directives you can use to correct the situation:
 		<programlisting>
 Locale en_US p_cs_precedes 1
 		</programlisting>
@@ -835,12 +835,12 @@ Locale en_US mon_decimal_point .
 	<sect2 id='CatalogVariables'>
 		<title>Catalog Variables</title>
 		<para>
-		Interchange provides a very useful feature that has not been discussed yet called <firstterm>catalog variables</firstterm>. It provides a way for you to set a variable to a certain value in the <filename>catalog.cfg</filename> file and then use it anywhere in your catalog pages. The Variable directive allows an Interchange catalog variable to be created with the name coming from the first parameter and the value from the rest of the line, like this:
+		Interchange provides a very useful feature that has not been discussed yet called <firstterm>catalog variables</firstterm>. It provides a way for you to set a variable to a certain value in the <filename>catalog.cfg</filename> file and then use it anywhere in your catalog pages. The <option>Variable</option> directive allows an Interchange catalog variable to be created with the name coming from the first parameter and the value from the rest of the line, like this:
 		<programlisting>
 Variable SOMENAME whatever value you want
 		</programlisting>
 		</para> <para>
-		To access that variable in your pages, type the token __SOMENAME__. Notice that there are two underscore characters before the variable name and two after it, and that in place of the word SOMENAME you would put the actual name of the variable. The first thing Interchange does on a page is to replace the token with the variable's value. The value can also include Interchange tags to be parsed.
+		To access that variable in your pages, type the token <varname>__SOMENAME__</varname>. Notice that there are two underscore characters before the variable name and two after it, and that in place of the word SOMENAME you would put the actual name of the variable. The first thing Interchange does on a page is to replace the token with the variable's value. The value can also include Interchange tags to be parsed.
 		</para>
 	</sect2>
 
@@ -953,9 +953,9 @@ Now add the following to the left template piece:
   </table>
 		]]></programlisting>
 		</para> <para>
-		In the first set of ltselectgt lt/selectgt tags a list is generated of the months to choose from. This is accomplished by using a <tag>loop</tag> tag. In this case we are looping over an explicit list. The list is provided in the list parameter. Use caution when typing this, as it is sensitive to formatting (which may not be reflected in this document). Make sure that the numbers are the first characters on each new line and that the single tab separates them from the rest of the line text. Since the columns in this list are not named, the first element can be accessed using <tag>loop-code</tag> or <tag>loop-pos 0</tag> with subsequent elements being accessed by <tag>loop-pos N</tag> where N is the number of the column you want. Notice that the elements are zero-indexed. Each time through this loop Interchange generates a select ltoptiongt with a number as the value and the name of the month as the text for the select menu.
+		In the first set of &lt;select&gt; &lt;/select&gt; HTML tags a list is generated of the months to choose from. This is accomplished by using a <tag>loop</tag> tag. In this case we are looping over an explicit list. The list is provided in the list parameter. Use caution when typing this, as it is sensitive to formatting (which may not be reflected in this document). Make sure that the numbers are the first characters on each new line and that the single tab separates them from the rest of the line text. Since the columns in this list are not named, the first element can be accessed using <tag>loop-code</tag> or <tag>loop-pos 0</tag> with subsequent elements being accessed by <tag>loop-pos N</tag> where N is the number of the column you want. Notice that the elements are zero-indexed. Each time through this loop Interchange generates a select &lt;option&gt; with a number as the value and the name of the month as the text for the select menu.
 		</para> <para>
-		For the next set of ltselectgt lt/selectgt tags embedded Perl is used to generate the list which is iterated over. Perl code can be embedded in Interchange pages in order to extend the abilities of the system. Make sure you type backticks (grave accents) after "list=" and before the closing bracket (and <command>not apostrophes</command>). This code generates an entry for seven years in addition to the current year. It is not necessary at this point for you to understand this Perl code.
+		For the next set of &lt;select&gt; &lt;/select&gt; tags embedded Perl is used to generate the list which is iterated over. Perl code can be embedded in Interchange pages in order to extend the abilities of the system. Make sure you type backticks (grave accents) after "list=" and before the closing bracket (and <command>not apostrophes</command>). This code generates an entry for seven years in addition to the current year. It is not necessary at this point for you to understand this Perl code.
 		</para>
 	</sect2>
 
@@ -1056,7 +1056,7 @@ Now add the following to the left template piece:
 		</para> <para>
 		This is a simple HTML form with a single input box for text. The action goes to a special Interchange processor called 'search' that will perform the search and pass the results to a page called <filename>pages/results.html</filename> (that has not been created yet). The search will be case-insensitive, but will only match complete words, not substrings.
 		</para> <para>
-		The <tag>set testname</tag> ... <tag>/set</tag> tags set an Interchange 'value' variable that, in this case, will be used as a predefined search profile. We specify all the search parameters except the one the user will enter, 'mv_searchspec' (the long name for 'se'). We then tell Interchange we want to use this search profile in a hidden form tag named 'mv_profile'.
+		The <tag>set testname</tag>...<tag>/set</tag> tags set an Interchange 'value' variable that, in this case, will be used as a predefined search profile. We specify all the search parameters except the one the user will enter, 'mv_searchspec' (the long name for 'se'). We then tell Interchange we want to use this search profile in a hidden form variable named 'mv_profile'.
 		</para> <para>
 		The search box will now appear on all catalog pages, but you still need to create the search results page. To create the search results page, type the following code and save it as <filename>pages/results.html</filename>.
 		</para> <para>
@@ -1071,9 +1071,9 @@ Now add the following to the left template piece:
 	<sect2 id='TheDefaultCatalogPage'>
 		<title>The Default Catalog Page</title>
 		<para>
-		As you know, a standard Interchange catalog page URL looks like this: http://myhost.mydomain.com/cgi-bin/tutorial/index.html
+		As you know, a standard Interchange catalog page URL looks like this: <ulink url="http://myhost.mydomain.com/cgi-bin/tutorial/index.html"/>.
 		</para> <para>
-		But what happens if you leave off the page name, as people often do when typing URLs in by hand? Type http://myhost.mydomain.com/cgi-bin/ic/tutorial and you'll get a <errortext>Page not found</errortext> error. This is because Interchange is looking for <filename>special_pages/catalog.html</filename> which we didn't create. It would seem useful to "redirect" those requests to an actual existing page, most probably your catalog entry page - <filename>pages/index.html</filename>. Fortunately, this is easily achieved with the following <filename>catalog.cfg</filename> directives<footnote><para>We need two directives; the first one, SpecialPage, only handles the catalog entry point (the cgi-bin/ic/tutorial/ case). The other, somewhat Apache-like DirectoryIndex directive, sets the index page for catalog subdirectories (say, cgi-bin/ic/tutorial/mydir/), but unlike Apache only takes one argument.</para></footnote>:
+		But what happens if you leave off the page name, as people often do when typing URLs in by hand? Visit <ulink url="http://myhost.mydomain.com/cgi-bin/ic/tutorial"/> and you'll get a <errortext>Page not found</errortext> error. This is because Interchange is looking for <filename>special_pages/catalog.html</filename> which we didn't create. It would seem useful to "redirect" those requests to an actual existing page, most probably your catalog entry page - <filename>pages/index.html</filename>. Fortunately, this is easily achieved with the following <filename>catalog.cfg</filename> directives<footnote><para>We need two directives; the first one, <option>SpecialPage</option>, only handles the catalog entry point (the <filename class='directory'>cgi-bin/ic/tutorial/</filename> case). The other, somewhat &APACHE;-like <option>DirectoryIndex</option> directive, sets the index page for catalog subdirectories (say, <filename class='directory'>cgi-bin/ic/tutorial/mydir/</filename>), but unlike Apache it only takes one argument.</para></footnote>:
 		<programlisting>
 SpecialPage catalog index
 DirectoryIndex index
@@ -1093,7 +1093,7 @@ Variable LEFT   [include left]
 Variable BOTTOM [include bottom]
 		</programlisting>
 		</para> <para>
-		Now change every instance of <tag>include top</tag> to __TOP__, doing the same for each <tag>include</tag> tag. At this point, you might not want to do a search-and-replace<footnote><para>If you're adventurous enough, try this Perl oneliner on the command line for automatic replace: cd /var/lib/interchange/catalogs/tutorial; perl -pi -e 's/\[include (\S+)\]/"__".uc($1)."__"/ge' `find . -name '*.html'`</para></footnote> on all the .html files you just created, but keep this capability in mind for the next catalog you work on.
+		Now change every instance of <tag>include top</tag> to <varname>__TOP__</varname>, doing the same for each <tag>include</tag> tag. At this point, you might not want to do a search-and-replace<footnote><para>If you're adventurous enough, try this Perl oneliner on the command line for automatic replace: cd /var/lib/interchange/catalogs/tutorial; perl -pi -e 's/\[include (\S+)\]/"__".uc($1)."__"/ge' `find . -name '*.html'`</para></footnote> on all the .html files you just created, but keep this capability in mind for the next catalog you work on.
 		</para> <para>
 		If you made all of the replacements and then renamed and moved your top file elsewhere, you would only have to make a single change for each region in <filename>catalog.cfg</filename> to get your pages up to date:
 		<programlisting>
@@ -1102,7 +1102,7 @@ Variable TOP    [include templates/main-top]
 		</para> <para>
 		Every time a catalog page is viewed, each file in an <tag>include</tag> tag must be loaded from disk. In a test situation, this takes no noticeable amount of time. But on a busy Interchange server, this can slow your system.
 		</para> <para>
-		You can switch to a high-traffic mode that doesn't require each template piece to be read from disk every time the page is loaded. Instead, all of the pieces are read into variables once when Interchange is started and they remain in memory until you restart Interchange, or reconfigure the catalog. On very busy Interchange catalogs, this can increase your speed noticeably. The (only) drawback is that you need to restart Interchange (or reconfigure the catalog) every time you make a change to the template pieces. You can set up those high-traffic templates by changing the Variable directives in catalog.cfg as follows:
+		You can switch to a high-traffic mode that doesn't require each template piece to be read from disk every time the page is loaded. Instead, all of the pieces are read into variables once when Interchange is started and they remain in memory until you restart Interchange, or reconfigure the catalog. On very busy Interchange catalogs, this can increase your speed noticeably. The (only) drawback is that you need to restart Interchange (or reconfigure the catalog) every time you make a change to the template pieces. You can set up those high-traffic templates by changing the <option>Variable</option> directives in <filename>catalog.cfg</filename> as follows:
 		<programlisting><![CDATA[
 Variable TOP    <top
 Variable LEFT   <left

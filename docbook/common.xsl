@@ -21,9 +21,7 @@
 	<xsl:param name="use.extensions">1</xsl:param>
 	<xsl:param name="textinsert.extension">1</xsl:param>
 
-	<xsl:template match="tag">
-		[<xsl:call-template name="inline.monoseq"/>]
-	</xsl:template>
+	<xsl:template match="tag">[<xsl:call-template name="inline.monoseq"/>]</xsl:template>
 
   <xsl:param name="local.l10n.xml" select="document('')"/>
   <l:i18n xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">
