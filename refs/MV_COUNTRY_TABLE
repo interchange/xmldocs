@@ -1,0 +1,31 @@
+
+__NAME__ purpose
+name of database containing countries, country codes, etc.
+__END__
+
+__NAME__ default
+<literal>country</literal>
+__END__
+
+__NAME__ see also
+MV_STATE_TABLE
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>database</replaceable></arg>
+</group>
+__END__
+
+__NAME__ description
+Table to search for country-related information, such as selector and ISO
+names or shipping methods available.
+__END__
+
+__NAME__ example: 
+Put the following in &ccf;:
+<programlisting>
+Variable MV_COUNTRY_TABLE  country
+</programlisting>
+__END__
+

@@ -1,0 +1,31 @@
+
+__NAME__ purpose
+name of column containing country-wide tax information
+__END__
+
+__NAME__ default
+<literal>tax</literal>
+__END__
+
+__NAME__ see also
+MV_STATE_TAX_FIELD,MV_TAX_TYPE_FIELD,MV_TAX_CATEGORY_FIELD
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>column</replaceable></arg>
+</group>
+__END__
+
+__NAME__ description
+Column name in the &var-MV_COUNTRY_TABLE; database that will be looked up
+to retrieve country-wide tax information.
+__END__
+
+__NAME__ example: 
+Put the following in &ccf;:
+<programlisting>
+Variable MV_COUNTRY_FIELD  tax
+</programlisting>
+__END__
+

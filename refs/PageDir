@@ -13,7 +13,7 @@ __END__
 __NAME__ description
 Specify the directory containing catalog pages.
 </para><para>
-This directive can be set in &locale; settings to allow different page
+This directive can be set in &glos-locale; settings to allow different page
 sets for different locales.
 __END__
 

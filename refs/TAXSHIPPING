@@ -1,0 +1,31 @@
+
+__NAME__ purpose
+list of geographical identifiers for which taxing is applied
+__END__
+
+__NAME__ default
+none
+__END__
+
+__NAME__ see also
+TAXAREA,TAXSHIPPING,TAXHANDLING,TAXCOUNTRY
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>area name</replaceable></arg>
+</group>
+__END__
+
+__NAME__ description
+A space- or comma-separated list of codes for which shipping is taxed
+and needs to be applied.
+This is used in conjunction with the FlyTax taxing method.
+__END__
+
+__NAME__ example: 
+<programlisting>
+NV, IL
+</programlisting>
+__END__
+

@@ -1,0 +1,183 @@
+<para>
+A flexible, chained pricing scheme is available when &conf-CommonAdjust;
+directive is set up.
+</para>
+
+__NAME__ purpose
+define default settings for a flexible, chained item pricing scheme
+__END__
+
+__NAME__ see also
+UseModifier
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><literal><replaceable>&CAs;</replaceable></literal></arg>
+</group>
+__END__
+
+
+__NAME__ description
+&conf-CommonAdjust; is used to define the default settings for a flexible,
+chained item pricing scheme.
+</para><para>
+The whole pricing idea and the explanation of &CAs;s can be found under the
+&glos-price; entry in the glossary. Make sure you read it, or you'll have only
+a limited success with <xref linkend="CommonAdjust_examples"/>.
+__END__
+
+
+__NAME__ example: The pricing database
+Most of the practical setups will use a separate (<emphasis>outboard</emphasis>)
+database to define pricing-related options. This <emphasis>could</emphasis>
+be all done in the <database>products</database> database as well, but let's
+stick to a visually cleaner implementation.
+</para><para>
+An example <database>pricing</database> database looks like this:
+
+<programlisting>
+<xi:include parse='text' href='../files/pricing/pricing.txt'/>
+</programlisting>
+__END__
+
+__NAME__ missing
+Say that in the examples, attribute names are arbitrary and that they should see price glossary entry for description of commonadjust strings and atoms.
+__END__
+
+__NAME__ example: Adjusting item price based on size
+Let's say we had a product, a t-shirt for example, and we wanted to define
+a pricing adjustment based on product's <literal>size</literal> attribute. The
+<database class='field'>price</database> field in the
+<database>products</database> database should have the following value
+to achieve the effect:
+
+<programlisting>
+10.00, ==size:pricing
+</programlisting>
+
+You see, the base price of <literal>10.00</literal> will be adjusted
+according to the <literal>size</literal> attribute. If we had a t-shirt
+with &glos-SKU; <literal>99-102</literal> and size <literal>XL</literal>,
+then an ammount of <literal>1.00</literal> would be added and form a total
+price of <literal>11.00</literal> (according to the
+<database>pricing</database> table above). The same product in size
+<literal>S</literal> (small) would have a "bonus" of <literal>-0.50</literal>
+and result in <literal>9.50</literal> total. For any other size, the base
+price would stay <emphasis>as-is</emphasis> because no matching column 
+would be found in <database>pricing</database>.
+</para><para>
+If we entered the above price specified in the
+<database class='field'>price</database> field for item
+<literal>00-343</literal>, then an adjustment of <literal>+2</literal> would
+be made only for size variant <literal>XL</literal>.
+__END__
+
+
+__NAME__ example: Adjusting item price based on size and color
+Let's say we had a t-shirt from previous example, and we wanted to define
+a pricing adjustment based on color attribute (in addition to size which we
+already implemented). The
+<database class='field'>price</database> field in the
+<database>products</database> database should have the following value
+to achieve the effect:
+
+<programlisting>
+10.00, ==size:pricing, ==color:pricing
+</programlisting>
+
+You see, the base price of <literal>10.00</literal> will be adjusted
+according to both <literal>size</literal> and <literal>color</literal>
+attributes. For item SKU <literal>99-102</literal>, additional 
+<literal>0.75</literal> would be added for a specific <literal>red</literal>
+color (according to the <database>pricing</database> table above).
+__END__
+
+
+__NAME__ example: Adjusting item attributes based on a common column
+Let's say we had a bunch of t-shirt products and the <literal>red</literal>
+color always added an additional <literal>0.75</literal> to the corresponding
+base price.
+</para><para>
+What we know by now is that to achieve that effect, we could create a column
+named <literal>red</literal> in the <database>pricing</database> database.
+In the same database, we would then add an entry for all t-shirt items
+and put a value of <literal>0.75</literal> in the
+<database class='field'>red</database> field. This approach, however, 
+is error-prone and of linear complexity &mdash; more t-shirt models you have,
+more work is needed to catalog them properly.
+</para><para>
+The solution to this problem is elegant. Instead of defining the 
+<database class='field'>red</database> column, define one column of a 
+common name (<literal>common</literal> itself is one good name for that
+column), and add <literal>red</literal> as an entry in the database.
+Refer to the first example in which we show a sample
+<database>pricing</database> database and where we did that (in the last row).
+You can then instruct &IC; to search for a row in the table with item color
+as key. Here's how to modify the previous example:
+
+<programlisting>
+10.00, ==size:pricing, ==color:pricing:common
+</programlisting>
+
+What's more, if you ever wanted to define an adjustment for another color,
+the only thing you'd have to do would be to add one entry in the
+<database>pricing</database> database:
+
+<programlisting>
+blue	0.50
+</programlisting>
+__END__
+
+
+__NAME__ example: Adjusting item price based on quantity
+The &glos-price; glossary entry explained the format of &CAs;s.
+To enable quantity based pricing, we need to name the columns that
+will participate in the process (remember, numerical portions of the 
+column names denote minimal quantity levels). Just in case, we can also
+specify a default price which will be applied
+<emphasis role='bold'>only if</emphasis> the lookup in the 
+<database>pricing</database> database returns blank or zero value.
+In this example, 
+after the base price gets determined based on quantity, the size and 
+color attributes will proceed with further price adjustment as usual:
+</para><para>
+
+<programlisting>
+pricing:q1,q5,q10:, ;10.00, ==size:pricing, ==color:pricing:common
+</programlisting>
+
+In the above example, the product (a t-shirt in our example) with SKU
+<literal>99-102</literal> would have a base price of
+<literal>8.00</literal> each, if ordered in quantity of 10 or more
+(again, according to the <database>pricing</database> table from the 
+beginning of <xref linkend="CommonAdjust_examples"/>).
+__END__
+
+
+__NAME__ example: Terminating the price adjustment chain
+Let's say we defined a fallback price (the same way as in the example above),
+and wanted to terminate the pricing chain (skip any further adjustments 
+&mdash; size- and color-based adjustment in our case) if the fallback price
+was applied. The code needed looks <emphasis>almost</emphasis> the same
+as above, except that the colon (<literal>,</literal>) does
+<emphasis role='bold'>not</emphasis> follow the fallback price:
+</para><para>
+
+<programlisting>
+pricing:q1,q5,q10:, ;10.00  ==size:pricing, ==color:pricing:common
+</programlisting>
+
+In the above example, the product (a t-shirt in our example) with SKU
+<literal>99-102</literal> would have a base price of
+<literal>8.00</literal> each, if ordered in quantity of 10 or more
+(again, according to the <database>pricing</database> table from the 
+beginning of <xref linkend="CommonAdjust_examples"/>).
+__END__
+
+
+
+CommonAdjust    pricing:q2,q5,q10,q25, ;products:price, ==size:pricing
+
+

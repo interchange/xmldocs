@@ -1,0 +1,31 @@
+
+__NAME__ purpose
+name of column containing enumerated tax names
+__END__
+
+__NAME__ default
+<literal>tax_name</literal>
+__END__
+
+__NAME__ see also
+MV_STATE_TABLE,MV_COUNTRY_TABLE
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>column</replaceable></arg>
+</group>
+__END__
+
+__NAME__ description
+Name of the column whose value will be retrieved in search of symbolic tax 
+name.
+__END__
+
+__NAME__ example: 
+Put the following in &ccf;:
+<programlisting>
+Variable MV_TAX_TYPE_FIELD tax_name
+</programlisting>
+__END__
+

@@ -1,0 +1,37 @@
+
+__NAME__ purpose
+specify shell command to use in order to dump Postgres databases
+__END__
+
+__NAME__ missing
+Why is no %s here as in CREATE_COMMAND_PG ?
+__END__
+
+
+__NAME__ default
+<literal>pg_dump -c -O</literal>
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>command line</replaceable></arg>
+</group>
+__END__
+
+__NAME__ description
+Specify shell command that will be invoked to dump a database
+under &PGSQL;.
+</para><para>
+<!-- TODO first, or all occurences of %s ?
+An occurence of <literal>%s</literal> is replaced with the database
+name prior to command execution.
+-->
+__END__
+
+__NAME__ example: 
+Put the following in &ccf;:
+<programlisting>
+Variable DUMP_COMMAND_PG /usr/bin/pg_dump -c -O
+</programlisting>
+__END__
+

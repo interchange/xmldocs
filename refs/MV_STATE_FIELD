@@ -1,0 +1,31 @@
+
+__NAME__ purpose
+name of form field whose value will be used as key to perform lookup in the MV_STATE_TABLE
+__END__
+
+__NAME__ default
+<literal>state</literal>
+__END__
+
+__NAME__ see also
+MV_STATE_FIELD,MV_COUNTRY_FIELD
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>field</replaceable></arg>
+</group>
+__END__
+
+__NAME__ description
+Form field whose value will be used as the key to perform lookup in the 
+&var-MV_STATE_TABLE; database.
+__END__
+
+__NAME__ example: 
+Put the following in &ccf;:
+<programlisting>
+Variable MV_STATE_FIELD  state
+</programlisting>
+__END__
+

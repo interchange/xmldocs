@@ -1,0 +1,31 @@
+
+__NAME__ purpose
+name of column containing enumerated tax types, based on product category
+__END__
+
+__NAME__ default
+<literal>tax_category</literal>
+__END__
+
+__NAME__ see also
+MV_STATE_TABLE,MV_COUNTRY_TABLE,MV_TAX_TYPE_FIELD
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>column</replaceable></arg>
+</group>
+__END__
+
+__NAME__ description
+Name of the column whose value will be retrieved in search of tax type
+applied to the specific product group.
+__END__
+
+__NAME__ example: 
+Put the following in &ccf;:
+<programlisting>
+Variable MV_TAX_CATEGORY_FIELD tax_category
+</programlisting>
+__END__
+

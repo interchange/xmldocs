@@ -1,0 +1,36 @@
+
+__NAME__ purpose
+key=value pairs used for taxing calculation
+__END__
+
+__NAME__ default
+none
+__END__
+
+__NAME__ see also
+TAXAREA,TAXSHIPPING,TAXHANDLING,TAXCOUNTRY
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>area</replaceable>=<replaceable>value</replaceable></arg>
+</group>
+__END__
+
+__NAME__ missing
+does it have to be 2-letter area name or ?
+__END__
+
+__NAME__ description
+An accessory-list style of values (key/value pairs) defining areas and
+corresponding tax values.
+</para><para>
+This is used in conjunction with the FlyTax taxing method.
+__END__
+
+__NAME__ example: 
+<programlisting>
+IL=7.25, NV=5.5
+</programlisting>
+__END__
+

@@ -1,0 +1,31 @@
+
+__NAME__ purpose
+name of database containing state, country and province information
+__END__
+
+__NAME__ default
+<literal>state</literal>
+__END__
+
+__NAME__ see also
+MV_STATE_TABLE,MV_COUNTRY_TABLE
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>database</replaceable></arg>
+</group>
+__END__
+
+__NAME__ description
+Table to search for state-related information, such as state names, postcodes,
+tax rates and shipping methods available.
+__END__
+
+__NAME__ example: 
+Put the following in &ccf;:
+<programlisting>
+Variable MV_STATE_TABLE  state
+</programlisting>
+__END__
+

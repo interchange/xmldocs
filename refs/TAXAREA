@@ -1,0 +1,33 @@
+
+__NAME__ purpose
+list of geographical identifiers for which taxing is applied
+__END__
+
+__NAME__ default
+none
+__END__
+
+__NAME__ see also
+TAXAREA,TAXSHIPPING,TAXHANDLING,TAXCOUNTRY
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>area name</replaceable></arg>
+</group>
+__END__
+
+__NAME__ description
+A space- or comma-separated list of codes to which taxing will be
+applied. This is used in conjunction with the FlyTax taxing method.
+</para><para>
+This variable is not needed for anything related to actual calculation,
+it is just used to build the UI list of gepgraphical regions (states, counties
+or similar) to tax.
+__END__
+
+__NAME__ example: 
+<programlisting>
+</programlisting>
+__END__
+

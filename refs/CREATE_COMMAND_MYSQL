@@ -1,0 +1,31 @@
+
+__NAME__ purpose
+specify shell command to use in order to create database under MySQL
+__END__
+
+__NAME__ default
+<literal>mysqladmin create %s</literal>
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>command line</replaceable></arg>
+</group>
+__END__
+
+__NAME__ description
+Specify shell command that will be invoked to create a database
+under &MYSQL;.
+</para><para>
+<!-- TODO first, or all occurences of %s ? -->
+An occurence of <literal>%s</literal> is replaced with the database
+name prior to command execution.
+__END__
+
+__NAME__ example: 
+Put the following in &ccf;:
+<programlisting>
+Variable CREATE_COMMAND_MYSQL /usr/bin/mysqladmin create %s
+</programlisting>
+__END__
+
