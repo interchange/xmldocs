@@ -218,7 +218,7 @@ sub wanted {
 	# Open text file, parse contents
 	open IN, "< $file" or die "Can't open $file ($!)\n";
 	my @filedata = <IN>;
-	unshift @filedata, ""; # Match index numbers with line numbers
+	unshift @filedata, ""; # Match index numbers with line numbers # MINUS
 	close IN;
 
 	# Global variables to use in the loop below
@@ -362,7 +362,7 @@ sub wanted {
 			last;
 
 		}
-	} # END IF
+	} # END FOR each line
 
 	# Now in addition to above general line-by-line processing, do some more
 	# processing on exactly *some* files:
@@ -503,7 +503,8 @@ sub file_parseVendConfig {
 	my %c = %{ (shift) };
 	my $content = shift; # Complete lib/Vend/Config.pm file
 
-	my $linenr = 0;      # Increases as we parse Config.pm
+	my $linenr = -1;     # Increases as we parse Config.pm (search "MINUS" above)
+	my $startline;       # Remember first line nr. of context, not last
 	my $context = "";    # Globconf (global) or catconf (catalog) config array
 	my $run = 0;         # Engine turned on?
 	my $multiline;       # Directive definition spans multiple lines?
@@ -517,6 +518,7 @@ sub file_parseVendConfig {
 		$linenr++;
 
 		goto MULTILINE if $multiline;
+		$startline = $linenr;
 		
 		# Determine context
 		if ( $line =~ /^sub\s+global_directives\s+{\s*$/ ) {
@@ -556,10 +558,10 @@ sub file_parseVendConfig {
 
 			# Register the directive and do some statistics
 			if ( $context eq 'globconf' ) {
-				push @globconf, $directive ;
+				push @globconf, [ $directive, $startline ] ;
 				$hash{total}{globconfs}++;
 			} elsif ( $context eq 'catconf' ){
-				push @catconf, $directive;
+				push @catconf, [ $directive, $startline ];
 				$hash{total}{catconfs}++;
 			}
 			$hash{total}{confs}++;
@@ -582,18 +584,22 @@ sub file_parseVendConfig {
 
 	# Well, let's congratulate ourselves.
 
-	for my $ln (@globconf) {
+	for my $itm (@globconf) {
+		my ($ln, $lnum) = @$itm;
 		$ln =~ /^\s*\['(\S+?)'/ or die "Can't match global directive name in '$ln'?\n";
 		push @{ $hash{symbols}{globconf}{$1} }, {
 			%c,
-			ctx => [ split /\n/, $ln ],
+			lnum => $lnum,
+			ctx => [ format_ctx(split(/\n/, $ln)) ],
 		}
 	}
-	for my $ln (@catconf) {
+	for my $itm (@catconf) {
+		my ($ln, $lnum) = @$itm;
 		$ln =~ /^\s*\['(\S+?)'/ or die "Can't match catalog directive name in '$ln'?\n";
 		push @{ $hash{symbols}{catconf}{$1} }, {
 			%c,
-			ctx => [ split /\n/, $ln ],
+			lnum => $lnum,
+			ctx => [ format_ctx(split(/\n/, $ln)) ],
 		}
 	}
 }

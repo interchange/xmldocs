@@ -238,12 +238,13 @@ while ( $path = shift @paths) { # For each version specified
 					
 					my ( $cstart, $cend, $ctxmeta ) = ("", "", "");
 					#if (0) { use Data::Dumper; print Dumper $ctx; sleep 10; }
+					# WE SHOW ONLY PART OF CONTEXT FOR THOSE
+					$ctxmeta = "<sbr/>Line $ln";
 					if ( $gkey !~ /(tag|conf)$/ ) {
-						# WE SHOW ONLY PART OF CONTEXT FOR THOSE
 						$cstart = $$ctx{lnum}-$$ctx{ctxpre};
 						$cend = $$ctx{lnum}+$$ctx{ctxpost};
-						$ctxmeta = "<sbr/>Line $$ctx{lnum} (context shows lines " .
-							( $cstart . "-" .  $cend );
+						$ctxmeta .= " (context shows lines " . ( $cstart . "-" .  $cend );
+
 					} else {
 						# WE SHOW ALL FOR THOSE
 						$cstart = 1;
@@ -262,12 +263,16 @@ while ( $path = shift @paths) { # For each version specified
 					}
 					my $r = $hash{revision}{$plf}->[0];
 					my $d = $hash{revision}{$plf}->[1];
+					my $revinfo = "";
+					if ( $gkey !~ /conf$/ ) {
+						$revinfo = "(rev. $r from $d)";
+					}
 					{ no warnings; # XXX If someone can figure out which of the used vars here is undefined...
 					$$ag{source} .= <<ENDD;
 <para>
 </para>
 <example>
-<title>$loc (rev. $r from $d)$ctxmeta</title>
+<title>$loc $revinfo$ctxmeta</title>
 
 <screen linenumbering='numbered' startinglinenumber='$ls'>
 <![CDATA[$ctxsdata]]>
@@ -903,13 +908,6 @@ $ag{"synopsis"}
 <para>$ag{"description"}</para>
 </refsect1>
 
-<!-- Disabled. I could remove it unless I do something useful with it.
-<refsect1 id='$ag{"name"}_structure"}'>
-<title>TAG STRUCTURE</title>
-<para>$ag{"structure"}</para>
-</refsect1>
--->
-
 <refsect1 id='$ag{"name"}_examples'>
 <title>EXAMPLES</title>
 $ag{"example"}
@@ -938,14 +936,6 @@ $ag{source}
 <title>AUTHORS</title>
 <para>$ag{"author"}</para>
 </refsect1>
-
-<!-- Removed because copyright is seen in Source (first few lines),
-     and the generated document starts with copyright notice
-<refsect1 id='$ag{"name"}_copyright'>
-<title>COPYRIGHT</title>
-$ag{"copyright"}
-</refsect1>
--->
 
 <refsect1 id='$ag{"name"}_seeAlso'>
 <title>SEE ALSO</title>

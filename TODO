@@ -9,6 +9,9 @@ PRIMARY:
   multiple times within +- of first occurence, we treat it like one context.
   but the header says 'displaying 2/2 contexts', it doesn't remove
   'duplicates'. fix that.
+- If usertag MapRoutines, display the routine
+- If See Also item starts with '<', do not perform any scrabmle on it and
+  pass as-is
 
 - In iccattut:
   - make a "translation map" of /etc/interchange/* to RPM-equivs.
