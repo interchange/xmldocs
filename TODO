@@ -10,8 +10,9 @@ PRIMARY:
 - Source contexts get some weird values reported in header information
 - Contexts: in situation like "symbol \n symbol" where the symbol appears
   multiple times within +- of first occurence, we treat it like one context.
-	but the header says 'displaying 2/2 contexts', it doesn't remove
-	'duplicates'. fix that.
+  but the header says 'displaying 2/2 contexts', it doesn't remove
+  'duplicates'. fix that.
+- why crypt tag recognized as user when it's in UI_Tag
 
 - In iccattut:
   - under important file and directories, mention default username,
@@ -68,6 +69,9 @@ tag, interpolation, reparse, symbol types
 - Visually mark obsolete items (those not present in cvs-head)
 - Visually mark undocumented items
 - leaf nodes
+- Make script which would be like: vim `our.script usertags synopsis`.
+  our.script would find all usertags and where their synopsis is defined,
+  somewhere in refs/.
 
  Long-term:
 - filenames in Source contexts should also be clickable. this is longterm
@@ -124,6 +128,7 @@ New docs:
  - new developer howto
 
 ----------
-itl, scratch, catalog/global variable, html, interchange, pragma, tag,ui,
-scratchpad, action, form,  unix inet socket, low, high, rpc, prefork,
+itl, catalog/global variable, html, interchange, tag,ui,
+action, form,  unix inet socket, low, high, rpc, prefork, values,
 
+style: leave newline at end of file

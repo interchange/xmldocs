@@ -9,14 +9,30 @@
 	<public publicId="-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
 	        uri="../docbook/docbookxi.dtd"/>
 	
-	<system systemId="iccattut-nc"
-		uri="../tmp/iccattut-nc.db" />
+	<system systemId="iccattut-nc" uri="../tmp/iccattut-nc.db" />
+	<system systemId="iccattut-c" uri="../tmp/iccattut-c.db" />
+	
+	<system systemId="globvars-nc" uri="../tmp/globvars-nc.db" />
+	<system systemId="globvars-c" uri="../tmp/globvars-c.db" />
+	
+	<system systemId="glossary-nc" uri="../tmp/glossary-nc.db" />
+	<system systemId="glossary-c" uri="../tmp/glossary-c.db" />
+	
+	<system systemId="pragmas-nc" uri="../tmp/pragmas-nc.db" />
+	<system systemId="pragmas-c" uri="../tmp/pragmas-c.db" />
+	
+	<system systemId="systemtags-nc" uri="../tmp/systemtags-nc.db" />
+	<system systemId="systemtags" uri="../tmp/systemtags.db" />
+	
+	<system systemId="uitags-nc" uri="../tmp/uitags-nc.db" />
+	<system systemId="uitags-c" uri="../tmp/uitags-c.db" />
+	
+	<system systemId="usertags-nc" uri="../tmp/usertags-nc.db" />
+	<system systemId="usertags-c" uri="../tmp/usertags-c.db" />
+	
+	<system systemId="xmldocs-nc" uri="../tmp/xmldocs-nc.db" />
+	<system systemId="xmldocs-c" uri="../tmp/xmldocs-c.db" />
 
-	<system systemId="iccattut-c"
-		uri="../tmp/iccattut-c.db" />
-
-	<system systemId="xmldocs.css"
-		uri="xmldocs.css" />
+	<system systemId="xmldocs.css" uri="xmldocs.css" />
 
 </catalog>
-
