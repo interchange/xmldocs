@@ -1,0 +1,3 @@
+The global variable <varname>MV_SUBJECT</varname>, set before interpolating
+any special page, is a more secure alternative to the
+<tagname>subject</tagname> pseudo-tag.

@@ -1,4 +1,4 @@
-By default, Interchange does not allow data returned from databases to be reparsed for Interchange tags. Setting this pragma eliminates the restriction.
+By default, Interchange does not allow data returned from databases to be reparsed for Interchange tags (all the &#91;s are converted to an entity "&amp;#91;"). Setting this pragma eliminates the restriction and passes &#91;s through for interpolation).
 </para><para>
 If you want to have tags in your database and display them in Interchange pages (to say, display <tag>page</tag> links for catalog-internal hyperlinks in your product descriptions), you need to enable the <pragma>safe_data</pragma> pragma.
 Some things to consider, though:

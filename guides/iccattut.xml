@@ -40,7 +40,7 @@
 			<revnumber>0</revnumber>
 			<date>Oct 2000</date>
 			<authorinitials>Sonny Cook</authorinitials>
-			<revremark>First concieved and written</revremark>
+			<revremark>First conceived and written</revremark>
 		</revision>
 		<revision>
 			<revnumber>1</revnumber>
@@ -101,7 +101,7 @@
 		<para>
 		Welcome to the &IC; Catalog Building Tutorial. Interchange originally started as an electronic cart and database display system, but over time it developed into a general application server.
 		</para> <para>
-		The simple Interchange <firstterm>catalog</firstterm> you will create during this tutorial should give you a feel of the basic Interchange system. It should also be considered a stepping stone to a more complete and functional Interchange-enabled website. The tutorial will rely as much as possible on default settings to accentuate ideas instead of implementation. It will use as few of Interchange's capabilities as possible, while still building a usable website (an online store in our example). <emphasis>The resulting site will be simple but usable</emphasis>. The value of this tutorial is in the explanations of the general Interchange ideas and small <emphasis>ready to use</emphasis> examples to get you up to speed.
+		The simple Interchange <firstterm>catalog</firstterm> you will create during this tutorial should give you a feel of the basic Interchange system. It should also be considered a stepping stone to a more complete and functional Interchange-enabled website. The tutorial will rely as much as possible on default settings to accentuate ideas instead of implementation. It will use as few of Interchange's capabilities as possible, while still building a usable website (an on-line store in our example). <emphasis>The resulting site will be simple but usable</emphasis>. The value of this tutorial is in the explanations of the general Interchange ideas and small <emphasis>ready to use</emphasis> examples to get you up to speed.
 		</para> <para>
 		It is recommended that you create the files used in this tutorial yourself. You will learn more by creating the directory structure and using your favorite text editor to create files in the proper places on your own system as they are discussed.
 		</para> <para>
@@ -128,7 +128,7 @@
 	<sect2 id='TestServerHostname'>
 		<title>Test Server Hostname</title>
 		<para>
-		It is recommended that you always use your full system name (such as <systemitem class='systemname'>myhost.mydomain.com</systemitem>) instead of <systemitem class='systemname'>localhost</systemitem>. The HTTP State Management Mechanism (<ulink url="http://www.ietf.org/rfc/rfc2109.txt">RFC 2109</ulink>) specifies that cookies can only be set when the domain name contains at least two dots. Interchange does work even with client cookies disabled, but your session will be dropped everytime you leave the catalog, since the session ID (which Interchange then embeds in the URL) will be lost.
+		It is recommended that you always use your full system name (such as <systemitem class='systemname'>myhost.mydomain.com</systemitem>) instead of <systemitem class='systemname'>localhost</systemitem>. The HTTP State Management Mechanism (<ulink url="http://www.ietf.org/rfc/rfc2109.txt">RFC 2109</ulink>) specifies that cookies can only be set when the domain name contains at least two dots. Interchange does work even with client cookies disabled, but your session will be dropped every time you leave the catalog, since the session ID (which Interchange then embeds in the URL) will be lost.
 		</para> <para>
 		If your system does not have a suitable name, and you're not going to bother yourself with establishing one, there's the <filename>/etc/hosts</filename> file you can tune for the desired effect. Simply modify:
 		<programlisting>
@@ -327,7 +327,7 @@ ErrorFile /var/log/interchange/error.log
 		</para> <para>
 		It is important to know that Interchange does not use plain-text databases (such as our <systemitem class='database'>products</systemitem> database) as-is; the data is imported and internally stored in a variant of the DBM database (depending on which variant is available on your system). That's why on most Linux systems, you will see the <filename>products/products.gdbm</filename> file created once you put the catalog on-line.
 		</para> <para>
-		To just briefly mention it, whenever you edit the text database file, Interchange will detect that and re-import the file into the DBM database on next access. All aspects of this autoimport (including its deactivation) are of course controlled by config file options (but are out of scope of this tutorial).
+		To just briefly mention it, whenever you edit the text database file, Interchange will detect that and re-import the file into the DBM database on next access. All aspects of this auto-import (including its deactivation) are of course controlled by config file options (but are out of scope of this tutorial).
 		</para> <para>
 		Now that we have the majority of base files ready, we just need to create the HTML page templates.
 		</para>
@@ -360,7 +360,7 @@ ErrorFile /var/log/interchange/error.log
 	|_____________________|
 		</screen>
 		</para> <para>
-		The <emphasis>main</emphasis> section wil hold the content different for each page. The <emphasis>top</emphasis> section will be used for headers, banners, menus, and so on. The <emphasis>left</emphasis> section can be used as a sidebar or navigation bar, and the <emphasis>bottom</emphasis> section can contain the copyright and contact info. The top, left, and bottom sections will remain constant throughout the site. Making a change to information in one of these sections will make that change to all pages in your site.
+		The <emphasis>main</emphasis> section will hold the content different for each page. The <emphasis>top</emphasis> section will be used for headers, banners, menus, and so on. The <emphasis>left</emphasis> section can be used as a sidebar or navigation bar, and the <emphasis>bottom</emphasis> section can contain the copyright and contact info. The top, left, and bottom sections will remain constant throughout the site. Making a change to information in one of these sections will make that change to all pages in your site.
 		</para> <para>
 		Now using the code displayed below, create the appropriate HTML files for each of the sections (naming the files after sections). No '.html' suffixes are needed here because those file parts are not meant to (and in fact can't) be parsed as standalone documents by Interchange (or the web server).
 		</para>
@@ -396,11 +396,11 @@ ErrorFile /var/log/interchange/error.log
 	<sect2 id='ITL:theInterchangeTagLanguage'>
 		<title>ITL: the Interchange Tag Language</title>
 		<para>
-		We need a way to pull those template pieces we just created into the proper places to make complete, previewable pages. This is done using ITL, the Interchange Tag Language.
+		We need a way to pull those template pieces we just created into the proper places to make complete, reviewable pages. This is done using ITL, the Interchange Tag Language.
 		</para>
 		<tip>
 			<para>
-			We use "tags" (enclosed in <tag>tag</tag> brackets) in Interchange much like the HTML uses tags enclosed in &lt;tag&gt;. The major difference, however, is in the hierarchy where the tags are parsed. ITL tags, parsed on the server side by the Interchange daemon, are expanded into the plaintext and HTML which is then (over the web server) delivered to the end user and parsed there for the browser presentation.
+			We use "tags" (enclosed in <tag>tag</tag> brackets) in Interchange much like the HTML uses tags enclosed in &lt;tag&gt;. The major difference, however, is in the hierarchy where the tags are parsed. ITL tags, parsed on the server side by the Interchange daemon, are expanded into the plain text and HTML which is then (over the web server) delivered to the end user and parsed there for the browser presentation.
 			</para>
 		</tip>
 		<para>
@@ -728,7 +728,7 @@ ErrorFile /var/log/interchange/error.log
 OrderProfile etc/profiles.order
 		</programlisting>
 		</para> <para>
-		Watch for white space in front of the <pragma>__NAME__</pragma> pragma, it can cause your profile to be ignored. Rember to reconfigure the catalog or simply restart Interchange altogether after modifying <filename>catalog.cfg</filename> or the profiles.
+		Watch for white space in front of the <pragma>__NAME__</pragma> pragma, it can cause your profile to be ignored. Remember to reconfigure the catalog or simply restart Interchange altogether after modifying <filename>catalog.cfg</filename> or the profiles.
 		</para>
 	</sect2>
 
@@ -740,7 +740,7 @@ OrderProfile etc/profiles.order
 <xi:include parse='text'  href='../files/tutorial-phase4/special_pages/needfield.html'></xi:include>
 		</programlisting>
 		</para> <para>
-		The <tag>error</tag> tag is the most important tag on this page. The 'all' parameter tells the tag to iterate through all of the errors reported from the failed verification, and the 'show_var' parameter indicates that the failed variable name should be displayed. For example, if the first name was left empty, fname would be shown. The 'show_error' parameter displays the actual error for the variable. The joiner parameter inserts an HTML &lt;br&gt; tag between each error message, so each error is displayed on its own line. In more complex configurations, the <tag>error</tag> tag can be even more expressive.
+		The <tag>error</tag> tag is the most important tag on this page. The 'all' parameter tells the tag to iterate through all of the errors reported from the failed verification, and the 'show_var' parameter indicates that the failed variable name should be displayed. For example, if the first name was left empty, 'fname' would be shown. The 'show_error' parameter displays the actual error for the variable. The joiner parameter inserts an HTML &lt;br&gt; tag between each error message, so each error is displayed on its own line. In more complex configurations, the <tag>error</tag> tag can be even more expressive.
 		</para>
 	</sect2>
 
@@ -821,7 +821,7 @@ __END__
 	<sect2 id='BasicEnhancements'>
 		<title>Basic Enhancements</title>
 		<para>
-		Now that you have a working catalog, you can go back and add improvements and test them incrementally. This section walks you through several, and then suggests even more enhancements you can attempt to do on your own (the <emphasis>excersizes for the readers</emphasis> are fantastic, aren't they :).
+		Now that you have a working catalog, you can go back and add improvements and test them incrementally. This section walks you through several, and then suggests even more enhancements you can attempt to do on your own (the <emphasis>exercises for the readers</emphasis> are fantastic, aren't they :).
 		</para>
 	</sect2>
 
@@ -836,7 +836,7 @@ __END__
 Locale en_US currency_symbol $
 		</programlisting>
 		</para> <para>
-		Restart Interchange and view your catalog. You will notice little has changed on the welcome page or the flypages, <command>but in the shopping cart</command> (<filename>pages/ord/basket.html</filename>) all your prices should be formatted as U.S. dollars ("1347.3" has become "$1,347.30"). Why the currency is only displayed on the basket page is easy to understand; we use the <tag>item-price</tag> tag there. That tag is equivalent to <code>[item-field price]</code> used elsewhere, but it has that extra logic associated with it that automatically displays the currency format. To use <tag>item-price</tag> without the autoformat, you'd have to change the <tag>item-price</tag> tag to <code>[item-price noformat]</code>.
+		Restart Interchange and view your catalog. You will notice little has changed on the welcome page or the flypages, <command>but in the shopping cart</command> (<filename>pages/ord/basket.html</filename>) all your prices should be formatted as U.S. dollars ("1347.3" has become "$1,347.30"). Why the currency is only displayed on the basket page is easy to understand; we use the <tag>item-price</tag> tag there. That tag is equivalent to <code>[item-field price]</code> used elsewhere, but it has that extra logic associated with it that automatically displays the currency format. To use <tag>item-price</tag> without the auto-format, you'd have to change the <tag>item-price</tag> tag to <code>[item-price noformat]</code>.
 		</para> <para>
 		But that's probably not what you want to do. You're probably more interested in formatting your other prices (such as those on the Welcome page) as currency. To do that, you could obviously replace <code>[item-field price]</code> with <tag>item-price</tag>, but we'll take on more general approach here. Simply use the <tag>currency</tag><tag>/currency</tag> tag pair for all price values. Make the following change to <filename>pages/index.html</filename>:
 		<programlisting><![CDATA[
@@ -943,10 +943,10 @@ Now add the following to the left template piece:
 	<sect2 id='AdvancedCreditCardExpirationDateSelection'>
 		<title>Advanced Credit Card Expiration Date Selection</title>
 		<para>
-		To reduce the possibility of human error at checkout time, most online stores use a pull-down option menu to list the months and the years for the credit card expiration date, instead of having the user to type the numbers by hand. It also lets you avoid explaining whether the user should enter a 2- or 4-digit year.
+		To reduce the possibility of human error at checkout time, most on-line stores use a pull-down option menu to list the months and the years for the credit card expiration date, instead of having the user to type the numbers by hand. It also lets you avoid explaining whether the user should enter a 2- or 4-digit year.
 		<!-- TODO: discuss security here -->
 		</para> <para>
-		Make the following change to your <filename>pages/checkout.html</filename> page. The section that follows explains the code. <command>Read the explanation section below before typing the code to be sure you know where tabs should be used instead of spaces and where to watch out for `backticks`</command>.
+		Make the following change to your <filename>pages/checkout.html</filename> page. The section that follows explains the code. <command>Read the explanation section below before typing the code to be sure you know where tabs should be used instead of spaces and where to watch out for `back-ticks`</command>.
 		<programlisting><![CDATA[
   <tr>
   <td align=right><b>Credit card expiration date:</b></td>
@@ -1007,7 +1007,7 @@ Now add the following to the left template piece:
 		</para> <para>
 		In the first set of &lt;select&gt; &lt;/select&gt; HTML tags a list is generated of the months to choose from. This is accomplished by using a <tag>loop</tag> tag. In this case we are looping over an explicit list. The list is provided in the list parameter. Use caution when typing this, as it is sensitive to formatting (which may not be reflected in this document). Make sure that the numbers are the first characters on each new line and that the single tab separates them from the rest of the line text. Since the columns in this list are not named, the first element can be accessed using <tag>loop-code</tag> or <code>[loop-pos 0]</code> with subsequent elements being accessed by <code>[loop-pos N]</code> where N is the number of the column you want. Notice that the elements are zero-indexed. Each time through this loop Interchange generates a select &lt;option&gt; with a number as the value and the name of the month as the text for the select menu.
 		</para> <para>
-		For the next set of &lt;select&gt; &lt;/select&gt; tags embedded Perl is used to generate the list which is iterated over. Perl code can be embedded in Interchange pages in order to extend the abilities of the system. Make sure you type backticks (grave accents) after "list=" and before the closing bracket (and <command>not apostrophes</command>). This code generates an entry for seven years in addition to the current year. It is not necessary at this point for you to understand this Perl code.
+		For the next set of &lt;select&gt; &lt;/select&gt; tags embedded Perl is used to generate the list which is iterated over. Perl code can be embedded in Interchange pages in order to extend the abilities of the system. Make sure you type back-ticks (grave accents) after "list=" and before the closing bracket (and <command>not apostrophes</command>). This code generates an entry for seven years in addition to the current year. It is not necessary at this point for you to understand this Perl code.
 		</para>
 	</sect2>
 
@@ -1145,7 +1145,7 @@ Variable LEFT   [include left]
 Variable BOTTOM [include bottom]
 		</programlisting>
 		</para> <para>
-		Now change every instance of <code>[include top]</code> to <varname>__TOP__</varname>, doing the same for each <tag>include</tag> tag. At this point, you might not want to do a search-and-replace<footnote><para>If you're adventurous enough, try this Perl oneliner on the command line for automatic replace: cd /var/lib/interchange/catalogs/tutorial; perl -pi -e 's/\[include (\S+)\]/"__".uc($1)."__"/ge' `find . -name '*.html'`</para></footnote> on all the .html files you just created, but keep this capability in mind for the next catalog you work on.
+		Now change every instance of <code>[include top]</code> to <varname>__TOP__</varname>, doing the same for each <tag>include</tag> tag. At this point, you might not want to do a search-and-replace<footnote><para>If you're adventurous enough, try this Perl one-liner on the command line for automatic replace: cd /var/lib/interchange/catalogs/tutorial; perl -pi -e 's/\[include (\S+)\]/"__".uc($1)."__"/ge' `find . -name '*.html'`</para></footnote> on all the .html files you just created, but keep this capability in mind for the next catalog you work on.
 		</para> <para>
 		If you made all of the replacements and then renamed and moved your top file elsewhere, you would only have to make a single change for each region in <filename>catalog.cfg</filename> to get your pages up to date:
 		<programlisting>
@@ -1182,7 +1182,7 @@ Variable BOTTOM <bottom
 	First and foremost - <command>congratulations</command> for completing this tutorial (and scrolling down the page to see this message doesn't count!).
 	</para>
 	<para>
-	Every good tutorial includes a set of excersizes for the readers, and we won't make an exception here. If you don't know any more Interchange than we presented in this tutorial, the following tasks might seem too difficult, but we will also give you some hints... Or wait.. No, we won't :).
+	Every good tutorial includes a set of exercises for the readers, and we won't make an exception here. If you don't know any more Interchange than we presented in this tutorial, the following tasks might seem too difficult, but we will also give you some hints... Or wait.. No, we won't :).
 	</para>
 	<itemizedlist>
 		<listitem><para>

@@ -18,6 +18,10 @@ DOCUMENTATION SYSTEM:
 - Read all possible options for tag files from vend/config.pm
   (%tag.* structures) and warn if invalid option is found in any tag file.
 
+
+GLOSSARY:
+tag, interpolation, reparse
+
  Mid-term:
 - Think about adding "online example" (role=html in combination with 
   a flag that says if html is to be static or for hosting on IC-enabled site) 

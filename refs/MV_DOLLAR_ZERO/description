@@ -1,3 +1,6 @@
 Define what to do with the Perl's <varname>$0</varname> variable which contains the system's name of the running process. That process name will appear in commands like <command>ps</command> or <command>top</command>.
 </para><para>
 Setting the variable to a <emphasis>false</emphasis> value (0 or undefined) leaves the string unchanged. Setting it to "1" displays the process in the form of "interchange --> (CATROOT)". Setting it to a string displays that same string.
+</para><para>
+This is a workaround for a bug in FreeBSD stock Perl build that sometimes
+caused a segmentation fault when starting the Interchange daemon

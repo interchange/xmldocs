@@ -35,9 +35,20 @@ option) any later version.</para>">
 <!ENTITY ICDEVGROUP "<ulink url='http://www.icdevgroup.org'>Interchange Development Group</ulink>">
 
 <!-- ENTITIES THAT DESCRIBE SYMBOLS -->
+<!ENTITY SYMBOL_USERTAG "
+<para>
+</para>
+">
+<!ENTITY SYMBOL_UITAG "
+<para>
+</para>
+">
+<!ENTITY SYMBOL_SYSTEMTAG "
+<para>
+</para>
+">
 <!ENTITY SYMBOL_GLOBVAR "
 <para>
-Global variables ....
 </para>
 ">
 <!ENTITY SYMBOL_PRAGMA "

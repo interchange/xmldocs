@@ -1,2 +1,3 @@
 purpose: work around a problem in systems with broken locking mechanism
 default: 0
+author: Mike Heins, &ICDEVGROUP;
