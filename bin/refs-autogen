@@ -48,19 +48,6 @@ my %longname = (
 	systemtag => "System Tag",
 );
 
-# General description of symbol types
-# Move to docbook/docbookxi.dtd entities
-my %general_desc;
-opendir DIR, "docbook/symbol-type-skel";
-while ( my $file = readdir DIR ) {
-	next if $file =~ /^\.|^CVS$/;
-	open INF, "< docbook/symbol-type-skel/$file" or
-		die "Can't open docbook/symbol-type-skel/$file ($!)\n";
-	$general_desc{$file} = join "", <INF>;
-	close INF;
-}
-closedir DIR;
-
 # Default fields
 my %defaults = (
 	synopsis => "&DEF_SYNOPSIS;",
@@ -307,7 +294,7 @@ sub process_symbol {
 		name => $name,
 		id => $name,
 		"_symbol type" => $group,
-		"symbol type" => $general_desc{$group},
+		"symbol type" => "&SYMBOL_" . uc($group) . ";",
 		"_first section" => ( $group =~ /tag$/ ? "TAG STRUCTURE" : "DEFAULT" ),
 	};
 
@@ -452,7 +439,7 @@ $ag{"example"}
 
 <refsect1>
 <title>SYMBOL TYPE</title>
-<para>$ag{"symbol type"}</para>
+$ag{"symbol type"}
 </refsect1>
 
 <refsect1>
