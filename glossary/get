@@ -1,14 +1,15 @@
 
 <glossentry id="GET">
 <glossterm>GET</glossterm>
-<glossterm>Form Method: GET</glossterm>
-
-<!--<acronym></acronym>-->
-<!--<abbrev></abbrev>-->
+<glossterm>GET Form Method</glossterm>
 
 <glossdef>
 <para>
-meek.
+"GET" resource at 
+<ulink url="http://www.cs.tut.fi/~jkorpela/forms/methods.html">Yukka
+Korpela's</ulink> website and
+<ulink url="http://www.faqs.org/docs/htmltut/forms/_FORM_METHOD_GET.html">
+faqs.org</ulink>.
 </para>
 
 </glossdef>

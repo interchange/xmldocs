@@ -1,9 +1,14 @@
 
 <glossentry id="mode">
-<glossterm>File mode</glossterm>
+<glossterm>Mode</glossterm>
+<glossterm>File Mode</glossterm>
 
 <glossdef>
 <para>
+Resources at
+<ulink url="http://www.debian.org/doc/manuals/debian-tutorial/ch-files.html#s-files-permissions">Debian Tutorial - Permissions</ulink>, 
+<ulink url="http://www.debian.org/doc/manuals/debian-tutorial/ch-advanced.html">Debian Tutorial - Advanced Topics</ulink> and
+<ulink url="http://www.kastlfamily.com/class-docs/unix-file-modes.html">O'Reilly &amp; Associates' Essential System Administration</ulink> book.
 </para>
 </glossdef>
 

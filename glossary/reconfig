@@ -1,13 +1,57 @@
 
 <glossentry id="reconfig">
-<glossterm>Catalog Reconfiguration</glossterm>
-
-<!--<acronym></acronym>-->
-<!--<abbrev></abbrev>-->
+<glossterm>Reconfiguration of the Interchange Catalog</glossterm>
 
 <glossdef>
 <para>
-meek.
+Catalog reconfiguration refers to either re-starting Interchange
+(all catalogs are configured at startup), or running a special command
+to only reconfigure a specific catalog, without shutting &IC; down.
+</para>
+<para>
+Interchange is (re)started by invoking:
+</para>
+<itemizedlist>
+	<listitem><para>
+		<userinput>/etc/init.d/interchange restart</userinput> on Debian GNU
+	</para></listitem>
+	<listitem><para>
+		<userinput>/etc/rc.d/init.d/interchange restart</userinput> on Red Hat
+		based systems
+	</para></listitem>
+	<listitem><para>
+		<userinput>/usr/local/interchange/bin/interchange -r</userinput> on
+		standard tarball installations.
+	</para></listitem>
+</itemizedlist>
+<para>
+Specific catalogs are reconfigured by invoking:
+</para>
+<itemizedlist>
+	<listitem><para>
+		<userinput>/usr/sbin/interchange -reconfig
+		<replaceable>CATNAME</replaceable></userinput> on Debian GNU
+		and Red Hat systems
+	</para></listitem>
+	<listitem><para>
+		<userinput>/usr/local/interchange/bin/interchange -reconfig
+		<replaceable>CATNAME</replaceable></userinput> on standard
+		tarball installations.
+	</para></listitem>
+</itemizedlist>
+<para>
+Why would you want to reconfigure a catalog?
+Most of the time, the changes you make to the HTML files or databases
+are directly visible on the next access to your site. However, that is not
+the case with more "serious" files such as catalog
+configurations (<filename>catalog.cfg</filename>) or profiles
+(<filename>etc/profiles*</filename>).
+</para><para>
+To take changes from those files "on air", you must reconfigure a catalog.
+</para>
+<para>
+Changes to global <filename>interchange.cfg</filename> can only be updated
+by restarting Interchange completely.
 </para>
 
 </glossdef>

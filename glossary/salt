@@ -4,8 +4,30 @@
 
 <glossdef>
 <para>
- (random two characters that make potential
-	attacker's dictionary too large to pre-compile it).
+In password protection, salt is a random string of data (two
+characters, in traditional crypt implementations) used to modify a
+password hash.
+</para><para>
+Salt is added to make it impossible (or at least more difficult) for an
+attacker to break into a system by pre-compiling large dictionaries of 
+password strings and then comparing them to the crypted strings from the
+password files. In effect, adding a 2-character salt to a password hash
+makes more than 600 possible combinations of the same actual password.
+</para><para>
+One of the side effects of salt is that it causes an actual password
+to generate two different encrypted strings (when two different salts are
+used), so multiple users can accidentally choose the same password without
+making that fact obvious to any user with read access to the crypted strings.
+<!-- Let's keep this trivia hidden ;-)
+<sbr/>
+A little real-world trivia:
+it once happened that, out of about 650 system users, there were two 
+pairs of identical passwords. Two people used the password
+<literal>franjo</literal>, and two used <literal>dinamo</literal>.
+At a later point in time, some other person changed her existing password
+to <literal>tinuviel</literal>, which created a total of 3 pairs of 
+identical passwords used at the same time.
+-->
 </para>
 </glossdef>
 

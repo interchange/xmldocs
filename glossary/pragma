@@ -2,9 +2,6 @@
 <glossentry id="pragma">
 <glossterm>Pragma</glossterm>
 
-<!--<acronym></acronym>-->
-<!--<abbrev></abbrev>-->
-
 <glossdef>
 <para>
 Pragmas are used to control various aspects of page and data parsing and display. They are processed before an Interchange page goes to the normal processing
