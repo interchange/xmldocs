@@ -23,7 +23,7 @@
     <a href="http://validator.w3.org/check?uri=referer">
       <img
         src="../images/colophon_xhtml.png"
-        alt="Valid XHTML 1.0!" height="31" width="88"
+        alt="Valid XHTML 1.0!"
         class='w3cimg'/>
     </a>
   </p>

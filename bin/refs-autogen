@@ -268,10 +268,14 @@ sub populate {
 				$line =~ s/^\s+//;
 				my ($sect,$text) = split /\s*:\s*/, $line, 2;
 				goto SDONE if (!( defined $text and length $text ));
-				if ( $mode eq 'override' ) {
-					$$ref{lc $sect} = $text;
+				if ( $sect ne 'missing' ) {
+					if ( $mode eq 'override' ) {
+						$$ref{lc $sect} = $text;
+					} else {
+						$$ref{lc $sect} .= '</para><para>' . $text;
+					}
 				} else {
-					$$ref{lc $sect} .= '</para><para>' . $text;
+					push @{ $invalid{$name} }, $text;
 				}
 				SDONE:
 			}
