@@ -129,7 +129,7 @@ while ( $path = shift @paths) {
 				if ( ! $ag{$field} ) {
 					if ( grep {/$field/} @mandatory) {
 						push @{ $invalid{$k} },
-							"Missing field '$field', using default";
+							"Missing field '$field', using unsuitable default";
 					}
 					$ag{$field} = $defaults{$field};
 				}
@@ -264,11 +264,11 @@ sub populate {
 	# From other file sets
 	} elsif (! length $file) { # all files
 		opendir INDIR, "refs/$name/" or do {
-			push @{ $invalid{$name} }, "Missing directory";
+			push @{ $invalid{$name} }, "Missing directory (all other errors follow from this)";
 			return;
 		};
 		while (my $fn = readdir INDIR) {
-			next if $fn =~ /^\./;
+			next if $fn =~ /^\.|^CVS$/;
 			next if $fn eq 'control';
 			open INF, "< refs/$name/$fn" or
 				die "Can't open refs/$name/$fn ($!)\n";

@@ -113,7 +113,7 @@ clean:
 distclean: clean
 	-rm -rf $(LTMPDIR)
 	-rm -rf refs/*.xml
-	-for p in $(IC_VERSIONS); do rm cache/$$p/*; done
+	-for p in $(IC_VERSIONS); do rm cache/$$p/* 2>/dev/null; done
 
 
 # OLD
