@@ -1,0 +1,240 @@
+__NAME__ purpose
+create HTML or JavaScript form submit button
+__END__
+
+
+__NAME__ synopsis2
+<row>
+	<entry>name</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry><literal>mv_click</literal></entry>
+	<entry>Button name</entry>
+</row>
+<row>
+	<entry>src</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry></entry>
+	<entry>
+	Image file to use. If the value starts with <literal>http</literal>,
+	it is used <emphasis>as-is</emphasis>. Otherwise the tag makes sure the
+	image file is reachable. Requires JavaScript.
+	</entry>
+</row>
+<row>
+	<entry>text</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry></entry>
+	<entry>
+	Button text. Scratch variable of the same name is also created to
+	hold the code associated with the button.
+	</entry>
+</row>
+<row>
+	<entry>wait-text</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>
+	Button text to show while the next page is being loaded.
+	If defined, this is used for the scratch variable name instead of the
+	<arg choice='plain'>text</arg> argument value. Requires JavaScript.
+	</entry>
+</row>
+<row>
+	<entry>form</entry>
+	<entry></entry><entry></entry>
+	<entry>First form on the page (document.forms[0])</entry>
+	<entry>Form name that this button will submit.</entry>
+</row>
+<row>
+	<entry>confirm</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>
+	Text for the Yes/No confirmation window that will show up before
+	the client's browser starts with form submission.
+	Requires JavaScript.</entry>
+</row>
+<row>
+	<entry>getsize</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>
+	Use Image::Size to determine image size and add width= and height= parameters
+	to the image definition.
+	</entry>
+</row>
+<row>
+	<entry>alt</entry>
+	<entry></entry><entry></entry>
+	<entry>Value of <arg choice='plain'>text</arg></entry>
+	<entry>Alternate text for the window.status and balloons.</entry>
+</row>
+<row>
+	<entry>anchor</entry>
+	<entry></entry><entry></entry>
+	<entry>Value of <arg choice='plain'>text</arg></entry>
+	<entry>HTML anchor name.</entry>
+</row>
+<row>
+	<entry>hidetext</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>Hide button text.</entry>
+</row>
+<row>
+	<entry>extra</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>
+	Extra HTML parameters. Passed verbatim. Note that the CSS attributes
+	<arg choice='plain'>id</arg>, <arg choice='plain'>class</arg> and
+	<arg choice='plain'>style</arg>
+	<emphasis role='bold'>are</emphasis>
+	available separately. Use this only for custom purposes.
+	</entry>
+</row>
+<row>
+	<entry>border</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>Standard &lt;img&gt; property.</entry>
+</row>
+<row>
+	<entry>height</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>Standard &lt;img&gt; property.</entry>
+</row>
+<row>
+	<entry>width</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>Standard &lt;img&gt; property.</entry>
+</row>
+<row>
+	<entry>vspace</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>Standard &lt;img&gt; property.</entry>
+</row>
+<row>
+	<entry>hspace</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>Standard &lt;img&gt; property.</entry>
+</row>
+<row>
+	<entry>align</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>Standard &lt;img&gt; property.</entry>
+</row>
+<row>
+	<entry>id</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>CSS parameter</entry>
+</row>
+<row>
+	<entry>class</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>CSS parameter</entry>
+</row>
+<row>
+	<entry>style</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>CSS parameter</entry>
+</row>
+__END__
+
+
+__NAME__ see also
+env
+__END__
+
+
+__NAME__ description
+This tag creates a <mv>mv_click</mv> form submit button.
+</para><para>
+Standard, text-only submit button is output in the form of
+<![CDATA[<input type='submit' ...>]]>.
+</para><para>
+JavaScript submit button can contain an image in place of the standard
+button text and is output as a combination of 
+<![CDATA[<a href=...>]]> and
+<![CDATA[<img src=...>]]> HTML tags.
+It can also produce other enhancements to the plain submit button, such
+as confirmation popup windows.
+</para><para>
+See <xref linkend='button_examples'/> for illustrative presentation.
+__END__
+
+
+__NAME__ notes
+<!-- This is preserved from old [button] docs but doesn't seem useful any more. -->
+<!--
+If your images stop showing on pages served over SSL, try using absolute
+<arg choice='plain'>src</arg> option. Replace
+<code>src="/tutorial/images/iclogo.png"</code> with 
+<code>src="http://myhost.mydomain.local/tutorial/images/iclogo.png"
+</programlisting>
+-->
+__END__
+
+__NAME__ example
+<example>
+	<title>Submit button with an image and confirmation window</title>
+	<para>
+	Notice the tags used in the button body:
+	</para>
+	<programlisting>
+[button text="Delete item" confirm="Are you sure?" src="delete.gif"]
+  [comment]
+    [button] element's body specifies the action code. It is what you would
+    put inside [set Delete item][/set] if you were creating the button
+    manually.
+  [/comment]
+  [mvtag] Use any Interchange tag here, i.e. ....[/mvtag]
+  [perl] # code to delete item [/perl]
+[/button]
+	</programlisting>
+</example>
+__END__
+
+__NAME__ example-inp
+<example>
+	<title>Creating the submit button manually</title>
+	<para>
+	We are here to discuss the usage of the [button] tag, but let's take a
+	look at an 
+	example equivalent to the one above, except that we create the button
+	manually:
+	</para>
+	<programlisting>
+[set Delete item]
+  [comment]
+    [button] element's body specifies the action code.
+  [/comment]
+  [mvtag] Use any Interchange tag here, i.e. ....[/mvtag]
+  [perl] # code to delete item [/perl]
+[/set]
+<![CDATA[
+<input type='submit' name='mv_click' value='Delete item'>
+]]>
+  </programlisting>
+</example>
+__END__
+
+__NAME__ example-js
+<example>
+  <title>Simple button with an embedded custom JavaScript code</title>
+  <programlisting>
+[button text="Click me"]
+  [javascript]onClick="myOwnOnClickFunction(this);"[/javascript]
+[/button]
+  </programlisting>
+</example>
+__END__
+

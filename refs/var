@@ -1,15 +1,36 @@
 __NAME__ purpose
-access global and catalog variables
+access local (catalog) and global Interchange variables
 __END__
 
 
 __NAME__ synopsis
-name=<replaceable>variable name</replaceable>
-global=<group choice='opt'>
-	<arg choice='plain'>1</arg>
-	<arg choice='plain'>2</arg>
-	</group>
-filter=<replaceable>filter name</replaceable>
+<row>
+	<entry>
+		<arg choice='plain'>name</arg>
+	</entry>
+	<entry>Yes</entry><entry>Yes</entry>
+	<entry></entry>
+	<entry>Name of the Interchange variable to display.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>global</arg>
+	</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry></entry>
+	<entry>Empty value only looks for a catalog variable. Value of 1 looks
+	only for a global variable. Value of 2 looks for the catalog variable
+	with the fallback to global, if local one is not defined.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>filter</arg>
+	</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry></entry>
+	<entry>Filter to apply.</entry>
+</row>
+
 __END__
 
 

@@ -1,7 +1,5 @@
-<cmdsynopsis>
   <group choice='req'>
     <arg choice='plain'>0</arg>
     <arg choice='plain'>1</arg>
     <arg choice='plain'><replaceable>string</replaceable></arg>
   </group>
-</cmdsynopsis>

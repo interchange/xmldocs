@@ -300,3 +300,14 @@ a {
 	color: #208cbd;
 }
 
+
+thead {
+	background-color: black;
+	color: white; 
+} 
+
+table, tbody,thead,tfoot, tr,td {
+	border-color: #8F8F8F;
+	border: dotted 1px;
+} 
+

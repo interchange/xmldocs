@@ -1,0 +1,11 @@
+<row>
+	<entry>
+		<group choice="opt">
+			<arg choice='plain'>arg</arg>
+			<arg choice='plain'>name</arg>
+		</group>
+	</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry></entry>
+	<entry>Name of the environment variable to display, if any.</entry>
+</row>

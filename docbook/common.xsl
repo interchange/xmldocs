@@ -18,7 +18,7 @@
 	<xsl:param name="callout.graphics">1</xsl:param>
 	<xsl:param name="callout.graphics.path">./images/</xsl:param>
 
-	<xsl:param name="use.extensions">1</xsl:param>
+	<xsl:param name="use.extensions">0</xsl:param>
 	<xsl:param name="textinsert.extension">1</xsl:param>
 
 	<!--<xsl:template match="tag"><xsl:text>[</xsl:text><xsl:call-template name="inline.monoseq"/><xsl:text>]</xsl:text></xsl:template>-->

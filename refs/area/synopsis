@@ -1,18 +1,19 @@
-<cmdsynopsis>
-  <arg choice='plain'>
-    <arg choice='opt'>href=</arg><replaceable>path</replaceable>
-  </arg>
-  <arg choice='opt'>
-    <arg choice='opt'>arg=</arg>
-		<replaceable>arg1=value1/arg2=value2...</replaceable>
-  </arg>
-  <arg choice='opt'>
-    secure='<group choice='plain'>
-      <arg choice='plain'>0</arg>
-      <arg choice='plain'>1</arg>
-    </group>'
-  </arg>
-  <arg choice='opt'>
-    form=<replaceable>form variables</replaceable>
-  </arg>
-</cmdsynopsis>
+<row>
+	<entry>href</entry>
+	<entry>Yes</entry><entry>Yes</entry>
+	<entry></entry>
+	<entry>URL to link to.</entry>
+</row>
+<row>
+	<entry>arg</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry></entry>
+	<entry>Argument list to pass onto the target page. Format of 
+	the value is <replaceable>arg1=value1/arg2=value2...</replaceable></entry>
+</row>
+<row>
+	<entry>secure</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>Use HTTPS for the target page</entry>
+</row>
