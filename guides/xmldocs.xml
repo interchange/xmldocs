@@ -45,10 +45,13 @@
 		<para>
 		The purpose of this document is to give you a
 		<emphasis>Quick Start</emphasis> on XMLDOCS authoring.
-		Where appropriate (and needed for context reasons), we will discuss the underlying technologies, Interchange sources and the XMLDOCS layer organization.
+		Where appropriate (and needed for context reasons), we will discuss the
+		underlying technologies, Interchange sources and the XMLDOCS layer
+		organization.
 		</para>
 		<para>
-		After this, you might be interested in more technical reading found in <filename>xmldocs/README</filename>.
+		After this, you might be interested in more technical reading found
+		in <filename>xmldocs/README</filename>.
 		</para>
 	</abstract>
 
@@ -501,28 +504,28 @@
 
 		<para>
 		<ulink url="http://www.docbook.org/tdg/en/html/acronym.html">acronym</ulink><sbr/>
-		<ulink url="http://www.docbook.org/tdg/en/html/application.html">application</ulink> - software program name<sbr/>
-		<ulink url="http://www.docbook.org/tdg/en/html/arg.html">arg</ulink> - part of the cmdsynopsis element<sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/application.html">application</ulink> - software program name, such as <application>QuickBooks</application><sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/arg.html">arg</ulink> - part of the cmdsynopsis element, such as <arg>value</arg> (it renders differently depnding on the type of argument - plain, required, or optional*)<sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/blockquote.html">blockquote</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/classname.html">classname</ulink> - Perl module name, such as <classname>Image::Size</classname><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/cmdsynopsis.html">cmdsynopsis</ulink> - the parent element for all synopsis lines<sbr/>
-		<ulink url="http://www.docbook.org/tdg/en/html/code.html">code</ulink> - chunks of actual code. Use to display ITL/Perl/any-other code examples inline<sbr/>
-		<ulink url="http://www.docbook.org/tdg/en/html/command.html">command</ulink> - computer command name (usually Unix command)<sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/code.html">code</ulink> - chunks of actual code. Use to display ITL/Perl/any-other code examples inline, suc as <code>[scratch tempvar]</code><sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/command.html">command</ulink> - computer command name (usually Unix command), such as <command>ls</command><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/computeroutput.html">computeroutput</ulink><sbr/>
-		<ulink url="http://www.docbook.org/tdg/en/html/constant.html">constant</ulink><sbr/>
-		<ulink url="http://www.docbook.org/tdg/en/html/database.html">database</ulink> - everything related to a database. See class='' option to it<sbr/>
-		<ulink url="http://www.docbook.org/tdg/en/html/emphasis.html">emphasis</ulink> - renders as italic text<sbr/>
-		<ulink url="http://www.docbook.org/tdg/en/html/envar.html">envar</ulink> - environment variable, such as REMOTE_PORT<sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/constant.html">constant</ulink>, such as <constant>MAXPATHLEN</constant><sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/database.html">database</ulink> - everything related to a database. See class='' option to it; such as field <database class='field'>sku</database><sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/emphasis.html">emphasis</ulink> - renders as <emphasis>italic</emphasis> or <emphasis role='bold'>bold with role='bold'</emphasis><sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/envar.html">envar</ulink> - environment variable, usually as seen by the web server or IC, such as <envar>REMOTE_PORT</envar><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/errorcode.html">errorcode</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/errorname.html">errorname</ulink><sbr/>
-		<ulink url="http://www.docbook.org/tdg/en/html/errortext.html">errortext</ulink> - such as "Page not found"<sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/errortext.html">errortext</ulink> - such as <errortext>Page not found</errortext><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/errortype.html">errortype</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/example.html">example</ulink> - parent element for all examples<sbr/>
-		<ulink url="http://www.docbook.org/tdg/en/html/filename.html">filename</ulink> - file and directory (class='directory') names<sbr/>
-		filter - Interchange filter name (XMLDOCS extension to DocBook XML)<sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/filename.html">filename</ulink> - file and directory (class='directory') names, such as <filename>/etc/syslog.conf</filename><sbr/>
+		filter - Interchange filter name (XMLDOCS extension to DocBook XML), such as <filter>entities</filter><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/firstterm.html">firstterm</ulink> - first occurence of a term. Renders as italic<sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/footnote.html">footnote</ulink><sbr/>
-		<ulink url="http://www.docbook.org/tdg/en/html/function.html">function</ulink> - function name, such as syscall64()<sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/function.html">function</ulink> - function name, such as <function>syscall64()</function><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/group.html">group</ulink> - grouping of args inside cmdsynopsis<sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/guibutton.html">guibutton</ulink> - identify buttons in the (web) gui, such as <guibutton>Finalize!</guibutton><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/guiicon.html">guiicon</ulink><sbr/>
@@ -530,7 +533,7 @@
 		<ulink url="http://www.docbook.org/tdg/en/html/guimenu.html">guimenu</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/guimenuitem.html">guimenu</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/guisubmenu.html">guisubmenu</ulink><sbr/>
-		<ulink url="http://www.docbook.org/tdg/en/html/hardware.html">hardware</ulink> - piece of hardware<sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/hardware.html">hardware</ulink> - piece of hardware, such as <hardware>motherboard</hardware><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/important.html">important</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/itemizedlist.html">itemizedlist</ulink> - most commonly used type of list<sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/keysym.html">keysym</ulink><sbr/>
@@ -541,12 +544,12 @@
 		mv - identify form variable, such as <mv>mv_return_all</mv> (XMLDOCS extension to DocBook XML)<sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/note.html">note</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/olink.html">olink</ulink><sbr/>
-		<ulink url="http://www.docbook.org/tdg/en/html/option.html">option</ulink> - use it to mark Interchange config directives (like say, MailOrderTo or Variable)<sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/option.html">option</ulink> - use it to mark Interchange config directives (like say, <option>MailOrderTo</option> or <option>Variable</option>)<sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/para.html">para</ulink> - the standard paragraph element<sbr/>
-		pragma - Interchange pragma name (XMLDOCS extension to DocBook XML)<sbr/>
+		pragma - Interchange pragma name (XMLDOCS extension to DocBook XML), such as <pragma>no_html_comment_embed</pragma><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/productname.html">productname</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/programlisting.html">programlisting</ulink><sbr/>
-		<ulink url="http://www.docbook.org/tdg/en/html/prompt.html">prompt</ulink> - computer prompt, such as Login:<sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/prompt.html">prompt</ulink> - computer prompt, such as <prompt>Login:</prompt><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/replaceable.html">replaceable</ulink> - identified the replaceable part in the cmdsynopsis element<sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/returnvalue.html">returnvalue</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/sbr.html">sbr</ulink> - starts a newline. Useful in cmdsynopsis or if you don't want to split the paragraph in two, which then generates a wide spacing<sbr/>
@@ -554,12 +557,12 @@
 		<ulink url="http://www.docbook.org/tdg/en/html/subscript.html">subscript</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/superscript.html">superscript</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/systemitem.html">systemitem</ulink> - various system items, see possible class='' values<sbr/>
-		tag - Interchange tag name (XMLDOCS extension to DocBook XML)<sbr/>
+		tag - Interchange tag name (XMLDOCS extension to DocBook XML), such as <tag>include</tag> or <tag>data</tag><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/term.html">term</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/tip.html">tip</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/ulink.html">ulink</ulink><sbr/>
-		<ulink url="http://www.docbook.org/tdg/en/html/userinput.html">userinput</ulink> - similar to &lt;command&gt; but here you can also include parameters, actually the complete command line the user would run<sbr/>
-		<ulink url="http://www.docbook.org/tdg/en/html/varname.html">varname</ulink> - global or catalog Interchange variable, such as MV_PAGE or UI_IMAGE_DIR<sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/userinput.html">userinput</ulink> - similar to &lt;command&gt; but here you can also include parameters, actually the complete command line the user would run, such as <userinput>ls /etc</userinput><sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/varname.html">varname</ulink> - global or catalog Interchange variable, such as <varname>MV_PAGE</varname> or <varname>UI_IMAGE_DIR</varname><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/warning.html">warning</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/wordasword.html">wordasword</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/xref.html">xref</ulink><sbr/>
