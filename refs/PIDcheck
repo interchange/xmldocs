@@ -1,0 +1,52 @@
+__NAME__ purpose
+check running Interchange processes during the HouseKeeping routine
+__END__
+
+__NAME__ see also
+HouseKeeping
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>seconds</arg>
+</group>
+__END__
+
+
+__NAME__ description
+If set to a positive non-zero value, enables check of running
+Interchange processes during the <option>HouseKeeping</option> routine.
+</para><para>
+If a process has been running (or is hung) for longer than
+<option>PIDcheck</option> seconds, then <userinput>kill -9</userinput> will
+be issued and the server count decremented.
+</para><para>
+During the HouseKeeping routine,
+the number of servers checked by <option>MaxServers</option> will be
+recounted based on PID files.
+__END__
+
+
+__NAME__ missing
+The comment on MaxServers is confusing.
+__END__
+
+__NAME__ notes
+If you have long-running database builds, this directive needs to stay
+disabled, or set to a high value (of perhaps <literal>600</literal>, or
+<literal>10 minutes</literal>), or use the <command>bin/offline</command>
+script.
+__END__
+
+
+__NAME__ example
+<example>
+  <title></title>
+  <programlisting>
+PIDcheck 300
+  </programlisting>
+</example>
+__END__
+

@@ -1,0 +1,34 @@
+__NAME__ purpose
+PID filename
+__END__
+
+__NAME__ see also
+PIDcheck
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>filename</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify the filename that will contain Interchange server process ID. As with
+most Unix daemons, this is an elegant way to determine which process should
+be sent a signal for stopping or reconfiguring the server.
+</para><para>
+The location must be writable by the Interchange daemon.
+__END__
+
+
+__NAME__ example
+<example>
+  <title></title>
+  <programlisting>
+PIDfile /var/run/interchange/interchange.pid
+  </programlisting>
+</example>
+__END__
+

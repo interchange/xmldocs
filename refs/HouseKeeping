@@ -1,0 +1,29 @@
+__NAME__ purpose
+number of seconds between periodic "house keeping" jobs
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>seconds</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify how often, in seconds, the Interchange server will "wake up" and
+look for user reconfiguration requests and hung search processes. On some
+systems, this wakeup is the only time the server will terminate in response
+to a stop command.
+__END__
+
+
+__NAME__ example
+<example>
+  <title></title>
+  <programlisting>
+HouseKeepign 5
+  </programlisting>
+</example>
+__END__
+

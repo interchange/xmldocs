@@ -1,0 +1,38 @@
+__NAME__ purpose
+Interchange Unix socket permissions
+__END__
+
+__NAME__ see also
+SocketFile
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>mode</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify permissions (&mode;) for the Interchange UNIX-domain socket.
+</para><para>
+Prepend a starting <literal>0</literal> to indicate an octal value.
+__END__
+
+__NAME__ notes
+Although not recommended in practice, it sometimes makes sense to
+set the permissions to <literal>0666</literal> (world-writable) to 
+easier debug problems.
+__END__
+
+
+__NAME__ example
+<example>
+  <title></title>
+  <programlisting>
+SocketPerms 0666
+  </programlisting>
+</example>
+__END__
+
