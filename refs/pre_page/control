@@ -11,5 +11,5 @@ purpose: custom subroutine to run after Variable substitution, before interpolat
 author:
 #  leave empty; GPL is the default
 copyright:
-see also: init_page, pre_page, post_page
+see also: init_page, post_page
 default: none

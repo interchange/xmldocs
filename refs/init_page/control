@@ -11,5 +11,5 @@ purpose: custom subroutine to run before page Variable processing
 author:
 #  leave empty; GPL is the default
 copyright:
-see also: init_page, pre_page, post_page
+see also:
 default: none
