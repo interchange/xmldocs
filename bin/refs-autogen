@@ -25,10 +25,9 @@
 #     - we construct the "Source" section (only dealing with formatting
 #       and display; what's actually in there is already decided in 
 #       bin/stattree run)
-#     -
+#     - XXX finish the list
 use warnings;
 use strict;
-use Fatal qw/chdir/;
 use File::Find;
 use Data::Dumper;
 use Getopt::Long;
@@ -59,14 +58,30 @@ my %templates;
 my $max_ctxs = 10;
 my @set_missing_all;
 my @parsed_versions;
+my $specific_only;
+my $output_spec;
+my $output_both;
+my %first; # Keep track if symbol group appears first time or not. (! logic)
 
 my @page_order = (qw/purpose default structure synopsis description example notes bugs/, "symbol type", "source", "author", "copyright", "see also");
 
 unless ( GetOptions ( 
 	"verbosedb|dumpdb|d!" => \$dumpdb,
 	"verbose|v!" => \$verbose,
+	"group|type|g|t=s" => \$specific_only,
+	"output|o=s" => \$output_spec,
+	"both|b!"    => \$output_both,
 )) { die "Error parsing options\n" }
 
+# Determine which stuff to output
+my ( $output_list, $output_xml ) = (1,1);
+if (!$output_both and $output_spec) {
+	$output_spec =~ /\.?list$/ and ($output_list,$output_xml) = (1,0) or
+	$output_spec =~ /\.?xml$/  and ($output_list,$output_xml) = (0,1) or
+	die "Unknown output combination '$output_spec'\n";
+}
+
+$specific_only and $specific_only =~ s/s$//;
 @ARGV or die "Usage: $0 version[s]\n";
 
 my %longname = (
@@ -118,6 +133,14 @@ while ( $path = shift @paths) { # For each version specified
 	# Outer loop: symbol types (pragmas, globvars, ...)
 	# Inner loop: actual symbols
 	while ( my ($gkey,$gval) = each %{ $hash{symbols} } ) {
+		next if $specific_only and $gkey ne $specific_only;
+		if (! $symbol_lists{$gkey} ) {
+			my @olist;
+			push @olist, "refs/${gkey}s.xml" if $output_xml;
+			push @olist, "tmp/${gkey}s.list" if $output_list;
+			local $" = ", ";
+			print "GEN: @olist\n";
+		}
 		for my $key (keys(%$gval)) {
 			my $val = $gval->{$key};
 
@@ -165,7 +188,7 @@ while ( $path = shift @paths) { # For each version specified
 				# see more than 10.
 				if ( $ctxcount++ > $max_ctxs ) {
 					print STDERR "$$ag{name} has ", scalar @$ar,
-						" contexts, limiting to $max_ctxs\n";
+						" contexts, limiting to $max_ctxs\n" if $verbose;
 					last;
 				}
 #					my $hidden = @$ar - $max_ctxs;
@@ -395,6 +418,19 @@ ENDD
 		die "Can't produce reference refs/$k.xml ($!)\n";
 	print OUT $refpage;
 	close OUT;
+}
+
+
+# Output lists
+if ( $output_list ) {
+	my @syms = $specific_only ? ($specific_only) : keys %symbol_lists;
+	local $" = "\n";
+	for my $sym (@syms) {
+		my @list = sort @{ $symbol_lists{$sym} };
+		open OUT, "> tmp/${sym}s.list" or die "Can't open tmp/${sym}s.list ($!)\n";
+		print OUT "@list";
+		close OUT;
+	}
 }
 
 # Output the 'invalid' list
