@@ -3,6 +3,16 @@
   in see also line and their type is distinguished visually.
 - Finish proper formatting for online examples
 - Add ROW_REPARSE along ROW_INTERPOLATE in tag refs
+- TAXAREA is not discovered in source by bin/stattree
+- toc in glossary
+- &gloss-hello-world needs to give "hello world", not "hello-world" as text
+- make glossary,howto items also appear as symbols, so that you can put
+  their names in See Also and get generated links
+- find out where on denali did I misplace a "port" of icvariables?
+- recognize situations where contexts overlap, but in a special way that
+  first example does not see the other, but the other sees the first becase
+  of 10 lines of pre-context. (example is IMAGE_MOGRIFY refentry). In those
+  cases, resize area of the context report so that it appears as one
 
 Outstanding:
 - why email, email-raw, SendMailProgram produce errors about usertags olink ID

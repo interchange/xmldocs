@@ -1,0 +1,350 @@
+
+Base price of each item is kept in the <database>products</database>
+database. In fact, the three required fields for all items are 
+<database class='field'>code</database>, 
+<database class='field'>price</database> and
+<database class='field'>description</database>.
+Note that the default names are well suited for about all purposes,
+but you can change the actual <emphasis>names</emphasis> of the price and
+description columns using &conf-PriceField; and &conf-DescriptionField; 
+directives.
+</para>
+<para>
+To optimize for speed, &IC; precomputes some pricing information at
+startup (or catalog configuration time actually), so you need to reconfigure
+the catalog if you change any of the pricing-related config directives.
+</para>
+
+
+<section id="SimplePricing">
+	<title>Simple Pricing</title>
+
+<para>
+The simplest method, as we've just hinted above, is flat pricing based on a
+fixed value in the <database>products</database> database. All you have to do
+is put item price in the <database class='field'>price</database> field and
+you're all set. If you want to change pricing based on quantity, size, color
+or arbitrary other factors, then read on.
+</para>
+</section>
+
+
+<section id="CommonAdjustPricing">
+	<title>"CommonAdjust" Pricing</title>
+
+
+<para>
+A flexible, chained pricing scheme is available when &conf-CommonAdjust;
+directive is set up.
+</para>
+<para>
+&CAs;, a term we'll use in this section, will be explained below.
+</para>
+<para>
+Here are &conf-CommonAdjust; usage rules, all assuming &conf-PriceField; 
+having the default value of <literal>price</literal>.
+</para>
+
+<itemizedlist>
+
+<listitem><para>
+If &conf-CommonAdjust; is set to <emphasis>any</emphasis> value (so, be it a
+valid &CAs; or not), extended price
+adjustments are enabled.
+<!-- TODO clarify: It may also hold the default pricing scheme. -->
+</para></listitem>
+
+<listitem><para>
+If the <database class='field'>price</database> field in the
+<database>products</database> database contains a 
+&CAs;, it takes
+precedence over the default set with &conf-CommonAdjust;.
+</para></listitem>
+
+<listitem><para>
+If the value of the &conf-CommonAdjust; directive is set to a valid &CAs;,
+and the <database class='field'>price</database> field is empty or
+specifically <literal>0</literal>, then the &CAs;
+will be used to set the price of the item.
+</para></listitem>
+
+<listitem><para>
+If no &CAs;s are found, then the price will be <literal>0</literal>, and
+subject to any later application of discounts.
+</para></listitem>
+
+<listitem><para>
+If, as a result of &CAs; application, another &CAs; is found,
+it will be re-parsed and the result applied. Chaining is retained; a
+fallback may be passed and will take effect.
+</para></listitem>
+</itemizedlist>
+
+</section>
+
+<section>
+	<title>CommonAdjust Strings, Atoms and Settors</title>
+
+<para>
+Using &CAs;, prices may be adjusted in several ways, but we first need to 
+define "&CAs;" as we've promised in the introduction. &CAs;s are price
+definition strings which consist of individual actions called
+<emphasis>atoms</emphasis>. Atoms in turn consist of
+<emphasis>settors</emphasis>.
+Roughly, we could say atoms convey "control information" &mdash; they
+define <emphasis role='bold'>when</emphasis> is the containing settor 
+applied, and settors define <emphasis role='bold'>what</emphasis> is applied.
+</para>
+<para>
+Price atoms can be of type <emphasis>final</emphasis>,
+<emphasis>chained</emphasis> and <emphasis>fallback</emphasis>.
+</para>
+
+<orderedlist>
+	<listitem><para>
+	<emphasis>Final</emphasis> price atom is always applied if it does not
+	evaluate to zero
+	</para></listitem>
+	<listitem><para>
+	<emphasis>Chained</emphasis> price atom is subject to further adjustment
+	</para></listitem>
+	<listitem><para>
+	<emphasis>Fallback</emphasis> price atom is skipped if a previous
+	chained price was not zero
+	</para></listitem>
+</orderedlist>
+
+<para>
+Atom types are recognizable from the syntax used to define them.
+A chained atom ends with a comma. A fallback atom has a
+leading semi-colon. Final atoms have no comma appended or semi-colon prepended.
+Atoms themselves are separated by whitespace and may be quoted, although there
+should normally be no whitespace in a setting and therefore quotes are 
+not necessary.
+</para>
+<para>
+A <emphasis>settor</emphasis> is a mean by which the price is set. In other
+words, it is an expression contained in an atom, and when evaluated, it
+affects the item price.
+Just as there are different types of atoms, there are different types of settors
+as well. Be aware that all settor types can yield new &CAs;s, and it's
+quite possible to create endless loops this way. Therefore, the maximum
+number of <emphasis>initial</emphasis> &CAs;s is <literal>16</literal>,
+and there may be a maximum of <literal>32</literal> repeated &CAs; iterations
+or loops before the price will return zero on an error. Those limits are only
+defaults and can be adjusted using general-purpose &conf-Limit; config
+directive.
+</para>
+
+<note>
+<para>
+Common needs are easily shown but not so easily explained.
+Follow our pointers to examples if your vision starts to blur as you dive
+into the following section.
+</para>
+</note>
+
+<para>
+Let's take a look at available settor types. Settor types do not have
+distinguishable symbolic names, but their type is recognizable from the
+syntax used.
+</para>
+
+<!-- 
+\USAGE: Optional items below have asterisks appended. The asterisk should
+not be used in the actual string. Optional <emphasis role='bold'>base</emphasis> or <emphasis role='bold'>table</emphasis> always
+defaults to the active <literal>products</literal> database table.  The optional <emphasis role='bold'>key</emphasis>
+defaults to the item code except in a special case for the attribute-based
+lookup. The <emphasis role='bold'>field</emphasis> name is not optional except in the case of an
+attribute lookup.
+
+N - digit
+I - integer 
+
+<emphasis role='bold'><replaceable></replaceable></emphasis>
+<literal></literal>
+<replaceable></replaceable>
+-->
+
+<orderedlist>
+
+<!-- TODO are settors able to yield new atoms, or only settors? -->
+
+	<listitem><para>
+	<!-- TODO is 2-decimal places fixed here or can be any? -->
+	<literal>-</literal><emphasis role='bold'><replaceable>decimal</replaceable></emphasis>
+	</para><para>
+	A number which is applied directly. For instance, a value of 
+	<literal>10</literal> will yield a price of <literal>10</literal>.
+	May be a positive or negative decimal.
+	</para></listitem>
+
+	<listitem><para>
+	<literal>-</literal><emphasis role='bold'><replaceable>decimal</replaceable></emphasis><literal>%</literal>
+	</para><para>
+	A number which is applied as a percentage of the <emphasis>current</emphasis>
+	price value. May be a positive or negative number. For instance,
+	a price of <literal>10</literal> and settor of <literal>-8%</literal> result
+	in new current price of <literal>9.20</literal>.
+	</para></listitem>
+
+	<listitem><para>
+	<replaceable>table</replaceable><emphasis role='bold'><literal>:</literal><replaceable>column</replaceable><literal>:</literal></emphasis><replaceable>key</replaceable>
+	</para><para>
+	Causes a direct lookup in a database table. Table defaults to the
+	<database>products</database> database entry for the item (subject,
+	of course, to multiple <database>products</database> databases). Column
+	argument must always be present, but you'd set it to
+	<literal>price</literal> unless you changed &conf-PriceField; or have 
+	some interesting ideas in mind.
+	<!-- TODO what means "key is item code except in attribute-based lookup?-->
+	Key argument defaults, of course, to the item code (except in a special
+	case of attribute-based lookup). The database value returned is treated
+	as settor again, and is re-parsed accordingly.
+	</para></listitem>
+
+	<listitem><para>
+	<replaceable>table</replaceable><emphasis role='bold'><literal>:</literal><replaceable>col1..col5</replaceable><literal>,</literal><replaceable>col10</replaceable><literal>:</literal></emphasis><replaceable>key</replaceable>
+	</para><para>
+	Causes a <emphasis>quantity</emphasis> lookup in database table which,
+	again, defaults to <database>products</database> databases.
+	Column specification is required and given as a set set of comma-separated
+	fields (with ranges supported), looked up by the optional key. Key defaults
+	to the item code as usual.
+	</para><para>
+	Pay attention to the convenient range support; the following two settors
+	are identical:
+
+<programlisting><![CDATA[
+pricing:p1,p2,p3,p4,p5,p10:
+pricing:p1..p5,p10:
+]]></programlisting>
+
+	With this <emphasis>quantity-based</emphasis> lookup, item quantity
+	is compared to the numerical portion of the column name (leading non-digits
+	are stripped). The price is then set to a value from the appropriate
+	database column. The "appropriateness" is determined logically &mdash;
+	since the numeric portion of the column name determines minimum quantity
+	for the class, &IC; picks the "highest" class for which minimum quantity
+	requirement is fullfiled (so that the item price is set according to 
+	quantity range).
+	<!-- TODO what happens if you list columns in order p8,p4,p12? -->
+	</para>
+
+	<warning>
+	<para>
+	If the column value at the appropriate quantity level is blank,
+	a <emphasis>zero</emphasis> cost will be returned from the atom.
+	It is important to have all columns populated, because <literal>0</literal>
+	is not appropriate.
+	<!-- TODO is this note because they think users don't want 0, or because
+	0 is treated differently from say, -100%? -->
+	</para>
+	</warning>
+
+	</listitem>
+
+	<listitem><para>
+	<emphasis role='bold'><literal>==</literal><replaceable>attribute</replaceable><literal>:</literal></emphasis><replaceable>table</replaceable><literal>:</literal><replaceable>column</replaceable><literal>:</literal><replaceable>key</replaceable>
+	</para><para>
+	<!-- TODO what's default table for attribute based lookup?-->
+	Performs <emphasis>attribute-based</emphasis> lookup. The table the attribute
+	is looked up in. Column default to the same value as attribute.
+	</para></listitem>
+
+	<listitem><para>
+	<emphasis role='bold'>&amp;<replaceable>PERL_CODE</replaceable></emphasis>
+	The leading <literal>&amp;</literal> character is stripped and the PERL_CODE
+	block is passed to the equivalent of a &tag-calc; tag. However, no &IC; tags
+	<!-- TODO tag_data : elaborate how to set it -->
+	can be used in there. Even so, your <function>tag_data</function> routine
+	<emphasis>is</emphasis> available, the current price and quantity are
+	available inside the <varname>$s</varname> hash reference, and 
+	the current item details (code, quantity, price, and any attributes) are
+	available inside the <varname>$item</varname> hashref. All are found
+	in package <classname>Vend::Interpolate</classname>.
+	<!-- TODO see this for myself and show Dumper output of the hash -->
+	</para>
+	<para>
+	That said,
+
+<programlisting><![CDATA[
+$Vend::Interpolate::item          is the current item
+$Vend::Interpolate::item->{code}  gives key for current item
+$Vend::Interpolate::item->{mv_ib} gives database ordered from
+$Vend::Interpolate::item->{...}   gives attribute value
+]]></programlisting>
+
+	</para></listitem>
+	<listitem><para>
+	<emphasis role='bold'><literal>[</literal><replaceable>ITL_CODE</replaceable><literal>]</literal></emphasis> or <emphasis role='bold'><literal>__</literal><replaceable>VARIABLE</replaceable><literal>__</literal></emphasis>
+	</para>
+	<para>
+	Causes <replaceable>ITL_CODE</replaceable> to be parsed for &IC; tags with
+	variable substitution, but 
+	without &glos-locale; substitution. You may also define a price in a
+	&conf-Variable;.
+	<!-- TODO enable only if not all yield new atoms
+	The string is re-submitted as an atom, so it may yield yet another 
+	settor.
+	-->
+	</para></listitem>
+
+	<listitem><para>
+	<emphasis role='bold'><literal>$</literal></emphasis>
+	</para>
+	<para>
+	Causes &IC; to look in the <literal>mv_price</literal> attribute of the
+	shopping cart, and apply that price as the final price, if it exists.
+	The attribute must be of numerical value.
+	<!-- TODO "attribute of the shopping cart"? Is this item option saved in the
+	basket array along with the item, or it's a field looked up in a DB? -->
+	</para></listitem>
+
+	<listitem><para>
+	<emphasis role='bold'><literal>&gt;&gt;</literal><replaceable>word</replaceable></emphasis>
+	</para>
+	<para>
+	Causes &IC; to literally return
+	<literal><replaceable>word</replaceable></literal> as price. This is not
+	useful in pricing, as it will evaluate to zero. But when &conf-CommonAdjust;
+	is also used for shipping, it is a way of re-directing shipping modes.
+	</para></listitem>
+
+	<listitem><para>
+	<emphasis role='bold'><replaceable>word</replaceable></emphasis>
+	</para>
+	<para>
+	The value <literal><replaceable>word</replaceable></literal> which must
+	be unique (must not match any other settors) is available as a key only for
+	the next lookup.
+	If that next settor is a database lookup and it contains
+	a dollar sign (<literal>$</literal>),
+	<literal><replaceable>word</replaceable></literal> will will be substituted
+	for it.
+	<!-- TODO above, are we talking settors or atoms? what means "must not
+	match any other settors" ? (does that mean its the same namespace as >>word
+	so it must not clash, or how would it "match" a settor of 10%?) -->
+	</para></listitem>
+
+	<listitem><para>
+	<emphasis role='bold'><literal>(</literal><replaceable>settor</replaceable><literal>)</literal></emphasis>
+	</para>
+	<para>
+	The value returned by <replaceable>settor</replaceable> will be available
+	as key for the next lookup.
+	If that next settor is a database lookup and it contains
+	a dollar sign (<literal>$</literal>),
+	<literal><replaceable>word</replaceable></literal> will will be substituted
+	for it.
+	<!-- TODO is this only if next is db lookup, or $ will always be 
+	substituted and db lookup is just an example? -->
+	</para></listitem>
+
+	</orderedlist>
+
+</section>
+
+<para>
+For actual examples, please see the &conf-CommonAdjust; reference page.
+
