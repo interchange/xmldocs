@@ -28,7 +28,7 @@ warning message is shown.
 __END__
 
 __NAME__ example: Testing for features
-<pogramlisting>
+<programlisting>
 Suggest module    Archive::Zip
 Suggest usertag   table_editor
 Suggest globalsub file_info
