@@ -1,0 +1,18 @@
+
+__NAME__ see also
+calc, mvasp
+__END__
+
+__NAME__ notes
+<!-- if you change this, also change the same in refs/calc -->
+The &tag-calc; tag is lower-overhead variant of &tag-perl;, because it
+does not accept arguments, does not try to interpolate tag body, does not
+pre-open any database tables, and it doesn't do any extra wrapping.
+</para><para>
+The &tag-calc; tag will remember variable values inside the page, so you
+can do the equivalent of a memory store and memory recall for a loop. In 
+other words, variables you initialize or set in one &tag-calc; block are
+also visible in all further &tag-calc; blocks on the same page. 
+</para><para>
+There is no reason to ever use this tag inside &tag-perl; or &tag-mvasp;.
+__END__

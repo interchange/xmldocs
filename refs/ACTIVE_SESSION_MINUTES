@@ -1,0 +1,30 @@
+
+__NAME__ purpose
+specify a duration after which idle user sessions are expired, overriding SessionExpire directive
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>minutes</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+This &glos-variable; overrides the &conf-SessionExpire; directive. See 
+&conf-SessionExpire; for information.
+__END__
+
+__NAME__ notes
+This variable only accepts input specified in minutes.
+__END__
+
+
+__NAME__ see also
+SessionExpire
+__END__
+
+
+__NAME__ example: 
+__END__

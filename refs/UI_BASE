@@ -1,0 +1,31 @@
+
+__NAME__ purpose
+specify relative system path to the admin interface files
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>path</replaceable></arg>
+</group>
+__END__
+
+
+
+
+__NAME__ description
+This &glos-variable; specifies the relative path to the admin interface.  
+It is used system-wide.
+__END__
+
+
+__NAME__ notes
+This variable should be set in <filename>dist/lib/UI/ui.cfg</filename>.
+__END__
+
+
+__NAME__ see also
+__END__
+
+__NAME__ example: 
+__END__

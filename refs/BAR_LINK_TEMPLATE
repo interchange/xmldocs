@@ -1,0 +1,39 @@
+
+__NAME__ purpose
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable></replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ default
+<literal>>![CDATA[<a href="$URL$" class="barlink">$ANCHOR$</a>]]></literal>
+__END__
+
+
+__NAME__ description
+The variable defines
+how the links are displayed in some of the &std-catalog; catalog 
+&glos-component;s.
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ missing
+More complete information
+__END__
+
+
+__NAME__ example: 
+__END__

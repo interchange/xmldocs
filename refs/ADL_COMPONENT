@@ -1,0 +1,35 @@
+
+__NAME__ purpose
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>HTML link</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+This &glos-variable; is defined in <filename>dist/lib/UI/ui.cfg</filename> 
+and be overriden by <varname>ADL_COMPONENT_TEMPLATE</varname>. However, 
+it is not used anywhere.
+__END__
+
+
+__NAME__ notes
+This variable is currently not used in &IC; code.
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ missing
+This var is not used in IC; remove it from config file or ?
+__END__
+
+
+__NAME__ example: 
+__END__

@@ -1,0 +1,33 @@
+
+__NAME__ purpose
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>HTML link</replaceable></arg>
+</group>
+__END__
+
+__NAME__ description
+This can be used to override <varname>ADL_COMPONENT</varname>.
+__END__
+
+
+__NAME__ notes
+This variable is currently not used in &IC; code.
+__END__
+
+
+__NAME__ see also
+ADL_COMPONENT
+__END__
+
+
+__NAME__ missing
+Not used anywhere; remove from ui.cfg ?
+__END__
+
+
+__NAME__ example: 
+__END__

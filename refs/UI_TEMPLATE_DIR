@@ -1,0 +1,38 @@
+
+__NAME__ purpose
+location of the admin templates
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable></replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ default
+<literal>templates</literal>
+__END__
+
+
+__NAME__ description
+The variable specifies the directory where the admin templates are kept.
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ missing
+More complete information
+__END__
+
+
+__NAME__ example: 
+__END__

@@ -1,0 +1,46 @@
+__NAME__ purpose
+route error messages to different files, based on message content or arbitrary tag
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>tag or message</arg>
+	<arg choice='plain'>filename</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive allows routing error messages to different files, based on 
+either message content or an arbitrary tag.
+</para><para>
+This allows us to add message "routing" information at a single place
+in the catalog configuration, instead of having to provide 
+<arg choice='plain'>file</arg> attribute to each invocation of 
+error-related tags of functions.
+__END__
+
+
+__NAME__ missing
+In examples, show how exactly would you call [error] tag (or whatever) to see ErrorDestination in practice
+__END__
+
+__NAME__ see also
+ErrorFile
+__END__
+
+
+__NAME__ example: Routing error messages based on error message
+<programlisting>
+ErrorDestination "Attempt to order missing product code: %s" logs/missing_product.log
+</programlisting>
+__END__
+
+
+__NAME__ example: Routing error messages based on an arbitrary tag
+<programlisting>
+ErrorDestination missing_code logs/missing_product.log
+</programlisting>
+__END__
+

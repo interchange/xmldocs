@@ -1,0 +1,126 @@
+
+__NAME__ purpose
+implement per-customer item or order discounts
+__END__
+
+__NAME__ description
+The tag is used to implement per-customer discounts. Discounts can 
+be applied to individual items, groups of items, or total orders.
+</para><para>
+The tag accepts &PERL; code in its body. To share variables with the
+<!-- TODO only calc or perl would do too ? -->
+rest of your catalog, use &tag-calc;.
+</para><para>
+For an introduction and theory behind item discounts, please see 
+the &glos-discount; glossary entry.
+__END__
+
+__NAME__ example: Straight 20% discount on all items
+<programlisting>
+[discount ALL_ITEMS] $s * .8 [/discount]
+</programlisting>
+
+Or the same as above, with named attributes:
+
+<programlisting>
+[discount code=ALL_ITEMS] $s * .8 [/discount]
+</programlisting>
+__END__
+
+
+__NAME__ example: Discount of 25% for an individual item
+To take 25% off of item SKU <literal>00-342</literal>, use:
+
+<programlisting>
+[discount 00-342] $s * .75 [/discount]
+</programlisting>
+__END__
+
+
+__NAME__ example: A discount of 5 on entire order:
+<programlisting>
+[discount ENTIRE_ORDER] $s - 5 [/discount]
+</programlisting>
+__END__
+
+__NAME__ example: Resetting discounts
+To reset a discount, simply set it to the empty string: 
+<programlisting>
+[discount ALL_ITEMS][/discount]
+</programlisting>
+__END__
+
+
+__NAME__ example: Dynamic discounts using Perl
+Perl code can, of course, be used to apply the discounts. Sometimes, 
+this needs to include some pre-processing which you need to do outside
+the &tag-discount; tag. You can freely do this within the &tag-calc; tag,
+as the values will be retained and visible inside &tag-discount;. For 
+each item ordered, this example gives a 10% discount for a minimum quantity
+of 2, with 5% more for each "extra quantity" (but up to a maximum discount of
+30%):
+
+<programlisting>
+[calc] 
+  [item-list]
+    $totalq{"[item-code]"} += [item-quantity];
+  [/item-list]
+  return '';
+[/calc]
+
+[item-list]
+  [discount code="[item-code]"]
+    return ($s)       if $totalq{"[item-code]"} == 1;
+    return ($s * .70) if $totalq{"[item-code]"} > 6;
+    return ($s * ( 1 - 0.05 * $totalq{"[item-code]"} ));
+  [/discount]
+[/item-list]
+</programlisting>
+__END__
+
+
+__NAME__ example: Applying discount to a specific "instance" within ordered quantity
+Here is an example of a special discount for item code
+<literal>00-343</literal> which sets the price of the
+<emphasis>second</emphasis> "instance" ordered to <literal>0.01</literal>:
+
+<!-- TODO this the example correct? -->
+<programlisting>
+[discount 00-343]
+  return $s if $q == 1;
+  my $p = $s/$q;
+  my $t = ($q - 1) * $p;
+  $t .= 0.01;
+  return $t;
+[/discount]
+</programlisting>
+__END__
+
+
+__NAME__ example: Displaying the discount ammount received
+If you want to display the discount amount to the user, simply use the
+&glos-item-discount; tag:
+<!-- TODO move this to refpage for item-discount -->
+
+<programlisting>
+[item-list]
+  Discount for [item-code]: [item-discount]
+[/item-list]
+</programlisting>
+__END__
+
+
+__NAME__ example: Displaying the discounted subtotal
+<!-- TODO verify this and clarify description -->
+When you want to display the discounted subtotal, you need to
+use &tag-calc;:
+
+<programlisting>
+[item-list]
+Discounted subtotal for [item-code]: [currency][calc]
+                                       [item-price] * [item-quantity]
+                                     [/calc][/currency]
+[/item-list]
+</programlisting>
+__END__
+

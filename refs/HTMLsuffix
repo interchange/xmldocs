@@ -5,7 +5,7 @@ __END__
 
 __NAME__ synopsis
 <group choice='req'>
-	<arg choice='plain'>extension</arg>
+	<arg choice='plain'>HTML file extension (suffix)</arg>
 </group>
 __END__
 

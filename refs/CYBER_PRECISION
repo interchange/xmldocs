@@ -1,0 +1,39 @@
+
+__NAME__ purpose
+specify precision to be used with selected payment gateways
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>number of decimal places</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ default
+<literal>2</literal>
+__END__
+
+
+__NAME__ description
+The variable defines the precision (number of decimal 
+places) to be used with selected payment gateways.
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ missing
+More complete information
+__END__
+
+
+__NAME__ example: 
+__END__

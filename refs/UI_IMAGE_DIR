@@ -1,0 +1,32 @@
+
+__NAME__ purpose
+specify web server path to the admin interface images and CSS
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>path</replaceable></arg>
+</group>
+__END__
+
+
+
+
+__NAME__ description
+This &glos-variable; specifies the web server path to the admin interface
+images and &glos-CSS; definitions.
+__END__
+
+
+__NAME__ notes
+This variable should be set in <filename>dist/lib/UI/ui.cfg</filename>.  
+__END__
+
+
+__NAME__ see also
+UI_IMAGE_DIR_SECURE
+__END__
+
+__NAME__ example: 
+__END__

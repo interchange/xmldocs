@@ -1,0 +1,38 @@
+
+__NAME__ purpose
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable></replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ default
+<literal></literal>
+__END__
+
+
+__NAME__ description
+It specifies the value to be placed in the 
+beginning of the html if the $Vend::PageInit is defined and not 0.
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ missing
+More complete information
+__END__
+
+
+__NAME__ example: 
+__END__

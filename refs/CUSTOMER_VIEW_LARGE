@@ -1,0 +1,41 @@
+
+__NAME__ purpose
+prevent display of huge customer list
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><literal>0</literal></arg>
+	<arg choice='plain'><literal>1</literal></arg>
+</group>
+__END__
+
+
+__NAME__ default
+<literal>0</literal>
+__END__
+
+
+__NAME__ description
+The variable identifies that you have a huge customer database, and 
+prevents the huge list to be built every time you visit the Customers
+list.
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ missing
+More complete information
+__END__
+
+
+__NAME__ example: 
+__END__

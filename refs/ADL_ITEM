@@ -1,0 +1,32 @@
+
+__NAME__ purpose
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>HTML link</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+__END__
+
+
+__NAME__ notes
+This variable is currently not used in &IC; code.
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ missing
+Not used in IC; remove from config ?
+__END__
+
+
+__NAME__ example: 
+__END__

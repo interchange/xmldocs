@@ -22,7 +22,7 @@ __END__
 
 __NAME__ online: Filter example
 <programlisting>
-[filter alpha]** Hello, World! **[/filter]
+[filter alpha]** Test 1: Hello, World! **[/filter]
 </programlisting>
 __END__
 

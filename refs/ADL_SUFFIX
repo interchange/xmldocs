@@ -1,0 +1,41 @@
+
+__NAME__ purpose
+specify HTML page suffix for links coming from ADL_PAGE
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>HTML file extension (suffix)</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ default
+value of the &conf-HTMLsuffix; directive
+__END__
+
+
+__NAME__ description
+The &glos-variable; specifies 
+page suffix for links coming from <varname>ADL_PAGE</varname> at the bottom of 
+the template files. 
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ see also
+HTMLsuffix
+__END__
+
+
+__NAME__ missing
+More complete information
+__END__
+
+
+__NAME__ example: 
+__END__

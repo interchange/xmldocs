@@ -1,0 +1,40 @@
+
+__NAME__ purpose
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable></replaceable></arg>
+</group>
+__END__
+
+
+
+
+__NAME__ description
+If configured and no UI_ACCESS_TABLE found, 
+then it will return that there is an acl set. This would allow you to test acls
+See sub <literal>ui_acl_enabled()</literal> for more details.
+</para><para>
+StandardCatalog (catalog.cfg)VariableValues
+Standard catalog (catalog.cfg) Variable values
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ missing
+Something got wrong in conversion to xml, see description field
+Needs work
+__END__
+
+
+__NAME__ example: 
+__END__

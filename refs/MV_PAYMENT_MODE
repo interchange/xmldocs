@@ -1,0 +1,41 @@
+
+__NAME__ purpose
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable></replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ default
+<literal></literal>
+__END__
+
+
+__NAME__ description
+Payment Gateway Which payment processor module you wish to use.
+The default value is  not set.
+<!-- TODO autodetect -->
+Valid values are : authorizenet, boa, echo, mcve, psigate,signio, skipjack, trustcommerce,
+testpayment, wellsfargo, itransact and linkpoint.
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ missing
+More complete information
+__END__
+
+
+__NAME__ example: 
+__END__

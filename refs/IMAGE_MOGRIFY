@@ -1,0 +1,37 @@
+
+__NAME__ purpose
+specify path to the ImageMagick mogrify command
+__END__
+
+__NAME__ default
+none (auto-detection might be attempted)
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>filename</replaceable></arg>
+</group>
+__END__
+
+__NAME__ description
+Specify full filesystem path to the &IMAGEMAGICK; 
+<command>mogrify</command> command.
+</para><para>
+ImageMagick's functions are used to perform image manipulation, such as
+resizing and format conversion (and that's not all, ImageMagick is a 
+<emphasis>very</emphasis> capable tool).
+
+__END__
+
+__NAME__ notes
+On a case by case basis, &IC; code might attempt an autodetection of the
+<command>mogrify</command> command location.
+__END__
+
+__NAME__ example: 
+Put the following in &gcf;:
+<programlisting>
+Variable IMAGE_MOGRIFY /usr/bin/mogrify
+</programlisting>
+__END__
+

@@ -1,0 +1,38 @@
+
+__NAME__ purpose
+specify ID for communication with selected payment gateways
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>name</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ default
+none
+__END__
+
+
+__NAME__ description
+The variable specifies your ID for communication with a payment gateway.
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ missing
+More complete information
+__END__
+
+
+__NAME__ example: 
+__END__

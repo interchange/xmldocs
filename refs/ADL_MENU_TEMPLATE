@@ -1,0 +1,38 @@
+
+__NAME__ purpose
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>HTML link</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ default
+none
+__END__
+
+
+__NAME__ description
+This &glos-variable; can be used to override <varname>ADL_MENU</varname>.
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ see also
+ADL_MENU
+__END__
+
+
+__NAME__ missing
+More complete information
+__END__
+
+
+__NAME__ example: 
+__END__

@@ -1,0 +1,39 @@
+
+__NAME__ purpose
+specify port for communication with selected payment gateways
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>port number</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ default
+<literal>443</literal>
+__END__
+
+
+__NAME__ description
+The variable specifies the port over which to communicate with the
+payment gateway server.
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ missing
+More complete information
+__END__
+
+
+__NAME__ example: 
+__END__
