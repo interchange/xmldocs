@@ -1,31 +1,23 @@
 
-Interpolate/reparse are two options?  adjust ROW_INTERPOLATE_0/1
+Outstanding:
+- Interpolate/reparse are two options;  adjust ROW_INTERPOLATE/REPARSE_0/1
+- Online examples only have to be standard examples, with actual work in
+  practice if condition=online
+  Code to do that is: <programlisting><textobject><textdata fileref="pathto.xml"/></textobject></programlisting>
 
-Great stuff:
-For each symbol: keep a list of other symbols IT uses
-For example, if I knew that, I could have seen I need to set
-DOCROOT for [image] to work.
+- Ask ndw about including [NEW!] and [TODO!] in titles in TOC.
 
-ADD ROLES FOR OPERATING SYSTEMS/LINUX DISTRIBUTIONS. Documentation 
-from Debian package should directly have all proper paths and names.
-
-<Racke>I name three things that IC users often didn't acknowledge:
-  namespaces (CGI, Values, Scratch)
-  parsing order ([L], variables, lists) - interpolation
-  inventing syntax doesn't buy you anything
-  IC is _not_ a programming language
-
-Ask ndw about including [NEW!] in titles in TOC.
-
-
-PRIMARY:
 - Stinky manpage stylesheets are a disaster. This time it's that
   <cmdsynopsis> is verbatim and <screen> still renders comments without
   newlines! I mean, what the... (And &copy; is translated to crap instead
   of plain "C"). Will need to write XSLT to fix that, and support tables.
+  NEWS: New guy took over xslt maintenance and is interested in improved
+    manpage support - he's interested in my problems, and is willing to
+    do xslt work himself.
+	
 - ./files/ directory is not properly referenced from chunked documents.
-- Double-linked SeeAlso doesn't work. ConfigAllBefore points to ConfigAllAfter,
-  but the latter doesn't return love.
+  This will be done by prefixing links from chunked documents with ../
+  "Code" for this is done, I just need to get it from ndw.
 
 - In iccattut:
   - make a "translation map" of /etc/interchange/* to RPM-equivs.
@@ -33,6 +25,17 @@ PRIMARY:
     ( This is ok, docbook 4.4 will have <package> element )
   - explain syntax accepted in profile files
   - Fix ImageDir and include one picture for example
+  - <Racke>I name three things that IC users often didn't acknowledge:
+    namespaces (CGI, Values, Scratch)
+    parsing order ([L], variables, lists) - interpolation
+    inventing syntax doesn't buy you anything
+    IC is _not_ a programming language
+  - how to delete item from cart in all possible ways
+  - give examples for the tasks in 'do yourself' section (in progress)
+  - give good practices about filtering, security
+  - see problems from old docs/TODO notes on iccattut
+  - ICCATTUT MUST NOT STOP WHERE it stops now. it needs to show all stuff
+    from current "excercise for readers" section, and also many more things.
 
 - in source contexts, wrap runaway lines
 - match style (no starting verb or all starting verbs) in all Example titles
@@ -45,11 +48,7 @@ Say about accesskeys in html source, for key-based navigation
 tag, interpolation, reparse, symbol types
 catalog/global variable, tag,ui,
 action, form,  unix inet socket, values,
-regex, flypage, sku, ad, weighted display
-
-HOWTOs:
-- how to delete item from cart in all possible ways
-- create a menu bar: see bar_button
+regex, flypage, sku
 
 - More:
 Programming guidelines doc - integrate with programming style. Advise
@@ -65,20 +64,11 @@ desktop machine for ultimate convenience.
 - PRODUCE PATCH TO RECOMPILE OFFICIAL DISTRIBUTION PERL without threads.
 
 DOCUMENTATION SYSTEM:
-- copy the definition for <example> to a
-  new name so we'll be able to differentiate between source chunks and 
-  examples.
 - Add support to document tags which are NOT found in separate files
   (like [restrict] or [subject]).
 - Read all possible options for tag files from vend/config.pm
   (%tag.* structures) and warn if invalid option is found in any tag file.
 
-iccattut:
-- give examples for the tasks in 'do yourself' section (in progress)
-- give good practices about filtering, security
-- see problems from old docs/TODO notes on iccattut
-- ICCATTUT MUST NOT STOP WHERE it stops now. it needs to show all stuff
-  from current "excercise for readers" section, and also many more things.
 
 
  Mid-term:
@@ -90,86 +80,47 @@ iccattut:
   say, 15 lines of context, but it'll come great when you have a copy
   of a 300-lines usertag. Example for this could be taken directly out of
   mwforum demo on mwforum.org
-- In refs-autogen at a few places we keep both the hash/array representation
-  of values, and their string representation. (We always generate string
-  when modifying array/hash). It should be made so that we only modify
-  array/hash during the whole program, then in the last step before
-  generating the template they get stringified.
-- Visually mark obsolete items (those not present in cvs-head)
-- Visually mark undocumented items
 - Generate leaf nodes (put bin/mkreport back in action)
-- Make script which would be like: vim `our.script usertags synopsis`.
-  our.script would find all usertags and where their synopsis is defined,
-  somewhere in refs/.
-- In howtos, include CVS date of items
-
- Long-term:
-- filenames in Source contexts should also be clickable. this is longterm
-  because it'll involve perltidy and other stuff I have in mind ...
-
-DOCUMENTATION ITSELF:
-- Resolve items from tmp/missing file. (You need to run 'make' in your tree
-  first, to get that file generated). I did what I could, now the list only
-  contains items which don't even exist in the old docs, so I can't copy/paste;
-  someone who is able to write the description/examples from scratch should
-  do that.
-
-
-<epigraph>
-<attribution>William Safire</attribution>
-<para>
-Knowing how things work is the basis for appreciation, and is
-thus a source of civilized delight.
-</para>
-</epigraph>
-
-
-"In times of universal deceit, telling the truth becomes
- a revolutionary act." -- George Orwell.
-
- 
-For a successful technology, reality must take precedence over public
-relations, for Nature cannot be fooled. -- Dick Feynman
-
-######################################################################
 
 Tags:
-  parameters
-  positional list
-  invalidates cache
   aliases
   tag call / perl call / mvasp
   container
   has subtags
   nests
 
----- 
-New docs:
- - promotional
- - new developer howto
-
-----------
-
----------------------------------------------------------------
-Taking on ideas from previous ML posts:
-
-** Dan Browning: clustering howto, tuning tips (by Mike),
-jedit + IC colorization, commit-to-live script,
-Racke: performance docs NEEDED, clustering my mike needs funding or he
-won't do it. CVS howto is browning.
-
-** Mike We are short on chiefs and heavy on Indians here
 
 
-OLINE EXAMPLES:
- <programlisting><textobject><textdata fileref="pathto.xml"/></textobject></programlisting>
-
-
-
-
-Code problems:
+Ideas:
 - In db_columns: add exlude_columns= parameter?
+- New docs:
+   - promotional
+   - new developer howto
+- filenames in Source contexts should also be clickable. this is longterm
+  because it'll involve perltidy and other stuff I have in mind ...
 
----
-say that code is colorful collection of time and people, so docs try to fill
+
+Notes:
+- say that code is colorful collection of time and people, so docs try to fill
 the gap.
+- say that even though sometimes the code looks ugly/unreadable, check 3 times before thinking it's a bug
+- ** Dan Browning: clustering howto, tuning tips (by Mike),
+- jedit + IC colorization, commit-to-live script,
+- Racke: performance docs NEEDED, clustering my mike needs funding or he
+  won't do it. CVS howto is browning.
+- "In times of universal deceit, telling the truth becomes
+  a revolutionary act." -- George Orwell.
+- For a successful technology, reality must take precedence over public
+  relations, for Nature cannot be fooled. -- Dick Feynman
+- <epigraph>
+  <attribution>William Safire</attribution>
+  <para>
+  Knowing how things work is the basis for appreciation, and is
+  thus a source of civilized delight.
+  </para>
+  </epigraph>
+
+
+Misc:
+- Mike We are short on chiefs and heavy on Indians here
+

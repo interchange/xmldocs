@@ -200,9 +200,9 @@ $T/%.list refs/%.xml: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) 
 
 #############################################################
 # One-shot targets
-glossary/glossary.xml: $(shell find glossary/ -regex '.+[^(\.xml)]$$')
+glossary/glossary.xml: $(shell find glossary/ -regex '.+[^(\.xml)]$$') bin/generic-autogen
 	bin/generic-autogen glossary
-howtos/howtos.xml: $(shell find howtos/ -regex '.+[^(\.xml)]$$')
+howtos/howtos.xml: $(shell find howtos/ -regex '.+[^(\.xml)]$$') bin/generic-autogen
 	bin/generic-autogen howtos
 
 

@@ -12,6 +12,21 @@
 <!ENTITY APACHE "<ulink url='http://www.apache.org/'>Apache</ulink>">
 <!ENTITY W3 "<ulink url='http://www.w3c.org/'>W3C</ulink>">
 <!ENTITY W3C "<ulink url='http://www.w3c.org/'>W3C</ulink>">
+<!ENTITY PERL "<ulink url='http://www.perl.org/'>Perl</ulink>">
+
+
+
+<!-- ENTITIES TO AVOID A LOT OF REPETITION -->
+<!ENTITY gcf "<filename>interchange.cfg</filename>">
+<!ENTITY ccf "<filename>catalog.cfg</filename>">
+<!ENTITY gcfs "<filename>interchange.cfg</filename> or <filename>catalog.cfg</filename>">
+<!ENTITY cgfs "<filename>catalog.cfg</filename> or <filename>interchange.cfg</filename>">
+<!ENTITY ICROOT "<olink targetdoc='glossary' targetptr='ICROOT'>ICROOT</olink>">
+<!-- Current and previous default catalog name -->
+<!ENTITY Std-catalog "Standard">
+<!ENTITY std-catalog "standard">
+<!ENTITY Prev-catalog "Foundation">
+<!ENTITY prev-catalog "foundation">
 
 
 
@@ -37,6 +52,7 @@ Free Software Foundation; either version 2 of the License, or (at your
 option) any later version.</para>">
 <!ENTITY DEF_SEEALSO "No information.">
 <!ENTITY DEF_PURPOSE "description line missing">
+<!ENTITY DEF_STRUCTURE "None.">
 
 
 
@@ -52,15 +68,6 @@ option) any later version.</para>">
 
 
 <!-- GLOSSARY LINKS ARE AUTOMATIC -->
-
-
-<!-- ENTITIES TO AVOID A LOT OF REPETITION -->
-<!ENTITY gcf "<filename>interchange.cfg</filename>">
-<!ENTITY ccf "<filename>catalog.cfg</filename>">
-<!ENTITY gcfs "<filename>interchange.cfg</filename> or <filename>catalog.cfg</filename>">
-<!ENTITY cgfs "<filename>catalog.cfg</filename> or <filename>interchange.cfg</filename>">
-
-<!ENTITY ICROOT "<olink targetdoc='glossary' targetptr='ICROOT'>ICROOT</olink>">
 
 
 <!-- ENTITIES TO EASIER CONSTRUCT TAG PARAMETERS LIST -->

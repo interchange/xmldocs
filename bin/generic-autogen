@@ -80,19 +80,18 @@ opendir DIR, $cat or die "Can't open $cat/ ($!)\n";
 readdir DIR; readdir DIR;
 
 while ( my $file = readdir DIR ) {
-	next if $file =~ /^\.|\.xml$/;
+	next if $file =~ /^\.|^CVS|\.xml$/;
 	open IN, "< $cat/$file" or die "Can't read-open $cat/$file ($!)\n";
 	$items{$file} = [ <IN> ];
 	$alphabet{ lc(substr($file, 0, 1)) }++;
 	push @loaded, $file;
 
 	my $lcfile = lc $file;
+	my $link = "<olink targetdoc='$cat' targetptr='$file'/>";
 
 	##### Should be lowercase ****
-	##### Uppercase is temporary only
 	print ENT <<ENDO;
-<!ENTITY $sn{$cat}-$lcfile "$file">
-<!ENTITY $sn{$cat}-$file "$file">
+<!ENTITY $sn{$cat}-$file "$link">
 ENDO
 	print "Added $file\n" if $verbose;
 
