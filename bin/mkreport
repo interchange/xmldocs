@@ -51,10 +51,10 @@ while (my($k,$v) = each %hash) {
 	procitem(\@stack, $k,$v);
 }
 
+# TODO this needs work
 open(OUT, "> $reportdir/$i{ver}/treestats.txt") or
 	die "Cant write/open report file: $!\n";
 select OUT;
-
 O("
 == Interchange version $i{ver}
 
@@ -78,9 +78,27 @@ O("
 +       KLOCS:${\( gs('klocs', [qw/code html coretag tag pod comment/],1) )}
 
 ");
-
-
 close (OUT);
+
+for my $p (qw/pragma globvar/) {
+	my $tfile = '';
+	open(OUT, "> $reportdir/$i{ver}/total.symbols.$p") or
+		die "Can't write symbols.$p ($!)\n";
+	print OUT scalar keys %{ $hash{symbols}{$p} };
+	close OUT;
+	while (my ($k,$v) = each %{ $hash{symbols}{$p} } ) {
+		$tfile .= "$k\n";
+			for my $fe ( @$v ) {
+				local $" = ":";
+				$tfile .= "\t@$fe\n";
+			}
+	}
+	open(OUT, "> $reportdir/$i{ver}/symbols.$p") or
+		die "Can't write symbols.$p ($!)\n";
+	print OUT $tfile;
+	close OUT;
+}
+
 exit 0;
 
 #################################################################
@@ -195,9 +213,11 @@ sub procitem {
 	
 	# Ignores:
 	return if "$key" eq "tree";
+	return if "$key" eq "symbols";
 	return if "@$stack" eq "total" and $key eq "matches";
 	
-	unless (ref $val) {
+	unless (ref $val eq 'HASH') {
+		$val = join("\n", @$val) if ( ref $val eq 'ARRAY' );
 		local $" = ".";
 		open OUT, "> $cachedir/$dumpdir/@$stack.$key" or
 			die "Can't dump $dumpdir/@$stack.$key ($!)\n";

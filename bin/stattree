@@ -150,7 +150,7 @@ sub wanted {
 			}
 		}
 	}
-	# Unknown
+	# Unknown // TODO pay more attention to this
 	print STDERR "$file UNKNOWN\n" if $verbose;
 	return; # We're not interested in handling that
 
@@ -170,8 +170,10 @@ sub wanted {
 	# Open text file, parse contents
 	open IN, "< $file" or die "Can't open $file ($!)\n";
 
+	my $lnum = 0;
 	while (<IN>) {
 		my $line = $_; 
+		$lnum ++;
 
 		$hash{tree}{$file}{lines}++ ;
 		$hash{total}{lines}++ ;
@@ -181,6 +183,7 @@ sub wanted {
 			if ( $line =~ /^\s*#/ ) {
 				$hash{tree}{$file}{comments}++ ;
 				$hash{total}{perl_comments}++;
+				# TODO check if the comment contains ::log[A-Z]\w+
 			} elsif ( $line =~ /\s+#/ ) {
 				$hash{tree}{$file}{gray}++ ;
 				$hash{total}{perl_gray}++;
@@ -199,6 +202,23 @@ sub wanted {
 				# The default is code
 				$hash{tree}{$file}{code}++;
 				$hash{total}{perl_code}++;
+
+				# Discover pragmas
+				# Ph33r, PH33R my MaD R3G3X skiLLz! ;-)
+				# This matches $::Pragma->{} or $$::Pragma{}
+				if ( $line =~ /(()|\$())\$::Pragma(->\2|\3){(\w+?)}/ ) {
+					push @{ $hash{symbols}{pragma}{$5} }, [ $file, $lnum ];
+				}
+
+				# Diskover global variables
+				if ( $line =~ /(()|\$())\$Global::Variable(->\2|\3){(\w+?)}/ ) {
+					push @{ $hash{symbols}{globvar}{$5} }, [ $file, $lnum ];
+				}
+				if ( $line =~ /\$Tag->var\s*\(\s*(["'])(\S+?)\1(\s*,\s*(\d))?/ ) {
+					push @{ $hash{symbols}{globvar}{$5} }, [ $file, $lnum ];
+					warn "\$Tag->var syntax never used in .pl/.pm files by now.
+						I'll register that, but is it a mistake? ($2, $4)\n";
+				}
 			} else {
 				warn "IMPOSSIBLE\n";
 			}
@@ -294,6 +314,15 @@ sub dumpdb {
 #				pod => lines of POD
 #				gray => mixed, same as above in total{}
 #				empty => empty lines (including whitespace)
+# 		}
+# 	}
+#
+# 	# Symbols
+# 	symbols => {
+# 		pragma => {              # pragma symbols
+# 			name => {              # pragma name
+# 				file => [ line num ] # file/line-information it occurs in
+# 			}
 # 		}
 # 	}
 # )
