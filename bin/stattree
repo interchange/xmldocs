@@ -246,28 +246,8 @@ sub wanted {
 		$hash{tree}{$file}{lines}++ ;
 		$hash{total}{lines}++ ;
 
-		# It's the main configure file, pick up the ICVERSION variable
-		if ( $c{file} eq 'configure' ) {
-			for $_ (@filedata) {
-				if ( /^ICVERSION=(['"])(\d+\.\d+\.\d+)\1/ ) {
-					if ( !$hash{version} or "$hash{version}" eq "$2" ) {
-						$hash{version} = $2
-					}
-					last;
-				}
-			}
-			# ICVERSION must be known here, or someone's playing, or
-			# it's a pre-5.0 version which doesnt have that.
-			unless ( $hash{version} ) {
-				warn "Wasn't able to determine " .
-					'^ICVERSION=([\'"])(\d+\.\d+\.\d+)\1 from the main ' .
-					"./configure script. Will use one from directory name ($i{ver}).\n"
-					unless $i{ver} =~ /^4/; # ignore warning for 4.x versions
-				$hash{version} = $i{ver};
-			}
-
 		# Perl program file
-		} elsif ( $c{fsubtype} eq 'perl' ) {
+		if ( $c{fsubtype} eq 'perl' ) {
 			my $pod = 0;
 			if ( $c{line} =~ /^\s*#/ ) {
 				$hash{tree}{$c{file}}{comments}++ ;
@@ -377,7 +357,37 @@ sub wanted {
 			}
 			
 			last;
+
 		}
+	} # END IF
+
+	####################################################################
+	# It's the main configure file, pick up the ICVERSION variable
+	if ( $c{file} eq 'configure' ) {
+		for $_ (@filedata) {
+			if ( /^ICVERSION=(['"])(\d+\.\d+\.\d+)\1/ ) {
+				if ( !$hash{version} or "$hash{version}" eq "$2" ) {
+					$hash{version} = $2
+				}
+				last;
+			}
+		}
+		# ICVERSION must be known here, or someone's playing, or
+		# it's a pre-5.0 version which doesnt have that.
+		unless ( $hash{version} ) {
+			warn "Wasn't able to determine " .
+				'^ICVERSION=([\'"])(\d+\.\d+\.\d+)\1 from the main ' .
+				"./configure script. Will use one from directory name ($i{ver}).\n"
+				unless $i{ver} =~ /^4/; # ignore warning for 4.x versions
+				$hash{version} = $i{ver};
+		}
+	}
+
+	####################################################################
+	# lib/Vend/Config.pm (outside elsif{} because we want this even after
+	# it first matches a requirement for a Perl file
+	if ( $c{file} eq 'lib/Vend/Config.pm' ) {
+		file_parseVendConfig(\@filedata);
 	}
 }
 
@@ -476,4 +486,47 @@ sub line_findFunctionName {
 		@{ $c{gfunc} } = ( $1, $c{lnum} );
 	}
 }
+
+
+sub file_parseVendConfig {
+	my $content = shift;
+
+	my $context = "";
+	my $run = 0;
+
+	for my $line (@$content) {
+		
+		# Determine context
+		if ( $line =~ /^sub\s+global_directives\s+{\s*$/ ) {
+			$context = "globconf"; next;
+		}
+		if ( $line =~ /^sub\s+catalog_directives\s+{\s*$/ ) {
+			$context = "catconf"; next;
+		}
+		if ( $line =~ /return \$directives/ ) {
+			$context = ""; $run = 0; next
+		}
+		if ( $context and $line =~ /my \$directives = \[/ ){
+			$run++; next
+		}
+
+		next unless $context;
+		next unless length $line;
+		next if $line =~ /^\s*$/;
+		next if $line =~ /^\s*#/;
+
+		# Count braces
+		my $opens = ( $line =~ s/([\(\[\{])/$1/g );
+		my $closes = ( $line =~ s/([\)\]\}])/$1/g );
+
+		unless ( $opens - $closes) { # Directive is contained on one line
+			# TODO
+		} else {
+			print "TODO: COMBO LINE $line" if $verbose;
+		}
+
+	}
+
+}
+
 
