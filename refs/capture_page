@@ -68,15 +68,7 @@ __NAME__ synopsis
 	<entry></entry>
 	<entry>File creation <glossterm linkend='umask'>umask</glossterm>.</entry>
 </row>
-<row>
-	<entry>
-		<arg choice='plain'>hide</arg>
-	</entry>
-	<entry></entry><entry></entry>
-	<entry>0</entry>
-	<entry>Hide return value of the <function>Vend::File::writefile()</function>
-	function?</entry>
-</row>
+&ROW_HIDE_0;
 __END__
 
 __NAME__ description

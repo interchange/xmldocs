@@ -61,3 +61,65 @@ option) any later version.</para>">
 <!ENTITY ITL "<glossterm linkend='ITL'>ITL</glossterm>">
 <!ENTITY SMTP "<ulink url='http://cr.yp.to/smtp.html'>SMTP</ulink> (<classname>Net::SMTP</classname> Perl module)">
 
+
+<!-- ENTITIES TO EASIER CONSTRUCT TAG PARAMETERS LIST -->
+<!-- put standard ones here, such as Hide or Interpolate/reparse -->
+<!ENTITY ROW_INTERPOLATE_0 "
+<row>
+	<entry>
+		<group choice='opt'>
+			<arg choice='plain'>interpolate</arg>
+			<arg choice='plain'>reparse</arg>
+		</group>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>Interpolate (reparse) for other Interchange tags?</entry>
+</row>
+">
+<!ENTITY ROW_INTERPOLATE_1 "
+<row>
+	<entry>
+		<group choice='opt'>
+			<arg choice='plain'>interpolate</arg>
+			<arg choice='plain'>reparse</arg>
+		</group>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>1</entry>
+	<entry>Interpolate (reparse) for other Interchange tags?</entry>
+</row>
+">
+<!ENTITY ROW_HIDE_0 "
+<row>
+	<entry>
+		<arg choice='plain'>hide</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>Hide the tag return value?</entry>
+</row>
+">
+<!ENTITY ROW_HIDE_1 "
+<row>
+	<entry>
+		<arg choice='plain'>hide</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>1</entry>
+	<entry>Hide the tag return value?</entry>
+</row>
+">
+<!ENTITY ROW_FILTER_none "
+<row>
+	<entry>
+		<arg choice='plain'>filter</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>None.</entry>
+	<entry>
+	<glossterm linkend='filter'>Interchange filter</glossterm> to apply.
+	</entry>
+</row>
+">
+

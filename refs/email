@@ -45,14 +45,7 @@ __NAME__ synopsis
 	<entry>Additional e-mail headers to include. For example,
 	<literal>Errors-To: errors@mydomain.local</literal>.</entry>
 </row>
-<row>
-	<entry>
-		<arg choice='plain'>hide</arg>
-	</entry>
-	<entry></entry><entry></entry>
-	<entry>0</entry>
-	<entry>Hide tag return value?</entry>
-</row>
+&ROW_HIDE_0;
 __END__
 
 

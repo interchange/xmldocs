@@ -4,14 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<row>
-	<entry>
-		<arg choice='plain'>hide</arg>
-	</entry>
-	<entry></entry><entry></entry>
-	<entry>0</entry>
-	<entry>Hide the tag return value?</entry>
-</row>
+&ROW_HIDE_0;
 __END__
 
 
