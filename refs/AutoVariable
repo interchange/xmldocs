@@ -1,5 +1,5 @@
 __NAME__ purpose
-list config directives that are to be made available through the Variable space
+specify config directives that are to be made available through the Variable space
 __END__
 
 

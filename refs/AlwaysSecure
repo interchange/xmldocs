@@ -1,0 +1,38 @@
+__NAME__ purpose
+list pages that are always to be served over a HTTPS connection
+__END__
+
+
+__NAME__ see also
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>page</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies &IC; pages that are always to be served over a
+secure (HTTPS) connection.
+__END__
+
+__NAME__ example: Specifying AlwaysSecure
+<programlisting>
+AlwaysSecure ord/checkout
+
+AlwaysSecure   <<EOD
+  change_password
+  login
+  member/account
+  ord/billing
+  ord/checkout
+  ord/finalize
+  ord/multi
+  ord/shipping
+  query/order_detail
+EOD
+</programlisting>
+__END__
+
