@@ -34,7 +34,7 @@
 	<sect1 id='validate_introduction'>
 		<title>Introduction</title>
 		<para>
-		HOW-TO version: $Id: validate,v 1.1 2004-11-23 00:29:44 docelic Exp $
+		HOW-TO version: $Id: validate,v 1.2 2005-01-07 05:08:47 jon Exp $
 		</para>
 		<para>
 		Validate pages at W3C.
@@ -56,7 +56,7 @@
 		&IC; does, however, output a lot of HTML markup.
 		That produced markup is, we can say, pretty inconsistent in
 		letter case (uppercase/lowecase) and argument quoting.
-		In later 2004., and in the spirit of the upcoming XHTML standards, a
+		In later 2004, and in the spirit of the upcoming XHTML standards, a
 		consensus was reached among &ICDEVGROUP; members to start a long-term
 		process of converting all
 		output markup to lowercase and quoting all arguments using double quotes.
