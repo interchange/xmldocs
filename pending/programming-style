@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html><head><title>[interchange-core] ProgrammingStandards</title>
+   
+   <link rel="Index" href="index.html">
+   <link rel="made" href="mailto:interchange-core%40interchange.redhat.com">
+   <meta name="robots" content="index,nofollow">
+   
+   <link rel="Previous" href="000259.html">
+   <link rel="Next" href="000258.html"><base href="http://www.icdevgroup.org/mailman/private/interchange-core/2001-October/000257.html"></head>
+
+ <body bgcolor="#ffffff">
+   <h1>[interchange-core] ProgrammingStandards
+   </h1>
+    <b>Jon Jensen
+    </b> 
+    <a href="mailto:interchange-core%40interchange.redhat.com" title="[interchange-core] ProgrammingStandards">interchange-core@interchange.redhat.com
+       </a><br>
+    <i>Tue Oct 30 10:08:00 2001</i>
+    <p></p><ul>
+        <li> Previous message: <a href="000259.html">[interchange-core] [sort] tag
+</a></li>
+        <li> Next message: <a href="000258.html">[interchange-core] ProgrammingStandards
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="date.html#257">[ date ]</a>
+              <a href="thread.html#257">[ thread ]</a>
+              <a href="subject.html#257">[ subject ]</a>
+              <a href="author.html#257">[ author ]</a>
+         </li>
+       </ul>
+    <hr>  
+<!--beginarticle-->
+<pre>The last "authoritative" statement on code standards was done about a year
+ago, and is still on the Akopia Wiki. Basically perlstyle was formally
+adopted and a few trivial additions made.
+
+I like the way cuddled elses visually unify the whole control flow. But
+even an else-cuddling diehard like me can change, if that's what people
+want. :)
+
+Jon
+
+
+Programming Standards
+
+(MikeHeins, JeffBarr, EricZarko, SonnyCook)
+
+The following notes document a meeting that took place on November 14,
+2000.
+
+Introduction - We agreed that it is good to have a programming style, and
+that the existing style of code should be preserved. We agreed that making
+global changes to impose a consistent style is not worth doing. Instead,
+we will make revisions as we rewrite code. We will generally follow the
+published Perl style guidelines, and we will use 4 character tabs.
+
+Else - We accept but do not encourage the use of the "cuddled else"
+construct ("} else {" on a single line).
+
+Lexical Issues - White space is free, and white space around operators
+increases readability. Lining up the "=" in a series of assignments can be
+used to emphasize the parallel structure.
+
+Naming - Package globals should start with a capital letter. In other
+situations, avoid StudlyCaps where names begin with a capital letter.
+Items in the main package should be referenced as "$::Foo", not
+"$main::Foo".
+
+Globals - Global variables and subs should be used very sparingly.
+Occasionally it is necessary to use global variables as implicit arguments
+to certain subs for efficiency purposes. We should not add more globals,
+and we should consider removing existing ones. An important exception are
+certain subs such as logGlobal, logDebug, errmsg, and logError.
+
+CVS - CVS comments should be meaningful. As a matter of good programming
+practice, we encourage a careful review of all diffs before committing
+changes to CVS. When committinga large number of files (possibly
+containing changes and fixes to multiple areas) it is best to create
+file-specific comments addressing individual fixes. Using a blanket
+comment is not encouraged.
+
+Loops - We prefer to declare loop control variables immediately prior to
+the beginning of the loop:
+
+my $var;
+foreach $var () {
+...
+}
+
+Bugzilla - We encourage the use of Bugzilla as a work queuing tool.
+Entering and tracking all bugs, even those you find and then fix yourself,
+is a good practice. Creating a relationship between a CVS commit and a
+Bugzilla entry by listing the bug number in the CVS log message and the
+file names in the Bugzilla entry is encouraged.
+
+
+</pre>
+<!--endarticle-->
+    <hr>
+    <p></p><ul>
+        <!--threads-->
+	<li> Previous message: <a href="000259.html">[interchange-core] [sort] tag
+</a></li>
+	<li> Next message: <a href="000258.html">[interchange-core] ProgrammingStandards
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="date.html#257">[ date ]</a>
+              <a href="thread.html#257">[ thread ]</a>
+              <a href="subject.html#257">[ subject ]</a>
+              <a href="author.html#257">[ author ]</a>
+         </li>
+       </ul>
+</body></html>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html><head><title>[interchange-core] [sort] tag</title>
+   
+   <link rel="Index" href="index.html">
+   <link rel="made" href="mailto:interchange-core%40interchange.redhat.com">
+   <meta name="robots" content="index,nofollow">
+   
+   <link rel="Previous" href="000256.html">
+   <link rel="Next" href="000257.html"><base href="http://www.icdevgroup.org/mailman/private/interchange-core/2001-October/000259.html"></head>
+
+ <body bgcolor="#ffffff">
+   <h1>[interchange-core] [sort] tag
+   </h1>
+    <b>Ed LaFrance
+    </b> 
+    <a href="mailto:interchange-core%40interchange.redhat.com" title="[interchange-core] [sort] tag">interchange-core@interchange.redhat.com
+       </a><br>
+    <i>Tue Oct 30 12:47:00 2001</i>
+    <p></p><ul>
+        <li> Previous message: <a href="000256.html">[interchange-core] [sort] tag
+</a></li>
+        <li> Next message: <a href="000257.html">[interchange-core] ProgrammingStandards
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="date.html#259">[ date ]</a>
+              <a href="thread.html#259">[ thread ]</a>
+              <a href="subject.html#259">[ subject ]</a>
+              <a href="author.html#259">[ author ]</a>
+         </li>
+       </ul>
+    <hr>  
+<!--beginarticle-->
+<pre>At 01:24 PM 10/30/2001 +0100, you wrote:
+&gt;<i>Mike Heins &lt;<a href="mailto:mheins@redhat.com">mheins@redhat.com</a>&gt; writes:
+</i>&gt;<i>
+</i>&gt;<i> &gt; Quoting Stefan Hornburg (Racke) (<a href="mailto:racke@linuxia.de">racke@linuxia.de</a>):
+</i>&gt;<i> &gt; &gt;
+</i>&gt;<i> &gt; &gt; Is there any reason that this is tag is widely mentioned in the docs ?
+</i>&gt;<i> &gt; &gt; I thought it is deprecated and can be replaced by other means.
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; Because I did a good job of documenting that one and it was never
+</i>&gt;<i> &gt; undocumented.
+</i>&gt;<i>
+</i>&gt;<i>Fine, but we can it take out now or not ?
+</i>&gt;<i>
+</i>&gt;<i>Ciao
+</i>&gt;<i>         Racke
+</i>
+At this point I would not consider it useless, as I don't see any other way 
+of sorting lists that don't come from search results, besides in-page perl 
+code.  In particular, the sorting of [item-lists] comes to mind. In any 
+case, [sort] is the only general-purpose sorting mechanism in ITL that I 
+know of (please correct me if I am wrong here), and for that reason alone I 
+think it is worth preserving.  Perhaps we can adjust the docs to 
+de-emphasize the use of [sort] for searches in favor of tf/to and just keep 
+the examples for [item-list] and [loop].
+
+- Ed L.
+
+
+</pre>
+<!--endarticle-->
+    <hr>
+    <p></p><ul>
+        <!--threads-->
+	<li> Previous message: <a href="000256.html">[interchange-core] [sort] tag
+</a></li>
+	<li> Next message: <a href="000257.html">[interchange-core] ProgrammingStandards
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="date.html#259">[ date ]</a>
+              <a href="thread.html#259">[ thread ]</a>
+              <a href="subject.html#259">[ subject ]</a>
+              <a href="author.html#259">[ author ]</a>
+         </li>
+       </ul>
+</body></html>

@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html><head><title>[interchange-core] Checking Interchange page servers</title>
+   
+   <link rel="Index" href="index.html">
+   <link rel="made" href="mailto:interchange-core%40interchange.redhat.com">
+   <meta name="robots" content="index,nofollow">
+   
+   <link rel="Previous" href="000161.html">
+   <link rel="Next" href="000164.html"><base href="http://www.icdevgroup.org/mailman/private/interchange-core/2001-October/000162.html"></head>
+
+ <body bgcolor="#ffffff">
+   <h1>[interchange-core] Checking Interchange page servers
+   </h1>
+    <b>Stefan Hornburg Racke
+
+    </b> 
+    <a href="mailto:interchange-core%40interchange.redhat.com" title="[interchange-core] Checking Interchange page servers">interchange-core@interchange.redhat.com
+       </a><br>
+    <i>Thu Oct  4 08:34:01 2001</i>
+    <p></p><ul>
+        <li> Previous message: <a href="000161.html">[interchange-core] Checking Interchange page servers
+</a></li>
+        <li> Next message: <a href="000164.html">[interchange-core] Freakish code appearance in makecat.PL
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="date.html#162">[ date ]</a>
+              <a href="thread.html#162">[ thread ]</a>
+              <a href="subject.html#162">[ subject ]</a>
+              <a href="author.html#162">[ author ]</a>
+         </li>
+       </ul>
+    <hr>  
+<!--beginarticle-->
+<pre><a href="mailto:mheins@redhat.com">mheins@redhat.com</a> writes:
+
+&gt;<i> Quoting Stefan Hornburg (Racke) (<a href="mailto:racke@linuxia.de">racke@linuxia.de</a>):
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt; How can I check if an Interchange page server is running properly or
+</i>&gt;<i> &gt; is stuck in a loop ?
+</i>&gt;<i> 
+</i>&gt;<i> Kill it, even with a 0. If it responds, it is alive.
+</i>
+Ah, OK. That's a cute idea.
+
+Ciao
+        Racke
+
+-- 
+Racke happily hacks Interchange and maintains Debian packages like Courier.
+
+For projects and other business stuff please refer to COBOLT NetServices
+(URL: <a href="http://www.cobolt.net;">http://www.cobolt.net;</a> Email: <a href="mailto:info@cobolt.net">info@cobolt.net</a>; Phone: 0041-1-3884400)
+
+</pre>
+<!--endarticle-->
+    <hr>
+    <p></p><ul>
+        <!--threads-->
+	<li> Previous message: <a href="000161.html">[interchange-core] Checking Interchange page servers
+</a></li>
+	<li> Next message: <a href="000164.html">[interchange-core] Freakish code appearance in makecat.PL
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="date.html#162">[ date ]</a>
+              <a href="thread.html#162">[ thread ]</a>
+              <a href="subject.html#162">[ subject ]</a>
+              <a href="author.html#162">[ author ]</a>
+         </li>
+       </ul>
+</body></html>
