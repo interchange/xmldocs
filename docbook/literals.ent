@@ -80,6 +80,11 @@ option) any later version.</para>">
 <!ENTITY dereferencing "<olink targetdoc='glossary' targetptr='deref'>Dereferencing</olink>">
 <!ENTITY prefork "<olink targetdoc='glossary' targetptr='ic-run-mode'>PreFork</olink>">
 
+<!ENTITY gcf "<filename>interchange.cfg</filename>">
+<!ENTITY ccf "<filename>catalog.cfg</filename>">
+<!ENTITY gcfs "<filename>interchange.cfg</filename> or <filename>catalog.cfg</filename>">
+<!ENTITY cgfs "<filename>catalog.cfg</filename> or <filename>interchange.cfg</filename>">
+
 
 <!-- ENTITIES TO EASIER CONSTRUCT TAG PARAMETERS LIST -->
 <!-- put standard ones here, such as Hide or Interpolate/reparse -->

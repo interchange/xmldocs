@@ -10,12 +10,8 @@ PRIMARY:
   'duplicates'. fix that.
 - ./files/ directory is not properly referenced from chunked documents.
   Solve by using entities?
-
-- Now that filters added duplicates among symbol names, fix bin/refs-autogen.
-
-- It's now obvious that multiple symbols will have the same names. This
-  calls for renaming every refs/* file to refs/*.<symbolType> (and all
-  other changes following from that).
+- Double-linked SeeAlso doesn't work. ConfigAllBefore points to ConfigAllAfter,
+  but the latter doesn't return love.
 
 - In iccattut:
   - make a "translation map" of /etc/interchange/* to RPM-equivs.

@@ -271,7 +271,8 @@ while ( $path = shift @paths) { # For each version specified
 					my $all = 0; # Showing all for an item?
 					#if (0) { use Data::Dumper; print Dumper $ctx; sleep 10; }
 					# WE SHOW ONLY PART OF CONTEXT FOR THOSE
-					if ( $gkey !~ /(tag|conf|filter)$/ ) {
+					if ( $gkey !~ /(tag|filter)$/ ) {
+						$$ctx{ctxpre} ||= 0; $$ctx{ctxpost} ||= 0; # *confs don't have it
 						$cstart = $$ctx{lnum}-$$ctx{ctxpre};
 						$cend = $cstart+$$ctx{lnum}+$$ctx{ctxpost};
 
@@ -288,9 +289,15 @@ while ( $path = shift @paths) { # For each version specified
 					$cend >= $cstart+@{ $$ctx{ctx} } and
 						$cend = $cstart+@{ $$ctx{ctx} }-1;
 
+					my $eb = 1; # Include ending bracket?
 					if ( ! $all ) {
 						$ctxmeta = "<sbr/>Line $ln";
-						$ctxmeta .= " (context shows lines " . ( $cstart . "-" .  $cend );
+						if ( $cstart == $cend ) {
+							$eb = 0;
+						} else {
+							$ctxmeta .= " (context shows lines " .
+								( $cstart . "-" .  $cend );
+						}
 					} else {
 						$ctxmeta = "<sbr/>Lines: $cend";
 					}
@@ -298,7 +305,7 @@ while ( $path = shift @paths) { # For each version specified
 					if ( $$ctx{funclnum} ) {
 						$ctxmeta .= " in $$ctx{func}():$$ctx{funclnum}" ;
 					}
-					$ctxmeta .= ")" unless $all;
+					$ctxmeta .= ")" if (!$all and $eb);
 					my $r = $hash{revision}{$plf}->[0];
 					my $d = $hash{revision}{$plf}->[1];
 					my $revinfo = "";
@@ -1032,30 +1039,10 @@ $templates{globconf} = <<'__ENDP__';
 </refnamediv>
 
 <refsect1 id='$ag{"name"}_synopsis'>
-<title>PARAMETERS</title>
-
-<informaltable pgwide='1' frame='none'>
-<tgroup cols='5' align='left'>
-<colspec colname='arg'/>
-<colspec colname='pos'/>
-<colspec colname='req'/>
-<colspec colname='def'/>
-<colspec colname='dsc'/>
-
-<thead>
-<row>
-<entry>Argument</entry>
-<entry>Pos.</entry>
-<entry>Req.</entry>
-<entry>Default</entry>
-<entry>Description</entry>
-</row>
-</thead>
-<tbody>
+<title>SYNOPSIS</title>
+<cmdsynopsis>
 $ag{"synopsis"}
-</tbody>
-</tgroup>
-</informaltable>
+</cmdsynopsis>
 </refsect1>
 
 <refsect1 id='$ag{"name"}_description'>
