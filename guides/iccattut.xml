@@ -119,7 +119,7 @@
 		<para>
 		You can also get Interchange by downloading and unpacking the basic Interchange tarball or checking out a copy of the &ICCVS; repository, and performing manual installation yourself. These installations can be done either as a regular user, or as root installing for a special Interchange user, but are out of scope of this tutorial.
 		</para> <para>
-		During the RPM or DEB installation, you will be asked to select the Interchange username. To eliminate basic security issues, the Interchange daemon will not run as root, and it should not run as the web server user either. Therefore, a new system account to run the Interchange daemon will be created (<systemitem class='username'>interchange</systemitem> by default).
+		During the Debian package installation, you will be asked to select the Interchange username. To eliminate basic security issues, the Interchange daemon will not run as root, and it should not run as the web server user either. Therefore, a new system account to run the Interchange daemon will be created (<systemitem class='username'>interchange</systemitem> by default). In RPM installations, Interchange runs as user <systemitem class='username'>interch</systemitem>.
 		</para> <para>
 		You must access the demo catalog to verify that your Interchange installation was successful. The interchange-cat-standard catalog was supposed to install itself and register with Interchange by modifying the main <filename moreinfo='refentry'>interchange.cfg</filename> config file (or some other file, such as <filename>/etc/interchange/catalogs.cfg</filename>, which logically puts all catalog definitions in a separate file and is read by <filename>interchange.cfg</filename>). The catalog should have also placed the <firstterm>link program</firstterm> in your <filename class='directory'>cgi-bin</filename> directory - the link program connects the web server software with the Interchange daemon. The demo catalog should be accessible by visiting the <ulink url="http://localhost/cgi-bin/ic/standard/index.html">Standard</ulink> (or <ulink url="http://localhost/cgi-bin/ic/foundation/index.html">Foundation</ulink>) Demo index page on your local host.
 		</para>
@@ -156,11 +156,13 @@
 				</para></listitem>
 			<listitem><para>
 				Base Interchange catalogs directory: 
-				<filename class='directory'>/var/lib/interchange/catalogs/</filename>
+				<filename class='directory'>/var/lib/interchange/catalogs/</filename> (Debian)
+				<filename class='directory'>/var/lib/interchange/</filename> (RPM)
 				</para></listitem>
 			<listitem><para>
 				Interchange <filename class='directory'>cgi-bin</filename> directory: 
-				<filename class='directory'>/usr/lib/cgi-bin/ic/</filename>
+				<filename class='directory'>/usr/lib/cgi-bin/ic/</filename> (Debian)
+				<filename class='directory'>/var/www/cgi-bin/</filename> (RPM)
 				</para></listitem>
 			<listitem><para>
 				Standard demo catalog URL: 
@@ -199,7 +201,7 @@
 	<sect2 id='TheLinkProgram'>
 		<title>The Link Program</title>
 		<para>
-		You need to locate the existing link program (found in the <filename class='directory'>cgi-bin</filename> directory) and copy it to a new name, making sure the permissions stay intact. Run <userinput>cd /usr/lib/cgi-bin/ic; cp -p vlink tutorial</userinput>.  If everything is working correctly, typing <userinput>ls -l /usr/lib/cgi-bin/ic/</userinput> should describe your files roughly like this:
+		You need to locate the existing link program (found in the <filename class='directory'>cgi-bin</filename> directory) and copy it to a new name, making sure the permissions stay intact. Run <userinput>cd /usr/lib/cgi-bin/ic; cp -p vlink tutorial</userinput> (Debian) or <userinput>cd /var/www/cgi-bin; cp -p standard tutorial</userinput> (RPM).  If everything is working correctly, typing <userinput>ls -l /usr/lib/cgi-bin/ic/</userinput> (Debian) or <userinput>ls -l /var/www/cgi-bin</userinput> should describe your files roughly like this:
 		<screen>
 -rwsr-xr-x    1 interchange  interchange      7708 Dec 16 22:47 vlink
 -rwsr-xr-x    1 interchange  interchange      7708 Dec 16 22:47 tutorial
@@ -212,7 +214,7 @@
 	<sect2 id='TheCatalogRootDirectory'>
 		<title>The Catalog Root Directory</title>
 		<para>
-		You need to create the tutorial catalog directory, <filename class='directory'>/var/lib/interchange/catalogs/tutorial</filename>. This is where all of your catalog-specific files will go. The directory needs to be readable, writable, and executable by the Interchange user. This will be referred to as your <emphasis>catalog directory</emphasis> or CATROOT. Type the following from the base catalogs directory (<filename class='directory'>/var/lib/interchange/catalogs/</filename>):
+		You need to create the tutorial catalog directory, <filename class='directory'>/var/lib/interchange/catalogs/tutorial</filename> (Debian) or <filename class='directory'>/var/lib/interchange/tutorial</filename> (RPM). This is where all of your catalog-specific files will go. The directory needs to be readable, writable, and executable by the Interchange user. This will be referred to as your <emphasis>catalog directory</emphasis> or CATROOT. Type the following from the base catalogs directory (<filename class='directory'>/var/lib/interchange/catalogs/</filename>):
 		<programlisting>
 mkdir tutorial
 chown interchange.interchange tutorial
