@@ -11,6 +11,23 @@ PRIMARY:
   username and version (cvs line)).
 - Support using refs/<filename> with all the documentation for a symbol
   instead of refs/<directory>/<files>.
+- Visually identify obsolete items (those not present in cvs-head)
+- Add a note that we're focusing on really basic stuff that won't change
+  over time (the criteria we used to determine what's for iccattut and what
+	isn't)
+
+- In iccattut:
+  - mention which paths would be valid for /usr/local tarball
+    install.
+  - under important file and directories, mention default username,
+    and /cgi-bin/ vs /cgi-bin/ic/ in the Catalog line. And rename the section
+	  appropriately.
+  - make a "translation map" of /etc/interchange/* to RPM-equivs.
+  - item for package names, like interchange-cat-foundation, wenglish, etc..
+  - fix markup in iccattut section "pages/checkout.html"
+	  and "etc/profiles.order" and 2 sections after it and below
+  - at the top where describing IC, mention it's built on Perl and ITL
+	- replace [area search] in phase5 with better (file and directory)
 
 
 DOCUMENTATION SYSTEM:
@@ -83,4 +100,6 @@ Tags:
   container
   has subtags
   nests
+
+----
 
