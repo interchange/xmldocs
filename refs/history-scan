@@ -1,0 +1,167 @@
+__NAME__ purpose
+generate link to (or just display name of) a previously visited page
+__END__
+
+
+__NAME__ synopsis
+<row>
+	<entry>
+		<arg choice='plain'>find</arg>
+	</entry>
+	<entry>Yes</entry><entry>Yes</entry>
+	<entry></entry>
+	<entry>
+	Regular expression that a candidate page must match. First match wins.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>exclude</arg>
+	</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry>
+	</entry>
+	<entry>
+	Regular expression specifying a pattern which, if matched,
+	causes individual history entries to be removed from the list
+	of possible candidates.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>default</arg>
+	</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry>
+	Value of the <option>SpecialPage catalog</option> directive
+	(which is usually <literal>index.html</literal>).
+	</entry>
+	<entry>
+	Default link. Displayed if nothing else matched your criteria,
+	or the user's history is empty.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>include</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>
+	</entry>
+	<entry>
+	Regular expression specifying a pattern which pages in user's history
+	must match to be included as candidates.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>form</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>
+	Additional form parameters.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>pageonly</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>
+	Only display page name instead of generating an HTML link around it.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>count</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>
+	How many most-recently-visited pages to leave out from the list of
+	candidates.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>var_exclude</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>
+	<literal>
+mv_credit_card_number 1<sbr/>
+mv_pc                 1<sbr/>
+mv_session_id         1<sbr/>
+expand                1<sbr/>
+collapse              1<sbr/>
+expandall             1<sbr/>
+collapseall           1
+	</literal>
+	</entry>
+	<entry>
+	Hash of variables to exclude from the form if
+	<arg choice='plain'>form=</arg> is used in the generated link.
+	The default value shows a meaningful example. Note that since this is
+	a hash, the number <literal>1</literal> (or any true value for that matter)
+	after each entry is neccesary, but redundant.
+	</entry>
+</row>
+__END__
+
+
+__NAME__ description
+This tag produces an HTML link to some previously visited page.
+Optionally, just the page name (without the link) can be displayed.
+</para><para>
+Pages in history which are marked "expired" (for any reason) are 
+automatically discarded from the link candidates list.
+__END__
+
+
+__NAME__ example
+<example>
+	<title>"Continue Shopping" button</title>
+	<programlisting>
+[button
+  text="Continue shopping"
+  src="__THEME_IMG_DIR__/continueshopping.gif"
+  hidetext=1
+  extra="class=maincontent"
+  form=basket
+]
+  [bounce href='[history-scan exclude="^/ord|^/multi/|^/process|^/login"
+          default=index]']
+  mv_nextpage=nothing
+[/button]
+	</programlisting>
+	<para>
+This example was provided by Jeff Dafoe.
+	</para>
+</example>
+__END__
+
+__NAME__ example2
+<example>
+	<title>"Continue" after login</title>
+	<para>
+	Here's a simple login form that returns the user to the previous page
+	after successful login:
+	</para>
+	<programlisting><![CDATA[
+<form action="[process secure=1]" method="post">
+<input type="hidden"   name="mv_todo"        value="return>
+<input type="hidden"   name="mv_click"       value="Login">
+<input type="hidden"   name="mv_failpage"    value="login">
+<input type="hidden"   name="mv_successpage" value="[history-scan exclude="^/ord|^/multi/|^/process|^/login|^/logout" pageonly=1]">
+<input type="hidden"   name="mv_nextpage"    value="index">
+<input type="hidden"   name="mv_session_id"  value="[data session id]">
+<input type="text"     name="mv_username"    value="[read-cookie MV_USERNAME]">
+<input type="password" name="mv_password"    value="">
+<input type="submit"   name="submit"         value="Log In">
+</form>
+]]></programlisting>
+</example>
+__END__
+
