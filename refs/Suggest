@@ -27,15 +27,12 @@ a feature or capability. When the tested feature is missing, a
 warning message is shown.
 __END__
 
-__NAME__ example
-<example>
-  <title>Testing for features</title>
-<programlisting>
+__NAME__ example: Testing for features
+<pogramlisting>
 Suggest module    Archive::Zip
 Suggest usertag   table_editor
 Suggest globalsub file_info
 Suggest module    Business::UPS
 </programlisting>
-</example>
 __END__
 

@@ -85,20 +85,15 @@ __END__
 __NAME__ notes
 __END__
 
-__NAME__ example
-<example>
-  <title>Accessing CGI variables</title>
-	<para>
-	Save the following content to a test page named say,
-	<filename>cgitest.html</filename>, then visit 
-	<literal><![CDATA[cgitest?foo=bar&toad=stool]]></literal> with your browser.
-	</para>
-  <programlisting>
+__NAME__ example: Accessing CGI variables
+Save the following content to a test page named say,
+<filename>cgitest.html</filename>, then visit 
+<literal><![CDATA[cgitest?foo=bar&toad=stool]]></literal> with your browser.
+<programlisting>
 <![CDATA[
 Value of 'foo': [cgi foo]<br/>
 Value of 'toad': [cgi name=toad]<br/>
 ]]>
-  </programlisting>
-</example>
+</programlisting>
 __END__
 

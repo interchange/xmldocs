@@ -34,15 +34,10 @@ This simple tag sets the default cart name for tags that operate on it
 <tag>nitems</tag>).
 __END__
 
-__NAME__ example
-<example>
-  <title>Set new default cart name</title>
-	<para>
-	Place the following on an Interchange page:
-	</para>
-  <programlisting>
+__NAME__ example: Set new default cart name
+Place the following on an Interchange page:
+<programlisting>
 [cart NEW]
-  </programlisting>
-</example>
+</programlisting>
 __END__
 

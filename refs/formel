@@ -162,20 +162,15 @@ Note that you can define values to control this tag's defaults. See
 <para>
 __END__
 
-__NAME__ example
-<example>
-	<title>Define tag defaults with form values</title>
-	<programlisting><![CDATA[
+__NAME__ example: Define tag defaults with form values
+<programlisting><![CDATA[
 [value name="mv_formel_cause"  set=" (<I>%s</I>)" hide=1]
 [value name="mv_formel_format" set="<tr><td>%s</td><td>%s</td></tr>" hide=1]
 [value name="mv_formel_order"  set=1 hide=1]
 [value name="mv_formel_signal" set="<blink>%s</blink>" hide=1]
-	]]></programlisting>
-	<para>
-	Note that the values, once you set them, remain persistant during the
-	user's session.
-	</para>
-</example>
+]]></programlisting>
+Note that the values, once you set them, remain persistant during the
+user's session.
 __END__
 
 __NAME__ example2: Displaying the label and form element in two passes

@@ -49,14 +49,10 @@ The crypt function is unsuitable for encrypting large quantities of data, not le
 __END__
 
 
-__NAME__ online
-<example>
-	<title>Crypt a string and verify it</title>
-	<para>
-	Note that this example is of little use in practice, but does show the
-	components you can re-use:
-	</para>
-	<programlisting><![CDATA[
+__NAME__ online: Crypt a string and verify it
+Note that this example is of little use in practice, but does show the
+components you can re-use:
+<programlisting><![CDATA[
 <p>
 [seti salt][perl]join '', ('.', '/', 0..9, 'A'..'Z', 'a'..'z')[rand 64, rand 64][/perl][/seti]
 String "test" crypted with salt "[scratch salt]": [crypt value="test" salt="[scratch salt]"]
@@ -73,7 +69,6 @@ $Tag->crypt("test", $Scratch->{crypted}) eq $Scratch->{crypted} ?
   "Password matches." : "Password does not match."
 [/perl]
 </p>
-	]]></programlisting>
-</example>
+]]></programlisting>
 __END__
 

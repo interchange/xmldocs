@@ -115,13 +115,9 @@ as confirmation popup windows.
 See <xref linkend='button_examples'/> for illustrative presentation.
 __END__
 
-__NAME__ example
-<example>
-	<title>Submit button with an image and confirmation window</title>
-	<para>
-	Notice the tags used in the button body:
-	</para>
-	<programlisting>
+__NAME__ example: Submit button with an image and confirmation window
+Notice the tags used in the button body:
+<programlisting>
 [button text="Delete item" confirm="Are you sure?" src="delete.gif"]
   [comment]
     [button] element's body specifies the action code. It is what you would
@@ -131,20 +127,15 @@ __NAME__ example
   [mvtag] Use any Interchange tag here, i.e. ....[/mvtag]
   [perl] # code to delete item [/perl]
 [/button]
-	</programlisting>
-</example>
+</programlisting>
 __END__
 
-__NAME__ example-inp
-<example>
-	<title>Creating the submit button manually</title>
-	<para>
-	We are here to discuss the usage of the <tag>button</tag> tag, but let's
-	take a look at an 
-	example equivalent to the one above, except that we create the button
-	manually:
-	</para>
-	<programlisting>
+__NAME__ example-inp: Creating the submit button manually
+We are here to discuss the usage of the <tag>button</tag> tag, but let's
+take a look at an 
+example equivalent to the one above, except that we create the button
+manually:
+<programlisting>
 [set Delete item]
   [comment]
     [button] element's body specifies the action code.
@@ -155,18 +146,14 @@ __NAME__ example-inp
 <![CDATA[
 <input type='submit' name='mv_click' value='Delete item'>
 ]]>
-  </programlisting>
-</example>
+</programlisting>
 __END__
 
-__NAME__ example-js
-<example>
-  <title>Simple button with an embedded custom JavaScript code</title>
-  <programlisting>
+__NAME__ example-js: Simple button with an embedded custom JavaScript code
+ <programlisting>
 [button text="Click me"]
   [javascript]onClick="myOwnOnClickFunction(this);"[/javascript]
 [/button]
-  </programlisting>
-</example>
+</programlisting>
 __END__
 

@@ -21,27 +21,18 @@ is not logged in (and hasn't set any
 of his preferences for the current session), the defaults will be used.
 __END__
 
-__NAME__ example
-<example>
-  <title>Defining default values</title>
-	<para>
-	Put the following in &ccf;:
-	</para>
+__NAME__ example: Defining default values
+Put the following in &ccf;:
 <programlisting>
 ValuesDefault fname New lname User
 ValuesDefault country HR
 </programlisting>
-	<para>
-	Create a test page:
-	</para>
+Create a test page:
 <programlisting><![CDATA[
 Welcome!<br/>
 Your first name is: [value fname]<br/>
 Your last name is: [value lname]<br/>
 Your country code is: [value country]
 ]]></programlisting>
-<para>
-</para>
-</example>
 __END__
 

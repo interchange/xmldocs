@@ -171,16 +171,9 @@ entries, separated by chosen delimiters.
 __END__
 
 
-__NAME__ example
-	<example>
-		<title>
-		Banner Ads
-		</title>
-		<para>
-		For the relevant supplemental description and all ready-to-use examples,
-		see the <olink targetdoc='howtos' targetptr='implementbanners'>
-		Implement Banner Ads</olink> HOW-TO.
-		</para>
-	</example>
+__NAME__ example: Banner Ads
+For the relevant supplemental description and all ready-to-use examples,
+see the <olink targetdoc='howtos' targetptr='implementbanners'>
+Implement Banner Ads</olink> HOW-TO.
 __END__
 

@@ -36,15 +36,10 @@ __NAME__ notes
 reliability in most environments.
 __END__
 
-__NAME__ example
-<example>
-  <title>Setting SessionType</title>
-	<para>
-	Put the following in &ccf;:
-	</para>
+__NAME__ example: Setting SessionType
+Put the following in &ccf;:
 <programlisting>
 SessionExpire  session-data.lock
 </programlisting>
-</example>
 __END__
 

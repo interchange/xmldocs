@@ -83,39 +83,27 @@ See the &glos-umask; glossary entry.
 __END__
 
 
-__NAME__ example
-<example>
-	<title>Basic static page example</title>
-	<para>
-	Create page named <filename>make-static.html</filename> with the following
-	content:
-	</para>
-	<programlisting>
-	[capture-page page=index file=static/index.html umask=022 auto_create_dir=1]
-	</programlisting>
-	<para>
-	This would create the <filename class='directory'>static/</filename>
-	directory in your catalog root, and a snapshot of
-	<filename>index.html</filename> in it.
-	</para>
-</example>
+__NAME__ example: Basic static page example
+Create page named <filename>make-static.html</filename> with the following
+content:
+<programlisting>
+[capture-page page=index file=static/index.html umask=022 auto_create_dir=1]
+</programlisting>
+This would create the <filename class='directory'>static/</filename>
+directory in your catalog root, and a snapshot of
+<filename>index.html</filename> in it.
 __END__
 
-__NAME__ example2
-<example>
-	<title>Static page example using scan=</title>
-	<para>
-	Create page named <filename>make-static2.html</filename> with the following
-	content:
-	</para>
-	<programlisting>
+__NAME__ example2: Static page example using scan=
+Create page named <filename>make-static2.html</filename> with the following
+content:
+<programlisting>
 [loop list="Levels,Rulers,Squares"]
   [capture-page page="[loop-code]" file="static/cats/[loop-code].html"
     scan="fi=products/st=db/co=yes/sf=category/se=[loop-code]"
     auto_create_dir=1]
 [/loop]
-	</programlisting>
-</example>
+</programlisting>
 __END__
 
 __NAME__ author

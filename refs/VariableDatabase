@@ -40,34 +40,23 @@ VariableDatabase variables
 __END__
 
 
-__NAME__ example
-<example>
-  <title>Enabling VariableDatabase</title>
-	<para>
-	Save the following as <filename>products/variables.txt</filename>:
-	</para>
+__NAME__ example: Enabling VariableDatabase
+Save the following as <filename>products/variables.txt</filename>:
 <programlisting>
 code	Variable
 HELLO	Hi
 ANON	Guest
 </programlisting>
-	<para>
-	Put the following lines in &ccf;:
-	</para>
+Put the following lines in &ccf;:
 <programlisting>
 Database  variables variables.txt TAB
 VariableDatabase variables
 </programlisting>
-	<para>
-	Create a test page:
-	</para>
+Create a test page:
 <programlisting><![CDATA[
 [tmp user][either][data session username][or]__ANON__[/either][/tmp]
 
 __HELLO__, [scratch user]!
 ]]></programlisting>
-<para>
-</para>
-</example>
 __END__
 

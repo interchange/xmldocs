@@ -43,16 +43,12 @@ when there is no match.
 __END__
 
 
-__NAME__ example
-<example>
-	<title>Create 3-button menubar</title>
-	<para>
-	Create three different pages,
-	<filename>page1.html</filename>,
-	<filename>page2.html</filename> and
-	<filename>page3.html</filename>, each with the identical content:
-	</para>
-	<programlisting><![CDATA[
+__NAME__ example: Create 3-button menubar
+Create three different pages,
+<filename>page1.html</filename>,
+<filename>page2.html</filename> and
+<filename>page3.html</filename>, each with the identical content:
+<programlisting><![CDATA[
 <table><tr>
 
 [bar-button page=page1]
@@ -78,6 +74,5 @@ __NAME__ example
 
 </tr></table>
 ]]></programlisting>
-</example>
 __END__
 

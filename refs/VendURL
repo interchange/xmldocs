@@ -29,15 +29,10 @@ protocol and hostname specification.
 __END__
 
 
-__NAME__ example
-<example>
-  <title>Setting VendURL</title>
-	<para>
-	Put the following lines in &ccf;:
-	</para>
+__NAME__ example: Setting VendURL
+Put the following lines in &ccf;:
 <programlisting>
 VendURL http://&def-hostname;/cgi-bin/ic/tutorial
 </programlisting>
-</example>
 __END__
 

@@ -32,16 +32,11 @@ Also do not use it unless you are using some encryption
 __END__
 
 
-__NAME__ example
-<example>
-  <title>Enabling WideOpen directive</title>
-	<para>
-	Put any of the following lines in &ccf;:
-	</para>
+__NAME__ example: Enabling WideOpen directive
+Put any of the following lines in &ccf;:
 <programlisting>
 WideOpen 1
 WideOpen Yes
 </programlisting>
-</example>
 __END__
 
