@@ -1,0 +1,91 @@
+/*
+  ICDEVGROUP Documentation CSS
+  DocBook HTML structure ("." = <div>, "/" = </div>):
+  docelic@icdevgroup.org
+*/
+
+
+/* General */
+a { text-decoration: none; }
+
+
+/*
+  Reference set:
+  .reference .titlepage . . <h1> </h1> / / . / <hr> /
+  .reference .toc <p> <b> </b> </p> <dl> <dt> </dt>
+  .reference .refentry .titlepage . / . / / .refnamediv <h2> </h2> <p> </p> /
+    .reference .refsect1 <h2> </h2> /
+*/
+
+.reference .titlepage h1 {
+	background-color: #208cbd; /* #6CA6C8; */
+	margin: 0;
+	margin-bottom: 20px;
+	padding: 2px 4px 2px 4px;
+	border: dashed 1px #FFFFFF;
+	color: #FFF;
+}
+
+.reference hr {
+	margin: 0;
+	padding: 2px 4px 2px 4px;
+    height: 4px;
+	border: 0;
+    border-top: 1px dashed #208cbd;
+    border-bottom: 1px solid #208cbd;
+	visibility: hidden;
+}
+
+.reference .toc {
+	margin: 0;
+	margin-bottom: 40px;
+	border: 1px dashed #CEE7F6;
+}
+
+.reference .toc p {
+	margin: 0;
+	padding: 0;
+	background-color: #6CA6C8;
+	border-bottom: 1px dashed #FFF;
+	padding: 1px 4px 1px 4px;
+	color: #FFF;
+}
+
+.reference .toc dl {
+	padding: 2px 4px 2px 4px;
+}
+
+.reference .refentry .refnamediv h2 {
+	margin: 0;
+	padding: 0;
+	background-color: #FFF;
+	border: none;
+	padding: 0;
+	color: #FFF;
+	font-size: 0;
+	visibility: hidden;
+}
+
+.reference .refentry .refnamediv p {
+	margin: 0;
+	padding: 0;
+	background-color: #6CA6C8;
+	border: 1px dashed #FFF;
+	padding: 4px 4px 4px 4px;
+	color: #FFF;
+	font-weight: bold;
+}
+
+.w3c {
+	margin: 0;
+	padding: 8px 4px 8px 4px;
+	border-top: 1px dashed #208cbd;
+	border-bottom: 1px dashed #208cbd;
+	border-left: 1px dashed #208cbd;
+	border-right: 1px dashed #208cbd;
+	text-align: right;
+}
+
+.w3c .w3cimg {
+	border: 0;
+}
