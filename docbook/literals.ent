@@ -4,6 +4,7 @@
 <!-- GENERAL ENTITIES -->
 <!ENTITY GNU "<ulink url='http://www.gnu.org'>GNU</ulink>">
 <!ENTITY IC "<ulink url='http://www.icdevgroup.org'>Interchange</ulink>">
+<!ENTITY ICDEVGROUP "<ulink url='http://www.icdevgroup.org'>Interchange Development Group</ulink>">
 <!ENTITY RH "<ulink url='http://www.redhat.com'>Red Hat</ulink>">
 <!ENTITY DEB "<ulink url='http://www.debian.org'>Debian</ulink>">
 <!ENTITY DEBGNU "<ulink url='http://www.debian.org'>Debian GNU</ulink>">
@@ -13,6 +14,12 @@
 <!ENTITY W3 "<ulink url='http://www.w3c.org/'>W3C</ulink>">
 <!ENTITY W3C "<ulink url='http://www.w3c.org/'>W3C</ulink>">
 <!ENTITY PERL "<ulink url='http://www.perl.org/'>Perl</ulink>">
+<!ENTITY MYSQL "<ulink url='http://www.mysql.com/'>MySQL</ulink>">
+<!ENTITY PGSQL "<ulink url='http://www.postgresql.org/'>PostgreSQL</ulink>">
+<!ENTITY ORACLE "<ulink url='http://www.oracle.com/'>Oracle</ulink>">
+<!ENTITY OPENLDAP "<ulink url='http://www.openldap.org/'>OpenLDAP</ulink>">
+<!ENTITY BDBM "<ulink url='http://http://www.sleepycat.com//'>Berkeley DBM</ulink>">
+<!ENTITY GDBM "<ulink url='http://www.delorie.com/gnu/docs/gdbm/'>GNU DBM</ulink>">
 
 
 
@@ -30,6 +37,8 @@
 <!ENTITY prev-catalog "foundation">
 <!ENTITY def-hostname "myhost.mydomain.local">
 <!ENTITY def-domain "mydomain.local">
+<!ENTITY css-validator "<ulink url='http://jigsaw.w3.org/css-validator/'>CSS Validator</ulink>">
+<!ENTITY markup-validator "<ulink url='http://validator.w3.org/'>Markup Validator</ulink>">
 
 
 
@@ -60,9 +69,8 @@ option) any later version.</para>">
 
 
 <!-- ENTITIES FOR CORE DEVELOPERS, FOR AUTHOR LINES-->
-<!ENTITY ICDEVGROUP "<ulink url='http://www.icdevgroup.org'>Interchange Development Group</ulink>">
 <!ENTITY racke "Stefan Hornburg">
-<!ENTITY docelic "Davor Ocelic">
+<!ENTITY docelic "<ulink url='mailto:docelic@icdevgroup.org'>Davor Ocelic</ulink>">
 <!ENTITY mheins "Mike Heins">
 <!ENTITY jon "Jon Jensen">
 <!ENTITY jonc "Jonathan Clark">

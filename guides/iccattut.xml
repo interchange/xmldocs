@@ -94,21 +94,22 @@
 			Those who want to find their way with Interchange, and take on
 			Interchange development equipped
 			with <emphasis role='bold'>good understanding of underlying concepts
-			and officially recommended practices</emphasis>.
+			and officially recommended &IC; practices</emphasis>.
 			</para></listitem>
 			<listitem><para>
 			Those who have decisional powers and need input on Interchange's
 			strengths and
-			available program support to make educated business decisions.
-			If you're only interested in 
+			available support to make educated business decisions.
+			If you're only interested in paying for 
 			professional &IC; development, hosting and support, you can
 			consult &howto-professional-support;.
 			</para></listitem>
 		</itemizedlist>
 		<para>
 		As information is only useful within a context, we'll clearly present
+		<!-- TODO: "upon which" or "upon whom" ? -->
 		the philosophies and implementations upon which Interchange is built,
-		but depending on your particular expectation from this Guide, you might
+		but depending on your particular expectation from this Guide you might
 		be interested in less or more supplemental material on individual subjects.
 		</para>
 		<para>
@@ -120,13 +121,13 @@
 		</para></footnote>), because
 		the examples will allow us to describe the concepts at work underneath.
 		Only when you get to understand Unix, general programming and Interchange
-		concepts, will you be able to successfully take on powerful Interchange
-		catalogs and professional Interchange
-		development.<sbr/>
+		concepts, will you be able to successfully take on more complex Interchange
+		catalogs and Interchange development.<sbr/>
 		Standard catalogs that ship with Interchange are unsuitable for our
-		purpose - they are ready to be used for business and they build upon
-		many Interchange design ideas and capabilities, most of which
-		are probably completely unknown to you at this point.
+		purpose - they are ready to be used for business, they are powerful and
+		complex,
+		and they build upon many Interchange design ideas and capabilities of which
+		most are probably completely unknown to you at this point.
 		</para>
 		<para>
 		Although this Guide provides ready-to-use examples, please
@@ -135,7 +136,7 @@
 		experience, I can tell you thar <emphasis role='bold'>re-implementing
 		the sample catalog manually on your system is the only proper way to
 		read this tutorial</emphasis> (unless you're only interested in
-		an easy overview). The examples serve to
+		an easy overview). The examples only serve to
 		eliminate doubts that could arise out of either linguistic limitations or
 		authors' inabilities to adequately <emphasis>express</emphasis> the
 		mindset on a sheet of paper.
@@ -159,14 +160,18 @@
 		and it gives you the full power of Perl in your Interchange pages.  While
 		being familiar with Perl (or programming languages in general) is
 		definitely an advantage, you do not have to be a programmer to use
-		Interchange. If you are interested in doing online business with
+		Interchange.
+		</para>
+		<para>
+		If you are interested in doing online business with
 		Interchange (that is, creating a typical web shop), then you'll be
-		glad to hear that it already ships with web
-		shop demo catalogs.  Those catalogs are mostly written with &glos-ITL;
-		tags (tags offer quite simple way to access Interchange features), and
-		are easily modifiable. And if you are willing to trade money for time or
-		need professional solution to your problem, then please see
-		&howto-professional-support;.
+		glad to hear that it already ships with web shop template catalogs. 
+		Those catalogs will suit you <emphasis>out of the box</emphasis>
+		unless you have more exotic custom requirements; in that case, you will
+		either
+		have to obtain some knowledge (reading this Guide is the recommended
+		starting point), or (if you are willing to trade money for time and
+		professional assistance) consult &howto-professional-support;.
 		</para>
 		<para>
 		Please keep in mind that we are interested in feedback from the community,
@@ -178,8 +183,8 @@
 	</sect2>
 
 
-	<sect2 id='WorkingEnvironment'>
-		<title>Working Environment</title>
+	<sect2 id='WorkEnvironment'>
+		<title>Work Environment</title>
 		<para>
 		Unless you are only interested in an overview, you will most likely want
 		to set up Interchange at your own computer so that you can properly
@@ -189,13 +194,16 @@
 		save you <emphasis>a great deal</emphasis> of doubt and frustration.
 		</para>
 
+<!-- TODO: mention docs, how to browse them, where to look for them,
+mention cgi-bin/cvsweb and mailing list archives and stuff -->
 
 		<sect3>
-			<title>Installing Interchange</title>
+			<title>Install Interchange</title>
 			<para>
 			The recommended way to get Interchange installed is to install
-			packages prepared by your &glos-OS; vendor. Not that there any 
-			differences in the software as such, but the initial setup is
+			packages prepared by your &glos-OS; vendor. Not that, compared to
+			plain &glos-tarball; installations, there
+			are no differences in software as such, but the initial setup is
 			straightforward, packages natively fit in the environment and are 
 			usually built with future upgradeability in mind.
 			</para>
@@ -203,9 +211,10 @@
 				<listitem vendor='deb'><para>
 				<userinput>apt-get install interchange interchange-ui
 				interchange-cat-&std-catalog;</userinput>
+				(Debian GNU)
 				</para>
 				<para>
-				During the Debian package installation, you will be asked to select the
+				During Debian package installation, you will be asked to select the
 				Interchange username. To eliminate basic security issues, the
 				Interchange
 				daemon will not run as root, and it should not run as the web server
@@ -226,6 +235,7 @@
 				TODO
 				<userinput>
 				</userinput>
+				(Red Hat)
 				</para>
 				<para>
 				During the package installation, you will be asked to select the
@@ -244,11 +254,13 @@
 				<userinput>
 			wget <ulink url="ftp://ftp.icdevgroup.org/pub/interchange-latest.tar.gz">
 				ftp://ftp.icdevgroup.org/pub/interchange-latest.tar.gz</ulink>
-				</userinput><sbr/>
+				</userinput>
+				(tarball)<sbr/>
 				<userinput>
 			wget <ulink url="ftp://ftp.icdevgroup.org/pub/interchange-nightly.tar.gz">
 				ftp://ftp.icdevgroup.org/pub/interchange-nightly.tar.gz</ulink>
 				</userinput>
+				(tarball)
 				</para></listitem>
 			</itemizedlist>
 			
@@ -268,8 +280,8 @@
 		</sect3>
 			
 
-		<sect3 id='TestServerHostname'>
-			<title>Test Server Hostname</title>
+		<sect3>
+			<title>Set Test Server Hostname</title>
 			<para>
 			We recommend that you always use your full system name (such as
 			<systemitem class='systemname'>&def-hostname;</systemitem>) to
@@ -303,8 +315,8 @@
 		</sect3>
 		
 
-	<sect3 id='ImportantSettingsandPaths'>
-		<title>Important Settings and Paths</title>
+	<sect3>
+		<title>Remember Important Settings and Paths</title>
 		<para>
 		In order to follow this tutorial, you will need to know the
 		following settings and values:
@@ -342,7 +354,7 @@
 				</itemizedlist>
 			</para></listitem>
 			<listitem><para>
-			Default Interchange catalogs directory:
+			Default Interchange catalogs directory (&glos-CATROOT;):
 			<itemizedlist>
 					<listitem vendor='deb'><para>
 						<filename class='directory'>/var/lib/interchange/catalogs</filename>
@@ -390,7 +402,6 @@
 					<listitem vendor='tarball'><para>
 						<ulink url="http://&def-hostname;/cgi-bin/&std-catalog;/index.html"/>
 						(tarball)
-						<literal></literal> (tarball)
 					</para></listitem>
 				</itemizedlist>
 			</para></listitem>
@@ -398,8 +409,8 @@
 	</sect3>
 
 
-	<sect3 id='DaemonControlandCatalogs'>
-		<title>Daemon Control and Catalogs</title>
+	<sect3>
+		<title>Learn to Control Interchange Daemon</title>
 		<para>
 		See &howto-daemon-control; for information on how to start, stop or
 		restart Interchange, and how to reconfigure individual catalogs.
@@ -407,8 +418,8 @@
 	</sect3>
 
 
-	<sect3 id='LogFiles'>
-		<title>Log Files</title>
+	<sect3>
+		<title>Monitor Log Files!</title>
 		<para>
 		<emphasis role='bold'>Almost every successful problem investigation on
 		Unix starts with a look at the system log files</emphasis>. Actually,
@@ -440,12 +451,12 @@
 
 
 
-<sect1 id='MinimalCatalog'>
-	<title>Minimal Catalog</title>
+<sect1 id='MinimalInterchangeCatalog'>
+	<title>Minimal Interchange Catalog</title>
 
 	<para>
-	Once the Interchange daemon is ran, it starts serving Interchange <firstterm>
-	catalogs</firstterm>.
+	Once you run the Interchange daemon, it will start serving Interchange
+	&glos-catalog;s.
 	In a way, catalogs are the basic functional units in Interchange.
 	You could associate a catalog with a web site, web shop
 	or any standalone group of content.
@@ -458,11 +469,11 @@
 	when we move to regular users space.
 	</para>
 
-	<sect2 id='LinkProgram'>
-		<title>Link Program</title>
+	<sect2 id='CreateLinkProgram'>
+		<title>Create Link Program</title>
 		<para>
-		We'll start with an easy task, copying the existing <firstterm>link program
-		</firstterm> to a new name.
+		We'll start with an easy task, copying the existing
+		&glos-link-program; to a new name.
 		</para>
 		<para>
 		The link program &mdash; found in your
@@ -475,7 +486,7 @@
 		<para>
 		<literal>vlink</literal>s, or Unix sockets, are used when the web server
 		and Interchange daemons are running on the same machine.
-		If needed, it's also possible to use Perl variants of the mentioned
+		If needed, it is also possible to use Perl variants of the mentioned
 		link programs.
 		We will, however, use the most common <literal>C vlink</literal> setup and
 		won't go describing <literal>tlink</literal>s or alternative Perl
@@ -500,6 +511,11 @@
 			<userinput>cd /var/www/cgi-bin; cp -p standard tutorial</userinput>
 			(Red Hat)
 			</para></listitem>
+			<listitem vendor='tarball'><para>
+			TODO
+			<userinput>cd /var/www/cgi-bin; cp -p standard tutorial</userinput>
+			(tarball)
+			</para></listitem>
 		</itemizedlist>
 		If everything is working correctly, typing <userinput>ls -l</userinput> in
 		the directory should <emphasis>roughly</emphasis> describe your files
@@ -511,14 +527,14 @@
 		</para>
 	</sect2>
 
-	<sect2 id='CatalogRootDirectory'>
-		<title>Catalog Root Directory (DOCROOT)</title>
+	<sect2 id='CreateCatalogRootDirectory'>
+		<title>Create Catalog Root Directory (DOCROOT)</title>
 		<para>
-		Once we've done with the basic step of copying a link program, we need
+		Once you're done with the basic step of copying a link program, you need
 		to create the <firstterm>catalog root directory</firstterm>, or
-		<firstterm>DOCROOT</firstterm>. Please do not <emphasis>mix</emphasis>
+		&glos-DOCROOT;. Please do not <emphasis>mix</emphasis>
 		Interchange catalog DOCROOT with a web server virtual host DOCROOT
-		(which we will refer to as WWWROOT) - the
+		(which we will refer to as &glos-WWWROOT;) - the
 		two are unrelated and found at different locations! You will generally use
 		catalog DOCROOT for everything,
 		and WWWROOT only for images and static content prepared for download.
@@ -526,7 +542,7 @@
 		<para>
 		&IC; DOCROOT directory is generally placed inside an existing
 		<firstterm>Interchange catalogs directory</firstterm>, or
-		<firstterm>CATROOT</firstterm>.
+		&glos-CATROOT;.
 		</para>
 		<para>
 		DOCROOT and its subdirectories are the place where all of your
@@ -561,15 +577,15 @@ chmod 775 tutorial
 		</para>
 	</sect2>
 
-	<sect2 id='CatalogRegistration:interchange_cfg'>
-		<title>Catalog Registration: interchange.cfg</title>
+	<sect2 id='RegisteraCatalog'>
+		<title>Register the Catalog in interchange.cfg</title>
 		<para>
 		Interchange server configuration is controlled by a number of 
 		configuration directives which are specified in two main files.
 		Global configuration directives go to 
 		&gcf; which is common for all catalogs running from the same
 		Interchange installation directory (ICROOT). Catalog-specific
-		configuration directives go to &ccf; in the catalog directory.
+		configuration directives go to &ccf; in the catalog root directory.
 		</para>
 		<para>
 		The first directive we need to add is the global <option>Catalog</option>
@@ -597,19 +613,25 @@ Catalog  tutorial  /usr/local/interchange/tutorial  /cgi-bin/tutorial
 		</itemizedlist>
 		</para>
 		<para>
-		As you can intuitively see, a complete config directive consists of the
-		directive name followed by whitespace-separated parameters. Any number
-		of spaces or tabs can appear between the directive and its options.
-		The directive is case-insensitive, but it is recommended that you use
+		As you can intuitively see, an &IC; configuration directive generally
+		consists of a
+		directive name, followed by whitespace-separated parameters (any number
+		of spaces or tabs can appear between the directive and its options).
+		The directive is not case-sensitive, but it is recommended that you use
 		it consistently for readability. You can insert blank lines or comment
 		lines (lines where the first non-blank character is '#') throughout
-		the configuration files. The order the lines appear in is significant,
+		the configuration files.
+		The order the lines appear in is significant,
 		but unimportant for the simple catalog we're creating.
+		</para>
+		<para>
+		You do not have to investigate configuration files more deeply at the
+		moment, we will describe them properly at a later point.
 		</para>
 	</sect2>
 
-	<sect2 id='Interchange_managedCatalogSubdirectories'>
-		<title>Interchange-managed Catalog Subdirectories</title>
+	<sect2 id='CreateCatalogSubdirectories'>
+		<title>Create Catalog Subdirectories</title>
 		<para>
 		Some of the directories in your DOCROOT are automatically managed by
 		&IC;, but you need to create them first.
@@ -634,8 +656,8 @@ Catalog  tutorial  /usr/local/interchange/tutorial  /cgi-bin/tutorial
 		</para>
 	</sect2>
 
-	<sect2 id='CatalogConfiguration:Catalog_cfg'>
-		<title>Catalog Configuration: catalog.cfg</title>
+	<sect2 id='CreateBasicCatalogConfigFile'>
+		<title>Create Basic Config File for the Catalog</title>
 		<para>
 		There are few <filename>catalog.cfg</filename> directives that
 		Interchange expects to see in order to complete the minimum
@@ -644,19 +666,7 @@ Catalog  tutorial  /usr/local/interchange/tutorial  /cgi-bin/tutorial
 		<option>MailOrderTo</option>, <option>Database</option> and
 		<option>ProductFiles</option>. If you do not have a suitable HTTPS
 		location for your catalog (if you're not running https, for example),
-		simply use the same value as for <option>VendURL</option>. In our
-		catalog, we will use a minimal
-		<database class='table'>products</database> table<footnote><para>Keep
-		in mind that Interchange uses both terms "database" and "table" to
-		identify the same thing - a table. This terminology is a historic
-		leftover from the time when Interchange only used a single
-		table.</para></footnote> with only the three necessary fields.
-		The table will be TAB delimited text file, stored in
-		<filename>products/products.txt</filename>. In general, you can
-		specify unlimited number of databases of any type
-		(for unlimited purposes), but at least one must be considered
-		a <firstterm>Product Files</firstterm> database, reflecting
-		Interchange's e-commerce roots.
+		simply use the same value as for <option>VendURL</option>.
 		</para>
 		<para>
 		So the basic &ccf; config file should look like this:
@@ -667,31 +677,171 @@ Catalog  tutorial  /usr/local/interchange/tutorial  /cgi-bin/tutorial
 		</para>
 	</sect2>
 
-	<sect2 id='ProductsDatabase'>
-		<title>Products Database</title>
+	<sect2 id='CreateProductsDatabase'>
+		<title>Create Products Database</title>
 		<para>
-		The <database class='table'>products</database> database we mentioned, kept in <filename>products/products.txt</filename>, will serve two purposes. It will provide Interchange with the layout of the products database table and it will also provide the data. When Interchange comes around to parse the products.txt file, it will expect the first line to contain the names of the fields for the database table (the <database class='field'>sku</database>, <database class='field'>description</database> and <database class='field'>price</database> fields are mandatory for a products database, but you can add arbitrary other fields as you see fit). The first field in the list is expected to be the primary key (unique identifier) for the row. In most cases you are going to use the SKU (<firstterm>Stock Keeping Unit</firstterm>) as the unique identifier for each product. The simple store that we are going to build will sell tests. You can choose another sample product line, but it is recommended that you keep it simple. Create the file <filename>products/products.txt</filename>, separating fields <emphasis>with a single TAB</emphasis>:
+		The <database class='table'>products</database> database,
+		kept in <filename>products/products.txt</filename>, will serve two
+		purposes. It will provide Interchange with the layout of the products
+		database table, and it will also provide the data. When Interchange comes
+		around to parsing the <filename>products.txt</filename> file, it will
+		expect the first line to contain the names of the fields for the database
+		table. <database class='field'>sku</database>,
+		<database class='field'>description</database> and
+		<database class='field'>price</database> fields are mandatory for a
+		products database, but you can add arbitrary other fields as you see fit.
+		The first field in the list is expected to be the primary key (unique
+		table identifier) for the row. In most cases you are going to use the
+		&glos-SKU; as the unique identifier for each product.
+		</para><para>
+		<emphasis role='bold'>The simple store
+		that we are going to build will sell tests</emphasis>.
+		You can choose another sample product line, but it is recommended that
+		you keep it simple. Create <filename>products/products.txt</filename>,
+		separating fields <emphasis>with a single TAB</emphasis>:
 		<programlisting>
 <xi:include parse='text'  href='../files/tutorial-phase1/products/products.txt'/>
 		</programlisting>
-		</para> <para>
-		You may notice that the columns don't line up in your text editor. This is the nature of tab-delimited files. Do not try to fix these.
-		</para> <para>
-		If you need more entries for the sample products database, you can use the <ulink url="files/dbgen">dbgen</ulink> Perl script to automatically create random database files for testing. The output of the script is much more meaningful if you provide it a list of words to work on (instead of just random characters) so make sure you have the <filename>/usr/share/dict/words</filename> file (in Debian, it's provided by the <literal>wenglish</literal> package), and then run <userinput>perl dbgen -c 10 -r /usr/share/dict/words > products/products.txt</userinput>. See the script source for available options and the complete usage syntax.
-		</para> <para>
-		It is important to know that Interchange does not use plain-text databases (such as our <systemitem class='database'>products</systemitem> database) as-is; the data is imported and internally stored in a variant of the DBM database (depending on which variant is available on your system). That's why on most Linux systems, you will see the <filename>products/products.gdbm</filename> file created once you put the catalog on-line.
-		</para> <para>
-		To just briefly mention it, whenever you edit the text database file, Interchange will detect that and re-import the file into the DBM database on next access. All aspects of this auto-import (including its deactivation) are of course controlled by config file options (but are out of scope of this tutorial).
-		</para> <para>
-		Now that we have the majority of base files ready, we just need to create the HTML page templates.
 		</para>
+		<note>
+		<para>
+		You may notice that the columns don't line up in your text editor. This
+		is the nature of TAB-delimited files. Do not try to fix these.
+		</para>
+		<para>
+		If you are looking for a more elegant way to edit TAB-delimited files,
+		please see the <command>te</command> utility shipped with Interchange.
+		It will break down the file into a different format, let you edit it
+		using the editor specified in the <envar>EDITOR</envar> environment
+		variable, and recollect the data back to a TAB-delimited file.
+		<!-- TODO: Is te installed with Red Hat or Debian? where? -->
+		</para>
+		</note>
+
+	<!-- TODO: mention somewhere else
+		<para>
+		If you will need more entries for the sample products database, you can
+		use the <ulink url="files/dbgen">dbgen</ulink> Perl script to
+		automatically create random database files for testing. The output
+		of the script is much more meaningful if you provide it a list of words
+		to work on (instead of just random characters) so make sure you have
+		the <filename>/usr/share/dict/words</filename> file (in Debian, it's
+		provided by the <literal>wenglish</literal> package), and then run
+		<userinput>perl dbgen -c 10 -r /usr/share/dict/words >
+		products/products.txt</userinput>. See the script source for
+		available options and the complete usage syntax.
+		</para>
+		-->
+		<para>
+		It is important to know that Interchange can use databases from all kinds
+		of sources at the same time. Those include files (DBM), databases (&PGSQL;,
+		&MYSQL;, &ORACLE;&hellip;), directory services (&OPENLDAP;) and RAM
+		(&IC;-specific MEMORY type). What is more, you can access all the
+		databases in an uniform way - using &glos-SQL; or otherwise.
+		<emphasis>
+		Where the SQL layer was naturally missing (such as in text files or
+		in-memory databases),
+		&IC; developers took an amazing approach and wrote the layers
+		themselves!</emphasis><sbr/>
+		To keep this tutorial simple and easy to follow, we will store our
+		initial database in a plain text file.
+		</para> <para>
+		<emphasis role='bold'>Please note that, to increase performance and
+		customer satisfaction, &IC; does not use plain-text databases directly;
+		it imports the initial text file data and stores the result in a
+		variant of the
+		&BDBM; database. On GNU systems, this will most likely be &GDBM;, so
+		you will see <filename>products/products.gdbm</filename> file created
+		once you request the data from a specific database</emphasis>.
+		<!-- TODO: http://www.jmarshall.com/tools/dbmedit/ is it any good?
+		test and report -->
+		</para>
+
+		<note>
+		<para>
+		Whenever you edit the text database file, Interchange will detect the
+		change on next database access, and re-import the file into the DBM
+		database. The previous contents of the DBM database will be overwritten.
+		All aspects of this import (including its deactivation) can, of course,
+		be controlled in configuration files &mdash; but are out of scope of this
+		tutorial.
+		</para>
+		</note>
 	</sect2>
 </sect1>
 
 
+<sect1 id='CreateFirstTestPage'>
+	<title>Create First Test Page</title>
 
-<sect1 id='PageTemplates'>
-	<title>Page Templates</title>
+		<para>
+		If you completed the above steps, you should have most of the base
+		files ready. All we need to do now is create a test page, and place
+		it in
+		<filename><replaceable>DOCROOT</replaceable>/pages/test.html</filename>.
+		</para>
+
+		<para>
+		We should keep this page content to a minimum while still showing an
+		usable example. If you ever read a popular introduction to a computer
+		programming language, you could guess we're about to re-use the
+		infamous &glos-hello-world; example.
+		</para>
+
+		<para>
+		Your 
+		<filename><replaceable>DOCROOT</replaceable>/pages/test.html</filename>
+		should look like this:
+		<programlisting>
+<xi:include parse='text'  href='../files/tutorial-phase1/pages/test.html'/>
+		</programlisting>
+		</para>
+
+		<para>
+		From the example above, you see that the
+		<filename class='directory'>pages</filename> directory should contain
+		valid &glos-HTML; files with the extension <literal>.html</literal>.
+		</para>
+
+		<para>
+		However, there's one crucial difference in comparison to the usual
+		HTML pages found in your &glos-WWWROOT; and served by your Web Server
+		&mdash; the pages from the <filename class='directory'>pages/</filename>
+		directory can contain &IC;-specific instructions and are naturally
+		processed by &IC; before being sent out.
+		</para>
+</sect1>
+
+
+<sect1 id='VisitTestPage'>
+	<title>Visit the Test Page, Understand the Page Serving Process</title>
+		<!-- TODO: EXPLAIN HERE how the page is requested, how apache asks IC,
+		how IC reads and expands the page (exact order), and how it sends it
+		back -->
+		<para>
+		<emphasis role='bold'>
+		To sum up and get back to our primary objective, we could say &IC;
+		reads the page, carries out any actions requested, and returns the
+		processed page to the user.
+		</emphasis>
+		</para>
+
+		<note>
+		<para>
+		If you care about &W3C; standards and recommendations (you really
+		should!), then you might be interested in seeing
+		&howto-validate;.
+		</para>
+		</note>
+</sect1>
+
+<sect1 id='CreatePageTemplates'>
+	<title>Create Page Templates</title>
+
+		<para>
+		If you completed the above steps, you should have most of the base
+		files ready. All we need to do now is create a test page.
+		</para>
 
 	<sect2 id='Organization'>
 		<title>Organization</title>

@@ -18,6 +18,10 @@ my %sn = ( # short name
 	glossary => "glos",
 	howtos => "howto",
 );
+my %ln = ( # long name
+	glossary => "glossary entry",
+	howtos => "HOW-TO",
+);
 
 # HEAD
 my $glossary = <<__ENDP__;
@@ -89,10 +93,10 @@ while ( my $file = readdir DIR ) {
 
 	my $lcfile = lc $file;
 	my $link = "<olink targetdoc='$cat' targetptr='$file'/>";
+	my $more = $cat eq 'howtos' ? " $ln{$cat}" : "";
 
-	##### Should be lowercase ****
 	print ENT <<ENDO;
-<!ENTITY $sn{$cat}-$file "$link">
+<!ENTITY $sn{$cat}-$file "$link$more">
 ENDO
 	print "Added $file\n" if $verbose;
 

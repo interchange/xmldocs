@@ -1,0 +1,37 @@
+
+***** IC STARTUP::
+
+1) 
+
+
+
+
+***** PAGE SERVING::
+
+1) The user clicks a link or enters an URL. The webserver is contacted,
+   with the request to show a page from a selected vhost:
+
+   host: something.somewhere.net
+   GET /cgi-bin/ic/tutorial/test?arg=x
+
+2) IC CGI is called with following parameters:
+
+   file: test
+   form GET arguments: arg=x
+   form POST arguments: ...
+
+3) IC process is started if needed, or the request is given to
+   already running process.
+
+4) IC starts serving a page:
+
+  4.1) Pre-setup
+  4.2) Reading a page
+  4.3) Parsing a page (parse order and stuff!)
+  4.4) Final output
+
+5) Data is filled back to web server.
+
+6) Data is sent back to client.
+
+7) Client's browser munches on input and displays result in a browser.

@@ -8,6 +8,10 @@ Outstanding:
 - To be able to build docs for 5.2 (so, excluding cvs-head)
 - Fix mess with entities
 - Commit log-files, glos-OS and more of the bunch from denali
+- From generated stuff, remove everything that's not available in release
+  the docs are built for.
+- For filters: add field which says whether filter's main purpose is to 
+  add or remove text (or combined).
 
 - Ask ndw about including [NEW!] and [TODO!] in titles in TOC.
 

@@ -203,8 +203,10 @@ $T/%.list refs/%.xml: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) 
 # One-shot targets
 glossary/glossary.xml: $(shell find glossary/ -regex '.+[^(\.xml)]$$') bin/generic-autogen
 	bin/generic-autogen glossary
+	make tmp/glossary-nc.db tmp/glossary-c.db
 howtos/howtos.xml: $(shell find howtos/ -regex '.+[^(\.xml)]$$') bin/generic-autogen
 	bin/generic-autogen howtos
+	make tmp/howtos-nc.db tmp/howtos-c.db
 
 
 ## Man pages
