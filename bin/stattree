@@ -602,7 +602,7 @@ sub line_findGlobVars {
 				group => 'function',
 				name => ${$c{gfunc}}[0],
 			};
-			print "$$context_data{name}\n" if $$context_data{group} eq 'function';
+			#print "$$context_data{name}\n" if $$context_data{group} eq 'function';
 			push
 				@{$hash{uses}{$$context_data{group}}{$$context_data{name}}{globvar}},
 					$name
