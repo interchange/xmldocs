@@ -34,16 +34,16 @@ unless ( GetOptions (
 
 # Load list of received emails in @archive
 my @archive = `test -d $archive_dir && find $archive_dir -type f -print`;
-@archive or die "No files in '$archive_dir'?\n";
+@archive or warn "No files in '$archive_dir'?\n" and exit 0;
 chomp for @archive;
 
-# Load list of already parsed messages and delete parsed ones from %archive
-open IN, "< whatsnew/parsed" or die "Can't open whatsnew/parsed ($!)\n";
-while ($_ = <IN>) {
-	chomp;
-	@archive = grep{!/^$_$/} @archive;
-}
-close IN;
+## Load list of already parsed messages and delete parsed ones from %archive
+#open IN, "< whatsnew/parsed" or die "Can't open whatsnew/parsed ($!)\n";
+#while ($_ = <IN>) {
+#	chomp;
+#	@archive = grep{!/^$_$/} @archive;
+#}
+#close IN;
 
 # Read all messages and expand template for each
 for $_ (@archive) {
@@ -51,7 +51,7 @@ for $_ (@archive) {
 
 	my $sect = eval "\"$template\"";
 	$final_content .= $sect;
-	print "Here's a cookie:\n$sect\n";
+	#print "Here's a cookie:\n$sect\n";
 }
 
 # Finally, update .xml
@@ -66,6 +66,9 @@ for $_ (@wn) {
 		$_ = "$entry_string\n$final_content";
 	}
 }
+
+# And delete parsed stuff
+unlink for @archive;
 
 open OUT, "> whatsnew/whatsnew.xml";
 print OUT @wn;
