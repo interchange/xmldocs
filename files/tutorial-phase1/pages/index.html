@@ -1,6 +1,119 @@
-[include top]
-[include left]
+[include templates/html/top]
 
-This is where your content goes.
+[include templates/html/banner]
 
-[include bottom]
+[include templates/html/left]
+
+[restrict]
+<div id="centercontent">
+	<h1>A Lesson on ITL Tags</h1>
+	<p>
+	<br />
+<!--
+If you're still with us, it means you have managed to grasp those most
+general principles of how Interchange features and functions are accessed
+from user pages.  It's now time for another cookie - for a more formal
+explanation.
+	</p>
+-->
+	<p>
+<b>Interchange Tag Language (ITL)</b> is a simple and intuitive way of
+accessing
+Interchange functionality; that's why we chose it for this <i>introductory
+course</i>. Other possibilities include direct Perl programming, ASP-like
+syntax and combinations of the above, but we'll explain those at a later
+time.
+	</p>
+
+	<p>
+ITL is a successor to <b>MML</b>, or <b>Minivend Markup Language</b>.
+(Up to version 5.x, Interchange was called Minivend). It is of vital
+importance that you become familiar with this basic language and its
+syntax. As ITL naturally progressed and the ammount of functionality
+provided through it grew, it became more and more important to properly
+learn the basics.
+<a href="http://mark.stosberg.com/">Mark Stosberg</a>
+once put up a theory that MML actually stood for <i>Mere Mortals Language</i>,
+while you had to be <i>Information Technology Leader</i> to use ITL.
+However, it's not as discouraging as it might seem - stick to our firm
+guidance and you'll learn the basics without wasting your time.
+	</p>
+	
+	<p>
+In a way, ITL and HTML tags are similar - they both take parameters
+or attributes, and they can both be standalone or container tags.
+	</p>
+	<p>
+Standalone tag is one that does not have an ending tag (consequently,
+it has no "body"). One such example is the [time] tag; simply placing [time]
+on the page displays local time:
+	</p>
+	<p>
+[/restrict]
+[time]
+[restrict]
+	</p>
+	<p>
+Container tags, on the other hand, do have a body. Let's take [filter]
+as an example. In [filter&nbsp;op=mailto]root@mydomain.local[/filter],
+"root@mydomain.local" is considered the tag's <i>body</i> and placing the
+tag on a page produces a <tt>mailto</tt> link:
+	</p>
+	<p>
+[/restrict]
+[filter op=mailto]root@mydomain.local[/filter]
+[restrict]
+	</p>
+	<p>
+	</p>
+	<p>
+Besides being good for a container example, the above [filter] tag also
+accepted an attribute. If an attribute is required, or can be specified in
+positional order - then it is called a <i>parameter</i>. In our specific case,
+the <tt>op</tt> attribute of the [filter] tag is both required and
+positional, so it is a true parameter. (<i>You can't tell which attributes are
+required, positional or accepted just by looking at the tag - you need to 
+consult the appropriate tag's reference page</i>).
+	</p>
+	<p>
+	Let's see the named and positional approach to specifying parameters
+	and attributes:
+	</p>
+	<p>
+	<ul>
+		<li>[filter op=mailto]</li>
+		<li>[filter mailto]</li>
+	</ul>
+	</p>
+	<p>
+	It is important to note that you cannot mix positional and named
+	parameters - <b>each tag individually must be provided either all positional,
+	or all named parameters</b>. Additionally, some tags <i>look</i> like
+	container tags when they're not - for example, the closing &#91;/page] tag is
+	just a macro and not a closing tag to the corresponding [page] 
+	(consequently, the text between [page] and &#91;/page] is <b>not</b> treated
+	as the body of the [page] tag.
+	</p>
+	<p>
+	</p>
+	<p>
+	</p>
+	<p>
+	</p>
+	<p>
+	</p>
+	<p>
+	</p>
+	<p>
+	</p>
+	<p>
+	</p>
+	<p>
+	</p>
+
+</div>
+[/restrict]
+
+[include templates/html/right]
+
+[include templates/html/bottom]

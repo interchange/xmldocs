@@ -40,8 +40,7 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry>Value of the <option>ImageDir</option> directive</entry>
 	<entry>
-	Image prefix to use (<filename class='directory'>/images</filename>
-	in the examples below).
+	Image prefix to use.
 	</entry>
 </row>
 <row>
@@ -51,8 +50,8 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry>0</entry>
 	<entry>
-	Don't prepend <arg choice='plain'>imagedir</arg> value to the
-	generated link URL?
+	Don't prepend value of the <arg choice='plain'>imagedir</arg> option to
+	the generated link URL?
 	</entry>
 </row>
 <row>
@@ -120,7 +119,8 @@ This tag builds a &glos-CSS; file (from a <option>Variable</option> or other
 sources) and generates a link to it.
 </para><para>
 Note that if you're providing the <arg choice='plain'>literal</arg> argument,
-the CSS file won't be rebuilt when the literal value changes. To cause
+the CSS file won't be rebuilt when you change the literal, in-place
+definition changes.  To cause
 rebuild, you must explicitly delete the generated
 <filename>.css</filename> file.
 __END__
