@@ -9,7 +9,7 @@ In the <filename>catalog.cfg</filename> file, add:
 </para>
 
 <programlisting><![CDATA[
-Pragma substitute_table_images
+Pragma substitute_table_image
 ]]></programlisting>
 
 </example>

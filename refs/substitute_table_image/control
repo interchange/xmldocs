@@ -1,3 +1,4 @@
 purpose: substitute background image paths in HTML table elements
 default: 0
 see also: no_image_rewrite, ImageDir, ImageSecureDir
+author: Stefan Hornburg, &ICDEVGROUP;

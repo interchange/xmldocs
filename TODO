@@ -13,6 +13,8 @@ DOCUMENTATION SYSTEM:
   to be prefixed with "Example: ", although they're technically not).
 - Add support to document tags which are NOT found in separate files
   (like [restrict]).
+- Under availability, if applicable, display cvs line (modification time,
+  username and version).
 
  Mid-term:
 - Think about adding "online example" (role=html in combination with 

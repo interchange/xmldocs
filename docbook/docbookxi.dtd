@@ -31,6 +31,8 @@ option) any later version.</para>">
 <!ENTITY DEF_SEEALSO "No information.">
 <!ENTITY DEF_PURPOSE "description line missing">
 
+<!-- Elements that supplement user's text -->
+<!ENTITY ICDEVGROUP "<ulink url='http://www.icdevgroup.org'>Interchange Development Group</ulink>">
 
 <!-- Remove MsgSet -->
 <!ENTITY % compound.class "procedure|sidebar">

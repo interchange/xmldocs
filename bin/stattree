@@ -327,9 +327,19 @@ sub wanted {
 
 				$specific{_name} = $tn;
 
+				# XXX CRITICAL:
+				# support for multiple tag definitions in the same file is 
+				# missing, as well as support for Alias option which has 
+				# reverse order (alias Alias name, and not name Alias alias).
+
 				my $tagopt = lc ( shift @lis );
-				next if $tagopt eq 'routine';
-				$specific{$tagopt} = "@lis";
+				next if $tagopt =~ /^(routine|documentation)$/;
+				if ( "@lis" =~ /<</ ) {
+					warn "TODO: Unsupported << in $tn\n";
+					next;
+				}
+				$specific{"_tagopt_$tagopt"} = "@lis";
+				#print "$tn :: $tagopt :: @lis\n";
 			}
 			$hash{specific}{$tagname} = { %specific };
 			last;

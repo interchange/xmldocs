@@ -33,6 +33,9 @@ guides: $(OUTPUT)/images $(OUTPUT)/files \
 refs: $(OUTPUT)/images $(OUTPUT)/files
 	make $(OUTPUT)/pragmas.html $(OUTPUT)/pragmas $(OUTPUT)/pragmas.man
 	make $(OUTPUT)/globvars.html $(OUTPUT)/globvars $(OUTPUT)/globvars.man
+	make $(OUTPUT)/usertags.html $(OUTPUT)/usertags $(OUTPUT)/usertags.man
+	make $(OUTPUT)/systemtags.html $(OUTPUT)/systemtags $(OUTPUT)/systemtags.man
+	make $(OUTPUT)/uitags.html $(OUTPUT)/uitags $(OUTPUT)/uitags.man
 
 howtos: howtos/howtos.xml howtos/*.xml
 	make $(OUTPUT)/howtos.html
