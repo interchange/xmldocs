@@ -1,0 +1,15 @@
+<example>
+
+<title>
+Enabling MV_GETPPID_BROKEN
+</title>
+
+<para>
+Add the following to <filename>interchange.cfg</filename>:
+</para>
+
+<programlisting><![CDATA[
+Variable MV_GETPPID_BROKEN 1
+]]></programlisting>
+
+</example>

@@ -1,0 +1,3 @@
+This variable contains the filename of the most recently returned
+contents. This variable is not set in the configuration files, but is 
+manipulated by the Interchange daemon while it is runnning.

@@ -1,0 +1,15 @@
+<example>
+
+<title>
+Use the predefined value of 1 to set MV_DOLLAR_ZERO
+</title>
+
+<para>
+Set the following in <filename>interchange.cfg</filename>:
+</para>
+
+<programlisting><![CDATA[
+Variable MV_DOLLAR_ZERO 1
+]]></programlisting>
+
+</example>

@@ -1,0 +1,3 @@
+Allow systems with broken locks to not destroy the pidfile lock
+by reading the file. Alleviates inability to use
+<command>interchange -stop</command>.

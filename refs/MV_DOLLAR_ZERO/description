@@ -1,0 +1,3 @@
+This determines what Interchange does to Perl's $0 variable, which contains the system's name of the running process, for example in the <citerefentry><refentrytitle>ps</refentrytitle></citerefentry> or <citerefentry><refentrytitle>top</refentrytitle></citerefentry> commands.
+</para><para>
+Setting the variable to a false value (0 or undefined) leaves the string unchanged. Setting it to 1 displays the process in the form of "interchange --> (CATROOT)". Setting it to a string displays that same string in the process list.

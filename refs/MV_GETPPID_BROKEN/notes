@@ -1,0 +1,3 @@
+Starting with Interchange 5.0, this directive is present in the default Debian GNU <filename>/etc/interchange/features.cfg</filename> file to let Interchange run on systems with threaded Perl installations.
+</para><para>
+Running Interchange in production on thread-enabled Perl machines is <emphasis>strongly discouraged</emphasis> (for the time being).

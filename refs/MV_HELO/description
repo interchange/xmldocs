@@ -1,0 +1,1 @@
+If SMTP is used to send mail, MV_HELO specifies the HELO string to present to the remote system.

@@ -1,0 +1,3 @@
+Note that this is set globally once only when the Interchange daemon is started, so it's pointless to change the variable after that.
+</para><para>
+It will also <emphasis>not</emphasis> work on BSD kernels.

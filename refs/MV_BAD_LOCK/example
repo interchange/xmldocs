@@ -1,0 +1,15 @@
+<example>
+
+<title>
+Turn around the workaround
+</title>
+
+<para>
+Add the following to <filename>interchange.cfg</filename>:
+</para>
+
+<programlisting><![CDATA[
+Variable MV_BAD_LOCK 1
+]]></programlisting>
+
+</example>

@@ -1,0 +1,19 @@
+<!-- Template example. Fill in the title (in title), short description
+     (in para) and actual program chunk (inside listing/cdata).
+     Delete those 3 lines of comments.                             -->
+
+<example>
+
+<title>
+Turn on the workaround code
+</title>
+
+<para>
+Add the following to <filename>interchange.cfg</filename>:
+</para>
+
+<programlisting><![CDATA[
+Variable CGIWRAP_WORKAROUND 1
+]]></programlisting>
+
+</example>

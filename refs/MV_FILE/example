@@ -1,0 +1,19 @@
+<!-- Template example. Fill in the title (in title), short description
+     (in para) and actual program chunk (inside listing/cdata).
+     Delete those 3 lines of comments.                             -->
+
+<example>
+
+<title>
+Display the content of the MV_FILE variable
+</title>
+
+<para>
+Add the follwing to a test Interchange page:
+</para>
+
+<programlisting><![CDATA[
+The last filename is: @@MV_FILE@@
+]]></programlisting>
+
+</example>

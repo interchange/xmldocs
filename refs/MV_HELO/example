@@ -1,0 +1,16 @@
+<example>
+
+<title>
+Using SMTP to send mail and setting a HELO string
+</title>
+
+<para>
+Add the following to <filename>interchange.cfg</filename>:
+</para>
+
+<programlisting><![CDATA[
+SendMailProgram Net::SMTP
+Variable MV_HELO myhost.mydomain.com
+]]></programlisting>
+
+</example>
