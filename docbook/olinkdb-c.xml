@@ -7,6 +7,7 @@
 	<!ENTITY glossary SYSTEM "../tmp/glossary-c.db"> 
 	<!ENTITY pragmas SYSTEM "../tmp/pragmas-c.db"> 
 	<!ENTITY globvars SYSTEM "../tmp/globvars-c.db"> 
+	<!ENTITY catvars SYSTEM "../tmp/catvars-c.db"> 
 	<!ENTITY uitags SYSTEM "../tmp/uitags-c.db"> 
 	<!ENTITY usertags SYSTEM "../tmp/usertags-c.db"> 
 	<!ENTITY systemtags SYSTEM "../tmp/systemtags-c.db"> 
@@ -55,6 +56,12 @@
 			<dir name='globvars'>
 				<document targetdoc="globvars">
 				&globvars;
+				</document>
+			</dir>
+			
+			<dir name='catvars'>
+				<document targetdoc="catvars">
+				&catvars;
 				</document>
 			</dir>
 			

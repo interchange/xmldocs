@@ -72,6 +72,7 @@ my $howtos = <<__ENDP__;
 __ENDP__
 
 # OPEN GLOSSARY ENTITIES
+print "GEN: docbook/auto$cat.ent\n";
 open ENT, "> docbook/auto$cat.ent" or
 	die "Can't wropen docbook/$cat.ent ($!)\n";
 

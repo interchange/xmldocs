@@ -7,6 +7,7 @@
 	<!ENTITY glossary SYSTEM "../tmp/glossary-nc.db"> 
 	<!ENTITY pragmas SYSTEM "../tmp/pragmas-nc.db"> 
 	<!ENTITY globvars SYSTEM "../tmp/globvars-nc.db"> 
+	<!ENTITY catvars SYSTEM "../tmp/catvars-nc.db"> 
 	<!ENTITY usertags SYSTEM "../tmp/usertags-nc.db"> 
 	<!ENTITY uitags SYSTEM "../tmp/uitags-nc.db"> 
 	<!ENTITY systemtags SYSTEM "../tmp/systemtags-nc.db"> 
@@ -27,6 +28,7 @@
 			<document targetdoc="glossary" baseuri="glossary.html"> &glossary; </document>
 			<document targetdoc="pragmas" baseuri="pragmas.html"> &pragmas; </document>
 			<document targetdoc="globvars" baseuri="globvars.html"> &globvars; </document>
+			<document targetdoc="catvars" baseuri="catvars.html"> &catvars; </document>
 			<document targetdoc="usertags" baseuri="usertags.html"> &usertags; </document>
 			<document targetdoc="uitags" baseuri="uitags.html"> &uitags; </document>
 			<document targetdoc="systemtags" baseuri="systemtags.html"> &systemtags; </document>

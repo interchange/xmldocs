@@ -143,7 +143,7 @@ __NAME__ description
 &IC; has a built-in banner display system designed to show 
 &glos-ad; or other
 messages, according to optional categories and
-<glossterm linkend="weighting_system">weighting</glossterm>.
+&glos-weighted; values.
 All this functionality is accessible using the <tag>banner</tag> tag.
 </para><para>
 The &glos-weighted; system,
