@@ -1,0 +1,276 @@
+__NAME__ purpose
+general purpose tag for generating HTML &lt;img&gt; tags
+__END__
+
+
+__NAME__ synopsis2
+<row>
+	<entry>src</entry>
+	<entry>Yes</entry><entry>Yes</entry>
+	<entry></entry>
+	<entry>
+	Image source. Can be a plain product SKU, or just the image basename (so 
+	Interchange would probe for existing file formats), or a literal 
+	(relative or absolute) URL.
+	If Interchange is let to search for file extensions, it will check for
+	<literal>.jpg</literal>,
+	<literal>.gif</literal>,
+	<literal>.png</literal> and
+	<literal>.jpeg</literal> in the same order as specified here.
+	</entry>
+</row>
+<row>
+	<entry>alt</entry>
+	<entry></entry><entry></entry>
+	<entry>
+	The <database class='field'>description</database> value from the
+	<database>products</database> database if SKU is specified instead of
+	a literal image filename. Otherwise, none.
+	</entry>
+	<entry>
+	Text to use in the &lt;img&gt;'s <arg choice='plain'>alt</arg> attribute.
+	By default, this will be filled with the
+	<database class='field'>description</database> from the product database
+	if a SKU (not a filename) is provided.
+	</entry>
+</row>
+<row>
+	<entry>default</entry>
+	<entry></entry><entry></entry>
+	<entry>
+	[scratch mv_imagedefault], if set.
+	</entry>
+	<entry>
+	Image filename (relative or absolute URL)
+	that will be used if no image for the SKU was found.
+	</entry>
+</row>
+<row>
+	<entry>descriptionfields</entry>
+	<entry></entry><entry></entry>
+	<entry>
+	<varname>DESCRIPTIONFIELDS</varname> catalog variable
+	</entry>
+	<entry>
+	Whitespace-separated list of fields in the <database>products</database>
+	database to pull the description from. This is used for the default
+	<arg choice='plain'>alt</arg> and
+	<arg choice='plain'>title</arg> atributes.
+	</entry>
+</row>
+<row>
+	<entry>dir_only</entry>
+	<entry></entry><entry></entry>
+	<entry>0
+	</entry>
+	<entry>
+	Setting this attribute causes the tag to only return the value of 
+	<option>ImageDir</option> or <option>ImageDirSecure</option> config
+	directives. This is primarily used in javascript code to discover the
+	appropriate path to prepend to image files.
+	</entry>
+</row>
+<row>
+	<entry>exists_only</entry>
+	<entry></entry><entry></entry>
+	<entry>0
+	</entry>
+	<entry>
+	Setting this attribute causes the tag to only return true if the image
+	exists.
+	</entry>
+</row>
+<row>
+	<entry>src_only</entry>
+	<entry></entry><entry></entry>
+	<entry>0
+	</entry>
+	<entry>
+	Only return the would-be image location, without the surrounding link
+	or any metadata (alts, titles, etc.).
+	</entry>
+</row>
+<row>
+	<entry>force</entry>
+	<entry></entry><entry></entry>
+	<entry>0
+	</entry>
+	<entry>
+	Skip any checks on image file (existence, extension, etc.).
+	</entry>
+</row>
+<row>
+	<entry>getsize</entry>
+	<entry></entry><entry></entry>
+	<entry>1
+	</entry>
+	<entry>
+	Use the Image::Size module to determine image dimensions and specify them
+	in the &lt;img&gt; tag.
+	</entry>
+</row>
+<row>
+	<entry>imagesubdir</entry>
+	<entry></entry><entry></entry>
+	<entry>[scratch mv_imagesubdir], if set.
+	</entry>
+	<entry>
+	Look for the image files in only one subdirectory of the
+	<option>ImageDir</option> or <option>ImageDirSecure</option> config
+	directives.
+	</entry>
+</row>
+<row>
+	<entry>makesize</entry>
+	<entry></entry><entry></entry>
+	<entry>
+	</entry>
+	<entry>
+	If ImageMagick is installed, you can display an arbitrary size of
+	the image, creating it if necessary. This would create a subdirectory
+	corresponding to the size, (i.e. 64x48) and copy the source image to it.
+	It would then use the <command>mogrify</command> command to resize.
+	This requires a writable image directory, of course.
+	If not found in the PATH, 
+	the location of the <command>mogrify</command> can be defined with the
+	<varname>IMAGE_MOGRIFY</varname> variable.
+	This would also temporarily set umask to 2 during the creation of files
+	and directories.
+	The value is specified as
+	<literal><replaceable>A</replaceable>x<replaceable>B</replaceable></literal>.
+	</entry>
+</row>
+<row>
+	<entry>secure</entry>
+	<entry></entry><entry></entry>
+	<entry>
+	</entry>
+	<entry>
+	Value of <literal>0</literal> forces <literal>http://</literal> link to
+	the file.
+	Value of <literal>1</literal> forces <literal>https://</literal>.
+	If unspecified, defaults to current page delivery method.
+	</entry>
+</row>
+<row>
+	<entry>sku</entry>
+	<entry></entry><entry></entry>
+	<entry>
+	</entry>
+	<entry>
+	Specify this parameter explicitly if you want to first try an image
+	from the <database class='field'>image</database> field in the
+	<database>products</database> database. If it does not exist, then a 
+	fallback to SKU-derived image filenames is performed.
+	</entry>
+</row>
+<row>
+	<entry>getsize</entry>
+	<entry></entry><entry></entry>
+	<entry>1
+	</entry>
+	<entry>
+	Use the Image::Size module to determine image dimensions and specify them
+	in the &lt;img&gt; tag.
+	</entry>
+</row>
+<row>
+	<entry>title</entry>
+	<entry></entry><entry></entry>
+	<entry>
+	Value of the <arg choice='plain'>alt=</arg> attribute.
+	</entry>
+	<entry>
+	Text to use for the &lt;img&gt;'s <arg choice='plain'>title</arg>
+	parameter. This is supported by newer browsers to provide things like
+	rollover tips.
+	</entry>
+</row>
+<row>
+	<entry>ui</entry>
+	<entry></entry><entry></entry>
+	<entry>0
+	</entry>
+	<entry>
+	Set to a true value to use Admin UI image prefixes. In other words, 
+	this uses the values of <varname>UI_IMAGE_DIR</varname> and
+	<varname>UI_IMAGE_DIR_SECURE</varname> variables instead of the
+	<option>ImageDir</option> and <option>ImageDirSecure</option> config
+	directives. This option does honor locale settings.
+	</entry>
+</row>
+<row>
+	<entry>
+		<group choice='plain'>
+		<arg choice='plain'>width</arg>
+		<arg choice='plain'>height</arg>
+		<arg choice='plain'>alt</arg>
+		<arg choice='plain'>title</arg>
+		<arg choice='plain'>border</arg>
+		<arg choice='plain'>hspace</arg>
+		<arg choice='plain'>vspace</arg>
+		</group>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>
+	</entry>
+	<entry>
+	Standard &lt;img&gt; HTML tag attributes to pass on.
+	</entry>
+</row>
+<row>
+	<entry>
+	extra
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>
+	</entry>
+	<entry>
+	Literal, arbitrary text to add to the generated &lt;img&gt; tag.
+	</entry>
+</row>
+__END__
+
+sku (for description), 
+to force image, https?:// or force=1
+dir_only
+
+__NAME__ description
+<tag>image</tag> is a general-purpose tag for generating HTML &lt;img&gt;
+tags based on various settings.
+</para><para>
+It can test whether an image exists,
+predetermine dimensions, retrieve image names from the
+product database (the <database class='field'>image</database> field),
+automatically pull product
+descriptions from the database (for <arg choice='plain'>alt</arg> and
+<arg choice='plain'>title</arg> attributes).
+__END__
+
+
+__NAME__ example
+<example>
+	<title>Simple image</title>
+	<para>
+	Let's suppose there'a product SKU os29000 present in your 
+	<database>products</database> database and the
+	<database class='field'>image</database> field contains value
+	<literal>os29000.png</literal>. Place the <tag>image</tag> on a test
+	page:
+	</para>
+	<programlisting>
+[image os29000]
+	</programlisting>
+	<para>
+	The tag would produce something like:
+	</para>
+	<programlisting><![CDATA[
+<img src="/standard/images/os29000.png"
+      width="120"
+      height="150"
+      alt="3' Step Ladder"
+      title="3' Step Ladder">
+	]]></programlisting>
+</example>
+__END__
+
