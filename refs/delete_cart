@@ -3,7 +3,7 @@ delete shopping cart from UserDB
 __END__
 
 __NAME__ missing
-Link UserDB to glossary and more info
+More info
 __END__
 
 __NAME__ synopsis
@@ -17,8 +17,11 @@ __END__
 
 
 __NAME__ description
-This tag deletes a shopping cart from the UserDB. This is basically the
-same as <code>[userdb function=delete_cart nickname=CART_NAME]</code>.
+This tag deletes a shopping cart from the
+<glossterm linkend="userdb">UserDB</glossterm>. This is basically the
+same as
+<code>[userdb function=delete_cart
+nickname=<replaceable>CART_NAME</replaceable>]</code>.
 __END__
 
 

@@ -28,7 +28,7 @@
 
 
 <!ENTITY % local.para.char.mix "|xi:include">
-<!ENTITY % local.tech.char.class "|tag|pragma|xi:include">
+<!ENTITY % local.tech.char.class "|tag|pragma|filter|xi:include">
 
 <!-- Load DocBook -->
 <!ENTITY % DocBookDTD PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
@@ -78,6 +78,28 @@
 >
 <!--end of pragma.attlist-->]]>
 <!--end of pragma.module-->]]>
+
+<!-- filter element -->
+<!ENTITY % filter.module "INCLUDE">
+<![%filter.module;[
+<!ENTITY % local.filter.attrib "">
+<!ENTITY % filter.role.attrib "%role.attrib;">
+
+<!ENTITY % filter.element "INCLUDE">
+<![%filter.element;[
+<!ELEMENT filter %ho; (%para.char.mix;|%para.mix;)*>
+<!--end of filter.element-->]]>
+
+<!ENTITY % filter.attlist "INCLUDE">
+<![%filter.attlist;[
+<!ATTLIST filter
+    %moreinfo.attrib;
+    %common.attrib;
+    %filter.role.attrib;
+    %local.filter.attrib;
+>
+<!--end of filter.attlist-->]]>
+<!--end of filter.module-->]]>
 
 <!-- mv element -->
 <!ENTITY % mv.module "INCLUDE">

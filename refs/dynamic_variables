@@ -17,12 +17,12 @@ __END__
 
 
 __NAME__ description
-This pragma enables configuration directives (<option>Variable</option>s,
+This &pragma; enables configuration directives (<option>Variable</option>s,
 most notably) to be dynamically updated from system files and databases.
 </para><para>
 It only makes sense to use this in combination with the 
 <option>DirConfig</option> or <option>VariableDatabase</option> directives,
-so check their reference entries for more information.
+so check their reference pages for more information.
 __END__
 
 

@@ -9,7 +9,7 @@ __END__
 
 __NAME__ synopsis2
 <row>
-	<entry>label</entry>
+	<entry><arg choice='plain'>label</arg></entry>
 	<entry>Yes</entry><entry>Yes</entry>
 	<entry></entry>
 	<entry>User-visible description of the form element's purpose 
@@ -17,16 +17,16 @@ __NAME__ synopsis2
 	</entry>
 </row>
 <row>
-	<entry>name</entry>
+	<entry><arg choice='plain'>name</arg></entry>
 	<entry>Yes</entry><entry>Yes</entry>
 	<entry></entry>
 	<entry>
-	Name to assign to this form element (appears as <literal>name=</literal>
-	parameter to the HTML tag).
+	Name to assign to this form element (appears as
+	<arg choice='plain'>name=</arg> parameter to the appropriate HTML tag).
 	</entry>
 </row>
 <row>
-	<entry>type</entry>
+	<entry><arg choice='plain'>type</arg></entry>
 	<entry>Yes</entry><entry>Yes</entry>
 	<entry></entry>
 	<entry>
@@ -41,7 +41,7 @@ __NAME__ synopsis2
 	</entry>
 </row>
 <row>
-	<entry>size</entry>
+	<entry><arg choice='plain'>size</arg></entry>
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>
@@ -51,24 +51,24 @@ __NAME__ synopsis2
 	</entry>
 </row>
 <row>
-	<entry>cause</entry>
+	<entry><arg choice='plain'>cause</arg></entry>
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>Format string for the error message. If set, the error message
-	is appended to the label. <literal> (%s)</literal> is one reasonable
+	is appended to the label. <literal> (%s)</literal> is a reasonable
 	value.
 	</entry>
 </row>
 <row>
-	<entry>checkfor</entry>
+	<entry><arg choice='plain'>checkfor</arg></entry>
 	<entry></entry><entry></entry>
-	<entry>The element's <literal>name=</literal> value.</entry>
+	<entry>The element's <arg choice='plain'>name=</arg> value.</entry>
 	<entry>
 	Name to pass to the <tag>error</tag> tag.
 	</entry>
 </row>
 <row>
-	<entry>choices</entry>
+	<entry><arg choice='plain'>choices</arg></entry>
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>
@@ -82,7 +82,7 @@ __NAME__ synopsis2
 	</entry>
 </row>
 <row>
-	<entry>format</entry>
+	<entry><arg choice='plain'>format</arg></entry>
 	<entry></entry><entry></entry>
 	<entry><literal>%s %s %s</literal></entry>
 	<entry>
@@ -90,7 +90,7 @@ __NAME__ synopsis2
 	</entry>
 </row>
 <row>
-	<entry>help</entry>
+	<entry><arg choice='plain'>help</arg></entry>
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>
@@ -100,14 +100,14 @@ __NAME__ synopsis2
 	</entry>
 </row>
 <row>
-	<entry>maxlength</entry>
+	<entry><arg choice='plain'>maxlength</arg></entry>
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>The <arg choice='plain'>maxlength=</arg> attribute for the
-	form element.</entry>
+	HTML form element.</entry>
 </row>
 <row>
-	<entry>order</entry>
+	<entry><arg choice='plain'>order</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>0</entry>
 	<entry>
@@ -116,23 +116,23 @@ __NAME__ synopsis2
 	</entry>
 </row>
 <row>
-	<entry>reset</entry>
+	<entry><arg choice='plain'>reset</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>0</entry>
 	<entry>Discard any previous element value?</entry>
 </row>
 <row>
-	<entry>signal</entry>
+	<entry><arg choice='plain'>signal</arg></entry>
 	<entry></entry><entry></entry>
 	<entry><![CDATA[<font color="__CONTRAST__">%s</font>]]></entry>
 	<entry>
 	Label container in case of errors. If the
-	<varname>CONTRAST</varname> variable is not defined, red is used as
-	default.
+	<varname>CONTRAST</varname> variable is not defined, <literal>red</literal>
+	is used as default.
 	</entry>
 </row>
 <row>
-	<entry>table</entry>
+	<entry><arg choice='plain'>table</arg></entry>
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>

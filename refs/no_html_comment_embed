@@ -17,7 +17,7 @@ __END__
 
 
 __NAME__ description
-Many HTML editing applications do not support ITL directly, and some 
+Many &HTML; editing applications do not support &ITL; directly, and some 
 (thinking it doesn't belong to the page) ruin your work. This is 
 understandable to an extent, because some ITL tags (such as <tag>list</tag>)
 appear in places that raise errors with HTML syntax checking algorithms.

@@ -14,7 +14,7 @@ __NAME__ synopsis
 	</entry>
 	<entry>Yes</entry><entry>Yes</entry>
 	<entry></entry>
-	<entry>Name of the Interchange page to process (as if the user visited
+	<entry>Name of the &IC; page to process (as if the user visited
 	it with the browser).</entry>
 </row>
 <row>
@@ -50,7 +50,7 @@ __NAME__ synopsis
 	</entry>
 	<entry></entry><entry></entry>
 	<entry></entry>
-	<entry>See if file Modification time is newer than expiry deadline</entry>
+	<entry>See if file Modification time is newer than expiry deadline.</entry>
 </row>
 <row>
 	<entry>
@@ -66,7 +66,7 @@ __NAME__ synopsis
 	</entry>
 	<entry></entry><entry></entry>
 	<entry></entry>
-	<entry>File creation umask</entry>
+	<entry>File creation <glossterm linkend='umask'>umask</glossterm>.</entry>
 </row>
 <row>
 	<entry>
@@ -82,13 +82,15 @@ __END__
 __NAME__ description
 This tag processes the page (as if the user visited it with the browser),
 and writes contents to disk.
-This is usually called from Interchange jobs but, of course, nothing
+This is usually called from
+<glossterm linkend='jobs'>Interchange jobs</glossterm> but, of course, nothing
 enforces this.
 </para><para>
 The tag is able to reproduce both standard and search results pages.
+<!-- XXX link 'search results' -->
 </para><para>
 This is similar to the output you could get from 
-<userinput>lynx -dump</userinput> or <userinput>w3m -dump</userinput>
+<userinput>lynx -source</userinput> or <userinput>w3m -dump_source</userinput>
 commands.
 __END__
 

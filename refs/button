@@ -5,88 +5,96 @@ __END__
 
 __NAME__ synopsis2
 <row>
-	<entry>name</entry>
+	<entry><arg choice='plain'>name</arg></entry>
 	<entry>Yes</entry><entry></entry>
 	<entry><literal>mv_click</literal></entry>
-	<entry>Button name</entry>
+	<entry>Button name.</entry>
 </row>
 <row>
-	<entry>src</entry>
+	<entry><arg choice='plain'>src</arg></entry>
 	<entry>Yes</entry><entry></entry>
 	<entry></entry>
 	<entry>
 	Image file to use. If the value starts with <literal>http</literal>,
 	it is used <emphasis>as-is</emphasis>. Otherwise the tag makes sure the
-	image file is reachable. Requires JavaScript.
+	image file is reachable. Requires &js;.
 	</entry>
 </row>
 <row>
-	<entry>text</entry>
+	<entry><arg choice='plain'>text</arg></entry>
 	<entry>Yes</entry><entry></entry>
 	<entry></entry>
 	<entry>
-	Button text. Scratch variable of the same name is also created to
+	Button text. <glossterm linkend="scratch-var">Scratch variable</glossterm>
+	of the same name is also created to
 	hold the code associated with the button.
 	</entry>
 </row>
 <row>
-	<entry>wait-text</entry>
+	<entry><arg choice='plain'>wait-text</arg></entry>
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>
 	Button text to show while the next page is being loaded.
-	If defined, this is used for the scratch variable name instead of the
-	<arg choice='plain'>text</arg> argument value. Requires JavaScript.
+	If defined, this is used for the
+	<glossterm linkend='scratch-var'>scratch variable</glossterm> name
+	instead of the
+	<arg choice='plain'>text=</arg> argument value. Requires &js;.
 	</entry>
 </row>
 <row>
-	<entry>form</entry>
+	<entry><arg choice='plain'>form</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>First form on the page (document.forms[0])</entry>
 	<entry>Form name that this button will submit.</entry>
 </row>
 <row>
-	<entry>confirm</entry>
+	<entry><arg choice='plain'>confirm</arg></entry>
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>
-	Text for the Yes/No confirmation window that will show up before
+	Text for the "Yes/No" confirmation window that will show up before
 	the client's browser starts with form submission.
-	Requires JavaScript.</entry>
-</row>
-<row>
-	<entry>getsize</entry>
-	<entry></entry><entry></entry>
-	<entry>0</entry>
-	<entry>
-	Use Image::Size to determine image size and add width= and height= parameters
-	to the image definition.
+	Requires &js;.
 	</entry>
 </row>
 <row>
-	<entry>alt</entry>
-	<entry></entry><entry></entry>
-	<entry>Value of <arg choice='plain'>text</arg></entry>
-	<entry>Alternate text for the window.status and balloons.</entry>
-</row>
-<row>
-	<entry>anchor</entry>
-	<entry></entry><entry></entry>
-	<entry>Value of <arg choice='plain'>text</arg></entry>
-	<entry>HTML anchor name.</entry>
-</row>
-<row>
-	<entry>hidetext</entry>
+	<entry><arg choice='plain'>getsize</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>0</entry>
-	<entry>Hide button text.</entry>
+	<entry>
+	Use <classname>Image::Size</classname> Perl module to determine image size and
+	add <arg choice='plain'>width=</arg> and <arg choice='plain'>height=</arg>
+	parameters to the image definition?
+	</entry>
 </row>
 <row>
-	<entry>extra</entry>
+	<entry><arg choice='plain'>alt</arg></entry>
+	<entry></entry><entry></entry>
+	<entry>Value of the <arg choice='plain'>text=</arg> parameter.</entry>
+	<entry>Alternate text for the browser status bar (window.status)
+	and <glossterm linkend='baloon'>balloons</glossterm>.
+	</entry>
+</row>
+<row>
+	<entry><arg choice='plain'>anchor</arg></entry>
+	<entry></entry><entry></entry>
+	<entry>Value of <arg choice='plain'>text</arg></entry>
+	<entry>&HTML; &anchor; name.
+	</entry>
+</row>
+<row>
+	<entry><arg choice='plain'>hidetext</arg></entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>Hide button text?</entry>
+</row>
+<row>
+	<entry><arg choice='plain'>extra</arg></entry>
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>
-	Extra HTML parameters. Passed verbatim. Note that the CSS attributes
+	Extra &HTML; parameters. Passed verbatim. Note that the &CSS; attributes
 	<arg choice='plain'>id</arg>, <arg choice='plain'>class</arg> and
 	<arg choice='plain'>style</arg>
 	<emphasis role='bold'>are</emphasis>
@@ -94,58 +102,31 @@ __NAME__ synopsis2
 	</entry>
 </row>
 <row>
-	<entry>border</entry>
-	<entry></entry><entry></entry>
-	<entry>0</entry>
-	<entry>Standard &lt;img&gt; property.</entry>
-</row>
-<row>
-	<entry>height</entry>
-	<entry></entry><entry></entry>
-	<entry></entry>
-	<entry>Standard &lt;img&gt; property.</entry>
-</row>
-<row>
-	<entry>width</entry>
+	<entry>
+		<group choice='plain'>
+		<arg choice='plain'>border</arg>
+		<arg choice='plain'>height</arg>
+		<arg choice='plain'>width</arg>
+		<arg choice='plain'>hspace</arg>
+		<arg choice='plain'>vspace</arg>
+		<arg choice='plain'>align</arg>
+		</group>
+	</entry>
 	<entry></entry><entry></entry>
 	<entry></entry>
-	<entry>Standard &lt;img&gt; property.</entry>
+	<entry>Standard &img; &HTML; tag properties.</entry>
 </row>
 <row>
-	<entry>vspace</entry>
+	<entry>
+		<group choice='plain'>
+		<arg choice='plain'>id</arg>
+		<arg choice='plain'>class</arg>
+		<arg choice='plain'>style</arg>
+		</group>
+	</entry>
 	<entry></entry><entry></entry>
 	<entry></entry>
-	<entry>Standard &lt;img&gt; property.</entry>
-</row>
-<row>
-	<entry>hspace</entry>
-	<entry></entry><entry></entry>
-	<entry></entry>
-	<entry>Standard &lt;img&gt; property.</entry>
-</row>
-<row>
-	<entry>align</entry>
-	<entry></entry><entry></entry>
-	<entry></entry>
-	<entry>Standard &lt;img&gt; property.</entry>
-</row>
-<row>
-	<entry>id</entry>
-	<entry></entry><entry></entry>
-	<entry></entry>
-	<entry>CSS parameter</entry>
-</row>
-<row>
-	<entry>class</entry>
-	<entry></entry><entry></entry>
-	<entry></entry>
-	<entry>CSS parameter</entry>
-</row>
-<row>
-	<entry>style</entry>
-	<entry></entry><entry></entry>
-	<entry></entry>
-	<entry>CSS parameter</entry>
+	<entry>&CSS; parameters.</entry>
 </row>
 __END__
 
@@ -161,7 +142,7 @@ This tag creates a <mv>mv_click</mv> form submit button.
 Standard, text-only submit button is output in the form of
 <![CDATA[<input type='submit' ...>]]>.
 </para><para>
-JavaScript submit button can contain an image in place of the standard
+&js; submit button can contain an image in place of the standard
 button text and is output as a combination of 
 <![CDATA[<a href=...>]]> and
 <![CDATA[<img src=...>]]> HTML tags.
@@ -169,18 +150,6 @@ It can also produce other enhancements to the plain submit button, such
 as confirmation popup windows.
 </para><para>
 See <xref linkend='button_examples'/> for illustrative presentation.
-__END__
-
-
-__NAME__ notes
-<!-- This is preserved from old [button] docs but doesn't seem useful any more. -->
-<!--
-If your images stop showing on pages served over SSL, try using absolute
-<arg choice='plain'>src</arg> option. Replace
-<code>src="/tutorial/images/iclogo.png"</code> with 
-<code>src="http://myhost.mydomain.local/tutorial/images/iclogo.png"
-</programlisting>
--->
 __END__
 
 __NAME__ example
@@ -207,8 +176,8 @@ __NAME__ example-inp
 <example>
 	<title>Creating the submit button manually</title>
 	<para>
-	We are here to discuss the usage of the [button] tag, but let's take a
-	look at an 
+	We are here to discuss the usage of the <tag>button</tag> tag, but let's
+	take a look at an 
 	example equivalent to the one above, except that we create the button
 	manually:
 	</para>

@@ -5,44 +5,45 @@ __END__
 
 __NAME__ synopsis2
 <row>
-	<entry>name</entry>
+	<entry><arg choice='plain'>name</arg></entry>
 	<entry>Yes</entry><entry></entry>
 	<entry><literal></literal></entry>
 	<entry>Switch namespace. Empty value (<code>name=""</code>) switches
 	back to the main namespace.</entry>
 </row>
 <row>
-	<entry>copy-all</entry>
+	<entry><arg choice='plain'>copy-all</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>0</entry>
 	<entry>
 	Copy all values from the current
-	namespace to the new one, and switch to it.
-	(Nested data structures are not dereferenced).
+	namespace to the new one before switching to it?
+	(Nested data structures are not
+	<glossterm linkend='deref'>dereferenced</glossterm>).
 	</entry>
 </row>
 <row>
-	<entry>copy</entry>
+	<entry><arg choice='plain'>copy</arg></entry>
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>
-	Copy only the specified space-separated values.
+	Copy only specified, space-separated values.
 	</entry>
 </row>
 <row>
-	<entry>clear</entry>
+	<entry><arg choice='plain'>clear</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>0</entry>
 	<entry>
-	Clear all values in the target namespace and switch to it.
+	Clear all values in the target namespace before switching to it?
 	</entry>
 </row>
 <row>
-	<entry>show</entry>
+	<entry><arg choice='plain'>show</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>0</entry>
 	<entry>
-	Return name of the current namespace, then switch to a new one.
+	Return name of the current namespace, then switch to a new one?
 	</entry>
 </row>
 __END__

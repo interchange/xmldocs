@@ -49,4 +49,15 @@ option) any later version.</para>">
 
 
 
+<!-- ENTITIES TO AVOID A LOT OF REPETITION -->
+<!ENTITY js "<glossterm linkend='js'>JavaScript</glossterm>">
+<!ENTITY anchor "<ulink url='http://www.w3.org/TR/REC-html40/struct/links.html'>anchor</ulink>">
+<!ENTITY CSS "<ulink url='http://www.w3.org/Style/CSS/'>CSS</ulink>">
+<!ENTITY HTML "<ulink url='http://www.w3.org/MarkUp/'>HTML</ulink>">
+<!ENTITY img "<ulink url='http://www.w3.org/MarkUp/html3/img.html'>&lt;img&gt;</ulink>">
+<!ENTITY link "<ulink url='http://www.w3.org/TR/REC-html40/struct/links.html'>link</ulink>">
+<!ENTITY pragma "<glossterm linkend='pragma'>pragma</glossterm>">
+<!ENTITY MIME "<ulink url='http://www.mhonarc.org/~ehood/MIME/'>MIME</ulink>">
+<!ENTITY ITL "<glossterm linkend='ITL'>ITL</glossterm>">
+<!ENTITY SMTP "<ulink url='http://cr.yp.to/smtp.html'>SMTP</ulink> (<classname>Net::SMTP</classname> Perl module)">
 

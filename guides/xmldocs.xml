@@ -504,6 +504,7 @@
 		<ulink url="http://www.docbook.org/tdg/en/html/application.html">application</ulink> - software program name<sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/arg.html">arg</ulink> - part of the cmdsynopsis element<sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/blockquote.html">blockquote</ulink><sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/classname.html">classname</ulink> - Perl module name, such as <classname>Image::Size</classname><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/cmdsynopsis.html">cmdsynopsis</ulink> - the parent element for all synopsis lines<sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/code.html">code</ulink> - chunks of actual code. Use to display ITL/Perl/any-other code examples inline<sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/command.html">command</ulink> - computer command name (usually Unix command)<sbr/>
@@ -518,6 +519,7 @@
 		<ulink url="http://www.docbook.org/tdg/en/html/errortype.html">errortype</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/example.html">example</ulink> - parent element for all examples<sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/filename.html">filename</ulink> - file and directory (class='directory') names<sbr/>
+		filter - Interchange filter name (XMLDOCS extension to DocBook XML)<sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/firstterm.html">firstterm</ulink> - first occurence of a term. Renders as italic<sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/footnote.html">footnote</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/function.html">function</ulink> - function name, such as syscall64()<sbr/>
@@ -542,6 +544,7 @@
 		<ulink url="http://www.docbook.org/tdg/en/html/option.html">option</ulink> - use it to mark Interchange config directives (like say, MailOrderTo or Variable)<sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/para.html">para</ulink> - the standard paragraph element<sbr/>
 		pragma - Interchange pragma name (XMLDOCS extension to DocBook XML)<sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/productname.html">productname</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/programlisting.html">programlisting</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/prompt.html">prompt</ulink> - computer prompt, such as Login:<sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/replaceable.html">replaceable</ulink> - identified the replaceable part in the cmdsynopsis element<sbr/>
@@ -556,7 +559,7 @@
 		<ulink url="http://www.docbook.org/tdg/en/html/tip.html">tip</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/ulink.html">ulink</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/userinput.html">userinput</ulink> - similar to &lt;command&gt; but here you can also include parameters, actually the complete command line the user would run<sbr/>
-		<ulink url="http://www.docbook.org/tdg/en/html/varname.html">varname</ulink> - variable name, such as MV_PAGE<sbr/>
+		<ulink url="http://www.docbook.org/tdg/en/html/varname.html">varname</ulink> - global or catalog Interchange variable, such as MV_PAGE or UI_IMAGE_DIR<sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/warning.html">warning</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/wordasword.html">wordasword</ulink><sbr/>
 		<ulink url="http://www.docbook.org/tdg/en/html/xref.html">xref</ulink><sbr/>

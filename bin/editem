@@ -9,18 +9,20 @@ if test -z "$EDPROG"; then
 	EDPROG=vim
 fi
 
-echo Creating/updating item $1
-mkdir -p "refs/$1"
-# --reply not supported in older versions of cp
-#cp -i --reply=no docbook/item-skel/* "refs/$1"
-cp -i docbook/item-skel/* "refs/$1"
+echo "Work in progress. To document your item, do:"
+echo "cp -i docbook/item-skel.onefile refs/$1; vim refs/$1"
 
-echo Editing all item files
-sleep 1
-$EDPROG refs/$1/*
-
-echo Removing empty files
-rm `find "refs/$1" -size 0`
-
-echo Done.
+#echo Creating/updating item $1
+#mkdir -p "refs/$1"
+## --reply not supported in older versions of cp
+##cp -i --reply=no docbook/item-skel/* "refs/$1"
+#cp -i docbook/item-skel/* "refs/$1"
+#
+#echo Editing all item files
+#sleep 1
+#$EDPROG refs/$1/*
+#
+#echo Removing empty files
+#rm `find "refs/$1" -size 0`
+#echo Done.
 

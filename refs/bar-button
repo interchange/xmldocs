@@ -1,5 +1,5 @@
 __NAME__ purpose
-display content (menubar usually) based on page name
+display content (usually a menu bar) based on page name
 __END__
 
 
@@ -17,7 +17,8 @@ __NAME__ synopsis
 		<arg choice='plain'>current</arg>
 	</entry>
 	<entry>Yes</entry><entry></entry>
-	<entry>Current page name (as obtained from <varname>MV_PAGE</varname>)</entry>
+	<entry>Current page name (as obtained from
+	<varname>MV_PAGE</varname>).</entry>
 	<entry>
 	Name of the current page. Usually you do not want to override the default.
 	</entry>
@@ -32,8 +33,9 @@ directly useful for creating menu bars, but can be used for other purposes.
 </para><para>
 The content between the <tag>selected</tag><tag>/selected</tag> tags will be
 displayed <emphasis role='bold'>if</emphasis> the name of the current
-page (<varname>MV_PAGE</varname> variable, or your custom 'current=' argument)
-matches the 'page=' parameter.
+page (<varname>MV_PAGE</varname> variable, or your custom
+<arg choice='plain'>current=</arg> argument)
+matches the <arg choice='plain'>page=</arg> parameter.
 </para><para>
 The default content (one outside of <tag>select</tag> tags) will be displayed
 when there is no match.

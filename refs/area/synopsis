@@ -9,11 +9,11 @@
 	<entry>Yes</entry><entry></entry>
 	<entry></entry>
 	<entry>Argument list to pass onto the target page. Format of 
-	the value is <replaceable>arg1=value1/arg2=value2...</replaceable></entry>
+	the value is <replaceable>arg1=value1/arg2=value2...</replaceable>.</entry>
 </row>
 <row>
 	<entry>secure</entry>
 	<entry></entry><entry></entry>
 	<entry>0</entry>
-	<entry>Use HTTPS for the target page</entry>
+	<entry>Use HTTPS for the target page></entry>
 </row>

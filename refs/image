@@ -2,10 +2,13 @@ __NAME__ purpose
 general purpose tag for generating HTML &lt;img&gt; tags
 __END__
 
+__NAME__ missing
+Finish examples
+__END__
 
 __NAME__ synopsis2
 <row>
-	<entry>src</entry>
+	<entry><arg choice='plain'>src</arg></entry>
 	<entry>Yes</entry><entry>Yes</entry>
 	<entry></entry>
 	<entry>
@@ -20,7 +23,7 @@ __NAME__ synopsis2
 	</entry>
 </row>
 <row>
-	<entry>alt</entry>
+	<entry><arg choice='plain'>alt</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>
 	The <database class='field'>description</database> value from the
@@ -35,7 +38,7 @@ __NAME__ synopsis2
 	</entry>
 </row>
 <row>
-	<entry>default</entry>
+	<entry><arg choice='plain'>default</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>
 	[scratch mv_imagedefault], if set.
@@ -46,7 +49,7 @@ __NAME__ synopsis2
 	</entry>
 </row>
 <row>
-	<entry>descriptionfields</entry>
+	<entry><arg choice='plain'>descriptionfields</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>
 	<varname>DESCRIPTIONFIELDS</varname> catalog variable
@@ -59,58 +62,57 @@ __NAME__ synopsis2
 	</entry>
 </row>
 <row>
-	<entry>dir_only</entry>
+	<entry><arg choice='plain'>dir_only</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>0
 	</entry>
 	<entry>
-	Setting this attribute causes the tag to only return the value of 
+	Only return the value of 
 	<option>ImageDir</option> or <option>ImageDirSecure</option> config
-	directives. This is primarily used in javascript code to discover the
+	directives? This is primarily used in &js; code to discover the
 	appropriate path to prepend to image files.
 	</entry>
 </row>
 <row>
-	<entry>exists_only</entry>
+	<entry><arg choice='plain'>exists_only</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>0
 	</entry>
 	<entry>
-	Setting this attribute causes the tag to only return true if the image
-	exists.
+	Only return true if the image exists?
 	</entry>
 </row>
 <row>
-	<entry>src_only</entry>
+	<entry><arg choice='plain'>src_only</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>0
 	</entry>
 	<entry>
 	Only return the would-be image location, without the surrounding link
-	or any metadata (alts, titles, etc.).
+	and metadata (alts, titles, etc.)?
 	</entry>
 </row>
 <row>
-	<entry>force</entry>
+	<entry><arg choice='plain'>force</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>0
 	</entry>
 	<entry>
-	Skip any checks on image file (existence, extension, etc.).
+	Skip any checks on image file (existence, extension, etc.)?
 	</entry>
 </row>
 <row>
-	<entry>getsize</entry>
+	<entry><arg choice='plain'>getsize</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>1
 	</entry>
 	<entry>
-	Use the Image::Size module to determine image dimensions and specify them
-	in the &lt;img&gt; tag.
+	Use  <classname>Image::Size</classname> Perl module to determine image
+	dimensions and specify them in the &img; tag?
 	</entry>
 </row>
 <row>
-	<entry>imagesubdir</entry>
+	<entry><arg choice='plain'>imagesubdir</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>[scratch mv_imagesubdir], if set.
 	</entry>
@@ -121,7 +123,7 @@ __NAME__ synopsis2
 	</entry>
 </row>
 <row>
-	<entry>makesize</entry>
+	<entry><arg choice='plain'>makesize</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>
 	</entry>
@@ -141,19 +143,19 @@ __NAME__ synopsis2
 	</entry>
 </row>
 <row>
-	<entry>secure</entry>
+	<entry><arg choice='plain'>secure</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>
+	Same delivery method as for the current page.
 	</entry>
 	<entry>
 	Value of <literal>0</literal> forces <literal>http://</literal> link to
 	the file.
 	Value of <literal>1</literal> forces <literal>https://</literal>.
-	If unspecified, defaults to current page delivery method.
 	</entry>
 </row>
 <row>
-	<entry>sku</entry>
+	<entry><arg choice='plain'>sku</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>
 	</entry>
@@ -165,23 +167,13 @@ __NAME__ synopsis2
 	</entry>
 </row>
 <row>
-	<entry>getsize</entry>
-	<entry></entry><entry></entry>
-	<entry>1
-	</entry>
-	<entry>
-	Use the Image::Size module to determine image dimensions and specify them
-	in the &lt;img&gt; tag.
-	</entry>
-</row>
-<row>
-	<entry>title</entry>
+	<entry><arg choice='plain'>title</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>
 	Value of the <arg choice='plain'>alt=</arg> attribute.
 	</entry>
 	<entry>
-	Text to use for the &lt;img&gt;'s <arg choice='plain'>title</arg>
+	Text to use for the &img;'s <arg choice='plain'>title=</arg>
 	parameter. This is supported by newer browsers to provide things like
 	rollover tips.
 	</entry>
@@ -230,10 +222,6 @@ __NAME__ synopsis2
 	</entry>
 </row>
 __END__
-
-sku (for description), 
-to force image, https?:// or force=1
-dir_only
 
 __NAME__ description
 <tag>image</tag> is a general-purpose tag for generating HTML &lt;img&gt;

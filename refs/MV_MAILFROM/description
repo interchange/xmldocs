@@ -1,2 +1,3 @@
-If SMTP (Net::SMTP module) is used to send mail from Interchange,
+If &SMTP; is used to send
+mail from Interchange,
 this variable specifies the default sender e-mail address.

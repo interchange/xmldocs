@@ -1,4 +1,4 @@
-The <tag>area</tag> tag expands to a proper hypertext URL which
+The <tag>area</tag> tag expands to a proper hypertext URL &link; which
 preserves Interchange session information and arguments passed onto
 the targeted page. The target page argument you supply is treated relatively
 to the <filename class='directory'>pages/</filename> directory inside your

@@ -18,8 +18,10 @@ __NAME__ synopsis
 	</entry>
 	<entry>Yes</entry><entry></entry>
 	<entry></entry>
-	<entry>Empty value only looks for a catalog variable. Value of 1 looks
-	only for a global variable. Value of 2 looks for the catalog variable
+	<entry>Empty value only looks for a catalog variable. Value of
+	<literal>1</literal> looks
+	only for a global variable. Value of <literal>2</literal> looks for the
+	catalog variable
 	with the fallback to global, if local one is not defined.</entry>
 </row>
 <row>
@@ -28,7 +30,8 @@ __NAME__ synopsis
 	</entry>
 	<entry>Yes</entry><entry></entry>
 	<entry></entry>
-	<entry>Filter to apply.</entry>
+	<entry><glossterm linkend='filter'>Interchange filter</glossterm> to
+	apply.</entry>
 </row>
 
 __END__

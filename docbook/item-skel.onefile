@@ -1,0 +1,128 @@
+This is a skeleton file for new XMLDOCS items.
+
+- Everything outside __NAME__ <name> ... __END__ blocks is ignored and
+  can be used as comment area.
+- Each section below is explained. Please follow the guidelines, and
+  delete all comments before saving and checking-in to the CVS.
+- Note that descriptions are constructed so that you can easily copy-paste
+  relevant lines into __NAME__ blocks and simply adjust it there.
+- R: required, O: optional
+
+
+R: One-line description for titles. Starts with lowercase and contains no XML
+__NAME__ purpose
+__END__
+
+
+O: Default value. Empty or "None." is fine. Enclose literal values in <literal>.
+   For tags, this field is ignored.
+   For anything else, just describe the default, honoring XML.
+<literal></literal>
+__NAME__ default
+__END__
+
+
+O: Any relevant See Also items. Simply comma/whitespace separate items without
+   any special formatting or XML. If, in A, you add reference to B, then B
+   will auto-reference A (the second part of the circular link is automatically
+   enabled). (No harm if B also explicitly references A).
+__NAME__ see also
+__END__
+
+
+O: List items missing to consider the item completely documented.
+   Each item in its own line, without any formatting. 
+__NAME__ missing
+__END__
+
+
+O: Author, if known. Otherwise a sane default is used. Use the format:
+   &username;[, &ICDEVGROUP;]. <username> must be a proper XML entity defined
+   in docbook/literals.ent (for "3rd-party" people, you can add an entity if
+   you expect more contribs, or simply write their name here).
+	 Include ", &ICDEVGROUP;" if the author is Interchange-core member.
+&;, &ICDEVGROUP;
+__NAME__ author
+__END__
+
+
+R: Important field, describes each symbol's synopsis:
+   Pragmas and globvars use <group choice='req'>.
+	 Tags use <row> (<table> is part of the template already).
+<group choice='req'>
+	<arg choice='plain'></arg>
+	<arg choice='plain'></arg>
+</group>
+<row>
+	<!-- ENTRIES: Name, Positional?(Yes), Required?(Yes), Default, Description -->
+	<entry>
+		<!-- FOR DIFFERENT OPTIONS GROUPED TOGETHER (such as width, height)
+		<group choice='plain'>
+			<arg choice='plain'></arg>
+			<arg choice='plain'></arg>
+		</group>
+		-->
+		<!-- FOR NAME ALIASES (such as "text" OR "password")
+		<group>
+			<arg choice='plain'></arg>
+			<arg choice='plain'></arg>
+		</group>
+		-->
+	</entry>
+	<entry></entry>
+	<entry></entry>
+	<entry></entry>
+	<entry></entry>
+</row>
+__NAME__ synopsis
+__END__
+
+
+R: Useful description of a symbol. Don't repeat yourself, focus on things
+   that haven't been said already.
+__NAME__ description
+__END__
+
+
+O: Notes. To date, this section proved useful for noting various trivia about
+   the symbol (details from history, name of bug reporter, etc...)
+__NAME__ notes
+__END__
+
+
+R: Primary example. One example always has to be provided, no matter
+   how simple and obvious you think it is.
+   It should consist of a title (no XML in it), description (inside <para>)
+   and code example (inside <programlisting>).
+__NAME__ example
+<example>
+  <title></title>
+	<para>
+	</para>
+  <programlisting>
+  </programlisting>
+</example>
+__END__
+
+
+O: Secondary example. Rules apply as for primary. For extra bonus, you can
+   provide more than 2 examples (simply choose another suffix, like 
+   example3, example-<description>, example.<yourname> etc..)
+__NAME__ example2
+__END__
+
+
+
+##################################################################
+Fields that need to be overriden only in special cases. Usually, just delete.
+
+__NAME__ id
+__END__
+
+__NAME__ name
+__END__
+
+__NAME__ copyright
+__END__
+
+

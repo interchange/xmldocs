@@ -6,7 +6,7 @@ __END__
 __NAME__ synopsis
 <row>
 	<entry>
-		<group choice='plain'>
+		<group>
 		<arg choice='plain'>value</arg>
 		<arg choice='plain'>password</arg>
 		</group>
@@ -17,18 +17,17 @@ __NAME__ synopsis
 </row>
 <row>
 	<entry>
-		<group choice='plain'>
+		<group>
 		<arg choice='plain'>salt</arg>
 		<arg choice='plain'>crypted</arg>
 		</group>
 	</entry>
 	<entry>Yes</entry><entry></entry>
 	<entry>Random 2-character string</entry>
-	<entry>Crypt salt (random two characters that make potential
-	attacker's dictionary too large to pre-compile it). You usually
+	<entry>Crypt salt. You usually
 	want to leave it empty for the tag to generate the random salt itself.
 	Specifying salt only makes sense for testing purposes, or when you're
-	verifying the password, like you see in <xref linkend='crypt_examples'/>
+	verifying the password, like you see in <xref linkend='crypt_examples'/>.
 	</entry>
 </row>
 __END__
@@ -77,5 +76,4 @@ $Tag->crypt("test", $Scratch->{crypted}) eq $Scratch->{crypted} ?
 	]]></programlisting>
 </example>
 __END__
-
 

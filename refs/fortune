@@ -19,7 +19,7 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry>0</entry>
 	<entry>
-	Do not display computer-related fortunes.
+	Prevent display of computer-related fortunes?
 	</entry>
 </row>
 <row>
@@ -44,8 +44,8 @@ __NAME__ synopsis
 	</entry>
 	<entry></entry><entry></entry>
 	<entry>0</entry>
-	<entry>Do not apply basic HTML formating to the text output 
-	from the fortune program.</entry>
+	<entry>Don't apply basic HTML formating to the text output 
+	from the fortune program?</entry>
 </row>
 __END__
 
@@ -55,8 +55,8 @@ The <tag>fortune</tag> tag calls the popular Unix
 <application>fortune</application> program to display random saying.
 </para><para>
 If no <arg choice='plain'>raw</arg> option is specified, basic HTML
-formatting is applied to the output (using the text2html Interchange
-filter).
+formatting is applied to the output (using the <filter>text2html</filter>
+Interchange filter).
 </para><para>
 The fortune program path defaults to <literal>/usr/games/fortune</literal>.
 You can override that by setting the <varname>MV_FORTUNE_COMMAND</varname>

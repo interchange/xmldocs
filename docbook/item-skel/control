@@ -1,11 +1,13 @@
+# Multiple-files docs are not favored any more, so use this only if 
+# you have specific needs.
+
 # The usual comments can be used here. 
 # To override a field, supply a value
 # To let it through unmodified, simply leave the fields empty
 
-#  purpose: oneline description (MUST FILL IN)
+#  purpose: oneline description (MUST FILL IN, no XML or other formatting)
 purpose:
 #  default value if applicable (make it short, just like: 0, none, ...)
-#  If documenting a TAG, leave "default" field empty unless you're overriding!
 default:
 # Please take time to fill in the See Also line.
 #  Just name the related symbols. The system will work everything out.

@@ -1,0 +1,13 @@
+
+<glossentry id="salt">
+<glossterm>Salt</glossterm>
+
+<glossdef>
+<para>
+ (random two characters that make potential
+	attacker's dictionary too large to pre-compile it).
+</para>
+</glossdef>
+
+</glossentry>
+

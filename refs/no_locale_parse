@@ -20,7 +20,8 @@ __NAME__ description
 This pragma disables parsing of <tag>L</tag> and <tag>LC</tag> tags.
 </para><para>
 This is only used in the Admin UI and is not of interest to the general public.
-It could also have some side effects in Interchange PreFork mode.
+It could also have some side effects in Interchange
+<glossterm linkend='ic-run-mode'>PreFork</glossterm> mode.
 If you have enough traffic that you want to run in PreFork mode, you will
 be wanting to move the Admin UI away from the customer-facing side anyway,
 so this will not be a problem.

@@ -16,7 +16,7 @@ __NAME__ synopsis
 	<entry>Yes</entry><entry>Yes</entry>
 	<entry></entry>
 	<entry>
-	Name of the CSS file. The name will be forced to lowercase, and
+	Name of the &CSS; file. The name will be forced to lowercase, and
 	the ".css" extension will be added unconditionally.
 	</entry>
 </row>
@@ -40,7 +40,8 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry>Value of the <option>ImageDir</option> directive</entry>
 	<entry>
-	Image prefix to use ("/images" in the examples below).
+	Image prefix to use (<filename class='directory'>/images</filename>
+	in the examples below).
 	</entry>
 </row>
 <row>
@@ -50,7 +51,8 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry>0</entry>
 	<entry>
-	Do not prepend "imagedir" to the generated link URL.
+	Don't prepend <arg choice='plain'>imagedir=</arg> value to the
+	generated link URL?
 	</entry>
 </row>
 <row>
@@ -60,7 +62,7 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>
-	Literal, in-place CSS definition. See <xref linkend="css_examples"/>.
+	Literal, in-place &CSS; definition. See <xref linkend="css_examples"/>.
 	</entry>
 </row>
 <row>
@@ -70,8 +72,8 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>
-	The <literal>media=</literal> parameter for the &lt;link&gt; HTML tag. For
-	example, <literal>media="PRINT"</literal>.
+	The <arg choice='plain'>media=</arg> parameter for the &link; &HTML; tag.
+	For example, <literal>PRINT</literal>.
 	</entry>
 </row>
 <row>
@@ -81,7 +83,8 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry><literal>0644</literal></entry>
 	<entry>
-	File creation mode (say, <literal>0755</literal>).
+	File creation <glossterm linkend="mode">mode</glossterm>
+	(say, <literal>0755</literal>).
 	</entry>
 </row>
 <row>
@@ -114,8 +117,9 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>
-	Regenerate the file on a timed basis. Default is the number of minutes,
-	but you can pass any standard Interchange interval.
+	Regenerate the file on a timed basis? Default unit are minutes,
+	but you can pass any standard
+	<glossterm linkend='interval'>Interchange interval</glossterm>.
 	</entry>
 </row>
 
@@ -123,18 +127,19 @@ __END__
 
 
 __NAME__ description
-This tag builds a CSS file (from a <option>Variable</option> or other
+This tag builds a &CSS; file (from a <option>Variable</option> or other
 sources) and generates a link to it.
 </para><para>
-Note that if you're providing the <literal>literal=</literal> argument,
+Note that if you're providing the <arg choice='plain'>literal=</arg> argument,
 the CSS file won't be rebuilt when the literal value changes. To cause
-rebuild, you must explicitly delete the generated .css file.
+rebuild, you must explicitly delete the generated
+<filename>.css</filename> file.
 __END__
 
 
 __NAME__ example
 <example>
-	<title>Simplest [css] example</title>
+	<title>Simplest tag example</title>
 	<programlisting>
 [css THEME_CSS]
 </programlisting>
@@ -150,7 +155,8 @@ __NAME__ example2
 <example>
 	<title>Using literal=</title>
 	<para>
-	You can either save your CSS in a Scratch variable, or provide it 
+	You can either save your CSS in a <glossterm linkend='scratch-var'>Scratch
+	variable</glossterm>, or provide it 
 	directly in-place. Here are both variants:
 	</para>
 	<programlisting>
