@@ -143,7 +143,7 @@ while (<STDIN>) {
 
 	#
 	# 4: Simple entities replacement
-	while ( $line =~ s/&(\S+?);/$entities{$1} || $1/ge ) {}
+	while ( $line =~ s/&(\S+?);/$entities{$1} || "&$1;"/ge ) {}
 
 
 	# Finished

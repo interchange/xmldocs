@@ -24,7 +24,7 @@
 		</author>
 		<author>
 			<firstname>Davor</firstname><surname>Ocelic</surname>
-			<email>docelic@mail.inet.hr</email>
+			<email>docelic@icdevgroup.org</email>
 		</author>
 	</authorgroup>
 
@@ -79,7 +79,7 @@
 
 	<abstract>
 		<para>
-		The purpose of this document is to guide you through constructing a simple <ulink url="http://www.icdevgroup.org">Interchange</ulink> catalog <command>from scratch</command>. The standard catalogs that ship with Interchange are quite complex since they are ready to be used for business and highlight many of the capabilities that Interchange offers. Those catalogs can be too intimidating<footnote><para>Intimidating: to make timid or fearful; to frighten into submission.</para></footnote> places to start the journey if you're interested in learning the basic Interchange building blocks.
+		The purpose of this document is to guide you through constructing a simple <ulink url="http://www.icdevgroup.org">Interchange</ulink> catalog <command>from scratch</command>. The standard catalogs that ship with Interchange are quite complex since they are ready to be used for business and highlight many of the capabilities that Interchange offers. Those catalogs can be too intimidating<footnote><para>Intimidate: to make timid or fearful; to frighten into submission.</para></footnote> places to start the journey if you're interested in learning the basic Interchange building blocks.
 		</para>
 	</abstract>
 
@@ -342,7 +342,7 @@ ErrorFile /var/log/interchange/error.log
 		</para>
 		<tip>
 			<para>
-			We use "tags" (enclosed in [] brackets) in Interchange much like the HTML uses tags enclosed in ltgt. The major difference, however, is in the hierarchy where the tags are parsed. ITL tags, parsed on the server side by the Interchange daemon, are expanded into the plaintext and HTML which is then (over the web server) delivered to the end user and parsed there for presentation in a browser.
+			We use "tags" (enclosed in <tag>tag</tag> brackets) in Interchange much like the HTML uses tags enclosed in ltgt. The major difference, however, is in the hierarchy where the tags are parsed. ITL tags, parsed on the server side by the Interchange daemon, are expanded into the plaintext and HTML which is then (over the web server) delivered to the end user and parsed there for presentation in a browser.
 			</para>
 		</tip>
 		<para>
@@ -354,12 +354,12 @@ ErrorFile /var/log/interchange/error.log
 		</programlisting>
 		</para>
 		<important><para>
-			You can't use positional parameters if the values contain whitespace. For example, [tagname "[data session mv_arg]"] is invalid; the only way to specify that is [tagname optionname="[data session mv_arg]"]. Also, if the first parameter is positional, all must be positional (and vice versa, if the first tag is named - all must be named).
+			You can't use positional parameters if the values contain whitespace. For example, <tag>tagname "<tag>data session mv_arg</tag>"</tag> is invalid; the only way to specify that is <tag>tagname optionname="<tag>data session mv_arg</tag>"</tag>. Also, if the first parameter is positional, all must be positional (and vice versa, if the first parameter is named - all must be named).
 		</para></important>
 		<para>
 		Tags can span multiple lines which helps readability when the tags have a large number of (long) options. There's a whole lot of tags available (around 200 in Interchange 5.2), but in this tutorial very few will be addressed. For a complete listing of the ITL tags, see the <!--<olink targetdoc='ictags' targetptr='ictags'>-->Interchange Tags Reference<!--</olink>-->.
 		</para> <para>
-		The first tag we'll use is going to be the [include] tag; it reads the specified file (relative to the catalog directory - CATROOT), reparses it for any Interchange tags, and puts the final result in place of the tag. We'll demonstrate that now on the next page you'll need to create.
+		The first tag we'll use is going to be the <tag>include</tag> tag; it reads the specified file (relative to the catalog directory - CATROOT), reparses it for any Interchange tags, and puts the final result in place of the tag. We'll demonstrate that now on the next page you'll need to create.
 	</para>
 	</sect2>
 
@@ -373,7 +373,7 @@ ErrorFile /var/log/interchange/error.log
 <xi:include parse='text'  href='../files/tutorial-phase1/pages/index.html'></xi:include>
 		</programlisting>
 		</para> <para>
-		Interchange pages in the <filename class='directory'>pages/</filename> directory (or elsewhere) must have the .html suffix. You can omit the suffix in both your URLs when accessing pages, and in the tags you call (such as [page]), but the files on the disk must be properly named.
+		Interchange pages in the <filename class='directory'>pages/</filename> directory (or elsewhere) must have the .html suffix. You can omit the suffix in both your URLs when accessing pages, and in the tags you call (such as <tag>page</tag>), but the files on the disk must be properly named.
 		</para>
 	</sect2>
 
@@ -483,7 +483,7 @@ ErrorFile /var/log/interchange/error.log
 </table>
 		]]></programlisting>
 		</para> <para>
-		Now we will use Interchange tags to fill in the rest of the table with the products database you created. The [loop] [/loop] ITL tag pair tells Interchange to iterate over each item in the parameter list. In this case, the loop runs over the results of an Interchange search. The search parameter does a database search on the provided parameters. In this case, <command>we're doing a very simple search that returns all of the fields for all of the entries in the <database class='table'>products</database> database</command>. The parameters passed to the search tell Interchange to return all records ('ra') from the products file ('fi'). The following should take the place of the ellipsis in the code we placed in <filename>pages/index.html</filename>:
+		Now we will use Interchange tags to fill in the rest of the table with the products database you created. The <tag>loop</tag> <tag>/loop</tag> ITL tag pair tells Interchange to iterate over each item in the parameter list. In this case, the loop runs over the results of an Interchange search. The search parameter does a database search on the provided parameters. In this case, <command>we're doing a very simple search that returns all of the fields for all of the entries in the <database class='table'>products</database> database</command>. The parameters passed to the search tell Interchange to return all records ('ra') from the products file ('fi'). The following should take the place of the ellipsis in the code we placed in <filename>pages/index.html</filename>:
 		<programlisting><![CDATA[
 	[loop search="ra=yes/fi=products"]
 
@@ -492,7 +492,7 @@ ErrorFile /var/log/interchange/error.log
 	[/loop]
 		]]></programlisting>
 		</para> <para>
-		In the loop we just established, the individual elements of each record are accessed using the [loop-field] tag. The following code should replace the above ellipsis in the code we placed in <filename>pages/index.html</filename>:
+		In the loop we just established, the individual elements of each record are accessed using the <tag>loop-field</tag> tag. The following code should replace the above ellipsis in the code we placed in <filename>pages/index.html</filename>:
 		<programlisting><![CDATA[
 	<tr>
 		<td>[loop-code]</td>
@@ -517,7 +517,7 @@ ErrorFile /var/log/interchange/error.log
 		<para>
 		The next step is to create an individual page for each item. You could theoretically create each page manually, but that approach isn't worth considering. So to do this, we need to create a <emphasis>special generic page</emphasis> called <filename>pages/flypage.html</filename>. When a page is requested that does not exist in the <filename class='directory'>pages/</filename> directory, Interchange will check and see if the requested page has the same name as a product ID from the product database table (in this case a SKU). If it does, it will show the flypage for that product. If there's no product with that ID, the special error page <filename>special_pages/missing.html</filename> (described in the next section) will be displayed.
 		</para> <para>
-		For example, if you request the <filename>0198.html</filename> page, Interchange first checks if that specific page exists (<filename class='directory'>pages/0198.html</filename>). If one is not found, it searches the products database table for a product with that ID 0198. It then creates that product page <emphasis>on the fly</emphasis> using <filename>pages/flypage.html</filename>. When constructing the flypage, the entire product record for the requested product is available through the [item-field] tag (similar to the [loop-field] tag). To create a fly page, type the following code and save it as <filename>pages/flypage.html</filename>.
+		For example, if you request the <filename>0198.html</filename> page, Interchange first checks if that specific page exists (<filename class='directory'>pages/0198.html</filename>). If one is not found, it searches the products database table for a product with that ID 0198. It then creates that product page <emphasis>on the fly</emphasis> using <filename>pages/flypage.html</filename>. When constructing the flypage, the entire product record for the requested product is available through the <tag>item-field</tag> tag (similar to the <tag>loop-field</tag> tag). To create a fly page, type the following code and save it as <filename>pages/flypage.html</filename>.
 		<programlisting>
 <xi:include parse='text'  href='../files/tutorial-phase2/pages/flypage.html'></xi:include>
 		</programlisting>
@@ -560,7 +560,7 @@ ErrorFile /var/log/interchange/error.log
 	<sect2 id='TheOrderLink'>
 		<title>The Order Link</title>
 		<para>
-		Now that you have your products available, let's add a shopping cart so customers can purchase them. This is simply created using the [order] tag. It creates an HTML link that causes the specified item to be ordered and takes the shopper to her basket page. This is a built-in shortcut to the complete order process which uses an HTML form submission process. The parameter for the [order] tag is the product ID. To add these tags to the catalog, make the following change to <filename>pages/index.html</filename>:
+		Now that you have your products available, let's add a shopping cart so customers can purchase them. This is simply created using the <tag>order</tag> tag. It creates an HTML link that causes the specified item to be ordered and takes the shopper to her basket page. This is a built-in shortcut to the complete order process which uses an HTML form submission process. The parameter for the <tag>order</tag> tag is the product ID. To add these tags to the catalog, make the following change to <filename>pages/index.html</filename>:
 		<programlisting><![CDATA[
 			[loop-field description]
 			</a>
@@ -580,26 +580,26 @@ ErrorFile /var/log/interchange/error.log
 		<para>
 		Create the directory <filename class='directory'>pages/ord/</filename> in the tutorial catalog directory.
 		</para> <para>
-		For the [order] tag, Interchange expects a default page called <filename>pages/ord/basket.html</filename>. This page displays the contents of the shopping basket and contains other shopping basket functionality.
+		For the <tag>order</tag> tag, Interchange expects a default page called <filename>pages/ord/basket.html</filename>. This page displays the contents of the shopping basket and contains other shopping basket functionality.
 		</para> <para>
-		The standard demo catalog has a full-featured shopping basket available for use, but this tutorial teaches you to build your own simple one. The shopping basket items can be accessed using a set of tags that have an [item] prefix. Put the following code in the new <filename>pages/ord/basket.html</filename> file. The section that follows explains the tags used.
+		The standard demo catalog has a full-featured shopping basket available for use, but this tutorial teaches you to build your own simple one. The shopping basket items can be accessed using a set of tags that have an <tag>item</tag> prefix. Put the following code in the new <filename>pages/ord/basket.html</filename> file. The section that follows explains the tags used.
 		<programlisting>
 <xi:include parse='text'  href='../files/tutorial-phase3/pages/ord/basket.html'></xi:include>
 		</programlisting>
 		</para> <para>
-		The basket items can be accessed one at a time by using the [item-list] tag. So we will create a table by iterating through the basket items. The text within the [item-list] [/item-list] tags is created for each item in the list.
+		The basket items can be accessed one at a time by using the <tag>item-list</tag> tag. So we will create a table by iterating through the basket items. The text within the <tag>item-list</tag> <tag>item-list</tag> tags is created for each item in the list.
 		</para> <para>
-		[item-quantity] shows the quantity of the item ordered. If the same item is ordered multiple times, the quantity increases.
+		<tag>item-quantity</tag> shows the quantity of the item ordered. If the same item is ordered multiple times, the quantity increases.
 		</para> <para>
-		[item-field description] shows the description from the product database table. Any field that is not special to Interchange can be accessed from the shopping cart this way.
+		<tag>item-field description</tag> shows the description from the product database table. Any field that is not special to Interchange can be accessed from the shopping cart this way.
 		</para> <para>
-		[item-price] shows the per-item price that is defined in the product database table.
+		<tag>item-price</tag> shows the per-item price that is defined in the product database table.
 		</para> <para>
-		[item-subtotal] shows the total cost of this order line. This is normally the price multiplied by the quantity, but it can also take into account other considerations, such as various kinds of price discounts.
+		<tag>item-subtotal</tag> shows the total cost of this order line. This is normally the price multiplied by the quantity, but it can also take into account other considerations, such as various kinds of price discounts.
 		</para> <para>
-		[subtotal] shows the calculated shopping basket subtotal.
+		<tag>subtotal</tag> shows the calculated shopping basket subtotal.
 		</para> <para>
-		[page index] creates the starting HTML lta href=...gt for a link to the catalog welcome page.
+		<tag>page index</tag> creates the starting HTML lta href=...gt for a link to the catalog welcome page.
 		</para> <para>
 		You also need to put a link in the index page so that shoppers can go to their shopping cart without ordering something. Modify the end of <filename>pages/index.html</filename> by adding the following lines:
 		<programlisting><![CDATA[
@@ -643,7 +643,7 @@ ErrorFile /var/log/interchange/error.log
 <xi:include parse='text'  href='../files/tutorial-phase4/pages/checkout.html'></xi:include>
 		</programlisting>
 		</para> <para>
-		The HTML form begins with a method of 'post' (which sends the form data as its own stream, as opposed to the 'get' method which encodes the data as part of the URL). The [process] tag creates a special URL for form processing. Interchange has a built-in form processor that is configured by submitting certain fields in the form. The Finalize button will invoke this form processor and link the user to the <filename>special_pages/receipt.html</filename> page, which is described later.
+		The HTML form begins with a method of 'post' (which sends the form data as its own stream, as opposed to the 'get' method which encodes the data as part of the URL). The <tag>process</tag> tag creates a special URL for form processing. Interchange has a built-in form processor that is configured by submitting certain fields in the form. The Finalize button will invoke this form processor and link the user to the <filename>special_pages/receipt.html</filename> page, which is described later.
 		</para> <para>
 		You are submitting some hidden form values that will tell Interchange how to process this form. The first value, mv_todo was set as submit. This causes the form to be submitted for validation. The second value, mv_order_profile was set as order_profile. This determines the validation process for the form. It is explained further in the next section.
 		</para> <para>
@@ -682,7 +682,7 @@ OrderProfile etc/profiles.order
 <xi:include parse='text'  href='../files/tutorial-phase4/special_pages/needfield.html'></xi:include>
 		</programlisting>
 		</para> <para>
-		The [error] tag is the most important tag on this page. The 'all' parameter tells the tag to iterate through all of the errors reported from the failed verification, and the 'show_var' parameter indicates that the failed variable name should be displayed. For example, if the first name was left empty, fname would be shown. The 'show_error' parameter displays the actual error for the variable. The joiner parameter inserts an HTML ltbrgt tag between each error message, so each error is displayed on its own line. In more complex configurations, the [error] tag can be even more expressive.
+		The <tag>error</tag> tag is the most important tag on this page. The 'all' parameter tells the tag to iterate through all of the errors reported from the failed verification, and the 'show_var' parameter indicates that the failed variable name should be displayed. For example, if the first name was left empty, fname would be shown. The 'show_error' parameter displays the actual error for the variable. The joiner parameter inserts an HTML ltbrgt tag between each error message, so each error is displayed on its own line. In more complex configurations, the <tag>error</tag> tag can be even more expressive.
 		</para>
 	</sect2>
 
@@ -718,9 +718,9 @@ __END__
 <xi:include parse='text'  href='../files/tutorial-phase4/etc/report'></xi:include>
 		</programlisting>
 		</para> <para>
-		This file is in plain text format where, unlike HTML, white space is relevant. It is fairly straightforward, except that the [if] tag was added to only include the optional second address line if the customer filled it in.
+		This file is in plain text format where, unlike HTML, white space is relevant. It is fairly straightforward, except that the <tag>if</tag> tag was added to only include the optional second address line if the customer filled it in.
 		</para> <para>
-		One of the special properties of the mv_credit_card_number field is that Interchange specifically precludes the credit card number from being saved. This makes it unavailable to you in the [value] tag. The [cgi] tag is used to circumvent this important security measure in order to get the value submitted from the last form.
+		One of the special properties of the mv_credit_card_number field is that Interchange specifically precludes the credit card number from being saved. This makes it unavailable to you in the <tag>value</tag> tag. The <tag>cgi</tag> tag is used to circumvent this important security measure in order to get the value submitted from the last form.
 		</para>
 		<warning><para>
 			Obviously it is a bad idea to send a real credit card number over an insecure channel like email. In a real configuration, you would encrypt the number securely before emailing or storing it.
@@ -778,9 +778,9 @@ __END__
 Locale en_US currency_symbol $
 		</programlisting>
 		</para> <para>
-		Restart Interchange and view your catalog. You will notice little has changed on the welcome page or the flypages, <command>but in the shopping cart</command> (<filename>pages/ord/basket.html</filename>) all your prices should be formatted as U.S. dollars ("1347.3" has become "$1,347.30"). Why the currency is only displayed on the basket page is easy to understand; we use the [item-price] tag there. That tag is equivalent to [item-field price] used elsewhere, but it has that extra logic associated with it that automatically displays the currency format. To use [item-price] without the autoformat, you'd have to change the [item-price] tag to [item-price noformat].
+		Restart Interchange and view your catalog. You will notice little has changed on the welcome page or the flypages, <command>but in the shopping cart</command> (<filename>pages/ord/basket.html</filename>) all your prices should be formatted as U.S. dollars ("1347.3" has become "$1,347.30"). Why the currency is only displayed on the basket page is easy to understand; we use the <tag>item-price</tag> tag there. That tag is equivalent to <tag>item-field price</tag> used elsewhere, but it has that extra logic associated with it that automatically displays the currency format. To use <tag>item-price</tag> without the autoformat, you'd have to change the <tag>item-price</tag> tag to <tag>item-price noformat</tag>.
 		</para> <para>
-		But that's probably not what you want to do. You're probably more interested in formatting your other prices (such as those on the Welcome page) as currency. To do that, you could obviously replace [item-field price] with [item-price], but we'll take on more general approach here. Simply use the [currency][/currency] tag pair for all price values. Make the following change to <filename>pages/index.html</filename>:
+		But that's probably not what you want to do. You're probably more interested in formatting your other prices (such as those on the Welcome page) as currency. To do that, you could obviously replace <tag>item-field price</tag> with <tag>item-price</tag>, but we'll take on more general approach here. Simply use the <tag>currency</tag><tag>/currency</tag> tag pair for all price values. Make the following change to <filename>pages/index.html</filename>:
 		<programlisting><![CDATA[
 	[loop search="ra=yes/fi=products"]
 	<tr>
@@ -801,7 +801,7 @@ Locale en_US currency_symbol $
 		The line that begins with '-' should be deleted. Do not type the '-'. The next line, that starts with '+', replaces it. (It's the <emphasis>context diff</emphasis> format we mentioned, remember?)
 		</para></note>
 		<para>
-		A similar change to the [item-field price] tag in the <filename>pages/flypage.html</filename> page will fix that currency display. View the page in your browser. All your prices should be formatted for U.S. currency.
+		A similar change to the <tag>item-field price</tag> tag in the <filename>pages/flypage.html</filename> page will fix that currency display. View the page in your browser. All your prices should be formatted for U.S. currency.
 		</para> <para>
 		If your prices are not being formatted correctly, your default system locale may be set up differently or your en_US locale settings may be wrong. There are a few other catalog.cfg directives you can use to correct the situation:
 		<programlisting>
@@ -945,7 +945,7 @@ Now add the following to the left template piece:
   </table>
 		]]></programlisting>
 		</para> <para>
-		In the first set of ltselectgt lt/selectgt tags a list is generated of the months to choose from. This is accomplished by using a [loop] tag. In this case we are looping over an explicit list. The list is provided in the list parameter. Use caution when typing this, as it is sensitive to formatting (which may not be reflected in this document). Make sure that the numbers are the first characters on each new line and that the single tab separates them from the rest of the line text. Since the columns in this list are not named, the first element can be accessed using [loop-code] or [loop-pos 0] with subsequent elements being accessed by [loop-pos N] where N is the number of the column you want. Notice that the elements are zero-indexed. Each time through this loop Interchange generates a select ltoptiongt with a number as the value and the name of the month as the text for the select menu.
+		In the first set of ltselectgt lt/selectgt tags a list is generated of the months to choose from. This is accomplished by using a <tag>loop</tag> tag. In this case we are looping over an explicit list. The list is provided in the list parameter. Use caution when typing this, as it is sensitive to formatting (which may not be reflected in this document). Make sure that the numbers are the first characters on each new line and that the single tab separates them from the rest of the line text. Since the columns in this list are not named, the first element can be accessed using <tag>loop-code</tag> or <tag>loop-pos 0</tag> with subsequent elements being accessed by <tag>loop-pos N</tag> where N is the number of the column you want. Notice that the elements are zero-indexed. Each time through this loop Interchange generates a select ltoptiongt with a number as the value and the name of the month as the text for the select menu.
 		</para> <para>
 		For the next set of ltselectgt lt/selectgt tags embedded Perl is used to generate the list which is iterated over. Perl code can be embedded in Interchange pages in order to extend the abilities of the system. Make sure you type backticks (grave accents) after "list=" and before the closing bracket (and <command>not apostrophes</command>). This code generates an entry for seven years in addition to the current year. It is not necessary at this point for you to understand this Perl code.
 		</para>
@@ -1048,7 +1048,7 @@ Now add the following to the left template piece:
 		</para> <para>
 		This is a simple HTML form with a single input box for text. The action goes to a special Interchange processor called 'search' that will perform the search and pass the results to a page called <filename>pages/results.html</filename> (that has not been created yet). The search will be case-insensitive, but will only match complete words, not substrings.
 		</para> <para>
-		The [set testname] ... [/set] tags set an Interchange 'value' variable that, in this case, will be used as a predefined search profile. We specify all the search parameters except the one the user will enter, 'mv_searchspec' (the long name for 'se'). We then tell Interchange we want to use this search profile in a hidden form tag named 'mv_profile'.
+		The <tag>set testname</tag> ... <tag>/set</tag> tags set an Interchange 'value' variable that, in this case, will be used as a predefined search profile. We specify all the search parameters except the one the user will enter, 'mv_searchspec' (the long name for 'se'). We then tell Interchange we want to use this search profile in a hidden form tag named 'mv_profile'.
 		</para> <para>
 		The search box will now appear on all catalog pages, but you still need to create the search results page. To create the search results page, type the following code and save it as <filename>pages/results.html</filename>.
 		</para> <para>
@@ -1056,7 +1056,7 @@ Now add the following to the left template piece:
 <xi:include parse='text'  href='../files/tutorial-phase5/pages/results.html'></xi:include>
 		</programlisting>
 		</para> <para>
-		The search results will be contained in the [search-region] [/search-region] tags. The text in the [on-match] [/on-match] container will be displayed only if matches were found for the search. The text in the [no-match] [/no-match] container will be displayed only if no matches were found. The [search-list] [/search-list] container functions just like [loop] [/loop], iterating over its contents for each item in the search results list.
+		The search results will be contained in the <tag>search-region</tag> <tag>/search-region</tag> tags. The text in the <tag>on-match</tag> <tag>/on-match</tag> container will be displayed only if matches were found for the search. The text in the <tag>no-match</tag> <tag>/no-match</tag> container will be displayed only if no matches were found. The <tag>search-list</tag> <tag>/search-list</tag> container functions just like <tag>loop</tag> <tag>/loop</tag>, iterating over its contents for each item in the search results list.
 		</para>
 	</sect2>
 
@@ -1078,21 +1078,21 @@ DirectoryIndex index
 	<sect2 id='High_trafficChanges'>
 		<title>High-traffic Changes</title>
 		<para>
-		During this tutorial you have created catalog pages that use the [include] tag to include template pieces in the pages. This has worked well, but there are a few drawbacks. First, if you want to rename any of the template piece files or move them out of the main catalog directory and into their own subdirectory, you would have to update the [include] tag on every page. To avoid this, you can create catalog variables set to the [include] tags. Add these lines to your <filename>catalog.cfg</filename> file:
+		During this tutorial you have created catalog pages that use the <tag>include</tag> tag to include template pieces in the pages. This has worked well, but there are a few drawbacks. First, if you want to rename any of the template piece files or move them out of the main catalog directory and into their own subdirectory, you would have to update the <tag>include</tag> tag on every page. To avoid this, you can create catalog variables set to the <tag>include</tag> tags. Add these lines to your <filename>catalog.cfg</filename> file:
 		<programlisting>
 Variable TOP    [include top]
 Variable LEFT   [include left]
 Variable BOTTOM [include bottom]
 		</programlisting>
 		</para> <para>
-		Now change every instance of [include top] to __TOP__, doing the same for each [include] tag. At this point, you might not want to do a search-and-replace<footnote><para>If you're adventurous enough, try this Perl oneliner on the command line for automatic replace: cd /var/lib/interchange/catalogs/tutorial; perl -pi -e 's/\[include (\S+)\]/"__".uc($1)."__"/ge' `find . -name '*.html'`</para></footnote> on all the .html files you just created, but keep this capability in mind for the next catalog you work on.
+		Now change every instance of <tag>include top</tag> to __TOP__, doing the same for each <tag>include</tag> tag. At this point, you might not want to do a search-and-replace<footnote><para>If you're adventurous enough, try this Perl oneliner on the command line for automatic replace: cd /var/lib/interchange/catalogs/tutorial; perl -pi -e 's/\[include (\S+)\]/"__".uc($1)."__"/ge' `find . -name '*.html'`</para></footnote> on all the .html files you just created, but keep this capability in mind for the next catalog you work on.
 		</para> <para>
 		If you made all of the replacements and then renamed and moved your top file elsewhere, you would only have to make a single change for each region in <filename>catalog.cfg</filename> to get your pages up to date:
 		<programlisting>
 Variable TOP    [include templates/main-top]
 		</programlisting>
 		</para> <para>
-		Every time a catalog page is viewed, each file in an [include] tag must be loaded from disk. In a test situation, this takes no noticeable amount of time. But on a busy Interchange server, this can slow your system.
+		Every time a catalog page is viewed, each file in an <tag>include</tag> tag must be loaded from disk. In a test situation, this takes no noticeable amount of time. But on a busy Interchange server, this can slow your system.
 		</para> <para>
 		You can switch to a high-traffic mode that doesn't require each template piece to be read from disk every time the page is loaded. Instead, all of the pieces are read into variables once when Interchange is started and they remain in memory until you restart Interchange, or reconfigure the catalog. On very busy Interchange catalogs, this can increase your speed noticeably. The (only) drawback is that you need to restart Interchange (or reconfigure the catalog) every time you make a change to the template pieces. You can set up those high-traffic templates by changing the Variable directives in catalog.cfg as follows:
 		<programlisting><![CDATA[

@@ -12,9 +12,11 @@ use Getopt::Long;
 use Storable qw/nstore_fd fd_retrieve/;
 use Fcntl qw/:DEFAULT :flock/;
 
+{ no warnings;
 $Data::Dumper::Indent = 1;
 $Data::Dumper::Terse++;
 $Data::Dumper::Sortkeys++;
+}
 
 my $dumpdb = 0;
 my $verbose = 0;

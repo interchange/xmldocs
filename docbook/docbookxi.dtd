@@ -4,6 +4,7 @@
 <!ENTITY % msgset.content.module "IGNORE">
 
 
+<!-- XInclude element -->
 <!ELEMENT xi:include (xi:fallback?)>
 <!ATTLIST xi:include
     xmlns:xi        CDATA       #FIXED    "http://www.w3.org/2003/XInclude"
@@ -20,12 +21,37 @@
 <!ATTLIST xi:fallback
     xmlns:xi   CDATA   #FIXED   "http://www.w3.org/2003/XInclude"
 >
-
-<!ENTITY % local.para.char.mix "|xi:include">
 <!ENTITY % local.common.attrib  "xml:base  CDATA  #IMPLIED">
 
+
+
+<!ENTITY % local.para.char.mix "|xi:include">
+<!ENTITY % local.tech.char.class "|tag">
 
 <!-- Load DocBook -->
 <!ENTITY % DocBookDTD PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
 	"file:///usr/share/xml/docbook/schema/dtd/4.2/docbookx.dtd"> %DocBookDTD;
+
+
+<!-- tag element -->
+<!ENTITY % tag.module "INCLUDE">
+<![%tag.module;[
+<!ENTITY % local.tag.attrib "">
+<!ENTITY % tag.role.attrib "%role.attrib;">
+
+<!ENTITY % tag.element "INCLUDE">
+<![%tag.element;[
+<!ELEMENT tag %ho; (%para.char.mix;|%para.mix;)*>
+<!--end of tag.element-->]]>
+
+<!ENTITY % tag.attlist "INCLUDE">
+<![%tag.attlist;[
+<!ATTLIST tag
+    %moreinfo.attrib;
+    %common.attrib;
+    %tag.role.attrib;
+    %local.tag.attrib;
+>
+<!--end of tagname.attlist-->]]>
+<!--end of tagname.module-->]]>
 

@@ -96,7 +96,7 @@ cache: tree-stats objlists tags
 
 objlists:
 	# Generate human-readable ctags information
-	for p in $(IC_VERSIONS); do \
+	-for p in $(IC_VERSIONS); do \
 		ctags -R -x --languages=perl --perl-kinds=cls sources/$$p/ \
 		> $(CACHE)/$$p/.objectlist.perl.txt; \
 		ctags -R -x --languages=c --c-kinds=cdf sources/$$p/ \
@@ -106,7 +106,7 @@ objlists:
 
 tags:
 	# Generate ctags information
-	for p in $(IC_VERSIONS); do \
+	-for p in $(IC_VERSIONS); do \
 		ctags -f $(CACHE)/$$p/.tags -R --extra=fq --fields=afikKlmnsSz --line-directives sources/$$p; \
 		cd sources \
 	; done
@@ -114,7 +114,7 @@ tags:
 tree-stats:
 	# Generate stats to bin dump 
 	# Only do that when sources/ is populated
-	for p in $(IC_VERSIONS); do \
+	-for p in $(IC_VERSIONS); do \
 		mkdir -p $(CACHE)/$$p; \
 		./bin/stattree sources/$$p \
 	; done
@@ -128,7 +128,7 @@ tree-reports:
 
 tree-cache:
 	# Copy tree stats to $(OUTPUT)
-	for p in $(IC_VERSIONS); do \
+	-for p in $(IC_VERSIONS); do \
 		cp -a $(CACHE)/$$p $(OUTPUT) \
 	; done
 

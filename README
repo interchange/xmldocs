@@ -18,11 +18,13 @@ To build specific targets, see Makefile for target names.
 
 PREREQUISITES
 
-To perform a successful build, this programs and modules must be available:
+To perform a successful build, the following programs and modules
+must be available:
 
   - Perl
   - Shell commands: mkdir, cp, tar, gzip, bzip2
-  - DocBook XML
+  - docbook-xml
+  - docbook-xsl
   - xsltproc
 
 
@@ -71,13 +73,19 @@ DEVELOPMENT NOTES
    (Or the "sources" file can be a symlink to the right location where
    you keep such directory structure).
 
-   Once that's in place, run "make cache". This will regenerate files for
+   Once that's in place, add the appropriate version under IC_VERSIONS 
+   in the Makefile and run "make cache". This will regenerate files for
    the versions you have.
 
    As this is only rarely done (only when the release changes due to an
    important backport or something - and even then it probably doesn't 
-   change any figures because the updates are small), the generated files
+   change any figures because the updates are small), the generated dotfiles
    *are* kept in the CVS because they can be considered static.
+
+   When bin/mkreport runs later, it parses the .cache.bin file and produces
+   number of output files (interesting "leaf nodes" in a hash). Those 
+   files are filesystem interface to tree-level statistics, and can be
+   used in numerous ways, XInclude for example.
 
 
  The XML "preprocessor" tool:
