@@ -28,6 +28,8 @@ PRIMARY:
 	  and "etc/profiles.order" and 2 sections after it and below
   - at the top where describing IC, mention it's built on Perl and ITL
 	- replace [area search] in phase5 with better (file and directory)
+	- replace <tag> with <code> where putting tag alone in the source would work.
+	- explain syntax accepted in profile files
 
 
 DOCUMENTATION SYSTEM:
@@ -103,3 +105,6 @@ Tags:
 
 ----
 
+guibutton
+mv
+literal for values

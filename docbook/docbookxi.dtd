@@ -143,3 +143,26 @@ Starting with Interchange 5.0, the <code>$::Pragma->{name}</code> syntax is used
 >
 <!--end of pragma.attlist-->]]>
 <!--end of pragma.module-->]]>
+
+<!-- mv element -->
+<!ENTITY % mv.module "INCLUDE">
+<![%mv.module;[
+<!ENTITY % local.mv.attrib "">
+<!ENTITY % mv.role.attrib "%role.attrib;">
+
+<!ENTITY % mv.element "INCLUDE">
+<![%mv.element;[
+<!ELEMENT mv %ho; (%para.char.mix;|%para.mix;)*>
+<!--end of mv.element-->]]>
+
+<!ENTITY % mv.attlist "INCLUDE">
+<![%mv.attlist;[
+<!ATTLIST mv
+    %moreinfo.attrib;
+    %common.attrib;
+    %mv.role.attrib;
+    %local.mv.attrib;
+>
+<!--end of mv.attlist-->]]>
+<!--end of mv.module-->]]>
+

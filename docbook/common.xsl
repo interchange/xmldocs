@@ -24,6 +24,7 @@
 	<!--<xsl:template match="tag"><xsl:text>[</xsl:text><xsl:call-template name="inline.monoseq"/><xsl:text>]</xsl:text></xsl:template>-->
 	<xsl:template match="tag">[<xsl:call-template name="inline.monoseq"/>]</xsl:template>
 	<xsl:template match="pragma"><xsl:call-template name="inline.monoseq"/></xsl:template>
+	<xsl:template match="mv"><xsl:call-template name="inline.monoseq"/></xsl:template>
 
   <xsl:param name="local.l10n.xml" select="document('')"/>
   <l:i18n xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">
