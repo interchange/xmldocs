@@ -68,15 +68,10 @@ for more information.
 __END__
 
 
-__NAME__ example
-<example>
-	<title>Display short fortune saying</title>
-	<para>
-	Put the following on your page:
-	</para>
-	<programlisting>
+__NAME__ example: Display short fortune saying
+Put the following on your page:
+<programlisting>
 [fortune 1]
-	</programlisting>
-</example>
+</programlisting>
 __END__
 

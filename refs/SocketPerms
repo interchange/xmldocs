@@ -27,12 +27,9 @@ easier debug problems.
 __END__
 
 
-__NAME__ example
-<example>
-  <title></title>
-  <programlisting>
+__NAME__ example: Setting SocketPerms
+<programlisting>
 SocketPerms 0666
-  </programlisting>
-</example>
+</programlisting>
 __END__
 

@@ -106,11 +106,7 @@ __END__
 
 
 __NAME__ example
-<example>
-	<title></title>
-	<para>
-	</para>
-	<programlisting>
+<programlisting>
 [get-url
   url="valid_url"
   method="POST"
@@ -121,16 +117,11 @@ __NAME__ example
   authpass="password"
   useragent="useragent string"
 ]
-	</programlisting>
-</example>
+</programlisting>
 __END__
 
 __NAME__ example2
-<example>
-	<title></title>
-	<para>
-	</para>
-	<programlisting>
+<programlisting>
 [get-url
   url="http://www.icdevgroup.org"
   method=POST
@@ -140,7 +131,6 @@ __NAME__ example2
     boo=The red's the thing.
   |
 ]
-	</programlisting>
-</example>
+</programlisting>
 __END__
 

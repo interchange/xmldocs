@@ -54,16 +54,11 @@ Here's the equivalency list:
 __END__
 
 
-__NAME__ example
-<example>
-	<title>Direct access equivalency example</title>
-	<para>
-	Note that the following two lines are identical in effect:
-	</para>
-	<programlisting>
+__NAME__ example: Direct access equivalency example
+Note that the following two lines are identical in effect:
+<programlisting>
 [image  src="[var IMAGE_DIR]/items/[cgi item_id]" border=0 extra="id='item_img'"]
 [image  src="__IMAGE_DIR__/items/[cgi item_id]" border=0 extra="id='item_img'"]
-	</programlisting>
-</example>
+</programlisting>
 __END__
 

@@ -64,15 +64,11 @@ variable.
 __END__
 
 
-__NAME__ example
-<example>
-	<title>Switch and display namespaces</title>
-	<programlisting>
+__NAME__ example: Switch and display namespaces
+<programlisting>
 Current namespace is: [values-space] <sbr/>
 Switching to namespace 'basket': [values-space basket] <sbr/>
 Switching [values-space name=checkout show=1 clear=1] to clear [values-space] <sbr/>
-
-	</programlisting>
-</example>
+</programlisting>
 __END__
 

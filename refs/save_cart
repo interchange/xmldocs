@@ -47,15 +47,10 @@ Note that the cart name does not have to be unique. If there are more carts
 with the same nickname, an index will be added.
 __END__
 
-__NAME__ example
-<example>
-  <title>Save cart to UserDB</title>
-	<para>
-	Place the following on an Interchange page:
-	</para>
-  <programlisting>
+__NAME__ example: Save cart to UserDB
+Place the following on an Interchange page:
+<programlisting>
 [save_cart mycart]
-  </programlisting>
-</example>
+</programlisting>
 __END__
 

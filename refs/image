@@ -274,29 +274,22 @@ might not be the best tool for the job.
 __END__
 
 
-__NAME__ example
-<example>
-	<title>Simple image</title>
-	<para>
-	Let's suppose there'a product SKU os29000 present in your 
-	<database>products</database> database and the
-	<database class='field'>image</database> field contains value
-	<literal>os29000.png</literal>. Place the <tag>image</tag> on a test
-	page:
-	</para>
-	<programlisting>
+__NAME__ example: Simple image
+Let's suppose there'a product SKU os29000 present in your 
+<database>products</database> database and the
+<database class='field'>image</database> field contains value
+<literal>os29000.png</literal>. Place the <tag>image</tag> on a test
+page:
+<programlisting>
 [image os29000]
-	</programlisting>
-	<para>
-	The tag would produce something like:
-	</para>
-	<programlisting><![CDATA[
+</programlisting>
+The tag would produce something like:
+<programlisting><![CDATA[
 <img src="/standard/images/os29000.png"
       width="120"
       height="150"
       alt="3' Step Ladder"
       title="3' Step Ladder">
-	]]></programlisting>
-</example>
+]]></programlisting>
 __END__
 

@@ -47,17 +47,12 @@ empty elements in return.
 __END__
 
 
-__NAME__ example
-<example>
-	<title>Return one random word</title>
-	<para>
-	Put the following on a test page:
-	</para>
-	<programlisting>
+__NAME__ example: Return one random word
+Put the following on a test page:
+<programlisting>
 [rand separator=" "]
 Foo Bar Baz Quux Toad Stool
 [/rand]
-	</programlisting>
-</example>
+</programlisting>
 __END__
 

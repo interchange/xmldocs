@@ -24,13 +24,9 @@ won't be delivered.
 __END__
 
 
-__NAME__ example
-<example>
-	<title>Simple raw e-mail message</title>
-	<para>
-	Put the following on a test page:
-	</para>
-	<programlisting>
+__NAME__ example: Simple raw e-mail message
+Put the following on a test page:
+<programlisting>
 [email-raw]
 From: test@localhost
 To: root@localhost
@@ -49,12 +45,9 @@ MAY I AT THIS POINT EMPHASIZE THE HIGH LEVEL OF CONFIDENTIALLITY WHICH THIS
 BUSINESS DEMANDS AND HOPE YOU WILL NOT BETRAY THE TRUST AND CONFIDENCE WHICH
 WE REPOSE IN YOU.
 [/email-raw]
-	</programlisting>
-	<para>
+</programlisting>
 We hope you will recognize an attempt at humor in the example above, and
 won't use it as an idea for
 <ulink url="http://spam.abuse.net/">spamming</ulink> activities.
-	</para>
-</example>
 __END__
 

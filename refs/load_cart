@@ -40,15 +40,10 @@ This tag loads a cart from the &glos-UserDB;.
 one</emphasis>.
 __END__
 
-__NAME__ example
-<example>
-  <title>Merge a saved cart to the current one</title>
-	<para>
-	Place the following on an Interchange page:
-	</para>
-  <programlisting>
+__NAME__ example: Merge a saved cart to the current one
+Place the following on an Interchange page:
+<programlisting>
 [load_cart nickname="mycart:990102732:c"]
-  </programlisting>
-</example>
+</programlisting>
 __END__
 

@@ -29,18 +29,13 @@ nickname=<replaceable>CART_NAME</replaceable>]</code>.
 __END__
 
 
-__NAME__ example
-<example>
-	<title>Delete cart "test"</title>
-	<para>
-	Put the following on your page:
-	</para>
-	<programlisting>
+__NAME__ example: Delete cart "test"
+Put the following on your page:
+<programlisting>
 [seti cartname]test[/seti]
 
 [delete_cart nickname="[scratch cartname]"]
 </programlisting>
-</example>
 __END__
 
 

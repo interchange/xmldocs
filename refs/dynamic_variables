@@ -26,16 +26,11 @@ so check their reference pages for more information.
 __END__
 
 
-__NAME__ example
-<example>
-	<title>Enable dynamic_variables pragma catalog-wide</title>
-	<para>
-	Put the following in your <filename>catalog.cfg</filename>:
-	</para>
-	<programlisting>
+__NAME__ example: Enable dynamic_variables pragma catalog-wide
+Put the following in your <filename>catalog.cfg</filename>:
+<programlisting>
 Pragma dynamic_variables
-	</programlisting>
-</example>
+</programlisting>
 __END__
 
 

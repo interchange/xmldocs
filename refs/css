@@ -126,29 +126,20 @@ rebuild, you must explicitly delete the generated
 __END__
 
 
-__NAME__ example
-<example>
-	<title>Simplest tag example</title>
-	<programlisting>
+__NAME__ example: Simplest tag example
+<programlisting>
 [css THEME_CSS]
 </programlisting>
-	<para>
-	In the example above, the <tag>css</tag> will look for the 
-	<filename>images/theme_css.css</filename>, and generate a HTML link to it
-	(&lt;link rel="stylesheet" href="/images/theme_css.css"&gt;).
-	</para>
-</example>
+In the example above, the <tag>css</tag> will look for the 
+<filename>images/theme_css.css</filename>, and generate a HTML link to it
+(&lt;link rel="stylesheet" href="/images/theme_css.css"&gt;).
 __END__
 
-__NAME__ example2
-<example>
-	<title>Using literal</title>
-	<para>
-	You can either save your CSS in a &glos-scratch;
-	variable, or provide it 
-	directly in-place. Here are both variants:
-	</para>
-	<programlisting>
+__NAME__ example2: Using literal
+You can either save your CSS in a &glos-scratch;
+variable, or provide it 
+directly in-place. Here are both variants:
+<programlisting>
 [set my_css]
 .title { background-color: #336699; }
 [/set]
@@ -156,7 +147,6 @@ __NAME__ example2
 [css name="test_css1" literal="[scratch my_css]"]
 [css name="test_css2" literal="body { background-color: yellow; }"]
 </programlisting>
-</example>
 __END__
 
 __NAME__ author

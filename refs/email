@@ -65,20 +65,15 @@ a valid e-mail address, or the message surely won't be delivered.
 __END__
 
 
-__NAME__ example
-<example>
-	<title>Simple e-mail message</title>
-	<para>
-	Put the following on a test page:
-	</para>
-	<programlisting>
+__NAME__ example: Simple e-mail message
+Put the following on a test page:
+<programlisting>
 [email
   to="root@mydomain.local"
   subject="Greetings"
 ]
 Hello, World!
 [/email]
-	</programlisting>
-</example>
+</programlisting>
 __END__
 

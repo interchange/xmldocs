@@ -124,10 +124,8 @@ automatically discarded from the link candidates list.
 __END__
 
 
-__NAME__ example
-<example>
-	<title>"Continue Shopping" button</title>
-	<programlisting>
+__NAME__ example: "Continue Shopping" button
+<programlisting>
 [button
   text="Continue shopping"
   src="__THEME_IMG_DIR__/continueshopping.gif"
@@ -139,21 +137,14 @@ __NAME__ example
           default=index]']
   mv_nextpage=nothing
 [/button]
-	</programlisting>
-	<para>
+</programlisting>
 This example was provided by Jeff Dafoe.
-	</para>
-</example>
 __END__
 
-__NAME__ example2
-<example>
-	<title>"Continue" after login</title>
-	<para>
-	Here's a simple login form that returns the user to the previous page
-	after successful login:
-	</para>
-	<programlisting><![CDATA[
+__NAME__ example2: "Continue" after login
+Here's a simple login form that returns the user to the previous page
+after successful login:
+<programlisting><![CDATA[
 <form action="[process secure=1]" method="post">
 <input type="hidden"   name="mv_todo"        value="return>
 <input type="hidden"   name="mv_click"       value="Login">
@@ -167,6 +158,5 @@ __NAME__ example2
 <input type="submit"   name="submit"         value="Log In">
 </form>
 ]]></programlisting>
-</example>
 __END__
 

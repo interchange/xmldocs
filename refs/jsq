@@ -19,32 +19,25 @@ This is mostly used for long strings which are hard to prepare manually.
 <tag>jsquote</tag> is an alias for <tag>jsq</tag>.
 __END__
 
-__NAME__ example
-<example>
-  <title>Basic example</title>
-	<para>
-	Here's an example of JavaScript code and the output it would generate,
-	once expanded by Interchange:
-	</para>
-  <programlisting><![CDATA[
+__NAME__ example: Basic example
+Here's an example of JavaScript code and the output it would generate,
+once expanded by Interchange:
+<programlisting><![CDATA[
 <script>
   var astring = 'just an insert';
   var somevar = [jsq] Big long string you don't
   want to have to quote for JS, and you want to
   insert the variable $astring.[/jsq];
 </script>
-  ]]></programlisting>
-	<para>
-	Expands to:
-	</para>
-  <programlisting><![CDATA[
+]]></programlisting>
+Expands to:
+<programlisting><![CDATA[
 <script>
 var astring = 'just an insert';
 var somevar = " Big long string you don't" +
   '  want to have to quote for JS, and you want to' +
   '  insert the variable ' + astring + '.';
 </script>
-  ]]></programlisting>
-</example>
+]]></programlisting>
 __END__
 

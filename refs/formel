@@ -178,19 +178,14 @@ __NAME__ example
 </example>
 __END__
 
-__NAME__ example2
-<example>
-	<title>Displaying the label and form element in two passes</title>
-	<para>
-	If you had specific requirements, you could,
-	by using a little trickery, display the form element label and the
-	element itself in two passes:
-	</para>
-	<programlisting>
+__NAME__ example2: Displaying the label and form element in two passes
+If you had specific requirements, you could,
+by using a little trickery, display the form element label and the
+element itself in two passes:
+<programlisting>
 [formel label=Username: name=login format="%s"]
 [formel name=login order=1 format="%s"]
-  </programlisting>
-</example>
+</programlisting>
 __END__
 
 __NAME__ author

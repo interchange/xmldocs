@@ -34,15 +34,10 @@ pragma.
 __END__
 
 
-__NAME__ example
-<example>
-	<title>Disable download pragma on a page</title>
-	<para>
-	Put the following anywhere on your specific page:
-	</para>
-	<programlisting>
+__NAME__ example: Disable download pragma on a page
+Put the following anywhere on your specific page:
+<programlisting>
 [pragma download 0]
-	</programlisting>
-</example>
+</programlisting>
 __END__
 
