@@ -1,11 +1,10 @@
 
 - See that if 'crypt' is put in see also, all symbols of that name appear
   in see also line and their type is distinguished visually.
-- Finish proper formatting for online examples
 - Add ROW_REPARSE along ROW_INTERPOLATE in tag refs
 - TAXAREA is not discovered in source by bin/stattree
 - toc in glossary
-- &gloss-hello-world needs to give "hello world", not "hello-world" as text
+- Make MapRoutined source contexts have Line: x-y instead of Lines: z header.
 - make glossary,howto items also appear as symbols, so that you can put
   their names in See Also and get generated links
 - find out where on denali did I misplace a "port" of icvariables?
@@ -13,13 +12,18 @@
   first example does not see the other, but the other sees the first becase
   of 10 lines of pre-context. (example is IMAGE_MOGRIFY refentry). In those
   cases, resize area of the context report so that it appears as one
+- With confs, also include source context where it is being used
+- Enhance stuff with acronyms
+- Under AUTHORS, include cvs line where appropriate (guides, howtos, gloss... )
+- In vars.html, include line if it appears in variable.txt
 
 Outstanding:
 - why email, email-raw, SendMailProgram produce errors about usertags olink ID
 - Add docbook element to reference mailing list posts. Something like
   <ml list='users'>2004-December/041539</ml>, it expands to:
 	<ulink url="http://www.icdevgroup.org/pipermail/interchange-users/2004-December/041539.html">2004-December/041539</ulink>.
-- Ask ndw about including [NEW!] and [TODO!] in titles in TOC.
+- Ask ndw about including [NEW!] and [TODO!] in titles in TOC. --> This is a 
+  bug and it will work when they fix it.
 - match style (no starting verb or all starting verbs) in all Example titles
 - check if all Default fields are properly formated (<literal> or none)
 - s/a HTML/an HTML/
@@ -38,6 +42,7 @@ DOCUMENTATION SYSTEM:
 
 
  Mid-term:
+- &glos-hello-world needs to give "hello world", not "hello-world" as text
 - List of mv_s, descriptions and shortcuts
 - for "online" docs, also provide a form where users can add comments or
   ask for clarification. (this could be done with either pure IC (forum?), or 
@@ -51,7 +56,6 @@ DOCUMENTATION SYSTEM:
 - If filter returns Vend::xxx::something(), include that function in context
   reports, and try to determine the "Uses" field (which also needs to be
   added to filter refentry template or something)
-- icsdf2xml.pl -> =item/=back should be <listitem><para> not, just <para>
 
 Tags:
   aliases
@@ -79,17 +83,12 @@ the gap.
 - jedit + IC colorization, commit-to-live script,
 - Racke: performance docs NEEDED, clustering my mike needs funding or he
   won't do it. CVS howto is browning.
+
+
 - "In times of universal deceit, telling the truth becomes
   a revolutionary act." -- George Orwell.
 - For a successful technology, reality must take precedence over public
   relations, for Nature cannot be fooled. -- Dick Feynman
-- <epigraph>
-  <attribution>William Safire</attribution>
-  <para>
-  Knowing how things work is the basis for appreciation, and is
-  thus a source of civilized delight.
-  </para>
-  </epigraph>
 
 
 Misc:
