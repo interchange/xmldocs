@@ -1,0 +1,14 @@
+<!-- Synopsis is a CDATA block (it's <pre>formatted), so you're pretty
+     much free to construct the synopsis any way you want. Try to keep it
+     along the lines of (if not describing Tags for which this scheme is
+     not usable: 
+
+      literal - literal text
+      <text>  - mandatory value
+      [text]  - optional text
+
+     Describe various options inside 'description' file.
+     Delete those comment lines                                       -->
+
+<synopsis><![CDATA[
+]]></synopsis>
