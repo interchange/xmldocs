@@ -1,0 +1,47 @@
+__NAME__ purpose
+specify a duration after which idle user sessions are expired
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>minimum interval</arg>
+</group>
+__END__
+
+
+__NAME__ see also
+SessionDB, SessionExpire,SessionLockFile,SessionType,
+__END__
+
+
+__NAME__ description
+It is the nature of the WWW that a customer can close the browser program, or
+leave your catalog at any time, without making your Web server aware of the
+fact. The only way we can reach the conclusion ourselves is to detect the
+the lack of further requests from the client (clients are identified by
+session IDs).
+</para><para>
+Old session information needs to be periodically expired. &conf-SessionExpire;
+specifies the minimum of time to keep track of session information.
+__END__
+
+__NAME__ notes
+If &conf-CookieLogin; is enabled, &conf-SessionExpire; can be a small value.
+If the customer's browser has the &IC; session cookie stored, he or she will
+be automatically logged back in with the next request. Note, however, that
+the customer's cart and session values will be reset.
+__END__
+
+__NAME__ example
+<example>
+  <title>Setting SessionExpire</title>
+	<para>
+	Put the following in &ccf;:
+	</para>
+<programlisting>
+SessionExpire  20 minutes
+</programlisting>
+</example>
+__END__
+

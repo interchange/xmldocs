@@ -1,0 +1,50 @@
+__NAME__ purpose
+specify type of the user sessions database
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>DB_File</arg>
+	<arg choice='plain'>DBI</arg>
+	<arg choice='plain'>File</arg>
+	<arg choice='plain'>NFS</arg>
+	<arg choice='plain'>GDBM</arg>
+</group>
+__END__
+
+
+__NAME__ see also
+SessionDB, SessionExpire,SessionLockFile,SessionType,LockType
+__END__
+
+
+__NAME__ description
+The directive specifies the <emphasis>type</emphasis> of the user
+sessions database.
+</para><para>
+If you are planning on running Interchange servers with an &NFS;-mounted
+filesystem as the session target, you must set &conf-SessionType; to
+<literal>NFS</literal>. The other requisites with NFS are usually
+<function>fcntl</function> supported in Perl, 
+a lock daemon running on &NFS; server system and 
+a lock daemon running on &IC; server.
+__END__
+
+__NAME__ notes
+<literal>File</literal>-based sessions provide best performance and
+reliability in most environments.
+__END__
+
+__NAME__ example
+<example>
+  <title>Setting SessionType</title>
+	<para>
+	Put the following in &ccf;:
+	</para>
+<programlisting>
+SessionExpire  session-data.lock
+</programlisting>
+</example>
+__END__
+

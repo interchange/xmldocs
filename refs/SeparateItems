@@ -1,0 +1,40 @@
+__NAME__ purpose
+treat the same items in the cart as separate, instead of just increasing quantity?
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The &conf-SeparateItems; directive changes the default behavior when ordering
+item in quantity greater of 1. Instead of only increasing quantity information,
+the items are treated as being separate and are listed just as different 
+products would (one per line).
+</para><para>
+The directive is of little global use, but it allows item attributes to be
+easily set for different instances of the same part number (&glos-SKU;),
+such as color or size.
+</para><para>
+The value can be overridden with both &glos-scratch; and &glos-value;
+variable <literal>mv_separate_items</literal>.
+__END__
+
+
+__NAME__ example
+<example>
+  <title>Enabling SeparateItems</title>
+	<para>
+	Put the following in &ccf;:
+	</para>
+<programlisting>
+SeparateItems       Yes
+</programlisting>
+</example>
+__END__
+

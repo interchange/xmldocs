@@ -31,9 +31,11 @@
 			<document targetdoc="pragmas" baseuri="pragmas.html"> &pragmas; </document>
 			<document targetdoc="globvars" baseuri="globvars.html"> &globvars; </document>
 			<document targetdoc="catvars" baseuri="catvars.html"> &catvars; </document>
+			<!--
 			<document targetdoc="usertags" baseuri="usertags.html"> &usertags; </document>
 			<document targetdoc="uitags" baseuri="uitags.html"> &uitags; </document>
 			<document targetdoc="systemtags" baseuri="systemtags.html"> &systemtags; </document>
+			-->
 			<document targetdoc="globconfs" baseuri="globconfs.html"> &globconfs; </document>
 			<document targetdoc="catconfs" baseuri="catconfs.html"> &catconfs; </document>
 			<!-- COMPOUNDS -->

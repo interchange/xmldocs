@@ -1,0 +1,48 @@
+__NAME__ purpose
+specify location of the user sessions database
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>filename or directory</arg>
+</group>
+__END__
+
+
+__NAME__ see also
+SessionDB, SessionExpire,SessionLockFile,SessionType,
+__END__
+
+
+__NAME__ description
+The &conf-SessionDatabase; directive defines the location
+of the user &glos-session;s database, and the path may be absolute.
+</para><para>
+For DBM sessions, an appropriate <literal>.db</literal> or 
+<literal>.gdbm</literal> suffix will be appended. For the default
+file-based sessions, the directive specifies the name of a base
+sessions directory.
+</para><para>
+It is possible for multiple catalogs to share the same session file, as
+well as for multiple &IC; servers to serve the same catalogs. If serving an
+extremely busy store, multiple parallel Interchange servers can share the
+same (NFS-based) file system, and serve users in a "ping-pong" fashion using
+file-based sessions. On huge systems, even the level of directory hashing 
+may be changed to increase file look-up speeds. By default,
+only 48 * 48 hashing is done.
+__END__
+
+
+__NAME__ example
+<example>
+  <title>Setting SessionDatabase</title>
+	<para>
+	Put the following in &ccf;:
+	</para>
+<programlisting>
+SessionDatabase session-data
+</programlisting>
+</example>
+__END__
+

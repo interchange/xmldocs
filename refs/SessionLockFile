@@ -1,0 +1,36 @@
+__NAME__ purpose
+specify the name of a lock file if DBM-based sessions are used
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>filename</arg>
+</group>
+__END__
+
+
+__NAME__ see also
+SessionDB, SessionExpire,SessionLockFile,SessionType,
+__END__
+
+
+__NAME__ description
+It is possible for multiple catalogs to share the same session file.
+&conf-SessionDatabase; needs to be set appropriately if the database is
+to be shared. This is only used with DBM-based sessions, and 
+the pathname can be absolute if desired.
+__END__
+
+__NAME__ example
+<example>
+  <title>Setting SessionLockFile</title>
+	<para>
+	Put the following in &ccf;:
+	</para>
+<programlisting>
+SessionExpire  session-data.lock
+</programlisting>
+</example>
+__END__
+

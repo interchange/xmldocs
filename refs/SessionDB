@@ -1,0 +1,38 @@
+__NAME__ purpose
+specify name of a database to use with DBI-based sessions
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>database</arg>
+</group>
+__END__
+
+
+__NAME__ see also
+SessionDatabase,SessionDB, SessionExpire,SessionLockFile,SessionType
+__END__
+
+
+__NAME__ description
+The directive specifies the name of a database to be used with
+DBI-based user &glos-session;s.
+__END__
+
+__NAME__ notes
+Using this directive (and DBI sessions in general) is not recommended.
+__END__
+
+__NAME__ example
+<example>
+  <title>Setting SessionDB</title>
+	<para>
+	Put the following in &ccf;:
+	</para>
+<programlisting>
+SessionDB sessions
+</programlisting>
+</example>
+__END__
+

@@ -20,6 +20,7 @@
 <!ENTITY OPENLDAP "<ulink url='http://www.openldap.org/'>OpenLDAP</ulink>">
 <!ENTITY BDBM "<ulink url='http://http://www.sleepycat.com//'>Berkeley DBM</ulink>">
 <!ENTITY GDBM "<ulink url='http://www.delorie.com/gnu/docs/gdbm/'>GNU DBM</ulink>">
+<!ENTITY NFS "<ulink url='http://nfs.sourceforge.net/'>NFS</ulink>">
 
 
 
