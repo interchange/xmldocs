@@ -1,3 +1,4 @@
-<synopsis><![CDATA[
-Pragma post_page=<subroutine name>
-]]></synopsis>
+<cmdsynopsis>
+Pragma post_page=
+  <arg choice='req'><replaceable>subroutine name</replaceable></arg>
+</cmdsynopsis>

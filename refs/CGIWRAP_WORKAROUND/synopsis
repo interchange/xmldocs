@@ -1,3 +1,7 @@
-<synopsis><![CDATA[
-Variable CGIWRAP_WORKAROUND <0|1>
-]]></synopsis>
+<cmdsynopsis>
+Variable CGIWRAP_WORKAROUND
+  <group choice='req'>
+    <arg choice='plain'>0</arg>
+    <arg choice='plain'>1</arg>
+  </group>
+</cmdsynopsis>

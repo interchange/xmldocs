@@ -1,3 +1,7 @@
-<synopsis><![CDATA[
-Pragma substitute_table_image <0|1>
-]]></synopsis>
+<cmdsynopsis>
+Pragma substitute_table_image
+  <group choice='req'>
+    <arg choice='plain'>0</arg>
+    <arg choice='plain'>1</arg>
+  </group>
+</cmdsynopsis>

@@ -1,3 +1,7 @@
-<synopsis><![CDATA[
-Variable MV_BAD_LOCK <0|1>
-]]></synopsis>
+<cmdsynopsis>
+Variable MV_BAD_LOCK
+  <group choice='req'>
+    <arg choice='plain'>0</arg>
+    <arg choice='plain'>1</arg>
+  </group>
+</cmdsynopsis>

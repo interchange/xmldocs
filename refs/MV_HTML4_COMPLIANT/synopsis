@@ -1,3 +1,7 @@
-<synopsis><![CDATA[
-Variable MV_HTML4_COMPLIANT <0|1>
-]]></synopsis>
+<cmdsynopsis>
+Variable MV_HTML4_COMPLIANT
+  <group choice='req'>
+    <arg choice='plain'>0</arg>
+    <arg choice='plain'>1</arg>
+  </group>
+</cmdsynopsis>

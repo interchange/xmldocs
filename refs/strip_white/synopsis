@@ -1,3 +1,7 @@
-<synopsis><![CDATA[
-Pragma strip_white <0|1>
-]]></synopsis>
+<cmdsynopsis>
+Pragma strip_white
+  <group choice='req'>
+    <arg choice='plain'>0</arg>
+    <arg choice='plain'>1</arg>
+  </group>
+</cmdsynopsis>

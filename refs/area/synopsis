@@ -1,3 +1,18 @@
-<synopsis>
-[area href=<replaceable>page</replaceable> arg=<replaceable>argument</replaceable>]
-</synopsis>
+<cmdsynopsis>
+area
+  <arg choice='plain'>
+    href='<replaceable>path</replaceable>'
+  </arg>
+  <arg choice='opt'>
+    arg='<replaceable>arg1=value1/arg2=value2...</replaceable>'
+  </arg>
+  <arg choice='opt'>
+    secure='<group choice='plain'>
+      <arg choice='plain'>0</arg>
+      <arg choice='plain'>1</arg>
+    </group>'
+  </arg>
+  <arg choice='opt'>
+    form='<replaceable>form variables</replaceable>'
+  </arg>
+</cmdsynopsis>

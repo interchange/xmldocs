@@ -1,3 +1,4 @@
-<synopsis><![CDATA[
-Variable MV_HELO <host name>
-]]></synopsis>
+<cmdsynopsis>
+Variable MV_HELO
+  <arg choice='req'><replaceable>host name</replaceable></arg>
+</cmdsynopsis>
