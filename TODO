@@ -5,6 +5,9 @@ DOCUMENTATION SYSTEM:
 - For tags documentation, have a field if it's a container or not
 - bin/stattree, in format_ctx(), see how many spacings all the lines have
   in common, and trim that.
+- why in manpage format, comments at the top of the file are messed up (no
+  linebreaks)
+- remember which tag had _ instead of - in first UserTag line (email-raw)
 
  Mid-term:
 - Think about adding "online example" (role=html in combination with 
@@ -39,3 +42,7 @@ Knowing how things work is the basis for appreciation, and is
 thus a source of civilized delight.
 </para>
 </epigraph>
+
+
+Old docs:
+docs/retired/icintro.sdf - history, intro, typical user session, security

@@ -7,4 +7,4 @@ To define a pragma value for a particular page, use the <tag>pragma</tag> tag an
 </para><para>
 To define a pragma for a small ITL block inside the page, enclose the block in <code>[tag pragma NAME]1[/tag]...[tag pragma NAME]0[/tag]</code>.
 </para><para>
-Starting with Interchange 5.0, the <code>$::Pragma->{name}</code> syntax is used instead of the old <code>$Vend::Cfg->{Pragma}{name}</code>.
+Starting with Interchange 5.0, the <code>$::Pragma->{name}</code> syntax is used in the Interchange source instead of the old <code>$Vend::Cfg->{Pragma}{name}</code>.

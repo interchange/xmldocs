@@ -175,6 +175,10 @@ sub wanted {
 	# No more job with binary files
 	return if $ftype eq 'binary';
 
+	# Also ignore some directories (don't parse contents in them)
+	# (following a -core discussion from Aug 2004).
+	return if $file =~ m#^(eg|extra|SPECS|debian|scripts|extensions)/#;
+
 	# Open text file, parse contents
 	open IN, "< $file" or die "Can't open $file ($!)\n";
 	my @file = <IN>;
@@ -288,10 +292,50 @@ sub wanted {
 			$file =~ m#(\w+?)\.(core)?tag$# or
 				warn "I know $file is a tag but regex doesn't match it\n";
 			my $tagname = $1;
-			# Disable for now.
-			#@{ $hash{symbols}{$fsubtype}{$1} } = ();
-				# Not this, context info will be provided in html files
-				#[ "$i{ver}/$file", scalar @file, "1:" . scalar @file, [ @file ] ];
+			# Add the tag and basic info to the hash
+			push @{ $hash{symbols}{$fsubtype}{$1} }, 
+				[ "$i{ver}/$file", scalar @file, "1:" . scalar @file, [ format_ctx(@file) ] ];
+			# Now, try to autoconstruct tag synopsis
+			my %specific;
+			#my $warned;
+			for my $_l (@file) {
+				next unless $_l =~ /^usertag\s/i;
+				my @lis = split /\s+/, $_l;
+				shift @lis; # Remove "Usertag" which is first in the list
+
+				# We don't care if filename doesn't match tag name defined in it,
+				# this is solved by saving the name to $specific{_name} which will 
+				# then override filename in bin/refs-autogen.
+				#unless ( (my $tn = shift(@lis)) eq "$tagname" ) { 
+					#warn "HA! TAGFILE $file, name mismatch ($tagname != $tn)\n"
+				#		unless $warned++;
+				#};
+				my $tn = shift @lis;
+
+				# Unfortunately this sucks. Some files contain more tags defined
+				# in them.
+				# code/SystemTag/attr_list.coretag,
+				# code/SystemTag/counter.coretag,
+				# code/SystemTag/counter.coretag,
+				# code/SystemTag/soap.coretag,
+				# code/UI_Tag/jsq.coretag,
+				# code/UserTag/email_raw.tag, 
+				# code/UserTag/forum.tag,
+				# code/UserTag/loc.tag,
+				# We'll deal with them later even though it will cause a small
+				# incaccuracy. Either split to files, or to hack in support for this
+				# in xmldocs tools, that would require more work.
+				#if ( $specific{_name} and ( $specific{_name} ne $tn )) {
+				#	warn "HA! $file, managed to err on $specific{_name}/$tn)\n"
+				#}
+
+				$specific{_name} = $tn;
+
+				my $tagopt = lc ( shift @lis );
+				next if $tagopt eq 'routine';
+				$specific{$tagopt} = "@lis";
+			}
+			$hash{specific}{$tagname} = { %specific };
 			last;
 		}
 	}
@@ -356,45 +400,52 @@ sub dumpdb {
 #     perl_pod         # pod lines
 #
 #     perl_empty       # number of empty (except whitespace) lines
-# 	
-#			matches => {     # files with that extension/selector
-# 			...ext...
-# 		}
+#   
+#      matches => {     # files with that extension/selector
+#       ...ext...
+#     }
 #
-#			filetypes => {   # files of that type
-# 			...ftype...
-# 		}
+#      filetypes => {   # files of that type
+#       ...ftype...
+#     }
 #
-# 		perl_functions   # Total number of Perl functions in the source
+#     perl_functions   # Total number of Perl functions in the source
 #
-#		# Each file's stat() data
-# 	tree => {
-# 		...file... => {
-#				size => (stat _)[7],
-#				atime => (stat _)[8],
-#				mtime => (stat _)[9],
-#				ctime => (stat _)[10],
-#				type  => directory/text/binary
-#				(for text only below)
-#				subtype> subtype (binary image, text c source, text perl source..)
-#				ext   => extension as recognized by file matcher
-#				lines => number of lines
-#				code => lines of code
-#				comments => lines of perl-style comments
-#				pod => lines of POD
-#				gray => mixed, same as above in total{}
-#				empty => empty lines (including whitespace)
-# 		}
-# 	}
+#    # Each file's stat() data
+#   tree => {
+#     ...file... => {
+#        size => (stat _)[7],
+#        atime => (stat _)[8],
+#        mtime => (stat _)[9],
+#        ctime => (stat _)[10],
+#        type  => directory/text/binary
+#        (for text only below)
+#        subtype> subtype (binary image, text c source, text perl source..)
+#        ext   => extension as recognized by file matcher
+#        lines => number of lines
+#        code => lines of code
+#        comments => lines of perl-style comments
+#        pod => lines of POD
+#        gray => mixed, same as above in total{}
+#        empty => empty lines (including whitespace)
+#     }
+#   }
 #
-# 	# Symbols
-# 	symbols => {
-# 		pragma => {              # pragma symbols
-# 			name => {              # pragma name
-# 				file => [ line num ] # file/line-information it occurs in
-# 			}
-# 		}
-# 	}
+#   # Symbols
+#   symbols => {
+#     pragma => {              # pragma symbols
+#       name => {              # pragma name
+#         file => [ line num ] # file/line-information it occurs in
+#       }
+#     }
+#   }
+#
+#   # Item specific data
+#   specific => {
+#     symbol name => {
+#        # something...
+#     }
+#   }
 # )
 #
 #
