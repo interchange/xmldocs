@@ -289,7 +289,6 @@ sub wanted {
 
 			my %specific; # Item-specific data
 			my @tags; # Support multiple tags defined in the same file
-			my $maproutine; # Register if the tag MapRoutines, and to which func.
 
 			# This is where we parse the tag file. We should discover settings like
 			# HasEndTag, Order, and so on.
@@ -324,21 +323,10 @@ sub wanted {
 					next;
 
 				} elsif ( $tagopt =~ /^maproutine$/i ) {
-					@lis == 1 and $maproutine = "@lis" or die 
-					"$tn MapRoutines, but argc != 1 ?\n";
 
+					@lis == 1 or die "$tn MapRoutines, but argc != 1 ?\n";
 					next if "@lis" =~ /^::/; # TODO
-
-					my @path = split /::/, "@lis";
-					my $func = pop @path;
-					my $path = join("/", @path) . ".pm";
-
-					open INF, "< lib/$path" or die "Can't open 'lib/$path' ($!)\n";
-					my @fc = <INF>;
-					close INF;
-
-					print "Checking $path\n";
-					file_extractSub($func, \@fc);
+					file_extractSub("@lis");
 				}
 				
 				if ( "@lis" =~ /<</ and $tagopt !~ /^routine/i ) {
@@ -567,6 +555,10 @@ sub file_parseVendConfig {
 		next if $line =~ /^\s*#/;
 
 		# Count braces
+		# If this code gets non-working for a particular case,
+		# add support for escapes (negative lookbehind): (?<!\\)
+		# Or even more, the code below in file_extractSub has support for
+		# correcty parsing {\\} . Bleh ;-)
 		$opens += ( $line =~ s/([\(\[\{])/$1/g );
 		$opens -= ( $line =~ s/([\)\]\}])/$1/g );
 		$directive .= $line;
@@ -624,17 +616,48 @@ sub file_parseVendConfig {
 
 
 sub file_extractSub {
-	my ($func, $fc) = @_;
+	my $func = shift;
 	my $done = 0;
+	$func or die "file_extractSub with no args?\n";
+	my $content;
 
-	#for my $line (@$fc) {
-	#	# Case1:
-	#	#/^sub $func {/;  # Extract this.
-	#	#
-	#	# Case2:
-	#	# /^\*func = \&Mod::Ule::func; # Follow and extract.
-	#}
+	my @path = split /::/, $func;
+	$func = pop @path;
+	my $path = join("/", @path) . ".pm";
 
-	#print "NOT FOUND FOR $func\n" unless $done;
+	open INF, "< lib/$path" or die "Can't open 'lib/$path' ($!)\n";
+	my @fc = <INF>;
+	close INF;
+
+	for ( my $i = 0; $i < @fc; $i++ ) {
+		my $line = $fc[$i];
+
+		if ( $line =~ /^\*$func = \\\&(\S+);/ ) {
+			#print "REPOINT TO $1\n";
+			my $repoint = ( file_extractSub( $1 ) );
+			return;
+
+		} elsif ( $line =~ /^sub $func {/ ) {
+			$content = $line;
+
+			# Quick and dirty extractor. This same functionality is in 
+			# file_parseVendConfig() above but is written too much purpose-specific
+			# to generalize it.
+			my $opens = 0;
+			for ( my $j = $i; $j < @fc; $j++) {
+				my $line2 = $fc[$j];
+				$opens += ( $line2 =~ s/(?<!(?<!\\)\\)([\(\[\{])/$1/g );
+				$opens -= ( $line2 =~ s/(?<!(?<!\\)\\)([\)\]\}])/$1/g );
+				$content .= $line2;
+				if ( !$opens) { $done++; last }
+			}
+
+			die "NOT FOUND FOR $func ?\n" unless $done;
+		}
+	}
+
+	return $content if wantarray;
+
+	$hash{functions}{$path}{$func} = [ split(/\n/, $content) ];
 }
 
