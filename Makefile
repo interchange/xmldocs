@@ -100,32 +100,38 @@ $T/%-nc.db: %.xml $T
 	  --stringparam collect.xref.targets only                         \
 	  --stringparam targets.filename $@                               \
 	  docbook/html-nochunks.xsl $<
-	  # tail +2 $@ > $T/tail
-	  # mv $T/tail $@
+	  perl -ni -e'print if $$. > 1 or $$.==1 and !/^<!DOCTYPE/' $@
 olinkdbs-c olinks-c: $(foreach f,$(ALL_DOCS),$T/$f-c.db)
 $T/%-c.db: %.xml $T
 	$(PSR) $(PSR_FLAGS)                                               \
 	  --stringparam collect.xref.targets only                         \
 	  --stringparam targets.filename $@                               \
 	  docbook/html-chunks.xsl $<
-	  # tail +2 $@ > $T/tail
-	  # mv $T/tail $@
+	  perl -ni -e'print if $$. > 1 or $$.==1 and !/^<!DOCTYPE/' $@
 
 
 #############################################################
-# Standard targets
+# Standard targets || two-pass processing method
 $O/%.html: %.xml docbook/autodefs.ent skel
 	echo "C     $@"
 	$(PSR) $(PSR_FLAGS)                                                \
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
-	  -o $@ docbook/html-nochunks.xsl $<
+	  -o $T/$*-nc.profiled docbook/profile.xsl $<
+	$(PSR) $(PSR_FLAGS)                                                \
+	  --stringparam current.docid $*                                   \
+	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
+	  -o $@ docbook/html-nochunks.xsl $T/$*-nc.profiled
 $O/%: %.xml skel
 	echo "C     $@/"
 	$(PSR) $(PSR_FLAGS)                                                \
 	  --stringparam current.docid $*                                   \
-	  --stringparam target.database.document ../docbook/olinkdb-c.xml  \
-	  -o $@/ docbook/html-chunks.xsl $<
+	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
+	  -o $T/$*-c.profiled docbook/profile.xsl $<
+	$(PSR) $(PSR_FLAGS)                                                \
+	  --stringparam current.docid $*                                   \
+	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
+	  -o $@/ docbook/html-chunks.xsl $T/$*-c.profiled
 
 
 #############################################################
