@@ -133,7 +133,7 @@ while ( $path = shift @paths) {
 				for my $arr ( @{ $covered{$key}{$fi} } ) {
 					goto DONELOOP if $ln > $$arr[0] and $ln < $$arr[1];
 				}
-				my $ctxsdata = join "", @$ctxdata;
+				my $ctxsdata = join "\n", @$ctxdata;
 				if ( length $ctxsdata ) {
 					my $ls = $ln - $ctxpre; # line start nr.
 # XXX when xsltproc gets to support line numbering, add this below: XXX

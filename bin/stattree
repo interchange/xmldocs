@@ -98,8 +98,15 @@ chdir $cpath; # Return to starting location
 
 
 # Dump
-print STDERR Dumper \%hash if $verbose;
 dumpdb( "$cachedir/$dumppath" );
+
+# Save human-readable %hash ?
+if ( $verbose ) {
+	#print STDERR Dumper \%hash;
+	open OUT, "> tmp/$i{ver}.hash" or die "Can't open tmp/$i{ver}.hash ($!)\n";
+	print OUT Dumper \%hash;
+	close OUT;
+}
 
 exit 0;
 
@@ -111,8 +118,7 @@ sub wanted {
 	# Things we ignore
 	return if /(^|\/)(CVS|\.cvs|\.svn|\.autoload)(\/.+[^\/])?$/;
 	
-	stat($file) or 
-		warn "Can't stat '$file' ? ($!)\n";
+	stat($file) or warn "Can't stat '$file' ? ($!)\n";
 
 	# totals
 	if ( -d $file ) {
@@ -297,14 +303,10 @@ sub wanted {
 			#$hash{total}{$fsubtype . "s"}++;
 			$file =~ m#(\w+?)\.(core)?tag$# or
 				warn "I know $file is a tag but regex doesn't match it\n";
-			my $tagname = $1;
-			# Add the tag and basic info to the hash
-			push @{ $hash{symbols}{$fsubtype}{$1} }, 
-				[ "$i{ver}/$file", scalar @file, "1:" . scalar @file, [ format_ctx(@file) ] ];
-			# Now, try to autoconstruct tag synopsis
-			my %specific;
 
-			#my $warned;
+			my %specific; # Item-specific data
+			my @tags; # Support multiple tags defined in the same file
+
 			# This is where we parse the tag file. We should discover settings like
 			# HasEndTag, Order, and so on.
 			for my $_l (@file) {
@@ -312,36 +314,32 @@ sub wanted {
 				my @lis = split /\s+/, $_l;
 				shift @lis; # Remove "Usertag" which is first in the list
 
-				# We don't care if filename doesn't match tag name defined in it,
-				# this is solved by saving the name to $specific{_name} which will 
-				# then override filename in bin/refs-autogen.
-				#unless ( (my $tn = shift(@lis)) eq "$tagname" ) { 
-					#warn "HA! TAGFILE $file, name mismatch ($tagname != $tn)\n"
-				#		unless $warned++;
-				#};
+				# Tag name as really defined, not just the file name
+				# (Most often, the difference is in _ and -).
 				my $tn = shift @lis;
 
-				#if ( $specific{_name} and ( $specific{_name} ne $tn )) {
-				#	warn "HA! $file, managed to err on $specific{_name}/$tn)\n"
-				#}
-
-				$specific{_name} = $tn;
-
-				# XXX CRITICAL:
-				# support for multiple tag definitions in the same file is 
-				# missing, as well as support for Alias option which has 
-				# reverse order (alias Alias name, and not name Alias alias).
-
-				my $tagopt = lc ( shift @lis );
-				next if $tagopt =~ /^(routine|documentation)$/;
+				my $tagopt = shift @lis;
+				next if $tagopt =~ /^(routine|documentation)$/i;
 				if ( "@lis" =~ /<</ ) {
 					warn "TODO: Unsupported << in $tn\n";
 					next;
 				}
-				$specific{"_tagopt_$tagopt"} = "@lis";
-				#print "$tn :: $tagopt :: @lis\n";
+
+				# New tag name we didn't see yet (either first run or another tag defined)
+				{ no warnings;
+				if (!grep{/^$tn$/}@tags and $lis[0] !~ /^alias$/i) { push @tags, $tn }
+				}
+
+				$specific{$tn}{"_tagopt_$tagopt"} = "@lis";
 			}
-			$hash{specific}{$tagname} = { %specific };
+			
+			# For each tag found in the file, create appropriate data in hash.
+			for my $tagname ( @tags ) {
+				push @{ $hash{symbols}{$fsubtype}{$tagname} }, 
+					[ "$i{ver}/$file", scalar @file, "1:" . scalar @file, [ format_ctx(@file) ] ];
+				$hash{specific}{$tagname} = $specific{$tagname};
+			}
+			
 			last;
 		}
 	}
@@ -349,7 +347,7 @@ sub wanted {
 
 # Format the context lines before saving to the db
 sub format_ctx {
-	map { s/\t/  /g } @_;
+	map { s/\t/  /g; chomp } @_;
 	return @_;
 }
 
@@ -370,88 +368,3 @@ sub dumpdb {
 
 }
 
-#
-#	This is how the final dumped hash looks like:
-# The %hash is per-module (main directory) of course!
-#
-# %hash = (
-# 	# General overview, summarized statistics
-# 	total => {
-#
-# 		known_types        # all extensions: binary + text
-#
-# 		known_binary_types # how many file types are considered binary
-# 		
-# 		known_ascii_types  # how many file types are considered text
-# 		
-#			files            # total number of files (non-dirs)
-#
-#			directories      # total number of dirs
-#
-#			binary_files     # how many bin files in total
-#
-#			ascii_files      # how many text files in total
-#
-#			size             # total size
-#
-#     lines            # total lines in text files (perl_* above is included
-#                      # in this 'lines' value
-#
-#     perl_comments    # total perl standalone comments
-#
-#     perl_gray        # inline comment on a perl line
-#
-#     perl_code        # pure code lines
-#
-#     perl_pod         # pod lines
-#
-#     perl_empty       # number of empty (except whitespace) lines
-#   
-#      matches => {     # files with that extension/selector
-#       ...ext...
-#     }
-#
-#      filetypes => {   # files of that type
-#       ...ftype...
-#     }
-#
-#     perl_functions   # Total number of Perl functions in the source
-#
-#    # Each file's stat() data
-#   tree => {
-#     ...file... => {
-#        size => (stat _)[7],
-#        atime => (stat _)[8],
-#        mtime => (stat _)[9],
-#        ctime => (stat _)[10],
-#        type  => directory/text/binary
-#        (for text only below)
-#        subtype> subtype (binary image, text c source, text perl source..)
-#        ext   => extension as recognized by file matcher
-#        lines => number of lines
-#        code => lines of code
-#        comments => lines of perl-style comments
-#        pod => lines of POD
-#        gray => mixed, same as above in total{}
-#        empty => empty lines (including whitespace)
-#     }
-#   }
-#
-#   # Symbols
-#   symbols => {
-#     pragma => {              # pragma symbols
-#       name => {              # pragma name
-#         file => [ line num ] # file/line-information it occurs in
-#       }
-#     }
-#   }
-#
-#   # Item specific data
-#   specific => {
-#     symbol name => {
-#        # something...
-#     }
-#   }
-# )
-#
-#

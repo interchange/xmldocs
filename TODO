@@ -15,6 +15,8 @@ DOCUMENTATION SYSTEM:
   (like [restrict]).
 - Under availability, if applicable, display cvs line (modification time,
   username and version).
+- Read all possible options for tag files from vend/config.pm
+  (%tag.* structures) and warn if invalid option is found in any tag file.
 
  Mid-term:
 - Think about adding "online example" (role=html in combination with 
@@ -49,4 +51,20 @@ Knowing how things work is the basis for appreciation, and is
 thus a source of civilized delight.
 </para>
 </epigraph>
+
+
+######################################################################
+
+Pragmas, globvars:
+  default
+
+Tags:
+  parameters
+	positional list
+	invalidates cache
+	aliases
+	tag call / perl call
+	container
+	has subtags
+	nests
 

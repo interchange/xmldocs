@@ -1,4 +1,3 @@
-purpose: none
+purpose:
 default: none
 #missing:the variable was only used in the skeleton foundation catalog?
-ignore: y
