@@ -30,14 +30,14 @@ targets would include:
                     the directory back to 'tmp/' and avoid the overhead of
                     regenerating OlinkDB files).
 
- -- And those covered by 'make':
-  make skel
-  make OUTPUT/xmldocs.css
+ -- And those already covered by 'make':
   make caches
   make refxmls
-  make olinkdbs-nc
-  make olinkdbs-c
-  make OUTPUT/iccattut.html OUTPUT/iccattut ...
+  make olinkdbs-nc olinkdbs-c
+  make tmp/iccattut-nc.db tmp/iccattut-c.db
+  make skel
+  make OUTPUT/xmldocs.css
+  make OUTPUT/iccattut.html OUTPUT/iccattut
 
 See Makefile for a complete list, of course.
 

@@ -22,13 +22,12 @@
 			</author>
 		</authorgroup>
 
-
 	</chapterinfo>
 
 	<sect1 id='customsendmail_introduction'>
 		<title>Introduction</title>
 		<para>
-		HOW-TO version: $Id: custom-sendmail-routine,v 1.3 2004-11-12 22:26:26 docelic Exp $
+		HOW-TO version: $Id: custom-sendmail-routine,v 1.4 2004-11-20 14:40:39 docelic Exp $
 		</para>
 		<para>
 		Someone <ulink url="http://www.icdevgroup.org/pipermail/interchange-users/2004-July/039811.html">was wondering</ulink> how to optimize the order processing on a busy site. It was observed that about once in every ten times, the <filename>etc/mail_receipt</filename> takes a few <emphasis>extra</emphasis> seconds before it's mailed out.

@@ -4,7 +4,10 @@ Outstanding:
 - Online examples only have to be standard examples, with actual work in
   practice if condition=online
   Code to do that is: <programlisting><textobject><textdata fileref="pathto.xml"/></textobject></programlisting>
+- Image tag, sort out mgkpath thing
+- To be able to build docs for 5.2 (so, excluding cvs-head)
 - Fix mess with entities
+- Commit log-files howto from denali
 
 - Ask ndw about including [NEW!] and [TODO!] in titles in TOC.
 
@@ -126,3 +129,11 @@ the gap.
 Misc:
 - Mike We are short on chiefs and heavy on Indians here
 
+Stuff:
+- nightly build http://ftp.icdevgroup.org/interchange/nightly_build/
+  Also provide interchange-nightly at same place where interchange-latest
+- CVS page: http://www.icdevgroup.org/i/dev/cvs.html?id=auxbUMnz
+  Make a tutorial : IC from CVS, Catalog in SVN, replicated setup online
+  and locally
+- Mention ML page, cvsweb
+- How to deal with Safe

@@ -1,0 +1,98 @@
+<chapter id="ControlDaemon">
+
+	<chapterinfo>
+		<title>Control Interchange Daemon</title>
+		<titleabbrev>daemoncontrol</titleabbrev>
+
+		<keywordset>
+			<keyword>control</keyword>
+			<keyword>start</keyword>
+			<keyword>stop</keyword>
+			<keyword>restart</keyword>
+			<keyword>reconfig</keyword>
+			<keyword>unix</keyword>
+			<keyword>init</keyword>
+			<keyword>sbin</keyword>
+			<keyword>daemon</keyword>
+			<keyword>script</keyword>
+			<keyword>run</keyword>
+		</keywordset>
+
+		<!--
+		<authorgroup>
+			<author>
+				<firstname>Mike</firstname>
+				<surname>Heins</surname>
+				<affiliation>
+					<email>mheins@perusion.net</email>
+				</affiliation>
+			</author>
+		</authorgroup>
+		-->
+
+	</chapterinfo>
+
+	<sect1 id='daemoncontrol_introduction'>
+		<title>Introduction</title>
+		<para>
+		HOW-TO version: $Id: daemon-control,v 1.1 2004-11-20 14:40:39 docelic Exp $
+		</para>
+		<para>
+		Knowing how to manage the Interchange daemon is one of the very basic
+		administration tasks.
+		</para>
+	</sect1>
+
+	<sect1 id='daemoncontrol_solution'>
+		<title>Solution</title>
+
+		<para>
+		Interchange is (re)started by invoking:
+		</para>
+		<itemizedlist>
+			<listitem vendor='deb'><para>
+				<userinput>/etc/init.d/interchange restart</userinput> (Debian GNU)
+			</para></listitem>
+			<listitem vendor='rh'><para>
+				<userinput>/etc/rc.d/init.d/interchange restart</userinput> (Red Hat)
+			</para></listitem>
+			<listitem vendor='tarball'><para>
+				<userinput>/usr/local/interchange/bin/interchange -r</userinput>
+				(tarball)
+			</para></listitem>
+		</itemizedlist>
+		<para>
+		Specific catalogs are reconfigured by invoking:
+		</para>
+		<itemizedlist>
+			<listitem vendor='deb;rh'><para>
+				<userinput>/usr/sbin/interchange -reconfig
+				<replaceable>CATNAME</replaceable></userinput> 
+				(Debian GNU and Red Hat)
+			</para></listitem>
+			<listitem><para>
+				<userinput>/usr/local/interchange/bin/interchange -reconfig
+				<replaceable>CATNAME</replaceable></userinput> (tarball)
+			</para></listitem>
+		</itemizedlist>
+		<para>
+		Why would you want to reconfigure a catalog?
+		Most of the time, the changes you make to the HTML files or databases
+		are directly visible on the next access to your site. However, that is not
+		the case with more "serious" files such as catalog
+		configurations (<filename>catalog.cfg</filename>) or profiles
+		(<filename>etc/profiles*</filename>).
+		</para><para>
+		To take changes from those files "on air", you must reconfigure a catalog.
+		</para>
+		<para>
+		Changes to global <filename>interchange.cfg</filename> can only be updated
+		by restarting Interchange completely.
+		</para>
+
+		<!-- TODO mention kill, pkill, killall, pidfile -->
+
+	</sect1>
+
+</chapter>
+

@@ -518,8 +518,9 @@ sub line_findPragmas {
 				name => ${$c{gfunc}}[0],
 			}
 		};
-		push @{$hash{uses}{$$context_data{group}}{$$context_data{name}}{pragma}},
-		$1
+		push(@{$hash{uses}{$$context_data{group}}{$$context_data{name}}{pragma}},
+		$1) unless grep {/^$1$/}
+			@{$hash{uses}{$$context_data{group}}{$$context_data{name}}{pragma}}
 	}
 
 		$hash{total}{pragmas}++;
@@ -561,9 +562,10 @@ sub line_findCatVars {
 				group => 'function',
 				name => ${$c{gfunc}}[0],
 			};
-			push
+			push(
 				@{$hash{uses}{$$context_data{group}}{$$context_data{name}}{catvar}},
-					$name
+					$name) unless grep {/^$name$/}
+			@{$hash{uses}{$$context_data{group}}{$$context_data{name}}{catvar}}
 		}
 
 		$hash{total}{catvars}++;
@@ -603,9 +605,10 @@ sub line_findGlobVars {
 				name => ${$c{gfunc}}[0],
 			};
 			#print "$$context_data{name}\n" if $$context_data{group} eq 'function';
-			push
+			push(
 				@{$hash{uses}{$$context_data{group}}{$$context_data{name}}{globvar}},
-					$name
+					$name) unless grep {/^$name$/}
+			@{$hash{uses}{$$context_data{group}}{$$context_data{name}}{globvar}}
 		}
 
 		$hash{total}{globvars}++;

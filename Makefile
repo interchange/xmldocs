@@ -14,7 +14,7 @@ SYMBOL_TYPES= pragmas globvars usertags uitags systemtags globconfs catconfs fil
 GUIDES      = iccattut xmldocs
 HOWTOS      = howtos
 GLOSSARY    = glossary
-ALL_DOCS    = $(GUIDES) $(HOWTOS) $(GLOSSARY) $(SYMBOL_TYPES)
+ALL_DOCS    = $(GLOSSARY) $(HOWTOS) $(GUIDES) $(SYMBOL_TYPES)
 SHELL       = /bin/sh
 export O    = OUTPUT
 export T    = tmp
@@ -26,7 +26,7 @@ PSR         = xsltproc
 PSR_FLAGS   = --xinclude
 
 VPATH       = guides refs howtos glossary
-.SILENT:
+#.SILENT:
 .PHONY: all complete
 .PHONY: skel
 .PHONY: guides howtos symbols glossary
@@ -185,13 +185,13 @@ cache/%/.cache.bin: sources/% bin/stattree
 # Silly, rewrite this, I forgot about $*. Or $* wouldn't help? I'm not 
 # willing to think about it right now.
 refxmls: BOTH = --both
-refxmls: bin/refs-autogen $(foreach stype,$(SYMBOL_TYPES),refs/$(stype).xml)
+refxmls: bin/refs-autogen $(foreach stype,$(SYMBOL_TYPES),refs/$(stype).xml) glossary/glossary.xml howtos/howtos.xml
 	:
 $T/%.list: BNAME = $(subst $T/,,$@)
 refs/%.xml: BNAME = $(subst refs/,,$@)
 $T/%.list: FNAME = $(subst .list,,$(BNAME))
 refs/%.xml: FNAME = $(subst .xml,,$(BNAME))
-# A little 'overwork' here: we reegenerate all .xml files even if just
+# A little 'overwork' here: we regenerate all .xml files even if just
 # one file changes.
 $T/%.list refs/%.xml: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) $(shell find refs/ -regex '.+[^(\.xml)]$$') bin/refs-autogen
 	# PEH, -g is useless since tags migrate between tag groups

@@ -79,7 +79,7 @@ For instance, if you invoke the page with &glos-GET;
 parameters, such as <literal>pagename?foo=bar</literal>,
 then the value of the <literal>foo</literal> CGI variable will be
 accessible using <code>[cgi foo]</code> in
-&glos-itl; or <code>$CGI->{foo}</code> in embedded Perl.
+&glos-ITL; or <code>$CGI->{foo}</code> in embedded Perl.
 __END__
 
 __NAME__ notes
