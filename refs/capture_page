@@ -60,14 +60,7 @@ __NAME__ synopsis
 	<entry>0</entry>
 	<entry>If the file is expired, touch it?</entry>
 </row>
-<row>
-	<entry>
-		<arg choice='plain'>umask</arg>
-	</entry>
-	<entry></entry><entry></entry>
-	<entry></entry>
-	<entry>File creation <glossterm linkend='umask'>umask</glossterm>.</entry>
-</row>
+&ROW_UMASK_none;
 &ROW_HIDE_0;
 __END__
 

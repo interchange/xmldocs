@@ -89,45 +89,9 @@ __NAME__ synopsis2
 	<entry>0</entry>
 	<entry>Hide button text?</entry>
 </row>
-<row>
-	<entry><arg choice='plain'>extra</arg></entry>
-	<entry></entry><entry></entry>
-	<entry></entry>
-	<entry>
-	Extra &HTML; parameters. Passed verbatim. Note that the &CSS; attributes
-	<arg choice='plain'>id</arg>, <arg choice='plain'>class</arg> and
-	<arg choice='plain'>style</arg>
-	<emphasis role='bold'>are</emphasis>
-	available separately. Use this only for custom purposes.
-	</entry>
-</row>
-<row>
-	<entry>
-		<group choice='plain'>
-		<arg choice='plain'>border</arg>
-		<arg choice='plain'>height</arg>
-		<arg choice='plain'>width</arg>
-		<arg choice='plain'>hspace</arg>
-		<arg choice='plain'>vspace</arg>
-		<arg choice='plain'>align</arg>
-		</group>
-	</entry>
-	<entry></entry><entry></entry>
-	<entry></entry>
-	<entry>Standard &img; &HTML; tag properties.</entry>
-</row>
-<row>
-	<entry>
-		<group choice='plain'>
-		<arg choice='plain'>id</arg>
-		<arg choice='plain'>class</arg>
-		<arg choice='plain'>style</arg>
-		</group>
-	</entry>
-	<entry></entry><entry></entry>
-	<entry></entry>
-	<entry>&CSS; parameters.</entry>
-</row>
+&ROW_EXTRA_none;
+&ROW_HTML_std;
+&ROW_CSS_std;
 __END__
 
 
@@ -137,7 +101,7 @@ __END__
 
 
 __NAME__ description
-This tag creates a <mv>mv_click</mv> form submit button.
+This tag creates a <mv>mv_click</mv> HTML form submit button.
 </para><para>
 Standard, text-only submit button is output in the form of
 <![CDATA[<input type='submit' ...>]]>.

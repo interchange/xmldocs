@@ -18,14 +18,14 @@ __END__
 
 __NAME__ description
 The main function of this &pragma; is to prevent any
-interpolation of the output.
+&interpolation; of the output.
 It helps to preserve the downloads intact if they 
 happen to contain constructs similar to
 <literal>__<replaceable>VAR</replaceable>__</literal> 
 or <literal>[tag]</literal>.
 </para><para>
 In practice, this pragma is only used internally. If
-you wanted to make Interchange a content-delivery engine only, you could
+you wanted to make &IC; a content-delivery engine only, you could
 set it in <filename>catalog.cfg</filename>, and only undefine it for a few
 pages where you want standard page processing.
 </para><para>

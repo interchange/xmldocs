@@ -76,17 +76,7 @@ __NAME__ synopsis
 	For example, <literal>PRINT</literal>.
 	</entry>
 </row>
-<row>
-	<entry>
-		<arg choice='plain'>mode</arg>
-	</entry>
-	<entry></entry><entry></entry>
-	<entry><literal>0644</literal></entry>
-	<entry>
-	File creation <glossterm linkend="mode">mode</glossterm>
-	(say, <literal>0755</literal>).
-	</entry>
-</row>
+&ROW_MODE_0644;
 <row>
 	<entry>
 		<arg choice='plain'>output_dir</arg>

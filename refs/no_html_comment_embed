@@ -38,7 +38,8 @@ The time is now <!--[time]-->.
 ]]>
 </programlisting>
 <para>
-Setting the <pragma>no_html_comment_embed</pragma> instructs Interchange
+Setting the <pragma>no_html_comment_embed</pragma> &pragma; instructs
+Interchange
 <emphasis role='bold'>not</emphasis> to parse and interpolate any HTML
 comments. With this pragma enabled, the above example would not display
 the current time.

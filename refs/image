@@ -191,36 +191,8 @@ __NAME__ synopsis2
 	directives. This option does honor locale settings.
 	</entry>
 </row>
-<row>
-	<entry>
-		<group choice='plain'>
-		<arg choice='plain'>width</arg>
-		<arg choice='plain'>height</arg>
-		<arg choice='plain'>alt</arg>
-		<arg choice='plain'>title</arg>
-		<arg choice='plain'>border</arg>
-		<arg choice='plain'>hspace</arg>
-		<arg choice='plain'>vspace</arg>
-		</group>
-	</entry>
-	<entry></entry><entry></entry>
-	<entry>
-	</entry>
-	<entry>
-	Standard &lt;img&gt; HTML tag attributes to pass on.
-	</entry>
-</row>
-<row>
-	<entry>
-	extra
-	</entry>
-	<entry></entry><entry></entry>
-	<entry>
-	</entry>
-	<entry>
-	Literal, arbitrary text to add to the generated &lt;img&gt; tag.
-	</entry>
-</row>
+&ROW_HTML_ext;
+&ROW_EXTRA_none;
 __END__
 
 __NAME__ description

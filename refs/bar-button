@@ -28,8 +28,9 @@ __END__
 
 
 __NAME__ description
-This tag can display content based on the (current) page name. It is most
-directly useful for creating menu bars, but can be used for other purposes.
+This tag can display content depending on current (or provided) page name.
+It is most directly useful for creating menu bars (although other uses are
+not excluded).
 </para><para>
 The content between the <tag>selected</tag><tag>/selected</tag> tags will be
 displayed <emphasis role='bold'>if</emphasis> the name of the current

@@ -8,7 +8,12 @@ __END__
 
 __NAME__ synopsis
 <row>
-	<entry><arg choice='plain'>nickname</arg></entry>
+	<entry>
+		<group choice='opt'>
+			<arg choice='plain'>nickname</arg>
+			<arg choice='plain'>name</arg>
+		<group>
+	</entry>
 	<entry>Yes</entry><entry>Yes</entry>
 	<entry></entry>
 	<entry>Cart name to delete.</entry>

@@ -1,4 +1,4 @@
-By default, Interchange does not allow data returned from the databases to be reparsed for Interchange tags (all the &#91;s are converted to an &HTML; entity (&amp;#91;) and displayed literally). Setting this pragma eliminates the restriction and passes &#91;s through for interpolation).
+By default, Interchange does not allow data returned from the databases to be interpolated (all the &#91;s are converted to an &HTML; entity (&amp;#91;) and displayed literally). Setting this pragma eliminates the restriction and passes &#91;s through for interpolation).
 </para><para>
 If you want to have tags in your database and display them in Interchange pages (to say, display <tag>page</tag> links for internal hyperlinks in your product descriptions), you need to enable this pragma.
 Some things to consider, though:
@@ -12,7 +12,7 @@ Be certain that you absolutely know where the data from your databases will be u
 
 <itemizedlist>
 	<listitem><para>
-	Will it always be possible to reparse for tags?
+	Will it always be possible to interpolate?
 	</para></listitem>
 	<listitem><para>
 	What about e-mailed plain-text receipts? Will literal "<tag>page </tag>" tags show up in product descriptions on the receipt?

@@ -57,6 +57,28 @@ __NAME__ synopsis
 </row>
 <row>
 	<entry>
+		<arg choice='plain'>c_field</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry><literal>category</literal></entry>
+	<entry>
+	Specify the column containing banner category.
+	This is only used with weighted ads.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>w_field</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry><literal>weight</literal></entry>
+	<entry>
+	Specify the table column containing banner weights.
+	This is only used with weighted ads.
+	</entry>
+</row>
+<row>
+	<entry>
 		<arg choice='plain'>separator</arg>
 	</entry>
 	<entry></entry><entry></entry>
@@ -86,7 +108,9 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry>0</entry>
 	<entry>
-	Use weighted banner system? In a weighted system, the database is expected
+	Use 
+	<glossterm linkend="weighted_system">weighted</glossterm>
+	banner system? In a weighted system, the database is expected
 	to contain multiple entries with the same
 	<database class='field'>category</database>, and then the banners are
 	selected in regard to their relative weight (more weight = more 
@@ -105,42 +129,12 @@ __NAME__ synopsis
 	This is only used with weighted ads.
 	</entry>
 </row>
-<row>
-	<entry>
-		<arg choice='plain'>c_field</arg>
-	</entry>
-	<entry></entry><entry></entry>
-	<entry><literal>category</literal></entry>
-	<entry>
-	Specify the column containing banner category.
-	This is only used with weighted ads.
-	</entry>
-</row>
-<row>
-	<entry>
-		<arg choice='plain'>w_field</arg>
-	</entry>
-	<entry></entry><entry></entry>
-	<entry><literal>weight</literal></entry>
-	<entry>
-	Specify the table column containing banner weights.
-	This is only used with weighted ads.
-	</entry>
-</row>
-<row>
-	<entry>
-		<arg choice='plain'>interpolate</arg>
-		<arg choice='plain'>reparse</arg>
-	</entry>
-	<entry></entry><entry></entry>
-	<entry>0</entry>
-	<entry>.</entry>
-</row>
+&ROW_INTERPOLATE_0;
 __END__
 
 
 __NAME__ see also
-implement_banners
+implementbanners
 __END__
 
 

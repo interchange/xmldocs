@@ -60,6 +60,7 @@ option) any later version.</para>">
 <!ENTITY MIME "<ulink url='http://www.mhonarc.org/~ehood/MIME/'>MIME</ulink>">
 <!ENTITY ITL "<glossterm linkend='ITL'>ITL</glossterm>">
 <!ENTITY SMTP "<ulink url='http://cr.yp.to/smtp.html'>SMTP</ulink> (<classname>Net::SMTP</classname> Perl module)">
+<!ENTITY interpolate "<glossterm linkend='interpolate'>interpolate</glossterm>">
 
 
 <!-- ENTITIES TO EASIER CONSTRUCT TAG PARAMETERS LIST -->
@@ -74,7 +75,7 @@ option) any later version.</para>">
 	</entry>
 	<entry></entry><entry></entry>
 	<entry>0</entry>
-	<entry>Interpolate (reparse) for other Interchange tags?</entry>
+	<entry><glossterm linkend='interpolate'>Interpolate</glossterm> input?</entry>
 </row>
 ">
 <!ENTITY ROW_INTERPOLATE_1 "
@@ -87,7 +88,7 @@ option) any later version.</para>">
 	</entry>
 	<entry></entry><entry></entry>
 	<entry>1</entry>
-	<entry>Interpolate (reparse) for other Interchange tags?</entry>
+	<entry><glossterm linkend='interpolate'>Interpolate</glossterm> input?</entry>
 </row>
 ">
 <!ENTITY ROW_HIDE_0 "
@@ -120,6 +121,88 @@ option) any later version.</para>">
 	<entry>
 	<glossterm linkend='filter'>Interchange filter</glossterm> to apply.
 	</entry>
+</row>
+">
+<!ENTITY ROW_EXTRA_none "
+<row>
+	<entry><arg choice='plain'>extra</arg></entry>
+	<entry></entry><entry></entry>
+	<entry>None.</entry>
+	<entry>
+	Extra &HTML; attributes. Passed verbatim. 
+	</entry>
+</row>
+">
+<!ENTITY ROW_HTML_std "
+<row>
+  <entry>
+    <group choice='plain'>
+    <arg choice='plain'>border</arg>
+    <arg choice='plain'>height</arg>
+    <arg choice='plain'>width</arg>
+    <arg choice='plain'>hspace</arg>
+    <arg choice='plain'>vspace</arg>
+    <arg choice='plain'>align</arg> 
+    </group>
+  </entry>
+  <entry></entry><entry></entry>
+  <entry></entry>
+  <entry>The usual &HTML; attributes.</entry>
+</row>
+">
+<!ENTITY ROW_HTML_ext "
+<row>
+  <entry>
+    <group choice='plain'>
+    <arg choice='plain'>border</arg>
+    <arg choice='plain'>height</arg>
+    <arg choice='plain'>width</arg>
+    <arg choice='plain'>hspace</arg>
+    <arg choice='plain'>vspace</arg>
+    <arg choice='plain'>align</arg> 
+    <arg choice='plain'>title</arg> 
+    <arg choice='plain'>alt</arg> 
+    </group>
+  </entry>
+  <entry></entry><entry></entry>
+  <entry></entry>
+  <entry>The usual &HTML; attributes.</entry>
+</row>
+">
+<!ENTITY ROW_CSS_std "
+<row>
+  <entry>
+    <group choice='plain'> 
+    <arg choice='plain'>id</arg>
+    <arg choice='plain'>class</arg>
+    <arg choice='plain'>style</arg>
+    </group>
+  </entry>
+  <entry></entry><entry></entry>
+  <entry></entry>
+  <entry>The usual &CSS; attributes.</entry>
+</row>
+">
+<!ENTITY ROW_UMASK_none "
+<row>
+	<entry>
+	<arg choice='plain'>umask</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>File creation <glossterm linkend='umask'>umask</glossterm>.</entry>
+</row>
+">
+<!ENTITY ROW_MODE_0644 "
+<row>
+  <entry>
+    <arg choice='plain'>mode</arg>
+  </entry>
+  <entry></entry><entry></entry>
+  <entry><literal>0644</literal></entry>
+  <entry>
+  File creation <glossterm linkend='mode'>mode</glossterm>.
+  </entry>
 </row>
 ">
 

@@ -59,8 +59,8 @@ __NAME__ example
 	Note that the following two lines are identical in effect:
 	</para>
 	<programlisting>
-[image  src="[var IMAGE_DIR]/items/[cgi item_id]" extra="border=0 id=item_img"]
-[image  src="__IMAGE_DIR__/items/[cgi item_id]" extra="border=0 id=item_img"]
+[image  src="[var IMAGE_DIR]/items/[cgi item_id]" border=0 extra="id='item_img'"]
+[image  src="__IMAGE_DIR__/items/[cgi item_id]" border=0 extra="id='item_img'"]
 	</programlisting>
 </example>
 __END__

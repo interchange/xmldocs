@@ -132,7 +132,7 @@ __NAME__ example
   text="Continue shopping"
   src="__THEME_IMG_DIR__/continueshopping.gif"
   hidetext=1
-  extra="class=maincontent"
+  extra="class='maincontent'"
   form=basket
 ]
   [bounce href='[history-scan exclude="^/ord|^/multi/|^/process|^/login"
