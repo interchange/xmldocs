@@ -480,34 +480,34 @@ ErrorFile /var/log/interchange/error.log
 
 		<programlisting><![CDATA[
 <table cellpadding="5">
-	<tr>
-		<th>Test #</th>
-		<th>Description</th>
-		<th>Price</th>
-	</tr>
+  <tr>
+    <th>Test #</th>
+    <th>Description</th>
+    <th>Price</th>
+  </tr>
 
-	. . .
+  . . .
 
 </table>
-		]]></programlisting>
+    ]]></programlisting>
 		</para> <para>
 		Now we will use Interchange tags to fill in the rest of the table with the products database you created. The <tag>loop</tag> ITL tag pair tells Interchange to iterate over each item in the parameter list. In this case, the loop runs over the results of an Interchange search. The search parameter does a database search on the provided parameters. In this case, <command>we're doing a very simple search that returns all of the fields for all of the entries in the <database class='table'>products</database> database</command>. The parameters passed to the search tell Interchange to return all records ('ra') from the products file ('fi'). The following should take the place of the ellipsis in the code we placed in <filename>pages/index.html</filename>:
 		<programlisting><![CDATA[
-	[loop search="ra=yes/fi=products"]
+  [loop search="ra=yes/fi=products"]
 
-	. . .
+  . . .
 
-	[/loop]
-		]]></programlisting>
+  [/loop]
+    ]]></programlisting>
 		</para> <para>
 		In the loop we just established, the individual elements of each record are accessed using the <tag>loop-field</tag> tag. The following code should replace the above ellipsis in the code we placed in <filename>pages/index.html</filename>:
 		<programlisting><![CDATA[
-	<tr>
-		<td>[loop-code]</td>
-		<td>[loop-field description]</td>
-		<td align="right">[loop-field price]</td>
-	</tr>
-		]]></programlisting>
+  <tr>
+    <td>[loop-code]</td>
+    <td>[loop-field description]</td>
+    <td align="right">[loop-field price]</td>
+  </tr>
+    ]]></programlisting>
 		</para> <para>
 		The <tag>loop-code</tag> tag refers to the primary key (unique identifier) for the current row of the database table in question. In this case, it will produce the same output as the <tag>loop-field sku</tag> tag, because the 'sku' field is the primary key for products table. In each case, the tag is replaced by the appropriate element. When put together, Interchange generates a page with your products table on it.
 		</para> <para>
@@ -570,14 +570,14 @@ ErrorFile /var/log/interchange/error.log
 		<para>
 		Now that you have your products available, let's add a shopping cart so customers can purchase them. This is simply created using the <tag>order</tag> tag. It creates an HTML link that causes the specified item to be ordered and takes the shopper to her basket page. This is a built-in shortcut to the complete order process which uses an HTML form submission process. The parameter for the <tag>order</tag> tag is the product ID. To add these tags to the catalog, make the following change to <filename>pages/index.html</filename>:
 		<programlisting><![CDATA[
-			[loop-field description]
-			</a>
-		</td>
-		<td align="right">[loop-field price]</td>
-+		<td>[order [loop-code]]Order Now</a></td>
-	</tr>
-	[/loop]
-		]]></programlisting>
+      [loop-field description]
+      </a>
+    </td>
+    <td align="right">[loop-field price]</td>
++    <td>[order [loop-code]]Order Now</a></td>
+  </tr>
+  [/loop]
+    ]]></programlisting>
 		</para> <para>
 		The single line you need to add is marked by a '+'. However, do not include the '+' when adding this line. The surrounding lines are shown to give you the context. This style is called "context diff", and will be used extensively.
 		</para>
@@ -615,7 +615,7 @@ ErrorFile /var/log/interchange/error.log
 + <hr>
 + <p align=center>[page order]View shopping cart</a></p>
   [include bottom]
-		]]></programlisting>
+    ]]></programlisting>
 		</para> <para>
 		Refresh the index page and test the shopping basket in your browser.
 		</para>
@@ -704,7 +704,7 @@ OrderProfile etc/profiles.order
 + &credit_card=standard keep
 
 __END__
-		]]></programlisting>
+    ]]></programlisting>
 		</para> <para>
 		This issues two instructions to the credit card system.
 		</para> <para>
@@ -790,20 +790,20 @@ Locale en_US currency_symbol $
 		</para> <para>
 		But that's probably not what you want to do. You're probably more interested in formatting your other prices (such as those on the Welcome page) as currency. To do that, you could obviously replace <code>[item-field price]</code> with <tag>item-price</tag>, but we'll take on more general approach here. Simply use the <tag>currency</tag><tag>/currency</tag> tag pair for all price values. Make the following change to <filename>pages/index.html</filename>:
 		<programlisting><![CDATA[
-	[loop search="ra=yes/fi=products"]
-	<tr>
-		<td>[loop-code]</td>
-		<td>
-			<a href="[loop-code].html">
-			[loop-field description]
-			</a>
-		</td>
--		<td align="right">[loop-field price]</td>
-+		<td align="right">[currency][loop-field price][/currency]</td>
-		<td>[order [loop-code]]Order Now</a></td>
-	</tr>
-	[/loop]
-		]]></programlisting>
+  [loop search="ra=yes/fi=products"]
+  <tr>
+    <td>[loop-code]</td>
+    <td>
+      <a href="[loop-code].html">
+      [loop-field description]
+      </a>
+    </td>
+-    <td align="right">[loop-field price]</td>
++    <td align="right">[currency][loop-field price][/currency]</td>
+    <td>[order [loop-code]]Order Now</a></td>
+  </tr>
+  [/loop]
+    ]]></programlisting>
 		</para>
 		<note><para>
 		The line that begins with '-' should be deleted. Do not type the '-'. The next line, that starts with '+', replaces it. (It's the <emphasis>context diff</emphasis> format we mentioned, remember?)
@@ -854,18 +854,18 @@ Variable CONTACT_EMAIL myname.surname@mydomain.com
 		</para> <para>
 		Now make the following change to your template file bottom:
 		<programlisting><![CDATA[
-	</td>
-	</tr>
-	<tr><td colspan="2" align="center">
--		(bottom)
-+		<a href="mailto:__CONTACT_EMAIL__">Contact us</a> if you have any questions.
-	</td>
-	</tr>
-	</table>
-	</div>
+  </td>
+  </tr>
+  <tr><td colspan="2" align="center">
+-    (bottom)
++    <a href="mailto:__CONTACT_EMAIL__">Contact us</a> if you have any questions.
+  </td>
+  </tr>
+  </table>
+  </div>
 </body>
 </html>
-		]]></programlisting>
+    ]]></programlisting>
 		</para> <para>
 		Be sure to restart Interchange (or reconfig the catalog at least) before reloading the page in your browser, since you made a change to <filename>catalog.cfg</filename>.
 		</para> <para>
@@ -876,13 +876,13 @@ Variable DISPLAYDATE [time]%A, %B %d, %Y[/time]
 		</para> <para>
 Now add the following to the left template piece:
 		<programlisting><![CDATA[
-	<tr>
-	<td align="center">
--		(left)
-+		__DISPLAYDATE__
-	</td>
-	<td align="center">
-		]]></programlisting>
+  <tr>
+  <td align="center">
+-    (left)
++    __DISPLAYDATE__
+  </td>
+  <td align="center">
+    ]]></programlisting>
 		</para> <para>
 		Restart Interchange and view the page.
 		</para>
@@ -951,7 +951,7 @@ Now add the following to the left template piece:
   </tr>
 
   </table>
-		]]></programlisting>
+    ]]></programlisting>
 		</para> <para>
 		In the first set of &lt;select&gt; &lt;/select&gt; HTML tags a list is generated of the months to choose from. This is accomplished by using a <tag>loop</tag> tag. In this case we are looping over an explicit list. The list is provided in the list parameter. Use caution when typing this, as it is sensitive to formatting (which may not be reflected in this document). Make sure that the numbers are the first characters on each new line and that the single tab separates them from the rest of the line text. Since the columns in this list are not named, the first element can be accessed using <tag>loop-code</tag> or <code>[loop-pos 0]</code> with subsequent elements being accessed by <code>[loop-pos N]</code> where N is the number of the column you want. Notice that the elements are zero-indexed. Each time through this loop Interchange generates a select &lt;option&gt; with a number as the value and the name of the month as the text for the select menu.
 		</para> <para>
@@ -964,68 +964,68 @@ Now add the following to the left template piece:
 		<para>
 		The products listed on your welcome page are shown in the same order that you entered them into <filename>products/products.txt</filename>. As you add more products, you will want this list to show up in a predictable order. To do this, you need to change the search parameters in <filename>pages/index.html</filename>, which were originally:
 		<programlisting>
-	[loop search="
-		ra=yes
-		fi=products
-	"]
-		</programlisting>
+  [loop search="
+    ra=yes
+    fi=products
+  "]
+    </programlisting>
 		</para> <para>
 		You will recall that 'ra' stands for 'return all' and 'fi' stands for file. Let's add the search parameter 'tf', which specifies the sort field. You can specify the field either by name or by number (starting with 0), with names and order as given in the first line of <filename>products/products.txt</filename>). Make the following change in <filename>pages/index.html</filename>:
 		<programlisting>
-	[loop search="
-		ra=yes
-		fi=products
-		tf=price
-	"]
-		</programlisting>
+  [loop search="
+    ra=yes
+    fi=products
+    tf=price
+  "]
+    </programlisting>
 		</para> <para>
 		Refresh your browser. The default ordering is done on a character-by-character basis, but we were looking to do a numeric sort. For this you need to set 'to', the sort order, to 'n', for numeric:
 		<programlisting>
-	[loop search="
-		ra=yes
-		fi=products
-		tf=price
-		to=n
-	"]
-		</programlisting>
+  [loop search="
+    ra=yes
+    fi=products
+    tf=price
+    to=n
+  "]
+    </programlisting>
 		</para> <para>
 		Refresh your browser. Now try reversing the sort order by adding 'r' to the 'to' setting:
 		<programlisting>
-	[loop search="
-		ra=yes
-		fi=products
-		tf=2
-		to=nr
-	"]
-		</programlisting>
+  [loop search="
+    ra=yes
+    fi=products
+    tf=2
+    to=nr
+  "]
+    </programlisting>
 		</para> <para>
 		You'll notice that it worked equally well to specify the sort field by number instead of name. You could also do a reverse alphabetical sort by description:
 
 		<programlisting>
-	[loop search="
-		ra=yes
-		fi=products
-		tf=1
-		to=r
-	"]
-		</programlisting>
+  [loop search="
+    ra=yes
+    fi=products
+    tf=1
+    to=r
+  "]
+    </programlisting>
 		</para> <para>
 		Now let's try narrowing the search down a bit. Instead of returning all, we'll give 'se', the search parameter, and and use 'su', which allows substring matches. To search only for products that have the word "test" in one of their fields, and sort the results by description, type:
 		<programlisting>
-	[loop search="
-		se=test
-		su=yes
-		fi=products
-		tf=description
-	"]
-		</programlisting>
+  [loop search="
+    se=test
+    su=yes
+    fi=products
+    tf=description
+  "]
+    </programlisting>
 		</para> <para>
 		Which seems like something that would be better done in a search box for your store visitors.
 		</para> <para>
 		Before moving on, change this search back to the simple list, sorted by description:
 		<programlisting>
-	[loop search="ra=yes/fi=products/tf=description"]
-		</programlisting>
+  [loop search="ra=yes/fi=products/tf=description"]
+    </programlisting>
 		</para>
 	</sect2>
 
@@ -1034,25 +1034,25 @@ Now add the following to the left template piece:
 		<para>
 		Your customers might appreciate the ability to search for a test by SKU or part of the test description. To do this, you need to add a search box to the left portion of the page layout. Make the following change to the file left:
 		<programlisting><![CDATA[
-	<tr>
-	<td align="center">
--		__DISPLAYDATE__
+  <tr>
+  <td align="center">
+-    __DISPLAYDATE__
 + <form action="[area search]" method="post">
 + Search:<br>
 + [set testname]
-+	su=yes
-+	fi=product
-+	sf=sk
-+	sf=description
++ su=yes
++ fi=product
++ sf=sk
++ sf=description
 + [/set]
 + <input type="hidden" name="mv_profile" value="testname">
 + <input type="text" name="mv_searchspec" size="15" value="">
 + </form>
 + <hr>
 + __DISPLAYDATE__
-	</td>
-	<td align="center">
-		]]></programlisting>
+  </td>
+  <td align="center">
+    ]]></programlisting>
 		</para> <para>
 		This is a simple HTML form with a single input box for text. The action goes to a special Interchange processor called 'search' that will perform the search and pass the results to a page called <filename>pages/results.html</filename> (that has not been created yet). The search will be case-insensitive, but will only match complete words, not substrings.
 		</para> <para>
@@ -1107,7 +1107,7 @@ Variable TOP    [include templates/main-top]
 Variable TOP    <top
 Variable LEFT   <left
 Variable BOTTOM <bottom
-		]]></programlisting>
+    ]]></programlisting>
 		</para>
 	</sect2>
 
