@@ -181,6 +181,9 @@ sub wanted {
 	unshift @file, ""; # Match index numbers with line numbers
 	close IN;
 
+	# Global variables to use from the loop below
+	my @gfunc = (qw/unknown -1/); # 2 elements: func name, line num
+
 	for (my $lnum = 1; $lnum < scalar @file; $lnum++) {
 		my $line = $file[$lnum];
 
@@ -233,6 +236,7 @@ sub wanted {
 				$hash{tree}{$file}{code}++;
 				$hash{total}{perl_code}++;
 
+				######################################################
 				# Discover pragmas
 				# Ph33r, PH33R my MaD R3G3X skiLLz! ;-)
 				# This matches $::Pragma->{} or $$::Pragma{}
@@ -244,20 +248,30 @@ sub wanted {
 						# TODO Here, and 2 places below: make sure if ctx is say, 5:5,
 						# it always shows that much (that is, workaround file beginning/
 						# file end problems - pad with empty lines or something).
-						[ "$i{ver}/$file", $lnum, "$ctx_p\:$ctx_n", [@file[$lnum-$ctx_p..$lnum+$ctx_n]] ];
+						[ "$i{ver}/$file", $lnum, "$gfunc[0]:$gfunc[1] $ctx_p\:$ctx_n", [@file[$lnum-$ctx_p..$lnum+$ctx_n]] ];
 				}
-
+				
+				######################################################
 				# Diskover global variables
 				if ( $line =~ /(()|\$())\$Global::Variable(->\2|\3){(\w+?)}/ ) {
 					push @{ $hash{symbols}{globvar}{$5} },
-						[ "$i{ver}/$file", $lnum, "$ctx_p\:$ctx_n", [@file[$lnum-$ctx_p..$lnum+$ctx_n]] ];
+						[ "$i{ver}/$file", $lnum, "$gfunc[0]:$gfunc[1] $ctx_p\:$ctx_n", [@file[$lnum-$ctx_p..$lnum+$ctx_n]] ];
 				}
 				if ( $line =~ /\$Tag->var\s*\(\s*(["'])(\S+?)\1(\s*,\s*(\d))?/ ) {
 					push @{ $hash{symbols}{globvar}{$5} },
-						[ "$i{ver}/$file", $lnum, "$ctx_p\:$ctx_n", [@file[$lnum-$ctx_p..$lnum+$ctx_n]] ];
+						[ "$i{ver}/$file", $lnum, "$gfunc[0]:$gfunc[1] $ctx_p\:$ctx_n", [@file[$lnum-$ctx_p..$lnum+$ctx_n]] ];
 					warn "\$Tag->var syntax never used in .pl/.pm files by now.
 						I'll register that, but is it a mistake? ($2, $4)\n";
 				}
+				
+				######################################################
+				# See if it's a beginning of a subroutine name, and remember the
+				# name/linenum.
+				if ( $line =~ /^\s*sub\s+(\w+)\s*\{\s*$/ ) {
+					$hash{total}{perl_functions}++;
+					@gfunc = ( $1, $lnum );
+				}
+				
 			} else {
 				warn "IMPOSSIBLE\n";
 			}
@@ -333,6 +347,8 @@ sub dumpdb {
 #			filetypes => {   # files of that type
 # 			...ftype...
 # 		}
+#
+# 		perl_functions   # Total number of Perl functions in the source
 #
 #		# Each file's stat() data
 # 	tree => {

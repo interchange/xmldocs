@@ -136,7 +136,11 @@ while ( $path = shift @paths) {
 			my $ar = $hash{symbols}{ $$ag{"_symbol type"} }{$key};
 			if ( @$ar ) { $$ag{source} = "" }
 			for my $ctx ( @$ar ) {
-				my ($fi, $ln, $ctxsize, $ctxdata) = @$ctx;
+				my ($fi, $ln, $ctxmeta, $ctxdata) = @$ctx;
+				my @ctxsize = split /\s/, $ctxmeta;
+				# Support incompatible bin/stattree change
+				# XXX Remove once we autogenerate all with new bin/stattree
+				my $ctxsize = scalar @ctxsize == 2 ? $ctxsize[1] : $ctxsize[0];
 				my $loc = "$fi:$ln";
 				for my $arr ( @{ $covered{$key}{$fi} } ) {
 					goto DONELOOP if $ln > $$arr[0] and $ln < $$arr[1];
@@ -145,7 +149,7 @@ while ( $path = shift @paths) {
 				if ( length $ctxsdata ) {
 					$$ag{source} .= <<ENDD;
 <example>
-<title>$loc ($ctxsize)</title>
+<title>$loc ($ctxmeta)</title>
 
 <programlisting><![CDATA[
 $ctxsdata
