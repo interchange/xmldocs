@@ -88,7 +88,6 @@ option) any later version.</para>">
 	<entry>
 		<group choice='opt'>
 			<arg choice='plain'>interpolate</arg>
-			<arg choice='plain'>reparse</arg>
 		</group>
 	</entry>
 	<entry></entry><entry></entry>
@@ -101,12 +100,35 @@ option) any later version.</para>">
 	<entry>
 		<group choice='opt'>
 			<arg choice='plain'>interpolate</arg>
-			<arg choice='plain'>reparse</arg>
 		</group>
 	</entry>
 	<entry></entry><entry></entry>
 	<entry>1</entry>
 	<entry>&glos-interpolation; input?</entry>
+</row>
+">
+<!ENTITY ROW_REPARSE_0 "
+<row>
+	<entry>
+		<group choice='opt'>
+			<arg choice='plain'>reparse</arg>
+		</group>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>&glos-reparse; output?</entry>
+</row>
+">
+<!ENTITY ROW_REPARSE_1 "
+<row>
+	<entry>
+		<group choice='opt'>
+			<arg choice='plain'>reparse</arg>
+		</group>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>1</entry>
+	<entry>&glos-reparse; output?</entry>
 </row>
 ">
 <!ENTITY ROW_HIDE_0 "

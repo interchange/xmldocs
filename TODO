@@ -1,6 +1,5 @@
 
 Outstanding:
-- Interpolate/reparse are two options;  adjust ROW_INTERPOLATE/REPARSE_0/1
 - Online examples only have to be standard examples, with actual work in
   practice if condition=online
   Code to do that is: <programlisting><textobject><textdata fileref="pathto.xml"/></textobject></programlisting>
@@ -14,6 +13,9 @@ Outstanding:
   add or remove text (or combined).
 
 - Ask ndw about including [NEW!] and [TODO!] in titles in TOC.
+- ./files/ directory is not properly referenced from chunked documents.
+  This will be done by prefixing links from chunked documents with ../
+  "Code" for this is done, I just need to get it from ndw.
 
 - Stinky manpage stylesheets are a disaster. This time it's that
   <cmdsynopsis> is verbatim and <screen> still renders comments without
@@ -22,15 +24,9 @@ Outstanding:
   NEWS: New guy took over xslt maintenance and is interested in improved
     manpage support - he's interested in my problems, and is willing to
     do xslt work himself.
-	
-- ./files/ directory is not properly referenced from chunked documents.
-  This will be done by prefixing links from chunked documents with ../
-  "Code" for this is done, I just need to get it from ndw.
 
 - In iccattut:
-  - make a "translation map" of /etc/interchange/* to RPM-equivs.
-  - item for package names, like interchange-cat-foundation, wenglish, etc..
-    ( This is ok, docbook 4.4 will have <package> element )
+  - Check if redhat/tarball paths are correct
   - explain syntax accepted in profile files
   - Fix ImageDir and include one picture for example
   - <Racke>I name three things that IC users often didn't acknowledge:

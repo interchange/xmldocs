@@ -75,6 +75,8 @@ R: Important field, describes each symbol's synopsis:
 	<entry></entry>
 </row>
 __NAME__ synopsis
+&ROW_INTERPOLATE_0;
+&ROW_REPARSE_1;
 __END__
 
 
