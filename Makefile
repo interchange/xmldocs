@@ -41,6 +41,9 @@ howtos: howtos/howtos.xml howtos/*.xml
 	make $(OUTPUT)/howtos.html
 	make $(OUTPUT)/howtos
 
+guides/glossary.xml:
+	bin/glossary-autogen
+
 #
 # All documents
 #
@@ -156,6 +159,8 @@ tmp/stattrees:
 	> cache/$$p/.objectlist.c.txt; \
 	ctags -f cache/$$p/.tags -R --extra=fq --fields=afikKlmnsSz --line-directives sources/$$p \
 	; done
+	touch tmp/stattrees
+
 
 #
 # Cleanup
