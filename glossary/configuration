@@ -1,9 +1,3 @@
-
-<glossentry id="configuration">
-<glossterm>configuration</glossterm>
-
-<glossdef>
-<para>
 &IC; supports multiple catalogs, and therefore splits its configuration
 into two pieces. One is global, &gcf;, and affects every catalog running
 under that &IC; server.
@@ -105,9 +99,3 @@ ifndef ORDERS_TO
   MailOrderTo  webmaster@&def-domain;
   endif
 </programlisting>
-
-</para>
-</glossdef>
-
-</glossentry>
-

@@ -1,14 +1,3 @@
-
-<glossentry id="scratch">
-<glossterm>Scratch variables</glossterm>
-<glossterm>Scratch space</glossterm>
-<glossterm>Scratchpad</glossterm>
-
-<!--<acronym></acronym>-->
-<!--<abbrev></abbrev>-->
-
-<glossdef>
-<para>
 To each new visitor, Interchange assigns an unique
 <firstterm>session ID</firstterm> and (among other things) creates a
 <firstterm>scratch space</firstterm> (also referred to as 
@@ -32,9 +21,3 @@ The following tags manipulate the scratch space:
 <para>
 Scratch variables are also used in form processing. See the 
 <tag>button</tag> tag for examples.
-</para>
-
-</glossdef>
-
-</glossentry>
-

@@ -1,18 +1,6 @@
-
-<glossentry id="true">
-<glossterm>true</glossterm>
-<glossterm>true value</glossterm>
-
-<glossdef>
-<para>
 In general programming terms, a <emphasis>true</emphasis> value is 
 anything, except <literal>0</literal> (zero), <literal>""</literal>
 (an empty string) and undefined value.
 </para><para>
 Note that a value of a string containing only whitespace
 (say, one TAB or space) is also considered 'true'.
-</para>
-</glossdef>
-
-</glossentry>
-

@@ -1,12 +1,1 @@
-
-<glossentry id="ic-run-mode">
-<glossterm>run mode</glossterm>
-
-<glossdef>
-<para>
 low, high, rpc, prefork
-</para>
-</glossdef>
-
-</glossentry>
-

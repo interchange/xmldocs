@@ -1,18 +1,6 @@
-
-<glossentry id="false">
-<glossterm>false</glossterm>
-<glossterm>false value</glossterm>
-
-<glossdef>
-<para>
 In general programming terms, a <emphasis>false</emphasis> value is one
 that is either <literal>0</literal> (zero) or <literal>""</literal>
 (an empty string).
 </para><para>
 Since the Perl programming language has a notion of undefined values, they
 too are considered false.
-</para>
-</glossdef>
-
-</glossentry>
-

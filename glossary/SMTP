@@ -1,16 +1,4 @@
-
-<glossentry id="SMTP">
-<acronym>SMTP</acronym>
-<glossterm>Simple Mail Transfer Protocol</glossterm>
-
-<glossdef>
-<para>
 <ulink url='http://cr.yp.to/smtp.html'>SMTP</ulink> resource.
 </para>
 <para>
 <classname>Net::SMTP</classname> <ulink url="http://search.cpan.org/~gbarr/">Perl module</ulink> (follow the "libnet" link).
-</para>
-</glossdef>
-
-</glossentry>
-

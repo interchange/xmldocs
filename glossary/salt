@@ -1,9 +1,3 @@
-
-<glossentry id="salt">
-<glossterm>Salt</glossterm>
-
-<glossdef>
-<para>
 In password protection, salt is a random string of data (two
 characters, in traditional crypt implementations) used to modify a
 password hash.
@@ -28,8 +22,3 @@ At a later point in time, some other person changed her existing password
 to <literal>tinuviel</literal>, which created a total of 3 pairs of 
 identical passwords used at the same time.
 -->
-</para>
-</glossdef>
-
-</glossentry>
-

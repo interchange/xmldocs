@@ -23,6 +23,17 @@ my %ln = ( # long name
 	howtos => "HOW-TO",
 );
 
+my %header = ( # item head
+	glossary => "<glossentry id=\"\$file\">
+<glossterm>\$file</glossterm>
+
+<glossdef><para>
+",
+);
+my %footer = ( # item tail
+	glossary => "\n</para>\n</glossdef>\n</glossentry>",
+);
+
 # HEAD
 my $glossary = <<__ENDP__;
 <?xml version="1.0" standalone="no"?>
@@ -84,10 +95,11 @@ open ENT, "> docbook/auto$cat.ent" or
 opendir DIR, $cat or die "Can't open $cat/ ($!)\n";
 readdir DIR; readdir DIR;
 
+# Read all elements from a directory
 while ( my $file = readdir DIR ) {
 	next if $file =~ /^\.|^CVS|\.xml$/;
 	open IN, "< $cat/$file" or die "Can't read-open $cat/$file ($!)\n";
-	$items{$file} = [ <IN> ];
+	$items{$file} = [ prefix($cat, $file), <IN>, suffix($cat, $file) ];
 	$alphabet{ lc(substr($file, 0, 1)) }++;
 	push @loaded, $file;
 
@@ -140,3 +152,27 @@ die "Can't wropen $cat/$cat.xml ($!)\n";
 print OUT $document;
 close OUT or warn "Cant close $cat/$cat.xml ($!)\n";
 
+exit 0;
+
+################################################################
+# Helpers below
+
+sub prefix {
+	my ($cat, $file) = @_;
+	if ( $header{$cat} ) {
+		my $tmp = $header{$cat};
+		$tmp =~ s/(\$\w+)/$1/gee;
+		return $tmp;
+	}
+	""
+}
+
+sub suffix {
+	my ($cat, $file) = @_;
+	if ( $footer{$cat} ) {
+		my $tmp = $footer{$cat};
+		$tmp =~ s/(\$\w+)/$1/gee;
+		return $tmp;
+	}
+	""
+}

@@ -1,9 +1,3 @@
-
-<glossentry id="filter">
-<glossterm>Filter</glossterm>
-
-<glossdef>
-<para>
 &IC; filters are usually small routines that perform various 
 (arbitrary) transformations of user input.
 </para><para>
@@ -13,8 +7,3 @@ or even serve as &tag-value; equivalents.
 </para><para>
 Using existing filters and creating new ones is very simple.
 <!-- TODO: Pointer to filters.html -->
-</para>
-</glossdef>
-
-</glossentry>
-

@@ -1,10 +1,3 @@
-
-<glossentry id="tracking">
-<glossterm>tracking</glossterm>
-<glossterm>user tracking</glossterm>
-
-<glossdef>
-<para>
 Several actions performed by users are recorded by &IC;'s usertracking 
 facility, if one is enabled. Usertrack data can actually be obtained from two
 different locations.
@@ -22,9 +15,3 @@ LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" \
 			%T %v \"%{X-Track}o\"" track
 CustomLog /var/log/apache/track.log track
 ]]></programlisting>
-</para>
-
-</glossdef>
-
-</glossentry>
-

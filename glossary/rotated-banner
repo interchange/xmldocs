@@ -1,9 +1,3 @@
-
-<glossentry id="rotated-banner">
-<glossterm>Rotated banner</glossterm>
-
-<glossdef>
-<para>
 In &IC;, the term "Rotated Banner" refers to the process of selecting
 or displaying one of the banners from the
 <database class='field'>banner</database> field in the banner database, 
@@ -13,9 +7,3 @@ integer value.
 </para><para>
 The available banners are displayed <emphasis>in sequential order</emphasis>,
 with an independent pointer for each client.
-</para>
-
-</glossdef>
-
-</glossentry>
-

@@ -1,10 +1,3 @@
-
-<glossentry id="ITL">
-<glossterm>ITL</glossterm>
-<glossterm>Interchange Tag Language</glossterm>
-
-<glossdef>
-<para>
 &IC; functions can be accessed via the Interchange Tag Language (&glos-ITL;).
 The pages in a catalog may be mostly &glos-HTML;, but they will use ITL tags
 to provide dynamic content and access Interchange functions in general.
@@ -654,12 +647,6 @@ The data structure would then be:
     { foo => 'fooN', bar => 'barN' },
 ]
 </programlisting>
-
-</para>
-
-</glossdef>
-
-</glossentry>
 
 <!-- TODO put somewhere
 PREFIX-field"]PREFIX-field (Optimization note- one query per field if you use this; we optimize around this if only one products table) 

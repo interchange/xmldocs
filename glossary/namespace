@@ -1,9 +1,3 @@
-
-<glossentry id="namespace">
-<glossterm>Namespace</glossterm>
-
-<glossdef>
-<para>
 Name-space is an abstract group of elements. Within the group, element names
 must be unique, but elements of the same name can appear in different 
 namespaces (so, in different groups). They are completely separate and in
@@ -14,8 +8,3 @@ the namespace indicator can be prefixed to the element name (such as
 <literal>xsl:stylesheet</literal>), given as a separate parameter
 (such as <literal>name="stylesheet" space="xsl"</literal>), or set
 in a separate call and later considered implicit.
-</para>
-</glossdef>
-
-</glossentry>
-

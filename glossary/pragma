@@ -1,9 +1,3 @@
-
-<glossentry id="pragma">
-<glossterm>Pragma</glossterm>
-
-<glossdef>
-<para>
 Pragmas are used to control various aspects of page and data parsing and display. They are processed before an Interchange page goes to the normal processing
 routine.
 </para><para>
@@ -18,11 +12,6 @@ To define a pragma value for a particular page, use the <tag>pragma</tag> tag an
 To define a pragma for a small ITL block inside the page, enclose the block in <code>[tag pragma NAME]1[/tag]...[tag pragma NAME]0[/tag]</code>.
 </para><para>
 Starting with Interchange 5.0, the <code>$::Pragma->{name}</code> syntax is used in the Interchange source instead of the old <code>$Vend::Cfg->{Pragma}{name}</code>.
-</para>
 
 <!-- <glosssee otherterm="sgml"/>
 <glossseealso otherterm="globvar">Global variable</glossseealso> -->
-</glossdef>
-
-</glossentry>
-

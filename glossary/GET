@@ -1,18 +1,6 @@
-
-<glossentry id="GET">
-<glossterm>GET</glossterm>
-<glossterm>GET Form Method</glossterm>
-
-<glossdef>
-<para>
 "GET" resource at 
 <ulink url="http://www.cs.tut.fi/~jkorpela/forms/methods.html">Yukka
 Korpela's</ulink> website and
 <ulink url="http://www.faqs.org/docs/htmltut/forms/_FORM_METHOD_GET.html">
 faqs.org</ulink>.
-</para>
-
-</glossdef>
-
-</glossentry>
 

@@ -1,14 +1,2 @@
-
-<glossentry id="hello-world">
-<glossterm>Hello, World!</glossterm>
-
-<glossdef>
-<para>
 <emphasis>Hello, World!</emphasis> resource at
 <ulink url="http://en.wikipedia.org/wiki/Hello_world">Wikipedia</ulink>.
-</para>
-
-</glossdef>
-
-</glossentry>
-

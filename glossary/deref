@@ -1,9 +1,3 @@
-
-<glossentry id="deref">
-<glossterm>Dereferencing</glossterm>
-
-<glossdef>
-<para>
 <emphasis>Dereferencing</emphasis> is strictly a computer-programming
 issue, but we will try to explain it in very brief and comprehensible terms,
 so that you understand the idea of <firstterm>dereferencing</firstterm> and
@@ -56,9 +50,3 @@ any of the two references would have impact on both.
 So, when a data structure (or its element) is said to be copied
 <emphasis>without dereferencing</emphasis>, then in case it was a reference,
 it is still copied in itself, but all copies point to the same location.
-</para>
-
-</glossdef>
-
-</glossentry>
-

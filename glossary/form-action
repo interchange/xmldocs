@@ -1,10 +1,4 @@
-
-<glossentry id="form-action">
-<glossterm>form action</glossterm>
-
-<glossdef>
-<para>
-<![CDATA[
+<!--
 TODO format
 Interchange form processing is based on an C<action> and a C<todo>. The 
 predefined actions at the first level are:
@@ -139,10 +133,4 @@ mv_successpage, or mv_nextpage. Finally, if the check fails, the user
 will be routed to mv_failpage or mv_nextpage in that order.
 
 =back
-]]>
-</para>
-
-</glossdef>
-
-</glossentry>
-
+-->

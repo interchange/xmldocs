@@ -1,13 +1,2 @@
-
-<glossentry id="CSS">
-<glossterm>CSS</glossterm>
-<glossterm>Cascading Style Sheets</glossterm>
-
-<glossdef>
-<para>
 <ulink url='http://www.w3.org/Style/CSS/'>CSS</ulink> resource
 at &W3C;.
-</para>
-</glossdef>
-
-</glossentry>

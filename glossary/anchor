@@ -1,13 +1,2 @@
-
-<glossentry id="anchor">
-<glossterm>anchor</glossterm>
-<glossterm>HyperText Anchor</glossterm>
-
-<glossdef>
-<para>
 <ulink url='http://www.w3.org/TR/REC-html40/struct/links.html'>Anchor</ulink>
 resource at &W3;.
-</para>
-</glossdef>
-
-</glossentry>

@@ -1,9 +1,3 @@
-
-<glossentry id="cgi-var">
-<glossterm>CGI Variable</glossterm>
-
-<glossdef>
-<para>
 Interchange server runs as a daemon on an Unix system, and is typically
 accessed over a communication socket by a web server daemon. In turn,
 the web server is accessed by a client using a web browser.
@@ -33,8 +27,3 @@ an user session - that is possible only using &tag-value;.
 As CGI variables contain user-supplied data, they are obviously of
 great concern from a security standpoint.
 <!-- TODO: IC functionality to deal with CGI data security .. filters etc. -->
-</para>
-</glossdef>
-
-</glossentry>
-
