@@ -1,0 +1,75 @@
+mv_all_chars|ac|S|Turns on punctuation matching
+mv_arg||A|Parameters for mv_subroutine (mv_arg0,mv_arg1,...)
+mv_base_directory|bd|S|Sets base directory for search file names
+mv_begin_string|bs|S|Pattern must match beginning of field
+mv_case|cs|S|Turns on case sensitivity
+mv_cartname||O|Sets the shopping cart name
+mv_check||A|Any form, sets multiple user variables after update
+mv_click||A|Any form, sets multiple form variables before update
+mv_click||XA|Default mv_click routine, click is mv_click_arg
+mv_click||XA|Routine for a click I<name>, sends click as arg
+mv_click_arg||XA|Argument name in scratch space
+mv_coordinate|co|S|Enables field/spec matching coordination
+mv_column_op|op|S|Operation for coordinated search
+mv_credit_card||O|Discussed in order security (some are read-only)
+mv_dict_end|de|S|Upper bound for binary search
+mv_dict_fold|df|S|Non-case sensitive binary search
+mv_dict_limit|di|S|Sets upper bound based on character position
+mv_dict_look|dl|S|Search specification for binary search
+mv_dict_order|do|S|Sets dictionary order mode
+mv_doit||A|Sets default action
+mv_email||O|Reply-to address for orders
+mv_exact_match|em|S|Sets word-matching mode
+mv_failpage|fp|OS|Sets page to display on failed order check/search
+mv_field_file|ff|S|Sets file to find field names for Glimpse
+mv_field_names|fn|S|Sets field names for search, starting at 1
+mv_first_match|fm|S|Start displaying search at specified match
+mv_head_skip|hs|S|Sets skipping of header line(s) in index
+mv_index_delim|id|S|Delimiter for search fields (TAB default)
+mv_matchlimit|ml|S|Sets match page size
+mv_max_matches|mm|S|Sets maximum match return
+mv_min_string|ms|S|Sets minimum search spec size
+mv_negate|ne|S|Records NOT matching will be found
+mv_nextpage|np|A|Sets next page user will go to
+mv_numeric|nu|S|Comparison numeric in coordinated search
+mv_order_group||O|Allows grouping of master item/sub item
+mv_order_item||O|Causes the order of an item
+mv_order_number||O|Order number of the last order (read-only)
+mv_order_quantity||O|Sets the quantity of an ordered item
+mv_order_profile||O|Selects the order check profile
+mv_order_receipt||O|Sets the receipt displayed
+mv_order_report||O|Sets the order report sent
+mv_order_subject||O|Sets the subject line of order email
+mv_orsearch|os|S|Selects AND/OR of search words
+mv_profile|mp|S|Selects search profile
+mv_record_delim|dr|S|Search index record delimiter
+mv_return_all|ra|S|Return all lines found (subject to range search)
+mv_return_delim|rd|S|Return record delimiter
+mv_return_fields|rf|S|Fields to return on a search
+mv_return_file_name|rn|S|Set return of file name for searches
+mv_return_spec|rs|S|Return the search string as the only result
+mv_save_session||C|Set to non-zero to prevent expiration of user session
+mv_search_field|sf|S|Sets the fields to be searched
+mv_search_file|fi|S|Sets the file(s) to be searched
+mv_search_line_return|lr|S|Each line is a return code (loop search)
+mv_search_match_count||S|Returns the number of matches found (read-only)
+mv_search_page|sp|S|Sets the page for search display
+mv_searchspec|se|S|Search specification
+mv_searchtype|st|S|Sets search type (text, glimpse, db or sql)
+mv_separate_items||O|Sets separate order lines (one per item ordered)
+mv_session_id|id|A|Suggests user session id (overridden by cookie)
+mv_shipmode||O|Sets shipping mode for custom shipping
+mv_sort_field|tf|S|Field(s) to sort on
+mv_sort_option|to|S|Options for sort
+mv_spelling_errors|er|S|Number of spelling errors for Glimpse
+mv_substring_match|su|S|Turns off word-matching mode
+mv_successpage||O|Page to display on successful order check
+mv_todo||A|Common to all forms, sets form action
+mv_todo.map||A|Contains form imagemap
+mv_todo.checkout.x||O|Causes checkout action on click of image
+mv_todo.return.x||O|Causes return action on click of image
+mv_todo.submit.x||O|Causes submit action on click of image
+mv_todo.x||A|Set by form imagemap
+mv_todo.y||A|Set by form imagemap
+mv_unique|un|S|Return unique search results only
+mv_value|va|S|Sets value on one-click search (va=var=value)
