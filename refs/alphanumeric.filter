@@ -1,0 +1,29 @@
+__NAME__ purpose
+eliminate non-alphanumeric characters
+__END__
+
+
+__NAME__ see also
+alpha
+__END__
+
+
+__NAME__ description
+The filter eliminates any non-alphanumeric characters
+(that is, anything that's not in <literal>a-zA-Z0-9</literal> range).
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[filter alphanumeric]** Test 2: Hello, World! **[/filter]
+</programlisting>
+__END__
+

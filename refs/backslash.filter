@@ -1,0 +1,27 @@
+__NAME__ purpose
+eliminate backslashes
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter eliminates backslashes.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[filter backslash]The filter will remove all of those: \\\\ \\\\[/filter]
+</programlisting>
+__END__
+

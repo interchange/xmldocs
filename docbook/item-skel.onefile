@@ -96,14 +96,9 @@ R: Primary example. One example always has to be provided, no matter
    how simple and obvious you think it is.
    It should consist of a title (no XML in it), description (inside <para>)
    and code example (inside <programlisting>).
-__NAME__ example
-<example>
-  <title></title>
-	<para>
-	</para>
+__NAME__ example: 
 <programlisting>
 </programlisting>
-</example>
 __END__
 
 

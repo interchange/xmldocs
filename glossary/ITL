@@ -10,7 +10,8 @@ the user session. There's more than 200 standard predefined tags, and the
 functions and can be just as powerful as the built-in tags.
 </para>
 
-<section>Tag Syntax</section>
+<section>
+<title>Basics</title>
 
 <para>
 &glos-ITL; tags are similar to HTML, in that they accept
@@ -41,9 +42,11 @@ In the above example, you can implicitly see that container tags are mostly
 useful only if some content is provided in their <emphasis>body</emphasis>
 (the place between the opening and corresponding ending tag).
 </para>
+</section>
 
 
-<section>Standard Syntax</section>
+<section>
+<title>Standard Syntax</title>
 
 <para>
 We've covered the most basic syntax above. If you need to pass parameters
@@ -84,13 +87,17 @@ includes an underscore or dash (such as in &tag-item-list;), then you can
 always choose between the dash <emphasis role='bold'>and</emphasis>
 underscore</emphasis>! The two forms are interchangeable, except that you
 must be consistent with tag markers; an ending tag must match the opening tag.
-<code>[item-list]...[/item-list]</code> is okay, 
+Both <code>[item-list]...[/item-list]</code> or
+<code>[item_list]...[/item_list]</code> are fine, but
 <code>[item-list]...[/item_list]</code> is
 <emphasis role='bold'>not</emphasis>.
 </para>
 </important>
+</section>
 
-<section>HTML Comments</section>
+
+<section>
+<title>HTML Comments</title>
 
 <para>
 &glos-ITL; also allows you to use <literal>&lt;!--[</literal> and 
@@ -138,8 +145,12 @@ This is a small parsing speed optimization and shouldn't cause you any
 trouble as you're supposed to be consistent in your syntax anyway.
 <!-- TODO there's more theoretical stuff in APPENDICES in ictags -->
 </para>
+</section>
 
-<section>Named and Positional Parameters</section>
+
+<section>
+<title>Named and Positional Parameters</title>
+
 
 <para>
 There are two styles of supplying parameters to a tag:
@@ -201,8 +212,12 @@ you must use named parameters:
   </para></listitem>
 </itemizedlist>
 </para>
+</section>
 
-<section>Argument Interpolation</section>
+
+<section>
+<title>Argument Interpolation</title>
+
 
 <para>
 When ITL tags are <emphasis>expanded</emphasis>, for example when 
@@ -229,9 +244,54 @@ Note that the <arg choice='plain'>href</arg> argument did not need to be
 quoted; only <arg choice='plain'>arg</arg> did because it
 contained a whitespace.
 </para>
+</section>
 
 
-<section>Universal Attributes</section>
+<section>
+<title>Deeper look at argument quoting</title>
+
+<para>
+The question is &mdash; exactly when can you omit the quotes around
+argument values? First answer is trivial; never omit the quotes and you'll
+never run into trouble.
+</para>
+<para>
+To quote values, you can use double quotes (<literal>"</literal>),
+single quotes (<literal>'</literal>) and 
+pipes (<literal>|</literal>). Pipes have the additional functionality of
+removing leading and trailing whitespace, but generally you can use 
+them in combination to do three levels of quoting with ITL; for 
+more deeply nested constructs, use direct &PERL; code.
+</para>
+<para>
+The above trivial answer to the quoting problem, however, is not the best
+you can get in terms of speed or 
+style. In general, looping <emphasis>subtags</emphasis> (covered some lines
+below) do not need quotes because they are parsed in a separate pass, before
+the general parser takes on.
+</para><para>
+Here's an example that would work properly with quotes omitted. (Pay attention
+to <code>[item-field url]</code> which, at first sight, looks like it is
+invalid because it is not quoted and contains a space.)
+<programlisting>
+[item-list]
+[page [item-field url]]detailed info[/page] on [item-description]
+[/item-list]
+</programlisting>
+</para>
+
+<para>
+<code>[page [value mypage]]</code>, however, would <emphasis>not</emphasis>
+work, because the &tag-value; tag shown is not one of the looping subtags
+which receive special treatment.
+</para>
+
+</section>
+
+
+<section>
+<title>Universal Attributes</title>
+
 
 <para>
 Universal attributes apply to all tags, although tags might specify
@@ -243,7 +303,7 @@ tags.
 We will explain <arg choice='plain'>interpolate</arg> and 
 <arg choice='plain'>reparse</arg> attributes here. <emphasis role='bold'>
 It is very important to remember that the behavior of the
-<arg choice='plain'>interpolate</arg> attribute (unfortunately) differs
+<arg choice='plain'>interpolate</arg> attribute (unfortunately) differs,
 depending on whether a tag is stand-alone or a container. In addition,
 the <arg choice='plain'>reparse</arg> attribute is only used with
 container tags (because its function is performed by
@@ -356,18 +416,25 @@ Kilroy was here
 </para><para> <sbr/><sbr/>
 The <arg choice='plain'>send</arg> attribute is deprecated.
 </para>
+</section>
 
 
-<section>Tag-specific Attributes</section>
+<section>
+<title>Tag-specific Attributes</title>
+
 
 <para>
 Each tag may accept additional arguments which vary from tag to
 tag. For each tag individually, you need to consult the 
 appropriate reference page to learn tag-specific parameters and attributes.
 </para>
+</section>
 
 
-<section>Attribute Arrays and Hashes</section>
+
+<section>
+<title>Attribute Arrays and Hashes</title>
+
 
 <para>
 Some tags allow you to pass a &PERL; &glos-array; or &glos-hash; as the
@@ -408,9 +475,11 @@ Note that it is up to the tag to handle an array or hash value
 properly. See the documentation for the specific tag before passing
 it an attribute array or hash value.
 </para>
+</section>
 
 
-<section>Perl calls</section>
+<section>
+<title>Perl calls</title>
 
 <para>
 You can simply ignore this section if you don't know the &PERL; 
@@ -444,9 +513,12 @@ my $hashref = { name   => "required",
 $Tag->routine( { entry => $hashref } );
 ]]></programlisting>
 </para>
+</section>
 
 
-<section>Looping Tags and Sub-tags</section>
+<section>
+<title>Looping Tags and Sub-tags</title>
+
 
 <para>
 Certain tags can only appear in a special context, usually nested within
@@ -651,3 +723,7 @@ The data structure would then be:
 <!-- TODO put somewhere
 PREFIX-field"]PREFIX-field (Optimization note- one query per field if you use this; we optimize around this if only one products table) 
 -->
+</para>
+</section>
+
+<para>

@@ -1,0 +1,22 @@
+__NAME__ purpose
+enclose input in HTML &lt;b&gt; (bold) tag
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter encloses input data in &glos-HTML; &lt;b&gt;
+(<emphasis role='bold'>bold</emphasis>) tag.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+"[filter bold]To Boldly Go Where No One Has Gone Before![/filter]"
+  -- Star Trek
+</programlisting>
+__END__
+

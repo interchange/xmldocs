@@ -26,4 +26,5 @@ an user session - that is possible only using &tag-value;.
 <para>
 As CGI variables contain user-supplied data, they are obviously of
 great concern from a security standpoint.
+<!-- TODO what to read on the topic -->
 <!-- TODO: IC functionality to deal with CGI data security .. filters etc. -->

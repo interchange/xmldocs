@@ -1,0 +1,19 @@
+__NAME__ purpose
+expand to value of the CGI variable specified in body
+__END__
+
+
+__NAME__ description
+The filter expands to the value of a &glos-CGI; variable.
+Name of the variable is specified in filter body.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[cgi name=online_cgi_test set="TEST VALUE" hide=1]
+
+My test value is [filter cgi]online_cgi_test[/filter]
+</programlisting>
+__END__
+

@@ -22,7 +22,7 @@ This directive sets the default page for all directories
 (In other words, this directive won't help you make 
 <literal>http://&def-hostname;/</literal> show
 <literal>http://&def-hostname;/index.html</literal> -
-see the &SpecialPage; for that).
+see the &conf-SpecialPage; for that).
 __END__
 
 __NAME__ notes

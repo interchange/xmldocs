@@ -46,7 +46,7 @@ my %dups; # List of symbols names that are not unique
 my $last_path; # Last version we want docs generated for (say, 5.2.0).
 my $compounds = 1; # Summarize similar symbol groups to single page?
 
-my @page_order = (qw/purpose default structure synopsis description online example notes bugs/, "symbol type", "source", "author", "copyright", "see also", "directive type", "filter type");
+my @page_order = (qw/purpose default structure synopsis description online example notes bugs/, "symbol type", "source", "author", "copyright", "see also", "directive type");
 
 unless ( GetOptions ( 
 	"verbosedb|dumpdb|d!" => \$dumpdb,
@@ -1115,10 +1115,12 @@ $templates{filter} = <<'__ENDP__';
 <para>$ag{"description"}</para>
 </refsect1>
 
+<!--
 <refsect1 id='$ag{"name"}_type'>
 <title>FILTER TYPE</title>
 <para>$ag{"filter type"}</para>
 </refsect1>
+-->
 
 <refsect1 id='$ag{"name"}_examples'>
 <title>EXAMPLES</title>

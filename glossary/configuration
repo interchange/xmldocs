@@ -1,8 +1,8 @@
 &IC; supports multiple catalogs, and therefore splits its configuration
-into two pieces. One is global, &gcf;, and affects every catalog running
-under that &IC; server.
-The other, &ccf;, is specific to an individual catalog, and has no effect
-on other catalogs.
+into two pieces. One is global, specified in &gcf;, and affects every
+catalog running under the same &IC; server installation.
+The other &mdash; catalog part, is specified in each catalog's
+&glos-CATROOT;/&ccf;, and has no effect on other catalogs.
 </para><para>
 Configuration directives are normally specified with the directive as the
 first word on the line, with its value or values following. Capitalization
@@ -97,5 +97,5 @@ endif
 ifndef ORDERS_TO
   #Needs to go somewhere....
   MailOrderTo  webmaster@&def-domain;
-  endif
+endif
 </programlisting>
