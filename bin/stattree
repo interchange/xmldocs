@@ -382,24 +382,21 @@ sub wanted {
 
 # Format the context lines before saving to the db
 sub format_ctx {
-	map { s/\t/  /g; chomp } @_;
+	for $_ ( @_ ) { s/\t/  /g; chomp };
 	# Find the number of starting whitespace common to all lines
-	# and trim it. XXX doesn't work
-	my $cs = 1000;
-	for my $ol ( @_ ) {
-		$ol =~ /^(\s*)/;
-		my $space_len = length $1;
-		$cs = $space_len if $space_len < $cs;
+	# and trim it.
+	my $common;
+	for $_ ( @_ ) {
+		if (/\S/ and /^( +)/) {
+			$common = length($1) if !defined $common || length($1) < $common
+		}
 		# Catch runaway lines (produces crapload of things, so refine
 		# search before starting to use it)
-		#if ( $ol =~ /\S\s{10,}/ ) {
-		#	warn "Runaway '$ol' ?\n";
+		#if ( $_ =~ /\S\s{10,}/ ) {
+		#	warn "Runaway '$_' ?\n";
 		#}
 	}
-	if ( $cs ) { # There is something to trim
-		#print "Trimming by $cs\n"; # XXX <- should be more of those ?!
-		map { s/^\s{$cs}// or warn "LTRIM: No $cs spaces?\n" } @_
-	}
+	if ( $common ) { s/^ {$common}// for @_ }
 	return @_;
 }
 

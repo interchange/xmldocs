@@ -159,7 +159,11 @@ while ( $path = shift @paths) { # For each version specified
 				# Make sure we don't overdo it with source contexts.
 				# MV_PAGE appears on like 31 place. We definitely don't need to
 				# see more than 10.
-				if ( $ctxcount++ > $max_ctxs ) { last }
+				if ( $ctxcount++ > $max_ctxs ) {
+					print STDERR "$$ag{name} has ", scalar @$ar,
+						" contexts, limiting to $max_ctxs\n";
+					last;
+				}
 #					my $hidden = @$ar - $max_ctxs;
 #					$$ag{source} .= <<ENDD;
 #<para>
@@ -182,9 +186,18 @@ while ( $path = shift @paths) { # For each version specified
 					( my $plf = $$ctx{file} ) =~ s#.+?/##;
 					#my $loc = "$$ctx{file}:$$ctx{lnum}";
 					my $loc = $$ctx{file};
+					
+					my $cstart = $$ctx{lnum}-$$ctx{ctxpre};
+					# XXX - eliminate negative numbers in source context spans
+					# ( 0-6 == OK, -4-6 != OK )
+					#if ( $cstart < 0 ) {
+					#	print STDERR "CSTART IS $cstart FOR $$ag{name}\n";
+					#	$cstart = 0 ;
+					#}
+					my $cend = $$ctx{lnum}+$$ctx{ctxpost};
 					my $ctxmeta = "Line $$ctx{lnum} (context shows lines " .
-						( $$ctx{lnum}-$$ctx{ctxpre}) . "-" .
-						($$ctx{lnum}+$$ctx{ctxpost});
+						( $cstart . "-" .  $cend );
+					
 					$ctxmeta .= " in $$ctx{func}():$$ctx{funclnum}" if $$ctx{funclnum};
 					$ctxmeta .= ")";
 					my $r = $hash{revision}{$plf}->[0];
