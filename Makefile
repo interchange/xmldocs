@@ -6,10 +6,12 @@
 # Davor Ocelic, docelic@icdevgroup.org
 #
 
+# Those two need to be adjusted with time
+export XMLDOCS_CUR_DEVEL = 5.3.0
+IC_VERSIONS = 4.6.0 4.8.0 5.0.0 5.2.0 cvs-head
 
 #############################################################
 # Base definitions
-IC_VERSIONS = 4.6.0 4.8.0 5.0.0 5.2.0 cvs-head
 SYMBOL_TYPES= pragmas globvars usertags uitags systemtags globconfs catconfs filters catvars
 GUIDES      = iccattut xmldocs
 HOWTOS      = howtos

@@ -44,7 +44,7 @@ my $autopath = "docbook/autorefs.ent";
 my %dups; # List of symbols names that are not unique
 my $last_path; # Last version we want docs generated for (say, 5.2.0).
 
-my @page_order = (qw/purpose default structure synopsis description structure example notes bugs/, "symbol type", "source", "author", "copyright", "see also");
+my @page_order = (qw/purpose default structure synopsis description structure online example notes bugs/, "symbol type", "source", "author", "copyright", "see also");
 
 unless ( GetOptions ( 
 	"verbosedb|dumpdb|d!" => \$dumpdb,
@@ -746,8 +746,7 @@ sub populate {
 					$section = "";
 					$content = "";
 				}
-
-				# Update record
+				# If not a beginning or end of section, simply add line to content
 				$content .= $line if $section;
 			}
 
@@ -773,6 +772,39 @@ sub update_field {
 			push @{ $invalid{$name} }, "Section '$sect' from file '$fn' won't be used (name not recognized)";
 		}
 
+		## Section-specific mangling here
+		## TODO seems promising, but needs to be wrapped in an element that would
+		# fit in .xml
+		if ( $sect eq 'online' ) {
+		#	# Extract programlistings.. dude! Ok, not as bad-looking as I thought:)
+		#	my $tmp = $content; my $code = "";
+		#	while($tmp =~ s#<programlisting>(.*?)</programlisting>##s){$code .= $1}
+
+		#	$code or
+		#		die "Empty online example for $name (no <programlisting> found)\n";
+
+		#	# Let's see if we'll get away this easy
+		#	$content .= qq{
+		#	<programlisting>
+		#		<textobject>
+		#		<textdata>
+		#		[/restrict]
+		#		$code
+		#		[restrict]
+		#		</textdata>
+		#		</textobject>
+		#	</programlisting>
+		#	};
+
+		# And rewrite section to example:
+			$sect = 'example';
+
+		} elsif ( $sect =~ /^see also$/i ) {
+			( my $list = $content ) =~ s/,/ /g;
+			my @list = split /\s+/, $list;
+			@{ $$sref{'_see also'} } = @list;
+		}
+		
 		if ( $mode eq 'override' ) {
 			$$sref{lc $sect} = $content;
 		} else {
@@ -780,11 +812,6 @@ sub update_field {
 			#$$sref{lc $sect} .= $$sref{lc $sect} ?
 			#	'</para><para>' . $content : $content;
 			$$sref{lc $sect} .= $content if $content;
-		}
-		if ( $sect =~ /^see also$/i ) {
-			( my $list = $content ) =~ s/,/ /g;
-			my @list = split /\s+/, $list;
-			@{ $$sref{'_see also'} } = @list;
 		}
 
 	} else { # "Missing" section

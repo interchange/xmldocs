@@ -79,7 +79,7 @@ __NAME__ synopsis2
 	<entry><arg choice='plain'>anchor</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>Value of <arg choice='plain'>text</arg></entry>
-	<entry>&glos-HTML; &glos-anchor; name.
+	<entry>HTML &glos-anchor; name.
 	</entry>
 </row>
 <row>

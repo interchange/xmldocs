@@ -49,7 +49,7 @@ The crypt function is unsuitable for encrypting large quantities of data, not le
 __END__
 
 
-__NAME__ example
+__NAME__ online
 <example>
 	<title>Crypt a string and verify it</title>
 	<para>
