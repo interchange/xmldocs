@@ -5,43 +5,7 @@ Outstanding:
 
 Later:
 - Ask ndw about including [NEW!] and [TODO!] in titles in TOC.
-- ./files/ directory is not properly referenced from chunked documents.
-  This will be done by prefixing links from chunked documents with ../
-  "Code" for this is done, I just need to get it from ndw.
-- [Infrastructure prepared]
-  Online examples only have to be standard examples, with actual work in
-  practice if condition=online
-  Code to do that is:
-  <programlisting>
-    <textobject>
-      <textdata fileref="pathto.xml"/>
-    </textobject>
-  </programlisting>
 - Image tag, sort out mgkpath thing
-- Stinky manpage stylesheets are a disaster. This time it's that
-  <cmdsynopsis> is verbatim and <screen> still renders comments without
-  newlines! I mean, what the... (And &copy; is translated to crap instead
-  of plain "C"). Will need to write XSLT to fix that, and support tables.
-  NEWS: New guy took over xslt maintenance and is interested in improved
-    manpage support - he's interested in my problems, and is willing to
-    do xslt work himself.
-
-- In iccattut:
-  - Check if redhat/tarball paths are correct
-  - explain syntax accepted in profile files
-  - Fix ImageDir and include one picture for example
-  - <Racke>I name three things that IC users often didn't acknowledge:
-    namespaces (CGI, Values, Scratch)
-    parsing order ([L], variables, lists) - interpolation
-    inventing syntax doesn't buy you anything
-    IC is _not_ a programming language
-  - how to delete item from cart in all possible ways
-  - give examples for the tasks in 'do yourself' section (in progress)
-  - give good practices about filtering, security
-  - see problems from old docs/TODO notes on iccattut
-  - ICCATTUT MUST NOT STOP WHERE it stops now. it needs to show all stuff
-    from current "excercise for readers" section, and also many more things.
-  - files/tutorial*: s/tutorial-*.log/tutorial.*.log/
 
 - in source contexts, wrap runaway lines
 - match style (no starting verb or all starting verbs) in all Example titles
@@ -138,3 +102,22 @@ Stuff:
   and locally
 - Mention ML page, cvsweb
 - How to deal with Safe
+
+
+- In iccattut (CHECK why revert to old version didn't get to cvs ?!):
+  - Check if redhat/tarball paths are correct
+  - explain syntax accepted in profile files
+  - Fix ImageDir and include one picture for example
+  - <Racke>I name three things that IC users often didn't acknowledge:
+    namespaces (CGI, Values, Scratch)
+    parsing order ([L], variables, lists) - interpolation
+    inventing syntax doesn't buy you anything
+    IC is _not_ a programming language
+  - how to delete item from cart in all possible ways
+  - give examples for the tasks in 'do yourself' section (in progress)
+  - give good practices about filtering, security
+  - see problems from old docs/TODO notes on iccattut
+  - ICCATTUT MUST NOT STOP WHERE it stops now. it needs to show all stuff
+    from current "excercise for readers" section, and also many more things.
+  - files/tutorial*: s/tutorial-*.log/tutorial.*.log/
+

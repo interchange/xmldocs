@@ -455,20 +455,26 @@ sub wanted {
 # Format the context lines before saving to the db
 sub format_ctx {
 	for $_ ( @_ ) { s/\t/  /g; chomp };
-	# Find the number of starting whitespace common to all lines
-	# and trim it.
+
 	my $common;
-	for $_ ( @_ ) {
-		if (/\S/ and /^( +)/) {
+	for my $str ( @_ ) {
+		# Behave long lines
+		my $len = length $str; my $pos = 70;
+		while ( $len > 100 ) {
+			$str =~ s/^(.{$pos}.*?)([\s<\&\?\|\(])/$1 \\\n$2/s;
+			$pos += 70; $len -= 70;
+		}
+
+
+		# Find the number of starting whitespace common to all lines
+		if ($str =~ /\S/ and $str =~ /^( +)/) {
 			$common = length($1) if !defined $common || length($1) < $common
 		}
-		# TODO Catch runaway lines (produces crapload of things, so refine
-		# search before starting to use it)
-		#if ( $_ =~ /\S\s{10,}/ ) {
-		#	warn "Runaway '$_' ?\n";
-		#}
 	}
+
+	# Do as above loop decided
 	if ( $common ) { s/^ {$common}// for @_ }
+
 	return @_;
 }
 
