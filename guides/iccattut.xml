@@ -85,7 +85,7 @@
 
 	<abstract>
 		<para>
-		The purpose of this document is to guide you through constructing a simple &IC; catalog <command>from scratch</command>. The standard catalogs that ship with Interchange are quite complex since they are ready to be used for business and highlight many of the capabilities that Interchange offers. Those catalogs can be too intimidating<footnote><para>Intimidate: to make timid or fearful; to frighten into submission.</para></footnote> places to start the journey if you're interested in learning the basic Interchange building blocks.
+		The purpose of this document is to guide you through constructing a simple &IC; catalog <emphasis role='bold'>from scratch</emphasis>. The standard catalogs that ship with Interchange are quite complex since they are ready to be used for business and highlight many of the capabilities that Interchange offers. Those catalogs can be too intimidating<footnote><para>Intimidate: to make timid or fearful; to frighten into submission.</para></footnote> places to start the journey if you're interested in learning the basic Interchange building blocks.
 		</para>
 	</abstract>
 
@@ -267,9 +267,9 @@ chmod 775 tutorial
 		</programlisting>
 		</para>
 		<para>
-		<command>For the rest of this tutorial, all file locations will be given relative to this tutorial catalog directory (CATROOT). For example, <filename>pages/ord/basket.html</filename> would be <filename>/var/lib/interchange/catalogs/tutorial/pages/ord/basket.html</filename> on Debian GNU, <filename>/var/lib/interchange/tutorial/pages/ord/basket.html</filename> on RPM-based systems, or another equivalent on your system. The only exception is <filename>interchange.cfg</filename>, which is implicitly meant to be edited in <filename class='directory'>/etc/interchange/</filename> (or in the Interchange software directory ICROOT, depending on the installation).</command>
+		<emphasis role='bold'>For the rest of this tutorial, all file locations will be given relative to this tutorial catalog directory (CATROOT). For example, <filename>pages/ord/basket.html</filename> would be <filename>/var/lib/interchange/catalogs/tutorial/pages/ord/basket.html</filename> on Debian GNU, <filename>/var/lib/interchange/tutorial/pages/ord/basket.html</filename> on RPM-based systems, or another equivalent on your system. The only exception is <filename>interchange.cfg</filename>, which is implicitly meant to be edited in <filename class='directory'>/etc/interchange/</filename> (or in the Interchange software directory ICROOT, depending on the installation).</emphasis>
 		</para> <para>
-		<command>In addition, at places which require full pathnames (or other "hard-coded" values, such as usernames), Debian defaults will be used to avoid duplication and preserve the natural text flow. RPM-based systems users, please translate Debian GNU paths and other names to your system equivalents by following the rules from the <xref linkend="ImportantSettingsandPaths"/>. We think you have precise enough information that there should be no problem with this simple task.</command>
+		<emphasis role='bold'>In addition, at places which require full pathnames (or other "hard-coded" values, such as usernames), Debian defaults will be used to avoid duplication and preserve the natural text flow. RPM-based systems users, please translate Debian GNU paths and other names to your system equivalents by following the rules from the <xref linkend="ImportantSettingsandPaths"/>. We think you have precise enough information that there should be no problem with this simple task.</emphasis>
 		</para>
 	</sect2>
 
@@ -451,7 +451,7 @@ ErrorFile /var/log/interchange/error.log
 		</para> <para>
 		Open the web browser and load the page. Your URL should be <ulink url="http://myhost.mydomain.local/cgi-bin/ic/tutorial/index.html"/> or <ulink url="http://myhost.mydomain.local/cgi-bin/tutorial/index.html"/>. Since the <filename>catalog.cfg</filename> only contains minimal configuration, <filename>index.html</filename> is not defined as the default page, so you can't leave it out of the URL.
 		</para> <para>
-		<command>Congratulations!</command> Your basic, "phase 1" catalog is now hopefully finished and working ;)
+		<emphasis role='bold'>Congratulations!</emphasis> Your basic, "phase 1" catalog is now hopefully finished and working ;)
 		</para>
 	</sect2>
 
@@ -517,7 +517,7 @@ ErrorFile /var/log/interchange/error.log
 	<sect2 id='MonitoringLogFiles'>
 		<title>Monitoring Log Files</title>
 		<para>
-		The key pseudo-troubleshooting technique that solves 99% of the problems with minimal effort is <command>log file monitoring</command>. Before proceeding, open up a new terminal and run the following (with root privileges): <userinput>tail -f /var/log/{apache*,interchange}/*log</userinput>. 
+		The key pseudo-troubleshooting technique that solves 99% of the problems with minimal effort is <emphasis role='bold'>log file monitoring</emphasis>. Before proceeding, open up a new terminal and run the following (with root privileges): <userinput>tail -f /var/log/{apache*,interchange}/*log</userinput>. 
 		</para> <para>
 		Once you have the logs monitored, restart Interchange and visit the catalog's index.html. Any problems should be reported in the logs.
 		</para>
@@ -548,7 +548,7 @@ ErrorFile /var/log/interchange/error.log
 </table>
     ]]></programlisting>
 		</para> <para>
-		Now we will use Interchange tags to fill in the rest of the table with the products database you created. The <tag>loop</tag> ITL tag pair tells Interchange to iterate over each item in the parameter list. In this case, the loop runs over the results of an Interchange search. The search parameter does a database search on the provided parameters. In this case, <command>we're doing a very simple search that returns all of the fields for all of the entries in the <database class='table'>products</database> database</command>. The parameters passed to the search tell Interchange to return all records ('ra') from the products file ('fi'). The following should take the place of the ellipsis in the code we placed in <filename>pages/index.html</filename>:
+		Now we will use Interchange tags to fill in the rest of the table with the products database you created. The <tag>loop</tag> ITL tag pair tells Interchange to iterate over each item in the parameter list. In this case, the loop runs over the results of an Interchange search. The search parameter does a database search on the provided parameters. In this case, <emphasis role='bold'>we're doing a very simple search that returns all of the fields for all of the entries in the <database class='table'>products</database> database</emphasis>. The parameters passed to the search tell Interchange to return all records ('ra') from the products file ('fi'). The following should take the place of the ellipsis in the code we placed in <filename>pages/index.html</filename>:
 		<programlisting><![CDATA[
   [loop search="ra=yes/fi=products"]
 
@@ -843,7 +843,7 @@ __END__
 Locale en_US currency_symbol $
 		</programlisting>
 		</para> <para>
-		Restart Interchange and view your catalog. You will notice little has changed on the welcome page or the flypages, <command>but in the shopping cart</command> (<filename>pages/ord/basket.html</filename>) all your prices should be formatted as U.S. dollars ("1347.3" has become "$1,347.30"). Why the currency is only displayed on the basket page is easy to understand; we use the <tag>item-price</tag> tag there. That tag is equivalent to <code>[item-field price]</code> used elsewhere, but it has that extra logic associated with it that automatically displays the currency format. To use <tag>item-price</tag> without the auto-format, you'd have to change the <tag>item-price</tag> tag to <code>[item-price noformat]</code>.
+		Restart Interchange and view your catalog. You will notice little has changed on the welcome page or the flypages, <emphasis role='bold'>but in the shopping cart</emphasis> (<filename>pages/ord/basket.html</filename>) all your prices should be formatted as U.S. dollars ("1347.3" has become "$1,347.30"). Why the currency is only displayed on the basket page is easy to understand; we use the <tag>item-price</tag> tag there. That tag is equivalent to <code>[item-field price]</code> used elsewhere, but it has that extra logic associated with it that automatically displays the currency format. To use <tag>item-price</tag> without the auto-format, you'd have to change the <tag>item-price</tag> tag to <code>[item-price noformat]</code>.
 		</para> <para>
 		But that's probably not what you want to do. You're probably more interested in formatting your other prices (such as those on the Welcome page) as currency. To do that, you could obviously replace <code>[item-field price]</code> with <tag>item-price</tag>, but we'll take on more general approach here. Simply use the <tag>currency</tag><tag>/currency</tag> tag pair for all price values. Make the following change to <filename>pages/index.html</filename>:
 		<programlisting><![CDATA[
@@ -953,7 +953,7 @@ Now add the following to the left template piece:
 		To reduce the possibility of human error at checkout time, most on-line stores use a pull-down option menu to list the months and the years for the credit card expiration date, instead of having the user to type the numbers by hand. The menu also lets you avoid explaining whether the user should enter a 2- or 4-digit year.
 		<!-- TODO: discuss security here -->
 		</para> <para>
-		Make the following change to your <filename>pages/checkout.html</filename> page. The section that follows explains the code. <command>Read the explanation section below before typing the code to be sure you know where tabs should be used instead of spaces and where to watch out for `back-ticks`</command>.
+		Make the following change to your <filename>pages/checkout.html</filename> page. The section that follows explains the code. <emphasis role='bold'>Read the explanation section below before typing the code to be sure you know where tabs should be used instead of spaces and where to watch out for `back-ticks`</emphasis>.
 		<programlisting><![CDATA[
   <tr>
   <td align=right><b>Credit card expiration date:</b></td>
@@ -1014,7 +1014,7 @@ Now add the following to the left template piece:
 		</para> <para>
 		In the first set of &lt;select&gt; &lt;/select&gt; HTML tags a list is generated of the months to choose from. This is accomplished by using a <tag>loop</tag> tag. In this case we are looping over an explicit list. The list is provided in the list parameter. Use caution when typing this, as it is sensitive to formatting (which may not be reflected in this document). Make sure that the numbers are the first characters on each new line and that the single tab separates them from the rest of the line text. Since the columns in this list are not named, the first element can be accessed using <tag>loop-code</tag> or <code>[loop-pos 0]</code> with subsequent elements being accessed by <code>[loop-pos N]</code> where N is the number of the column you want. Notice that the elements are zero-indexed. Each time through this loop Interchange generates a select &lt;option&gt; with a number as the value and the name of the month as the text for the select menu.
 		</para> <para>
-		For the next set of &lt;select&gt; &lt;/select&gt; tags embedded Perl is used to generate the list which is iterated over. Perl code can be embedded in Interchange pages in order to extend the abilities of the system. Make sure you type back-ticks (grave accents) after "list=" and before the closing bracket (and <command>not apostrophes</command>). This code generates an entry for seven years in addition to the current year. It is not necessary at this point for you to understand this Perl code.
+		For the next set of &lt;select&gt; &lt;/select&gt; tags embedded Perl is used to generate the list which is iterated over. Perl code can be embedded in Interchange pages in order to extend the abilities of the system. Make sure you type back-ticks (grave accents) after "list=" and before the closing bracket (and <emphasis role='bold'>not apostrophes</emphasis>). This code generates an entry for seven years in addition to the current year. It is not necessary at this point for you to understand this Perl code.
 		</para>
 	</sect2>
 
@@ -1186,7 +1186,7 @@ Variable BOTTOM <bottom
 <sect1 id='FinalNotes'>
 	<title>Final Notes</title>
 	<para>
-	First and foremost - <command>congratulations</command> for completing this tutorial (and scrolling down the page to see this message doesn't count!).
+	First and foremost - <emphasis role='bold'>congratulations</emphasis> for completing this tutorial (and scrolling down the page to see this message doesn't count!).
 	</para>
 	<para>
 	Every good tutorial includes a set of exercises for the readers, and we won't make an exception here. If you don't know any more Interchange than we presented in this tutorial, the following tasks might seem too difficult, but we will also give you some hints... Or wait.. No, we won't :).
