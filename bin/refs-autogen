@@ -127,6 +127,19 @@ my %item_footer = (
 	example => "</para>\n</example>",
 );
 
+# Support preamble texts
+my %preamble = (
+	# Dude, this is 15 pages of text in place where there shouldn't be any really
+	#tag => scalar readfile('glossary/ITL'),
+	tag => "For a complete introduction to the &IC; Tag Language and " .
+	"the supported syntax, please see the &glos-ITL; glossary entry.",
+	conf => "",
+	globvar => "",
+	catvar => "",
+	pragma => "",
+	filter => "",
+);
+
 my @paths = @ARGV; # Versions requested
 my $path; # Current path, used in loop for each version requested
 my $dumppath; # Path to cache dump file
@@ -588,6 +601,13 @@ for my $group ( keys %symbols ) {
 
 <reference id="${group}s">
 	<title>Interchange Reference Pages: $longname{$group}s</title>
+
+  <partintro>
+  <para>
+  $preamble{$group}
+  </para>
+  </partintro>
+
 ENDD
 
 	## Add items
@@ -967,6 +987,16 @@ sub O { print "@_\n"; print STDOUT "@_\n" if $verbose }
 #<title>ONLINE EXAMPLES</title>
 #$ag{"online"}
 #</refsect1>
+
+sub readfile {
+	my $file = shift;
+	open IN, $file or die "Can't open $file ($!)\n";
+	my @slurp = <IN>;
+	close IN;
+
+	local $" = "";
+	wantarray? @slurp : "@slurp"
+}
 
 sub load_templates {
 
