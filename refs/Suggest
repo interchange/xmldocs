@@ -1,0 +1,41 @@
+__NAME__ purpose
+check existence of a feature
+__END__
+
+__NAME__ see also
+Require,Suggest
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'>
+		<replaceable>type</replaceable>
+		<replaceable>type-specific value</replaceable>
+	</arg>
+</group>
+__END__
+
+__NAME__ missing
+Which values can appear for 'type' ? module, usertag, globalsub, ... ?
+Also make notes @ Require and Capability entries.
+__END__
+
+
+__NAME__ description
+Just like &conf-Require; or &conf-Suggest;, this directive checks for
+a feature or capability. When the tested feature is missing, a 
+warning message is shown.
+__END__
+
+__NAME__ example
+<example>
+  <title>Testing for features</title>
+<programlisting>
+Suggest module    Archive::Zip
+Suggest usertag   table_editor
+Suggest globalsub file_info
+Suggest module    Business::UPS
+</programlisting>
+</example>
+__END__
+

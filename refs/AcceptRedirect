@@ -1,0 +1,53 @@
+__NAME__ purpose
+accept Web server redirects
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive
+enables processing of HTTP server redirects, i.e. when handling ErrorDocument
+for a Web server such as &APACHE;. For instance, if your
+<filename>httpd.conf</filename> contains
+
+<programlisting>
+  ErrorDocument 404 /cgi-bin/ic/&std-catalog;
+</programlisting>
+
+then a request for <literal>/somedir/index.html</literal> that is not found
+on the Web server would be resent to
+<filename>/cgi-bin/ic/foundation/somedir/index.html</filename>, and
+would be 
+indistinguishable from the Web server-served page by the client.
+__END__
+
+
+__NAME__ notes
+Although the idea seems attractive at first sight,
+caution should be taken not to allow Web server's ErrorDocument redirection
+to &IC; globally &mdash; it would render you subject to a
+denial-of-service attack at random URLs (i.e. a flood of MS Windows
+"Code Red" attacks). It is recommended that you enable it only for
+specific directories, as &APACHE; or another HTTP server will stand up
+much better under such a flood.
+__END__
+
+
+__NAME__ example
+<example>
+  <title>Enabling AcceptRedirect</title>
+	<para>
+	Put any of the following lines in &ccf;:
+	</para>
+<programlisting>
+AcceptRedirect Yes
+</programlisting>
+</example>
+__END__
+

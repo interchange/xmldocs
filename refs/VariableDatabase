@@ -15,6 +15,13 @@ __END__
 
 
 __NAME__ description
+The directive specifies name of a database containing a field
+<database class='field'>Variable</database>
+which will be used to return Interchange variable values.
+</para><para>
+In other words, instead of keeping a long list of
+<code>Variable NAME value</code> definitions in &gcf; or &ccf;, you can
+simply create a database with the name and value pairs.
 __END__
 
 

@@ -1,0 +1,47 @@
+__NAME__ purpose
+define default user values
+__END__
+
+
+__NAME__ see also
+ScratchDefault
+__END__
+
+
+__NAME__ synopsis
+	<arg choice='plain'><replaceable>name</replaceable></arg>
+	<arg choice='plain' rep='repeat'><replaceable>value</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive sets default user session values. Values are kept in
+&glos-UserDB; and (of course) override the defaults, but when the user
+is not logged in (and hasn't set any
+of his preferences for the current session), the defaults will be used.
+__END__
+
+__NAME__ example
+<example>
+  <title>Defining default values</title>
+	<para>
+	Put the following in &ccf;:
+	</para>
+<programlisting>
+ValuesDefault fname New lname User
+ValuesDefault country HR
+</programlisting>
+	<para>
+	Create a test page:
+	</para>
+<programlisting><![CDATA[
+Welcome!<br/>
+Your first name is: [value fname]<br/>
+Your last name is: [value lname]<br/>
+Your country code is: [value country]
+]]></programlisting>
+<para>
+</para>
+</example>
+__END__
+

@@ -1,0 +1,113 @@
+
+<glossentry id="configuration">
+<glossterm>configuration</glossterm>
+
+<glossdef>
+<para>
+&IC; supports multiple catalogs, and therefore splits its configuration
+into two pieces. One is global, &gcf;, and affects every catalog running
+under that &IC; server.
+The other, &ccf;, is specific to an individual catalog, and has no effect
+on other catalogs.
+</para><para>
+Configuration directives are normally specified with the directive as the
+first word on the line, with its value or values following. Capitalization
+of the directive name is not significant (although it helps readability and
+consistency). Additionally, any leading and trailing whitespace is removed
+("stripped") before processing. Here's an example:
+<programlisting>
+DirectiveName <replaceable>value</replaceable>
+</programlisting>
+</para><para>
+Besides specifying directive values inline, one can conveniently use
+the following syntax to obtain value from external files:
+
+<programlisting>
+DirectiveName &lt;<replaceable>include_filename</replaceable>
+</programlisting>
+
+<note><para>
+Note that this syntax can be used anywhere on a line, such as in 
+<code>Variable MYSTUFF &lt;<replaceable>file</replaceable></code>.
+You can use this to achieve the
+best performance with <option>Variable</option>s.
+</para></note>
+
+Files included from &gcf; are relative to &glos-ICROOT;. Files included
+from &ccf; are relative to specific &glos-CATROOT;.
+
+</para><para>
+So-called "here document" syntax is supported as well. You can use it to
+spread directive values over several lines, with the usual &PERL;
+&lt;&lt;MARKER syntax (but unlike Perl, &IC; syntax uses no semicolon to
+terminate the marker). The closing marker must be the only thing on the line.
+No leading or trailing characters are allowed, not even whitespace. Here
+is a hypothetical directive using a here document:
+
+<programlisting>
+DirectiveName &lt;&lt;EOD<replaceable>
+    setting1
+    setting2
+    setting3</replaceable>
+EOD
+</programlisting>
+
+
+</para><para>
+The above is equivalent to:
+<programlisting>
+DirectiveName <replaceable>setting1 setting2 setting3</replaceable>
+</programlisting>
+
+</para><para>
+Other configuration files can also be included from the current one.
+For example, common settings can be set in one file:
+
+<programlisting>
+include common.cfg
+</programlisting>
+
+Or all files loaded from a directory:
+
+<programlisting>
+include usertag/*
+</programlisting>
+
+</para><para>
+In addition,
+<literal>ifdef/endif</literal> and <literal>ifndef/endif</literal> pairs
+can be used:
+
+<programlisting>
+Variable ORDERS_TO email_address
+
+ifdef ORDERS_TO
+  ParseVariables Yes
+  MailOrderTo __ORDERS_TO__
+  ParseVariables No
+endif
+
+ifdef ORDERS_TO =~ /foo.com/
+  # Send all orders at foo.com to one place now
+  # Set ORDERS_TO to stop default setting
+  Variable  ORDERS_TO  1
+  MailOrderTo   orders@foo.com
+  endif
+
+ifdef ORDERS_TO eq 'nobody@nowhere.com'
+  # Better change to something else, set ORDERS_TO to stop default
+  Variable  ORDERS_TO  1
+  MailOrderTo   someone@somewhere.com
+endif
+
+ifndef ORDERS_TO
+  #Needs to go somewhere....
+  MailOrderTo  webmaster@&def-domain;
+  endif
+</programlisting>
+
+</para>
+</glossdef>
+
+</glossentry>
+

@@ -1,0 +1,62 @@
+__NAME__ purpose
+define an Interchange variable
+__END__
+
+
+__NAME__ see also
+VariableDatabase
+__END__
+
+
+__NAME__ synopsis
+	<arg choice='plain'><replaceable>NAME</replaceable></arg>
+	<arg choice='plain'><replaceable>value</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive defines a variable that will be available either
+globally (if defined in &gcf;) or within a catalog (if defined in &ccf;).
+</para><para>
+Cariable names are case sensitive, must begin with a capital letter
+(uppercase), and can only contain word characters
+(that is, a-z, A-Z, 0-9 and _).
+</para><para>
+Once the variable is defined, it can be accessed using the following
+syntax:
+<itemizedlist>
+	<listitem><para>
+	<literal>__<replaceable>NAME</replaceable>__</literal>
+	- to only look for a catalog variable
+	</para></listitem>
+	<listitem><para>
+	<literal>@@<replaceable>NAME</replaceable>@@</literal>
+	- to only look for a global variable
+	</para></listitem>
+	<listitem><para>
+	<literal>@_<replaceable>NAME</replaceable>_@</literal>
+	- to first look for a catalog variable, falling back to global
+	unless found
+	</para></listitem>
+</itemizedlist>
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ example
+<example>
+  <title>Defining a variable</title>
+	<para>
+	Put the following in &ccf;:
+	</para>
+<programlisting>
+Variable EMAIL root@&def-domain;
+</programlisting>
+<para>
+</para>
+</example>
+__END__
+

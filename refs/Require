@@ -1,0 +1,38 @@
+__NAME__ purpose
+guarantee existence of a feature
+__END__
+
+__NAME__ see also
+Require,Suggest
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'>
+		<replaceable>type</replaceable>
+		<replaceable>type-specific value</replaceable>
+	</arg>
+</group>
+__END__
+
+__NAME__ description
+Just like &conf-Capability; or &conf-Suggest;, this directive checks for
+a feature or capability. When the tested feature is missing, a 
+catalog is <emphasis role='bold'>not</emphasis> configured and included
+in global configuration.
+</para><para>
+This is useful when transporting catalogs to different locations, to make
+sure they will have all the needed facilities available.
+__END__
+
+__NAME__ example
+<example>
+  <title>Requireing features</title>
+<programlisting>
+Require module    Archive::Zip
+Require usertag   table_editor
+Require globalsub file_info
+</programlisting>
+</example>
+__END__
+

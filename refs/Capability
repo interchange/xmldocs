@@ -1,0 +1,35 @@
+__NAME__ purpose
+test existence of a feature
+__END__
+
+__NAME__ see also
+Require,Suggest
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'>
+		<replaceable>type</replaceable>
+		<replaceable>type-specific value</replaceable>
+	</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Just like &conf-Require; or &conf-Suggest;, this directive checks for
+a feature or capability, but unlike the first two it never causes a
+warning or other message. This allows a module to be loaded if available
+and a program can later check for the capability and dynamically adapt to the
+configuration.
+__END__
+
+__NAME__ example
+<example>
+  <title>Testing for existence of Archive::Zip Perl module</title>
+  <programlisting>
+Capability module Archive::Zip
+  </programlisting>
+</example>
+__END__
+

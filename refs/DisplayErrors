@@ -1,0 +1,37 @@
+__NAME__ purpose
+display eventual errors directly in the client session
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+All &IC; errors are reported in the error log, but errors can also be
+displayed directly in the client browser. This is convenient while testing
+a configuration. To allow catalog-specific settings of &conf-DisplayErrors;
+the global directive needs to be enabled.
+__END__
+
+__NAME__ notes
+This directive changes the operation of <code>$SIG{__DIE__}</code> and
+may have other effects on program operation.
+This should <emphasis role='bold'>never</emphasis> be used for normal
+operation.
+__END__
+
+__NAME__ example
+<example>
+  <title>Enabling DisplayErrors</title>
+	<para>Put the following in &gcf;</para>
+<programlisting>
+DisplayErrors Yes
+</programlisting>
+</example>
+__END__
+
