@@ -40,7 +40,7 @@ my $specific_only; # Build only one specific .xml ?
 my $output_spec; # 'list' produces tag list, 'xml' produces real xml source
 my $output_both; # Unconditionally override $output_spec
 my $no_autodefs; # Generate autodefs.ent collection of entities by default
-my $autopath = "docbook/autodefs.ent";
+my $autopath = "docbook/autorefs.ent";
 my %dups; # List of symbols names that are not unique
 
 my @page_order = (qw/purpose default structure synopsis description online example notes bugs/, "symbol type", "source", "author", "copyright", "see also");
@@ -558,9 +558,11 @@ unless ( $no_autodefs ) {
 				die "UNKNOWN $g\n";
 			}
 
+			( my $prefix = $g ) =~ s/.+(tag|conf|var)$/$1/;
+
 #<!ENTITY $_ "<olink targetdoc='${g}s' targetptr='$_'>$_</olink>">
 			print ATD <<ENDD;
-<!ENTITY $_ "<$tag>$_</$tag>">
+<!ENTITY ${prefix}-$_ "<$tag>$_</$tag>">
 ENDD
 		}
 	}

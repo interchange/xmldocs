@@ -1,6 +1,8 @@
 
 <!ENTITY % literals	SYSTEM "literals.ent">  %literals;
-<!ENTITY % autodefs	SYSTEM "autodefs.ent">  %autodefs;
+<!ENTITY % autodefs	SYSTEM "autorefs.ent">  %autodefs;
+<!ENTITY % glossary	SYSTEM "autoglossary.ent">  %glossary;
+<!ENTITY % howtos	  SYSTEM "autohowtos.ent">  %howtos;
 
 <!-- Remove MsgSet -->
 <!ENTITY % compound.class "procedure|sidebar">

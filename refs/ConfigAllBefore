@@ -1,0 +1,30 @@
+__NAME__ purpose
+config files to read as part of every catalog's configuration, before any of its files are read in
+__END__
+
+
+__NAME__ see also
+ConfigAllAfter
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>config file</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify configuration files to read as a part of every catalog's configuration, before any other corresponding catalog config files are processed.
+__END__
+
+__NAME__ example
+<example>
+  <title></title>
+  <programlisting>
+ConfigAllBefore set_actions.cfg set_variables.cfg
+  </programlisting>
+</example>
+__END__
+
+

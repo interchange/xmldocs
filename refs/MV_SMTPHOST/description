@@ -1,2 +1,2 @@
-If &SMTP; is used to send mail from Interchange,
+If &glos-SMTP; is used to send mail from Interchange,
 this variable specifies the hostname to use.

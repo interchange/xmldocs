@@ -1,3 +1,40 @@
+
+	      By  default,  the  width and height are maximum values. That is,
+	      the image is expanded or contracted to fit the width and	height
+	      value while maintaining the aspect ratio of the image. Append an
+	      exclamation point to the geometry to force  the  image  size  to
+	      exactly  the  size  you  specify.  For  example,	if you specify
+	      640x480! the image width is set to 640 pixels and height to 480.
+
+
+	      If  only the width is specified, the width assumes the value and
+	      the height is chosen to maintain the aspect ratio of the	image.
+	      Similarly,  if  only  the  height  is specified (e.g., -geometry
+	      x256), the width is chosen to maintain the aspect ratio.
+
+
+	      To specify a percentage width or height instead, append  %.  The
+	      image  size is multiplied by the width and height percentages to
+	      obtain the final image dimensions. To increase the  size	of  an
+	      image,  use a value greater than 100 (e.g. 125%). To decrease an
+	      image's size, use a percentage less than 100.
+
+
+	      Use @ to specify the maximum area in pixels of an image.
+
+
+	      Use > to change the dimensions of the image only if its width or
+	      height  exceeds  the geometry specification. < resizes the image
+	      only if both of its dimensions are less than the geometry speci-
+	      fication.  For  example, if you specify '640x480>' and the image
+	      size is 256x256, the image size does not change. However, if the
+	      image  is  512x512  or  1024x1024,  it  is  resized  to 480x480.
+	      Enclose the geometry specification in quotation marks to prevent
+	      the  < or > from being interpreted by your shell as a file redi-
+	      rection.
+
+
+
 __NAME__ purpose
 general purpose tag for generating HTML &lt;img&gt; tags
 __END__
@@ -69,7 +106,7 @@ __NAME__ synopsis2
 	<entry>
 	Only return the value of 
 	<option>ImageDir</option> or <option>ImageDirSecure</option> config
-	directives? This is primarily used in &js; code to discover the
+	directives? This is primarily used in &glos-js; code to discover the
 	appropriate path to prepend to image files.
 	</entry>
 </row>
@@ -108,7 +145,7 @@ __NAME__ synopsis2
 	</entry>
 	<entry>
 	Use  <classname>Image::Size</classname> Perl module to determine image
-	dimensions and specify them in the &img; tag?
+	dimensions and specify them in the &glos-img; tag?
 	</entry>
 </row>
 <row>
@@ -123,23 +160,35 @@ __NAME__ synopsis2
 	</entry>
 </row>
 <row>
-	<entry><arg choice='plain'>makesize</arg></entry>
+	<entry>
+		<group choice='opt'>
+			<arg choice='plain'>makesize</arg>
+			<arg choice='plain'>resize</arg>
+			<arg choice='plain'>geometry</arg>
+		</group>
+	</entry>
 	<entry></entry><entry></entry>
 	<entry>
 	</entry>
 	<entry>
 	If ImageMagick is installed, you can display an arbitrary size of
 	the image, creating it if necessary. This would create a subdirectory
-	corresponding to the size, (i.e. 64x48) and copy the source image to it.
+	corresponding to the size, (i.e. "64x48") and copy the source image to it.
 	It would then use the <command>mogrify</command> command to resize.
 	This requires a writable image directory, of course.
 	If not found in the PATH, 
 	the location of the <command>mogrify</command> can be defined with the
 	<varname>IMAGE_MOGRIFY</varname> variable.
-	This would also temporarily set &umask; to 2 during the creation of files
+	This would also temporarily set &glos-umask; to 2 during the creation of files
 	and directories.
 	The value is specified as
-	<literal><replaceable>A</replaceable>x<replaceable>B</replaceable></literal>.
+	<literal><replaceable>A</replaceable>x<replaceable>B</replaceable></literal>,
+	<literal><replaceable>A</replaceable></literal> or
+	<literal>x<replaceable>B</replaceable></literal>, followed by up to two
+	<literal>+- <replaceable>offset</replaceable></literal> specifications,
+	followed by none or one of <literal>%@!&lt;&gt;</literal>.
+	For a complete syntax, see <command>mogrify</command>
+	<literal>-geometry</literal> parameter.
 	</entry>
 </row>
 <row>
@@ -173,7 +222,7 @@ __NAME__ synopsis2
 	Value of the <arg choice='plain'>alt</arg> attribute.
 	</entry>
 	<entry>
-	Text to use for the &img;'s <arg choice='plain'>title</arg>
+	Text to use for the &glos-img;'s <arg choice='plain'>title</arg>
 	attribute. This is supported by newer browsers to provide things like
 	rollover tips.
 	</entry>
@@ -205,6 +254,12 @@ product database (the <database class='field'>image</database> field),
 automatically pull product
 descriptions from the database (for <arg choice='plain'>alt</arg> and
 <arg choice='plain'>title</arg> attributes).
+__END__
+
+
+__NAME__ notes
+This tag makes a lot of assumptions about your setup, and sometimes it 
+might not be the best tool for the job.
 __END__
 
 

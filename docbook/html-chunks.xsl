@@ -2,8 +2,8 @@
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 
-	<xsl:import
-		href="/usr/share/xml/docbook/stylesheet/nwalsh/xhtml/chunk.xsl"/>
+	<xsl:import href="http://docbook.sourceforge.net/release/xsl/current/xhtml/chunk.xsl"/>
+	<!-- <xsl:import href="/usr/share/xml/docbook/stylesheet/nwalsh/xhtml/chunk.xsl"/> -->
 	
 	<!-- This section here till I find out how to pick this
 	information from a catalog -->
@@ -40,6 +40,9 @@
 
 	<xsl:include href="common.xsl"/>
 	<xsl:include href="html-common.xsl"/>
+
+	<!-- Norman Walsh gave me a nice idea and code. Since chunked documents
+		need ../ prefix in relative links, add it with XSL.	-->
 
 </xsl:stylesheet>
 

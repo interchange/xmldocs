@@ -17,7 +17,7 @@ __NAME__ synopsis2
 	<entry>
 	Image file to use. If the value starts with <literal>http</literal>,
 	it is used <emphasis>as-is</emphasis>. Otherwise the tag makes sure the
-	image file is reachable. Requires &js;.
+	image file is reachable. Requires &glos-js;.
 	</entry>
 </row>
 <row>
@@ -25,7 +25,7 @@ __NAME__ synopsis2
 	<entry>Yes</entry><entry></entry>
 	<entry></entry>
 	<entry>
-	Button text. &scratch; variable
+	Button text. &glos-scratch; variable
 	of the same name is also created to
 	hold the code associated with the button.
 	</entry>
@@ -37,8 +37,8 @@ __NAME__ synopsis2
 	<entry>
 	Button text to show while the next page is being loaded.
 	If defined, this is used for the
-	&scratch; variable name instead of the
-	<arg choice='plain'>text</arg> argument value. Requires &js;.
+	&glos-scratch; variable name instead of the
+	<arg choice='plain'>text</arg> argument value. Requires &glos-js;.
 	</entry>
 </row>
 <row>
@@ -54,7 +54,7 @@ __NAME__ synopsis2
 	<entry>
 	Text for the "Yes/No" confirmation window that will show up before
 	the client's browser starts with form submission.
-	Requires &js;.
+	Requires &glos-js;.
 	</entry>
 </row>
 <row>
@@ -79,7 +79,7 @@ __NAME__ synopsis2
 	<entry><arg choice='plain'>anchor</arg></entry>
 	<entry></entry><entry></entry>
 	<entry>Value of <arg choice='plain'>text</arg></entry>
-	<entry>&HTML; &anchor; name.
+	<entry>&glos-HTML; &glos-anchor; name.
 	</entry>
 </row>
 <row>
@@ -105,7 +105,7 @@ This tag creates a <mv>mv_click</mv> HTML form submit button.
 Standard, text-only submit button is output in the form of
 <![CDATA[<input type='submit' ...>]]>.
 </para><para>
-&js; submit button can contain an image in place of the standard
+&glos-js; submit button can contain an image in place of the standard
 button text and is output as a combination of 
 <![CDATA[<a href=...>]]> and
 <![CDATA[<img src=...>]]> HTML tags.

@@ -5,8 +5,8 @@
 	xmlns:xi="http://www.w3.org/2003/XInclude"
 	version="1.0">
 
-	<xsl:import
-		href="/usr/share/xml/docbook/stylesheet/nwalsh/xhtml/docbook.xsl"/>
+	<xsl:import href="http://docbook.sourceforge.net/release/xsl/current/xhtml/docbook.xsl"/>
+	<!--<xsl:import href="/usr/share/xml/docbook/stylesheet/nwalsh/xhtml/docbook.xsl"/>-->
 
 	<!-- till we use catalog for this -->
   <xsl:template name="user.footer.content" >

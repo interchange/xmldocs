@@ -9,7 +9,7 @@ A rectangular graphic image which is included on a content page for
 advertising and promotional purposes.
 </para><para>
 In &IC;, when "banner" or "ad" is used to describe the functionality of
-the &banner; tag, it does not neccesarily mean an image, since you can
+the &tag-banner; tag, it does not neccesarily mean an image, since you can
 put anything in the content placeholder. In fact, banner examples from
 <olink targetdoc='howtos' targetptr='implementbanners'/> HOW-TO use plain 
 text.

@@ -1,4 +1,6 @@
 
+Interpolate/reparse are two options?  adjust ROW_INTERPOLATE_0/1
+
 Great stuff:
 For each symbol: keep a list of other symbols IT uses
 For example, if I knew that, I could have seen I need to set
@@ -7,6 +9,11 @@ DOCROOT for [image] to work.
 ADD ROLES FOR OPERATING SYSTEMS/LINUX DISTRIBUTIONS. Documentation 
 from Debian package should directly have all proper paths and names.
 
+<Racke>I name three things that IC users often didn't acknowledge:
+  namespaces (CGI, Values, Scratch)
+  parsing order ([L], variables, lists) - interpolation
+  inventing syntax doesn't buy you anything
+  IC is _not_ a programming language
 
 Ask ndw about including [NEW!] in titles in TOC.
 

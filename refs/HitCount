@@ -15,7 +15,7 @@ __NAME__ description
 Specify whether the catalog counter file should be increased on every 
 access to the catalog.
 </para><para>
-The counter filename will be <filename>hits.<replaceable>catalog_name</replaceable></filename>, placed in the <filename class='directory'>&ICROOT;/etc/</filename> directory.
+The counter filename will be <filename>hits.<replaceable>catalog_name</replaceable></filename>, placed in the <filename class='directory'>&glos-ICROOT;/etc/</filename> directory.
 __END__
 
 __NAME__ see also

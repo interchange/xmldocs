@@ -17,7 +17,7 @@ __END__
 
 
 __NAME__ description
-Many &HTML; editing applications do not support &ITL; directly, and some 
+Many &glos-HTML; editing applications do not support &glos-itl; directly, and some 
 (thinking it doesn't belong to the page) ruin your work. This is 
 understandable to an extent, because some ITL tags (such as <tag>list</tag>)
 appear in places that raise errors with HTML syntax checking algorithms.
@@ -38,7 +38,7 @@ The time is now <!--[time]-->.
 ]]>
 </programlisting>
 <para>
-Setting the <pragma>no_html_comment_embed</pragma> &pragma; instructs
+Setting the <pragma>no_html_comment_embed</pragma> &glos-pragma; instructs
 Interchange
 <emphasis role='bold'>not</emphasis> to parse and interpolate any HTML
 comments. With this pragma enabled, the above example would not display

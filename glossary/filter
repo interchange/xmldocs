@@ -9,7 +9,7 @@
 </para><para>
 There are filters that trim the text to a specified maximum length,
 substitute characters in strings, make user input display- or storage-safe,
-or even serve as &value; equivalents.
+or even serve as &tag-value; equivalents.
 </para><para>
 Using existing filters and creating new ones is very simple.
 <!-- TODO: Pointer to filters.html -->

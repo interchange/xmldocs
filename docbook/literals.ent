@@ -51,36 +51,10 @@ option) any later version.</para>">
 <!ENTITY edl "Ed LaFrance">
 
 
+<!-- GLOSSARY LINKS ARE AUTOMATIC -->
 
-<!-- ENTITIES TO AVOID A LOT OF REPETITION, ESPECIALLY LINKING TO GLOSSARY -->
-<!ENTITY js "<olink targetdoc='glossary' targetptr='js'>JavaScript</olink>">
-<!ENTITY CSS "<olink targetdoc='glossary' targetptr='CSS'>CSS</olink>">
-<!ENTITY anchor "<olink targetdoc='glossary' targetptr='anchor'>Anchor</olink>">
-<!ENTITY HTML "<olink targetdoc='glossary' targetptr='HTML'>HTML</olink>">
-<!ENTITY img "<olink targetdoc='glossary' targetptr='img'>Img</olink>">
-<!ENTITY link "<olink targetdoc='glossary' targetptr='link'>Link</olink>">
-<!ENTITY pragma "<olink targetdoc='glossary' targetptr='pragma'>Pragma</olink>">
-<!ENTITY MIME "<olink targetdoc='glossary' targetptr='MIME'>MIME</olink>">
-<!ENTITY ITL "<olink targetdoc='glossary' targetptr='ITL'>ITL</olink>">
-<!ENTITY SMTP "<olink targetdoc='glossary' targetptr='SMTP'>SMTP</olink>">
-<!ENTITY interpolation "<olink targetdoc='glossary' targetptr='interpolation'>Interpolation</olink>">
-<!ENTITY interpolate "<olink targetdoc='glossary' targetptr='interpolation'>Interpolate</olink>">
-<!ENTITY epoch "<olink targetdoc='glossary' targetptr='epoch'>Epoch</olink>">
-<!ENTITY userdb "<olink targetdoc='glossary' targetptr='userdb'>UserDB</olink>">
-<!ENTITY weighted "<olink targetdoc='glossary' targetptr='weighted'>Weighted</olink>">
-<!ENTITY ad "<olink targetdoc='glossary' targetptr='ad'>Ad</olink>">
-<!ENTITY scratch "<olink targetdoc='glossary' targetptr='scratch'>Scratch</olink>">
-<!ENTITY jobs "<olink targetdoc='glossary' targetptr='jobs'>Jobs</olink>">
-<!ENTITY GET "<olink targetdoc='glossary' targetptr='GET'>GET</olink>">
-<!ENTITY interval "<olink targetdoc='glossary' targetptr='interval'>Interval</olink>">
-<!ENTITY cgi-var "<olink targetdoc='glossary' targetptr='cgi-var'>CGI Variable</olink>">
-<!ENTITY cgi-vars "<olink targetdoc='glossary' targetptr='cgi-var'>CGI Variables</olink>">
-<!ENTITY umask "<glossterm baseform='umask'>umask</glossterm>">
-<!ENTITY mode "<olink targetdoc='glossary' targetptr='mode'>Mode</olink>">
-<!ENTITY filter "<olink targetdoc='glossary' targetptr='filter'>Filter</olink>">
-<!ENTITY dereferencing "<olink targetdoc='glossary' targetptr='deref'>Dereferencing</olink>">
-<!ENTITY prefork "<olink targetdoc='glossary' targetptr='ic-run-mode'>PreFork</olink>">
 
+<!-- ENTITIES TO AVOID A LOT OF REPETITION -->
 <!ENTITY gcf "<filename>interchange.cfg</filename>">
 <!ENTITY ccf "<filename>catalog.cfg</filename>">
 <!ENTITY gcfs "<filename>interchange.cfg</filename> or <filename>catalog.cfg</filename>">
@@ -101,7 +75,7 @@ option) any later version.</para>">
 	</entry>
 	<entry></entry><entry></entry>
 	<entry>0</entry>
-	<entry>&interpolate; input?</entry>
+	<entry>&glos-interpolation; input?</entry>
 </row>
 ">
 <!ENTITY ROW_INTERPOLATE_1 "
@@ -114,7 +88,7 @@ option) any later version.</para>">
 	</entry>
 	<entry></entry><entry></entry>
 	<entry>1</entry>
-	<entry>&interpolate; input?</entry>
+	<entry>&glos-interpolation; input?</entry>
 </row>
 ">
 <!ENTITY ROW_HIDE_0 "
@@ -145,7 +119,7 @@ option) any later version.</para>">
 	<entry></entry><entry></entry>
 	<entry>None.</entry>
 	<entry>
-	&filter; to apply.
+	&glos-filter; to apply.
 	</entry>
 </row>
 ">
@@ -155,7 +129,7 @@ option) any later version.</para>">
 	<entry></entry><entry></entry>
 	<entry>None.</entry>
 	<entry>
-	Extra &HTML; attributes. Passed verbatim. 
+	Extra &glos-HTML; attributes. Passed verbatim. 
 	</entry>
 </row>
 ">
@@ -173,7 +147,7 @@ option) any later version.</para>">
   </entry>
   <entry></entry><entry></entry>
   <entry></entry>
-  <entry>The usual &HTML; attributes.</entry>
+  <entry>The usual &glos-HTML; attributes.</entry>
 </row>
 ">
 <!ENTITY ROW_HTML_ext "
@@ -192,7 +166,7 @@ option) any later version.</para>">
   </entry>
   <entry></entry><entry></entry>
   <entry></entry>
-  <entry>The usual &HTML; attributes.</entry>
+  <entry>The usual &glos-HTML; attributes.</entry>
 </row>
 ">
 <!ENTITY ROW_CSS_std "
@@ -206,7 +180,7 @@ option) any later version.</para>">
   </entry>
   <entry></entry><entry></entry>
   <entry></entry>
-  <entry>The usual &CSS; attributes.</entry>
+  <entry>The usual &glos-CSS; attributes.</entry>
 </row>
 ">
 <!ENTITY ROW_UMASK_none "
@@ -216,7 +190,7 @@ option) any later version.</para>">
 	</entry>
 	<entry></entry><entry></entry>
 	<entry></entry>
-	<entry>File creation &umask;.</entry>
+	<entry>File creation &glos-umask;.</entry>
 </row>
 ">
 <!ENTITY ROW_MODE_0644 "
@@ -227,7 +201,7 @@ option) any later version.</para>">
   <entry></entry><entry></entry>
   <entry><literal>0644</literal></entry>
   <entry>
-  File creation &mode;.
+  File creation &glos-mode;.
   </entry>
 </row>
 ">

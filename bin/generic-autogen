@@ -11,9 +11,13 @@ use strict;
 my %items;
 my %alphabet;
 my $verbose = 0;
-my $cat = shift;
+my $cat = shift; $cat ||= "glossary";
 my @loaded;
 my $document;
+my %sn = ( # short name
+	glossary => "glos",
+	howtos => "howto",
+);
 
 # HEAD
 my $glossary = <<__ENDP__;
@@ -67,6 +71,10 @@ my $howtos = <<__ENDP__;
 	-->
 __ENDP__
 
+# OPEN GLOSSARY ENTITIES
+open ENT, "> docbook/auto$cat.ent" or
+	die "Can't wropen docbook/$cat.ent ($!)\n";
+
 # LOAD ITEMS
 opendir DIR, $cat or die "Can't open $cat/ ($!)\n";
 readdir DIR; readdir DIR;
@@ -77,7 +85,17 @@ while ( my $file = readdir DIR ) {
 	$items{$file} = [ <IN> ];
 	$alphabet{ lc(substr($file, 0, 1)) }++;
 	push @loaded, $file;
+
+	my $lcfile = lc $file;
+
+	##### Should be lowercase ****
+	##### Uppercase is temporary only
+	print ENT <<ENDO;
+<!ENTITY $sn{$cat}-$lcfile "$file">
+<!ENTITY $sn{$cat}-$file "$file">
+ENDO
 	print "Added $file\n" if $verbose;
+
 	close IN or warn "Error closing $cat/$file ($!)\n";
 }
 closedir DIR or warn "Error closing $cat/ ($!)\n";

@@ -16,7 +16,7 @@ __NAME__ synopsis
 	<entry>Yes</entry><entry>Yes</entry>
 	<entry></entry>
 	<entry>
-	Name of the &CSS; file. The name will be forced to lowercase, and
+	Name of the &glos-CSS; file. The name will be forced to lowercase, and
 	the ".css" extension will be added unconditionally.
 	</entry>
 </row>
@@ -62,7 +62,7 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>
-	Literal, in-place &CSS; definition. See <xref linkend="css_examples"/>.
+	Literal, in-place &glos-CSS; definition. See <xref linkend="css_examples"/>.
 	</entry>
 </row>
 <row>
@@ -72,7 +72,7 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>
-	The <arg choice='plain'>media</arg> attribute for the &link; &HTML; tag.
+	The <arg choice='plain'>media</arg> attribute for the &glos-link; &glos-HTML; tag.
 	For example, <literal>PRINT</literal>.
 	</entry>
 </row>
@@ -108,7 +108,7 @@ __NAME__ synopsis
 	<entry></entry>
 	<entry>
 	Regenerate the file on a timed basis? Default unit are minutes,
-	but you can pass any standard &interval;.
+	but you can pass any standard &glos-interval;.
 	</entry>
 </row>
 
@@ -116,7 +116,7 @@ __END__
 
 
 __NAME__ description
-This tag builds a &CSS; file (from a <option>Variable</option> or other
+This tag builds a &glos-CSS; file (from a <option>Variable</option> or other
 sources) and generates a link to it.
 </para><para>
 Note that if you're providing the <arg choice='plain'>literal</arg> argument,
@@ -144,7 +144,7 @@ __NAME__ example2
 <example>
 	<title>Using literal</title>
 	<para>
-	You can either save your CSS in a &scratch;
+	You can either save your CSS in a &glos-scratch;
 	variable, or provide it 
 	directly in-place. Here are both variants:
 	</para>

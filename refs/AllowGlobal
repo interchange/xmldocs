@@ -1,0 +1,36 @@
+__NAME__ purpose
+list catalogs that may define subroutines and tags which operate with full Interchange server permissions
+__END__
+
+
+__NAME__ missing
+Fix value type in directive definition?
+__END__
+
+
+__NAME__ see also
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>catalog</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify catalogs that may define subroutines and tags that can operate with the full permissions of the &IC; server.
+</para><para>
+Don't use this directive unless the catalog user is completely trusted.
+__END__
+
+__NAME__ example
+<example>
+  <title></title>
+  <programlisting>
+AllowGlobal tutorial1 tutorial2
+  </programlisting>
+</example>
+__END__
+
+

@@ -23,11 +23,11 @@ Those submitted keys (and their associated values) are, now obviously, called
 "CGI variables".
 </para>
 <para>
-CGI variables in &IC; are accessible using the &cgi; tag, but
+CGI variables in &IC; are accessible using the &tag-cgi; tag, but
 <emphasis role='bold'>only</emphasis>
 on a page directly following the form submission. In other words, you can't
-use &cgi; to retrieve a variable submitted at arbitrary past time during
-an user session - that is possible only using &value;.
+use &tag-cgi; to retrieve a variable submitted at arbitrary past time during
+an user session - that is possible only using &tag-value;.
 </para>
 <para>
 As CGI variables contain user-supplied data, they are obviously of

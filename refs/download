@@ -17,8 +17,8 @@ __END__
 
 
 __NAME__ description
-The main function of this &pragma; is to prevent any
-&interpolation; of the output.
+The main function of this &glos-pragma; is to prevent any
+&glos-interpolation; of the output.
 It helps to preserve the downloads intact if they 
 happen to contain constructs similar to
 <literal>__<replaceable>VAR</replaceable>__</literal> 

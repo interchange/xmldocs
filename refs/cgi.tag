@@ -75,11 +75,11 @@ transitory values that have been submitted with the current request.
 In other words, the CGI values are reset on each request and you can
 only access the values directly submitted to the current page.
 </para><para>
-For instance, if you invoke the page with &GET;
+For instance, if you invoke the page with &glos-GET;
 parameters, such as <literal>pagename?foo=bar</literal>,
 then the value of the <literal>foo</literal> CGI variable will be
 accessible using <code>[cgi foo]</code> in
-&ITL; or <code>$CGI->{foo}</code> in embedded Perl.
+&glos-itl; or <code>$CGI->{foo}</code> in embedded Perl.
 __END__
 
 __NAME__ notes

@@ -1,0 +1,50 @@
+__NAME__ purpose
+trace DBI calls with variable granularity
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>granularity</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Trace DBI calls with variable granularity.
+As this tends to produce large ammounts of output, only use it if
+there's a strong chance that your problem is related to DBI.
+</para><para>
+Setting of <literal>0</literal> disables tracing.<sbr/>
+Setting of <literal>1</literal> traces DBI method calls with return values (or errors)<sbr/>
+Setting of <literal>2</literal> traces as (1) plus the parameters used in method calls<sbr/>
+Setting of <literal>3</literal> traces as (2) plus some high-level information from the driver, and some internal information from the DBI<sbr/>
+Setting of <literal>4</literal> traces as (3) plus more detailed information from the driver. Also includes DBI mutex information when using threaded Perl<sbr/>
+Setting of <literal>5</literal> traces as (4) plus more and more obscure information<sbr/>
+</para><para>
+Trace level of <literal>1</literal> is suitable in most situations.
+__END__
+
+__NAME__ see also
+DebugFile, DEBUG
+__END__
+
+__NAME__ notes
+Keep in mind that, since the trace output is directed to the debug file,
+you need to have the <varname>DEBUG</varname> global variable
+defined, and <option>DebugFile</option> properly set.
+__END__
+
+__NAME__ example
+<example>
+  <title></title>
+  <programlisting>
+Variable DEBUG 1
+DebugFile /tmp/icdebug
+
+DataTrace 1
+  </programlisting>
+</example>
+__END__
+
+

@@ -1,0 +1,51 @@
+__NAME__ purpose
+specify Interchange debug output filename
+__END__
+
+
+__NAME__ missing
+Link to script for managing logDebug statements (to be written first ;-)
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>filename</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify the Interchange debug output file. If the filename is not absolute,
+it is treated relative to the Interchange root directory (ICROOT).
+</para><para>
+When enabled, the debug file will gather output of the
+<function>::logDebug()</function> Interchange statements and Perl warnings
+(if they are enabled).
+__END__
+
+__NAME__ see also
+DEBUG, DataTrace
+__END__
+
+__NAME__ notes
+Keep in mind that
+you need to have the <varname>DEBUG</varname> global variable
+defined.
+</para><para>
+Also, as the <function>::logDebug()</function> statements are disabled
+(commented) 
+by default in Interchange sources, you'll probably want to use a special
+script for managing debug statements.
+__END__
+
+__NAME__ example
+<example>
+  <title></title>
+  <programlisting>
+Variable DEBUG 1
+DebugFile /tmp/icdebug
+  </programlisting>
+</example>
+__END__
+

@@ -1,0 +1,32 @@
+__NAME__ purpose
+config files to read as part of every catalog's configuration, after all its files are read in first
+__END__
+
+
+__NAME__ see also
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>config file</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify configuration files to read as a part of every catalog's configuration, after all other corresponding catalog config files are processed.
+</para><para>
+This is useful to catch user configuration errors, supply missing values,
+or force your settings over user's configuration.
+__END__
+
+__NAME__ example
+<example>
+  <title></title>
+  <programlisting>
+ConfigAllAfter check_actions.cfg check_variables.cfg
+  </programlisting>
+</example>
+__END__
+
+

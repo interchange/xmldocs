@@ -24,7 +24,7 @@ __NAME__ synopsis
 	<entry>
 	Cart specification string. The string is colon-separated, and contains three
 	fields: the cart name, time of save, and type. Time of save is measured
-	in seconds since the &epoch;. Type can be 
+	in seconds since the &glos-epoch;. Type can be 
 	<literal>c</literal> (cart) or <literal>r</literal> (recurring).
 	</entry>
 </row>
@@ -41,7 +41,7 @@ __END__
 
 
 __NAME__ description
-This tag saves current cart to &userdb;.
+This tag saves current cart to &glos-userdb;.
 </para><para>
 Note that the cart name does not have to be unique. If there are more carts
 with the same nickname, an index will be added.
