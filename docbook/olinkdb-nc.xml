@@ -10,6 +10,8 @@
 	<!ENTITY usertags SYSTEM "../tmp/usertags-nc.db"> 
 	<!ENTITY uitags SYSTEM "../tmp/uitags-nc.db"> 
 	<!ENTITY systemtags SYSTEM "../tmp/systemtags-nc.db"> 
+	<!ENTITY globconfs SYSTEM "../tmp/globconfs-nc.db"> 
+	<!ENTITY catconfs SYSTEM "../tmp/catconfs-nc.db"> 
 ]>
 
 <targetset>
@@ -28,6 +30,8 @@
 			<document targetdoc="usertags" baseuri="usertags.html"> &usertags; </document>
 			<document targetdoc="uitags" baseuri="uitags.html"> &uitags; </document>
 			<document targetdoc="systemtags" baseuri="systemtags.html"> &systemtags; </document>
+			<document targetdoc="globconfs" baseuri="globconfs.html"> &globconfs; </document>
+			<document targetdoc="catconfs" baseuri="catconfs.html"> &catconfs; </document>
 		</dir>
 	</sitemap>
 

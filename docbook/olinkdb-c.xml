@@ -10,6 +10,8 @@
 	<!ENTITY uitags SYSTEM "../tmp/uitags-c.db"> 
 	<!ENTITY usertags SYSTEM "../tmp/usertags-c.db"> 
 	<!ENTITY systemtags SYSTEM "../tmp/systemtags-c.db"> 
+	<!ENTITY globconfs SYSTEM "../tmp/globconfs-c.db"> 
+	<!ENTITY catconfs SYSTEM "../tmp/catconfs-c.db"> 
 ]>
 
 <targetset>
@@ -73,6 +75,16 @@
 				&systemtags;
 				</document>
 			</dir>
+			
+			<dir name='globconfs'>
+				<document targetdoc="globconfs">
+				&globconfs;
+				</document>
+			</dir>
+			
+			<dir name='catconfs'>
+				<document targetdoc="catconfs">
+				&catconfs;
 
 		</dir>
 	</sitemap>
