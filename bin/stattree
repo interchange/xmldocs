@@ -197,8 +197,7 @@ sub wanted {
 					if ( !$hash{version} or "$hash{version}" eq "$2" ) {
 						$hash{version} = $2
 					}
-					# break; # We *could* stop processing here,
-					         # but we won't.
+					last;
 				}
 			}
 			# ICVERSION must be known here, or someone's playing, or
@@ -267,15 +266,14 @@ sub wanted {
 				######################################################
 				# See if it's a beginning of a subroutine name, and remember the
 				# name/linenum.
-				if ( $line =~ /^\s*sub\s+(\w+)\s*\{\s*$/ ) {
+				if ( $line =~ m#^\s*sub\s+(\w+)\s*\{\s*$# ) {
 					$hash{total}{perl_functions}++;
 					@gfunc = ( $1, $lnum );
 				}
-				
+
 			} else {
 				warn "IMPOSSIBLE\n";
 			}
-		}
 
 		# TODO:
 		# - parse contents, identify blocks and add to appropriate
@@ -283,6 +281,18 @@ sub wanted {
 		# - code with inline comments or html with tags count as "gray area"
 		#   (adds 1 to both)
 
+		##########################################################
+		# Found a tag
+		} elsif ( $fsubtype =~ /^(user|ui|system)tag$/ )  {
+			#$hash{total}{$fsubtype . "s"}++;
+			$file =~ m#(\w+?)\.(core)?tag$# or
+				warn "I know $file is a tag but regex doesn't match it\n";
+			my $tagname = $1;
+			@{ $hash{symbols}{$fsubtype}{$1} } = ();
+				# Not this, context info will be provided in html files
+				#[ "$i{ver}/$file", scalar @file, "1:" . scalar @file, [ @file ] ];
+			last;
+		}
 	}
 }
 

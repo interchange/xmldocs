@@ -18,7 +18,14 @@ targets would include:
 
   make guides
   make refs
+
+	make OUTPUT/iccattut.html
+	make OUTPUT/iccattut
+	make OUTPUT/iccattut.man
+
   make OUTPUT/xmldocs.css
+	make tmp/refs-autogen
+	make tmp/olinkdbs
 
 
 PREREQUISITES
@@ -33,14 +40,15 @@ must be available:
   - xsltproc
   - xmlto
 	- exuberant-ctags
+	- passivetex (for FO output - ps, pdf, ...)
 
 
 FINAL OUTPUT
 
 During the invocation of 'make', few files will be created:
   
-  tmp/*.db       - OLink DB files generated from source .xml files
-                   (currently disabled), and other temporary files.
+  tmp/*.db       - OLink DB files generated from source .xml files,
+                   and other temporary files.
 
   cache/<ver>/*  - Various Interchange source tree statistics, available
                    over a filesystem interface. (For XInclusion in .xml

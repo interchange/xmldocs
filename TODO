@@ -8,6 +8,10 @@ DOCUMENTATION SYSTEM:
   ask for clarification. (this could be done with either pure IC (forum?), or 
 	XML forms capability)..
 - filenames in Source contexts should also be clickable
+- in html, make source contexts "rollable" by either using some css
+  properties or javascript. this is not really needed when you only have
+	say, 15 lines of context, but it'll come great when you have a copy
+	of a 300-lines usertag.
 
  Long-term:
 - Support using refs/<filename> with all the documentation for a symbol
