@@ -1,0 +1,49 @@
+__NAME__ purpose
+define maximum number of spawned servers
+__END__
+
+
+__NAME__ see also
+MaxRequestsPerChild, PIDcheck,PIDfile
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>count</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The &conf-MaxServers; directive specifies the maximum number
+of &IC; server processes to keep running at any one time.
+</para><para>
+If more requests are pending, they will be queued within the defined
+capability of the Operating System (usually 5 pending requests) until the
+server's "usage count" drops.
+__END__
+
+__NAME__ notes
+The directive is only used when &IC; is in <literal>PreFork</literal>
+&glos-ic-run-mode;.
+__END__
+
+
+__NAME__ missing
+Is this only in PreFork? if not, fix Notes section.
+__END__
+
+
+__NAME__ example
+<example>
+  <title>Setting MaxServers</title>
+	<para>
+	Put the following in &gcf;:
+	</para>
+<programlisting>
+MaxServers 20
+</programlisting>
+</example>
+__END__
+

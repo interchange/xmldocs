@@ -1,0 +1,44 @@
+__NAME__ purpose
+define maximum number of per-server page deliveries before respawn
+__END__
+
+
+__NAME__ see also
+MaxServers, PIDcheck,PIDfile
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>count</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The &conf-MaxRequestsPerChild; directive defines the maximum number
+of page deliveries that each server instance will carry out before 
+closing down and respawning.
+</para><para>
+The whole point of a periodic respawn is to prevent accumulation of 
+eventual memory leaks.
+__END__
+
+__NAME__ notes
+The directive is only used when &IC; is in <literal>PreFork</literal>
+&glos-ic-run-mode;.
+__END__
+
+
+__NAME__ example
+<example>
+  <title>Setting MaxRequestsPerChild </title>
+	<para>
+	Put the following in &gcf;:
+	</para>
+<programlisting>
+MaxRequestsPerChild 100
+</programlisting>
+</example>
+__END__
+

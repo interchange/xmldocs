@@ -1,0 +1,29 @@
+__NAME__ purpose
+specify global locale for use in error messages
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>locale definition</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies the global &glos-locale; for error messages.
+The content is usually loaded from a file.
+__END__
+
+__NAME__ example
+<example>
+  <title>Defining Locale</title>
+	<para>
+	Put the following in &gcf;:
+	</para>
+<programlisting>
+Locale &lt;locale.error
+</programlisting>
+</example>
+__END__
+
