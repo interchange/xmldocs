@@ -204,7 +204,7 @@ while (my ($k,$v) = each %symbol_lists ) {
 <!DOCTYPE reference PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
 	"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
 
-<reference>
+<reference id="$k">
 	<title>Interchange Reference Pages: $longname{$k}s</title>
 ENDD
 
@@ -377,11 +377,6 @@ $ag{"example"}
 </refsect1>
 
 <refsect1>
-<title>BUGS</title>
-<para>$ag{"bugs"}</para>
-</refsect1>
-
-<refsect1>
 <title>SYMBOL TYPE</title>
 <para>$ag{"symbol type"}</para>
 </refsect1>
@@ -405,6 +400,11 @@ $ag{source}
 <refsect1>
 <title>AUTHORS</title>
 <para>$ag{"author"}</para>
+</refsect1>
+
+<refsect1>
+<title>BUGS</title>
+<para>$ag{"bugs"}</para>
 </refsect1>
 
 <refsect1>
