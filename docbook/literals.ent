@@ -60,7 +60,7 @@ option) any later version.</para>">
 <!ENTITY MIME "<ulink url='http://www.mhonarc.org/~ehood/MIME/'>MIME</ulink>">
 <!ENTITY ITL "<glossterm linkend='ITL'>ITL</glossterm>">
 <!ENTITY SMTP "<ulink url='http://cr.yp.to/smtp.html'>SMTP</ulink> (<classname>Net::SMTP</classname> Perl module)">
-<!ENTITY interpolate "<glossterm linkend='interpolate'>interpolate</glossterm>">
+<!ENTITY interpolation "<glossterm linkend='interpolation'>interpolation</glossterm>">
 
 
 <!-- ENTITIES TO EASIER CONSTRUCT TAG PARAMETERS LIST -->
@@ -137,12 +137,12 @@ option) any later version.</para>">
 <row>
   <entry>
     <group choice='plain'>
-    <arg choice='plain'>border</arg>
-    <arg choice='plain'>height</arg>
-    <arg choice='plain'>width</arg>
-    <arg choice='plain'>hspace</arg>
-    <arg choice='plain'>vspace</arg>
-    <arg choice='plain'>align</arg> 
+			<arg choice='plain'>border</arg>
+			<arg choice='plain'>height</arg>
+			<arg choice='plain'>width</arg>
+			<arg choice='plain'>hspace</arg>
+			<arg choice='plain'>vspace</arg>
+			<arg choice='plain'>align</arg> 
     </group>
   </entry>
   <entry></entry><entry></entry>
@@ -154,14 +154,14 @@ option) any later version.</para>">
 <row>
   <entry>
     <group choice='plain'>
-    <arg choice='plain'>border</arg>
-    <arg choice='plain'>height</arg>
-    <arg choice='plain'>width</arg>
-    <arg choice='plain'>hspace</arg>
-    <arg choice='plain'>vspace</arg>
-    <arg choice='plain'>align</arg> 
-    <arg choice='plain'>title</arg> 
-    <arg choice='plain'>alt</arg> 
+			<arg choice='plain'>border</arg>
+			<arg choice='plain'>height</arg>
+			<arg choice='plain'>width</arg>
+			<arg choice='plain'>hspace</arg>
+			<arg choice='plain'>vspace</arg>
+			<arg choice='plain'>align</arg> 
+			<arg choice='plain'>title</arg> 
+			<arg choice='plain'>alt</arg> 
     </group>
   </entry>
   <entry></entry><entry></entry>
@@ -173,9 +173,9 @@ option) any later version.</para>">
 <row>
   <entry>
     <group choice='plain'> 
-    <arg choice='plain'>id</arg>
-    <arg choice='plain'>class</arg>
-    <arg choice='plain'>style</arg>
+			<arg choice='plain'>id</arg>
+			<arg choice='plain'>class</arg>
+			<arg choice='plain'>style</arg>
     </group>
   </entry>
   <entry></entry><entry></entry>
@@ -186,7 +186,7 @@ option) any later version.</para>">
 <!ENTITY ROW_UMASK_none "
 <row>
 	<entry>
-	<arg choice='plain'>umask</arg>
+		<arg choice='plain'>umask</arg>
 	</entry>
 	<entry></entry><entry></entry>
 	<entry></entry>

@@ -12,7 +12,7 @@ __NAME__ synopsis
 		<group choice='opt'>
 			<arg choice='plain'>nickname</arg>
 			<arg choice='plain'>name</arg>
-		<group>
+		</group>
 	</entry>
 	<entry>Yes</entry><entry>Yes</entry>
 	<entry></entry>
