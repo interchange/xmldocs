@@ -845,7 +845,7 @@ Locale en_US currency_symbol $
   <tr>
     <td>[loop-code]</td>
     <td>
-      <a href="[loop-code].html">
+      [page [loop-code]]
       [loop-field description]
       </a>
     </td>
