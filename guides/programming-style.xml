@@ -1,0 +1,186 @@
+<?xml version="1.0" standalone="no"?>
+
+<!-- catalog not working ? -->
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+	"../docbook/docbookxi.dtd">
+
+<article id='programming-style'>
+
+<articleinfo>
+	<title>Interchange Guides: Official Programming Style</title>
+	<titleabbrev>programming-style</titleabbrev>
+
+	<copyright>
+		<year>2003</year><year>2004</year><year>2005</year>
+		<holder>Interchange Development Group</holder>
+	</copyright>
+
+	<authorgroup>
+		<author>
+			<firstname>Davor</firstname><surname>Ocelic</surname>
+			<email>docelic@icdevgroup.org</email>
+		</author>
+		<author><firstname>Mike</firstname><surname>Heins</surname>
+			<email>mike@perusion.com</email>
+		</author>
+		<author><firstname>Jeff</firstname><surname>Barr</surname>
+			<!-- <email></email> -->
+		</author>
+		<author>
+			<firstname>Eric</firstname><surname>Zarko</surname>
+			<!--<email></email>-->
+		</author>
+		<author>
+			<firstname>Jon</firstname><surname>Jensen</surname>
+			<email>jon@endpoint.com</email>
+		</author>
+		<author><firstname>Sonny</firstname><surname>Cook</surname>
+			<email>sonny@endpoint.com</email>
+		</author>
+	</authorgroup>
+
+	<legalnotice>
+		<para>
+		This documentation is free; you can redistribute it and/or modify
+		it under the terms of the &GNU; General Public License as published by
+		the Free Software Foundation; either version 2 of the License, or
+		(at your option) any later version.
+		</para>
+		<para>
+		It is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+		</para>
+	</legalnotice>
+
+	<abstract>
+		<para>
+		The purpose of this document is present the officially encouraged &IC; programming style.
+		</para>
+	</abstract>
+
+</articleinfo>
+
+
+
+<sect1 id='GeneralProgrammingStyle'>
+	<title>General Programming Style</title>
+
+	<para>
+	&IC; programming style is <literal>perlstyle</literal>, with few
+	additions. Most of the following was decided in a meeting held on
+	November 14, 2000.
+	</para>
+	<para>
+	We agreed that it is good to have a programming style, and
+	that the existing style of code should be preserved. We agreed that making
+	global changes to impose a consistent style is not worth doing. Instead,
+	we will make revisions as we rewrite code. We will generally follow the
+	published &PERL; style <ulink url="http://www.perl.com/doc/manual/html/pod/perlstyle.html">guidelines</ulink>.
+	</para>
+	<!-- TODO check out http://perlmonks.thepen.com/209555.html -->
+
+</sect1>
+
+<sect1 id="Additions">
+	<title>Interchange-specific additions</title>
+
+	<itemizedlist>
+
+	<listitem><para>
+		<emphasis role='bold'>if / else</emphasis>  - we accept, but do not
+		encourage the use of <emphasis>cuddled else</emphasis> constructs
+		(those with <literal>} else {</literal> on the same line). Use:
+<programlisting>
+  }
+  else {
+</programlisting>
+	</para></listitem>
+
+	<listitem><para>
+		<emphasis role='bold'>Lexical Issues</emphasis> - white space is free,
+		and white space around operators increases readability.
+		Lining up <literal>=</literal>s in a series of assignments can be
+		used to emphasize the parallel structure.
+	</para></listitem>
+
+	<listitem><para>
+		<emphasis role='bold'>Naming</emphasis> - package globals
+		should start with a capital letter. In other
+		situations, avoid <emphasis>StudlyCaps</emphasis> where names begin
+		with a capital letter.
+		Items in the main package should be referenced as
+		<literal>$::<replaceable>Foo</replaceable></literal>, not
+		<literal>$main::<replaceable>Foo</replaceable></literal>.
+	</para></listitem>
+
+	<listitem><para>
+		<emphasis role='bold'>Globals</emphasis> - global variables and subs
+		should be used very sparingly.
+		Occasionally it is necessary to use global variables as implicit arguments
+		to certain subs for efficiency purposes. We should not add more globals,
+		and we should consider removing existing ones. An important exception are
+		certain subs such as <function>logGlobal</function>,
+		<function>logDebug</function>, <function>errmsg</function>, and
+		<function>logError</function>.
+	</para></listitem>
+
+	<listitem><para>
+		<emphasis role='bold'>CVS</emphasis> - CVS comments should be meaningful.
+		As a matter of good programming
+		practice, we encourage a careful review of all diffs before committing
+		changes to CVS. When committing a large number of files (possibly
+				containing changes and fixes to multiple areas) it is best to create
+		file-specific comments addressing individual fixes. Using blank
+		comments is not encouraged.
+	</para></listitem>
+
+	<listitem><para>
+		<emphasis role='bold'>Loops</emphasis> - we prefer to declare loop
+		control variables immediately prior to the beginning of the loop:
+
+<programlisting>
+  my $var;
+  foreach $var () {
+  	...
+  }
+</programlisting>
+	</para></listitem>
+	<listitem><para>
+		<emphasis role='bold'>HTML</emphasis> - in late 2004, it was agreed to
+		make the HTML code as XHTML-compliant as possible, but without using
+		XHTML constructs that could cause problems for older browsers.
+		</para>
+		<para>
+		In essence, all &glos-HTML; tag and argument names should be lowercased,
+		and all argument values should be quoted, using double quotes if not
+		particularly unsuitable. &PERL; gives us the nice <literal>qq{}</literal>
+		operator that eliminates the problem of quotes clashing with Perl syntax:
+<programlisting><![CDATA[
+my $buf = qq{<a href="http://google.com/">Visit Google!</a>};
+]]></programlisting>
+		</para>
+		<para>
+		XHTML also mandates that all 
+		tags are treated as containers. This is easy to follow for container tags
+		such as &lt;p&gt; &mdash; simply remember not to omit the closing tag.
+		With non-container tags, such as &lt;input&gt;, &lt;br&gt; or &lt;hr&gt;,
+		a new &glos-pragma; will be introduced to automatically replace the 
+		closing <literal>&gt;</literal> with <literal>/&gt;</literal>.
+	</para></listitem>
+
+<!--
+Bugzilla - We encourage the use of Bugzilla as a work queuing tool.
+Entering and tracking all bugs, even those you find and then fix yourself,
+	is a good practice. Creating a relationship between a CVS commit and a
+	Bugzilla entry by listing the bug number in the CVS log message and the
+	file names in the Bugzilla entry is encouraged.
+-->
+
+</itemizedlist>
+
+</sect1>
+
+</article>
+
