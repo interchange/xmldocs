@@ -1,0 +1,61 @@
+__NAME__ purpose
+save shopping cart to UserDB
+__END__
+
+
+__NAME__ see also
+delete_cart, load_cart, cart, userdb
+__END__
+
+__NAME__ missing
+Describe recurring/cart distinction
+__END__
+
+__NAME__ synopsis
+<row>
+	<entry>
+		<group>
+			<arg choice='plain'>nickname</arg>
+			<arg choice='plain'>name</arg>
+		</group>
+	</entry>
+	<entry>Yes</entry><entry>Yes</entry>
+	<entry></entry>
+	<entry>
+	Cart specification string. The string is colon-separated, and contains three
+	fields: the cart name, time of save, and type. Time of save is measured
+	in seconds since the &epoch;. Type can be 
+	<literal>c</literal> (cart) or <literal>r</literal> (recurring).
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>recurring</arg>
+	</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry></entry>
+	<entry>
+	</entry>
+</row>
+__END__
+
+
+__NAME__ description
+This tag saves current cart to &userdb;.
+</para><para>
+Note that the cart name does not have to be unique. If there are more carts
+with the same nickname, an index will be added.
+__END__
+
+__NAME__ example
+<example>
+  <title>Save cart to UserDB</title>
+	<para>
+	Place the following on an Interchange page:
+	</para>
+  <programlisting>
+[save_cart mycart]
+  </programlisting>
+</example>
+__END__
+

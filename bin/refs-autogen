@@ -644,7 +644,7 @@ sub update_field {
 			# Causes problems
 			#$$sref{lc $sect} .= $$sref{lc $sect} ?
 			#	'</para><para>' . $content : $content;
-			$$sref{lc $sect} .= $content;
+			$$sref{lc $sect} .= $content if $content;
 		}
 		if ( $sect =~ /^see also$/i ) {
 			( my $list = $content ) =~ s/,/ /g;

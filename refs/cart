@@ -1,0 +1,48 @@
+__NAME__ purpose
+set the current shopping cart
+__END__
+
+
+__NAME__ see also
+delete_cart
+__END__
+
+
+__NAME__ synopsis
+<row>
+	<entry>
+		<group>
+			<arg choice='plain'>nickname</arg>
+			<arg choice='plain'>name</arg>
+		</group>
+	</entry>
+	<entry>Yes</entry><entry>Yes</entry>
+	<entry></entry>
+	<entry>Cart name to switch to.</entry>
+</row>
+&ROW_INTERPOLATE_0;
+__END__
+
+
+__NAME__ description
+This simple tag sets the default cart name for tags that operate on it
+(such as
+<tag>shipping</tag>,
+<tag>price</tag>,
+<tag>total</tag>,
+<tag>subtotal</tag> or
+<tag>nitems</tag>).
+__END__
+
+__NAME__ example
+<example>
+  <title>Set new default cart name</title>
+	<para>
+	Place the following on an Interchange page:
+	</para>
+  <programlisting>
+[cart NEW]
+  </programlisting>
+</example>
+__END__
+

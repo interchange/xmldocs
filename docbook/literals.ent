@@ -61,6 +61,8 @@ option) any later version.</para>">
 <!ENTITY ITL "<glossterm linkend='ITL'>ITL</glossterm>">
 <!ENTITY SMTP "<ulink url='http://cr.yp.to/smtp.html'>SMTP</ulink> (<classname>Net::SMTP</classname> Perl module)">
 <!ENTITY interpolation "<glossterm linkend='interpolation'>interpolation</glossterm>">
+<!ENTITY epoch "<glossterm linkend='epoch'>Epoch</glossterm>">
+<!ENTITY userdb "UserDB">
 
 
 <!-- ENTITIES TO EASIER CONSTRUCT TAG PARAMETERS LIST -->

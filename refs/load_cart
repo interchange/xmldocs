@@ -1,0 +1,54 @@
+__NAME__ purpose
+load shopping cart from UserDB
+__END__
+
+
+__NAME__ missing
+Describe cart/recurring options
+__END__
+
+
+__NAME__ see also
+delete_cart, save_cart, cart, userdb
+__END__
+
+
+__NAME__ synopsis
+<row>
+	<entry>
+		<group>
+			<arg choice='plain'>nickname</arg>
+			<arg choice='plain'>name</arg>
+		</group>
+	</entry>
+	<entry>Yes</entry><entry>Yes</entry>
+	<entry></entry>
+	<entry>
+	Cart specification string. The string is colon-separated, and contains three
+	fields: the cart name, time of save, and type. Time of save is measured
+	in seconds since the &epoch;. Type can be 
+	<literal>c</literal> (cart) or <literal>r</literal> (recurring).
+	</entry>
+</row>
+&ROW_INTERPOLATE_0;
+__END__
+
+
+__NAME__ description
+This tag loads a cart from the &userdb;.
+<emphasis role='bold'>The loaded cart will be merged with the current
+one</emphasis>.
+__END__
+
+__NAME__ example
+<example>
+  <title>Merge a saved cart to the current one</title>
+	<para>
+	Place the following on an Interchange page:
+	</para>
+  <programlisting>
+[load_cart nickname="mycart:990102732:c"]
+  </programlisting>
+</example>
+__END__
+
