@@ -1,0 +1,49 @@
+__NAME__ purpose
+treat config meta-directives as plain comments
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>Yes</arg>
+	<arg choice='plain'>No</arg>
+</group>
+__END__
+
+
+__NAME__ description
+When disabled (set to <literal>No</literal>), 
+configuration meta-directives such as 
+<literal>#include</literal>,
+<literal>#ifdef</literal> and
+<literal>#ifndef</literal>,
+are treated as pure comments with no specific meaning.
+</para><para>
+However, since those were originally borrowed from the C preprocessor,
+and true to their C heritage - they started with an '#' (hash) character
+in &IC; versions up to and including 4.6.
+</para><para>
+This was inconvenient for newcomers who were easily misguided by thinking
+those were just comments, so Interchange versions 4.7 and up support
+meta-directives without the hash prefix.
+</para><para>
+To preserve compatibility, the default is still <literal>Yes</literal>,
+but you should omit the '#' (hash) in new configuration files.
+__END__
+
+
+__NAME__ example
+<example>
+  <title></title>
+  <programlisting>
+ConfigParseComments No
+
+#include comment
+# This, and the above line, are pure comments.
+
+# You better prepare the file named 'comment' for the following one:
+include comment
+  </programlisting>
+</example>
+__END__
+
