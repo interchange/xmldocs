@@ -1,0 +1,144 @@
+__NAME__ purpose
+fetch an URL using Perl LWP and return contents
+__END__
+
+__NAME__ missing
+Fix examples
+Fix description
+__END__
+
+__NAME__ synopsis
+<row>
+	<entry>
+		<arg choice='plain'>url</arg>
+	</entry>
+	<entry>Yes</entry><entry>Yes</entry>
+	<entry></entry>
+	<entry>URL to fetch.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>method</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry><literal>GET</literal></entry>
+	<entry>Form method. Can be one of
+	<literal>GET</literal>,
+	<literal>POST</literal>,
+	<literal>HEAD</literal> or
+	<literal>PUT</literal>.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>strip</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>If set, delete everything before &lt;body&gt; and after
+	&lt;/body&gt; prior to returning contents.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>content_type</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry><literal>x-www-form-urlencoded</literal></entry>
+	<entry>MIME content type.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>content</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>CGI variables to pass. If you want to use this, the form
+	method should be <literal>POST</literal> or <literal>PUT</literal>.
+	The list can be ampersand-separated, like 
+	<literal><![CDATA[fname=Brev&lname=Patterson&state=UT]]></literal>, and
+	to URL-encode the variables themselves, use
+	<code>[filter op=urlencode]</code>. The
+	form, however, <emphasis role='bold'>does not</emphasis> need to 
+	be URL-encoded, see <xref linkend="get-url_examples"/>.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>authuser</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>Username to send for authentication.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>authpass</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>Password to send for authentication.</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>useragent</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>The <emphasis>User Agent</emphasis> string (in other words,
+	your "browser" identification).</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>timeout</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>No timeout</entry>
+	<entry>Set timeout for the operation. Timeout can be specified
+	as a valid Interchange interval (such as "3 min").</entry>
+</row>
+__END__
+
+
+__NAME__ description
+__END__
+
+
+__NAME__ example
+<example>
+	<title></title>
+	<para>
+	</para>
+	<programlisting>
+[get-url
+  url="valid_url"
+  method="POST"
+  strip=1
+  content_type="x-www-form-urlencoded"
+  content="name=Brev"
+  authuser="username"
+  authpass="password"
+  useragent="useragent string"
+]
+	</programlisting>
+</example>
+__END__
+
+__NAME__ example2
+<example>
+	<title></title>
+	<para>
+	</para>
+	<programlisting>
+[get-url
+  url="http://www.icdevgroup.org"
+  method=POST
+  form=|
+    foo=bar
+    buz=baz
+    boo=The red's the thing.
+  |
+]
+	</programlisting>
+</example>
+__END__
+

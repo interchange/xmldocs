@@ -1,0 +1,67 @@
+__NAME__ purpose
+send raw-formatted e-mail using SendMailProgram
+__END__
+
+
+__NAME__ synopsis
+<row>
+	<entry>
+		<arg choice='plain'>hide</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>Hide the tag return value?</entry>
+</row>
+__END__
+
+
+__NAME__ see also
+email, SendMailProgram, customsendmail
+__END__
+
+
+__NAME__ description
+This tag simply feeds <option>SendMailProgram</option> with the raw-formatted
+e-mail body that you provide.
+</para><para>
+This means you also need to provide all the headers yourself.
+Header lines must be at the beginning of the line, and the header
+must have a valid <literal>To:</literal> field, or the message surely
+won't be delivered.
+__END__
+
+
+__NAME__ example
+<example>
+	<title>Simple raw e-mail message</title>
+	<para>
+	Put the following on a test page:
+	</para>
+	<programlisting>
+[email-raw]
+From: test@localhost
+To: root@localhost
+Subject: DEAR FRIEND
+
+THROUGH THE COURTESY OF BUSINESS OPPORTUNITY, I TAKE LIBERTY ANCHORED ON A
+STRONG DESIRE TO SOLICIT YOUR ASSISTANCE ON THIS MUTUALLY BENEFICIAL AND
+RISKFREE TRANSACTION WHICH I HOPE YOU WILL GIVE YOUR URGENT ATTENTION.
+
+I HAVE DEPOSITED THE SUM OF THIRTY MILLION,FIVE HUNDRED THOUSAND UNITED
+STATES DOLLARS(US$30,500,000) WITH A SECURITY COMPANY FOR SAFEKEEPING.
+THE FUNDS ARE SECURITY CODED TO PREVENT THEM FROM KNOWING THE ACTUAL
+CONTENTS.
+
+MAY I AT THIS POINT EMPHASIZE THE HIGH LEVEL OF CONFIDENTIALLITY WHICH THIS
+BUSINESS DEMANDS AND HOPE YOU WILL NOT BETRAY THE TRUST AND CONFIDENCE WHICH
+WE REPOSE IN YOU.
+[/email-raw]
+	</programlisting>
+	<para>
+We hope you will recognize an attempt at humor in the example above, and
+won't use it as an idea for
+<ulink url="http://spam.abuse.net/">spamming</ulink> activities.
+	</para>
+</example>
+__END__
+

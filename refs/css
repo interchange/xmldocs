@@ -1,0 +1,170 @@
+__NAME__ purpose
+generate CSS file and create a link to it
+__END__
+
+__NAME__ missing
+Link "Interchange interval" to glossary entry.
+no_imagedir option
+__END__
+
+
+__NAME__ synopsis
+<row>
+	<entry>
+		<arg choice='plain'>name</arg>
+	</entry>
+	<entry>Yes</entry><entry>Yes</entry>
+	<entry></entry>
+	<entry>
+	Name of the CSS file. The name will be forced to lowercase, and
+	the ".css" extension will be added unconditionally.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>basefile</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>
+	If the <option>Variable</option> is being used dinamically via 
+	<option>DirConfig</option>, this should be the filename the CSS is contained
+	in. The file will be checked for modification time, and the CSS will be
+	rebuilt if it's older than the source file.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>imagedir</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>Value of the <option>ImageDir</option> directive</entry>
+	<entry>
+	Image prefix to use ("/images" in the examples below).
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>no_imagedir</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>
+	Do not prepend "imagedir" to the generated link URL.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>literal</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>
+	Literal, in-place CSS definition. See <xref linkend="css_examples"/>.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>media</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>
+	The <literal>media=</literal> parameter for the &lt;link&gt; HTML tag. For
+	example, <literal>media="PRINT"</literal>.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>mode</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry><literal>0644</literal></entry>
+	<entry>
+	File creation mode (say, <literal>0755</literal>).
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>output_dir</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry><literal>images</literal></entry>
+	<entry>
+	Directory to place generated files to. It makes sense to match this with
+	the <option>ImageDir</option> value.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>relative</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>
+	Copy the directory hieararchy in the output directory. Say, the 
+	<tag>css</tag> tag on the <filename>info/index.html</filename> page
+	would produce output in <filename>images/info/theme_css.css</filename>.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>timed</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>
+	Regenerate the file on a timed basis. Default is the number of minutes,
+	but you can pass any standard Interchange interval.
+	</entry>
+</row>
+
+__END__
+
+
+__NAME__ description
+This tag builds a CSS file (from a <option>Variable</option> or other
+sources) and generates a link to it.
+</para><para>
+Note that if you're providing the <literal>literal=</literal> argument,
+the CSS file won't be rebuilt when the literal value changes. To cause
+rebuild, you must explicitly delete the generated .css file.
+__END__
+
+
+__NAME__ example
+<example>
+	<title>Simplest [css] example</title>
+	<programlisting>
+[css THEME_CSS]
+</programlisting>
+	<para>
+	In the example above, the <tag>css</tag> will look for the 
+	<filename>images/theme_css.css</filename>, and generate a HTML link to it
+	(&lt;link rel="stylesheet" href="/images/theme_css.css"&gt;).
+	</para>
+</example>
+__END__
+
+__NAME__ example2
+<example>
+	<title>Using literal=</title>
+	<para>
+	You can either save your CSS in a Scratch variable, or provide it 
+	directly in-place. Here are both variants:
+	</para>
+	<programlisting>
+[set my_css]
+.title { background-color: #336699; }
+[/set]
+
+[css name="test_css1" literal="[scratch my_css]"]
+[css name="test_css2" literal="body { background-color: yellow; }"]
+</programlisting>
+</example>
+__END__
+
+__NAME__ author
+&mheins;, &ICDEVGROUP;
+__END__
+

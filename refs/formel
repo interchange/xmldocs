@@ -1,0 +1,199 @@
+__NAME__ purpose
+generate HTML form elements
+__END__
+
+__NAME__ missing
+Provide real usage example
+__END__
+
+
+__NAME__ synopsis2
+<row>
+	<entry>label</entry>
+	<entry>Yes</entry><entry>Yes</entry>
+	<entry></entry>
+	<entry>User-visible description of the form element's purpose 
+	or intended use.
+	</entry>
+</row>
+<row>
+	<entry>name</entry>
+	<entry>Yes</entry><entry>Yes</entry>
+	<entry></entry>
+	<entry>
+	Name to assign to this form element (appears as <literal>name=</literal>
+	parameter to the HTML tag).
+	</entry>
+</row>
+<row>
+	<entry>type</entry>
+	<entry>Yes</entry><entry>Yes</entry>
+	<entry></entry>
+	<entry>
+	Form element type. Supported HTML element types are 
+	<literal>text</literal>,
+	<literal>textarea</literal>,
+	<literal>checkbox</literal>,
+	<literal>radio</literal> and
+	<literal>select</literal>.
+	Special value of <literal>display</literal> does not produce any
+	form element but simply displays the element value in a label.
+	</entry>
+</row>
+<row>
+	<entry>size</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>
+	Usually the width of an element. For the <literal>textarea</literal>
+	type, you can specify width and height in form of "AxB", "A,B" or
+	"A B".
+	</entry>
+</row>
+<row>
+	<entry>cause</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>Format string for the error message. If set, the error message
+	is appended to the label. <literal> (%s)</literal> is one reasonable
+	value.
+	</entry>
+</row>
+<row>
+	<entry>checkfor</entry>
+	<entry></entry><entry></entry>
+	<entry>The element's <literal>name=</literal> value.</entry>
+	<entry>
+	Name to pass to the <tag>error</tag> tag.
+	</entry>
+</row>
+<row>
+	<entry>choices</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>
+	Comma-separated list of choices for the
+	<literal>checkbox</literal>,
+	<literal>radio</literal> or
+	<literal>select</literal> elements. To display labels different from 
+	the values, use the	<literal>
+	<replaceable>value1</replaceable>=<replaceable>label1</replaceable>
+	</literal> notation.
+	</entry>
+</row>
+<row>
+	<entry>format</entry>
+	<entry></entry><entry></entry>
+	<entry><literal>%s %s %s</literal></entry>
+	<entry>
+	The container format string for the label, form element and help text.
+	</entry>
+</row>
+<row>
+	<entry>help</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>
+	Help text for the element. If the user was to input, say, an username,
+	you could set the help field to
+	<literal>alphanumeric (5-10 characters)</literal>
+	</entry>
+</row>
+<row>
+	<entry>maxlength</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>The <arg choice='plain'>maxlength=</arg> attribute for the
+	form element.</entry>
+</row>
+<row>
+	<entry>order</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>
+	If not set, the user-visible description comes first (before the
+	form element) in the output.
+	</entry>
+</row>
+<row>
+	<entry>reset</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>Discard any previous element value?</entry>
+</row>
+<row>
+	<entry>signal</entry>
+	<entry></entry><entry></entry>
+	<entry><![CDATA[<font color="__CONTRAST__">%s</font>]]></entry>
+	<entry>
+	Label container in case of errors. If the
+	<varname>CONTRAST</varname> variable is not defined, red is used as
+	default.
+	</entry>
+</row>
+<row>
+	<entry>table</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>
+	Database name to pass to the display tag. Of course, this is only used
+	with the <literal>display</literal> form "element".
+	</entry>
+</row>
+__END__
+
+
+__NAME__ see also
+button, widget
+__END__
+
+
+__NAME__ description
+This tag can create HTML form elements. Note that it preserves user input
+from previous displays of the same page and keeps track of input errors
+(using the <tag>error</tag> tag).
+</para><para>
+The error messages will be displayed in red color (or the color defined
+in the <varname>CONTRAST</varname> variable).
+</para><para>
+Note that you can define values to control this tag's defaults. See
+<xref linkend="formel_examples"/>.
+</para>
+<para>
+__END__
+
+__NAME__ example
+<example>
+	<title>Define tag defaults with form values</title>
+	<programlisting><![CDATA[
+[value name="mv_formel_cause"  set=" (<I>%s</I>)" hide=1]
+[value name="mv_formel_format" set="<tr><td>%s</td><td>%s</td></tr>" hide=1]
+[value name="mv_formel_order"  set=1 hide=1]
+[value name="mv_formel_signal" set="<blink>%s</blink>" hide=1]
+	]]></programlisting>
+	<para>
+	Note that the values, once you set them, remain persistant during the
+	user's session.
+	</para>
+</example>
+__END__
+
+__NAME__ example2
+<example>
+	<title>Displaying the label and form element in two passes</title>
+	<para>
+	If you had specific requirements, you could,
+	by using a little trickery, display the form element label and the
+	element itself in two passes:
+	</para>
+	<programlisting>
+[formel label=Username: name=login format="%s"]
+[formel name=login order=1 format="%s"]
+  </programlisting>
+</example>
+__END__
+
+__NAME__ author
+&racke;, &ICDEVGROUP;
+__END__
+

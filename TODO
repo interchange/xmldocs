@@ -116,8 +116,11 @@ New docs:
 ----------
 itl, catalog/global variable, html, interchange, tag,ui,
 action, form,  unix inet socket, low, high, rpc, prefork, values, umask,
-interchange jobs,
+interchange jobs, interchange intervals,
+
+match style in all Example titles
 
 style: leave newline at end of file
 explain version naming.. stable/unstable and how 5.3.0 implies next stable
 
+script to [un]comment debug lines

@@ -1,0 +1,43 @@
+__NAME__ purpose
+delete shopping cart from UserDB
+__END__
+
+__NAME__ missing
+Link UserDB to glossary and more info
+__END__
+
+__NAME__ synopsis
+<row>
+	<entry><arg choice='plain'>nickname</arg></entry>
+	<entry>Yes</entry><entry>Yes</entry>
+	<entry></entry>
+	<entry>Cart name to delete.</entry>
+</row>
+__END__
+
+
+__NAME__ description
+This tag deletes a shopping cart from the UserDB. This is basically the
+same as <code>[userdb function=delete_cart nickname=CART_NAME]</code>.
+__END__
+
+
+__NAME__ example
+<example>
+	<title>Delete cart "test"</title>
+	<para>
+	Put the following on your page:
+	</para>
+	<programlisting>
+[seti cartname]test[/seti]
+
+[delete_cart nickname="[scratch cartname]"]
+</programlisting>
+</example>
+__END__
+
+
+__NAME__ see also
+userdb, load_cart, save_cart
+__END__
+

@@ -73,11 +73,11 @@ $O/xmldocs.css: docbook/xmldocs.css
 
 #############################################################
 # OLINK DBs (interlinking between documents)
-#olinkdbs-nc olinks-nc:                                              \
-#	$(patsubst %.xml,$T/%-nc.db,$(shell find $(VPATH) -name '*.xml' | \
-#	awk -F/ '{ print $$2 }'))                                         \
-#	$(patsubst %.xml,$T/%-nc.db,$(shell find $(VPATH) -name '*.xml' | \
-#	awk -F/ '{ print $$2 }'))
+olinkdbs-nc olinks-nc:                                              \
+	$(patsubst %.xml,$T/%-nc.db,$(shell find $(VPATH) -name '*.xml' | \
+	awk -F/ '{ print $$2 }'))                                         \
+	$(patsubst %.xml,$T/%-nc.db,$(shell find $(VPATH) -name '*.xml' | \
+	awk -F/ '{ print $$2 }'))
 $T/%-nc.db: %.xml $T
 	$(PSR) $(PSR_FLAGS)                                               \
 	  --stringparam collect.xref.targets only                         \
