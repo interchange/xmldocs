@@ -64,6 +64,8 @@ option) any later version.</para>">
 <!ENTITY DEF_SEEALSO "No information.">
 <!ENTITY DEF_PURPOSE "description line missing">
 <!ENTITY DEF_STRUCTURE "None.">
+<!ENTITY DEF_FILTER_TYPE "Unspecified.">
+<!ENTITY DEF_DIRECTIVE_TYPE "Catalog directive">
 
 
 

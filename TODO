@@ -1,46 +1,15 @@
 
 Outstanding:
-- For filters: add field which says whether filter's main purpose is to 
-  add or remove text (or combined): subtypes: filter, add, transform.
-  (this needs to come between description and example, just like 
-  tags have BEHAVIOR field there, and confs will have global or catalog
-  directive indication in that place).
-- See why email and email-raw produce some errors about usertags olink ID
-- Since directives are in the same file, catconfs and globconfs which 
-  are common need to have 2 source contexts instead of one.
+- filters/confs: fill $ag{structure}, automatic for confs, manual for filters
+- why email, email-raw, SendMailProgram produce errors about usertags olink ID
 - Add docbook element to reference mailing list posts. Something like
   <ml list='users'>2004-December/041539</ml>, it expands to:
 	<ulink url="http://www.icdevgroup.org/pipermail/interchange-users/2004-December/041539.html">2004-December/041539</ulink>.
-
-Later:
 - Ask ndw about including [NEW!] and [TODO!] in titles in TOC.
-- Image tag, sort out mgkpath thing
-
-- in source contexts, wrap runaway lines
 - match style (no starting verb or all starting verbs) in all Example titles
 - check if all Default fields are properly formated (<literal> or none)
 - s/a HTML/an HTML/
 - script to [un]comment debug lines!!
-
-GLOSSARY:
-Say about accesskeys in html source, for key-based navigation
-tag, interpolation, reparse, symbol types
-catalog/global variable, tag,ui,
-action, form,  unix inet socket, values,
-regex, flypage, sku
-
-- More:
-Programming guidelines doc - integrate with programming style. Advise
-programmers of choices to make in order to make their code play well with
-IC - for example, if they want to have a field in the DB for images,
-advise them to name the column 'image' because other tags (they might or
-might not later use) take that as default value. etc...
-guide on setting complete IC environment
-style: leave newline at end of file
-explain version naming.. stable/unstable and how 5.3.0 implies next stable
-Documentation on how to create replicated catalog online and at your
-desktop machine for ultimate convenience.
-- PRODUCE PATCH TO RECOMPILE OFFICIAL DISTRIBUTION PERL without threads.
 
 DOCUMENTATION SYSTEM:
 - Add support to document tags which are NOT found in separate files
@@ -113,7 +82,7 @@ Stuff:
 - How to deal with Safe
 
 
-- In iccattut (CHECK why revert to old version didn't get to cvs ?!):
+- In iccattut:
   - Check if redhat/tarball paths are correct
   - explain syntax accepted in profile files
   - Fix ImageDir and include one picture for example
@@ -130,3 +99,27 @@ Stuff:
     from current "excercise for readers" section, and also many more things.
   - files/tutorial*: s/tutorial-*.log/tutorial.*.log/
 
+GLOSSARY:
+Say about accesskeys in html source, for key-based navigation
+tag, interpolation, reparse, symbol types
+catalog/global variable, tag,ui,
+action, form,  unix inet socket, values,
+regex, flypage, sku
+
+- More:
+Programming guidelines doc - integrate with programming style. Advise
+programmers of choices to make in order to make their code play well with
+IC - for example, if they want to have a field in the DB for images,
+advise them to name the column 'image' because other tags (they might or
+might not later use) take that as default value. etc...
+guide on setting complete IC environment
+style: leave newline at end of file
+explain version naming.. stable/unstable and how 5.3.0 implies next stable
+Documentation on how to create replicated catalog online and at your
+desktop machine for ultimate convenience.
+- PRODUCE PATCH TO RECOMPILE OFFICIAL DISTRIBUTION PERL without threads.
+
+
+
+NON DOCS RELATED
+- Image tag, sort out mgkpath thing
