@@ -6,7 +6,7 @@
 
 	<xsl:param name="para.propagates.style">1</xsl:param>
 
-	<!-- <xsl:param name="glossary.auto.link">1</xsl:param> -->
+	<xsl:param name="glossary.auto.link">1</xsl:param>
 
 </xsl:stylesheet>
 

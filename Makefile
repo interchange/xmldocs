@@ -85,6 +85,11 @@ $T/%-nc.db: %.xml $T
 	  docbook/html-nochunks.xsl $<
 	  tail +2 $@ > $T/tail
 	  mv $T/tail $@
+olinkdbs-c olinks-c:                                              \
+	$(patsubst %.xml,$T/%-c.db,$(shell find $(VPATH) -name '*.xml' | \
+	awk -F/ '{ print $$2 }'))                                         \
+	$(patsubst %.xml,$T/%-c.db,$(shell find $(VPATH) -name '*.xml' | \
+	awk -F/ '{ print $$2 }'))
 $T/%-c.db: %.xml $T
 	$(PSR) $(PSR_FLAGS)                                               \
 	  --stringparam collect.xref.targets only                         \

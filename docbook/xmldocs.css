@@ -300,17 +300,26 @@ a {
 	color: #208cbd;
 }
 
+img {
+	border: 0;
+}
+
 
 thead {
 	background-color: black;
 	color: white; 
 } 
 
-table, tbody, thead, tfoot, tr, td {
+.informaltable table,
+.informaltable tbody,
+.informaltable thead,
+.informaltable tfoot,
+.informaltable td {
 	border-color: #8F8F8F;
 	border: none;
 	border: 0.5pt solid black;
+	border: 0.5pt solid black;
 	padding: 0;
 	margin: 0
-} 
+}
 
