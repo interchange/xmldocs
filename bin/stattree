@@ -378,6 +378,26 @@ sub wanted {
 				}
 			}
 			last;
+
+		##########################################################
+		# Found a filter
+		} elsif ( $c{fsubtype} =~ /^filter$/ )  {
+			( my $fn = $file ) =~ s#.+/##;
+			$fn =~ s/\.filter$//;
+
+			push @{ $hash{symbols}{$c{fsubtype}}{$fn} }, {
+				%c,
+				file => "$i{ver}/$c{file}",
+				lnum => scalar @filedata,
+				ctxpre => $ctx_p,
+				ctxpost => $ctx_n,
+				ctxs => 1,
+				ctxe => scalar @filedata,
+				ctx => [ format_ctx(@filedata) ]
+			};
+
+			$hash{total}{$fsubtype . "s"}++;
+			last;
 		}
 	} # END FOR each line
 
