@@ -1,0 +1,2276 @@
+<?xml version="1.0" standalone="no"?>
+
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+	"../docbook/docbookxi.dtd">
+
+<article id='ordercheckout'>
+
+<articleinfo>
+	<title>Interchange Guides: Order &amp; Checkout Process</title>
+	<titleabbrev>ordercheckout</titleabbrev>
+
+	<copyright>
+		<year>2003</year><year>2004</year><year>2005</year>
+		<holder>Interchange Development Group</holder>
+	</copyright>
+	<copyright>
+		<year>2002</year>
+		<holder>Red Hat, Inc.</holder>
+	</copyright>
+
+	<authorgroup>
+		<author>
+			<firstname>Davor</firstname><surname>Ocelic</surname>
+			<email>docelic@icdevgroup.org</email>
+		</author>
+		<author>
+			<firstname>Ed</firstname><surname>LaFrance</surname>
+			<email>edl@icdevgroup.org</email>
+		</author>
+	</authorgroup>
+
+	<legalnotice>
+		<para>
+		This documentation is free; you can redistribute it and/or modify
+		it under the terms of the &GNU; General Public License as published by
+		the Free Software Foundation; either version 2 of the License, or
+		(at your option) any later version.
+		</para>
+		<para>
+		It is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+		</para>
+	</legalnotice>
+
+	<abstract>
+		<para>
+		The purpose of this document is to guide you through &IC; item <emphasis>ordering</emphasis> and <emphasis>checkout</emphasis> process.
+		</para> <para>
+		By term "item ordering" we assume users placing items in their electronic cart, or performing cart management functions such as quantity change, item removal and price recalculation. By term "checkout" we assume users passing all checkout stages and triggering order finalization (such as physical delivery or download activation).
+		</para> <para>
+		Basic ordering and checkout process is explained in the <olink targetdoc='iccattut' targetptr='iccattut'>Interchange Catalog Tutorial</olink>. Make sure you're familiar with it before proceeding with this Guide.
+		</para>
+	</abstract>
+
+</articleinfo>
+
+
+<sect1 id="Order">
+
+<sect2 id="TheOrderProcess">
+	<title>The order process</title>
+
+<para>
+
+Interchange has a completely flexible order basket and checkout
+scheme. The <literal>foundation</literal> demo presents a common use of this process,
+in the directory pages/ord -- the files are:
+
+
+<programlisting><![CDATA[
+basket.html      The order basket displayed by default
+checkout.html    The form where the customer enters their billing
+and shipping info
+]]></programlisting>
+
+
+... and in the directory etc:
+
+
+<programlisting><![CDATA[
+receipt.html     The receipt displayed to the customer
+report           The order report mailed to you
+mail_receipt     The customer's email copy (if requested)
+]]></programlisting>
+
+
+It is not strictly necessary to display an order basket when
+an item is ordered. If you specify a different page to be
+displayed that is fine, but most customers will be confused if
+you don't give them an indication that the order operation has
+succeeded.
+
+Any order basket is an HTML <literal>FORM</literal>. It will have a number of
+variables on it. At the minimum it must have an &tag-item-list; to
+loop through the items, and the <literal>quantity</literal> of each item must be
+set in some place on that form. Any valid Interchange tags may be
+used on the page, and you may use multiple item lists if necessary.
+
+
+</para>
+</sect2>
+
+
+<sect2 id="HowToOrderAnItem">
+	<title>How to order an item</title>
+
+<para>
+
+Interchange can either use a form-based order or a link-based order to
+place an item in the shopping cart. The link-based order uses the
+special <code>[order item-code]</code> tag:
+
+</para>
+
+<para>
+
+named attributes:
+
+
+<programlisting><![CDATA[
+[order code="sku" quantity="n"* href="page"* cart="cartname"* base="table"*]
+* = optional parameters
+]]></programlisting>
+
+
+Expands into a hypertext link which will include the specified
+code in the list of products to order and display the order page. <emphasis role='bold'>code</emphasis>
+should be a product SKU listed in one of the "products" tables, and is the 
+only required parameter. <emphasis role='bold'>quantity</emphasis> may be specified if more than one 
+(the default) of the item should be 
+placed in the cart. <emphasis role='bold'>href</emphasis> allows some page other than the default order
+page to be displayed once the item has been added to the cart. <emphasis role='bold'>cart</emphasis> 
+selects the shopping cart the item will be placed in. The optional argument 
+<emphasis role='bold'>base</emphasis> constrains
+the order to a particular products file -- if not specified, all tables
+defined as products files will be searched in sequence for the item.
+
+
+<programlisting><![CDATA[
+Order a [order TK112]Toaster</a> today.
+]]></programlisting>
+
+
+Note that this is the same as:
+
+
+<programlisting><![CDATA[
+Order a [page order TK112]Toaster</A> today.
+]]></programlisting>
+
+
+You can change frames for the order with:
+
+
+<programlisting><![CDATA[
+Order a <a href="[area order TK112]"  target="newframe">Toaster</A> today.
+]]></programlisting>
+
+Expands into &lt;/a&gt;. May be used to give the order tag the appearance
+of being a container tag, but neither necessary nor recommended.
+
+</para> <para>
+To order with a form, you set the form variable <literal>mv_order_item</literal> to
+the item-code/SKU and use the <literal>refresh</literal> action:
+
+
+<programlisting><![CDATA[
+<form action="[process-target]"  method="POST">
+<input  type="hidden"  name="mv_todo"        value="refresh">
+<input  type="hidden"  name="mv_order_item"  value="TK112">
+
+Order <input name="mv_order_quantity"  size="3"  value="1"> toaster
+
+<input  type="submit" value="Order!">
+</FORM>
+]]></programlisting>
+
+
+You may batch select whole groups of items:
+
+
+
+<programlisting><![CDATA[
+<form action="[process-target]"  method="POST">
+<input  type="hidden"  name="mv_todo"        value="refresh">
+
+<input  type="hidden"  name="mv_order_item"  value="TK112">
+<input name="mv_order_quantity"  size="3"> Standard Toaster
+
+<input  type="hidden"  name="mv_order_item"  value="TK200">
+<input name="mv_order_quantity"  size="3"> Super Toaster
+
+<input  type="submit" value="Order!">
+</FORM>
+]]></programlisting>
+
+
+Items that have a quantity of zero (or blank) will be skipped, and only
+items with a positive quantity will be placed in the basket.
+
+You may also specify attributes like size or color at time of order (see 
+<emphasis>How to set up an order button</emphasis>).
+
+
+</para>
+</sect2>
+
+
+<sect2 id="HowToSetUpAnOrderLink">
+	<title>How to set up an order link</title>
+
+<para>
+
+On a product display page, use:
+
+
+<programlisting><![CDATA[
+[order 00-0011]Order the Mona Lisa</a>
+]]></programlisting>
+
+
+If coming from a search results or on-the-fly page, you may use the generated
+&tag-item-code; thusly:
+
+
+<programlisting><![CDATA[
+[order [item-code]]Order [item-field name]</a>
+]]></programlisting>
+
+
+Bear in mind that if you have not reached the page via a search or
+on-the-fly operation, &tag-item-code; means nothing and will cause an error.
+
+</para>
+</sect2>
+
+
+<sect2 id="HowToSetUpAnOrderButton">
+	<title>How to set up an order button</title>
+
+<para>
+
+Interchange can order via form submission as well. This allows you
+to order a product (or group of products) via a form button. In its
+simplest form, it is:
+
+
+<programlisting><![CDATA[
+<form action="[process-target]"  method="POST">
+<input  type="hidden"  name="mv_todo"  value="refresh">
+<input  type="hidden"  name="mv_order_item" value="00-0011">
+<input  type="submit" value="Order the Mona Lisa">
+</FORM>
+]]></programlisting>
+
+
+The default quantity is one.  An initial quantity may be set by the user
+by adding an mv_order_quantity variable:
+
+
+<programlisting><![CDATA[
+Number to order:<input  type="text"  name="mv_order_quantity" value="1">
+]]></programlisting>
+
+
+You can order multiple items by stacking the variables:
+
+
+<programlisting><![CDATA[
+<form action="[process-target]"  method="POST">
+<input  type="hidden"  name="mv_todo"  value="refresh">
+<input  type="hidden"  name="mv_order_item" value="00-0011">
+<input  type="hidden"  name="mv_order_item" value="00-0011a">
+<input  type="submit" value="Order the Mona Lisa with frame">
+</FORM>
+]]></programlisting>
+
+
+Initial size or color may be set as well, provided <emphasis>UseModifier</emphasis> is
+set up properly:
+
+
+<programlisting><![CDATA[
+<input  type="hidden"  name="mv_order_size" value="L">
+]]></programlisting>
+
+
+If the order is coming from a generated flypage, loop list, or search
+results page, you can get a canned select box from the 
+<code>[item-accessories size]</code> or <code>[item-accessories size]</code> tag. See
+<emphasis>Item Attributes</emphasis>.
+
+</para>
+</sect2>
+
+
+<sect2 id="HowToSetUpAnOnTheFlyItem">
+	<title>How to set up an on-the-fly item</title>
+
+<para>
+
+If you enable the catalog directive <emphasis>OnFly</emphasis>, setting it to the
+name of a subroutine (or possibly a UserTag) that can handle its calls, then
+Interchange will add items to the basket that are not in the product
+database. Interchange supplies an internal <literal>onfly</literal> subroutine, which 
+will work according to the examples given below. 
+
+In <literal>catalog.cfg</literal>:
+
+
+<programlisting><![CDATA[
+OnFly  onfly
+]]></programlisting>
+
+
+If your item code is not to be named <literal>mv_order_item</literal> then you
+must perform a rename in the <literal>Autoload</literal> routine.
+
+A basic link can be generated like:
+
+
+<programlisting><![CDATA[
+<a href="[area form="
+mv_todo=refresh
+mv_order_item=000101
+mv_order_fly=description=An on-the-fly item|price=100.01
+"]">Order item 000101</a>
+]]></programlisting>
+
+
+The form parameter value <literal>mv_order_fly</literal> can contain any number of fields
+which will set corresponding parameters in the item attributes. The fields
+are separated by the pipe (<literal>|</literal>) character and contain value-parameter
+pairs separated by an = sign. (These are URL-encoded by the &tag-area; or
+&tag-page; tag, of course.) You can set a size, color, or any other parameter.
+
+The special attribute <literal>mv_price</literal> can be used in conjunction with the
+<literal>CommonAdjust</literal> atom <literal>$</literal> to set the price for checkout and display.
+
+The &tag-item-list; sub-tag &tag-item-description;, when used with an
+item-list, will use the item attribute <literal>description</literal> to display in the 
+basket. Note that <code>[item-field description]</code> or <code>[item-data products description]</code>
+will NOT work, as both of these tags reference an actual field value for 
+a record in the products table - not applicable for on-the-fly items.
+Similarly, an attempt to generate a flypage for an on-the-fly item 
+(<code>[page 000101]</code>, for example) will fail, resulting in the display of
+the SpecialPage <emphasis role='bold'>missing</emphasis>.
+
+If you wish to set up a UserTag to process on-the-fly items, it should
+accept a call of
+
+
+<programlisting><![CDATA[
+usertag(mv_item_code, mv_item_quantity, mv_order_fly)
+]]></programlisting>
+
+
+The <literal>mv_item_code</literal> and <literal>mv_order_fly</literal> parameters are required to trigger
+Interchange's <literal>add_item</literal> routine (along with  mv_todo="refresh" to set the action).
+
+The item will always act as if <literal>SeparateItems</literal> or <literal>mv_separate_items</literal> is
+set.
+
+Multiple items can be ordered at once by stacking the variables. If there
+is only one <literal>mv_order_item</literal> instance, however, you can stack the <literal>mv_order_fly</literal>
+variable so that all are concatenated together as with the <literal>|</literal> symbol. So
+the above example could be done as:
+
+
+<programlisting><![CDATA[
+[area form="
+mv_todo=refresh
+mv_order_item=000101
+mv_order_fly=description=An on-the-fly item
+mv_order_fly=price=100.00
+"]
+]]></programlisting>
+
+
+Multiple items would need multiple instances of <literal>mv_order_item</literal> with 
+a corresponding <literal>mv_order_fly</literal> for each <literal>mv_order_item</literal>. You can
+order both <literal>000101</literal> and <literal>000101</literal> as follows:
+
+
+<programlisting><![CDATA[
+[area form="
+mv_todo=refresh
+
+mv_order_item=000101
+mv_order_fly=description=An on-the-fly item|price=100.00
+
+mv_order_item=000102
+mv_order_fly=description=Another on-the-fly item|price=200.00
+"]
+]]></programlisting>
+
+
+The following two forms correspond to the above two examples, in order,
+with the slight refinement of adding a quantity:
+
+
+<programlisting><![CDATA[
+<form action="[area process]"  method="POST">
+<input  type="hidden"  name="mv_todo" value="refresh">
+<input  type="hidden"  name="mv_order_item" value="000101">
+Qty: <input  size="2"  name="mv_order_quantity" value="1">
+<input  type="hidden"  name="mv_order_fly"
+VALUE="description=An on-the-fly item|price=100.00">
+<input  type="submit" value="Order button">
+</FORM>
+
+<form action="[area process]"  method="POST">
+<input  type="hidden"  name="mv_todo" value="refresh">
+<input  type="hidden"  name="mv_order_item" value="000101">
+Qty: <input  size="2"  name="mv_order_quantity" value="1"><br>
+<input  type="hidden"  name="mv_order_fly"
+VALUE="description=An on-the-fly item|price=100.00">
+<input  type="hidden"  name="mv_order_item" value="000102">
+Qty: <input  size="2"  name="mv_order_quantity" value="1"><br>
+<input  type="hidden"  name="mv_order_fly"
+VALUE="description=Another on-the-fly item|price=200.00">
+<input  type="submit" value="Order two different with a button">
+</FORM>
+]]></programlisting>
+
+
+</para>
+</sect2>
+
+
+<sect2 id="OrderGroups">
+	<title>Order Groups</title>
+
+<para>
+
+Interchange allows you to group items together, making a master item
+and sub-items. This can be used to delete accessories or options when
+the master item is deleted. In its simplest form, you order just one
+master item and all subsequent items are sub-items.
+
+
+<programlisting><![CDATA[
+<form action="[process-target]"  method="POST">
+<input  type="hidden"  name="mv_todo"  value="refresh">
+<input  type="hidden"  name="mv_order_group" value="1">
+<input  type="hidden"  name="mv_order_item" value="00-0011">
+<input  type="hidden"  name="mv_order_item" value="00-0011a">
+<input  type="submit" value="Order the Mona Lisa with frame">
+</FORM>
+]]></programlisting>
+
+
+If you wish to stack more than one master item, then you must define
+mv_order_group for <emphasis role='bold'>all</emphasis> items, with either a 1 value (master) or 0 value
+(sub-item). A master owns all subsequent sub-items until the next master
+is defined.
+
+
+<programlisting><![CDATA[
+<form action="[process-target]"  method="POST">
+<input  type="hidden"  name="mv_todo"  value="refresh">
+<input  type="hidden"  name="mv_order_group" value="1">
+<input  type="hidden"  name="mv_order_item" value="00-0011">
+<input  type="hidden"  name="mv_order_group" value="0">
+<input  type="hidden"  name="mv_order_item" value="00-0011a">
+<input  type="hidden"  name="mv_order_group" value="1">
+<input  type="hidden"  name="mv_order_item" value="19-202">
+<input  type="hidden"  name="mv_order_group" value="0">
+<input  type="hidden"  name="mv_order_item" value="99-102">
+<input  type="submit" value="Order items">
+</FORM>
+]]></programlisting>
+
+
+When the master item <literal>00-0011</literal> is deleted from the basket,
+<literal>00-0011a</literal> will be deleted as well. And when 19-202 is deleted,
+then 99-102 will be deleted from the basket.
+
+\NOTE: Use of checkboxes for this type of thing can be hazardous, as they
+do not pass a value when unchecked.  It is preferable to use radio groups 
+or select/drop-down widgets. If you must use checkboxes, be sure to 
+explicitly clear <literal>mv_order_group</literal> and <literal>mv_order_item</literal> somewhere on the
+page which contains the form:
+
+
+<programlisting><![CDATA[
+[value name=mv_order_group set='']
+[value name=mv_order_item set='']
+]]></programlisting>
+
+
+The attributes <literal>mv_mi</literal> and <literal>mv_si</literal> are set to the group and sub-item status
+of each item.  The group, contained in the attribute <literal>mv_mi</literal>, is a
+meaningless yet unique integer. All items in a group will have the same
+value of <literal>mv_mi</literal>. The attribute <literal>mv_si</literal> is set to 0 if the item is
+a master item, and 1 if it is a sub-item.
+
+</para>
+</sect2>
+
+
+<sect2 id="BasketDisplay">
+	<title>Basket display</title>
+
+<para>
+
+The basket page(s) are where the items are tracked and adjusted by the
+customer. It is possible to have an unlimited number of basket pages.
+It is also possible to have multiple shopping carts, as in buy or
+sell. This allows a basket/checkout type of ordering scheme, with custom
+order pages for items which have many accessories.
+
+The name of the page to display can be configured in several
+ways:
+
+^ Set the SpecialPage <literal>order</literal> to the page to display
+  when an item is ordered.
++ Use the <code>[order  code="item"  page="page_name"] Order it!&lt;/a&gt;</code> form of
+  order tag to specify an arbitrary order page for an item.
++ If already on an order page, set the mv_orderpage,
+  mv_nextpage, mv_successpage, or mv_failpage variables.
+
+The following variables can be used to control cart selection and
+page display:
+
+</para>
+
+<para>
+
+The shopping cart (default is main) to be used for this order
+operation.
+
+</para>
+<para>
+
+Page to be displayed on a failed order
+check (see <emphasis>Advanced Multi-level Order Pages</emphasis>)
+
+</para>
+<para>
+
+Page to display on a return operation.
+
+</para>
+<para>
+
+Page to be displayed on a refresh.
+
+</para>
+<para>
+
+Page to be displayed on a successful order
+check (see <emphasis>Advanced Multi-level Order Pages</emphasis>).
+
+</para>
+<para>
+
+Order profile to be used if the form action is <literal>submit</literal>
+(see <emphasis>Advanced Multi-level Order Pages</emphasis>).
+
+</para>
+</sect2>
+
+
+<sect2 id="MultipleShoppingCarts">
+	<title>Multiple Shopping Carts</title>
+
+<para>
+
+Interchange allows you to define and maintain multiple shopping carts.
+One shopping cart -- main, by name -- is defined when the user session
+starts. If the user orders item M1212 with the following tag:
+
+
+<programlisting><![CDATA[
+[order code=M1212 cart=layaway] Order this item! </a>
+]]></programlisting>
+
+
+the order will be placed in the cart named <emphasis>layaway</emphasis>. However, by default
+you won't see the just-ordered item on the basket page.  That is because 
+the default shopping basket displays the contents of the 'main' cart only. 
+So copy the default basket page (pages/ord/basket.html in the demo)
+to a new file, insert a <code>[cart layaway]</code> tag, and specify it as the target
+page in your &tag-order; tag:
+
+
+<programlisting><![CDATA[
+[order code=M1212 cart=layaway page=ord/lay_basket] Order this item! </a>
+]]></programlisting>
+
+
+Now the contents of the <emphasis>layaway</emphasis> cart will be displayed. Most of the ITL
+tags that are fundamental to cart display accept a 'cartname' option, 
+allowing you to specify which cart to be used:
+
+</para>
+
+<para>
+
+A 'sticky' setting of the default cart name to use for all subsequent
+cart-related tags.  Convenient, but you must remember to use <code>[cart main]</code>
+to get back to the primary cart!  As an alternative, you can specify the
+desired cart as a parameter of the other tags.  These are not sticky, 
+referencing the specified cart only for the instance in which they are called:
+
+</para>
+<para>
+
+Iterates over the items in the specified cart - tags like &tag-item-quantity;
+ and &tag-item-price; will be evaluated accordingly;
+
+</para>
+<para>
+
+Returns the total number of items in the specified cart;
+
+</para>
+<para>
+
+Returns the monetary subtotal for the contents of specified cart;
+
+</para>
+<para>
+
+You get the idea. It is worth noting that tags which summarize
+cart contents do not need to be in used concert, or in conjunction with
+an &tag-item-list;. For instance, you can display just the grand
+total for a cart on the sidebar or bottom of each page, using 
+&tag-total-cost; by itself, if you wish.
+
+</para> <para>
+You can also order items from a form, using the <literal>mv_order_item</literal>,
+<literal>mv_cartname</literal>, and optional <literal>mv_order_quantity</literal> variables.
+
+
+<programlisting><![CDATA[
+<form  method="POST" action="[process]">
+<input  type="checkbox" name="mv_order_item" value="M3243"> Item M3243
+<input name="mv_order_quantity" value="1"> Quantity
+<input  type="hidden" name="mv_cartname" value="layaway">
+<input  type="hidden" name="mv_doit" value="refresh">
+<input  type="submit" name="mv_junk" value="Place on Layaway Now!">
+</FORM>
+]]></programlisting>
+
+
+
+If you need to utilize an alternative item price in conjunction with 
+the use of a custom cart, see the section on <emphasis>PRODUCT PRICING</emphasis> for 
+pricing methods and strategies.
+
+</para>
+
+</sect2>
+
+</sect1>
+
+
+<sect1 id="ProductPricinga">
+	<title>Product pricing</title>
+
+<sect2 id="ProductPricing">
+	<title>Product pricing</title>
+
+<para>
+
+Interchange maintains a price in its database for every product. The price
+field is the one required field in the product database -- it is necessary
+to build the price routines.
+
+For speed, Interchange builds the code that is used to determine a product's
+price at catalog configuration time. If you choose to change a directive
+that affects product pricing you must reconfigure the catalog.
+
+</para>
+</sect2>
+
+
+<sect2 id="SimplePricing">
+	<title>Simple pricing</title>
+
+<para>
+
+The simplest method is flat pricing based on a fixed value in
+the <literal>products</literal> database. If you put that price in a field named
+<literal>price</literal>, you don't need to do more. If you want to change pricing
+based on quantity, size, color or other factors read on.
+
+</para>
+</sect2>
+
+
+<sect2 id="PriceMaintenanceWithCommonadjust">
+	<title>Price Maintenance with CommonAdjust</title>
+
+<para>
+
+A flexible chained pricing scheme is available
+when the <emphasis>CommonAdjust</emphasis> directive is set.
+
+We talk below about a <emphasis>CommonAdjust string</emphasis>; it will be defined
+in due time.
+
+A few rules about CommonAdjust, all assuming the <emphasis>PriceField</emphasis> directive
+is set to <literal>price</literal>:
+
+LI1: 1
+
+If <literal>CommonAdjust</literal> is set to any value, a valid <emphasis>CommonAdjust string</emphasis> or
+not, extended price adjustments are enabled. It may also hold the
+default pricing scheme.
+
+LI1: 2
+
+The <literal>price</literal> field may also hold a <emphasis>CommonAdjust string</emphasis>. It takes
+precedence over the default.
+
+LI1: 3
+
+If the value of the <literal>CommonAdjust</literal> directive is set to a CommonAdjust
+string, and the <literal>price</literal> field is empty or specifically <emphasis>0</emphasis>, then it
+will be used to set the price of the items.
+
+LI1: 4
+
+If no CommonAdjust strings are found, then the price will be 0, subject
+to any later application of discounts.
+
+LI1: 5
+
+If another CommonAdjust string is found as the result of an operation,
+it will be re-parsed and the result applied. Chaining is retained; a
+fallback may be passed and will take effect.
+
+Prices may be adjusted in several ways, and the individual actions
+are referred to below as <emphasis>atoms</emphasis>. Price atoms may be <emphasis>final</emphasis>,
+<emphasis>chained</emphasis>, or <emphasis>fallback</emphasis>. A final price atom is always applied if it
+does not evaluate to zero. A chained price atom is subject to further
+adjustment. A fallback price atom is skipped if a previous chained price
+was not zero.
+
+Atoms are separated by whitespace, and may be quoted (although there
+should not normally be whitespace in a setting). A chained item ends
+with a comma.  A fallback item has a leading semi-colon.  Final atoms
+have no comma appended or semi-colon prepended.
+
+A <emphasis>settor</emphasis> is the means by which the price is set.
+There are eight different types of price settors. All settors
+can then yield another CommonAdjust string. 
+
+It is quite possible to create endless loops, so the maximum
+number of initial CommonAdjust strings is set to 16, and there
+may be only 32 iterations by default before the price will return zero on
+an error. (The maximum iterations is specified with
+the {{CMD[jump="icconfig.html#Limit"]Limit}} directive.)
+
+<emphasis role='bold'>NOTE</emphasis>:  Common needs are easily shown but not so easily explained;
+skip to the examples in the reference below if your vision starts to
+blur when reading the next section. 8-)
+
+\USAGE: Optional items below have asterisks appended. The asterisk should
+not be used in the actual string. Optional <emphasis role='bold'>base</emphasis> or <emphasis role='bold'>table</emphasis> always
+defaults to the active <literal>products</literal> database table.  The optional <emphasis role='bold'>key</emphasis>
+defaults to the item code except in a special case for the attribute-based
+lookup. The <emphasis role='bold'>field</emphasis> name is not optional except in the case of an
+attribute lookup.
+
+</para>
+<para>
+
+where N is a digit.  A number which is applied directly; for instance
+10 will yield a price of 10. May be a positive or negative number.
+
+</para>
+<para>
+
+where N is a digit.  A number which is applied as a percentage of
+the <emphasis>current</emphasis> price value. May be a positive or negative number. For
+example, if the price is 10 and -8% is applied, the next price value
+will be 9.20.
+
+</para>
+<para>
+
+Causes a straight lookup in a database table. The optional <emphasis role='bold'>table</emphasis> 
+defaults to the main products database table for the item (subject
+of course to multiple product files). The <emphasis role='bold'>column</emphasis> must always
+be present. The optional <emphasis role='bold'>key</emphasis> defaults to the item code except
+in a special case for the attribute-based lookup. The return value
+is then re-parsed as another price settor.
+
+</para>
+<para>
+
+Causes a quantity lookup in database table <emphasis role='bold'>table</emphasis> (which defaults to
+the products database), with a set of comma-separated fields, looked
+up by the optional <emphasis role='bold'>key</emphasis>. (Key defaults to the item code, of course).
+If ranges are specified with .., each column in the sequence will be used;
+Therefore
+
+
+<programlisting><![CDATA[
+pricing:p1,p2,p3,p4,p5,p10:
+]]></programlisting>
+
+
+is the same as
+
+
+<programlisting><![CDATA[
+pricing:p1..p5,p10:
+]]></programlisting>
+
+
+Leading non-digits are stripped, and the item quantity is compared with
+the numerical portion of the column name. The price is set to the value of
+the database column (numeric portion) that is at least equal to it but
+doesn't yet reach the next break.
+
+\WARNING: If the field at the appropriate quantity level is blank,
+a zero cost will be returned from the atom. It is important to
+have all columns populated.
+
+</para>
+<para>
+
+Does an attribute-based adjustment. The attribute is looked up in the
+database <emphasis role='bold'>table</emphasis>, with the optional <emphasis role='bold'>column</emphasis> defaulting to the same
+name as the <emphasis>value</emphasis> of the <emphasis role='bold'>attribute</emphasis>. If the column is not left blank,
+the <emphasis>key</emphasis> is set to the <emphasis>value</emphasis> of the <emphasis role='bold'>attribute</emphasis> if blank.
+
+</para>
+<para>
+
+The leading <literal>&amp;</literal> sign is stripped and the code is passed to the
+equivalent of a &tag-calc; tag. No Interchange tags can be used, but
+the tag_data routine is available, the current value of the price
+and quantity are available as <literal>$s</literal>, and the current item (code, quantity,
+price, and any attributes) are available as <literal>$item</literal>, all forced
+to the package Vend::Interpolate. That means that in a UserTag:
+
+
+<programlisting><![CDATA[
+$Vend::Interpolate::item          is the current item
+$Vend::Interpolate::item->{code}  gives key for current item
+$Vend::Interpolate::item->{size}  gives size for current item (if there)
+$Vend::Interpolate::item->{mv_ib} gives database ordered from
+]]></programlisting>
+
+
+</para>
+<para>
+
+If the settor begins with a square bracket ([) or underscore, it
+is parsed for Interchange tags with variable substitution (but no Locale
+substitution). You may define a price in a <emphasis>Variable</emphasis> in this fashion.
+The string is re-submitted as an atom, so it may yield yet another 
+settor.
+
+</para>
+<para>
+
+Tells Interchange to look in the <literal>mv_price</literal> attribute of the shopping cart,
+and apply that price as the final price, if it exists. The attribute must
+be a numerical value.
+
+</para>
+<para>
+
+Tells the routine to return <literal>word</literal> directly as the result. This is not
+useful in pricing, as it will evaluate to zero. But when CommonAdjust
+is used for shipping, it is a way of re-directing shipping modes.
+
+</para>
+<para>
+
+The value of <literal>word</literal>, which must not match any of the other settors,
+is available as a key for the next lookup (only). If the next settor
+is a database lookup, and it contains a dollar sign (<literal>$</literal>) the <literal>word</literal>
+will be substituted; i.e. <literal>table:column:$</literal> becomes <literal>table:column:word</literal>.
+
+</para>
+<para>
+
+The value returned by <literal>settor</literal> will be used as a key for the next
+lookup, as above.
+
+</para>
+</sect2>
+
+
+<sect2 id="CommonadjustExamples">
+	<title>CommonAdjust Examples</title>
+
+<para>
+
+Most examples below use an outboard database table named <emphasis role='bold'>pricing</emphasis>, but
+any valid table including the <emphasis role='bold'>products</emphasis> table can be used. We will refer
+to this <emphasis role='bold'>pricing</emphasis> table:
+
+
+<programlisting><![CDATA[
+code    common  q1     q5     q10    XL    S      red
+99-102          10     9      8      1     -0.50  0.75
+00-343                               2
+red      0.75
+]]></programlisting>
+
+
+The simplest case is a straight lookup on an attribute; <emphasis>size</emphasis> in this
+case. 
+
+
+<programlisting><![CDATA[
+10.00, ==size:pricing
+]]></programlisting>
+
+
+With this value in the <literal>price</literal> field, a base price of 10.00 will be
+adjusted with the value of the <emphasis>size</emphasis> attribute. If size for the item
+99-102 is set to <literal>XL</literal> then 1.00 will be added for a total price of 11.00;
+if it is <literal>S</literal> then .50 will be subtracted for a total price of 9.50;
+for any other value of <emphasis>size</emphasis> no further adjustment would be made. 00-343
+would be adjusted up 2.00 only for <emphasis>XL</emphasis>.
+
+
+<programlisting><![CDATA[
+10.00, ==size:pricing, ==color:pricing
+]]></programlisting>
+
+
+This is the same as above, except both size and color are adjusted for.
+A color value of red for item code 99-102 would add 0.75 to the price. For
+00-343 it would have no effect.
+
+
+<programlisting><![CDATA[
+10.00, ==size:pricing, ==color:pricing:common
+]]></programlisting>
+
+
+Here price is set based on a common column, keyed by the value of the
+color attribute. Any item with a color value of red would have 0.75 added
+to the base price.
+
+
+<programlisting><![CDATA[
+pricing:q1,q5,q10:, ;10.00, ==size:pricing, ==color:pricing:common
+]]></programlisting>
+
+
+Here is a quantity price lookup, with a fallback price setting. If there
+is a valid price found at the quantity of 1, 5, or 10, depending on
+item quantity, then it will be used. The fallback of 10.00 only applies if no
+non-zero/non-blank price was found at the quantity lookup. In either
+case, size/color adjustment is applied.
+
+
+<programlisting><![CDATA[
+pricing:q1,q5,q10:, ;10.00 ==size:pricing, ==color:pricing:common
+]]></programlisting>
+
+
+Removing the comma from the end of the fallback string stops color/size
+lookup if it reaches that point. If a quantity price was found, then size
+and color are chained.
+
+
+<programlisting><![CDATA[
+pricing:q1,q5,q10:, ;products:list_price, ==size:pricing, ==color:pricing
+]]></programlisting>
+
+
+The value of the database column <literal>list_price</literal> is used as a fallback
+instead of the fixed 10.00 value. The above value might be a nice one
+to use as the default for a typical retail catalog that has items with
+colors and sizes.
+
+</para>
+</sect2>
+
+
+<sect2 id="Pricebreaks,Discounts,AndPriceadjustment">
+	<title>PriceBreaks, discounts, and PriceAdjustment</title>
+
+<para>
+
+There are several ways that Interchange can modify the price of a product during 
+normal catalog operation. Several of them require that the <emphasis>pricing.asc</emphasis>
+file be present, and that you define a pricing database. You do that by
+placing the following directive in <emphasis>catalog.cfg</emphasis>:
+
+
+<programlisting><![CDATA[
+Database  pricing pricing.asc 1
+]]></programlisting>
+
+
+\NOTE: PriceAdjustment is slightly deprecated by CommonAdjust, but
+will remain in use at least through the end of Version 3 of Interchange.
+
+Configurable directives and tags with regard to pricing:
+
+</para>
+
+<para>
+
+Quantity price breaks are configured by means of the <emphasis>PriceBreaks</emphasis> and
+<emphasis>MixMatch</emphasis> directives. They require a field named specifically <literal>price</literal>
+in the pricing database. The <emphasis role='bold'>price</emphasis> field contains a space-separated
+list of prices that correspond to the quantity levels defined in the
+pricebreaks directive. If quantity is to be applied to all items in
+the shopping cart (as opposed to quantity of just that item) then the
+<emphasis>MixMatch</emphasis> directive should be set to <emphasis role='bold'>Yes</emphasis>.
+
+</para>
+<para>
+
+Individual line-item prices can be adjusted according to the value of
+their attributes. See <emphasis>PriceAdjustment</emphasis> and <emphasis>CommonAdjust</emphasis>. The
+pricing database <emphasis role='bold'>must</emphasis> be defined unless you define the commonadjust
+behavior.
+
+</para>
+<para>
+
+Product discounts for individual products, specific product codes,
+all products, or the entire order can be configured with the &tag-discount;
+tag. Discounts are applied on a per-user basis -- you can gate the
+discount based on membership in a club or other arbitrary means. See
+<emphasis>Product Discounts</emphasis>.
+
+</para> <para>
+For example, if you decided to adjust the price of T-shirt part number
+99-102 up 1.00 when the size is extra large and down 1.00 when the size is small,
+you would have the following directives defined in catalog.cfg:
+
+
+<programlisting><![CDATA[
+Database          pricing pricing.asc 1
+UseModifier       size
+PriceAdjustment   size
+]]></programlisting>
+
+
+To enable automatic modifier handling, you define a size field in
+products.txt:
+
+
+<programlisting><![CDATA[
+code    description   price    size
+99-102  T-Shirt       10.00    S=Small, M=Medium, L=Large*, XL=Extra Large
+]]></programlisting>
+
+
+You would place the proper tag within your &tag-item-list; on the shopping-basket
+or order page:
+
+
+<programlisting><![CDATA[
+[item-accessories size]
+]]></programlisting>
+
+
+In the pricing.asc database source, you would need:
+
+
+<programlisting><![CDATA[
+code      S       XL
+99-102    -1.00   1.00
+]]></programlisting>
+
+
+If you want to assign a price based on the option, precede the number
+with an equals sign:
+
+
+<programlisting><![CDATA[
+code    S       M       L       XL
+99-102  =9.00   =10     =10     =11
+]]></programlisting>
+
+
+IMPORTANT NOTE: Price adjustments occur AFTER quantity price breaks, so
+the above would negate anything set with the <emphasis>PriceBreaks</emphasis> directive/option.
+
+Numbers that begin with an equals sign (<literal>=</literal>) are used as absolute
+prices and are <emphasis>interpolated for Interchange tags first</emphasis>, so you can
+use subroutines to set the price. To facilitate coordination with the
+subroutine, the session variables <literal>item_code</literal> and <literal>item_quantity</literal> are
+set to the code and quantity of the item being evaluated. They would
+be accessed in a global subroutine with <literal>$Vend::Session-</literal>><literal>{item_code}</literal>
+and <literal>$Vend::Session-</literal>><literal>{item_quantity}</literal>.
+
+The pricing information must always come from a database because
+of security.
+
+</para>
+</sect2>
+
+
+<sect2 id="ItemAttributes">
+	<title>Item Attributes</title>
+
+<para>
+
+Interchange allows item attributes to be set for each ordered item. This
+allows a size, color, or other modifier to be attached to a common
+part number. If multiple attributes are set, then they should be
+separated by commas. Previous attribute values can be saved by means
+of a hidden field on a form, and multiple attributes for each item
+can be <emphasis>stacked</emphasis> on top of each other.
+
+The configuration file directive <emphasis>UseModifier</emphasis> is used to set
+the name of the modifier or modifiers. For example
+
+
+<programlisting><![CDATA[
+UseModifier        size,color
+]]></programlisting>
+
+
+will attach both a size and color attribute to each item code that
+is ordered.
+
+<emphasis role='bold'>IMPORTANT NOTE:</emphasis> You may not use the following names for attributes:
+
+
+<programlisting><![CDATA[
+item  group  quantity  code  mv_ib  mv_mi  mv_si
+]]></programlisting>
+
+
+You can also set it in scratch with the mv_UseModifier
+scratch variable -- <code>[set mv_UseModifier]size color[/set]</code> has the
+same effect as above. This allows multiple options to be set for
+products. Whichever one is in effect at order time will be used.
+Be careful, you cannot set it more than once on the same page.
+Setting the <literal>mv_separate_items</literal> or global directive <emphasis>SeparateItems</emphasis>
+places each ordered item on a separate line, simplifying attribute
+handling. The scratch setting for <literal>mv_separate_items</literal> has the same
+effect.
+
+The modifier value is accessed in the &tag-item-list; loop with the
+<code>[item-modifier attribute]</code> tag, and form input fields are placed with the
+<code>[modifier-name attribute]</code> tag. This is similar to the way that quantity
+is handled, except that attributes can be "stacked" by setting multiple
+values in an input form.
+
+You cannot define a modifier name of <emphasis>code</emphasis> or <emphasis>quantity</emphasis>, as they
+are already used. You must be sure that no fields in your forms
+have digits appended to their names if the variable is the same name
+as the attribute name you select, as the <code>[modifier-name size]</code> variables
+will be placed in the user session as the form variables size0, size1,
+size2, etc. 
+
+You can use the <code>[loop arg="item item item"]</code> list to reference multiple display
+or selection fields for modifiers, or you can use the built-in
+&tag-PREFIX-accessories; tags available in most Interchange list operations.
+The modifier value can then be used to select data from an arbitrary database
+for attribute selection and display.
+
+Below is a fragment from a shopping basket display form which 
+shows a selectable size with "sticky" setting. Note that this
+would always be contained within &tag-item_list;.
+
+
+<programlisting><![CDATA[
+<select name="[modifier-name size]">
+<option  [selected [modifier-name size] S]> S
+<option  [selected [modifier-name size] M]> M
+<option  [selected [modifier-name size] L]> L
+<option [selected [modifier-name size] XL]> XL
+</SELECT>
+]]></programlisting>
+
+
+It could just as easily be done with a radio button group combined
+with the &tag-checked; tag.
+
+Interchange will automatically generate the above select box
+when the <code>[accessories <replaceable>code</replaceable> size]</code>
+or <code>[item-accessories size]</code>
+tags are called. They have the syntax:
+
+
+<programlisting><![CDATA[
+[item_accessories attribute*, type*, field*, database*, name*, outboard*]
+
+[accessories code attribute*, type*, field*, database*, name*, outboard*]
+]]></programlisting>
+
+
+</para>
+
+<para>
+
+Not needed for item-accessories, this is the product code of the item to
+reference.
+ 
+</para>
+<para>
+
+The item attribute as specified in the UseModifier configuration
+directive. Typical are <literal>size</literal> or <literal>color</literal>.
+
+</para>
+<para>
+
+The action to be taken. One of:
+
+
+<programlisting><![CDATA[
+select          Builds a dropdown <select> menu for the attribute.
+NOTE: This is the default.
+
+multiple        Builds a multiple dropdown <select> menu for the
+attribute.  The size is equal to the number of
+option choices.
+
+display         Shows the label text for *only the selected option*.
+
+show            Shows the option choices (no labels) for the option.
+
+radio           Builds a radio box group for the item, with spaces
+separating the elements.
+
+radio nbsp      Builds a radio box group for the item, with &nbsp;
+separating the elements.
+
+radio left n    Builds a radio box group for the item, inside a
+table, with the checkbox on the left side. If "n"
+is present and is a digit from 2 to 9, it will align
+the options in that many columns.
+
+radio right n   Builds a radio box group for the item, inside a
+table, with the checkbox on the right side. If "n"
+is present and is a digit from 2 to 9, it will align
+the options in that many columns.
+]]></programlisting>
+
+
+
+<programlisting><![CDATA[
+
+check           Builds a checkbox group for the item, with spaces
+separating the elements.
+
+check nbsp      Builds a checkbox group for the item, with &nbsp;
+separating the elements.
+
+check left n    Builds a checkbox group for the item, inside a
+table, with the checkbox on the left side. If "n"
+is present and is a digit from 2 to 9, it will align
+the options in that many columns.
+
+check right n   Builds a checkbox group for the item, inside a
+table, with the checkbox on the right side. If "n"
+is present and is a digit from 2 to 9, it will align
+the options in that many columns.
+]]></programlisting>
+
+
+The default is 'select', which builds an HTML select form entry for
+the attribute.  Also recognized is 'multiple', which generates a
+multiple-selection drop down list, 'show', which shows the list of
+possible attributes, and 'display', which shows the label text for the
+selected option only.
+
+</para>
+<para>
+
+The database field name to be used to build the entry (usually a field
+in the products database).  Defaults to a field named the same as the
+attribute.
+
+</para>
+<para>
+
+The database to find <emphasis role='bold'>field</emphasis> in, defaults to the first products file
+where the item code is found.
+
+</para>
+<para>
+
+Name of the form variable to use if a form is being built. Defaults to
+mv_order_<emphasis role='bold'>attribute</emphasis> -- i.e.  if the attribute is <emphasis role='bold'>size</emphasis>, the form
+variable will be named <emphasis role='bold'>mv_order_size</emphasis>.
+
+</para>
+<para>
+
+If calling the item-accessories tag, and you wish to select from an
+outboard database, you can pass the key to use to find the accessory
+data.
+
+</para> <para>
+When called with an attribute, the database is consulted and looks for
+a comma-separated list of attribute options. They take the form:
+
+
+<programlisting><![CDATA[
+name=Label Text, name=Label Text*
+]]></programlisting>
+
+
+The label text is optional -- if none is given, the <emphasis role='bold'>name</emphasis> will
+be used.
+
+If an asterisk is the last character of the label text, the item is
+the default selection. If no default is specified, the first will be
+the default. An example:
+
+
+<programlisting><![CDATA[
+[item_accessories color]
+]]></programlisting>
+
+
+This will search the product database for a field named "color". If
+an entry "beige=Almond, gold=Harvest Gold, White*, green=Avocado" is found,
+a select box like this will be built:
+
+
+<programlisting><![CDATA[
+<select name="mv_order_color">
+<option value="beige">Almond
+<option value="gold">Harvest Gold
+<option SELECTED>White
+<option value="green">Avocado
+</SELECT>
+]]></programlisting>
+
+
+In combination with the <literal>mv_order_item</literal> and <literal>mv_order_quantity</literal> variables
+this can be used to allow entry of an attribute at time of order.
+
+If used in an item list, and the user has changed the value, the generated
+select box will automatically retain the current value the user has selected.
+
+The value can then be displayed with <code>[item-modifier size]</code> on the
+order report, order receipt, or any other page containing an
+&tag-item-list;. 
+
+</para>
+</sect2>
+
+
+<sect2 id="ProductDiscounts">
+	<title>Product Discounts</title>
+
+<para>
+
+Product discounts can be set upon display of any page. The discounts
+apply only to the customer receiving them, and are of one of three types:
+
+
+<programlisting><![CDATA[
+1. A discount for one particular item code (key is the item-code)
+2. A discount applying to all item codes (key is ALL_ITEMS)
+3. A discount for an individual line item (set the mv_discount attribute
+with embedded Perl)
+4. A discount applied after all items are totaled
+(key is ENTIRE_ORDER)
+]]></programlisting>
+
+
+The discounts are specified via a formula. The formula is scanned for
+the variables $q and $s, which are substituted for with the item
+<emphasis>quantity</emphasis> and <emphasis>subtotal</emphasis> respectively. The variable $s is saved between
+iterations, so the discounts are cumulative. In the case of the item and
+all items discount, the formula must evaluate to a new subtotal for all
+items <emphasis>of that code</emphasis> that are ordered. The discount for the entire
+order is applied to the entire order, and would normally be a monetary
+amount to subtract or a flat percentage discount.
+
+Discounts are applied to the effective price of the product, including
+any quantity discounts or price adjustments.
+
+To apply a straight 20% discount to all items:
+
+
+<programlisting><![CDATA[
+[discount ALL_ITEMS] $s * .8 [/discount]
+]]></programlisting>
+
+
+or with named attributes:
+
+
+<programlisting><![CDATA[
+[discount code=ALL_ITEMS] $s * .8 [/discount]
+]]></programlisting>
+
+
+To take 25% off of only item 00-342:
+
+
+<programlisting><![CDATA[
+[discount 00-342] $s * .75 [/discount]
+]]></programlisting>
+
+
+To subtract $5.00 from the customer's order:
+
+
+<programlisting><![CDATA[
+[discount ENTIRE_ORDER] $s - 5 [/discount]
+]]></programlisting>
+
+
+To reset a discount, set it to the empty string: 
+
+
+<programlisting><![CDATA[
+[discount ALL_ITEMS][/discount]
+]]></programlisting>
+
+
+Perl code can be used to apply the discounts, and variables are
+saved between items and are shared with the &tag-calc; tag. This
+example gives 10% off if two items are ordered, with 5% more for 
+each additional up to a maximum of 30% discount:
+
+
+<programlisting><![CDATA[
+[calc]
+[item-list]
+$totalq{"[item-code]"} += [item-quantity];
+[/item-list]
+return '';
+[/calc]
+
+[item-list]
+[discount code="[item-code]"]
+return ($s)       if $totalq{"[item-code]"} == 1;
+return ($s * .70) if $totalq{"[item-code]"} > 6;
+return ($s * ( 1 - 0.05 * $totalq{"[item-code]"} ));
+[/discount]
+[/item-list]
+]]></programlisting>
+
+
+Here is an example of a special discount for item code 00-343 which prices
+the <emphasis>second</emphasis> one ordered at 1 cent:
+
+
+<programlisting><![CDATA[
+[discount 00-343]
+return $s if $q == 1;
+my $p = $s/$q;
+my $t = ($q - 1) * $p;
+$t .= 0.01;
+return $t;
+[/discount]
+]]></programlisting>
+
+
+If you want to display the discount amount, use the &tag-item-discount; tag.
+
+
+<programlisting><![CDATA[
+[item-list]
+Discount for [item-code]: [item-discount]
+[/item-list]
+]]></programlisting>
+
+
+Finally, if you want to display the discounted subtotal, you need to
+use the &tag-calc; capability:
+
+
+<programlisting><![CDATA[
+[item-list]
+Discounted subtotal for [item-code]: [currency][calc]
+[item-price] * [item-quantity]
+[/calc][/currency]
+[/item-list]
+]]></programlisting>
+
+
+</para>
+</sect2>
+</sect1>
+
+
+<sect1 id="Taxinga">
+	<title>Taxing</title>
+
+<sect2 id="Taxing">
+	<title>Taxing</title>
+<para>
+
+Interchange allows taxing in a number of ways.
+
+LI1: Simple salestax.asc table
+
+The {{CMD[jump="icconfig.html#SalesTax"]SalesTax}} directive is
+set to a form field or fields for user input, and those form fields
+are used look up the tax rate in salestax.asc.
+
+LI1: Fly tax
+
+Another simple tax method. A series of Interchange Variable settings
+are read to develop a salestax rate for one or a few localities, usually
+a state in the US.
+
+LI1: Salestax multi -- VAT taxing
+
+The {{CMD[jump="icfoundation.html#country"]country}}
+and {{CMD[jump="icfoundation.html#state"]state}} tables are used
+to develop complex VAT or salestax rate calculations based on
+country and state, possibly with different rates based on product
+type.
+
+LI1: Levies -- multiple levels of tax
+
+Using the {{CMD[jump="icconfig.html#Levies"]Levies}} setting
+and the {{CMD[jump="icconfig.html#Levy"]Levy}} structure, any or all of
+the above methods is used to implement one or more taxes.
+
+</para>
+</sect2>
+
+
+<sect2 id="SalesTaxSimpleSalestax">
+	<title>Sales Tax -- simple salestax.asc table</title>
+
+<para>
+
+Interchange allows calculation of sales tax on a straight percentage basis,
+with certain items allowed to be tax-exempt. To enable this feature,
+the directive <emphasis>SalesTax</emphasis> is initialized with the name of a field (or
+fields) on the order form. Commonly, this is zipcode and/or state:
+
+
+<programlisting><![CDATA[
+SalesTax    zip,state
+]]></programlisting>
+
+
+This being done, Interchange assumes the presence of a file salestax.asc,
+which contains a database with the percentages. Each line of 
+salestax.asc should be a code (again, usually a five-digit zip or
+a two letter state) followed by a tab, then a percentage. Example:
+
+!block example
+	DEFAULT 0.0
+    45056   .0525
+    61821   .0725
+    61801   .075
+    IL      .0625
+    OH      .0525
+    VAT     .15
+    WA      .08
+!endblock
+
+Based on the user's entry of information in the order form, Interchange
+will look up (for our example SalesTax directive) first the zip, then
+the state, and apply the percentage to the SUBTOTAL of the order. The
+subtotal will include any taxable items, and will also include the
+shipping cost if the state/zip is included in the <emphasis>TaxShipping</emphasis> directive.
+It will add the percentage, then make that available with the &tag-salestax;
+tag for display on the order form. If no match is found, the entry
+<literal>DEFAULT</literal> is applied -- it is normally zero.
+
+If business is being done on a national basis, it is now common to have
+to collect sales tax for multiple states. If you are doing so, it is possible
+to subscribe to a service which issues regular updates of the sales tax
+percentages -- usually by quarterly or monthly subscription. Such a
+database should be easily converted to Interchange format -- but some systems
+are rather convoluted, and it will be well to check and see if the
+program can export to a flat ASCII file format based on zip code.
+
+If some items are not taxable, then you must set up a field in your
+database which indicates that. You then place the <emphasis role='bold'>name</emphasis> of that field
+in the <emphasis>NonTaxableField</emphasis> directive. If the field for that item
+evaluates true on a yes-no basis (i.e. is set to <literal>yes</literal>, <literal>y</literal>, 1, or the
+like), sales tax will not be applied to the item. If it evaluates false,
+it will be taxed.
+
+If your state taxes shipping, use the <emphasis>TaxShipping</emphasis> directive.
+Utah and Nevada are known to tax shipping -- there may be others.
+
+If you want to set a fixed tax for all orders, as might occur for VAT
+in some countries, just set the <emphasis>SalesTax</emphasis> directive to a value like
+<literal>tax_code</literal>, and define a variable in the user session to reflect the
+proper entry in the <literal>salestax.asc</literal> file.  To set it to 15% with the
+above <literal>salestax.asc</literal> file, you would put in a form:
+
+
+<programlisting><![CDATA[
+<input  type="hidden"  name="tax_code" value="VAT">
+]]></programlisting>
+
+
+or to do it without submitting a form:
+
+
+<programlisting><![CDATA[
+[perl] $Values->{tax_code} = 'VAT'; return; [/perl]
+]]></programlisting>
+
+
+</para>
+</sect2>
+
+
+<sect2 id="FlyTax">
+	<title>Fly tax</title>
+
+<para>
+
+The {{CMD[jump="ictags.html#fly-tax"][fly-tax]}} tag is placed
+in the DEFAULT setting of salestax.asc, and the variables 
+<literal>TAXAREA</literal>, <literal>TAXRATE</literal>, and <literal>TAXSHIPPING</literal> are used to build
+the rates.
+
+LI1: TAXAREA
+
+A space-separated or comma-seperated list of states to apply
+tax to. Not needed for anything in the calculation, it is used
+to build the UI list of states to tax.
+
+LI1: TAXRATE
+
+An Interchange accessory-list style of value, with the
+format
+
+!block example
+  XX=N.NN, XX=N.NN
+!endblock
+
+where XX is the two-letter state code and N.NN is the tax rate
+in percent. To apply a tax of 7.25% for Illinois and 5.5% for
+Nevada, you would use:
+
+	IL=7.25, NV=5.5
+
+LI1: TAXSHIPPING
+
+A space- or comma-separated list of states where shipping is
+taxed. For the above example, if Nevada taxed shipping and Illinois
+did not, you would make TAXSHIPPING equal to "NV".
+
+LI1: The Salestax Directive
+
+To set the field that is used for the state code, you use the
+standard Interchange {{CMD[jump="icconfig.html#SalesTax"]SalesTax}} directive. It would almost always
+be set to <literal>state</literal>.
+
+</para>
+</sect2>
+
+
+<sect2 id="SalestaxMultiVatTaxing">
+	<title>Salestax "multi" -- VAT taxing</title>
+
+<para>
+
+If the SalesTax directive is set to "multi", then the type of
+tax is read from the {{CMD[jump="icfoundation.html#country"]country}} table. To see the tax type in
+force for the UK, you can place in a page:
+
+!block example
+	[data table=country col=tax key="UK"].
+!endblock
+
+.NOTE: We mention the "country" table above. In actual practice, most
+everything is configurable for variable name and field name via
+different Variable settings. They are:
+
+!block example
+  MV_COUNTRY_TABLE      Table for country info (default "country")
+  MV_COUNTRY_FIELD      Form field determining country (default "country")
+  MV_COUNTRY_TAX_FIELD  Table column for country-wide tax (default "tax")
+  MV_STATE_TABLE        Table for state/province info (default "state")
+  MV_STATE_FIELD        Form field determining state/province (default "state")
+  MV_STATE_TAX_FIELD    Table column for state-wide tax (default "tax")
+  MV_TAX_TYPE_FIELD     Table column enumerating tax types (default "tax_type")
+  MV_TAX_CATEGORY_FIELD Table column for product type (default tax_category)
+!endblock
+
+Below, we refer to the tables, columns, and fields by their default names.
+
+The first lookup is done in table <literal>country</literal> based on the user input
+of <literal>country</literal> (i.e. <code>[value country]</code>). The <literal>tax</literal> field is read and one
+of the following is done:
+
+1. If no string is found, tax returns 0.
+
+2. If string "simple:XX" is found, uses [fly-tax] with the area
+specifed in XX.
+
+3. If string "state" is found, does a re-lookup with
+
+!block example
+     select tax from state where country = country and state = state
+!endblock
+
+and value is applied as below.
+
+4. If just digits are found, rate applied directly -- i.e. "0.05"
+
+5. If N.NN% is found, applied as percentage.
+
+6. If <literal>category = N.NN%, default = N.NN%</literal> is found, the <literal>tax_category</literal> 
+field in the {{CMD[jump="icfoundation.html#products"]products}} table is used to determine tax basis.
+If no tax_category is found for the product, <literal>default</literal> rate is used.
+
+This product data
+
+!block example
+    sku      price     tax_category
+    os28003  10.00     tools
+    os28004  20.00     food
+!endblock
+
+with this country and state data:
+
+!block example
+    code     name     tax
+    US       U.S.A.   state
+    JP       Japan    tools=10%, default=15%
+
+
+    code   country   state   name      tax
+    0001   US        IL      Illinois  6.5%
+    0002   US        OH      Ohio      default = 5.5%, food = 1%
+    0003   US        AZ      Arizona
+!endblock
+
+Will yield tax for one each of os28003 and os28004 of:
+
+!block example
+    Japan   $4.00
+    US/IL   $1.95
+    US/OH   $0.75
+    US/AZ   $0.00
+!endblock
+
+</para>
+</sect2>
+</sect1>
+
+
+<sect1 id="TheCheckoutProcess">
+	<title>The checkout process</title>
+
+<sect2 id="AdvancedMultiLevelOrderPages">
+	<title>Advanced Multi-level Order Pages</title>
+
+<para>
+
+An unlimited number of order checking profiles can be defined with the
+<emphasis>OrderProfile</emphasis> directive, or by defining order profiles in scratch
+variables. This allows a multi-level ordering process, with checking
+for format and validity at every stage.
+
+To custom-configure the error message, place it after the format check
+requirement.
+
+Specifications take the form of an order page variable (like name
+or address), followed by an equals sign and one of five check types:
+
+</para>
+<para>
+
+A non-blank value is required
+
+</para>
+<para>
+
+Must be non-blank, and must have been specified on this
+form, not a saved value from a previous form
+
+</para>
+<para>
+
+The field must look like a phone number, by a very
+loose specification allowing numbers from all countries
+
+</para>
+<para>
+
+Must have US phone number formatting, with area code
+
+</para>
+<para>
+
+Must be a US state, including DC and Puerto Rico.
+
+</para>
+<para>
+
+Must be a Canadian province or pre-1997 territory.
+
+</para>
+<para>
+
+Must be a US state or Canadian province.
+
+</para>
+<para>
+
+Must have US postal code formatting, with optional ZIP+4.
+Also called by the alias <literal>us_postcode</literal>.
+
+</para>
+<para>
+
+Must have Canadian postal code formatting. Checks for a valid
+first letter.
+
+</para>
+<para>
+
+Must have Canadian or US postal code formatting.
+
+</para>
+<para>
+
+Field begins with <emphasis role='bold'>y</emphasis>, <emphasis role='bold'>1</emphasis>, or <emphasis role='bold'>t</emphasis> (Yes, 1, or True) - not case sensitive
+
+</para>
+<para>
+
+Field begins with <emphasis role='bold'>n</emphasis>, <emphasis role='bold'>0</emphasis>, or <emphasis role='bold'>f</emphasis> (No, 0, or False) - not case sensitive
+
+</para>
+<para>
+
+Rudimentary email address check, must have an '@' sign,
+a name, and a minimal domain
+
+</para>
+<para>
+
+One or more regular expressions (space-separated) to check against. To
+check that all submissions of the "foo" variable have "bar" at the
+beginning, do:
+
+
+<programlisting><![CDATA[
+foo=regex ^bar
+]]></programlisting>
+
+
+You can add an error message by putting it in quotes at the end:
+
+
+<programlisting><![CDATA[
+foo=regex ^bar "You must have bar at the beginning of this"
+]]></programlisting>
+
+
+You can require that the value <emphasis role='bold'>not</emphasis> match the regex by preceding the regex with a <emphasis role='bold'>!</emphasis> character (and no space afterwards):
+
+
+<programlisting><![CDATA[
+foo=regex !^bar "You may not have bar at the beginning!"
+]]></programlisting>
+
+
+</para>
+<para>
+
+A range of lengths you want the input to be:
+
+
+<programlisting><![CDATA[
+foo=length 4-10
+]]></programlisting>
+
+
+That will require <literal>foo</literal> be from 4 to 10 characters long.
+
+</para>
+<para>
+
+Tests to see that the value would be a unique key in a table:
+
+
+<programlisting><![CDATA[
+foo=unique userdb Sorry, that username is already taken
+]]></programlisting>
+
+
+</para>
+<para>
+
+Runs the value through an Interchange filter and checks that the returned value is equal
+to the original value.
+
+
+<programlisting><![CDATA[
+foo=filter entities Sorry, no HTML allowed
+]]></programlisting>
+
+
+To check for all lower-case characters:
+
+
+<programlisting><![CDATA[
+foo=filter lower Sorry, no uppercase characters
+]]></programlisting>
+
+
+</para> <para>
+Also, there are pragmas that can be used to change behavior:
+
+</para>
+
+<para>
+
+Perform a real-time charge operation. If set to any value but
+"custom", it will use Interchange's CyberCash routines. To set to
+something else, use the value "custom ROUTINE". The ROUTINE should
+be a GlobalSub which will cause the charge operation to occur -- if
+it returns non-blank, non-zero the profile will have succeeded. If
+it returns 0 or undef or blank, the profile will return failure.
+
+</para>
+<para>
+
+Checks the mv_credit_card_* variables for validity. If set to
+"standard", it will use Interchange's <literal>encrypt_standard_cc</literal> routines.
+This destroys the CGI value of mv_credit_card_number -- if you don't
+want that to happen (perhaps to save it for sending to CyberCash)
+then add the word <literal>keep</literal> on the end.
+
+\Example:
+
+
+<programlisting><![CDATA[
+# Checks credit card number and destroys number after encryption
+# The charge operation can never work
+
+&credit_card=standard
+&charge=custom authorizenet
+
+# Checks credit card number and keeps number after encryption
+# The charge operation can now work
+
+&credit_card=standard keep
+&charge=custom authorizenet
+]]></programlisting>
+
+
+You can supply your own check routine with a GlobalSub:
+
+
+<programlisting><![CDATA[
+&credit_card=check_cc
+]]></programlisting>
+
+
+The <literal>GlobalSub</literal> check_cc will be used to check and encrypt the
+credit card number, and its return value will be used to determine
+profile success.
+
+</para>
+<para>
+
+Sets the mv_failpage value.
+
+
+<programlisting><![CDATA[
+&fail=page4
+]]></programlisting>
+
+
+If the submit process succeeds, the user will be sent to the
+page <literal>page4</literal>.
+
+
+</para>
+<para>
+
+Set to '&amp;fatal=yes' if an error should generate
+the error page.
+
+</para>
+<para>
+
+Set to '&amp;final=yes' if a successful check should cause the order to be placed.
+
+</para>
+<para>
+
+Set to '&amp;update=yes' if a successful check should cause the variable to be copied from the CGI space to the Values space. This is like [update values] except only
+for that variable.
+
+This is typically used when using a <literal>mv_form_profile</literal> check so that
+a failing check will not cause all values to be reset to their former
+state upon returning to the form.
+
+</para>
+<para>
+
+Causes profile processing to terminate with either a success
+or failure depending on what follows. If it is non-blank and
+non-zero, the profile succeeds. 
+
+
+<programlisting><![CDATA[
+# Success :)
+&return 1
+
+# Failure :\
+&return 0
+]]></programlisting>
+
+
+Will ignore the &amp;fatal pragma, but &amp;final is still in effect if set.
+
+</para>
+<para>
+
+Set a user session variable to a value, i.e. <literal>&amp;set=mv_email [value email]</literal>.
+This will not cause failure if blank or zero.
+
+</para>
+<para>
+
+Set a user session variable to a value, i.e. <code>&amp;set=mv_email [value
+email]</code>.  This <emphasis role='bold'>will</emphasis> cause failure if set to a blank or zero. It is
+usually placed at the end after a &amp;fatal pragma would have caused the
+process to stop if there was an error -- can also be used to determine
+pass/fail based on a derived value, as it will cause failure if it
+evaluates to zero or a blank value.
+
+</para>
+<para>
+
+Sets the mv_successpage value. Example:
+
+
+<programlisting><![CDATA[
+&success=page5
+]]></programlisting>
+
+
+If the submit process succeeds, the user will be sent to the
+page <literal>page5</literal>.
+
+</para> <para>
+As an added measure of control, the specification is evaluated for the
+special Interchange tags to provide conditional setting of order
+parameters. With the &tag-perl; capability, quite complex checks
+can be done. Also, the name of the page to be displayed on an error can
+be set in the <literal>mv_failpage</literal> variable.
+
+The following file specifies a simple check of formatted parameters:
+
+
+<programlisting><![CDATA[
+name=required You must give us your name.
+address=required Oops! No address.
+city=required
+state=required
+zip=required
+email=required
+phone_day=phone_us XXX-XXX-XXXX phone-number for US or Canada
+&fatal=yes
+email=email Email address missing the domain?
+&set=mv_email [value email]
+&set=mv_successpage ord/shipping
+]]></programlisting>
+
+
+The profile above only performs the &amp;set directives if all of the
+previous checks have passed -- the &amp;fatal=yes will stop processing after
+the check of the email address if any of the previous checks failed.
+
+If you want to place multiple order profiles in the same file,
+separate them with __END__, which must be on a line by itself.
+
+
+User-defined check routines can be defined in a GlobalSub:
+
+
+<programlisting><![CDATA[
+GlobalSub <<eof
+sub set_up_extra_check {
+BEGIN {
+package Vend::Order;
+sub _pt_postcode {
+# $ref is to Vend::Session->{'values'} hash
+# $var is the passed name of the variable
+# $val is current value of checked variable
+my($ref, $var, $val) = @_;
+
+if ($ref->{country} =~ /^(PT|portugal)$/i) {
+return $val =~ /^\d\d\d\d$/ ?
+(1, $var, '') : (undef, $var, "not a Portugese postal code");
+}
+else {
+return (1, $var, '');
+}
+}
+}
+}
+EOF
+]]></programlisting>
+
+
+Now you can specify in an order profile:
+
+
+<programlisting><![CDATA[
+postcode=pt_postcode
+]]></programlisting>
+
+
+Very elaborate checks are possible. There must be an underscore 
+preceding the routine name. The return value of the subroutine 
+should be a three-element array, consisting of:
+^ the pass/fail ('1' or 'undef') status of the check;
++ the name of the variable which was checked;
++ a standard error message for the failure, in case a custom one has 
+  not been specified in the order profile.
+
+The latter two elements are used by the &tag-error; tag for on-screen 
+display of form errors. The checkout page of the Foundation demo includes
+examples of this. 
+
+</para>
+</sect2>
+
+
+<sect2 id="SimpleOrderReportFile">
+	<title>Simple Order Report File</title>
+
+<para>
+
+The simple order report file, "report", defines the layout of the order
+report which gets mailed on the completion of the order. For example,
+
+
+<programlisting><![CDATA[
+Order Date: $date
+
+Name: $name
+Email address: $email
+
+Shipping address: $addr
+Town, State, Zip: $town, $state $zip
+Country: $country
+]]></programlisting>
+
+
+Any input field from the order page can be included using the dollar
+sign notation.
+
+Interchange defines some values for use in the search form -- they begin
+with <literal>mv_</literal> and are automatically ignored.
+
+</para>
+</sect2>
+
+
+<sect2 id="FullyConfigurableOrderReports">
+	<title>Fully-configurable Order Reports</title>
+
+<para>
+
+You can specify a fully-configurable order report by setting the hidden
+field "mv_order_report" to a legal Interchange page. This page will be
+interpolated with all Interchange tags before sending by email. The order
+number as set by backend ordering is in the variable mv_order_number,
+and available for your use.
+
+You could if you wish include HTML in the file, which will be interpreted
+by many mailers, but you can choose to use standard ASCII format.
+An example report is provided in the demo file <filename>pages/ord/report.html</filename>.
+
+</para>
+</sect2>
+
+
+<sect2 id="OrderReceipts">
+	<title>Order Receipts</title>
+
+<para>
+
+The file can of course be configured with all Interchange tags, and
+will be interpolated for the ordered items before they are deleted from
+the user session. You can set the default receipt with the <literal>receipt</literal>
+key in SpecialPage. If using order <emphasis>Route</emphasis>s, as in the <literal>foundation</literal> demo,
+you set it with the <literal>receipt</literal> key to <literal>Route</literal>.
+
+</para>
+</sect2>
+
+
+<sect2 id="TheOrderCounter">
+	<title>The Order Counter</title>
+
+<para>
+
+An order counter can be enabled if the <emphasis>OrderCounter</emphasis> directive
+is set to a file name. An incrementing count of all orders will be
+kept and assigned as orders are placed. By default, the number
+starts at 0, but you can edit the file and change the default
+starting number at any time.
+
+This capability is made possible by the File::CounterFile module,
+available (as a part of the fine libwww modules) at the same place you
+got Interchange. It is included with the distribution.
+
+</para>
+</sect2>
+
+
+<sect2 id="CustomerInputFields">
+	<title>Customer Input Fields</title>
+
+<para>
+
+On the order (or shopping basket) page, by default order.html, you will
+have a number of input fields allowing the customer to enter information
+such as their name and address. You can add more fields simply by
+putting more input elements on the order.html page, and the information
+will automatically be included in the order report. Input elements
+should be written in this way:
+
+
+<programlisting><![CDATA[
+<input type="text" name="town" value="[value town]"  size="30">
+]]></programlisting>
+
+
+Choose a name for this input field such as "email" for an email
+address. Set the name attribute to the name you have chosen.
+
+The value attribute specifies the default value to give the field when
+the page is displayed. Because the customer may enter information on
+the order page, return to browsing, and come back to the order page,
+you want the default value to be what was entered the first time. This
+is done with the <code>[value var]</code> element, which returns the last value of an
+input field. Thus,
+
+
+<programlisting><![CDATA[
+value="[value name]"
+]]></programlisting>
+
+
+will evaluate to the name entered on the previous order screen, such
+as:
+
+
+<programlisting><![CDATA[
+value="Jane Smith"
+]]></programlisting>
+
+
+which will be displayed by the browser.
+
+The size attributes specifies how many characters wide the input field
+should be on the browser. You do not need to set this to fit the
+longest possible value since the browser will scroll the field, but
+you should set it large enough to be comfortable for the customer.
+
+</para>
+
+</sect2>
+
+</sect1>
+
+</article>
+
