@@ -1,0 +1,10 @@
+code	category	weight	rotate	banner
+t1	tech	1	0	10% tech banner
+t2	tech	2	0	20% tech banner
+t3	tech	7	0	70% tech banner
+tech	tech	0	0	tech banner, categorized, non-rotated
+tech	tech	0	1	Tech rotated 1{or}Tech rotated 2
+a1	art	1	0	10% art banner
+a2	art	2	0	20% art banner
+a3	art	7	0	70% art banner
+default		0	1	Default 1{or}Default 2{or}Default 3
