@@ -345,7 +345,7 @@ sub wanted {
 				}
 				
 				if ( "@lis" =~ /<</ and $tagopt !~ /^routine/i ) {
-					warn "TODO: Unsupported << in $tn (in $i{ver})\n";
+					warn "TODO: Unsupported << in $tn (in $i{ver})\n" if $verbose;
 					next;
 				}
 
@@ -361,6 +361,7 @@ sub wanted {
 			# For each tag found in the file, create appropriate data in hash.
 			for my $tagname ( @tags ) {
 				push @{ $hash{symbols}{$c{fsubtype}}{$tagname} }, {
+					%c,
 					file => "$i{ver}/$c{file}",
 					lnum => scalar @filedata,
 					ctxpre => $ctx_p,
@@ -430,6 +431,7 @@ sub line_findPragmas {
 	# TODO Here, and 2 places below: make sure if ctx is say, 5:5,
 	# it always shows that much (that is, workaround file beginning/
 	# file end problems - pad with empty lines or something).
+		%ptr,
 		file => "$i{ver}/$ptr{file}",
 		lnum => $ptr{lnum},
 		func => ${$ptr{gfunc}}[0],
@@ -450,6 +452,7 @@ sub line_findGlobVars {
 	if ( ( $c{line} =~ /(()|\$())\$Global::Variable(->\2|\3){(\w+?)}/ or
 		$c{line} =~ /\$Tag->var\s*\(\s*(["'])(\S+?)\1(\s*,\s*(\d))?/ ) and $5 ) {
 		push @{ $hash{symbols}{globvar}{$5} }, {
+			%c,
 			file => "$i{ver}/$c{file}",
 			lnum => $c{lnum},
 			func => ${$c{gfunc}}[0],
