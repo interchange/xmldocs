@@ -8,5 +8,14 @@
 
 	<!-- <xsl:param name="glossary.auto.link">1</xsl:param> -->
 
+	<xsl:param name="local.l10n.xml" select="document('')"/> 
+	<l:i18n xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0"> 
+		<l:l10n language="en"> 
+			<l:context name="title"> 
+				<l:template name="example" text="%t"/> 
+			</l:context>    
+		</l:l10n>
+	</l:i18n>
+
 </xsl:stylesheet>
 

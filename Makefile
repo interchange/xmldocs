@@ -91,9 +91,9 @@ $(OUTPUT)/files: files/*
 		if test "$$p" != "CVS"; then                              \
 			if test -d "$$p"; then                                \
 				cp -a $$p ../$(OUTPUT)/files/;                    \
-				tar cf ../$(OUTPUT)/files/$$p.tar $$p;            \
-				tar zcf ../$(OUTPUT)/files/$$p.tgz $$p;           \
-				tar jcf ../$(OUTPUT)/files/$$p.tbz2 $$p           \
+				tar --exclude=CVS -cf ../$(OUTPUT)/files/$$p.tar $$p;            \
+				tar --exclude=CVS -zcf ../$(OUTPUT)/files/$$p.tgz $$p;           \
+				tar --exclude=CVS -jcf ../$(OUTPUT)/files/$$p.tbz2 $$p           \
 			; fi                                                  \
 		; fi                                                      \
 	; done

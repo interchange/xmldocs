@@ -1,23 +1,9 @@
 
 DOCUMENTATION SYSTEM:
-- Make items in the See Also section to appear as links to the 
-  appropriate items.
-- For reference pages, make Examples appear without the "Example XY"
-  prefix.
-- See why each Example has weird characters around the example index number
-  (it renders badly in manpages).
-- In bin/stattree, when extracting symbol context, also try to determine
-  function name in question and print its name in Context header (along with
-  filename/line number).
-- Make more use of docbook/catalog.xml
 
  Long-term:
 - Support using refs/<filename> with all the documentation for a symbol
   instead of refs/<directory>/<files>.
-
-SUPPORT FILES:
-- Exclude CVS from tarballs (tutorial-phase?.* files)
-
 
 DOCUMENTATION ITSELF:
 - Resolve items from tmp/missing file. (You need to run 'make' in your tree
