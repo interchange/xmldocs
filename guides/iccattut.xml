@@ -119,7 +119,7 @@
 		<para>
 		You can also get Interchange by downloading and unpacking the basic Interchange tarball or checking out a copy of the &ICCVS; repository, and performing manual installation yourself. These installations can be done either as a regular user, or as root installing for a special Interchange user, but are out of scope of this tutorial.
 		</para> <para>
-		During the Debian package installation, you will be asked to select the Interchange username. To eliminate basic security issues, the Interchange daemon will not run as root, and it should not run as the web server user either. Therefore, a new system account to run the Interchange daemon will be created (<systemitem class='username'>interchange</systemitem> by default). In RPM installations, Interchange runs as user <systemitem class='username'>interch</systemitem>.
+		During the Debian package installation, you will be asked to select the Interchange username. To eliminate basic security issues, the Interchange daemon will not run as root, and it should not run as the web server user either. Therefore, a new system account to run the Interchange daemon will be created (<systemitem class='username'>interchange</systemitem> by default). With RPM packages, the default Interchange username will be <systemitem class='username'>interch</systemitem><footnote><para>There are a lot of packaging differences between Debian and Red Hat packages. Some are mandated by system policies (which is especially the case with Debian GNU), while others (such as the default username) reflect preferences of the package maintainers and the corresponding user groups.</para></footnote>.
 		</para> <para>
 		You must access the demo catalog to verify that your Interchange installation was successful. The interchange-cat-standard catalog was supposed to install itself and register with Interchange by modifying the main <filename moreinfo='refentry'>interchange.cfg</filename> config file (or some other file, such as <filename>/etc/interchange/catalogs.cfg</filename>, which logically puts all catalog definitions in a separate file and is read by <filename>interchange.cfg</filename>). The catalog should have also placed the <firstterm>link program</firstterm> in your <filename class='directory'>cgi-bin</filename> directory - the link program connects the web server software with the Interchange daemon. The demo catalog should be accessible by visiting the <ulink url="http://localhost/cgi-bin/ic/standard/index.html">Standard</ulink> (or <ulink url="http://localhost/cgi-bin/ic/foundation/index.html">Foundation</ulink>) Demo index page on your local host.
 		</para>
@@ -152,21 +152,48 @@
 		<itemizedlist>
 			<listitem><para>
 				The Interchange software directory (<firstterm>ICROOT</firstterm>): 
-				<filename class='directory'>/usr/lib/interchange/</filename>
+				<itemizedlist>
+					<listitem><para>
+					<filename class='directory'>/usr/lib/interchange/</filename>
+					</para></listitem>
+				</itemizedlist>
 				</para></listitem>
-			<listitem><para>
-				Base Interchange catalogs directory: 
-				<filename class='directory'>/var/lib/interchange/catalogs/</filename> (Debian)
-				<filename class='directory'>/var/lib/interchange/</filename> (RPM)
+			<listitem><para id="catdir">
+				Base Interchange catalogs directory:
+				<itemizedlist>
+					<listitem><para>
+					<filename class='directory'>/var/lib/interchange/catalogs/</filename>
+					(Debian GNU)
+					</para></listitem>
+					<listitem><para>
+					<filename class='directory'>/var/lib/interchange/</filename>
+					(RPM-based systems)
+					</para></listitem>
+				</itemizedlist>
 				</para></listitem>
 			<listitem><para>
 				Interchange <filename class='directory'>cgi-bin</filename> directory: 
-				<filename class='directory'>/usr/lib/cgi-bin/ic/</filename> (Debian)
-				<filename class='directory'>/var/www/cgi-bin/</filename> (RPM)
+				<itemizedlist>
+					<listitem><para>
+					<filename class='directory'>/usr/lib/cgi-bin/ic/</filename>
+					(Debian GNU)
+					</para></listitem>
+					<listitem><para>
+					<filename class='directory'>/var/www/cgi-bin/</filename>
+					(RPM-based systems)
+					</para></listitem>
+				</itemizedlist>
 				</para></listitem>
 			<listitem><para>
 				Standard demo catalog URL: 
-				<ulink url="http://myhost.mydomain.com/cgi-bin/ic/standard/index.html"/>
+				<itemizedlist>
+					<listitem><para>
+					<ulink url="http://myhost.mydomain.com/cgi-bin/ic/standard/index.html"/> (Debian GNU)
+					</para></listitem>
+					<listitem><para>
+					<ulink url="http://myhost.mydomain.com/cgi-bin/standard/index.html"/> (RPM-based systems)
+					</para></listitem>
+				</itemizedlist>
 				</para></listitem>
 		</itemizedlist>
 
@@ -201,25 +228,55 @@
 	<sect2 id='TheLinkProgram'>
 		<title>The Link Program</title>
 		<para>
-		You need to locate the existing link program (found in the <filename class='directory'>cgi-bin</filename> directory) and copy it to a new name, making sure the permissions stay intact. Run <userinput>cd /usr/lib/cgi-bin/ic; cp -p vlink tutorial</userinput> (Debian) or <userinput>cd /var/www/cgi-bin; cp -p standard tutorial</userinput> (RPM).  If everything is working correctly, typing <userinput>ls -l /usr/lib/cgi-bin/ic/</userinput> (Debian) or <userinput>ls -l /var/www/cgi-bin</userinput> should describe your files roughly like this:
+		You need to locate the existing link program (found in the <filename class='directory'>cgi-bin</filename> directory) and copy it to a new name, making sure the permissions stay intact. Run
+		<itemizedlist>
+			<listitem><para>
+			<userinput>cd /usr/lib/cgi-bin/ic; cp -p vlink tutorial</userinput>
+			(on Debian GNU), or
+			</para></listitem>
+			<listitem><para>
+			<userinput>cd /var/www/cgi-bin; cp -p standard tutorial</userinput>
+			(on RPM-based systems).
+			</para></listitem>
+		</itemizedlist>
+		If everything is working correctly, typing <userinput>ls -l /usr/lib/cgi-bin/ic/</userinput> or <userinput>ls -l /var/www/cgi-bin</userinput> should roughly describe your files like this:
 		<screen>
 -rwsr-xr-x    1 interchange  interchange      7708 Dec 16 22:47 vlink
 -rwsr-xr-x    1 interchange  interchange      7708 Dec 16 22:47 tutorial
 		</screen>
 		</para> <para>
-		The link program enables communication with the Interchange daemon. You might notice both <filename>vlink</filename> and <filename>tlink</filename> files present; the former uses Unix sockets to talk to the Interchange daemon (what you want most of the time), while the latter uses Inet sockets and won't be used in this tutorial.
+		The link program enables communication with the Interchange daemon. You might notice both <filename>vlink</filename> and <filename>tlink</filename> files present; the former uses Unix sockets to talk to the Interchange daemon (what you want most of the time), while the latter uses Inet sockets<footnote><para>Unix sockets are a way for programs on the same machine to communicate. It is not possible to connect to an Unix socket remotely (this is interprocess communication, mind you, and it doesn't mean you can't browse the website from a different machine). When you need remote connection, you then have to use Inet sockets.</para></footnote> and won't be used in this tutorial.
 		</para>
 	</sect2>
 
 	<sect2 id='TheCatalogRootDirectory'>
-		<title>The Catalog Root Directory</title>
+		<title>The Catalog Root Directory (CATROOT)</title>
 		<para>
-		You need to create the tutorial catalog directory, <filename class='directory'>/var/lib/interchange/catalogs/tutorial</filename> (Debian) or <filename class='directory'>/var/lib/interchange/tutorial</filename> (RPM). This is where all of your catalog-specific files will go. The directory needs to be readable, writable, and executable by the Interchange user. This will be referred to as your <emphasis>catalog directory</emphasis> or CATROOT. Type the following from the base catalogs directory (<filename class='directory'>/var/lib/interchange/catalogs/</filename>):
+		In the <link linkend="catdir">Interchange (base) catalogs directory</link>, you need to create a new subdirectory for the tutorial catalog. This is where all of your catalog-specific files will go. The directory needs to be readable, writable, and executable by the Interchange user. This will be referred to as your <emphasis>catalog directory</emphasis><footnote><para>Please note the difference between <emphasis>Interchange catalogs directory</emphasis> which holds all of the catalogs, and the <emphasis>catalog directory</emphasis> which, always in a context, designates one of the subdirectories.</para></footnote> or CATROOT. Type the following from the corresponding base catalogs directory on your system:
 		<programlisting>
 mkdir tutorial
 chown interchange.interchange tutorial
-chmod 770 tutorial
+chmod 775 tutorial
 		</programlisting>
+		</para>
+		<para>
+		<command>For the rest of this tutorial, all file locations will be given relative to this tutorial catalog directory (CATROOT). For example, <filename>pages/ord/basket.html</filename> would be <filename>/var/lib/interchange/catalogs/tutorial/pages/ord/basket.html</filename> on Debian GNU, <filename>/var/lib/interchange/tutorial/pages/ord/basket.html</filename> on RPM-based systems, or another equivalent on your system. The only exception is <filename>interchange.cfg</filename>, which is implicitly meant to be edited in <filename class='directory'>/etc/interchange/</filename> (or in the Interchange software directory ICROOT, depending on the installation).</command>
+		</para> <para>
+		<command>In addition, at places which require full pathnames (or other "hard-coded" values, such as usernames), Debian defaults will be used to avoid duplication and preserve the natural text flow. RPM-based systems users, please translate Debian GNU paths and other names to your system equivalents by following the rules from the <xref linkend="ImportantFileandDirectoryLocations"/>. We think you have precise enough information that there should be no problem with this simple task.</command>
+		</para>
+	</sect2>
+
+	<sect2 id='Interchange_managedCatalogSubdirectories'>
+		<title>Interchange-managed Catalog Subdirectories</title>
+		<para>
+		Now switch from the superuser to the Interchange user (<systemitem class='username'>interchange</systemitem> by default), by typing <userinput>su -s /bin/sh - interchange</userinput>. It's important to complete the rest of the steps under the "interchange" account or you'll run into permission problems later. (By the way, also make sure your <firstterm>umask</firstterm> setting is correct by running <userinput>umask 022</userinput>).
+		</para> <para>
+		Move to the catalog root directory (with the <userinput>cd /var/lib/interchange/catalogs/tutorial</userinput> or <userinput>cd /var/lib/interchange/tutorial</userinput> command).
+		</para> <para>
+		You need to create few catalog subdirectories that Interchange will use as it sees fit. The <filename class='directory'>session/</filename> subdirectory of the catalog root will be used to save information on visitors' browsing sessions. The <filename class='directory'>etc/</filename> and <filename class='directory'>tmp/</filename> directories are needed too, your catalog wouldn't work without them. The directories go under your catalog directory. Type <userinput>mkdir session etc tmp</userinput> to create them all.
+		</para>
+		<para>
+		For the next part, prepare your text editor of preference (vim, emacs, pico, joe, gedit, or nedit, to name a few).
 		</para>
 	</sect2>
 
@@ -240,19 +297,6 @@ ErrorFile /var/log/interchange/error.log
 		</programlisting>
 		</para> <para>
 		As you can intuitively see, a complete config directive consists of the directive name followed by whitespace-separated parameters. Any number of spaces or tabs can appear between the directive and its options. The directive is case-insensitive, but it is recommended that you use it consistently for readability. You can insert blank lines or comment lines (lines where the first non-blank character is '#') throughout the configuration files to improve readability. The order the lines appear in is significant, but unimportant for the simple catalog we're creating.
-		</para>
-	</sect2>
-
-	<sect2 id='Interchange_managedCatalogSubdirectories'>
-		<title>Interchange-managed Catalog Subdirectories</title>
-		<para>
-		Now switch from the superuser to the Interchange user (<systemitem class='username'>interchange</systemitem> by default), by typing <userinput>su -s /bin/sh - interchange</userinput>. It's important to complete the rest of the steps under the "interchange" account or you'll run into permission problems later. (By the way, also make sure your <firstterm>umask</firstterm> setting is correct by running <userinput>umask 022</userinput>).
-		</para> <para>
-		Move to the catalog root directory with the <userinput>cd /var/lib/interchange/catalogs/tutorial</userinput> command. For the rest of this tutorial, all file locations will be given relative to this tutorial catalog directory (CATROOT). For example, <filename>pages/ord/basket.html</filename> would actually be <filename>/var/lib/interchange/catalogs/tutorial/pages/ord/basket.html</filename> (or the equivalent) on your system. The only exception is <filename>interchange.cfg</filename>, which is implicitly meant to be edited in <filename class='directory'>/etc/interchange/</filename> (or in the Interchange software directory ICROOT, depending on the installation).
-		</para> <para>
-		You need to create few catalog subdirectories that Interchange will use as it sees fit. The <filename class='directory'>session/</filename> subdirectory of the catalog root will be used to save information on visitors' browsing sessions. The <filename class='directory'>etc/</filename> and <filename class='directory'>tmp/</filename> directories are needed too, your catalog wouldn't work without them. The directories go under your catalog directory. Type <userinput>mkdir session etc tmp</userinput> to create them all.
-		</para> <para>
-		For the next part, prepare your text editor of preference (vim, emacs, pico, joe, gedit, or nedit, to name a few).
 		</para>
 	</sect2>
 
@@ -322,8 +366,8 @@ ErrorFile /var/log/interchange/error.log
 		</para>
 	</sect2>
 
-	<sect2 id='var_lib_interchange_catalogs_tutorial_top'>
-		<title>/var/lib/interchange/catalogs/tutorial/top</title>
+	<sect2 id='CATROOT/top'>
+		<title>CATROOT/top</title>
 		<para>
 		<programlisting>
 <xi:include parse='text'  href='../files/tutorial-phase1/top'></xi:include>
@@ -331,8 +375,8 @@ ErrorFile /var/log/interchange/error.log
 		</para>
 	</sect2>
 
-	<sect2 id='var_lib_interchange_catalogs_tutorial_left'>
-		<title>/var/lib/interchange/catalogs/tutorial/left</title>
+	<sect2 id='CATROOT/left'>
+		<title>CATROOT/left</title>
 		<para>
 		<programlisting>
 <xi:include parse='text'  href='../files/tutorial-phase1/left'></xi:include>
@@ -340,8 +384,8 @@ ErrorFile /var/log/interchange/error.log
 		</para>
 	</sect2>
 
-	<sect2 id='var_lib_interchange_catalogs_tutorial_bottom'>
-		<title>/var/lib/interchange/catalogs/tutorial/bottom</title>
+	<sect2 id='CATROOT/bottom'>
+		<title>CATROOT/bottom</title>
 		<para>
 		<programlisting>
 <xi:include parse='text'  href='../files/tutorial-phase1/bottom'></xi:include>
@@ -380,7 +424,7 @@ ErrorFile /var/log/interchange/error.log
 	<sect2 id='TheWelcomePage'>
 		<title>The Welcome Page</title>
 		<para>
-		Create a directory called <filename class='directory'>pages/</filename> in your tutorial catalog directory (<filename class='directory'>/var/lib/interchange/catalogs/tutorial/</filename>).
+		Create a directory called <filename class='directory'>pages/</filename> in your tutorial catalog directory (the CATROOT).
 		</para> <para>
 		Save the following text as <filename>pages/index.html</filename>. This will create a page to test that everything works so far.
 		<programlisting>
@@ -396,9 +440,9 @@ ErrorFile /var/log/interchange/error.log
 		<para>
 		As the superuser, first restart Interchange to make sure all the <filename>catalog.cfg</filename> changes get applied to the running catalog.
 		</para> <para>
-		Monitor the log files: <userinput>tail -f /var/log/{interchange,apache2}/*log</userinput>
+		Monitor the log files: <userinput>tail -f /var/log/{interchange,apache*}/*log</userinput>
 		</para> <para>
-		Open the web browser and load the page. Your URL should be <ulink url="http://myhost.mydomain.com/cgi-bin/ic/tutorial/index.html"/>. Since the <filename>catalog.cfg</filename> only contains minimal configuration, <filename>index.html</filename> is not defined as the default page, so you can't leave it out of the URL.
+		Open the web browser and load the page. Your URL should be <ulink url="http://myhost.mydomain.com/cgi-bin/ic/tutorial/index.html"/> or <ulink url="http://myhost.mydomain.com/cgi-bin/tutorial/index.html"/>. Since the <filename>catalog.cfg</filename> only contains minimal configuration, <filename>index.html</filename> is not defined as the default page, so you can't leave it out of the URL.
 		</para> <para>
 		<command>Congratulations!</command> Your basic, "phase 1" catalog is now hopefully finished and working ;)
 		</para>
@@ -466,7 +510,7 @@ ErrorFile /var/log/interchange/error.log
 	<sect2 id='MonitoringLogFiles'>
 		<title>Monitoring Log Files</title>
 		<para>
-		The key pseudo-troubleshooting technique that solves 99% of the problems with minimal effort is <command>log file monitoring</command>. Before proceeding, open up a new terminal and run the following (with root privileges): <userinput>tail -f /var/log/{apache2,interchange}/*log</userinput>. 
+		The key pseudo-troubleshooting technique that solves 99% of the problems with minimal effort is <command>log file monitoring</command>. Before proceeding, open up a new terminal and run the following (with root privileges): <userinput>tail -f /var/log/{apache*,interchange}/*log</userinput>. 
 		</para> <para>
 		Once you have the logs monitored, restart Interchange and visit the catalog's index.html. Any problems should be reported in the logs.
 		</para>
@@ -541,7 +585,7 @@ ErrorFile /var/log/interchange/error.log
 	<sect2 id='special_pages_missing'>
 		<title>special_pages/missing.html</title>
 		<para>
-		Create the <filename class='directory'>special_pages/</filename> directory in your catalog directory <filename class='directory'>/var/lib/interchange/catalogs/tutorial/</filename>.
+		Create the <filename class='directory'>special_pages/</filename> directory in your catalog directory (the CATROOT).
 		</para> <para>
 		It is a good idea to display an error page when Interchange is asked for an unknown page. To create a missing page for display, type the following and save it as <filename>special_pages/missing.html</filename>.
 		<programlisting>
@@ -1079,7 +1123,7 @@ Now add the following to the left template piece:
 	<sect2 id='TheDefaultCatalogPage'>
 		<title>The Default Catalog Page</title>
 		<para>
-		As you know, a standard Interchange catalog page URL looks like this: <ulink url="http://myhost.mydomain.com/cgi-bin/tutorial/index.html"/>.
+		As you know, a standard Interchange catalog page URL looks like <ulink url="http://myhost.mydomain.com/cgi-bin/ic/tutorial/index.html"/>.
 		</para> <para>
 		But what happens if you leave off the page name, as people often do when typing URLs in by hand? Visit <ulink url="http://myhost.mydomain.com/cgi-bin/ic/tutorial"/> and you'll get a <errortext>Page not found</errortext> error. This is because Interchange is looking for <filename>special_pages/catalog.html</filename> which we didn't create. It would seem useful to "redirect" those requests to an actual existing page, most probably your catalog entry page - <filename>pages/index.html</filename>. Fortunately, this is easily achieved with the following <filename>catalog.cfg</filename> directives<footnote><para>We need two directives; the first one, <option>SpecialPage</option>, only handles the catalog entry point (the <filename class='directory'>cgi-bin/ic/tutorial/</filename> case). The other, somewhat &APACHE;-like <option>DirectoryIndex</option> directive, sets the index page for catalog subdirectories (say, <filename class='directory'>cgi-bin/ic/tutorial/mydir/</filename>), but unlike Apache it only takes one argument.</para></footnote>:
 		<programlisting>
