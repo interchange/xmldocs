@@ -13,6 +13,7 @@ DOCBOOKDIR = docbook
 XSLT = xsltproc
 XSLT_FLAGS = --xinclude
 IC_VERSIONS = cvs-head
+.SILENT:
 
 VPATH = guides
 
@@ -174,10 +175,10 @@ css:
 #
 #
 distclean clean:
-	-rm -r $(OUTPUT)
-	-rm $(DOCBOOKDIR)/*.db
+	-rm -rf $(OUTPUT)
+	-rm -f $(DOCBOOKDIR)/*.db
 	-for p in $(IC_VERSIONS); do \
-		  rm $(CACHE)/$$p/* \
+	  rm -f $(CACHE)/$$p/* \
 	; done
 
 final:

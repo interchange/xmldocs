@@ -15,5 +15,8 @@
 	<system systemId="iccattut-chunks-targets"
 		uri="iccattut-chunks-targets.db" />
 
+	<system systemId="xmldocs.css"
+		uri="xmldocs.css" />
+
 </catalog>
 

@@ -79,6 +79,7 @@ O("
 
 ");
 close (OUT);
+select STDOUT;
 
 for my $p (qw/pragma globvar/) {
 	my $tfile = '';
@@ -90,7 +91,9 @@ for my $p (qw/pragma globvar/) {
 		$tfile .= "$k\n";
 			for my $fe ( @$v ) {
 				local $" = ":";
-				$tfile .= "\t@$fe\n";
+				$tfile .= "\t@$fe[0,1] $$fe[2]\n";
+				local $" = "\t\t";
+				$tfile .= "\t\t@{@$fe[3]}\n";
 			}
 	}
 	open(OUT, "> $reportdir/$i{ver}/symbols.$p") or

@@ -27,6 +27,8 @@ my $verbose = 0;
 my $cachedir = $ENV{CACHE} || "cache";
 my %hash;
 my $cpath = $ENV{PWD};
+my $ctx_p = 1; # How much context lines to show before
+my $ctx_n = 1; #                                after
 
 # All types should be listed here or the stats wont. It should be
 # reported if an unknown file is found in the archive
@@ -169,11 +171,12 @@ sub wanted {
 
 	# Open text file, parse contents
 	open IN, "< $file" or die "Can't open $file ($!)\n";
+	my @file = <IN>;
+	unshift @file, ""; # Match indices with line numbers
+	close IN;
 
-	my $lnum = 0;
-	while (<IN>) {
-		my $line = $_; 
-		$lnum ++;
+	for (my $lnum = 1; $lnum < scalar @file; $lnum++) {
+		my $line = $file[$lnum];
 
 		$hash{tree}{$file}{lines}++ ;
 		$hash{total}{lines}++ ;
@@ -207,15 +210,21 @@ sub wanted {
 				# Ph33r, PH33R my MaD R3G3X skiLLz! ;-)
 				# This matches $::Pragma->{} or $$::Pragma{}
 				if ( $line =~ /(()|\$())\$::Pragma(->\2|\3){(\w+?)}/ ) {
-					push @{ $hash{symbols}{pragma}{$5} }, [ $file, $lnum ];
+					push @{ $hash{symbols}{pragma}{$5} },
+						# TODO Here, and 2 places below: make sure if ctx is say, 5:5,
+						# it always shows that much (that is, workaround file beginning/
+						# file end problems).
+						[ $file, $lnum, "$ctx_p\:$ctx_n", [@file[$lnum-$ctx_p..$lnum+$ctx_n]] ];
 				}
 
 				# Diskover global variables
 				if ( $line =~ /(()|\$())\$Global::Variable(->\2|\3){(\w+?)}/ ) {
-					push @{ $hash{symbols}{globvar}{$5} }, [ $file, $lnum ];
+					push @{ $hash{symbols}{globvar}{$5} },
+						[ $file, $lnum, "$ctx_p\:$ctx_n", [@file[$lnum-$ctx_p..$lnum+$ctx_n]] ];
 				}
 				if ( $line =~ /\$Tag->var\s*\(\s*(["'])(\S+?)\1(\s*,\s*(\d))?/ ) {
-					push @{ $hash{symbols}{globvar}{$5} }, [ $file, $lnum ];
+					push @{ $hash{symbols}{globvar}{$5} },
+						[ $file, $lnum, "$ctx_p\:$ctx_n", [@file[$lnum-$ctx_p..$lnum+$ctx_n]] ];
 					warn "\$Tag->var syntax never used in .pl/.pm files by now.
 						I'll register that, but is it a mistake? ($2, $4)\n";
 				}
@@ -231,8 +240,6 @@ sub wanted {
 		#   (adds 1 to both)
 
 	}
-
-	close IN;
 }
 
 # Storable dumper
