@@ -145,7 +145,7 @@ __END__
 
 
 __NAME__ description
-&IC; has a built-in banner rotation system designed to show 
+&IC; has a built-in banner display system designed to show 
 <glossterm linkend="ad">ads</glossterm> or other
 messages, according to optional categories and
 <glossterm linkend="weighting_system">weighting</glossterm>.
@@ -153,7 +153,7 @@ All this functionality is accessible using the <tag>banner</tag> tag.
 </para><para>
 The <glossterm linkend="weighted_system">weighting system</glossterm>, 
 if used, will pre-built banners in the directory
-<filename class='directory'>Banners/*</filename> under the catalog temporary
+<filename class='directory'>Banners/*/</filename> under the catalog temporary
 directory (this will happen when the banners are first requested after
 a catalog reconfiguration or Interchange daemon start).
 It will build one copy of the banner for every value of <database
@@ -161,74 +161,31 @@ class='field'>weight</database>.
 If one banner is weighted 7, one 2 and one 1 (in abstract points), then a
 total of 10 pre-built banners will be made. The first will be displayed
 70 percent of the time, the second 20 percent and the third 10 percent,
-in random fashion. If all banners need to be equal, give each a weight of 1.
+in random fashion. If all banners need to be equal (that is, displayed
+randomly with the same probability), give each a weight of 1.
 </para><para>
 Each category has its own separate weighting if categorized display is
 requested; otherwise all weights enter the same logical "pool".
+</para><para>
+Note that the term <firstterm>rotation</firstterm> refers to sequentially
+selecting and displaying banners from the same
+<database class='field'>banner</database> field (keeping a separate counter
+for each client). This, of course, makes sense in a context where
+<database class='field'>banner</database> contains multiple banner
+entries, separated by chosen delimiters.
 __END__
 
 
 __NAME__ example
 	<example>
 		<title>
+		Banner Ads
 		</title>
 		<para>
+		For the relevant supplemental description and all ready-to-use examples,
+		see the <olink targetdoc='howtos' targetptr='implementbanners'>
+		Implement Banner Ads</olink> HOW-TO.
 		</para>
-		<programlisting>
-		</programlisting>
 	</example>
-
-<!--
-		To display weighted banners from a specific category (say, 
-		<literal>tech</literal>), use
-		<code>[banner weighted=1 category=tech]</code>. The tag would look for
-		<emphasis>all</emphasis> banners where the
-		<database class='field'>weight</database> field is positive integer and
-		the <database class='field'>category</database> matches "tech", and 
-		build them in the <filename class='directory'>tmp/Banners/tech/</filename>
-		directory.
-		</para>
-		<para>
-		To display weighted banners regardless of the category, use
-		<code>[banner weighted=1]</code>. The tag would look for
-		<emphasis>all</emphasis> banners where the
-		<database class='field'>weight</database> field is positive integer, and
-		build them in the <filename class='directory'>tmp/Banners/</filename>
-		directory. Note that the total sum of weights in our sample database
-		is 20, so each weight point is worth 100/20 = 5%. Therefore, the banners
-		with the weight of 7 would be displayed 35% of the time each.
-		</para>
-		<para>
-		To display categorized,
-		<glossterm linkend="rotated_banner">non-rotating</glossterm>
-		banners (from category
-		<literal>tech</literal>), use
-		<code>[banner category=tech]</code>, which is equal in effect to
-		<code>[data table=banner col=banner key=tech]</code>. <emphasis role='bold'>
-		Note that the 
-		value of the <database class='field'>rotate</database> field must be
-		<literal>0</literal></emphasis>.
-		</para>
-		<para>
-		To display categorized,
-		<glossterm linkend="rotated_banner">rotating</glossterm>
-		banners (from category
-		<literal>tech</literal>), use
-		<code>[banner category=tech]</code>, which is equal in effect to
-		<code>[data table=banner col=banner key=tech]</code>. <emphasis role='bold'>
-		Note that the 
-		value of the <database class='field'>rotate</database> field must be
-		<literal>1</literal></emphasis>.
-		</para>
-		<para>
-		To display multilevel-categorized banners (from say, the 
-		<literal>tech -> hardware</literal> category), use
-		<code>[banner category=tech:hw]</code>. The colon will help &IC;
-		select the most specific banner available, so the difference in
-		respect to single-level categories is the fallback mechanism; if no
-		banners are found in the <literal>tech:hw</literal> category, the
-		<tag>banner</tag> will fallback to category <literal>tech</literal>.
-		</para>
-		-->
 __END__
 

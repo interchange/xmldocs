@@ -1,4 +1,4 @@
-<chapter id="Implement Banners">
+<chapter id="implementbanners">
 
 	<chapterinfo>
 		<title>Implement Banner Ads</title>
@@ -29,8 +29,38 @@
 	<sect1 id='implementbanners_introduction'>
 		<title>Introduction</title>
 		<para>
-		Banners in &IC; are implemented using the <tag>banner</tag> tag.
-		For this tag to work, you'll need to have a
+		Banner display in &IC; is implemented using the <tag>banner</tag> tag.
+		There are two terms which need to be understood first:
+		</para>
+		<itemizedlist>
+			<listitem><para>
+			Banner display - term referring to general banner display. Actual code
+			behavior might be affected by the
+			<arg choice='plain'>category</arg> or
+			<arg choice='plain'>weighted</arg> attributes passed to the tag.
+			</para></listitem>
+			<listitem><para>
+			Banner rotation - term referring to selecting exactly one banner, if
+			there are multiple banners defined in the
+			<database class='field'>banner</database> database field. Those
+			multiple banners are displayed in sequential order, with a separate
+			counter kept for each client.
+			</para></listitem>
+		</itemizedlist>
+		<para>
+		Additionally, we need to clarify the difference between
+		<emphasis>categorized</emphasis>
+		and <emphasis>rotated</emphasis> display.
+		Categorized display (mostly used in combination with weighting) makes
+		all banners matching a category to be displayed the appropriate
+		ammount of time (adding weight gives the banner more visibility).
+		Rotated display makes multiple banners from the same
+		<database class='field'>banner</database> database field to be selected
+		<emphasis>in sequential order, for each client separately</emphasis>.
+		Both categorized/weighted and rotating techniques can be used together.
+		</para>
+		<para>
+		For the <tag>banner</tag> tag to work, you'll need to have a
 		<database class='table'>banner</database> table. Here's an 
 		example:
 		</para>
@@ -38,20 +68,38 @@
 <xi:include parse='text' href='../files/banner/banner.txt'/>
 		</programlisting>
 		<para>
+		You might notice that the fields names and values in the tables
+		above are not properly aligned. This is an unfortunate nature of
+		<glossterm linkend="tab_delimited">TAB-delimited</glossterm> files.
+		</para>
+		<para>
+		To minimize the chance of confusion, you can download properly composed
+		<ulink url="files/banner/banner.txt">banner.txt</ulink>.
+		</para>
+		<para>
 		Field descriptions follow:
 		<itemizedlist>
 			<listitem><para>
-			<database class='field'>code</database> - key for an item. If banners
-			are not weighted, this should be a category-specific code.
+			<database class='field'>code</database> - key for an item (of course,
+			the key has to be unique). In a <glossterm linkend='weighted_system'>
+			weighted</glossterm> display, the value of this field is not that
+			important because the choice
+			is made by selecting all database rows (or optionally, only taking
+			a subset of those matching specific <arg choice='plain'>category</arg>).
+			In default, non-weighted display, the <arg choice='plain'>category</arg>
+			attribute is expected to contain an unique code, so this is where the
+			<database class='field'>code</database> value is expected to have a 
+			more meaningful value.
 			</para></listitem>
 			<listitem><para>
 			<database class='field'>category</database> - categorize weighted ads.
-			If empty, the banner will be placed in the default category.
+			If empty, the banner will be placed in category
+			<literal>default</literal>.
 			</para></listitem>
 			<listitem><para>
 			<database class='field'>weight</database> - banner weight. Must be an
-			integer number equal or greater than 1 to include the banner for display.
-			0 or blank will ignore the banner when weighted ads are built.
+			integer number equal or greater than 1 to consider the banner for
+			display. 0 or blank will ignore the banner when weighted ads are built.
 			</para></listitem>
 			<listitem><para>
 			<database class='field'>rotate</database> - 
@@ -84,15 +132,6 @@
 			separated using the specified or default delimiter.
 			</para></listitem>
 		</itemizedlist>
-		</para>
-		<para>
-		You might have noticed that the fields names and values in the tables
-		above are not properly aligned. This is an unfortunate nature of
-		<glossterm linkend="tab_delimited">TAB-delimited</glossterm> files.
-		</para>
-		<para>
-		To minimize the chance of confusion, you can download properly composed
-		<ulink url="files/banner/banner.txt">banner.txt</ulink>.
 		</para>
 	</sect1>
 

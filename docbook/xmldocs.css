@@ -293,7 +293,9 @@ a { text-decoration: none; }
 
 .database {
 	border: dotted 1px #cee7f6;
-	padding-left: 3mm;
+	border-left: 3px solid #cee7f6;
+	padding-left: 1.2mm;
+	padding-right: 0.5mm;
 }
 
 a {
