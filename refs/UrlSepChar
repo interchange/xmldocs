@@ -1,0 +1,29 @@
+__NAME__ purpose
+specify default URL separator character
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>non_word_character</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify URL separator character for &IC;-generated &glos-HTML; links.
+Only one character is allowed, and the only recommended ones are
+the default <literal>&amp;</literal>, <literal>;</literal> and
+<literal>:</literal>.
+__END__
+
+__NAME__ see also
+MV_HTML4_COMPLIANT
+__END__
+
+__NAME__ example: Setting UrlSepChar
+<programlisting>
+UrlSepChar :
+</programlisting>
+__END__
+

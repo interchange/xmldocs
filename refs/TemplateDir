@@ -1,0 +1,26 @@
+__NAME__ purpose
+specify common template/fallback "pages" directories
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'>directory</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify directories containing default pages. This effectively allows you to 
+keep pages common for all catalogs in common directories, or &mdash; in case
+of a catalog directive &mdash; extend the page
+search outside the catalog's <filename class='directory'>pages/</filename>
+directory.
+__END__
+
+__NAME__ example: Setting TemplateDir
+<programlisting>
+TemplateDir /usr/local/interchange/default_pages
+</programlisting>
+__END__
+

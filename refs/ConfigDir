@@ -1,0 +1,52 @@
+__NAME__ purpose
+specify default "include" directory for "&lt;file" notation
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>directory</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify the default "include" directory for files that are specified
+using the <literal>&lt;filename</literal> notation and have a relative
+pathname. See <xref linkend="ConfigDir_examples"/> for clarification.
+__END__
+
+TODO: in glos configuration, mention that directives are immediate-effect
+  so you can redefine them multiple times
+
+TODO: show conditionals in config:
+   Variable   TEMPLATE   blue
+
+   ParseVariables Yes
+   ConfigDir  templates/__TEMPLATE__
+   ParseVariables No
+   Variable   MENUBAR   <menubar
+   Variable   LEFTSIDE  <leftside
+   Variable   BOTTOM    <bottom
+   ConfigDir config
+
+
+__NAME__ notes
+See the &glos-configuration; glossary entry for complete information 
+on &IC; config files.
+__END__
+
+__NAME__ example: Setting ConfigDir
+<programlisting>
+ConfigDir variables
+</programlisting>
+__END__
+
+__NAME__ example: Setting directive value from a file
+In combination with the above example, the following would read the 
+directive value from file <filename>variables/mailorderto</filename>.
+<programlisting>
+MailOrderTo &lt;mailorderto
+</programlisting>
+__END__
+

@@ -1,0 +1,42 @@
+__NAME__ purpose
+specify which hosts can connect to Interchange server running in Inet mode
+__END__
+
+
+__NAME__ see also
+TcpMap
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>hostname</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The &conf-TcpHost; directive defines a list of hostnames whose 
+connections to the &IC; Inet socket will be accepted.
+This effectively allows or denies access to all catalogs running on the
+corresponding &IC; server.
+</para><para>
+It's important to note that the directive <emphasis role='bold'>does not
+</emphasis> support wildcards or anything, it only accepts plain list
+of space-separated IPs or hostnames.
+__END__
+<!--
+accepts a wildcard list -
+<literal>*</literal> represents any number of characters, while
+<literal>?</literal> represents a single character.
+-->
+
+TODO: Why not as RobotHost etc, accepting wildcards and proper comma-
+  separated list ?
+
+
+__NAME__ example: Defining TcpHost
+<programlisting><![CDATA[
+TcpHost localhost secure.domain.com
+]]></programlisting>
+__END__
+

@@ -1,0 +1,35 @@
+__NAME__ purpose
+remap Interchange variables to arbitrary names in generated URLs
+__END__
+
+
+__NAME__ see also
+ScratchDefault
+__END__
+
+
+__NAME__ synopsis
+	<arg choice='plain'><replaceable>original_name</replaceable></arg>
+	<arg choice='plain'><replaceable>remapped_name</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive sets the names of variables that will be remapped to and from
+the URL when Interchange outputs it in user pages or reads from form
+submission requests.
+__END__
+
+
+__NAME__ notes
+&IC; already ships with some remapping definitions (to shorten URLs, not
+obfuscate code or anything); see <filename>/etc/varnames</filename> for the
+list.
+__END__
+
+__NAME__ example: Remapping mv_session_id to session
+<programlisting>
+VarName mv_session_id session
+</programlisting>
+__END__
+

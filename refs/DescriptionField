@@ -1,0 +1,39 @@
+__NAME__ purpose
+specify name of the "description" field in the Interchange database
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>field_name</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+By default, &IC; expects the item description to be in the 
+<database class='field'>description</database> field in the database.
+This directive allows modification of the default name.
+</para><para>
+The field is accessed implicitly when you call say, 
+<code>[item-description]</code> in &glos-ITL;.
+__END__
+
+
+__NAME__ notes
+The existence of the field is not exactly crucial, but it's important
+for say, &glos-flypage;s.
+__END__
+
+TODO: Clarify this? "If there is an
+attribute set to the same name as C<DescriptionField>, this will be used for
+display."
+
+
+__NAME__ example: Redefining DescriptionField
+<programlisting>
+DescriptionField opis
+</programlisting>
+"Opis", for example, is a croatian equivalent of "description".
+__END__
+

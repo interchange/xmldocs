@@ -1,13 +1,14 @@
+
+Outstanding:
+=======
 On config directives, include parse_<> function in source context
 - See that if 'crypt' is put in see also, all symbols of that name appear
   in see also line and their type is distinguished visually.
-- Add ROW_REPARSE along ROW_INTERPOLATE in tag refs
 - TAXAREA is not discovered in source by bin/stattree
 - toc in glossary
 - Make MapRoutined source contexts have Line: x-y instead of Lines: z header.
 - make glossary,howto items also appear as symbols, so that you can put
   their names in See Also and get generated links
-- find out where on denali did I misplace a "port" of icvariables?
 - recognize situations where contexts overlap, but in a special way that
   first example does not see the other, but the other sees the first becase
   of 10 lines of pre-context. (example is IMAGE_MOGRIFY refentry). In those
@@ -16,14 +17,10 @@ On config directives, include parse_<> function in source context
 - Enhance stuff with acronyms
 - Under AUTHORS, include cvs line where appropriate (guides, howtos, gloss... )
 - In vars.html, include line if it appears in variable.txt
-
-Outstanding:
 - why email, email-raw, SendMailProgram produce errors about usertags olink ID
 - Add docbook element to reference mailing list posts. Something like
   <ml list='users'>2004-December/041539</ml>, it expands to:
 	<ulink url="http://www.icdevgroup.org/pipermail/interchange-users/2004-December/041539.html">2004-December/041539</ulink>.
-- Ask ndw about including [NEW!] and [TODO!] in titles in TOC. --> This is a 
-  bug and it will work when they fix it.
 - match style (no starting verb or all starting verbs) in all Example titles
 - check if all Default fields are properly formated (<literal> or none)
 - s/a HTML/an HTML/
@@ -42,6 +39,8 @@ DOCUMENTATION SYSTEM:
 
 
  Mid-term:
+- Ask ndw about including [NEW!] and [TODO!] in titles in TOC. --> This is a 
+  bug and it will work when they fix it.
 - &glos-hello-world needs to give "hello world", not "hello-world" as text
 - List of mv_s, descriptions and shortcuts
 - for "online" docs, also provide a form where users can add comments or
@@ -73,6 +72,19 @@ Ideas:
    - new developer howto
 - filenames in Source contexts should also be clickable. this is longterm
   because it'll involve perltidy and other stuff I have in mind ...
+- CVS page: http://www.icdevgroup.org/i/dev/cvs.html?id=auxbUMnz
+  Make a tutorial : IC from CVS, Catalog in SVN, replicated setup online
+  and locally
+- How to deal with Safe
+Programming guidelines doc - integrate with programming style. Advise
+programmers of choices to make in order to make their code play well with
+IC - for example, if they want to have a field in the DB for images,
+advise them to name the column 'image' because other tags (they might or
+might not later use) take that as default value. etc...
+guide on setting complete IC environment
+explain version naming.. stable/unstable and how 5.3.0 implies next stable
+Documentation on how to create replicated catalog online and at your
+desktop machine for ultimate convenience.
 
 
 Notes:
@@ -94,14 +106,6 @@ the gap.
 Misc:
 - Mike We are short on chiefs and heavy on Indians here
 
-Stuff:
-- nightly build http://ftp.icdevgroup.org/interchange/nightly_build/
-  Also provide interchange-nightly at same place where interchange-latest
-- CVS page: http://www.icdevgroup.org/i/dev/cvs.html?id=auxbUMnz
-  Make a tutorial : IC from CVS, Catalog in SVN, replicated setup online
-  and locally
-- Mention ML page, cvsweb
-- How to deal with Safe
 
 
 - In iccattut:
@@ -128,18 +132,6 @@ catalog/global variable, tag,ui,
 action, form,  unix inet socket, values,
 regex, flypage, sku
 
-- More:
-Programming guidelines doc - integrate with programming style. Advise
-programmers of choices to make in order to make their code play well with
-IC - for example, if they want to have a field in the DB for images,
-advise them to name the column 'image' because other tags (they might or
-might not later use) take that as default value. etc...
-guide on setting complete IC environment
-style: leave newline at end of file
-explain version naming.. stable/unstable and how 5.3.0 implies next stable
-Documentation on how to create replicated catalog online and at your
-desktop machine for ultimate convenience.
-- PRODUCE PATCH TO RECOMPILE OFFICIAL DISTRIBUTION PERL without threads.
 
 
 

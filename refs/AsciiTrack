@@ -1,0 +1,32 @@
+__NAME__ purpose
+specify filename to which formatted order reports should be appended
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>filename</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies the filename to which formatted orders will be appended.
+__END__
+
+__NAME__ see also
+SendMailProgram
+__END__
+
+__NAME__ notes
+If the &conf-Route; directive is set to <literal>supplant</literal>, this
+directive is disregarded.
+__END__
+
+
+__NAME__ example: Setting ErrorFile
+<programlisting>
+AsciiTrack etc/tracking.asc
+</programlisting>
+__END__
+

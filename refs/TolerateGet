@@ -1,0 +1,27 @@
+__NAME__ purpose
+specify whether information from both GET and POST method should be parsed when form is submitted using POST method
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Enabling the option makes &IC; parse both GET data and POST data when a POST
+form is been submitted. 
+Unfortunately this has to be a global setting because at URL
+parse time, the &IC; daemon doesn't yet know which catalog it is dealing
+with (due to catalog aliases, etc.).
+__END__
+
+__NAME__ example: Enabling TolerateGet
+<programlisting>
+TolerateGet yes
+</programlisting>
+__END__
+
