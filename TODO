@@ -37,6 +37,7 @@ Outstanding:
   - see problems from old docs/TODO notes on iccattut
   - ICCATTUT MUST NOT STOP WHERE it stops now. it needs to show all stuff
     from current "excercise for readers" section, and also many more things.
+  - files/tutorial*: s/tutorial-*.log/tutorial.*.log/
 
 - in source contexts, wrap runaway lines
 - match style (no starting verb or all starting verbs) in all Example titles

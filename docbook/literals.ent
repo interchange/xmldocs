@@ -17,6 +17,7 @@
 
 
 <!-- ENTITIES TO AVOID A LOT OF REPETITION -->
+<!ENTITY mdash "&#x2014;">
 <!ENTITY gcf "<filename>interchange.cfg</filename>">
 <!ENTITY ccf "<filename>catalog.cfg</filename>">
 <!ENTITY gcfs "<filename>interchange.cfg</filename> or <filename>catalog.cfg</filename>">
@@ -27,6 +28,8 @@
 <!ENTITY std-catalog "standard">
 <!ENTITY Prev-catalog "Foundation">
 <!ENTITY prev-catalog "foundation">
+<!ENTITY def-hostname "myhost.mydomain.local">
+<!ENTITY def-domain "mydomain.local">
 
 
 

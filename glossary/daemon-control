@@ -1,42 +1,35 @@
 
-<glossentry id="reconfig">
-<glossterm>Reconfiguration of the Interchange Catalog</glossterm>
+<glossentry id="daemon-control">
+<glossterm>Interchange Daemon Control</glossterm>
 
 <glossdef>
 <para>
-Catalog reconfiguration refers to either re-starting Interchange
-(all catalogs are configured at startup), or running a special command
-to only reconfigure a specific catalog, without shutting &IC; down.
-</para>
 <para>
 Interchange is (re)started by invoking:
 </para>
 <itemizedlist>
-	<listitem><para>
-		<userinput>/etc/init.d/interchange restart</userinput> on Debian GNU
+	<listitem vendor='deb'><para>
+		<userinput>/etc/init.d/interchange restart</userinput> (Debian GNU)
 	</para></listitem>
-	<listitem><para>
-		<userinput>/etc/rc.d/init.d/interchange restart</userinput> on Red Hat
-		based systems
+	<listitem vendor='rh'><para>
+		<userinput>/etc/rc.d/init.d/interchange restart</userinput> (Red Hat)
 	</para></listitem>
-	<listitem><para>
-		<userinput>/usr/local/interchange/bin/interchange -r</userinput> on
-		standard tarball installations.
+	<listitem vendor='tarball'><para>
+		<userinput>/usr/local/interchange/bin/interchange -r</userinput> (tarball)
 	</para></listitem>
 </itemizedlist>
 <para>
 Specific catalogs are reconfigured by invoking:
 </para>
 <itemizedlist>
-	<listitem><para>
+	<listitem vendor='deb;rh'><para>
 		<userinput>/usr/sbin/interchange -reconfig
-		<replaceable>CATNAME</replaceable></userinput> on Debian GNU
-		and Red Hat systems
+		<replaceable>CATNAME</replaceable></userinput> 
+		(Debian GNU and Red Hat)
 	</para></listitem>
 	<listitem><para>
 		<userinput>/usr/local/interchange/bin/interchange -reconfig
-		<replaceable>CATNAME</replaceable></userinput> on standard
-		tarball installations.
+		<replaceable>CATNAME</replaceable></userinput> (tarball)
 	</para></listitem>
 </itemizedlist>
 <para>
