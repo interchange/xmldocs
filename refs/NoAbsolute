@@ -1,0 +1,42 @@
+__NAME__ purpose
+disable catalogs to read absolute filenames on the system
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies whether to prevent commands and tags (such as 
+&tag-file;) to read absolute filenames (any files) on the system.
+In cases where the &IC; daemon has no permission to read the file , this
+directive &mdash; of course &mdash; has no influence.
+</para><para>
+This should be enabled in multiuser environments to minimize security
+problems.
+__END__
+
+__NAME__ notes
+Note that this does not apply to tests for whether a file exists (as one
+would do with <code>[if file ...]</code> or similar). Such operations are
+allowed regardless of &conf-NoAbsolute;.
+__END__
+
+
+__NAME__ example
+<example>
+  <title>Enabling NoAbsolute</title>
+	<para>
+	Put the following in &gcf;:
+	</para>
+<programlisting>
+NoAbsolute Yes
+</programlisting>
+</example>
+__END__
+

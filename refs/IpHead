@@ -1,0 +1,46 @@
+__NAME__ purpose
+use only part of the IP to qualify user sessions?
+__END__
+
+
+__NAME__ see also
+DomainTail,IpHead,IpQuad,WideOpen,
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive affects the domain/IP session qualifying method. When enabled,
+only the first &conf-IpQuad; dot-quads of the IP address are used to qualify
+the user session (along with, of course, the session ID).
+</para><para>
+This is a slight compromise on security, but it allows
+non-cookie-accepting browsers, like AOL's V2.0, to use multiple proxy
+servers.
+__END__
+
+__NAME__ notes
+&conf-DomainTail; is preferable unless one of your HTTP servers does not do
+host name lookups.
+__END__
+
+__NAME__ example
+<example>
+  <title>Enabling IpHead directive</title>
+	<para>
+	Put the following in &gcf;:
+	</para>
+<programlisting>
+DomainTail No
+IpHead     Yes
+</programlisting>
+</example>
+__END__
+

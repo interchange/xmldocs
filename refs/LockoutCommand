@@ -1,0 +1,63 @@
+__NAME__ purpose
+specify command to run in order to lock a client out of the site
+__END__
+
+
+__NAME__ see also
+DomainTail, CreditCardAuto, CyberCash
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>command</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies the command (as it would be entered from the shell)
+that will somehow prevent the remote IP from accessing the &IC; catalog, or
+the whole system.
+</para><para>
+The IP address will be substituted for the first occurrence of the string
+<literal>%s</literal> (which might remind you of <function>printf</function>
+format specifiers). The command will be executed under the &IC; user ID,
+so you'll have to fine-tune the system privileges, or use 
+<command>sudo</command>-like tools.
+__END__
+
+__NAME__ notes
+A script could be written which would modify the appropriate access control
+files, such as <filename>.htaccess</filename> (Web server-level)
+or <filename>/etc/hosts.deny</filename> (TCP Wrappers-level), to do another
+level of lockout.
+</para><para>
+Even a simple command line along the lines of
+<userinput>perl -0777 -npi -e 's/deny/deny from %s\ndeny/'
+/path/to/cgi-bin/.htaccess</userinput>
+would work as well.
+__END__
+
+
+__NAME__ example
+<example>
+  <title>Preventing access to the system with ipfwadm</title>
+	<para>
+	Put the following in &gcf;:
+	</para>
+<programlisting>
+LockoutCommand ipfwadm -I -i deny -S %s
+</programlisting>
+	<para>
+	Note that the <command>ipfwadm</command> filtering system was used in Linux
+	2.0.* kernels, and is now largely obsolete.
+	</para>
+</example>
+__END__
+
+__NAME__ missing
+Give lockout examples for ipchains, iptables and ipfw
+Write a script that does what we suggest in Notes section
+__END__
+

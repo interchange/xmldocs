@@ -79,8 +79,9 @@ my %longname = (
 	globconf => "Global Configuration Directive",
 	catconf => "Catalog Configuration Directive",
 	filter => "Filter",
-	# Summarized:
+	# Summarized / compounds:
 	tag => "Tag",
+	conf => "Configuration directive",
 );
 
 my %tagname = (
@@ -95,6 +96,7 @@ my %tagname = (
 	filter => "filter",
 	# Summarized:
 	tag => "tag",
+	conf => "option",
 );
 
 # Default fields
@@ -152,6 +154,7 @@ while ( $path = shift @paths) { # For each version specified
 			my $pref = "";
 			if ( $compounds ) {
 				$gkey =~ /tag$/ and $name = 'tag';
+				$gkey =~ /conf$/ and $name = 'conf';
 				$pref = "${gkey}s -> ";
 			}
 
@@ -555,7 +558,12 @@ if ( $compounds ) {
 		%{ $symbols{usertag} },
 		%{ $symbols{uitag} },
 	};
+	$symbols{conf} = {
+		%{ $symbols{globconf} },
+		%{ $symbols{catconf} },
+	};
 	delete @symbols{qw/systemtag usertag uitag/};
+	delete @symbols{qw/globconf catconf/};
 }
 
 

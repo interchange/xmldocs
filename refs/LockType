@@ -1,0 +1,51 @@
+__NAME__ purpose
+specify file locking method to use
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>flock</arg>
+	<arg choice='plain'>fcntl</arg>
+	<arg choice='plain'>none</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies the file locking method to use. 
+<literal>flock</literal> is the default and works well with standard
+setups.
+</para><para>
+<literal>fcntl</literal> is used with &NFS;. In case of NFS, both
+the NFS client and server need to run the lock daemon
+(<command>lockd</command>).
+</para><para>
+<literal>none</literal> can be used to turn off locking completely. This
+is never recommended, unless you only want to see if the locking 
+is causing system hangs.
+__END__
+
+__NAME__ notes
+Although this directive was added in &IC; 4.7, due to an error later
+discovered, the directive started working properly with the release
+of &IC; 4.8.6.
+</para><para>
+If you are only accessing sessions on an NFS-mounted directory, but the rest
+of Interchange is on the local filesystem, you can set the &conf-SessionType;
+directive to <literal>NFS</literal> instead. That would enable
+<literal>fcntl</literal> locking for sessions on a per-catalog basis only.
+__END__
+
+__NAME__ example
+<example>
+  <title>Setting LockType</title>
+	<para>
+	Put the following in &gcf;:
+	</para>
+<programlisting>
+LockType fcntl
+</programlisting>
+</example>
+__END__
+

@@ -1,0 +1,47 @@
+__NAME__ purpose
+specify number of dot-quads to honor when IpHead is enabled
+__END__
+
+
+__NAME__ see also
+DomainTail,IpHead,WideOpen
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>number</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive simply specifies the number of <emphasis>dot-quads</emphasis>
+the session qualifier will look at, if &conf-IpHead; is enabled.
+</para><para>
+In other words, with an IPV4 address (32 bit address, consisting of 
+four dot-quads) of value
+<systemitem class='ipadress'>127.0.0.1</systemitem> and &conf-IpQuad; of 
+<literal>2</literal>, 
+<systemitem class='ipadress'><emphasis role='bold'>127.0.</emphasis></systemitem>
+would be enough to qualify the user session.
+__END__
+
+__NAME__ notes
+&conf-DomainTail; is preferable unless one of your HTTP servers does not do
+host name lookups.
+__END__
+
+__NAME__ example
+<example>
+  <title>Enabling IpHead directive</title>
+	<para>
+	Put the following in &gcf;:
+	</para>
+<programlisting>
+DomainTail No
+IpHead     Yes
+</programlisting>
+</example>
+__END__
+
