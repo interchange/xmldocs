@@ -265,6 +265,7 @@ sub populate {
 			while (my $line = <IN>) {
 				next if $line =~ /^\s*#/;
 				chomp $line;
+				$line =~ s/^\s+//;
 				my ($sect,$text) = split /\s*:\s*/, $line, 2;
 				goto SDONE if (!( defined $text and length $text ));
 				if ( $mode eq 'override' ) {

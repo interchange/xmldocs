@@ -112,13 +112,14 @@ sub wanted {
 	# Things we ignore
 	return if /(^|\/)(CVS|\.cvs|\.svn|\.autoload)(\/.+[^\/])?$/;
 	
-	stat($file);
+	stat($file) or 
+		warn "Can't stat '$file' ? ($!)\n";
 
 	# totals
 	if ( -d $file ) {
 		$hash{total}{directories}++;
 		$hash{tree}{$file}{type} = "directory";
-		return;
+		return; # This is enough for directories
 	} else {
 		$hash{total}{files}++;
 		$hash{total}{size} += (stat _)[7];
@@ -177,7 +178,7 @@ sub wanted {
 	# Open text file, parse contents
 	open IN, "< $file" or die "Can't open $file ($!)\n";
 	my @file = <IN>;
-	unshift @file, ""; # Match indices with line numbers
+	unshift @file, ""; # Match index numbers with line numbers
 	close IN;
 
 	for (my $lnum = 1; $lnum < scalar @file; $lnum++) {
@@ -192,16 +193,13 @@ sub wanted {
 				if ( /^ICVERSION=(['"])(\d+\.\d+\.\d+)\1/ ) {
 					if ( !$hash{version} or "$hash{version}" eq "$2" ) {
 						$hash{version} = $2
-					} else {
-						die "I got inconsistent ^ICVERSION= information: " .
-							"existing is $hash{version}, new is $2. " . 
-							"Not continuing, fix manually\n";
 					}
 					# break; # We *could* stop processing here,
 					         # but we won't.
 				}
 			}
-			# ICVERSION must be known here, or someone's playing
+			# ICVERSION must be known here, or someone's playing, or
+			# it's a pre-5.0 version which doesnt have that.
 			unless ( $hash{version} ) {
 				warn "Wasn't able to determine " .
 					'^ICVERSION=([\'"])(\d+\.\d+\.\d+)\1 from the main ' .
@@ -245,7 +243,7 @@ sub wanted {
 					push @{ $hash{symbols}{pragma}{$1} },
 						# TODO Here, and 2 places below: make sure if ctx is say, 5:5,
 						# it always shows that much (that is, workaround file beginning/
-						# file end problems).
+						# file end problems - pad with empty lines or something).
 						[ "$i{ver}/$file", $lnum, "$ctx_p\:$ctx_n", [@file[$lnum-$ctx_p..$lnum+$ctx_n]] ];
 				}
 

@@ -1,0 +1,28 @@
+<example>
+
+<title>
+Image path rewriting example
+</title>
+
+<para>
+If the no_image_rewrite directive is <emphasis>disabled</emphasis> and
+ImageDir is set to "/standard/images", a tag like
+</para>
+
+<programlisting><![CDATA[
+<img src="fancy.gif">
+]]></programlisting>
+
+<para>
+would be changed to
+</para>
+
+<programlisting><![CDATA[
+<img src="/standard/images/fancy.gif">
+]]></programlisting>
+
+<para>
+With the directive enabled, the image URLs would be left intact.
+</para>
+
+</example>
