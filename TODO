@@ -11,6 +11,8 @@ PRIMARY:
 - ./files/ directory is not properly referenced from chunked documents.
   Solve by using entities?
 
+- Now that filters added duplicates among symbol names, fix bin/refs-autogen.
+
 - It's now obvious that multiple symbols will have the same names. This
   calls for renaming every refs/* file to refs/*.<symbolType> (and all
   other changes following from that).
