@@ -2,7 +2,6 @@ __NAME__ purpose
 display banner ads or messages, based on category and optional weighting
 __END__
 
-
 __NAME__ synopsis
 <row>
 	<entry>
@@ -28,7 +27,8 @@ __NAME__ synopsis
 	<entry><literal>banner</literal></entry>
 	<entry>
 	The banner table name. The default is reasonable and
-	rarely needs to be changed.</entry>
+	rarely needs to be changed. <mv>my_banner_table</mv> can be set to 
+	override this value.</entry>
 </row>
 <row>
 	<entry>
@@ -41,7 +41,8 @@ __NAME__ synopsis
 	class='field'>banner</database> column (separated by specified delimiters).
 	The column specified by <database class='field'>r_field</database> is 
 	consulted (expecting a boolean value) to determine whether to
-	sequentially rotate banners.
+	sequentially rotate banners. This is only used with non-weighted banner
+	display scheme.
 	</entry>
 </row>
 <row>
@@ -65,6 +66,8 @@ __NAME__ synopsis
 	<entry><literal>category</literal></entry>
 	<entry>
 	Specify the column containing banner category.
+	Only banners from the selected category will be taken as possible
+	candidates for display.
 	This is only used with weighted ads.
 	</entry>
 </row>
@@ -115,7 +118,9 @@ __NAME__ synopsis
 	to contain multiple entries with the same
 	<database class='field'>category</database>, and then the banners are
 	selected in regard to their relative weight (more weight = more 
-	visibility).
+	visibility). The sum of weights can be arbitrary and does not need to 
+	equal 1 (obviously - because that would require a manual intervention
+	on every banner addition/remove operation).
 	</entry>
 </row>
 <row>

@@ -5,13 +5,13 @@ Embedding HTML forms in the area tag
 </title>
 
 <programlisting><![CDATA[
-<A HREF="[area form="
+<a href="[area form="
   mv_order_item=99-102
   mv_order_size=L
   mv_order_quantity=1
   mv_separate_items=1
   mv_todo=refresh"
-]">Order T-shirt in Large size</A>
+]">Order T-shirt in Large size</a>
 ]]></programlisting>
 
 <para>
@@ -31,8 +31,8 @@ Which is equivalent to the usual HTML form:
 </para>
 
 <programlisting><![CDATA[
-<form action="[area process]" method=post>
-  <input type='hidden' name='mv_todo' VALUE="refresh">
+<form action="[area process]" method="post">
+  <input type='hidden' name='mv_todo' value="refresh">
   <input type='hidden' name='mv_order_item' value="000101">
   Qty: <input size='2' name='mv_order_quantity' value="1">
   <input type='hidden' name='mv_order_fly' value="description=An on-the-fly item|price=100.00">

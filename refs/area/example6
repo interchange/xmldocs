@@ -1,0 +1,23 @@
+<example>
+
+<title>
+Implementing searches using search= option
+</title>
+
+<para>
+The <arg choice='plain'>search</arg> attribute is a shorthand for the 
+<arg choice='plain'>href</arg>/<arg choice='plain'>arg</arg> scheme. 
+When <arg choice='plain'>search</arg> is used, 
+<arg choice='plain'>href</arg> will be set to <literal>scan</literal> and
+<arg choice='plain'>arg</arg> to the value of 
+<arg choice='plain'>search</arg>.
+</para>
+
+<programlisting><![CDATA[
+<a href="[area search="
+    se=Impressionists
+    sf=category"]
+">Search for Impressionist Paintings</a>
+]]></programlisting>
+
+</example>

@@ -19,7 +19,7 @@ secure (HTTPS) connection.
 __END__
 
 __NAME__ example: Specifying AlwaysSecure
-<programlisting>
+<programlisting><![CDATA[
 AlwaysSecure ord/checkout
 
 AlwaysSecure   <<EOD
@@ -33,6 +33,6 @@ AlwaysSecure   <<EOD
   ord/shipping
   query/order_detail
 EOD
-</programlisting>
+]]></programlisting>
 __END__
 

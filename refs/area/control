@@ -1,3 +1,3 @@
 purpose: produce a hypertext link
 see also: page
-missing: under example 2, tell how to extract arg1=val1/arg2=val2 as separate fields from [data session arg]
+missing: under example 2, tell how to extract arg1=val1/arg2=val2 as separate fields from [data session arg]. Also see why there's no href in synopsis

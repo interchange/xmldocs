@@ -1,0 +1,33 @@
+<!--
+H2: RobotUA *global*
+
+The RobotUA directive defines a list of User Agents which will be classed as
+crawler robots (search engines) and causes Interchange to alter its
+behavior to improve the chance of Interchange-served content being crawled
+and listed.
+
+The directive accepts a wildcard list - * represents any number of
+characters, ? represents a single character. The elements of the list are
+separated by a comma.
+
+If a User Agent is recognised as a robot, the following will be performed by Interchange:
+
+=over 4
+
+* C<mv_tmp_session> scratch variable is set to 1, causing sessions to be
+disabled and therefore avoiding the writing of session data to disk.
+
+* C<mv_no_session_id> scratch variable is set to 1, causing Interchange to
+generate URLs without a session id (eg. C<mv_session_id=KvWna2PT>).
+
+* C<mv_no_count> scratch variable is set to 1, causing Interchange to
+generate URLs without an incremental number, normally used to prevent
+proxy caching (eg. C<mv_pc=4>).
+
+=back
+
+It should be noted that once you have identified you are serving a page to a
+robot, you should not use this to massively alter your page content in an
+attempt to improve your ranking. If you do this, you stand the chance of
+being blacklisted. You have been warned!
+-->

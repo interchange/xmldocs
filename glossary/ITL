@@ -272,6 +272,7 @@ contained a whitespace.
 
 <section>
 <title>Deeper Look at Argument Quoting</title>
+<!-- TODO Explain quoting on examples from [area] -->
 
 <para>
 The question is &mdash; exactly when can you omit the quotes around
