@@ -117,6 +117,7 @@ while ( $path = shift @paths) {
 	# Outer loop: symbol types (pragmas, globvars, ...)
 	# Inner loop: actual symbols
 	while ( my ($gkey,$gval) = each %{ $hash{symbols} } ) {
+		next unless $gkey =~ /^(globvar|pragma)$/;
 		for my $key (keys(%$gval)) {
 			my $val = $gval->{$key};
 			push @{ $symbol_lists{$gkey} }, $key

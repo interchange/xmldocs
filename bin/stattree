@@ -288,7 +288,8 @@ sub wanted {
 			$file =~ m#(\w+?)\.(core)?tag$# or
 				warn "I know $file is a tag but regex doesn't match it\n";
 			my $tagname = $1;
-			@{ $hash{symbols}{$fsubtype}{$1} } = ();
+			# Disable for now.
+			#@{ $hash{symbols}{$fsubtype}{$1} } = ();
 				# Not this, context info will be provided in html files
 				#[ "$i{ver}/$file", scalar @file, "1:" . scalar @file, [ @file ] ];
 			last;
