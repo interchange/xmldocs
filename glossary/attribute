@@ -1,0 +1,228 @@
+
+&IC; allows item <emphasis>attributes</emphasis> (also called
+<emphasis>modifiers</emphasis> or <emphasis>options</emphasis>)
+to be set for each ordered item. This
+allows a varying size, color, or any other modifier to be attached to
+an otherwise common
+part number.
+
+<!-- TODO move some of this to UseModifier -->
+
+If multiple attributes are set, then they should be
+separated by commas. Previous attribute values can be saved by means
+of a hidden field on a form, and multiple attributes for each item
+can be "stacked" on top of each other.
+
+The configuration file directive &conf-UseModifier; is used to set
+the name of the modifier or modifiers. Here's an example of attaching
+both the size and color attributes to each item ordered.
+</para>
+
+<programlisting>
+UseModifier        size,color
+</programlisting>
+
+<important>
+<para>
+Some of the names are reserved for use by &IC;, and you must not use them
+in modifier names. Namely, they include 
+	<literal>item</literal>,
+	<literal>group</literal>,
+	<literal>quantity</literal>,
+	<literal>free</literal>,
+	<literal>free_message</literal>,
+	<literal>code</literal> and, of course,
+	all <literal>mv_</literal> variables.
+</para>
+<para>
+You can see a quick list of those "reserved" names by entering the &IC;
+source tree and issuing <userinput>grep -r 'item->{[^$]' * | less</userinput>.
+</para>
+</important>
+
+<para>
+Besides setting modifier names the config files, you can also set them as
+&glos-scratch; variables with <mv>mv_UseModifier</mv>. For example,
+the above modifiers would be set with
+<code>[set mv_UseModifier]size color[/set]</code>.
+This effectively allows you to have different product options for different
+or even same product &glos-SKU;s. Those specified in <mv>mv_UseModifier</mv> at
+the time of order will be used (just be careful, because you cannot set it
+more than once on the same page).
+</para><para>
+Setting &conf-SeparateItems; or <mv>mv_separate_items</mv>
+places each ordered item on a separate line even if they have the same
+&glos-SKU;, simplifying attribute handling.
+</para><para>
+The modifier value is accessed in the &tag-item-list; loop with the
+<code>[item-modifier <replaceable>attribute_name</replaceable>]</code> tag,
+and form input fields are created with
+<code>[modifier-name <replaceable>attribute</replaceable>]</code>.
+This is similar to the way that quantity
+is handled, except that attributes can be "stacked" by setting multiple
+values in an input form (whereas there can be only one quantity field
+for each item).
+</para><para>
+When you want to provide a series of modifiers for an element, 
+you can use the standard &tag-loop; tag (such as
+<code>[loop arg="<replaceable>item item item</replaceable>"]</code>),
+or you can use the built-in &tag-PREFIX-accessories; tag available with
+most &IC; list operations.
+The modifier value can then be used to select data from an arbitrary database
+for attribute selection and display.
+</para>
+<para>
+Below is a fragment from a shopping basket display form which 
+shows a selectable size with "sticky" setting. Note that the example
+can only work within the &tag-item-list; tag.
+</para>
+
+<programlisting><![CDATA[
+  <select name="[modifier-name size]">
+  <option [selected [modifier-name size] S]  /> S
+  <option [selected [modifier-name size] M]  /> M
+  <option [selected [modifier-name size] L]  /> L
+  <option [selected [modifier-name size] XL] /> XL
+  </select>
+]]></programlisting>
+
+<para>
+It could just as easily be done with a radio button group as well
+(when you combine them with the &lt;checked&gt; &glos-HTML; tag.
+</para><para>
+In addition, &IC; would automatically generate the above select box
+if you called <code>[accessories <replaceable>code</replaceable> size]</code>
+or <code>[item-accessories size]</code>.
+
+<!--
+>   [item_accessories attribute*, type*, field*, database*, name*, outboard*]
+>
+>   [accessories code attribute*, type*, field*, database*, name*, outboard*]
+
+=over 4
+
+=item code
+
+Not needed for item-accessories, this is the product code of the item to
+reference.
+ 
+=item attribute
+
+The item attribute as specified in the UseModifier configuration
+directive. Typical are C<size> or C<color>.
+
+=item type
+
+The action to be taken. One of:
+
+>  select          Builds a dropdown <SELECT> menu for the attribute.
+>                  NOTE: This is the default.
+>
+>  multiple        Builds a multiple dropdown <SELECT> menu for the
+>                  attribute.  The size is equal to the number of
+>                  option choices.
+>
+>  display         Shows the label text for *only the selected option*.
+>
+>  show            Shows the option choices (no labels) for the option.
+>
+>  radio           Builds a radio box group for the item, with spaces
+>                  separating the elements.
+>
+>  radio nbsp      Builds a radio box group for the item, with &nbsp;
+>                  separating the elements.
+>
+>  radio left n    Builds a radio box group for the item, inside a
+>                  table, with the checkbox on the left side. If "n"
+>                  is present and is a digit from 2 to 9, it will align
+>                  the options in that many columns.
+>
+>  radio right n   Builds a radio box group for the item, inside a
+>                  table, with the checkbox on the right side. If "n"
+>                  is present and is a digit from 2 to 9, it will align
+>                  the options in that many columns.
+
+>
+>  check           Builds a checkbox group for the item, with spaces
+>                  separating the elements.
+>
+>  check nbsp      Builds a checkbox group for the item, with &nbsp;
+>                  separating the elements.
+>
+>  check left n    Builds a checkbox group for the item, inside a
+>                  table, with the checkbox on the left side. If "n"
+>                  is present and is a digit from 2 to 9, it will align
+>                  the options in that many columns.
+>
+>  check right n   Builds a checkbox group for the item, inside a
+>                  table, with the checkbox on the right side. If "n"
+>                  is present and is a digit from 2 to 9, it will align
+>                  the options in that many columns.
+
+The default is 'select', which builds an HTML select form entry for
+the attribute.  Also recognized is 'multiple', which generates a
+multiple-selection drop down list, 'show', which shows the list of
+possible attributes, and 'display', which shows the label text for the
+selected option only.
+
+=item field
+
+The database field name to be used to build the entry (usually a field
+in the products database).  Defaults to a field named the same as the
+attribute.
+
+=item database
+
+The database to find B<field> in, defaults to the first products file
+where the item code is found.
+
+=item name
+
+Name of the form variable to use if a form is being built. Defaults to
+mv_order_B<attribute> - i.e.  if the attribute is B<size>, the form
+variable will be named B<mv_order_size>.
+
+=item outboard
+
+If calling the item-accessories tag, and you wish to select from an
+outboard database, you can pass the key to use to find the accessory
+data.
+
+=back
+
+When called with an attribute, the database is consulted and looks for
+a comma-separated list of attribute options. They take the form:
+
+>    name=Label Text, name=Label Text*
+
+The label text is optional - if none is given, the B<name> will
+be used.
+
+If an asterisk is the last character of the label text, the item is
+the default selection. If no default is specified, the first will be
+the default. An example:
+
+>    [item_accessories color]
+
+This will search the product database for a field named "color". If
+an entry "beige=Almond, gold=Harvest Gold, White*, green=Avocado" is found,
+a select box like this will be built:
+
+>    <SELECT NAME="mv_order_color">
+>    <OPTION VALUE="beige">Almond
+>    <OPTION VALUE="gold">Harvest Gold
+>    <OPTION SELECTED>White
+>    <OPTION VALUE="green">Avocado
+>    </SELECT>
+
+In combination with the C<mv_order_item> and C<mv_order_quantity> variables
+this can be used to allow entry of an attribute at time of order.
+
+If used in an item list, and the user has changed the value, the generated
+select box will automatically retain the current value the user has selected.
+
+The value can then be displayed with C<[item-modifier size]> on the
+order report, order receipt, or any other page containing an
+C<[item-list]>. 
+
+-->

@@ -40,8 +40,9 @@ my $ctx_n = 4; #                                after
 my %resolver_path; # Support for stack (a -> b -> c -> d   =>
                    # a = d with full "path" recorded). This expands MapRoutines.
 
-# All file types should be listed here or the stats wont. It should be
-# reported if an unknown file is found in the archive
+# All file types should be listed here or the stats wont be accurate.
+# It should be reported if an unknown file is found in the archive (you can 
+# see that output with -v).
 # Order is important. First match wins.
 my %binary_types = (
 	images => [qw/\.gif \.jpeg \.jpg \.png \.bmp/],
@@ -54,22 +55,29 @@ my %ascii_types = (
 	build_helpfile => [qw/configure ^debian.* ^SPECS.*/],
 	catalog_helpfile => [qw/\.access \.log \.error \.(auto)?number \.empty/],
 	config => [qw/\.cfg \.dist/],
-	c => [qw/\.c \.in/],
+	c => [qw/\.c [^A-Z]\.in/],
 	perl => [qw/\.pl \.pm/],
 	uitag => [qw|UI_Tag/\S+\.(core)?tag dist/lib/UI/usertag/\S+|],
 	systemtag => [qw|SystemTag/\S+\.(core)?tag|],
 	usertag => [qw|UserTag/\S+\.tag \.tag|],
 	filter => [qw/\.filter/],
 	actionmap => [qw/\.am/],
-	html => [qw/\.css \.html?/],
+	html => [qw/\.html?/],
 	widget => [qw/\.widget/],
 	profile => [qw|/profiles/.+ \.profiles \.login \.order|],
 	globalsub => [qw|/globalsub/.+|],
 	variable => [qw|/vars/.+ /variables/.+|],
 );
 
+# Only add items here if you want to provide sub{} for them which gets
+# triggered when they're found in source.
+my %tagCanon = (
+  documentation => sub{$verbose and warn "${$_[0]}{file} CONTAINS DOCS\n" },
+);
 
 # A general overview: how many different contents do we have
+# This part of the statistic ( $hash{total} ) should be processed by
+# bin/mkreport once.
 my $binary_types;
 my $ascii_types;
 for ( keys %binary_types ) { $binary_types += scalar @{ $binary_types{$_} } }
@@ -87,7 +95,7 @@ unless ( GetOptions (
 @ARGV == 1 or die "Usage: $0 path[/] \n";
 
 # $path is the directory to process, $dumppath is relocated name, say
-# sources/cvs-head becomes output/cvs-head/cache
+# sources/cvs-head becomes cvs-head/cache/.cache.bin
 my $path = shift;
 ( my $dumppath = $path ) =~ s#.+?/##;
 my $dumpdir = $dumppath; # Directory to dump to, without file name
@@ -119,7 +127,7 @@ for my $entry ( @files ) {
 
 # Convenient routine to just discover all files
 find({
-	wanted => \&wanted,
+	wanted => \&wanted, # <-- all the work is done here
 	bydepth => 0,
 	no_chdir=> 1,
 }, ".");
@@ -154,6 +162,7 @@ sub wanted {
 		$hash{total}{directories}++;
 		$hash{tree}{$file}{type} = "directory";
 		return; # This is enough for directories
+
 	} else {
 		$hash{total}{files}++;
 		$hash{total}{size} += (stat _)[7];
@@ -167,10 +176,10 @@ sub wanted {
 		ctime => (stat _)[10],
 	};
 
+
 	#
 	# Make sure the file extension is known (we're entering
 	# content-based processing now, not filename-based as above).
-
 	my $ftype;
 	my $fsubtype;
 	my $fext;
@@ -196,13 +205,16 @@ sub wanted {
 	# even if we're not interested in some files, they *should* be matched
 	# in %ascii_types/%binary_types above to provide accurate statistics.
 	print STDERR "$file UNKNOWN\n" if $verbose;
-	return; # We're not interested in handling that
-
+	return; # We're not interested in handling unknown stuff (there should
+	        # be no single file matching this when the stattree gets
+	        # sophisticated enough)
 	EXTDONE:
+	##  At this point, file, ftype, fsubtype and fext are known.     ##
+	##  file is filename, ftype is binary/ascii, fsubtype is key in  ##
+	##  %ascii_types/%binary_types hash, fext is extension           ##
 
-	# file, ftype, fsubtype and fext are known here.
-	# file is filename, ftype is binary/ascii, fsubtype is key in 
-	# %ascii_types/%binary_types hash, fext is extension
+
+	# General statistics
 	$hash{total}{$ftype."_files"}++;
 	$hash{total}{filetypes}{$fsubtype}++;
 	$hash{total}{matches}{$fext}++;
@@ -210,12 +222,15 @@ sub wanted {
 	$hash{tree}{$file}{subtype} = "$fsubtype";
 	$hash{tree}{$file}{ext} = "$fext";
 
-	# No more job with binary files
-	return if $ftype eq 'binary';
+	return if $ftype eq 'binary'; # No more job with binary files
+
 
 	# Also ignore some directories (don't parse contents in them)
-	# (following a -core discussion from Aug 2004).
+	# (following a -core discussion from Aug 2004). This is OK to do here
+	# because those files already did their job as part of the general
+	# statistic.
 	return if $file =~ m#^(eg|extra|SPECS|debian|scripts|extensions)/#;
+
 
 	# Open text file, parse contents
 	open IN, "< $file" or die "Can't open $file ($!)\n";
@@ -223,11 +238,15 @@ sub wanted {
 	unshift @filedata, ""; # Match index numbers with line numbers # MINUS
 	close IN;
 
+
 	# Global variables to use in the loop below
-	my @gfunc = (qw/unknown 0/); # 2 elements: func name, line num
+	my @gfunc = (qw/unknown 0/); # keep track of func name & line num,
+	                             # if it appears in the file
 
 	# Prepare context hash so that all data is available to the
-	# line handler functions later
+	# line handler functions later. This is not all; some more is 
+	# initialized/updated as the loop below iterates
+	# (line numbers, for example).
 	my %c = ( 
 		file => $file,
 		ftype => $ftype,
@@ -240,6 +259,16 @@ sub wanted {
 	);
 
 
+	# And here we go. We start parsing the file. Note that this gets a little
+	# ugly here. The loop is supposed to run all code for each line. This 
+	# leads us to three main program flows:
+	#  a) this main loop parses line by line, in each iteration the appropriate
+	#     regex/condition matches and that's it.
+	#  b) we detect a particular file type and we jump out to a custom parse
+	#     routine that parses the whole file and ends this first loop.
+	#  c) we parse line-by-line for a while, until we match something interesting
+	#     and *then* jump to custom parse routine.
+	#
 	for (my $lnum = 1; $lnum < scalar @filedata; $lnum++) {
 		$c{line} = $filedata[$lnum];
 		$c{lnum} = $lnum;
@@ -251,48 +280,62 @@ sub wanted {
 			die;
 		};
 
+		# Again, general code statistics
 		$hash{tree}{$file}{lines}++ ;
 		$hash{total}{lines}++ ;
 
-		# BLEH!
+		# BLEH! Workaround issue with 4.6.0
 		last if $i{ver} eq '4.6.0'
 			and $c{file} =~ /Tagref\.pm$/ and $c{line} =~ /^__DATA__$/;
 
+
+		################################################################
 		# Perl program file
 		if ( $c{fsubtype} eq 'perl' ) {
 			my $pod = 0;
-			if ( $c{line} =~ /^\s*#/ ) {
+
+			if ( $c{line} =~ /^\s*#/ ) {         # commented line
 				$hash{tree}{$c{file}}{comments}++ ;
 				$hash{total}{perl_comments}++;
-				# TODO check if the comment contains ::log[A-Z]\w+
-				# to discover calls to logGlobal/logDebug/logError
-			} elsif ( $c{line} =~ /\s+#/ ) {
+				# PLANNED check if the comment contains ::log[A-Z]\w+
+				# to discover calls to logGlobal/logDebug/logError.
+				# I don't plan this anymore since wasn't there some talk
+				# on replacing those hack routines with some formal logging?
+
+			} elsif ( $c{line} =~ /\s+(?<!s)#/ ) {     # code + inline comment
 				$hash{tree}{$c{file}}{gray}++ ;
 				$hash{total}{perl_gray}++;
-			} elsif ( $c{line} =~ /^=(head|over|item)/) {
+				$c{line} =~ s/#.*//; # Remove inline comment
+				goto PERLCODE;       # Parse as if it was plain code line
+				
+			} elsif ( $c{line} =~ /^=(head|over|item)/) { # begin of POD
 				$hash{tree}{$c{file}}{pod}++;
 				$hash{total}{perl_pod}++;
 				$pod++;
-			} elsif ( $c{line} =~ /^=cut/) {
+				
+			} elsif ( $c{line} =~ /^=cut/) { # End of POD
 				$hash{tree}{$c{file}}{pod}++;
 				$hash{total}{perl_pod}++;
 				$pod = 0;
-			} elsif ( $c{line} =~ /^\s*$/ ) {
+				
+			} elsif ( $c{line} =~ /^\s*$/ ) { # Empty line
 				$hash{tree}{$c{file}}{empty}++;
 				$hash{total}{perl_empty}++;
-			} elsif ( ! $pod ) {
+				
+			} elsif ( ! $pod ) { # Pure code line, with no inline comment
 				# The default is code
 				$hash{tree}{$c{file}}{code}++;
 				$hash{total}{perl_code}++;
+				PERLCODE:
 
-				line_findFunctionName(\%c);
+				line_findFunctionName(\%c); # See if a function begins on that line
 
 				line_findPragmas(\%c);
 				line_findGlobVars(\%c);
 				line_findCatVars(\%c);
 
 			} else {
-				warn "IMPOSSIBLE case in $file\n";
+				die "IMPOSSIBLE case in $file:$c{file}:$c{lnum} -- $c{line}\n";
 			}
 
 		##########################################################
@@ -307,8 +350,9 @@ sub wanted {
 				warn "I know $c{file} is a tag but regex doesn't match it\n";
 			}
 
-			my %specific; # Item-specific data
-			my @tags; # Support multiple tags defined in the same file
+			my %specific; # Item-specific data # Pretty ugly hack
+			my @tags; # Support multiple tags defined in the same file. Heh, had
+			          # my share of effort to hack this in.
 
 			# This is where we parse the tag file. We should discover settings like
 			# HasEndTag, Order, and so on.
@@ -316,14 +360,28 @@ sub wanted {
 				my $_l = $filedata[$lnum];
 				next unless $_l =~ /^usertag\s/i;
 				my @lis = split /\s+/, $_l;
-				shift @lis; # Remove "Usertag" which is first in the list
+
+				# Remove "Usertag" which is first in the list. (Safety check
+				# done just above so we can go ahead unconditionally)
+				shift @lis;
 
 				# Tag name as really defined, not just the file name
 				# (Most often, the difference is in _ and -).
+				# See if this is ok, or makes only problems (since ITL is 
+				# dash-insensitive anyway).
 				my $tn = shift @lis;
 
 				my $tagopt = lc(shift @lis);
-				next if $tagopt =~ /^documentation$/;
+				# Check if there's a sub defined for this $tagopt.
+				$tagCanon{lc $tagopt} and &{ $tagCanon{lc $tagopt} }(\%c);
+				
+				next if $tagopt =~ /^documentation$/; # Docs sections are ignored
+				# in a way that the dony begin with ^UserTag so they're completely
+				# disregarded.
+
+
+				#
+				# Now follows a SWITCH series, based on value of $tagopt.
 
 				# See if it's a routine and parse routine lines as usual perl lines
 				if ( $tagopt =~ /^routine$/ and "@lis" =~ /\s*<<(\S+)\s*$/i ) {
@@ -359,7 +417,11 @@ sub wanted {
 				}
 
 				# New tag name we didn't see yet
-				# (either first run or another tag definition in the same file)
+				# (either first run or another tag definition in the same file).
+				# We'll record all of them in @tags, then create appropriate records
+				# for each. Body will be shared, this just ensures that they are
+				# recognized under different names (that no tags 'slip through' as
+				# being undetected if they disguise themselves inside a "host" file).
 				{ no warnings;
 				if (!grep{/^$tn$/}@tags and $lis[0] !~ /^alias$/i) { push @tags, $tn }
 				}
@@ -421,7 +483,8 @@ sub wanted {
 			$hash{total}{$fsubtype . "s"}++;
 			last;
 		}
-	} # END FOR each line
+	} # END of 'FOR each (line of file)'
+
 
 	# Now in addition to above general line-by-line processing, do some more
 	# processing on exactly *some* files:
@@ -506,9 +569,9 @@ sub line_findPragmas {
 	
 	# This matches $::Pragma->{} or $$::Pragma{}
 	#if ( $line =~ /(()|\$())\$::Pragma(->\2|\3){(\w+?)}/ ) {
+	#push @{ $hash{symbols}{pragma}{$5} },
 	if ( $c{line} =~ /\$::Pragma->{(\w+?)}/ or         
 			$c{line} =~ /\$Vend::Cfg->{Pragma}{(\w+?)}/ ) {
-	#push @{ $hash{symbols}{pragma}{$5} }, <- for use with above
 		push @{ $hash{symbols}{pragma}{$1} }, {
 	# TODO Here, and 2 places below: make sure if ctx is say, 5:5,
 	# it always shows that much (that is, workaround file beginning/
@@ -543,7 +606,7 @@ sub line_findPragmas {
 
 sub line_findCatVars {
 	######################################################
-	# Diskover global variables
+	# Diskover catalog variables
 	my %c = %{ (shift) };
 	my $context_data = shift;
 
@@ -642,7 +705,7 @@ sub line_findFunctionName {
 	$hash{total}{functions}++;
 }
 
-
+# Parse Config.pm and take out some great stuff ;-)
 sub file_parseVendConfig {
 	my %c = %{ (shift) };
 	my $content = shift; # Complete lib/Vend/Config.pm file
@@ -753,6 +816,7 @@ sub file_parseVendConfig {
 }
 
 
+# This is basically an excersize in bracket-matching
 sub file_extractSub {
 	my $tagname = shift;
 	my $func = shift;

@@ -227,7 +227,7 @@ a:hover { text-decoration: underline; }
 	/*background-color: #e5e5e5;*/
 	/*background-color: #f7e8e8;*/
 	padding: 4px 4px 4px 4px;
-	border-left: dashed 1px #ffd1d1;
+	border-left: dashed 1px #ff8300; /*#ffd1d1;*/
 	padding-left: 8px;
 	margin: 0;
 }
@@ -237,11 +237,11 @@ a:hover { text-decoration: underline; }
 	margin-bottom: 0;
 	/*background-color: #e8b9b9;*/
 	/*background-color: #ffd1d1;*/
-	border: dashed 1px #ffd1d1;
+	border: dashed 1px #ff8300; /*#ffd1d1;*/
 }
 
 .example p {
-	border-left: dashed 1px #ffd1d1;
+	border-left: dashed 1px #ff8300; /*#ffd1d1;*/
 	padding: 10px 0px 10px 4px;
 	margin: 0;
 }
@@ -258,9 +258,9 @@ a:hover { text-decoration: underline; }
 }
 
 .code {
-	background-color: #e5e5e5;
+	background-color: #e0e0e0;
 	padding: 1px 1px 1px 1px;
-	border: dashed 1px white;
+	border: dotted 1px #208cb0;
 }
 
 .option {

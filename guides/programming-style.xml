@@ -103,6 +103,15 @@
 		and white space around operators increases readability.
 		Lining up <literal>=</literal>s in a series of assignments can be
 		used to emphasize the parallel structure.
+<programlisting><![CDATA[
+sub init_calc {
+#::logDebug("reset_state=$Vend::Calc_reset init_state=$Vend::Calc_initialized -- initting calc from " . caller);
+	reset_calc() unless $Vend::Calc_reset;
+	$CGI_array  = \%CGI::values_array;
+	$CGI        = \%CGI::values;
+	$Carts      = $::Carts;
+	$Items      = $Vend::Items;
+]]></programlisting>
 	</para></listitem>
 
 	<listitem><para>
@@ -113,6 +122,10 @@
 		Items in the main package should be referenced as
 		<literal>$::<replaceable>Foo</replaceable></literal>, not
 		<literal>$main::<replaceable>Foo</replaceable></literal>.
+<programlisting>
+## Allow no substitution of downloads
+return if $::Pragma->{download};
+</programlisting>
 	</para></listitem>
 
 	<listitem><para>
@@ -168,6 +181,12 @@ my $buf = qq{<a href="http://google.com/">Visit Google!</a>};
 		With non-container tags, such as &lt;input&gt;, &lt;br&gt; or &lt;hr&gt;,
 		a new &glos-pragma; will be introduced to automatically replace the 
 		closing <literal>&gt;</literal> with <literal>/&gt;</literal>.
+<programlisting><![CDATA[
+<form action="[process]">
+  <input type="text"   name="city" value="[value city]" >
+  <input type="submit"             value=" Submit "     >
+</form>
+]]></programlisting>
 	</para></listitem>
 
 <!--
@@ -179,8 +198,59 @@ Entering and tracking all bugs, even those you find and then fix yourself,
 -->
 
 </itemizedlist>
-
 </sect1>
+
+
+<sect1 id='XMLDOCS'>
+	<title>XMLDOCS notes</title>
+
+	<para>
+	As you might know, XMLDOCS documentation system contains 
+	<filename>bin/stattree</filename> script which parses complete &IC;
+	source tree. Although I really tried to make it recognize code regardless
+	of formatting (much like &PERL; interpreter does), there are still some
+	little suggestions on the programming style to make it easier for XMLDOCS.
+	</para>
+
+	<itemizedlist>
+		<listitem><para>
+		Do not use the hash character <literal>#</literal> in weird contexts.
+		Use it only for comments (putting a space between eventual inline code and
+		comment) or simple substitution such as <literal>s#A#B#g</literal>.
+		(Impact: cosmetic)
+<programlisting><![CDATA[
+# Line comment
+my $test = 12; # Only used for test
+]]></programlisting>
+		</para></listitem>
+		<listitem><para>
+		Do not break word <literal>sub</literal> and subroutine name to separate
+		lines.
+		<code>sub test....</code> is OK, <code>sub \n test</code> is NOT.
+		(Impact: might confuse function tracking code)
+<programlisting><![CDATA[
+sub test1 {
+
+sub test2
+{
+]]></programlisting>
+		</para></listitem>
+		<listitem><para>
+		Do not break obviously "solid" blocks of code to multiple lines. To give
+		you an idea of what I am talking about, let's say you should not break
+		typical xmldocs regexps, such as <literal>/\$::Pragma->{(\w+?)}/</literal>
+		or <literal>/\$Vend::Cfg->{Pragma}{(\w+?)}/</literal>.
+<programlisting><![CDATA[
+return if $::Pragma->{download};
+
+if (
+  $Vend::Cfg->{Pragma}{download}
+  ) {
+]]></programlisting>
+		</para></listitem>
+	</itemizedlist>
+</sect1>
+
 
 </article>
 
