@@ -1,0 +1,36 @@
+__NAME__ purpose
+sendmail (or compatible) binary location
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>filename</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies the location of the <command>sendmail</command>
+binary (executable file).
+__END__
+
+__NAME__ notes
+It is not required to specifically use the original
+<command>sendmail</command> with this directive. Probably all available
+<command>sendmail</command> replacements include the
+<command>sendmail</command> binary of their own, but which is completely
+compatible with the original implementation (regarding command line 
+options).
+</para><para>
+If this directive is not defined (and none of the defaults are available at
+startup), it won't be possible to send any e-mails using standard &IC;
+facilities.
+__END__
+
+__NAME__ example: Setting SendMailProgram
+<programlisting>
+SendMailProgram /usr/sbin/sendmail
+</programlisting>
+__END__
+

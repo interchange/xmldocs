@@ -2,6 +2,12 @@
 Outstanding:
 - For filters: add field which says whether filter's main purpose is to 
   add or remove text (or combined): subtypes: filter, add, transform.
+  (this needs to come between description and example, just like 
+  tags have BEHAVIOR field there, and confs will have global or catalog
+  directive indication in that place).
+- See why email and email-raw produce some errors about usertags olink ID
+- Since directives are in the same file, catconfs and globconfs which 
+  are common need to have 2 source contexts instead of one.
 
 Later:
 - Ask ndw about including [NEW!] and [TODO!] in titles in TOC.
