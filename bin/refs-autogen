@@ -226,7 +226,7 @@ while ( $path = shift @paths) { # For each version specified
 				# We 'shift' here because we unshifted 1 row to match line
 				# numbers with array indexes
 				my $ctxsdata = join "\n", @{ $$ctx{ctx} };
-				$ctxsdata =~ s/^\n//;
+				#$ctxsdata =~ s/^\n//;
 				if ( length $ctxsdata ) {
 					my $ls = $$ctx{ctxs}; # line start nr.
 					( my $plf = $$ctx{file} ) =~ s#.+?/##;
@@ -235,16 +235,16 @@ while ( $path = shift @paths) { # For each version specified
 					
 					my ( $cstart, $cend, $ctxmeta ) = ("", "", "");
 					#if (0) { use Data::Dumper; print Dumper $ctx; sleep 10; }
-					if ( $$ctx{fsubtype} !~ /tag$/ ) {
+					if ( $gkey !~ /tag$/ ) {
 						# WE SHOW ONLY PART OF CONTEXT FOR THOSE
-						$cstart = 1;
-						$cend = scalar @{$$ctx{ctx}}-1;
+						$cstart = $$ctx{lnum}-$$ctx{ctxpre};
+						$cend = $$ctx{lnum}+$$ctx{ctxpost};
 						$ctxmeta = "<sbr/>Line $$ctx{lnum} (context shows lines " .
 							( $cstart . "-" .  $cend );
 					} else {
 						# WE SHOW ALL FOR THOSE
-						$cstart = $$ctx{lnum}-$$ctx{ctxpre};
-						$cend = $$ctx{lnum}+$$ctx{ctxpost}-1;
+						$cstart = 1;
+						$cend = scalar @{$$ctx{ctx}}-1;
 					}
 					# XXX - eliminate negative numbers in source context spans
 					# ( 0-6 == OK, -4-6 != OK )
@@ -412,7 +412,7 @@ sub compress_availability {
 		}
 	}
 	local $" = ", ";
-	if ( $cl > 2 ) {
+	if ( $cl > 1 ) {
 		unshift @avails, "$start-$end";
 		return "@avails"
 	} else {

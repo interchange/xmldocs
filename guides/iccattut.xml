@@ -63,6 +63,9 @@
 				XML conversion,
 				proofreading and expansion,
 				download link for tutorial files.
+				more proofreading and expansion,
+				more proofreading and expansion,
+				....
 			</revremark>
 		</revision>
 	</revhistory>
@@ -86,6 +89,13 @@
 	<abstract>
 		<para>
 		The purpose of this document is to guide you through constructing a simple &IC; catalog <emphasis role='bold'>from scratch</emphasis>. The standard catalogs that ship with Interchange are quite complex since they are ready to be used for business and highlight many of the capabilities that Interchange offers. Those catalogs can be too intimidating<footnote><para>Intimidate: to make timid or fearful; to frighten into submission.</para></footnote> places to start the journey if you're interested in learning the basic Interchange building blocks.
+		</para> <para>
+		Although this tutorial provides ready-to-use examples, please <emphasis role='bold'>think</emphasis>
+		about them (and ideally, retype them instead of copy-pasting to your test catalog). From personal
+		experience, I can tell you <emphasis role='bold'>re-implementing the catalog manually on your system
+		is the only proper way to read this tutorial</emphasis>. All the examples serve only to quickly 
+		clarify all your doubts and save the time you'd spend wondering about which style is right
+		and officially encouraged.
 		</para>
 	</abstract>
 
@@ -99,13 +109,18 @@
 	<sect2 id='Introduction'>
 		<title>Introduction</title>
 		<para>
-		Welcome to the &IC; Catalog Building Tutorial. Interchange originally started as an electronic cart and database display system, but over time it developed into a general application server.
+		Welcome to the &IC; Catalog Building Tutorial. Interchange originally started as an electronic cart and database display system, but over time it developed into a general application server. Interchange
+		is written in Perl programming language, and it gives you the full power of Perl in Interchange pages.
+		While being familiar with Perl (or programming languages in general) is definitely an advantage, 
+		you do not have to be a programmer to use Interchange. Interchange offers elegant and
+		convenient <olink targetdoc='glossary' targetptr='itl'>Interchange tags</olink> (generally called
+		<firstterm>ITL</firstterm> - Interchange Tag Language) to access its features.
 		</para> <para>
 		The simple Interchange <firstterm>catalog</firstterm> you will create during this tutorial should give you a feel of the basic Interchange system. The catalog should also be considered a stepping stone to a more complete and functional Interchange-enabled website. We will rely on default settings as much as possible, to accentuate ideas instead of implementation. We will use a small number of Interchange features and still create a usable website (an on-line store in our example). <emphasis>The resulting site will be simple but usable</emphasis>. The value of this tutorial is in the explanations of the general Interchange ideas and small <emphasis>ready to use</emphasis> examples to get you up to speed.
 		</para> <para>
 		We recommend that you create the files used in this tutorial yourself. You will learn more by creating the directory structure and using your favorite text editor to create files in the proper places on your own system as they are discussed.
 		</para> <para>
-		Writing a complete tutorial without the feedback from the audience is hard. Please jot down your notes and remarks as you digest this tutorial and e-mail docs@icdevgroup.org with your thoughts; which sections need clarification or examples, which parts were useful to you, or what was the weather like over there yesterday afternoon :).
+		Writing a complete tutorial without the feedback from the audience is hard. Please jot down your notes and remarks as you digest this tutorial and e-mail docelic@icdevgroup.org with your thoughts; which sections need clarification or examples, which parts were useful to you, or what was the weather like over there yesterday afternoon :).
 		</para>
 	</sect2>
 
@@ -147,11 +162,22 @@
 	<sect2 id='ImportantSettingsandPaths'>
 		<title>Important Settings and Paths</title>
 		<para>
-		In order to follow this tutorial you will need to know the locations of the following directories, and have write permissions on them:
+		In order to follow this tutorial, you will need to know the following values:
 		</para>
 		<itemizedlist>
 			<listitem><para>
-				The Interchange software directory (<firstterm>ICROOT</firstterm>): 
+				Default Interchange username:
+				<itemizedlist>
+					<listitem><para>
+					<systemitem class='username'>interchange</systemitem> (Debian GNU and tarballs)
+					</para></listitem>
+					<listitem><para>
+					<systemitem class='username'>interch</systemitem> (Red Hat)
+					</para></listitem>
+				</itemizedlist>
+				</para></listitem>
+			<listitem><para>
+				Interchange software directory (<firstterm>ICROOT</firstterm>): 
 				<itemizedlist>
 					<listitem><para>
 					<filename class='directory'>/usr/lib/interchange/</filename> (Debian GNU and Red Hat)
@@ -422,7 +448,7 @@ ErrorFile /var/log/interchange/error.log
 			You can't use positional parameters if the values contain whitespace. For example, <code>[tagname "[data session mv_arg]"]</code> is invalid; the only way to specify that is <code>[tagname optionname="[data session mv_arg]"]</code>. Also, if the first parameter is positional, all must be positional (and vice versa, if the first parameter is named - all must be named).
 		</para></important>
 		<para>
-		Tags can span multiple lines which helps readability when the tags have a large number of (long) options. There's a whole lot of tags available (around 200 in Interchange 5.2), but in this tutorial very few will be addressed. For a complete listing of the ITL tags, see the <!--<olink targetdoc='ictags' targetptr='ictags'>-->Interchange Tags Reference<!--</olink>-->.
+		Tags can span multiple lines which helps readability when the tags have a large number of (long) options. There's a whole lot of tags available (around 200 in Interchange 5.2), but in this tutorial very few will be addressed. For a complete listing of the ITL tags, see the <olink targetdoc='systemtags' targetptr='systemtags'>SystemTags</olink>, <olink targetdoc='usertags' targetptr='usertags'>UserTags</olink> and <olink targetdoc='uitags' targetptr='uitags'>UITags</olink>. <!-- TODO: refer to all-in-one page -->
 		</para> <para>
 		The first tag we'll use is going to be the <tag>include</tag> tag; it reads the specified file (relative to the catalog directory - CATROOT), reparses it for any Interchange tags, and puts the final result in place of the tag. We'll demonstrate that now on the next page you'll need to create.
 	</para>
@@ -566,7 +592,7 @@ ErrorFile /var/log/interchange/error.log
   </tr>
     ]]></programlisting>
 		</para> <para>
-		The <tag>loop-code</tag> tag refers to the primary key (unique identifier) for the current row of the database table in question. In this case, it will produce the same output as the <tag>loop-field sku</tag> tag, because the 'sku' field is the primary key for products table. In each case, the tag is replaced by the appropriate element. When put together, Interchange generates a page with your products table on it.
+		The <code>loop-code</code> tag refers to the primary key (unique identifier) for the current row of the database table in question. In this case, it will produce the same output as the <code>loop-field sku</code> tag, because the 'sku' field is the primary key for products table. In each case, the tag is replaced by the appropriate element. When put together, Interchange generates a page with your products table on it.
 		</para> <para>
 		Your finished <filename>pages/index.html</filename> page should look like this:
 		<programlisting>
@@ -647,14 +673,14 @@ ErrorFile /var/log/interchange/error.log
 		</para> <para>
 		For the <tag>order</tag> tag, Interchange expects a default page called <filename>pages/ord/basket.html</filename>. This page displays the contents of the shopping basket and contains other shopping basket functionality.
 		</para> <para>
-		The standard demo catalog has a full-featured shopping basket available for use, but this tutorial teaches you to build your own simple one. The shopping basket items can be accessed using a set of tags that have an <tag>item</tag> prefix. Put the following code in the new <filename>pages/ord/basket.html</filename> file. The section that follows explains the tags used.
+		The standard demo catalog has a full-featured shopping basket available for use, but this tutorial teaches you to build your own simple one. The shopping basket items can be accessed using a set of tags that have prefix of "item". Put the following code in the new <filename>pages/ord/basket.html</filename> file. The section that follows explains the tags used.
 		<programlisting>
 <xi:include parse='text'  href='../files/tutorial-phase3/pages/ord/basket.html'/>
 		</programlisting>
 		</para> <para>
-		The basket items can be accessed one at a time by using the <tag>item-list</tag> tag. So we will create a table by iterating through the basket items. The text within the <tag>item-list</tag> <tag>item-list</tag> tags is created for each item in the list.
+		The basket items can be accessed one at a time by using the <tag>item-list</tag> tag. So we will create a table by iterating through the basket items. The text within the <tag>item-list</tag> <tag>/item-list</tag> tags is created for each item in the list.
 		</para> <para>
-		<tag>item-quantity</tag> shows the quantity of the item ordered. If the same item is ordered multiple times, the quantity increases.
+		<code>item-quantity</code> shows the quantity of the item ordered. If the same item is ordered multiple times, the quantity increases.
 		</para> <para>
 		<code>[item-field description]</code> shows the description from the product database table. Any field that is not special to Interchange can be accessed from the shopping cart this way.
 		</para> <para>
@@ -843,9 +869,9 @@ __END__
 Locale en_US currency_symbol $
 		</programlisting>
 		</para> <para>
-		Restart Interchange and view your catalog. You will notice little has changed on the welcome page or the flypages, <emphasis role='bold'>but in the shopping cart</emphasis> (<filename>pages/ord/basket.html</filename>) all your prices should be formatted as U.S. dollars ("1347.3" has become "$1,347.30"). Why the currency is only displayed on the basket page is easy to understand; we use the <tag>item-price</tag> tag there. That tag is equivalent to <code>[item-field price]</code> used elsewhere, but it has that extra logic associated with it that automatically displays the currency format. To use <tag>item-price</tag> without the auto-format, you'd have to change the <tag>item-price</tag> tag to <code>[item-price noformat]</code>.
+		Restart Interchange and view your catalog. You will notice little has changed on the welcome page or the flypages, <emphasis role='bold'>but in the shopping cart</emphasis> (<filename>pages/ord/basket.html</filename>) all your prices should be formatted as U.S. dollars ("1347.3" has become "$1,347.30"). Why the currency is only displayed on the basket page is easy to understand; we use the <tag>item-price</tag> tag there. That tag is equivalent to <code>[item-field price]</code> used elsewhere, but it has that extra logic associated with it that automatically displays the currency format. To use <tag>item-price</tag> without the auto-format, you'd have to change the <code>item-price</code> tag to <code>[item-price noformat]</code>.
 		</para> <para>
-		But that's probably not what you want to do. You're probably more interested in formatting your other prices (such as those on the Welcome page) as currency. To do that, you could obviously replace <code>[item-field price]</code> with <tag>item-price</tag>, but we'll take on more general approach here. Simply use the <tag>currency</tag><tag>/currency</tag> tag pair for all price values. Make the following change to <filename>pages/index.html</filename>:
+		But that's probably not what you want to do. You're probably more interested in formatting your other prices (such as those on the Welcome page) as currency. To do that, you could obviously replace <code>[item-field price]</code> with <code>item-price</code>, but we'll take on more general approach here. Simply use the <tag>currency</tag><tag>/currency</tag> tag pair for all price values. Make the following change to <filename>pages/index.html</filename>:
 		<programlisting><![CDATA[
   [loop search="ra=yes/fi=products"]
   <tr>
@@ -1012,7 +1038,7 @@ Now add the following to the left template piece:
   </table>
     ]]></programlisting>
 		</para> <para>
-		In the first set of &lt;select&gt; &lt;/select&gt; HTML tags a list is generated of the months to choose from. This is accomplished by using a <tag>loop</tag> tag. In this case we are looping over an explicit list. The list is provided in the list parameter. Use caution when typing this, as it is sensitive to formatting (which may not be reflected in this document). Make sure that the numbers are the first characters on each new line and that the single tab separates them from the rest of the line text. Since the columns in this list are not named, the first element can be accessed using <tag>loop-code</tag> or <code>[loop-pos 0]</code> with subsequent elements being accessed by <code>[loop-pos N]</code> where N is the number of the column you want. Notice that the elements are zero-indexed. Each time through this loop Interchange generates a select &lt;option&gt; with a number as the value and the name of the month as the text for the select menu.
+		In the first set of &lt;select&gt; &lt;/select&gt; HTML tags a list is generated of the months to choose from. This is accomplished by using a <tag>loop</tag> tag. In this case we are looping over an explicit list. The list is provided in the list parameter. Use caution when typing this, as it is sensitive to formatting (which may not be reflected in this document). Make sure that the numbers are the first characters on each new line and that the single tab separates them from the rest of the line text. Since the columns in this list are not named, the first element can be accessed using <code>loop-code</code> or <code>[loop-pos 0]</code> with subsequent elements being accessed by <code>[loop-pos N]</code> where N is the number of the column you want. Notice that the elements are zero-indexed. Each time through this loop Interchange generates a select &lt;option&gt; with a number as the value and the name of the month as the text for the select menu.
 		</para> <para>
 		For the next set of &lt;select&gt; &lt;/select&gt; tags embedded Perl is used to generate the list which is iterated over. Perl code can be embedded in Interchange pages in order to extend the abilities of the system. Make sure you type back-ticks (grave accents) after "list=" and before the closing bracket (and <emphasis role='bold'>not apostrophes</emphasis>). This code generates an entry for seven years in addition to the current year. It is not necessary at this point for you to understand this Perl code.
 		</para>
@@ -1189,7 +1215,7 @@ Variable BOTTOM <bottom
 	First and foremost - <emphasis role='bold'>congratulations</emphasis> for completing this tutorial (and scrolling down the page to see this message doesn't count!).
 	</para>
 	<para>
-	Every good tutorial includes a set of exercises for the readers, and we won't make an exception here. If you don't know any more Interchange than we presented in this tutorial, the following tasks might seem too difficult, but we will also give you some hints... Or wait.. No, we won't :).
+	Every good tutorial includes a set of exercises for the readers, and we won't make an exception here. If you don't know any more Interchange than we presented in this tutorial, the following tasks might seem too difficult, but you can take a look at the excellent collection of <olink targetdoc='howtos' targetptr='howtos'>Interchange HOWTOs</olink> :).
 	</para>
 	<itemizedlist>
 		<listitem><para>

@@ -4,6 +4,7 @@
 	<!ENTITY iccattut SYSTEM "../tmp/iccattut-c.db"> 
 	<!ENTITY xmldocs SYSTEM "../tmp/xmldocs-c.db"> 
 	<!ENTITY howtos SYSTEM "../tmp/howtos-c.db"> 
+	<!ENTITY glossary SYSTEM "../tmp/glossary-c.db"> 
 	<!ENTITY pragmas SYSTEM "../tmp/pragmas-c.db"> 
 	<!ENTITY globvars SYSTEM "../tmp/globvars-c.db"> 
 	<!ENTITY uitags SYSTEM "../tmp/uitags-c.db"> 
@@ -34,6 +35,12 @@
 			<dir name='howtos'>
 				<document targetdoc="howtos">
 				&howtos;
+				</document>
+			</dir>
+			
+			<dir name='glossary'>
+				<document targetdoc="glossary">
+				&glossary;
 				</document>
 			</dir>
 			

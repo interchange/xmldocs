@@ -4,6 +4,7 @@
 	<!ENTITY iccattut SYSTEM "../tmp/iccattut-nc.db"> 
 	<!ENTITY xmldocs SYSTEM "../tmp/xmldocs-nc.db"> 
 	<!ENTITY howtos SYSTEM "../tmp/howtos-nc.db"> 
+	<!ENTITY glossary SYSTEM "../tmp/glossary-nc.db"> 
 	<!ENTITY pragmas SYSTEM "../tmp/pragmas-nc.db"> 
 	<!ENTITY globvars SYSTEM "../tmp/globvars-nc.db"> 
 	<!ENTITY usertags SYSTEM "../tmp/usertags-nc.db"> 
@@ -21,6 +22,7 @@
 			<document targetdoc="iccattut" baseuri="iccattut.html"> &iccattut; </document>
 			<document targetdoc="xmldocs" baseuri="xmldocs.html"> &xmldocs; </document>
 			<document targetdoc="howtos" baseuri="howtos.html"> &howtos; </document>
+			<document targetdoc="glossary" baseuri="glossary.html"> &glossary; </document>
 			<document targetdoc="pragmas" baseuri="pragmas.html"> &pragmas; </document>
 			<document targetdoc="globvars" baseuri="globvars.html"> &globvars; </document>
 			<document targetdoc="usertags" baseuri="usertags.html"> &usertags; </document>

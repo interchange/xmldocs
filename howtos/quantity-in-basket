@@ -36,7 +36,7 @@
 
 	</chapterinfo>
 
-	<sect1 id='introduction'>
+	<sect1 id='quantityfields_introduction'>
 		<title>Introduction</title>
 		<para>
 		On your Interchange pages, you must provide some kind of a HTML form
@@ -66,7 +66,7 @@
 		</screen>
 	</sect1>
 
-	<sect1 id='solution'>
+	<sect1 id='quantityfields_solution'>
 		<title>Solution</title>
 		<para>
 		What we need to do is:

@@ -59,12 +59,19 @@ $O/%: %.xml skel
 
 
 #############################################################
-# OLINK DBs
+# OLINK DBs (interlinking between documents)
 $T/%-nc.db: %.xml $T
 	$(PSR) $(PSR_FLAGS)                                               \
 	  --stringparam collect.xref.targets only                         \
 	  --stringparam targets.filename $@                               \
 	  docbook/html-nochunks.xsl $<
+	  tail +2 $@ > $T/tail
+	  mv $T/tail $@
+$T/%-c.db: %.xml $T
+	$(PSR) $(PSR_FLAGS)                                               \
+	  --stringparam collect.xref.targets only                         \
+	  --stringparam targets.filename $@                               \
+	  docbook/html-chunks.xsl $<
 	  tail +2 $@ > $T/tail
 	  mv $T/tail $@
 
@@ -140,7 +147,8 @@ cache/%/.cache.bin: sources/%
 
 #############################################################
 # Reference .xmls
-# Silly, rewrite this, I forgot about $*
+# Silly, rewrite this, I forgot about $*. Or $* wouldn't help? I'm not 
+# willing to think about it right now.
 refxmls: BOTH = --both
 refxmls: bin/refs-autogen $(foreach stype,$(SYMBOL_TYPES),refs/$(stype).xml)
 	:
@@ -149,6 +157,7 @@ refs/%.xml: BNAME = $(subst refs/,,$@)
 $T/%.list: FNAME = $(subst .list,,$(BNAME))
 refs/%.xml: FNAME = $(subst .xml,,$(BNAME))
 $T/%.list refs/%.xml: bin/refs-autogen $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin)
+	# PEH, -g is useless since tags migrate between tag groups
 	#bin/refs-autogen -g $(FNAME) -o $@ $(BOTH) $(IC_VERSIONS)
 	bin/refs-autogen -o $@ $(BOTH) $(IC_VERSIONS)
 
@@ -169,9 +178,6 @@ howtos/howtos.xml: $(shell find howtos/ -regex '.+[^(\.xml)]$$')
 #	-o $(OUTPUT)/man/                                              \
 #	man $<
 ##
-## OlinkDBs
-##
-## OlinkDB information for unchunked parts
 ##tmp/olinkdbs: $(LTMPDIR) \
 ##  $(patsubst guides/%.xml,$(LTMPDIR)/%-c.db,$(wildcard guides/*.xml))  \
 ##  $(patsubst guides/%.xml,$(LTMPDIR)/%-nc.db,$(wildcard guides/*.xml)) \
@@ -184,23 +190,6 @@ howtos/howtos.xml: $(shell find howtos/ -regex '.+[^(\.xml)]$$')
 #	make $(patsubst refs/%.xml,$(LTMPDIR)/%-c.db,$(wildcard refs/*.xml))
 #	make $(patsubst refs/%.xml,$(LTMPDIR)/%-nc.db,$(wildcard refs/*.xml))
 #	touch $(LTMPDIR)/olinkdbs
-#
-#$(LTMPDIR)/%-nc.db: %.xml $(LTMPDIR)
-#	$(XSLT) $(XSLT_FLAGS)                                          \
-#	--stringparam collect.xref.targets only                        \
-#	--stringparam targets.filename $@                              \
-#	docbook/html-nochunks.xsl $<
-#	tail +2 $@ > $(LTMPDIR)/tail
-#	mv $(LTMPDIR)/tail $@
-#
-## OlinkDB information for chunked parts
-#$(LTMPDIR)/%-c.db: %.xml $(TMPDIR)
-#	$(XSLT) $(XSLT_FLAGS)                                          \
-#	--stringparam collect.xref.targets only                        \
-#	--stringparam targets.filename $@                              \
-#	docbook/html-chunks.xsl $<
-#	tail +2 $@ > $(LTMPDIR)/tail
-#	mv $(LTMPDIR)/tail $@
 #
 #	TODO:
 #	- make cache

@@ -25,7 +25,7 @@
 
 	</chapterinfo>
 
-	<sect1 id='introduction'>
+	<sect1 id='customsendmail_introduction'>
 		<title>Introduction</title>
 		<para>
 		Someone <ulink url="http://www.icdevgroup.org/pipermail/interchange-users/2004-July/039811.html">was wondering</ulink> how to optimize the order processing on a busy site. It was observed that about once in every ten times, the <filename>etc/mail_receipt</filename> takes a few <emphasis>extra</emphasis> seconds before it's mailed out.
@@ -47,7 +47,7 @@
 		</screen>
 	</sect1>
 
-	<sect1 id='solution'>
+	<sect1 id='customsendmail_solution'>
 		<title>Solution</title>
 		<para>
 		To eliminate this "delay", you could use a custom script that accepts the message on standard input (STDIN), and then calls <application>Sendmail</application> in the background.
