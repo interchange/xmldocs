@@ -1,13 +1,12 @@
 <?xml version="1.0" standalone="no"?>
 
-<!-- catalog not working ? -->
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
 	"../docbook/docbookxi.dtd">
 
 <article id='iccattut'>
 
 <articleinfo>
-	<title>Interchange Guides: the Catalog Building Tutorial</title>
+	<title>Interchange Guides: Concepts and Catalogs Tutorial</title>
 	<titleabbrev>iccattut</titleabbrev>
 	<edition>version xml2.0pre</edition>
 
@@ -88,14 +87,55 @@
 
 	<abstract>
 		<para>
-		The purpose of this document is to guide you through constructing a simple &IC; catalog <emphasis role='bold'>from scratch</emphasis>. The standard catalogs that ship with Interchange are quite complex since they are ready to be used for business and highlight many of the capabilities that Interchange offers. Those catalogs can be too intimidating<footnote><para>Intimidate: to make timid or fearful; to frighten into submission.</para></footnote> places to start the journey if you're interested in learning the basic Interchange building blocks.
-		</para> <para>
-		Although this tutorial provides ready-to-use examples, please <emphasis role='bold'>think</emphasis>
-		about them (and ideally, retype them instead of copy-pasting to your test catalog). From personal
-		experience, I can tell you <emphasis role='bold'>re-implementing the catalog manually on your system
-		is the only proper way to read this tutorial</emphasis>. All the examples serve only to quickly 
-		clarify all your doubts and save the time you'd spend wondering about which style is right
-		and officially encouraged.
+		This Guide should serve two main groups of users:
+		</para>
+		<itemizedlist>
+			<listitem><para>
+			Those who want to find their way with Interchange, and take on
+			Interchange development equipped
+			with <emphasis role='bold'>good understanding of underlying concepts
+			and officially recommended practices</emphasis>.
+			</para></listitem>
+			<listitem><para>
+			Those who have decisional powers and need input on Interchange's
+			strengths and
+			available program support to make educated business decisions.
+			</para></listitem>
+		</itemizedlist>
+		<para>
+		As information is only useful within a context, we'll clearly present
+		the philosophies and implementations upon which Interchange is built,
+		but depending on your particular expectation from this Guide, you might
+		be interested in less or more supplemental material on individual subjects.
+		</para>
+		<para>
+		Throughout this Guide we'll be incrementally developing a sample
+		Interchange catalog (one that we'll build from
+		scratch<footnote><para>scratch: a point at the beginning of a project at
+		which nothing has been done ahead of time, such as in "building a
+		school system from scratch".
+		</para></footnote>), because
+		the examples will allow us to describe the concepts at work underneath.
+		Only when you get to understand Unix, general programming and Interchange
+		concepts, will you be able to successfully take on powerful Interchange
+		catalogs and professional Interchange
+		development.<sbr/>
+		Standard catalogs that ship with Interchange are unsuitable for our
+		purpose - they are ready to be used for business and they build upon
+		many Interchange design ideas and capabilities, most of which
+		are probably completely unknown to you at this point.
+		</para>
+		<para>
+		Although this Guide provides ready-to-use examples, please
+		<emphasis role='bold'>think</emphasis> about them (and ideally, retype
+		them instead of copy-pasting to your test catalog). From personal
+		experience, I can tell you thar <emphasis role='bold'>re-implementing
+		the sample catalog manually on your system is the only proper way to
+		read this tutorial</emphasis> (unless you're only interested in
+		an easy overview). The examples serve to
+		eliminate doubts that could arise out of either linguistic limitations or
+		authors' inabilities to adequately <emphasis>express</emphasis> the
+		mindset on a sheet of paper.
 		</para>
 	</abstract>
 
@@ -103,146 +143,225 @@
 
 
 
-<sect1 id='BeforeYouBegin'>
-	<title>Before You Begin</title>
+<sect1 id='Introduction'>
+	<title>Introduction</title>
 
-	<sect2 id='Introduction'>
-		<title>Introduction</title>
+	<sect2 id='Overview'>
+		<title>Overview</title>
 		<para>
-		Welcome to the &IC; Catalog Building Tutorial. Interchange originally started as an electronic cart and database display system, but over time it developed into a general application server. Interchange
-		is written in Perl programming language, and it gives you the full power of Perl in Interchange pages.
-		While being familiar with Perl (or programming languages in general) is definitely an advantage, 
-		you do not have to be a programmer to use Interchange. Interchange offers elegant and
-		convenient <olink targetdoc='glossary' targetptr='itl'>Interchange tags</olink> (generally called
-		<firstterm>ITL</firstterm> - Interchange Tag Language) to access its features.
-		</para> <para>
-		The simple Interchange <firstterm>catalog</firstterm> you will create during this tutorial should give you a feel of the basic Interchange system. The catalog should also be considered a stepping stone to a more complete and functional Interchange-enabled website. We will rely on default settings as much as possible, to accentuate ideas instead of implementation. We will use a small number of Interchange features and still create a usable website (an on-line store in our example). <emphasis>The resulting site will be simple but usable</emphasis>. The value of this tutorial is in the explanations of the general Interchange ideas and small <emphasis>ready to use</emphasis> examples to get you up to speed.
-		</para> <para>
-		We recommend that you create the files used in this tutorial yourself. You will learn more by creating the directory structure and using your favorite text editor to create files in the proper places on your own system as they are discussed.
-		</para> <para>
-		Writing a complete tutorial without the feedback from the audience is hard. Please jot down your notes and remarks as you digest this tutorial and e-mail docelic@icdevgroup.org with your thoughts; which sections need clarification or examples, which parts were useful to you, or what was the weather like over there yesterday afternoon :).
+		&IC; originally started as an <emphasis>electronic catalog and database
+		display system</emphasis>, but over time it developed into a general
+		application server. It is written in the &PERL; programming language,
+		and it gives you the full power of Perl in your Interchange pages.  While
+		being familiar with Perl (or programming languages in general) is
+		definitely an advantage, you do not have to be a programmer to use
+		Interchange. If you are interested in doing online business with
+		Interchange, then you'll be glad to hear that it already ships with web
+		shop demo catalogs.  Those catalogs are mostly written with &glos-ITL;
+		tags (tags offer quite simple way to access Interchange features), and
+		are easily modifiable. If you are willing to trade money for time or
+		need professional solution to your problem, then please see
+		&howto-professional-support;.
+		</para>
+		<para>
+		Please keep in mind that we are interested in feedback from the community,
+		so please jot down your notes and remarks as you digest the Guide
+		and e-mail
+		<ulink url="mailto:docelic@icdevgroup.org">docelic@icdevgroup.org</ulink>
+		with your thoughts on life, Universe, and everything.
 		</para>
 	</sect2>
 
-	<sect2 id='InterchangeandtheStandardDemoCatalogInstallation'>
-		<title>Interchange and the Standard Demo Catalog Installation</title>
+	<sect2 id='WorkingEnvironment'>
+		<title>Working Environment</title>
 		<para>
-		The easiest way to prepare the environment (that is, install Interchange and the standard catalog) is to use installable packages prepared for you in the <firstterm>RPM</firstterm> (&RH;, SuSE or Mandrake Linux systems) or <firstterm>DEB</firstterm> (&DEBGNU;) formats. On Debian systems, run <userinput>apt-get install interchange interchange-ui interchange-cat-standard interchange-doc</userinput>. For other formats, see the Interchange &ICDL; page.
+		Unless you are only interested in an overview, you will most likely want
+		to set up Interchange at your own computer so that you can properly
+		follow this Guide.
 		</para>
-		<note><para>
-		Interchange version 5.2.0 is the last one to ship with the <emphasis>Foundation</emphasis> demo catalog. If you suspect you only have the old packages, install interchange-cat-foundation instead of interchange-cat-standard.</para></note>
 		<para>
-		You can also get Interchange by downloading and unpacking the basic Interchange tarball or checking out a copy of the &ICCVS; repository, and performing manual installation yourself. These installations can be done either as a regular user, or as root installing for a special Interchange user, but are out of scope of this tutorial.
-		</para> <para>
-		During the Debian package installation, you will be asked to select the Interchange username. To eliminate basic security issues, the Interchange daemon will not run as root, and it should not run as the web server user either. Therefore, a new system account to run the Interchange daemon will be created (<systemitem class='username'>interchange</systemitem> by default). With RPM packages, the default Interchange username will be <systemitem class='username'>interch</systemitem><footnote><para>There are a lot of packaging differences between Debian and Red Hat packages. Some are mandated by system policies (which is especially the case with Debian GNU), while others (such as the default username) reflect preferences of the package maintainers and the corresponding user groups.</para></footnote>.
-		</para> <para>
-		You must access the demo catalog to verify that your Interchange installation was successful. The interchange-cat-standard catalog was supposed to install itself and register with Interchange by modifying the main <filename moreinfo='refentry'>interchange.cfg</filename> config file (or some other file, such as <filename>/etc/interchange/catalogs.cfg</filename>, which logically puts all catalog definitions in a separate file and is read by <filename>interchange.cfg</filename>). The catalog should have also placed the <firstterm>link program</firstterm> in your <filename class='directory'>cgi-bin</filename> directory - the link program connects the web server software with the Interchange daemon. The demo catalog should be accessible by visiting the <ulink url="http://localhost/cgi-bin/ic/standard/index.html">Standard</ulink> (or <ulink url="http://localhost/cgi-bin/ic/foundation/index.html">Foundation</ulink>) Demo index page on your local host.
+		The easiest way to get Interchange installed is to install Interchange
+		packages that have been prepared by your &glos-OS; vendor:
 		</para>
-	</sect2>
+		<itemizedlist>
+			<listitem vendor='deb'><para>
+			<userinput>apt-get install interchange interchange-ui interchange-cat-&std-catalog;</userinput>
+			</para>
+			<para>
+			During the Debian package installation, you will be asked to select the
+			Interchange username. To eliminate basic security issues, the Interchange
+			daemon will not run as root, and it should not run as the web server
+			user either. Therefore, a new system account 
+			<systemitem class='username'>interchange</systemitem> will be created
+			to run the &IC; daemon.
+			</para>
+			<para>
+			Note that there are a lot of packaging differences between Debian and
+			Red Hat packages. Some are mandated by system policies (which is
+			especially the case with Debian GNU), while others (such as the default
+			username) reflect preferences of the package maintainers and the
+			corresponding user groups.
+			</para>
+			</listitem>
+			<listitem vendor='rh'>
+			<para>
+			TODO
+			<userinput>
+			</userinput>
+			</para>
+			<para>
+			During the package installation, you will be asked to select the
+			Interchange username. To eliminate basic security issues, the Interchange
+			daemon will not run as root, and it should not run as the web server
+			user either. Therefore, a new system account 
+			<systemitem class='username'>interch</systemitem> will be created
+			to run the &IC; daemon.
+			</para>
+			</listitem>
+			<listitem vendor='tarball'><para>
+			<userinput>
+			wget <ulink url="ftp://ftp.icdevgroup.org/pub/interchange-latest.tar.gz">ftp://ftp.icdevgroup.org/pub/interchange-latest.tar.gz</ulink>
+			</userinput>
+			</para></listitem>
+		</itemizedlist>
 		
-	<sect2 id='TestServerHostname'>
+		<note><para>
+		The development version of Interchange ships with the demo catalog
+		named <emphasis>&Std-catalog;</emphasis>. Latest stable version shipped
+		with the catalog <emphasis>&Prev-catalog;</emphasis>, so adjust
+		the above <literal>interchange-cat-&std-catalog;</literal> accordingly.
+		</para></note>
+
+		<para>
+		Although we will not use the demo catalog that ships with Interchange,
+		you're advised to install one, just to verify that your Interchange
+		installation is valid and capable of displaying at least basic content
+		(you can safely ignore any problems with images).
+		</para>
+		
+	<sect3 id='TestServerHostname'>
 		<title>Test Server Hostname</title>
 		<para>
-		We recommend that you always use your full system name (such as <systemitem class='systemname'>myhost.mydomain.local</systemitem>) instead of <systemitem class='systemname'>localhost</systemitem>. The HTTP State Management Mechanism (<ulink url="http://www.ietf.org/rfc/rfc2109.txt">RFC 2109</ulink>) specifies that cookies can only be set when the domain name contains at least two dots. Interchange does work even with client cookies disabled, but your session will be dropped every time you leave the catalog, since the session ID (which Interchange then embeds in the URL) will be lost.
+		We recommend that you always use your full system name (such as
+		<systemitem class='systemname'>myhost.mydomain.local</systemitem>) to
+		access the &IC; catalog instead of
+		<systemitem class='systemname'>localhost</systemitem>. The
+		<ulink url="http://www.ietf.org/rfc/rfc2109.txt">HTTP State Management
+		Mechanism (RFC 2109)</ulink> specifies that cookies can only be set
+		when the domain name contains at least two dots. <emphasis role='bold'>
+		Interchange does work even with client cookies disabled</emphasis>, but
+		your session will be dropped every time you leave the catalog, since the
+		session ID (which Interchange then embeds in the URL) will be lost.
 		</para> <para>
-		If your system does not have a suitable name, and you're not going to bother yourself with establishing one, there's the <filename>/etc/hosts</filename> file you can tune for the desired effect. Simply modify:
+		If your system does not have a suitable name, and you're not going to
+		bother yourself with establishing one, here's how you can quickly tune
+		<filename>/etc/hosts</filename> for the purpose. Simply modify:
 		<programlisting>
 127.0.0.1       localhost
 		</programlisting>
-		</para> <para>
 		to become
 		<programlisting>
 127.0.0.1       localhost myhost.mydomain.local mydomain.local
 		</programlisting>
-		</para> <para>
-		and you'll be able to use <systemitem class='systemname'>myhost.mydomain.local</systemitem> as your server name.
+		and you'll be able to use
+		<systemitem class='systemname'>myhost.mydomain.local</systemitem> as
+		your server name.
 		</para>
-	</sect2>
+	</sect3>
 		
-	<sect2 id='ImportantSettingsandPaths'>
+	<sect3 id='ImportantSettingsandPaths'>
 		<title>Important Settings and Paths</title>
 		<para>
 		In order to follow this tutorial, you will need to know the following values:
 		</para>
 		<itemizedlist>
 			<listitem><para>
-				Default Interchange username:
-				<itemizedlist>
-					<listitem><para>
-					<systemitem class='username'>interchange</systemitem> (Debian GNU and tarballs)
+			Default Interchange daemon username:
+			<itemizedlist>
+					<listitem vendor='deb'><para>
+						<literal>interchange</literal> (Debian GNU)
 					</para></listitem>
-					<listitem><para>
-					<systemitem class='username'>interch</systemitem> (Red Hat)
+					<listitem vendor='deb'><para>
+						<literal>interch</literal> (Red Hat)
+					</para></listitem>
+					<listitem vendor='tarball'><para>
+						<literal>interch</literal> (tarball)
 					</para></listitem>
 				</itemizedlist>
-				</para></listitem>
+			</para></listitem>
 			<listitem><para>
-				Interchange software directory (<firstterm>ICROOT</firstterm>): 
-				<itemizedlist>
-					<listitem><para>
-					<filename class='directory'>/usr/lib/interchange/</filename> (Debian GNU and Red Hat)
+			Default Interchange software directory (&glos-ICROOT;):
+			<itemizedlist>
+					<listitem vendor='deb'><para>
+						<literal>/usr/lib/interchange</literal> (Debian GNU)
 					</para></listitem>
-					<listitem><para>
-					<filename class='directory'>/usr/local/interchange/</filename> (tarball)
+					<listitem vendor='rh'><para>
+						<literal>/usr/lib/interchange</literal> (Red Hat)
 					</para></listitem>
-				</itemizedlist>
-				</para></listitem>
-			<listitem><para id="catdir">
-				Base Interchange catalogs directory:
-				<itemizedlist>
-					<listitem><para>
-					<filename class='directory'>/var/lib/interchange/catalogs/</filename>
-					(Debian GNU)
-					</para></listitem>
-					<listitem><para>
-					<filename class='directory'>/var/lib/interchange/</filename>
-					(RPM-based systems)
+					<listitem vendor='tarball'><para>
+						<literal>/usr/local/interchange</literal> (tarball)
 					</para></listitem>
 				</itemizedlist>
-				</para></listitem>
+			</para></listitem>
 			<listitem><para>
-				Interchange <filename class='directory'>cgi-bin</filename> directory: 
-				<itemizedlist>
-					<listitem><para>
-					<filename class='directory'>/usr/lib/cgi-bin/ic/</filename>
-					(Debian GNU)
+			Default Interchange catalogs directory:
+			<itemizedlist>
+					<listitem vendor='deb'><para>
+						<literal>/var/lib/interchange/catalogs</literal> (Debian GNU)
 					</para></listitem>
-					<listitem><para>
-					<filename class='directory'>/var/www/cgi-bin/</filename>
-					(RPM-based systems)
+					<listitem vendor='rh'><para>
+						<literal>/var/lib/interchange</literal> (Red Hat)
 					</para></listitem>
-					<listitem><para>
-					<filename class='directory'>/usr/lib/cgi-bin/</filename>
-					(tarball)
+					<listitem vendor='tarball'><para>
+					TODO
+						<literal></literal> (tarball)
 					</para></listitem>
 				</itemizedlist>
-				</para></listitem>
+			</para></listitem>
 			<listitem><para>
-				Standard demo catalog URL: 
-				<itemizedlist>
-					<listitem><para>
-					<ulink url="http://myhost.mydomain.local/cgi-bin/ic/standard/index.html"/> (Debian GNU)
+			Default <literal>cgi-bin</literal> directory:
+			<itemizedlist>
+					<listitem vendor='deb'><para>
+						<literal>/usr/lib/cgi-bin</literal> (Debian GNU)
 					</para></listitem>
-					<listitem><para>
-					<ulink url="http://myhost.mydomain.local/cgi-bin/standard/index.html"/> (RPM-based systems and tarballs)
+					<listitem vendor='rh'><para>
+						<literal>/var/www/cgi-bin</literal> (Red Hat)
+					</para></listitem>
+					<listitem vendor='tarball'><para>
+					TODO
+						<literal></literal> (tarball)
 					</para></listitem>
 				</itemizedlist>
-				</para></listitem>
+			</para></listitem>
+			<listitem><para>
+			Default demo catalog URL:
+			<itemizedlist>
+					<listitem vendor='deb'><para>
+						<ulink url="http://myhost.mydomain.local/cgi-bin/ic/standard/index.html"/> (Debian GNU)
+					</para></listitem>
+					<listitem vendor='rh'><para>
+						<literal>/var/www/cgi-bin</literal> (Red Hat)
+					</para></listitem>
+					<listitem vendor='tarball'><para>
+					TODO
+						<literal></literal> (tarball)
+					</para></listitem>
+				</itemizedlist>
+			</para></listitem>
 		</itemizedlist>
+	</sect3>
 
-		<important><para>
-			The Interchange installation routine is very flexible and the resulting file locations on your system may vary, depending on how your system was set up. We recommend that you do not proceed until you are sure you have this information and the necessary permissions to write to the directories used. The locations mentioned here are valid for prepackaged RPM or DEB installations. If you did not install those packages, substitute the paths for your values appropriately.
-		</para></important>
-	</sect2>
-
-	<sect2 id='InterchangeDaemonandCatalogs'>
+	<sect3 id='InterchangeDaemonandCatalogs'>
 		<title>Interchange Daemon and Catalogs</title>
 		<para>
+		TODO link to restart-ic glossary || TODO: log files
 		To control the Interchange daemon, use the <filename class='directory'>init.d</filename> script supplied with the RPM and DEB packages. For example, to start Interchange, run <userinput>/etc/init.d/interchange start</userinput> or <userinput>/etc/rc.d/init.d/interchange start</userinput>. To stop or restart Interchange, simply use <userinput>stop</userinput> or <userinput>restart</userinput> as arguments.
 		</para> <para>
 		To reconfigure a catalog (re-read the appropriate <filename>catalog.cfg</filename>), either restart Interchange altogether or run <userinput>/usr/sbin/interchange -reconfig CATNAME</userinput>.
 		</para>
-	</sect2>
+	</sect3>
+
+</sect2>
 
 </sect1>
 
@@ -1241,3 +1360,8 @@ Variable BOTTOM <bottom
 
 </article>
 
+<!--
+		You must access the demo catalog to verify that your Interchange installation was successful. The interchange-cat-standard catalog was supposed to install itself and register with Interchange by modifying the main <filename moreinfo='refentry'>interchange.cfg</filename> config file (or some other file, such as <filename>/etc/interchange/catalogs.cfg</filename>, which logically puts all catalog definitions in a separate file and is read by <filename>interchange.cfg</filename>).
+		The catalog should have also placed the <firstterm>link program</firstterm> in your <filename class='directory'>cgi-bin</filename> directory - the link program connects the web server software with the Interchange daemon. The demo catalog should be accessible by visiting the <ulink url="http://localhost/cgi-bin/ic/standard/index.html">Standard</ulink> (or <ulink url="http://localhost/cgi-bin/ic/foundation/index.html">Foundation</ulink>) Demo index page on your local host.
+		</para>
+-->
