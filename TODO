@@ -17,6 +17,11 @@ PRIMARY:
   - at the top where describing IC, mention it's built on Perl and ITL
   - replace <tag> with <code> where putting tag alone in the source would work.
   - explain syntax accepted in profile files
+  - Fix ImageDir and include one picture for example
+
+- refresh docbook/item-skel/* and provide support for one-file docs in
+  bin/editem
+- in source contexts, wrap runaway lines
 
 DOCUMENTATION SYSTEM:
 - copy the definition for <example> to a

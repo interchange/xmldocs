@@ -1,0 +1,52 @@
+__NAME__ purpose
+access global and catalog variables
+__END__
+
+
+__NAME__ synopsis
+name=<replaceable>variable name</replaceable>
+global=<group choice='opt'>
+	<arg choice='plain'>1</arg>
+	<arg choice='plain'>2</arg>
+	</group>
+filter=<replaceable>filter name</replaceable>
+__END__
+
+
+__NAME__ see also
+env
+__END__
+
+
+__NAME__ description
+This tag gives access to Interchange global or catalog variables.
+Direct access to variables (using the <code>__VAR__</code> syntax) is
+faster, so you should only use this tag where the direct access is
+impossible.
+</para><para>
+Here's the equivalency list:
+</para><para>
+<code>[var <replaceable>VAR</replaceable>]</code> == 
+<code>__<replaceable>VAR</replaceable>__</code>
+<sbr/>
+<code>[var <replaceable>VAR</replaceable> 1]</code> == 
+<code>@@<replaceable>VAR</replaceable>@@</code>
+<sbr/>
+<code>[var <replaceable>VAR</replaceable> 2]</code> == 
+<code>@_<replaceable>VAR</replaceable>_@</code>
+__END__
+
+
+__NAME__ example
+<example>
+	<title>Direct access equivalency example</title>
+	<para>
+	Note that the following two lines are identical in effect:
+	</para>
+	<programlisting>
+[image  src="[var IMAGE_DIR]/items/[cgi item_id]" extra="border=0 id=item_img"]
+[image  src="__IMAGE_DIR__/items/[cgi item_id]" extra="border=0 id=item_img"]
+	</programlisting>
+</example>
+__END__
+

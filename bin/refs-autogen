@@ -455,7 +455,8 @@ sub populate {
 	# From one specific file (control file usually)
 	if ( $file ) {
 		open IN, "< refs/$name/$file" or do {
-			push @{ $invalid{$name} }, "Requested file '$file' ($!)";
+			push @{ $invalid{$name} }, "Requested file '$file' ($!)"
+				unless -f "refs/$name";
 			return;
 		};
 		if ( $file eq 'control' ) {
@@ -464,23 +465,8 @@ sub populate {
 				chomp $line;
 				$line =~ s/^\s+//;
 				my ($sect,$text) = split /\s*:\s*/, $line, 2;
-				goto SDONE if (!( defined $text and length $text ));
-				if ( $sect ne 'missing' ) {
-					if ( $mode eq 'override' ) {
-						$$ref{lc $sect} = $text;
-					} else {
-						$$ref{lc $sect} .= '</para><para>' . $text;
-					}
-					if ( $sect =~ /^see also$/i ) {
-						( my $list = $text ) =~ s/,/ /g;
-						my @list = split /\s+/, $list;
-						push @{ $$ref{'_see also'} }, @list;
-						$$ref{'see also'} = join ", ", @{$$ref{'_see also'}};
-					}
-				} else {
-					push @{ $invalid{$name} }, $text;
-				}
-				SDONE:
+				update_field($mode, $name, $ref, $file, $sect, $text)
+					if ( defined $text and length $text );
 			}
 		}
 		close IN;
@@ -517,6 +503,7 @@ sub populate {
 			close IN;
 
 			my ( $section, $content );
+			# XXX check if it's empty, then don't update
 			for my $line (@c) {
 				if ( $line =~ /^__NAME__ (.+)\s*$/ ) { $section = $1; next }
 				if ( $line =~ /^__END__/ ) {
@@ -524,6 +511,8 @@ sub populate {
 					$section = "";
 					$content = "";
 				}
+
+				# Update record
 				$content .= $line if $section;
 			}
 
@@ -547,11 +536,29 @@ sub update_field {
 		push @{ $invalid{$name} }, "Section '$sect' from file '$fn' won't be used (name not recognized)";
 	}
 
-	if ( $mode eq 'override' ) {
-		$$sref{$sect} = $content;
-	} elsif ( $mode eq 'append' ) {
-		$$sref{$sect} .= $content;
+	if ( $sect ne 'missing' ) {
+		if ( $mode eq 'override' ) {
+			$$sref{lc $sect} = $content;
+		} else {
+			# Causes problems
+			#$$sref{lc $sect} .= $$sref{lc $sect} ?
+			#	'</para><para>' . $content : $content;
+			$$sref{lc $sect} .= $content;
+		}
+		if ( $sect =~ /^see also$/i ) {
+			( my $list = $content ) =~ s/,/ /g;
+			my @list = split /\s+/, $list;
+			push @{ $$sref{'_see also'} }, @list;
+			$$sref{'see also'} = join ", ", @{$$sref{'_see also'}};
+		}
 	}
+
+	# Older code
+	#if ( $mode eq 'override' ) {
+	#	$$sref{$sect} = $content;
+	#} elsif ( $mode eq 'append' ) {
+	#	$$sref{$sect} .= $content;
+	#}
 }
 
 sub loaddb {
