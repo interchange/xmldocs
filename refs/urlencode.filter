@@ -1,0 +1,23 @@
+__NAME__ purpose
+replace non-word characters or a colon with encoded (hex) representation
+__END__
+
+__NAME__ description
+The filter replaces non-word characters or colons with their encoded
+(hex) representation.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[filter urlencode]http://&def-hostname;<![CDATA[/path/script.cgi?var1=val1&var2=val2[filter]
+]]></programlisting>
+__END__
+

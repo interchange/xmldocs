@@ -1,0 +1,29 @@
+__NAME__ purpose
+eliminate any non-word characters
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter eliminates non-word characters in the input.
+(Non-word characters are those outside the 
+[<literal>a-zA-Z0-9_</literal>] range.)
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[filter word]Hello, World![/filter]
+</programlisting>
+__END__
+

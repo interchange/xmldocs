@@ -1,0 +1,19 @@
+__NAME__ purpose
+simply enclose input in HTML &lt;tt&gt; (typerwiter) tag
+__END__
+
+
+__NAME__ description
+The filter simply encloses input in &glos-HTML; &lt;tt&gt; (typewriter)
+tag.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting><![CDATA[
+R. J. Zavada's <a href="http://www.jfk-info.com/zreport.htm">report</a>:<br/>
+[filter tt]Zapruder, eight milimeter, 8mm, cage print, B&H Model J Printer,<br/>
+B&H 414PD Camera, NARA, ARRB[filter] 
+]]></programlisting>
+__END__
+

@@ -1,0 +1,33 @@
+__NAME__ purpose
+replace DOS CRLF or CR sequences with Unix LF
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+DOS and Microsoft Windows use CRLF (Carriage Return/Line Feed -
+<literal>\r\n</literal>) to signal end of line in text files.
+Unix, on the other hand, uses only line feeds (<literal>\n</literal>), so CRs 
+end up as excess characters.
+</para><para>
+The &filter-unix; filter removes CRLF or CR sequences with LF.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[filter unix]Those pesky DOS characters, we can only be lucky that there are
+none hiding in this text ;-)[/filter]
+</programlisting>
+__END__
+

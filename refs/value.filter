@@ -1,0 +1,19 @@
+__NAME__ purpose
+expand to value of the UserDB variable specified in body
+__END__
+
+
+__NAME__ description
+The filter expands to the value of a &glos-UserDB; variable.
+Name of the variable is specified in filter body.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[value name=online_value_test set="TEST VALUE" hide=1]
+
+My test value is [filter value]online_value_test[/filter]
+</programlisting>
+__END__
+
