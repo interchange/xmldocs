@@ -132,8 +132,8 @@ $(OUTPUT)/files: files/*
 			if test -d "$$p"; then                                \
 				cp -a $$p ../$(OUTPUT)/files/;                    \
 				tar --exclude=CVS -cf ../$(OUTPUT)/files/$$p.tar $$p;            \
-				tar --exclude=CVS -zcf ../$(OUTPUT)/files/$$p.tgz $$p;           \
-				tar --exclude=CVS -jcf ../$(OUTPUT)/files/$$p.tbz2 $$p           \
+				tar --exclude=CVS -zcf ../$(OUTPUT)/files/$$p.tar.gz $$p;           \
+				tar --exclude=CVS -jcf ../$(OUTPUT)/files/$$p.tar.bz2 $$p           \
 			; fi                                                  \
 		; fi                                                      \
 	; done

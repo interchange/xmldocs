@@ -17,7 +17,7 @@
 	</copyright>
 	<copyright>
 		<year>2002</year>
-		<holder>Red-Hat, Inc.</holder>
+		<holder>Red Hat, Inc.</holder>
 	</copyright>
 
 	<authorgroup>
@@ -403,8 +403,8 @@ ErrorFile /var/log/interchange/error.log
 		<para>
 		We have prepared the files from this tutorial phase for download in
 		<ulink url="files/tutorial-phase1.tar">.tar</ulink>,
-		<ulink url="files/tutorial-phase1.tgz">.tgz</ulink>,
-		<ulink url="files/tutorial-phase1.tbz2">.tbz2</ulink>, and
+		<ulink url="files/tutorial-phase1.tar.gz">.tar.gz</ulink>,
+		<ulink url="files/tutorial-phase1.tar.bz2">.tar.bz2</ulink>, and
 		<ulink url="files/tutorial-phase1/">expanded</ulink>
 		formats. Special notes on turning the files into a working catalog are not included; that's what this document is for.
 		</para>
@@ -551,8 +551,8 @@ ErrorFile /var/log/interchange/error.log
 		<para>
 		We have prepared the files from this tutorial phase for download in
 		<ulink url="files/tutorial-phase2.tar">.tar</ulink>,
-		<ulink url="files/tutorial-phase2.tgz">.tgz</ulink>,
-		<ulink url="files/tutorial-phase2.tbz2">.tbz2</ulink>, and
+		<ulink url="files/tutorial-phase2.tar.gz">.tar.gz</ulink>,
+		<ulink url="files/tutorial-phase2.tar.bz2">.tar.bz2</ulink>, and
 		<ulink url="files/tutorial-phase2/">expanded</ulink>
 		formats.
 		</para>
@@ -626,8 +626,8 @@ ErrorFile /var/log/interchange/error.log
 		<para>
 		We have prepared the files from this tutorial phase for download in
 		<ulink url="files/tutorial-phase3.tar">.tar</ulink>,
-		<ulink url="files/tutorial-phase3.tgz">.tgz</ulink>,
-		<ulink url="files/tutorial-phase3.tbz2">.tbz2</ulink>, and
+		<ulink url="files/tutorial-phase3.tar.gz">.tar.gz</ulink>,
+		<ulink url="files/tutorial-phase3.tar.bz2">.tar.bz2</ulink>, and
 		<ulink url="files/tutorial-phase3/">expanded</ulink>
 		formats.
 		</para>
@@ -754,8 +754,8 @@ __END__
 		<para>
 		We have prepared the files from this tutorial phase for download in
 		<ulink url="files/tutorial-phase4.tar">.tar</ulink>,
-		<ulink url="files/tutorial-phase4.tgz">.tgz</ulink>,
-		<ulink url="files/tutorial-phase4.tbz2">.tbz2</ulink>, and
+		<ulink url="files/tutorial-phase4.tar.gz">.tar.gz</ulink>,
+		<ulink url="files/tutorial-phase4.tar.bz2">.tar.bz2</ulink>, and
 		<ulink url="files/tutorial-phase4/">expanded</ulink>
 		formats.
 		</para>
@@ -1116,8 +1116,8 @@ Variable BOTTOM <bottom
 		<para>
 		We have prepared the files from this tutorial phase for download in
 		<ulink url="files/tutorial-phase5.tar">.tar</ulink>,
-		<ulink url="files/tutorial-phase5.tgz">.tgz</ulink>,
-		<ulink url="files/tutorial-phase5.tbz2">.tbz2</ulink>, and
+		<ulink url="files/tutorial-phase5.tar.gz">.tar.gz</ulink>,
+		<ulink url="files/tutorial-phase5.tar.bz2">.tar.bz2</ulink>, and
 		<ulink url="files/tutorial-phase5/">expanded</ulink>
 		formats.
 		</para>
