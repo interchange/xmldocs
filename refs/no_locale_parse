@@ -1,0 +1,41 @@
+__NAME__ purpose
+do not parse [L] or [LC] tags
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ default
+0
+__END__
+
+
+__NAME__ description
+This pragma disables parsing of <tag>L</tag> and <tag>LC</tag> tags.
+</para><para>
+This is only used in the Admin UI and is not of interest to the general public.
+It could also have some side effects in Interchange PreFork mode.
+If you have enough traffic that you want to run in PreFork mode, you will
+be wanting to move the Admin UI away from the customer-facing side anyway,
+so this will not be a problem.
+__END__
+
+
+__NAME__ example
+<example>
+	<title>Enable no_locale_parse pragma page-wide</title>
+	<para>
+	Put the following anywhere on your page:
+	</para>
+	<programlisting>
+[pragma no_locale_parse]
+	</programlisting>
+</example>
+__END__
+

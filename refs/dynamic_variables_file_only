@@ -1,0 +1,46 @@
+__NAME__ purpose
+do not dynamically update directives from databases
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ default
+0
+__END__
+
+
+__NAME__ description
+If this pragma is set, it prevents opening of Interchange databases in 
+search for dynamic content of the directives, so that only files are
+checked.
+</para><para>
+It only makes sense to use this in combination with the 
+<pragma>dynamic_variables</pragma> pragma, and
+<option>DirConfig</option> and <option>VariableDatabase</option> directives,
+so check their reference entries for more information.
+__END__
+
+
+__NAME__ example
+<example>
+	<title>Enable dynamic_variables_file_only pragma catalog-wide</title>
+	<para>
+	Put the following in your <filename>catalog.cfg</filename>:
+	</para>
+	<programlisting>
+Pragma dynamic_variables_file_only
+	</programlisting>
+</example>
+__END__
+
+
+__NAME__ see also
+dynamic_variables, DirConfig, VariableDatabase
+__END__

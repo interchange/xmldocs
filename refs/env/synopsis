@@ -1,6 +1,6 @@
 <row>
 	<entry>
-		<group choice="opt">
+		<group choice="plain">
 			<arg choice='plain'>arg</arg>
 			<arg choice='plain'>name</arg>
 		</group>

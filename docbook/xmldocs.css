@@ -306,8 +306,11 @@ thead {
 	color: white; 
 } 
 
-table, tbody,thead,tfoot, tr,td {
+table, tbody, thead, tfoot, tr, td {
 	border-color: #8F8F8F;
-	border: dotted 1px;
+	border: none;
+	border: 0.5pt solid black;
+	padding: 0;
+	margin: 0
 } 
 

@@ -1,0 +1,44 @@
+__NAME__ purpose
+dynamically update the directives from files and databases
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ default
+0
+__END__
+
+
+__NAME__ description
+This pragma enables configuration directives (<option>Variable</option>s,
+most notably) to be dynamically updated from system files and databases.
+</para><para>
+It only makes sense to use this in combination with the 
+<option>DirConfig</option> or <option>VariableDatabase</option> directives,
+so check their reference entries for more information.
+__END__
+
+
+__NAME__ example
+<example>
+	<title>Enable dynamic_variables pragma catalog-wide</title>
+	<para>
+	Put the following in your <filename>catalog.cfg</filename>:
+	</para>
+	<programlisting>
+Pragma dynamic_variables
+	</programlisting>
+</example>
+__END__
+
+
+__NAME__ see also
+dynamic_variables_file_only, DirConfig, VariableDatabase
+__END__

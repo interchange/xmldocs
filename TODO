@@ -8,6 +8,10 @@ PRIMARY:
   no next/prev)
 - not to forget, fix cases where context goes to negative values
 - Source contexts get some weird values reported in header information
+- Contexts: in situation like "symbol \n symbol" where the symbol appears
+  multiple times within +- of first occurence, we treat it like one context.
+	but the header says 'displaying 2/2 contexts', it doesn't remove
+	'duplicates'. fix that.
 
 - In iccattut:
   - under important file and directories, mention default username,
@@ -62,6 +66,7 @@ tag, interpolation, reparse, symbol types
   array/hash during the whole program, then in the last step before
   generating the template they get stringified.
 - Visually mark obsolete items (those not present in cvs-head)
+- Visually mark undocumented items
 - leaf nodes
 
  Long-term:
@@ -117,3 +122,8 @@ Tags:
 New docs:
  - promotional
  - new developer howto
+
+----------
+itl, scratch, catalog/global variable, html, interchange, pragma, tag,ui,
+scratchpad, action, form,  unix inet socket, low, high, rpc, prefork,
+

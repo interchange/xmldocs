@@ -1,0 +1,66 @@
+__NAME__ purpose
+do not treat specially formed HTML comments as ITL code
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ default
+0
+__END__
+
+
+__NAME__ description
+Many HTML editing applications do not support ITL directly, and some 
+(thinking it doesn't belong to the page) ruin your work. This is 
+understandable to an extent, because some ITL tags (such as <tag>list</tag>)
+appear in places that raise errors with HTML syntax checking algorithms.
+</para><para>
+So in order to help that, Interchange allows you to <emphasis>wrap</emphasis>
+ITL code into HTML comments, which the editing applications leave alone in
+most cases.
+</para><para>
+When such HTML comment is found, it is stripped away, ITL tags are interpolated
+and the output is displayed as if HTML comment was never there.
+</para><para>
+To make use of this <emphasis>arcane</emphasis> feature, simply leave no
+space between the HTML comment and ITL tags:
+</para>
+<programlisting>
+<![CDATA[
+The time is now <!--[time]-->.
+]]>
+</programlisting>
+<para>
+Setting the <pragma>no_html_comment_embed</pragma> instructs Interchange
+<emphasis role='bold'>not</emphasis> to parse and interpolate any HTML
+comments. With this pragma enabled, the above example would not display
+the current time.
+__END__
+
+
+__NAME__ example
+<example>
+	<title>Enable no_html_comment_embded pragma page-wide</title>
+	<para>
+	Put the following anywhere on your page:
+	</para>
+	<programlisting>
+[pragma no_html_comment_embed]
+	</programlisting>
+</example>
+__END__
+
+
+__NAME__ notes
+Although this feature existed in Interchange for a very long time, the
+pragma to control its behavior was added in September 2004, after someone
+stumbled on it by accident and wanted to remove it.
+__END__
+

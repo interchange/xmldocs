@@ -651,10 +651,13 @@ $ag{source}
 <para>$ag{"author"}</para>
 </refsect1>
 
+<!-- Removed because copyright is seen in Source (first few lines),
+     and the generated document starts with copyright notice
 <refsect1 id='$ag{"name"}_copyright'>
 <title>COPYRIGHT</title>
 $ag{"copyright"}
 </refsect1>
+-->
 
 <refsect1 id='$ag{"name"}_seeAlso'>
 <title>SEE ALSO</title>
@@ -679,16 +682,11 @@ $templates{usertag} = <<'__ENDP__';
 <refpurpose>$ag{"purpose"}</refpurpose>
 </refnamediv>
 
-<refsect1 id='$ag{"name"}_description'>
-<title>DESCRIPTION</title>
-<para>$ag{"description"}</para>
-</refsect1>
-
 <refsect1 id='$ag{"name"}_synopsis'>
 <title>PARAMETERS</title>
 
-<informaltable cellspacing='4' cellpadding='2' pgwide='1'>
-<tgroup cols='5' align='left' colsep='1' rowsep='1'>
+<informaltable pgwide='1' frame='none'>
+<tgroup cols='5' align='left'>
 <colspec colname='arg'/>
 <colspec colname='pos'/>
 <colspec colname='req'/>
@@ -711,6 +709,11 @@ $ag{"synopsis"}
 </informaltable>
 </refsect1>
 
+<refsect1 id='$ag{"name"}_description'>
+<title>DESCRIPTION</title>
+<para>$ag{"description"}</para>
+</refsect1>
+
 <!-- Disabled. I could remove it unless I do something useful with it.
 <refsect1 id='$ag{"name"}_structure"}'>
 <title>TAG STRUCTURE</title>
@@ -718,14 +721,14 @@ $ag{"synopsis"}
 </refsect1>
 -->
 
-<refsect1 id='$ag{"name"}_notes'>
-<title>NOTES</title>
-<para>$ag{"notes"}</para>
-</refsect1>
-
 <refsect1 id='$ag{"name"}_examples'>
 <title>EXAMPLES</title>
 $ag{"example"}
+</refsect1>
+
+<refsect1 id='$ag{"name"}_notes'>
+<title>NOTES</title>
+<para>$ag{"notes"}</para>
 </refsect1>
 
 <refsect1 id='$ag{"name"}_availability'>
