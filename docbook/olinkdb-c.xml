@@ -6,11 +6,10 @@
 	<!ENTITY howtos SYSTEM "../tmp/howtos-c.db"> 
 	<!ENTITY glossary SYSTEM "../tmp/glossary-c.db"> 
 	<!ENTITY pragmas SYSTEM "../tmp/pragmas-c.db"> 
-	<!ENTITY globvars SYSTEM "../tmp/globvars-c.db"> 
-	<!ENTITY catvars SYSTEM "../tmp/catvars-c.db"> 
 	<!-- COMPOUNDS -->
 	<!ENTITY tags SYSTEM "../tmp/tags-c.db"> 
 	<!ENTITY confs SYSTEM "../tmp/confs-c.db"> 
+	<!ENTITY vars SYSTEM "../tmp/vars-c.db"> 
 ]>
 
 <targetset>
@@ -51,18 +50,12 @@
 				</document>
 			</dir>
 			
-			<dir name='globvars'>
-				<document targetdoc="globvars">
-				&globvars;
+			<dir name='vars'>
+				<document targetdoc="vars">
+				&vars;
 				</document>
 			</dir>
 			
-			<dir name='catvars'>
-				<document targetdoc="catvars">
-				&catvars;
-				</document>
-			</dir>
-
 			<dir name='tags'>
 				<document targetdoc="tags">
 				&tags;

@@ -6,9 +6,8 @@
 	<!ENTITY howtos SYSTEM "../tmp/howtos-nc.db"> 
 	<!ENTITY glossary SYSTEM "../tmp/glossary-nc.db"> 
 	<!ENTITY pragmas SYSTEM "../tmp/pragmas-nc.db"> 
-	<!ENTITY globvars SYSTEM "../tmp/globvars-nc.db"> 
-	<!ENTITY catvars SYSTEM "../tmp/catvars-nc.db"> 
 	<!-- COMPOUNDS -->
+	<!ENTITY vars SYSTEM "../tmp/vars-nc.db"> 
 	<!ENTITY tags SYSTEM "../tmp/tags-nc.db"> 
 	<!ENTITY confs SYSTEM "../tmp/confs-nc.db"> 
 ]>
@@ -25,8 +24,7 @@
 			<document targetdoc="howtos" baseuri="howtos.html"> &howtos; </document>
 			<document targetdoc="glossary" baseuri="glossary.html"> &glossary; </document>
 			<document targetdoc="pragmas" baseuri="pragmas.html"> &pragmas; </document>
-			<document targetdoc="globvars" baseuri="globvars.html"> &globvars; </document>
-			<document targetdoc="catvars" baseuri="catvars.html"> &catvars; </document>
+			<document targetdoc="vars" baseuri="vars.html"> &vars; </document>
 			<!-- COMPOUNDS -->
 			<document targetdoc="tags" baseuri="tags.html"> &tags; </document>
 			<document targetdoc="confs" baseuri="confs.html"> &confs; </document>
