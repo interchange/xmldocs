@@ -17,6 +17,8 @@ PRIMARY:
 - Add a note that we're focusing on really basic stuff that won't change
   over time (the criteria we used to determine what's for iccattut and what
 	isn't)
+- not to forget, fix cases where context goes to negative values, and make
+  cache target in Makefile
 
 - In iccattut:
   - mention which paths would be valid for /usr/local tarball
@@ -70,6 +72,9 @@ tag, interpolation, reparse, symbol types
  Long-term:
 - filenames in Source contexts should also be clickable. this is longterm
   because it'll involve perltidy and other stuff I have in mind ...
+- rebuild the make system
+- isolate build steps and make it possible to build specific "pages"
+  without the rest
 
 DOCUMENTATION ITSELF:
 - Resolve items from tmp/missing file. (You need to run 'make' in your tree
@@ -115,8 +120,3 @@ Tags:
 New docs:
  - promotional
  - new developer howto
-
-
-guibutton
-mv
-literal for values
