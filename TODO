@@ -1,9 +1,17 @@
 
-DOCUMENTATION SYSTEM:
+PRIMARY:
+- agree on rules for writing Synopsis lines (should be flexible enough to
+  support all symbol types in an uniform way)
+- rewrite bin/refs-autogen
 - Make docbook/symbol-type-skel/* contents of a glossary, and display a 
   glossary entry instead of those files.
-- For tags documentation, have a field if it's a container or not (and
-  also honor other tag details found in tag files)
+- Under availability, if applicable, display cvs line (modification time,
+  username and version (cvs line)).
+- Support using refs/<filename> with all the documentation for a symbol
+  instead of refs/<directory>/<files>.
+
+
+DOCUMENTATION SYSTEM:
 - bin/stattree, in format_ctx(), see how many spacings all the lines have
   in common, and trim that from the beginning.
 - why in manpage format, comments at the top of the file are messed up (no
@@ -12,15 +20,16 @@ DOCUMENTATION SYSTEM:
   element title, and Screen element title. (This causes source contexts
   to be prefixed with "Example: ", although they're technically not).
 - Add support to document tags which are NOT found in separate files
-  (like [restrict]).
-- Under availability, if applicable, display cvs line (modification time,
-  username and version).
+  (like [restrict] or [subject]).
 - Read all possible options for tag files from vend/config.pm
   (%tag.* structures) and warn if invalid option is found in any tag file.
 
+iccattut:
+- give examples for the tasks in 'do yourself' section
+- give good practices about filtering, security
 
 GLOSSARY:
-tag, interpolation, reparse
+tag, interpolation, reparse, symbol types
 
  Mid-term:
 - Think about adding "online example" (role=html in combination with 
@@ -35,8 +44,6 @@ tag, interpolation, reparse
   mwforum demo on mwforum.org
 
  Long-term:
-- Support using refs/<filename> with all the documentation for a symbol
-  instead of refs/<directory>/<files>.
 - filenames in Source contexts should also be clickable. this is longterm
   because it'll involve perltidy and other stuff I have in mind ...
 
@@ -64,11 +71,11 @@ Pragmas, globvars:
 
 Tags:
   parameters
-	positional list
-	invalidates cache
-	aliases
-	tag call / perl call
-	container
-	has subtags
-	nests
+  positional list
+  invalidates cache
+  aliases
+  tag call / perl call / mvasp
+  container
+  has subtags
+  nests
 

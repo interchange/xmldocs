@@ -412,66 +412,66 @@ __DATA__
 <refpurpose>$ag{"purpose"}</refpurpose>
 </refnamediv>
 
-<refsect1>
+<refsect1 id='$ag{"name"}_synopsis'>
 <title>SYNOPSIS</title>
 $ag{"synopsis"}
 </refsect1>
 
-<refsect1>
+<refsect1 id='$ag{"name"}_$ag{"_first section"}'>
 <title>$ag{"_first section"}</title>
 <para>$ag{"default"}</para>
 </refsect1>
 
-<refsect1>
+<refsect1 id='$ag{"name"}_description'>
 <title>DESCRIPTION</title>
 <para>$ag{"description"}</para>
 </refsect1>
 
-<refsect1>
+<refsect1 id='$ag{"name"}_examples'>
 <title>EXAMPLES</title>
 $ag{"example"}
 </refsect1>
 
-<refsect1>
+<refsect1 id='$ag{"name"}_notes'>
 <title>NOTES</title>
 <para>$ag{"notes"}</para>
 </refsect1>
 
-<refsect1>
+<refsect1 id='$ag{"name"}_symbolType'>
 <title>SYMBOL TYPE</title>
 $ag{"symbol type"}
 </refsect1>
 
-<refsect1>
+<refsect1 id='$ag{"name"}_availability'>
 <title>AVAILABILITY</title>
 <para>$ag{"name"} is available in Interchange versions:
 </para><para>
 $ag{"available in"}</para>
 </refsect1>
 
-<refsect1>
+<refsect1 id='$ag{"name"}_source'>
 <title>SOURCE</title>
 <para>Interchange $ag{"source ver"}:
 </para>
 $ag{source}
 </refsect1>
 
-<refsect1>
+<refsect1 id='$ag{"name"}_authors'>
 <title>AUTHORS</title>
 <para>$ag{"author"}</para>
 </refsect1>
 
-<refsect1>
+<refsect1 id='$ag{"name"}_bugs'>
 <title>BUGS</title>
 $ag{"bugs"}
 </refsect1>
 
-<refsect1>
+<refsect1 id='$ag{"name"}_copyright'>
 <title>COPYRIGHT</title>
 $ag{"copyright"}
 </refsect1>
 
-<refsect1>
+<refsect1 id='$ag{"name"}_seeAlso'>
 <title>SEE ALSO</title>
 <para>$ag{"see also"}</para>
 </refsect1>

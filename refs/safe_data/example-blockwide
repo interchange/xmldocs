@@ -12,9 +12,9 @@ enclose the critical section in <code>[tag pragma ...]</code>:
 <programlisting><![CDATA[
 [tag pragma safe_data]1[/tag]
   ...critical section...
-	[restrict area page]
+  [restrict area page]
   ...critical section...
-	[/restrict]
+  [/restrict]
   ...critical section...
 [tag pragma safe_data]0[/tag]
 ]]></programlisting>

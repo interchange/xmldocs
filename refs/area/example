@@ -1,0 +1,15 @@
+<example>
+
+<title>
+Produce the basic hypertext link
+</title>
+
+<para>
+Add the following to an Interchange page:
+</para>
+
+<programlisting><![CDATA[
+Please visit our <a href="[area index]">Welcome</a> page.
+]]></programlisting>
+
+</example>

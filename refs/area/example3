@@ -1,0 +1,11 @@
+<example>
+
+<title>
+Simple item ordering using the area tag
+</title>
+
+<programlisting><![CDATA[
+Order a <a href="[area order TK112]" target='newframe'>Toaster</a> today.
+]]></programlisting>
+
+</example>

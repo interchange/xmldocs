@@ -1,0 +1,15 @@
+<example>
+
+<title>
+Pass arguments onto the target page
+</title>
+
+<para>
+Add the following link to an Interchange page:
+</para>
+
+<programlisting><![CDATA[
+Visit the <a href="[area href='index' arg='arg1=value1/arg2=value2']">test</a> page.
+]]></programlisting>
+
+</example>

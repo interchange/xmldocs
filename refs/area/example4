@@ -1,0 +1,43 @@
+<example>
+
+<title>
+Embedding HTML forms in the area tag
+</title>
+
+<programlisting><![CDATA[
+<A HREF="[area form="
+  mv_order_item=99-102
+  mv_order_size=L
+  mv_order_quantity=1
+  mv_separate_items=1
+  mv_todo=refresh"
+]">Order T-shirt in Large size</A>
+]]></programlisting>
+
+<para>
+Or another example:
+</para>
+
+<programlisting><![CDATA[
+<a href="[area form="
+  mv_todo=refresh
+  mv_order_item=000101
+  mv_order_fly=description=An on-the-fly item|price=100.01
+"]">Order item 000101</a>
+]]></programlisting>
+
+<para>
+Which is equivalent to the usual HTML form:
+</para>
+
+<programlisting><![CDATA[
+<form action="[area process]" method=post>
+  <input type='hidden' name='mv_todo' VALUE="refresh">
+  <input type='hidden' name='mv_order_item' value="000101">
+  Qty: <input size='2' name='mv_order_quantity' value="1">
+  <input type='hidden' name='mv_order_fly' value="description=An on-the-fly item|price=100.00">
+  <input type='submit' value="Order button">
+</form>
+]]></programlisting>
+
+</example>
