@@ -1,0 +1,16 @@
+<example>
+
+<title>
+Display the client remote address and port
+</title>
+
+<para>
+The client's remote address and port are kept in <envar>REMOTE_ADDR</envar>
+and <envar>REMOTE_PORT</envar> variables.
+</para>
+
+<programlisting><![CDATA[
+Client connection: [env REMOTE_ADDR]:[env name="REMOTE_PORT"]
+]]></programlisting>
+
+</example>

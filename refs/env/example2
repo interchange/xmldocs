@@ -1,0 +1,12 @@
+<example>
+
+<title>
+Display the simple HTML table with the complete HTTP environment
+</title>
+
+<programlisting><![CDATA[
+HTTP environment: <br>
+[env]
+]]></programlisting>
+
+</example>
