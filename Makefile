@@ -114,7 +114,7 @@ $T/%-c.db: %.xml $T
 
 #############################################################
 # STANDARD TARGETS || two-pass processing method
-$O/%.html: %.xml docbook/autodefs.ent skel
+$O/%.html: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent skel
 	echo "C     $@"
 	$(PSR) $(PSR_FLAGS)                                                \
 	  $(PROFILE)                                                       \
