@@ -242,15 +242,16 @@ while ( $path = shift @paths) { # For each version specified
 					my $loc = $$ctx{file};
 					
 					my ( $cstart, $cend, $ctxmeta ) = ("", "", "");
+					my $all = 0; # Showing all for an item?
 					#if (0) { use Data::Dumper; print Dumper $ctx; sleep 10; }
 					# WE SHOW ONLY PART OF CONTEXT FOR THOSE
-					$ctxmeta = "<sbr/>Line $ln";
-					if ( $gkey !~ /(tag|conf)$/ ) {
+					if ( $gkey !~ /(tag|conf|filter)$/ ) {
 						$cstart = $$ctx{lnum}-$$ctx{ctxpre};
 						$cend = $$ctx{lnum}+$$ctx{ctxpost};
 
 					} else {
 						# WE SHOW ALL FOR THOSE
+						$all++;
 						$cstart = $$ctx{ctxs} || 1;
 						$cend = $cstart + scalar @{$$ctx{ctx}}-1;
 						$cstart == 1 and $cend -= 1;
@@ -260,7 +261,12 @@ while ( $path = shift @paths) { # For each version specified
 					$cstart <= 0 and $cstart = 1;
 					$cend > @{ $$ctx{ctx} } and $cend = @{ $$ctx{ctx} }-1;
 
-					$ctxmeta .= " (context shows lines " . ( $cstart . "-" .  $cend );
+					if ( ! $all ) {
+						$ctxmeta = "<sbr/>Line $ln";
+						$ctxmeta .= " (context shows lines " . ( $cstart . "-" .  $cend );
+					} else {
+						$ctxmeta = "<sbr/>Lines: $cend";
+					}
 					# XXX - eliminate negative numbers in source context spans
 					# ( 0-6 == OK, -4-6 != OK )
 					#if ( $cstart < 0 ) {
@@ -271,7 +277,7 @@ while ( $path = shift @paths) { # For each version specified
 					if ( $$ctx{funclnum} ) {
 						$ctxmeta .= " in $$ctx{func}():$$ctx{funclnum}" ;
 					}
-					$ctxmeta .= ")";
+					$ctxmeta .= ")" unless $all;
 					my $r = $hash{revision}{$plf}->[0];
 					my $d = $hash{revision}{$plf}->[1];
 					my $revinfo = "";
