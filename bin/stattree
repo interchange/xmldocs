@@ -285,10 +285,11 @@ sub wanted {
 				$hash{tree}{$c{file}}{code}++;
 				$hash{total}{perl_code}++;
 
+				line_findFunctionName(\%c);
+
 				line_findPragmas(\%c);
 				line_findGlobVars(\%c);
 				line_findCatVars(\%c);
-				line_findFunctionName(\%c);
 
 			} else {
 				warn "IMPOSSIBLE case in $file\n";
@@ -317,10 +318,10 @@ sub wanted {
 				my $tn = shift @lis;
 
 				my $tagopt = lc(shift @lis);
-				next if $tagopt =~ /^documentation$/i;
+				next if $tagopt =~ /^documentation$/;
 
 				# See if it's a routine and parse routine lines as usual perl lines
-				if ( $tagopt =~ /^routine$/i and "@lis" =~ /\s*<<(\S+)\s*$/i ) {
+				if ( $tagopt =~ /^routine$/ and "@lis" =~ /\s*<<(\S+)\s*$/i ) {
 					my $ender = $1;
 					for (my $lnum2 = $lnum; $lnum2 < scalar @filedata; $lnum2++) {
 						my $_t = $filedata[$lnum2];
@@ -329,22 +330,22 @@ sub wanted {
 						$c{line} = $_t;
 						$c{lnum} = $lnum2;
 
-						line_findPragmas(\%c);
+						line_findPragmas(\%c, {group =>$c{fsubtype}, name=>$tn});
 						# For example, this should find PGP_HOME
-						line_findGlobVars(\%c);
-						line_findCatVars(\%c);
-						line_findFunctionName(\%c);
+						line_findGlobVars(\%c, {group => $c{fsubtype}, name=>$tn});
+						line_findCatVars(\%c, {group => $c{fsubtype}, name=>$tn});
+						line_findFunctionName(\%c, {group => $c{fsubtype}, name=>$tn});
 					}
 					next;
 
-				} elsif ( $tagopt =~ /^maproutine$/i ) {
+				} elsif ( $tagopt =~ /^maproutine$/ ) {
 
 					@lis == 1 or die "$tn MapRoutines, but argc != 1 ?\n";
 					next if "@lis" =~ /^::/; # TODO
-					file_extractSub($tn, "@lis", \%c);
+					file_extractSub($tn, "@lis", \%c, {group => $c{fsubtype},name=>$tn});
 				}
 				
-				if ( "@lis" =~ /<</ and $tagopt !~ /^routine/i ) {
+				if ( "@lis" =~ /<</ and $tagopt !~ /^routine/ ) {
 					warn "TODO: Unsupported << in $tn (in $i{ver})\n" if $verbose;
 					next;
 				}
@@ -486,27 +487,40 @@ sub dumpdb {
 # HELPERS
 
 sub line_findPragmas {
-	my %ptr = %{ (shift) };
+	my %c = %{ (shift) };
+	my $context_data = shift;
+	
 	# This matches $::Pragma->{} or $$::Pragma{}
 	#if ( $line =~ /(()|\$())\$::Pragma(->\2|\3){(\w+?)}/ ) {
-	if ( $ptr{line} =~ /\$::Pragma->{(\w+?)}/ or         
-			$ptr{line} =~ /\$Vend::Cfg->{Pragma}{(\w+?)}/ ) {
+	if ( $c{line} =~ /\$::Pragma->{(\w+?)}/ or         
+			$c{line} =~ /\$Vend::Cfg->{Pragma}{(\w+?)}/ ) {
 	#push @{ $hash{symbols}{pragma}{$5} }, <- for use with above
 		push @{ $hash{symbols}{pragma}{$1} }, {
 	# TODO Here, and 2 places below: make sure if ctx is say, 5:5,
 	# it always shows that much (that is, workaround file beginning/
 	# file end problems - pad with empty lines or something).
-		%ptr,
-		file => "$i{ver}/$ptr{file}",
-		lnum => $ptr{lnum},
-		func => ${$ptr{gfunc}}[0],
-		funclnum => ${$ptr{gfunc}}[1],
-		ctxpre => $ptr{ctx_p},
-		ctxpost => $ptr{ctx_n},
-		ctxs => $ptr{lnum} - $ptr{ctx_p},
-		ctxe => $ptr{lnum} + $ptr{ctx_n},
-		ctx => [format_ctx(@{$ptr{filedata}}[$ptr{lnum}-$ptr{ctx_p}..$ptr{lnum}+$ptr{ctx_n}])]
+		%c,
+		file => "$i{ver}/$c{file}",
+		lnum => $c{lnum},
+		func => ${$c{gfunc}}[0],
+		funclnum => ${$c{gfunc}}[1],
+		ctxpre => $c{ctx_p},
+		ctxpost => $c{ctx_n},
+		ctxs => $c{lnum} - $c{ctx_p},
+		ctxe => $c{lnum} + $c{ctx_n},
+		ctx => [format_ctx(@{$c{filedata}}[$c{lnum}-$c{ctx_p}..$c{lnum}+$c{ctx_n}])]
 	};
+
+	if ( $context_data or $c{gfunc}) {
+		!$context_data and do {
+			$context_data = {
+				group => 'function',
+				name => ${$c{gfunc}}[0],
+			}
+		};
+		push @{$hash{uses}{$$context_data{group}}{$$context_data{name}}{pragma}},
+		$1
+	}
 
 		$hash{total}{pragmas}++;
 	}
@@ -516,6 +530,8 @@ sub line_findCatVars {
 	######################################################
 	# Diskover global variables
 	my %c = %{ (shift) };
+	my $context_data = shift;
+
 	my $name;
 
 	if (
@@ -540,6 +556,16 @@ sub line_findCatVars {
 			ctx => [format_ctx(@{$c{filedata}}[$c{lnum}-$c{ctx_p}..$c{lnum}+$c{ctx_n}])]
 		};
 
+		if ( $context_data or $c{gfunc} ) {
+			!$context_data and $context_data = {
+				group => 'function',
+				name => ${$c{gfunc}}[0],
+			};
+			push
+				@{$hash{uses}{$$context_data{group}}{$$context_data{name}}{catvar}},
+					$name
+		}
+
 		$hash{total}{catvars}++;
 	}
 }
@@ -548,6 +574,8 @@ sub line_findGlobVars {
 	######################################################
 	# Diskover global variables
 	my %c = %{ (shift) };
+	my $context_data = shift;
+
 	my $name;
 
 	if (
@@ -569,6 +597,17 @@ sub line_findGlobVars {
 			ctx => [format_ctx(@{$c{filedata}}[$c{lnum}-$c{ctx_p}..$c{lnum}+$c{ctx_n}])]
 		};
 
+		if ( $context_data or $c{gfunc} ) {
+			!$context_data and $context_data = {
+				group => 'function',
+				name => ${$c{gfunc}}[0],
+			};
+			print "$$context_data{name}\n" if $$context_data{group} eq 'function';
+			push
+				@{$hash{uses}{$$context_data{group}}{$$context_data{name}}{globvar}},
+					$name
+		}
+
 		$hash{total}{globvars}++;
 	}
 }
@@ -577,10 +616,10 @@ sub line_findFunctionName {
 	######################################################
 	# See if it's a beginning of a subroutine name, and remember the
 	# name/linenum.
-	my %c = %{ (shift) };
-	if ( $c{line} =~ m#^\s*sub\s+(\w+)\s*\{\s*$# ) {
+	my $c = shift;
+	if ( $$c{line} =~ m#^\s*sub\s+(\w+)\s*\{\s*$# ) {
 		$hash{total}{perl_functions}++;
-		@{ $c{gfunc} } = ( $1, $c{lnum} );
+		@{ $$c{gfunc} } = ( $1, $$c{lnum} );
 	}
 
 	$hash{total}{functions}++;
@@ -701,10 +740,12 @@ sub file_extractSub {
 	my $tagname = shift;
 	my $func = shift;
 	my $c = shift;
+	my $context_data = shift;
+
 	my $done = 0;
 	$func or die "file_extractSub with no args?\n";
 	my ( $start, $end );
-	my $content;
+	my ($content,@content);
 
 	my @path = split /::/, $func;
 	$func = pop @path;
@@ -728,12 +769,12 @@ sub file_extractSub {
 				ctx_n => 0,
 				ctx => [ format_ctx($line) ],
 			};
-			file_extractSub( $tagname, $1, $c );
+			file_extractSub( $tagname, $1, $c, $context_data);
 			return;
 
 		} elsif ( $line =~ /^sub $func {/ ) {
 			$start = $i+1 unless $start;
-			$content = $line;
+			@content = ($line);
 
 			# Quick and dirty extractor. This same functionality is in 
 			# file_parseVendConfig() above but is written too much purpose-specific
@@ -743,7 +784,7 @@ sub file_extractSub {
 				my $line2 = $fc[$j];
 				$opens += ( $line2 =~ s/(?<!(?<!\\)\\)([\(\[\{])/$1/g );
 				$opens -= ( $line2 =~ s/(?<!(?<!\\)\\)([\)\]\}])/$1/g );
-				$content .= $line2;
+				push @content, $line2;
 				if ( !$opens) { $done++; $end = $j+1; last }
 			}
 
@@ -752,6 +793,7 @@ sub file_extractSub {
 	}
 
 	# func in lib/$path from $start to $end
+	$content = join '', @content;
 	push @{ $resolver_path{$tagname} }, {
 		name => $func,
 		file => "lib/$path",
