@@ -1,0 +1,2 @@
+purpose: custom subroutine to run before Image substitution on a page
+see also: init_page, pre_page, post_page

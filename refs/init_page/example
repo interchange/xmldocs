@@ -1,0 +1,34 @@
+<example>
+
+<title>
+Auto-wrapping pages in templates
+</title>
+
+<para>
+We check the page to see if it contains any @_VARIABLE_@ strings.
+If it does not, we consider it not to have a template and add the
+definitions ourselves.
+The following is needed in <filename>catalog.cfg</filename>:
+</para>
+
+<programlisting><![CDATA[
+Pragma  init_page=wrap_page
+
+Sub <<EOS
+	sub wrap_page {
+	my $pref = shift;
+	return if $$pref =~ m{\@_[A-Z]\w+_\@};
+	$$pref =~ m{<!--+ title:\s*(.*?)\s+-->} and $Scratch->{page_title} = $1;
+	$$pref = <<EOF;
+\@_MYTEMPLATE_TOP_\@
+<!--BEGIN CONTENT -->
+$$pref
+<!-- END CONTENT -->
+\@_MYTEMPLATE_BOTTOM_\@
+EOF
+
+	return;
+	}
+EOS
+]]></programlisting>
+</example>

@@ -1,0 +1,4 @@
+Defines a Sub or GlobalSub to run
+<emphasis>before</emphasis> Image substitution on a page. A
+<emphasis>reference</emphasis> to the page contents
+is passed to the subroutine.

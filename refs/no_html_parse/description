@@ -1,0 +1,3 @@
+Disallows tag parsing inside HTML tags. This was a <command>big</command>
+parser performance gain and was enabled in the demo catalog shipping with
+older Interchange releases.

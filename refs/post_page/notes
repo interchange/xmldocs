@@ -1,0 +1,1 @@
+The old documentation system improperly describes the phase at which post_page takes effect (it says it's after Variables and before Interpolation).

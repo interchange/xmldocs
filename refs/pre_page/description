@@ -1,0 +1,5 @@
+Defines a Sub or GlobalSub to run
+<emphasis>after</emphasis> Variable substitution and
+<emphasis>before</emphasis> Interpolation on a page.
+<emphasis>reference</emphasis> to the page contents
+is passed to the subroutine.

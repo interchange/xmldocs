@@ -1,0 +1,4 @@
+Defines a Sub or GlobalSub to run 
+<emphasis>before</emphasis> page Variable processing.
+A <emphasis>reference</emphasis> to the contents of the
+page is passed to the subroutine.
