@@ -1,0 +1,43 @@
+__NAME__ purpose
+specify base URL of the Interchange catalog link program
+__END__
+
+
+__NAME__ see also
+SecureURL, ImageDir, ImageDirSecure
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>URL</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+&conf-VendURL; is one of mandatory settings in every &ccf;.
+</para><para>
+The directive specifies a base catalog URL, that is, it's entry point
+(usually a cgi-bin link program).
+__END__
+
+
+__NAME__ notes
+&conf-VendURL; value can also be a relative path, with or without the
+protocol and hostname specification.
+__END__
+
+
+__NAME__ example
+<example>
+  <title>Setting VendURL</title>
+	<para>
+	Put the following lines in &ccf;:
+	</para>
+<programlisting>
+VendURL http://&def-hostname;/cgi-bin/ic/tutorial
+</programlisting>
+</example>
+__END__
+

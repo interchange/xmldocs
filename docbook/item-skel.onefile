@@ -74,9 +74,9 @@ R: Important field, describes each symbol's synopsis:
 	<entry></entry>
 	<entry></entry>
 </row>
-__NAME__ synopsis
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
+__NAME__ synopsis
 __END__
 
 
@@ -101,8 +101,8 @@ __NAME__ example
   <title></title>
 	<para>
 	</para>
-  <programlisting>
-  </programlisting>
+<programlisting>
+</programlisting>
 </example>
 __END__
 

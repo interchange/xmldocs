@@ -1,0 +1,47 @@
+__NAME__ purpose
+disable IP-based qualification of user sessions (the directive degrades catalog security!)
+__END__
+
+
+__NAME__ see also
+DomainTail, CreditCardAuto, CyberCash
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The &conf-WideOpen; directive disables IP-based qualification user sessions,
+which usually results in reduced catalog security.
+</para><para>
+When &conf-WideOpen; is enabled, no IP-based checking is done, so 
+anyone guessing and supplying a valid session ID can hijack other client's
+session.
+</para><para>
+The option was introduced to achieve more compatiblity with old browsers, at
+cost of some security. Do not enable it unless you first experience problems.
+Also do not use it unless you are using some encryption
+(PGP/&conf-CreditCardAuto;) or a real-time payment gateway, such as
+&glos-CyberCash;.
+__END__
+
+
+__NAME__ example
+<example>
+  <title>Enabling WideOpen directive</title>
+	<para>
+	Put any of the following lines in &ccf;:
+	</para>
+<programlisting>
+WideOpen 1
+WideOpen Yes
+</programlisting>
+</example>
+__END__
+

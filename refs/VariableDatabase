@@ -1,0 +1,66 @@
+__NAME__ purpose
+specify database containing variables
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>database name</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+__END__
+
+
+__NAME__ notes
+If no &conf-Database; entry corresponding to &conf-VariableDatabase;
+definition is found, a default of TAB-separated <literal>.txt</literal>
+file is assumed. In other words:
+<programlisting>
+VariableDatabase variables
+</programlisting>
+is the same as:
+<programlisting>
+Database variables variables.txt TAB
+VariableDatabase variables
+</programlisting>
+__END__
+
+
+__NAME__ example
+<example>
+  <title>Enabling VariableDatabase</title>
+	<para>
+	Save the following as <filename>products/variables.txt</filename>:
+	</para>
+<programlisting>
+code	Variable
+HELLO	Hi
+ANON	Guest
+</programlisting>
+	<para>
+	Put the following lines in &ccf;:
+	</para>
+<programlisting>
+Database  variables variables.txt TAB
+VariableDatabase variables
+</programlisting>
+	<para>
+	Create a test page:
+	</para>
+<programlisting><![CDATA[
+[tmp user][either][data session username][or]__ANON__[/either][/tmp]
+
+__HELLO__, [scratch user]!
+]]></programlisting>
+<para>
+</para>
+</example>
+__END__
+
