@@ -806,15 +806,35 @@ Catalog  tutorial  /usr/local/interchange/tutorial  /cgi-bin/tutorial
 		<para>
 		However, there's one crucial difference in comparison to the usual
 		HTML pages found in your &glos-WWWROOT; and served by your Web Server
-		&mdash; the pages from the <filename class='directory'>pages/</filename>
-		directory can contain &IC;-specific instructions and are naturally
+		&mdash; in addition to HTML, the pages from the
+		<filename class='directory'>pages/</filename>
+		directory can contain &IC;-specific instructions and are
 		processed by &IC; before being sent out.
+		</para>
+
+		<para>
+		&IC;-specific instructions can be given in a few ways, but this
+		example uses simple and convenient &glos-ITL; &mdash; &IC; Tag Language.
+		</para>
+		<para>
+		The <tag>time</tag> tag doesn't need any arguments and simply inserts
+		the current time (honoring, of course, locale preferences).
+		</para>
+		<para>
+		The <tag>filter</tag> tag accepted an argument &mdash; name of the
+		general content filter to apply. In our case, that is the
+		<filter>mailto</filter> filter which recognizes email addresses
+		and automatically wraps them in a &glos-link;. At the same time, you can
+		see that <tag>filter</tag> is a <emphasis>container</emphasis> tag;
+		it has a corresponding ending (<tag>/filter</tag>), and
+		besides parameters also accepts input in its <emphasis>body</emphasis>
+		(the space between the opening and closing tag).
 		</para>
 </sect1>
 
 
 <sect1 id='VisitTestPage'>
-	<title>Visit the Test Page, Understand the Page Serving Process</title>
+	<title>Visit the Test Page, Understand Page Serving Process</title>
 		<!-- TODO: EXPLAIN HERE how the page is requested, how apache asks IC,
 		how IC reads and expands the page (exact order), and how it sends it
 		back -->
