@@ -1,0 +1,77 @@
+__NAME__ purpose
+switch between value namespaces
+__END__
+
+
+__NAME__ synopsis2
+<row>
+	<entry>name</entry>
+	<entry>Yes</entry><entry></entry>
+	<entry><literal></literal></entry>
+	<entry>Switch namespace. Empty value (<code>name=""</code>) switches
+	back to the main namespace.</entry>
+</row>
+<row>
+	<entry>copy-all</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>
+	Copy all values from the current
+	namespace to the new one, and switch to it.
+	(Nested data structures are not dereferenced).
+	</entry>
+</row>
+<row>
+	<entry>copy</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>
+	Copy only the specified space-separated values.
+	</entry>
+</row>
+<row>
+	<entry>clear</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>
+	Clear all values in the target namespace and switch to it.
+	</entry>
+</row>
+<row>
+	<entry>show</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>
+	Return name of the current namespace, then switch to a new one.
+	</entry>
+</row>
+__END__
+
+
+__NAME__ see also
+value, value-extended
+__END__
+
+
+__NAME__ description
+This tag switches the values namespace for the duration of the page.
+To switch back to the default namespace, use
+<code>[values-space name='']</code>.
+</para><para>
+The current namespace is kept in the <varname>$Vend::ValuesSpace</varname>
+variable.
+__END__
+
+
+__NAME__ example
+<example>
+	<title>Switch and display namespaces</title>
+	<programlisting>
+Current namespace is: [values-space] <sbr/>
+Switching to namespace 'basket': [values-space basket] <sbr/>
+Switching [values-space name=checkout show=1 clear=1] to clear [values-space] <sbr/>
+
+	</programlisting>
+</example>
+__END__
+
