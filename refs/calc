@@ -1,12 +1,32 @@
+__NAME__ purpose
+evalute the enclosed arithmetic expression or Perl block
+__END__
+
+__NAME__ synopsis
+&ROW_INTERPOLATE_1;
+&ROW_REPARSE_1;
+__END__
 
 __NAME__ see also
 calc, mvasp, perl
 __END__
 
+__NAME__ description
+The tag evaluates the enclosed arithmetic expression or a &PERL; block.
+The last expression evaluated (return value) is returned to the client
+page.
+</para><para>
+Note that Perl blocks can be of arbitrary content and complexity, and there
+really are no typical examples to show.
+__END__
+TODO note about safe, note about doc on Perl programming within IC
+
+
 __NAME__ notes
 <!-- if you change this, also change the same in refs/perl -->
 The &tag-calc; tag is lower-overhead variant of &tag-perl;, because it
-does not accept arguments, does not try to interpolate tag body, does not
+does not accept arguments, does not try to interpolate tag body (well, 
+&tag-calcn; tag only) , does not
 pre-open any database tables, and it doesn't do any extra wrapping.
 </para><para>
 The &tag-calc; tag will remember variable values inside the page, so you
@@ -15,4 +35,35 @@ other words, variables you initialize or set in one &tag-calc; block are
 also visible in all further &tag-calc; blocks on the same page. 
 </para><para>
 There is no reason to ever use this tag inside &tag-perl; or &tag-mvasp;.
+</para><para>
+&tag-calc; and &tag-perl; are the two tags that play major role in any
+&PERL; programming within &IC;.
 __END__
+
+__NAME__ example: Simple Perl code, a random arithmetic expression
+<programlisting>
+Current magic number is: [calc]2+rand[/calc]
+</programlisting>
+__END__
+
+__NAME__ example: Retrieving an Interchange session value
+<programlisting>
+Welcome, your user name is [calc]$Tag->data(qw/session username/)[/calc]
+</programlisting>
+__END__
+
+__NAME__ example: Setting and displaying a value
+<programlisting>
+Order number is:
+  [calc] $Session->{mv_order_number} = $Values->{mv_order_number} [/calc]
+</programlisting>
+__END__
+
+__NAME__ example: Clearing the return value
+You can clear the return value (that is, return nothing) by simply calling
+<code>return</code> with no arguments:
+<programlisting>
+[calc] my $a = 5; return [/calc]
+</programlisting>
+__END__
+
