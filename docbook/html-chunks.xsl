@@ -19,7 +19,7 @@
 	<xsl:param name="chunk.fast">1</xsl:param>
 	<xsl:param name="chunk.section.depth">1</xsl:param>
 	<xsl:param name="chunker.output.encoding">ISO8859-1</xsl:param>
-	<xsl:param name="chunker.output.indent">yes</xsl:param>
+	<xsl:param name="chunker.output.indent">no</xsl:param>
 
   <xsl:template name="user.footer.content" >
   <p class='w3c'>
