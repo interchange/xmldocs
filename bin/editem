@@ -11,7 +11,9 @@ fi
 
 echo Creating/updating item $1
 mkdir -p "refs/$1"
-cp -i --reply=no docbook/item-skel/* "refs/$1"
+# --reply not supported in older versions of cp
+#cp -i --reply=no docbook/item-skel/* "refs/$1"
+cp -i docbook/item-skel/* "refs/$1"
 
 echo Editing all item files
 sleep 1

@@ -15,6 +15,9 @@ DOCUMENTATION SYSTEM:
 - Support using refs/<filename> with all the documentation for a symbol
   instead of refs/<directory>/<files>.
 
+SUPPORT FILES:
+- Exclude CVS from tarballs (tutorial-phase?.* files)
+
 
 DOCUMENTATION ITSELF:
 - Resolve items from tmp/missing file. (You need to run 'make' in your tree
