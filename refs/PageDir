@@ -1,0 +1,29 @@
+__NAME__ purpose
+directory containing catalog pages
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>directory</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify the directory containing catalog pages.
+</para><para>
+This directive can be set in &locale; settings to allow different page
+sets for different locales.
+__END__
+
+__NAME__ notes
+The specified location is always treated relative to &glos-CATROOT;.
+__END__
+
+__NAME__ example: Setting PageDir
+<programlisting>
+PageDir /html
+</programlisting>
+__END__
+

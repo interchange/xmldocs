@@ -1,0 +1,23 @@
+__NAME__ purpose
+filename extension for files in the pages/ directory
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>extension</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify extension to append to the filename when looking for the source 
+file in the <filename class='directory'>pages/</filename> directory.
+__END__
+
+__NAME__ example: Setting HTMLsuffix
+<programlisting>
+HTMLsuffix .htm
+</programlisting>
+__END__
+

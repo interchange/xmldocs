@@ -1,0 +1,43 @@
+__NAME__ purpose
+set the default page in a directory
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>filename</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify the default page to show in a directory.
+</para><para>
+When the location requested does not exist, and this directive is set, 
+&IC; will try to append the specified filename to the URL, and re-test
+for the page existence.
+</para><para>
+This directive sets the default page for all directories
+<emphasis role='bold'>except</emphasis> the catalog entry point.
+(In other words, this directive won't help you make 
+<literal>http://&def-hostname;/</literal> show
+<literal>http://&def-hostname;/index.html</literal> -
+see the &SpecialPage; for that).
+__END__
+
+__NAME__ notes
+Although the name for this directive was borrowed from the &APACHE; Web
+Server project, it only accepts one filename (unlike Apache which supports
+multiple filenames to look for in sequential order).
+__END__
+
+__NAME__ see also
+SpecialPage
+__END__
+
+__NAME__ example: Setting DirectoryIndex
+<programlisting>
+DirectoryIndex index.html
+</programlisting>
+__END__
+
