@@ -44,8 +44,6 @@ my $glossary = <<__ENDP__;
 <glossary>
 	<title>Interchange Documentation: Glossary</title>
 
-<toc/>
-
 __ENDP__
 my $howtos = <<__ENDP__;
 <?xml version="1.0" standalone="no"?>

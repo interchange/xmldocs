@@ -347,7 +347,10 @@ sub wanted {
 
 					@lis == 1 or die "$tn MapRoutines, but argc != 1 ?\n";
 					next if "@lis" =~ /^::/; # TODO
+					# TODO : Functions don't end up having proper Line: x-y in source
+					# contexts but have Lines: as if the whole file was shown.
 					file_extractSub($tn, "@lis", \%c, {group => $c{fsubtype},name=>$tn});
+					#file_extractSub($tn, "@lis", \%c, {group => 'function',name=>$tn});
 				}
 				
 				if ( "@lis" =~ /<</ and $tagopt !~ /^routine/ ) {

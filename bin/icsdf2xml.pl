@@ -23,13 +23,16 @@ for (my $i=0; $i<@input; $i++) {
 	s#C\<(\[[\w_\-]+ [\w_\-]+\])\>#<code>$1</code>#g;
 
 	s#^=over\s+.*#</para>#;
-	s#^=item\s+.*#</para> <para>#;
-	s#^=back\s*.*#</para> <para>#;
+	s#^=item\s+.*#</para></listitem> <listitem><para>#;
+	s#^=back\s*.*#</para></listitem> <listitem><para>#;
 
-	!&in_pl and do {
+	!$in_pl and do {
 		s/&/&amp;/g;
 		s/interchange/&IC;/gi;
-	}
+	};
+
+	s#{{CMD\[.*?\](\w+)}}#$1#g;
+	s#variable#&glos-variable;#;
 
 	s/(<[\w_-]+)/lc $1/ge and do {
 		s/( [A-Z]+=)/lc $1/ge;
@@ -39,7 +42,7 @@ for (my $i=0; $i<@input; $i++) {
 ######################### SECT1
 	/^H1:\s*(.*?)\s*$/ and do {
 	my $sec = $1;
-	(my $title = lc $1) =~ s/(^|[\s_-"']+)(\w)/uc $2/ge;
+	(my $title = lc $1) =~ s/(^|[\s_"'-]+)(\w)/uc $2/ge;
 	push @output, <<__ENDD__;
 </para>
 </sect1>
@@ -72,6 +75,16 @@ __ENDD__
 		push @output, $1, "\n";
 		next;
 	};
+	/^\!block example$/ and do {
+		push @output, "\n<programlisting><![CDATA[\n" unless $in_pl++;
+		push @output, $1, "\n";
+		next;
+	};
+	/^\!endblock$/ and do {
+		push @output, "\n]]></programlisting>\n\n" if $in_pl; $in_pl=0;
+		next;
+	};
+
 
 	# If we got here, we're in "para"
 	push @output, "]]></programlisting>\n\n" if $in_pl; $in_pl=0;
@@ -81,4 +94,6 @@ __ENDD__
 }
 
 
-print @output;
+{ no warnings;
+print @output; }
+
