@@ -106,7 +106,8 @@ while ( $path = shift @paths) {
 	# Outer loop: symbol types (pragmas, globvars, ...)
 	# Inner loop: actual symbols
 	while ( my ($gkey,$gval) = each %{ $hash{symbols} } ) {
-		while ( my ($key,$val) = each %{ $gval } ) {
+		for my $key (sort(keys(%$gval))) {
+			my $val = $gval->{$key};
 			push @{ $symbol_lists{$gkey} }, $key
 			# ADDER
 				unless grep {/^$key$/} @{ $symbol_lists{$gkey} };
