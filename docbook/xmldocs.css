@@ -11,13 +11,13 @@ a { text-decoration: none; }
 
 /*
   Reference set:
-  .reference .titlepage . . <h1> </h1> / / . / <hr> /
-  .reference .toc <p> <b> </b> </p> <dl> <dt> </dt>
-  .reference .refentry .titlepage . / . / / .refnamediv <h2> </h2> <p> </p> /
-    .reference .refsect1 <h2> </h2> /
+  .reference .titlepage . . <h1/> / / . / <hr> /
+  .reference .toc <p> <b> </b> </p> <dl> <dt/>
+  .reference .refentry .titlepage . / . / / .refnamediv <h2/> <p/> /
+    .reference .refsect1 <h2/> /
 */
 
-.reference .titlepage h1 {
+.reference .titlepage h1, .article .titlepage h1 {
 	background-color: #208cbd; /* #6CA6C8; */
 	margin: 0;
 	margin-bottom: 20px;
@@ -29,20 +29,20 @@ a { text-decoration: none; }
 .reference hr {
 	margin: 0;
 	padding: 2px 4px 2px 4px;
-    height: 4px;
+	height: 4px;
 	border: 0;
-    border-top: 1px dashed #208cbd;
-    border-bottom: 1px solid #208cbd;
+	border-top: 1px dashed #208cbd;
+	border-bottom: 1px solid #208cbd;
 	visibility: hidden;
 }
 
-.reference .toc {
+.reference .toc, .article .toc {
 	margin: 0;
 	margin-bottom: 40px;
 	border: 1px dashed #CEE7F6;
 }
 
-.reference .toc p {
+.reference .toc p, .article .toc p {
 	margin: 0;
 	padding: 0;
 	background-color: #6CA6C8;
@@ -51,11 +51,11 @@ a { text-decoration: none; }
 	color: #FFF;
 }
 
-.reference .toc dl {
+.reference .toc dl, .article .toc dl {
 	padding: 2px 4px 2px 4px;
 }
 
-.reference .refentry .refnamediv h2 {
+.refentry .refnamediv h2 {
 	margin: 0;
 	padding: 0;
 	background-color: #FFF;
@@ -66,7 +66,7 @@ a { text-decoration: none; }
 	visibility: hidden;
 }
 
-.reference .refentry .refnamediv p {
+.refentry .refnamediv p {
 	margin: 0;
 	padding: 0;
 	background-color: #6CA6C8;
@@ -75,6 +75,108 @@ a { text-decoration: none; }
 	color: #FFF;
 	font-weight: bold;
 }
+
+
+/*
+	Chunked reference (individual refentry):
+	.navheader <tr> <th> </th> </tr> <hr> /
+	.refentry .titlepage . / . / / .refnamediv <h2 Name/> <p/> /
+	  .refsect1 <h2/> <pre|p/ class=sectname>
+*/
+
+.navheader {
+	padding: 2px 4px 2px 4px;
+	border: 0;
+	margin: 0;
+	font-size: 0;
+	height: 0;
+	visibility: hidden;
+}
+
+
+/*
+	Unchunked guide:
+	.article .titlepage . . <h1 title=/> / .
+	  .authorgroup
+		.author <h3 author> .firstname / .surname / .email / / /
+		/
+		. .copyright / /
+		.abstract p.title b/ / p / /
+		.toc p b/ / dl dt .sect1
+		  dd dl dt ...
+		.sect1 .titlepage . . h2.title / / . / /
+		  .sect2 .titlepage . . h3.title / / . / / <p/>
+*/
+
+.article .authorgroup {
+	margin: 0;
+	margin-bottom: 40px;
+	border: 1px dashed #CEE7F6;
+	padding: 2px 4px 8px 4px;
+}
+
+.article .abstract {
+	margin: 0;
+	margin-bottom: 40px;
+	border: 1px dashed #CEE7F6;
+	border-bottom: none;
+}
+
+.article .abstract p.title {
+	margin: 0;
+	padding: 0;
+	background-color: #6CA6C8;
+	border-bottom: 1px dashed #FFF;
+	padding: 1px 4px 1px 4px;
+	color: #FFF;
+}
+
+.article .abstract p {
+	padding: 1px 4px 1px 4px;
+}
+
+.article .sect1 .titlepage h2.title {
+	margin: 0;
+	padding: 0;
+	background-color: #6CA6C8;
+	border: 1px dashed #FFF;
+	padding: 4px 4px 4px 4px;
+	color: #FFF;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.article .sect2 .titlepage h3.title {
+	margin: 0;
+	padding: 0;
+	background-color: #CEE7F6;
+	border: 1px dashed #FFF;
+	padding: 4px 4px 4px 4px;
+	color: #000;
+	font-weight: bold;
+}
+
+.article .footnotes hr {
+	margin: 0;
+	padding: 2px 4px 2px 4px;
+	width: 100%;
+	border: 0;
+	border-top: 1px dashed #208cbd;
+	border-bottom: 1px solid #208cbd;
+}
+
+.article hr {
+	margin: 0 0 10px 0;
+	padding: 2px 4px 2px 4px;
+	width: 100%;
+	border: 0;
+	border-top: 1px dashed #208cbd;
+	border-bottom: 1px solid #208cbd;
+	visibility: hidden;
+}
+
+
+/* W3C icons */
 
 .w3c {
 	margin: 0;
@@ -89,3 +191,4 @@ a { text-decoration: none; }
 .w3c .w3cimg {
 	border: 0;
 }
+

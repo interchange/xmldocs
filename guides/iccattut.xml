@@ -7,7 +7,7 @@
 <article id='iccattut'>
 
 <articleinfo>
-	<title>Interchange Documentation: the Catalog Building Tutorial</title>
+	<title>Interchange Guides: the Catalog Building Tutorial</title>
 	<titleabbrev>iccattut</titleabbrev>
 	<edition>version xml2.0pre</edition>
 
@@ -21,14 +21,16 @@
 	</copyright>
 
 	<authorgroup>
-		<author><firstname>Sonny</firstname><surname>Cook</surname></author>
+		<author>
+			<firstname>Davor</firstname><surname>Ocelic</surname>
+			<email>docelic@icdevgroup.org</email>
+		</author>
 		<author>
 			<firstname>Jon</firstname><surname>Jensen</surname>
 			<email>jon@endpoint.com</email>
 		</author>
-		<author>
-			<firstname>Davor</firstname><surname>Ocelic</surname>
-			<email>docelic@icdevgroup.org</email>
+		<author><firstname>Sonny</firstname><surname>Cook</surname>
+			<email>sonny@endpoint.com</email>
 		</author>
 	</authorgroup>
 
