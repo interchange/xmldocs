@@ -1,4 +1,4 @@
-By default, Interchange does not allow data returned from the databases to be interpolated (all the &#91;s are converted to an &glos-HTML; entity (&amp;#91;) and displayed literally). Setting this pragma eliminates the restriction and passes &#91;s through for interpolation).
+By default, Interchange does not allow data returned from the databases to be &glos-interpolate;d (all the &#91;s are converted to an &glos-HTML; entity (&amp;#91;) and displayed literally). Setting this pragma eliminates the restriction and passes &#91;s through for interpolation).
 </para><para>
 If you want to have tags in your database and display them in Interchange pages (to say, display <tag>page</tag> links for internal hyperlinks in your product descriptions), you need to enable this pragma.
 Some things to consider, though:

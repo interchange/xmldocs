@@ -780,7 +780,7 @@ sub file_extractSub {
 			file_extractSub( $tagname, $1, $c, $context_data);
 			return;
 
-		} elsif ( $line =~ /^sub $func {/ ) {
+		} elsif ( $line =~ /^sub $func \{/ ) {
 			$start = $i+1 unless $start;
 			@content = ($line);
 

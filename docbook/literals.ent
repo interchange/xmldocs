@@ -92,7 +92,7 @@ option) any later version.</para>">
 	</entry>
 	<entry></entry><entry></entry>
 	<entry>0</entry>
-	<entry>&glos-interpolation; input?</entry>
+	<entry>&glos-interpolate; input?</entry>
 </row>
 ">
 <!ENTITY ROW_INTERPOLATE_1 "
@@ -104,7 +104,7 @@ option) any later version.</para>">
 	</entry>
 	<entry></entry><entry></entry>
 	<entry>1</entry>
-	<entry>&glos-interpolation; input?</entry>
+	<entry>&glos-interpolate; input?</entry>
 </row>
 ">
 <!ENTITY ROW_REPARSE_0 "

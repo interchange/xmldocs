@@ -1,1 +1,1 @@
-The old documentation system improperly describes the phase at which the <pragma>post_page</pragma> pragma takes effect (it states it happens after <option>Variable</option> processing and before tag interpolation).
+The old documentation system improperly describes the phase at which the <pragma>post_page</pragma> pragma takes effect (it states it happens after <option>Variable</option> processing and before tags are &glos-interpolate;d).

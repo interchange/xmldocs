@@ -1,6 +1,6 @@
 This pragma defines a <literal>Sub</literal> or <literal>GlobalSub</literal>
 to run
 <emphasis>after</emphasis> <option>Variable</option> substitution and
-<emphasis>before</emphasis> tag interpolation on a page. A
+<emphasis>before</emphasis> tags are &glos-interpolate;d on a page. A
 <emphasis>reference</emphasis> to the page contents
 is passed to the subroutine.

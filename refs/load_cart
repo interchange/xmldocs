@@ -35,7 +35,7 @@ __END__
 
 
 __NAME__ description
-This tag loads a cart from the &glos-userdb;.
+This tag loads a cart from the &glos-UserDB;.
 <emphasis role='bold'>The loaded cart will be merged with the current
 one</emphasis>.
 __END__

@@ -13,6 +13,8 @@
 	<!ENTITY systemtags SYSTEM "../tmp/systemtags-c.db"> 
 	<!ENTITY globconfs SYSTEM "../tmp/globconfs-c.db"> 
 	<!ENTITY catconfs SYSTEM "../tmp/catconfs-c.db"> 
+	<!-- COMPOUNDS -->
+	<!ENTITY tags SYSTEM "../tmp/tags-c.db"> 
 ]>
 
 <targetset>
@@ -65,6 +67,7 @@
 				</document>
 			</dir>
 			
+			<!--
 			<dir name='uitags'>
 				<document targetdoc="uitags">
 				&uitags;
@@ -80,6 +83,13 @@
 			<dir name='systemtags'>
 				<document targetdoc="systemtags">
 				&systemtags;
+				</document>
+			</dir>
+			-->
+
+			<dir name='ictags'>
+				<document targetdoc="tags">
+				&tags;
 				</document>
 			</dir>
 			

@@ -13,6 +13,8 @@
 	<!ENTITY systemtags SYSTEM "../tmp/systemtags-nc.db"> 
 	<!ENTITY globconfs SYSTEM "../tmp/globconfs-nc.db"> 
 	<!ENTITY catconfs SYSTEM "../tmp/catconfs-nc.db"> 
+	<!-- COMPOUNDS -->
+	<!ENTITY tags SYSTEM "../tmp/tags-nc.db"> 
 ]>
 
 <targetset>
@@ -34,6 +36,8 @@
 			<document targetdoc="systemtags" baseuri="systemtags.html"> &systemtags; </document>
 			<document targetdoc="globconfs" baseuri="globconfs.html"> &globconfs; </document>
 			<document targetdoc="catconfs" baseuri="catconfs.html"> &catconfs; </document>
+			<!-- COMPOUNDS -->
+			<document targetdoc="tags" baseuri="tags.html"> &tags; </document>
 		</dir>
 	</sitemap>
 

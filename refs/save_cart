@@ -41,7 +41,7 @@ __END__
 
 
 __NAME__ description
-This tag saves current cart to &glos-userdb;.
+This tag saves current cart to &glos-UserDB;.
 </para><para>
 Note that the cart name does not have to be unique. If there are more carts
 with the same nickname, an index will be added.
