@@ -23,6 +23,7 @@ my $output = "whatsnew/whatsnew.xml";
 my $entry_string = "<!-- AUTO UPDATER -->";
 my @template = <DATA>;
 my $template = join "", @template;
+my $final_content;
 
 unless ( GetOptions ( 
 	"verbose|v!" => \$verbose,
@@ -44,12 +45,31 @@ while ($_ = <IN>) {
 }
 close IN;
 
+# Read all messages and expand template for each
 for $_ (@archive) {
 	my ($user,$date,$log) = read_log($_);
 
 	my $sect = eval "\"$template\"";
+	$final_content .= $sect;
 	print "Here's a cookie:\n$sect\n";
 }
+
+# Finally, update .xml
+open IN, "< whatsnew/whatsnew.xml" or
+	die "Can't open whatsnew/whatsnew.xml ($!)\n";
+my @wn = <IN>;
+close IN;
+
+my $count = 0;
+for $_ (@wn) {
+	/^(\Q$entry_string\E)$/ and do {
+		$_ = "$entry_string\n$final_content";
+	}
+}
+
+open OUT, "> whatsnew/whatsnew.xml";
+print OUT @wn;
+close OUT;
 
 exit 0;
 
@@ -67,7 +87,7 @@ sub read_log {
 	for $_ (@file) {
 		/^User:\s+(\S+)$/ and $user = $1;
 		/^Date:\s+(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} GMT)$/ and $date = $1;
-		/^Log:$/ and $run++;
+		/^Log:$/ and do { $run++; next };
 		/^Revision\s+Changes\s+Path$/ and $run=0;
 		$run and push @log, $_;
 	}
@@ -77,6 +97,12 @@ sub read_log {
 
 
 __DATA__
-User: $user ($date)
+<literallayout>
+<emphasis>
+User: $user
+Date: $date
+</emphasis>
+
 @$log
+</literallayout>
 
