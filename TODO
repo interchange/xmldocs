@@ -2,12 +2,17 @@
 DOCUMENTATION SYSTEM:
 - Make docbook/symbol-type-skel/* contents of a glossary, and display a 
   glossary entry instead of those files.
-- For tags documentation, have a field if it's a container or not
+- For tags documentation, have a field if it's a container or not (and
+  also honor other tag details found in tag files)
 - bin/stattree, in format_ctx(), see how many spacings all the lines have
-  in common, and trim that.
+  in common, and trim that from the beginning.
 - why in manpage format, comments at the top of the file are messed up (no
   linebreaks)
-- remember which tag had _ instead of - in first UserTag line (email-raw)
+- Seems like there's no CSS selector to make a difference between an Example
+  element title, and Screen element title. (This causes source contexts
+  to be prefixed with "Example: ", although they're technically not).
+- Add support to document tags which are NOT found in separate files
+  (like [restrict]).
 
  Mid-term:
 - Think about adding "online example" (role=html in combination with 
@@ -43,6 +48,3 @@ thus a source of civilized delight.
 </para>
 </epigraph>
 
-
-Old docs:
-docs/retired/icintro.sdf - history, intro, typical user session, security

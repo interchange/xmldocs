@@ -8,7 +8,7 @@ purpose: allow reparsing of database values in search for Interchange tags
 #  Just name the related symbols. The system will work everything out.
 #  (Note that if you link some item from here, that item will auto-point
 #  back here (under "indirect links" section))
-see also:
+see also: restrict
 
 # Usually not needed to modify below
 

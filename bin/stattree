@@ -25,12 +25,13 @@ $Data::Dumper::Sortkeys++;
 # Vars
 my $verbose = 0;
 my $cachedir = $ENV{CACHE} || "cache";
-my %hash;
+my %hash; # Will contain data to be dumped
 my $cpath = $ENV{PWD};
+# Source contexts
 my $ctx_p = 10; # How much context lines to show before
 my $ctx_n = 4; #                                after
 
-# All types should be listed here or the stats wont. It should be
+# All file types should be listed here or the stats wont. It should be
 # reported if an unknown file is found in the archive
 # Order is important. First match wins.
 my %binary_types = (
@@ -58,12 +59,12 @@ my %ascii_types = (
 	variable => [qw|/vars/.+ /variables/.+|],
 );
 
+
+# A general overview: how many different contents do we have
 my $binary_types;
 my $ascii_types;
 for ( keys %binary_types ) { $binary_types += scalar @{ $binary_types{$_} } }
 for ( keys %ascii_types ) { $ascii_types += scalar @{ $ascii_types{$_} } }
-
-# A general overview: how many different contents do we have
 $hash{total}{known_types} = $binary_types + $ascii_types;
 $hash{total}{known_binary_types} = $binary_types;
 $hash{total}{known_ascii_types} = $ascii_types;
@@ -76,14 +77,12 @@ unless ( GetOptions (
 
 @ARGV == 1 or die "Usage: $0 path[/] \n";
 
-# $path is the dir to process, $dumppath is relocated name, say
+# $path is the directory to process, $dumppath is relocated name, say
 # sources/cvs-head becomes output/cvs-head/cache
 my $path = shift;
 ( my $dumppath = $path ) =~ s#.+?/##;
 my $dumpdir = $dumppath;
-my %i = (
-	ver => $dumpdir,
-);
+my %i = ( ver => $dumpdir );
 $i{ver} =~ s/\/$//;
 `mkdir -p $cachedir/$dumpdir` unless -e "$cachedir/$dumpdir";
 $dumppath .= "/.cache.bin";
@@ -158,13 +157,17 @@ sub wanted {
 			}
 		}
 	}
-	# Unknown // TODO pay more attention to this
+	# Unknown // TODO pay more attention to this, this should rarely happen,
+	# even if we're not interested in some files, they *should* be matched
+	# in %ascii_types/%binary_types above to provide accurate statistics.
 	print STDERR "$file UNKNOWN\n" if $verbose;
 	return; # We're not interested in handling that
 
 	EXTDONE:
 
-	# ftype, fsubtype and fext are known here
+	# file, ftype, fsubtype and fext are known here.
+	# file is filename, ftype is binary/ascii, fsubtype is key in 
+	# %ascii_types/%binary_types hash, fext is extension
 	$hash{total}{$ftype."_files"}++;
 	$hash{total}{filetypes}{$fsubtype}++;
 	$hash{total}{matches}{$fext}++;
@@ -209,7 +212,8 @@ sub wanted {
 			unless ( $hash{version} ) {
 				warn "Wasn't able to determine " .
 					'^ICVERSION=([\'"])(\d+\.\d+\.\d+)\1 from the main ' .
-					"./configure script. Will use one from directory name.\n";
+					"./configure script. Will use one from directory name. " .
+					"(This is OK for pre-5.0 versions).\n";
 				$hash{version} = $i{ver};
 			}
 
@@ -220,6 +224,7 @@ sub wanted {
 				$hash{tree}{$file}{comments}++ ;
 				$hash{total}{perl_comments}++;
 				# TODO check if the comment contains ::log[A-Z]\w+
+				# to discover calls to logGlobal/logDebug
 			} elsif ( $line =~ /\s+#/ ) {
 				$hash{tree}{$file}{gray}++ ;
 				$hash{total}{perl_gray}++;
@@ -260,6 +265,7 @@ sub wanted {
 					push @{ $hash{symbols}{globvar}{$5} },
 						[ "$i{ver}/$file", $lnum, "$gfunc[0]:$gfunc[1] $ctx_p\:$ctx_n", [format_ctx(@file[$lnum-$ctx_p..$lnum+$ctx_n])] ];
 				}
+				# A little catch
 				if ( $line =~ /\$Tag->var\s*\(\s*(["'])(\S+?)\1(\s*,\s*(\d))?/ ) {
 					push @{ $hash{symbols}{globvar}{$5} },
 						[ "$i{ver}/$file", $lnum, "$gfunc[0]:$gfunc[1] $ctx_p\:$ctx_n", [format_ctx(@file[$lnum-$ctx_p..$lnum+$ctx_n])] ];
@@ -297,7 +303,10 @@ sub wanted {
 				[ "$i{ver}/$file", scalar @file, "1:" . scalar @file, [ format_ctx(@file) ] ];
 			# Now, try to autoconstruct tag synopsis
 			my %specific;
+
 			#my $warned;
+			# This is where we parse the tag file. We should discover settings like
+			# HasEndTag, Order, and so on.
 			for my $_l (@file) {
 				next unless $_l =~ /^usertag\s/i;
 				my @lis = split /\s+/, $_l;
@@ -312,19 +321,6 @@ sub wanted {
 				#};
 				my $tn = shift @lis;
 
-				# Unfortunately this sucks. Some files contain more tags defined
-				# in them.
-				# code/SystemTag/attr_list.coretag,
-				# code/SystemTag/counter.coretag,
-				# code/SystemTag/counter.coretag,
-				# code/SystemTag/soap.coretag,
-				# code/UI_Tag/jsq.coretag,
-				# code/UserTag/email_raw.tag, 
-				# code/UserTag/forum.tag,
-				# code/UserTag/loc.tag,
-				# We'll deal with them later even though it will cause a small
-				# incaccuracy. Either split to files, or to hack in support for this
-				# in xmldocs tools, that would require more work.
 				#if ( $specific{_name} and ( $specific{_name} ne $tn )) {
 				#	warn "HA! $file, managed to err on $specific{_name}/$tn)\n"
 				#}
