@@ -1,0 +1,30 @@
+
+<glossentry id="tracking">
+<glossterm>tracking</glossterm>
+<glossterm>user tracking</glossterm>
+
+<glossdef>
+<para>
+Several actions performed by users are recorded by &IC;'s usertracking 
+facility, if one is enabled. Usertrack data can actually be obtained from two
+different locations.
+</para><para>
+The first location is &IC; itself, where you tune the &conf-TrackFile;
+directive to your needs (such as <filename>logs/usertrack</filename>).
+This is the approach used in the &std-catalog; demo.
+</para><para>
+The second location are the HTTP headers. You can configure the Web server to
+write this header into access logs; here's an example for the &APACHE;
+web server:
+
+<programlisting><![CDATA[
+LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" \
+			%T %v \"%{X-Track}o\"" track
+CustomLog /var/log/apache/track.log track
+]]></programlisting>
+</para>
+
+</glossdef>
+
+</glossentry>
+
