@@ -12,8 +12,12 @@
 	<edition>version xml2.0pre</edition>
 
 	<copyright>
-		<year>2002</year><year>2003</year><year>2004</year>
+		<year>2003</year><year>2004</year>
 		<holder>Interchange Development Group</holder>
+	</copyright>
+	<copyright>
+		<year>2002</year>
+		<holder>Red-Hat, Inc.</holder>
 	</copyright>
 
 	<authorgroup>

@@ -34,7 +34,7 @@ my $cpath = $ENV{PWD};
 my %binary_types = (
 	images => [qw/\.gif \.jpeg \.jpg \.png \.bmp/],
 	);
-my %text_types = (
+my %ascii_types = (
 	database => [qw|\.(..)?sql \.ora \..?dbm \.notes \.csv
 		/products/\S+\.txt \.asc|],
 	release_helpfile => [qw/^WHATSNEW-\d+\.\d+ README(\..+)? TODO
@@ -57,14 +57,14 @@ my %text_types = (
 );
 
 my $binary_types;
-my $text_types;
+my $ascii_types;
 for ( keys %binary_types ) { $binary_types += scalar @{ $binary_types{$_} } }
-for ( keys %text_types ) { $text_types += scalar @{ $text_types{$_} } }
+for ( keys %ascii_types ) { $ascii_types += scalar @{ $ascii_types{$_} } }
 
 # A general overview: how many different contents do we have
-$hash{total}{types} = $binary_types + $text_types;
-$hash{total}{binary_types} = $binary_types;
-$hash{total}{text_types} = $text_types;
+$hash{total}{known_types} = $binary_types + $ascii_types;
+$hash{total}{known_binary_types} = $binary_types;
+$hash{total}{known_ascii_types} = $ascii_types;
 
 
 # Parse args (not much available anyway :)
@@ -142,10 +142,10 @@ sub wanted {
 		}
 	}
 	#Text
-	for my $k ( keys %text_types ) {
-		for my $t ( @{ $text_types{$k} } ) {
+	for my $k ( keys %ascii_types ) {
+		for my $t ( @{ $ascii_types{$k} } ) {
 			if ( $file =~ /$t$/i ) {
-				$ftype = "text"; $fsubtype = "$k"; $fext = $t;
+				$ftype = "ascii"; $fsubtype = "$k"; $fext = $t;
 				goto EXTDONE;
 			}
 		}
@@ -171,13 +171,45 @@ sub wanted {
 	open IN, "< $file" or die "Can't open $file ($!)\n";
 
 	while (<IN>) {
-		$hash{tree}{$file}{lines}++ 
+		my $line = $_; 
+
+		$hash{tree}{$file}{lines}++ ;
+		$hash{total}{lines}++ ;
+
+		if ( $fsubtype eq 'perl' ) {
+			my $pod = 0;
+			if ( $line =~ /^\s*#/ ) {
+				$hash{tree}{$file}{comments}++ ;
+				$hash{total}{perl_comments}++;
+			} elsif ( $line =~ /\s+#/ ) {
+				$hash{tree}{$file}{gray}++ ;
+				$hash{total}{perl_gray}++;
+			} elsif ( $line =~ /^=(head|over|item)/) {
+				$hash{tree}{$file}{pod}++;
+				$hash{total}{perl_pod}++;
+				$pod++;
+			} elsif ( $line =~ /^=cut/) {
+				$hash{tree}{$file}{pod}++;
+				$hash{total}{perl_pod}++;
+				$pod = 0;
+			} elsif ( $line =~ /^\s*$/ ) {
+				$hash{tree}{$file}{empty}++;
+				$hash{total}{perl_empty}++;
+			} elsif ( ! $pod ) {
+				# The default is code
+				$hash{tree}{$file}{code}++;
+				$hash{total}{perl_code}++;
+			} else {
+				warn "IMPOSSIBLE\n";
+			}
+		}
 
 		# TODO:
 		# - parse contents, identify blocks and add to appropriate
 		#   counters.
 		# - code with inline comments or html with tags count as "gray area"
 		#   (adds 1 to both)
+
 	}
 
 	close IN;
@@ -208,11 +240,11 @@ sub dumpdb {
 # 	# General overview, summarized statistics
 # 	total => {
 #
-# 		types            # all extensions: binary + text
+# 		known_types        # all extensions: binary + text
 #
-# 		binary_types     # how many file types are considered binary
+# 		known_binary_types # how many file types are considered binary
 # 		
-# 		text_types       # how many file types are considered text
+# 		known_ascii_types  # how many file types are considered text
 # 		
 #			files            # total number of files (non-dirs)
 #
@@ -220,9 +252,22 @@ sub dumpdb {
 #
 #			binary_files     # how many bin files in total
 #
-#			text_files       # how many text files in total
+#			ascii_files      # how many text files in total
 #
 #			size             # total size
+#
+#     lines            # total lines in text files (perl_* above is included
+#                      # in this 'lines' value
+#
+#     perl_comments    # total perl standalone comments
+#
+#     perl_gray        # inline comment on a perl line
+#
+#     perl_code        # pure code lines
+#
+#     perl_pod         # pod lines
+#
+#     perl_empty       # number of empty (except whitespace) lines
 # 	
 #			matches => {     # files with that extension/selector
 # 			...ext...
@@ -244,6 +289,11 @@ sub dumpdb {
 #				subtype> subtype (binary image, text c source, text perl source..)
 #				ext   => extension as recognized by file matcher
 #				lines => number of lines
+#				code => lines of code
+#				comments => lines of perl-style comments
+#				pod => lines of POD
+#				gray => mixed, same as above in total{}
+#				empty => empty lines (including whitespace)
 # 		}
 # 	}
 # )

@@ -70,7 +70,7 @@ while (<STDIN>) {
 	# Although xml uses only lowecase tags and we use only uppercase,
 	# the dash in "<-.*" needs to be present just to be sure we don't
 	# clash with html or anything eventually in uppercase.
-	#
+	# TODO Also stop processing inside programlisting/screen
 	if ( $line =~ s/<-NOEX(PAND)?>// ) { $active = 0; next}
 	if ( $line =~ s/<-EX(PAND)?>// ) { $active++; next}
 	goto DUMP unless $active;
@@ -144,6 +144,11 @@ while (<STDIN>) {
 	#
 	# 4: Simple entities replacement
 	while ( $line =~ s/&(\S+?);/$entities{$1} || "&$1;"/ge ) {}
+
+
+	#
+	# 5: TODO
+	# Turn [\S+?] into <tag>
 
 
 	# Finished
