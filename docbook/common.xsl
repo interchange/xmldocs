@@ -38,6 +38,9 @@
       <l:context name="title">
         <l:template name="example" text="Example: %t"/>
       </l:context>
+      <l:context name="title">
+        <l:template name="figure" text="%t"/>
+      </l:context>
     </l:l10n>
   </l:i18n>
 

@@ -290,13 +290,13 @@ while ( $path = shift @paths) { # For each version specified
 					$$ag{source} .= <<ENDD;
 <para>
 </para>
-<example>
+<figure>
 <title>$loc $revinfo$ctxmeta</title>
 
 <screen linenumbering='numbered' startinglinenumber='$ls'>
 <![CDATA[$ctxsdata]]>
 </screen>
-</example>
+</figure>
 
 ENDD
 					}
