@@ -96,9 +96,7 @@ option) any later version.</para>">
 <!ENTITY ROW_INTERPOLATE_0 "
 <row>
 	<entry>
-		<group choice='opt'>
-			<arg choice='plain'>interpolate</arg>
-		</group>
+		<arg choice='plain'>interpolate</arg>
 	</entry>
 	<entry></entry><entry></entry>
 	<entry>0</entry>
@@ -108,9 +106,7 @@ option) any later version.</para>">
 <!ENTITY ROW_INTERPOLATE_1 "
 <row>
 	<entry>
-		<group choice='opt'>
-			<arg choice='plain'>interpolate</arg>
-		</group>
+		<arg choice='plain'>interpolate</arg>
 	</entry>
 	<entry></entry><entry></entry>
 	<entry>1</entry>
@@ -120,9 +116,7 @@ option) any later version.</para>">
 <!ENTITY ROW_REPARSE_0 "
 <row>
 	<entry>
-		<group choice='opt'>
-			<arg choice='plain'>reparse</arg>
-		</group>
+		<arg choice='plain'>reparse</arg>
 	</entry>
 	<entry></entry><entry></entry>
 	<entry>0</entry>
@@ -132,9 +126,7 @@ option) any later version.</para>">
 <!ENTITY ROW_REPARSE_1 "
 <row>
 	<entry>
-		<group choice='opt'>
-			<arg choice='plain'>reparse</arg>
-		</group>
+		<arg choice='plain'>reparse</arg>
 	</entry>
 	<entry></entry><entry></entry>
 	<entry>1</entry>

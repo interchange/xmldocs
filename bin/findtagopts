@@ -1,0 +1,137 @@
+#! /usr/bin/perl
+
+# docelic@icdevgroup.org
+
+# The script parses cache files made by bin/stattree, and generates
+# the refs/*.xml files.
+
+use warnings;
+use strict;
+use File::Find;
+use Data::Dumper;
+use Getopt::Long;
+use Storable qw/nstore_fd fd_retrieve/;
+use Fcntl qw/:DEFAULT :flock/;
+
+{ no warnings;
+$Data::Dumper::Indent = 1;
+$Data::Dumper::Terse++;
+$Data::Dumper::Sortkeys++;
+$ENV{XMLDOCS_CUR_DEVEL} ||= "";
+}
+
+my $dumpdb = 0;
+my $verbose = 0;
+my $OUTPUT = "OUTPUT";
+my %refcache; # memory cache of Storable files. Not really needed but I 
+              # copied old code which had it, so ...
+my %hash; # complete tree data for each IC version we parse
+my $cachedir = $ENV{CACHE} || "cache";
+
+unless ( GetOptions ( 
+	"verbosedb|dumpdb|d!" => \$dumpdb,
+	"verbose|v!" => \$verbose,
+)) { die "Error parsing options\n" }
+
+@ARGV or die "Usage: $0 <tagname>\n";
+
+loaddb("$cachedir/cvs-head/.cache.bin");
+
+my $tagname = shift;
+
+my $true_head= "__NAME__ synopsis";
+my $true_foot = "\n&ROW_INTERPOLATE_0;\n&ROW_REPARSE_1;\n__END__";
+ 
+my $head = "
+<row>
+";
+my $foot = "
+</row>";
+
+my $itm = '"
+	<entry>
+	$option
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+"';
+
+my @options;
+my %seen;
+
+for my $p (qw/systemtag usertag uitag/) {
+	my $ref = $hash{symbols}{$p};
+	#if ( $$ref{$tagname} ) {
+	#	@{$$ref{$tagname}} == 1 or do {
+	#		warn "Multiple contexts for $tagname\n";
+	#		print Dumper $$ref{$tagname};
+	#		exit 1;
+	#	}
+	#}
+
+
+	next unless $$ref{$tagname};
+
+	my $at_least_one_opt = 0;
+	for (@{$$ref{$tagname}}) {
+		my @source = @{ $$_{ctx} };
+		for (@source) {
+			$at_least_one_opt++ if /\$opt/;
+			while ( s/\$opt->\{(.+?)\}// ) {
+				my $option = $1;
+				push @options, $head . eval($itm) . $foot
+					unless ( $option =~ /^\$/ or $seen{$option}++ )
+			}
+			while ( s/\$\$opt\{(.+?)\}// ) {
+				my $option = $1;
+				push @options, $head . eval($itm) . $foot
+					unless ( $option =~ /^\$/ or $seen{$option}++ )
+			}
+		}
+	}
+	unless ($at_least_one_opt) {
+		print STDERR "$tagname doesn't use \$opt ?\n";
+	}
+}
+
+@options and do { unshift @options, $true_head; push @options, $true_foot };
+
+
+print "@options";
+
+
+exit 0;
+
+#################################################################
+# Helpers below
+
+sub loaddb {
+	my $dbpath = shift;
+
+	unless ( exists $refcache{$dbpath} ) {
+		open( IN, "< $dbpath") or
+			die "Can't open database ($dbpath) ($!).\n";
+		flock( IN, LOCK_SH ) or
+			die "Can't shared-lock database ($dbpath) ($!).\n";
+		$refcache{$dbpath} = fd_retrieve( \*IN );
+		close IN or
+			die "Can't properly close database ($dbpath) ($!).\n";
+	}
+
+	%hash = %{ $refcache{$dbpath} };
+}
+
+
+sub O { print "@_\n"; print STDOUT "@_\n" if $verbose }
+
+

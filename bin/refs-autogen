@@ -677,7 +677,7 @@ for my $group ( keys %symbols ) {
 
   <partintro>
   <para>
-	<phrase condition='online'>[restrict log='none']</phrase>
+	<phrase condition='online'>[restrict log=none]</phrase>
   $preamble{$group}
   </para>
   </partintro>
@@ -920,7 +920,7 @@ sub populate {
 				# __NAME__ section name: section title
 				# The 'title' part will be automatically wrapped in a 
 				# <title> element.
-				if ( $line =~ /^__NAME__\s+(.+)\s*$/ ) {
+				if ( $line =~ /^__NAME__\s+(.+?)\s*$/ ) {
 					# Support for this exists only in this format, it's not
 					# supported in control files or name/*. And fortunately, since
 					# we didn't modify the templates to do this trick, those old files
