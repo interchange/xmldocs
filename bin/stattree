@@ -56,7 +56,7 @@ my %ascii_types = (
 	config => [qw/\.cfg \.dist/],
 	c => [qw/\.c \.in/],
 	perl => [qw/\.pl \.pm/],
-	uitag => [qw|UI_Tag/\S+\.(core)?tag|],
+	uitag => [qw|UI_Tag/\S+\.(core)?tag dist/lib/UI/usertag/\S+|],
 	systemtag => [qw|SystemTag/\S+\.(core)?tag|],
 	usertag => [qw|UserTag/\S+\.tag \.tag|],
 	filter => [qw/\.filter/],
@@ -299,8 +299,13 @@ sub wanted {
 		# Found a tag
 		} elsif ( $c{fsubtype} =~ /^(user|ui|system)tag$/ )  {
 			#$hash{total}{$fsubtype . "s"}++;
+
+			# Skip this simple sanity check for 4.6.0 - those files do not
+			# have .(core)?tag ending.
+			if ( $hash{version} ne '4.6.0') {
 			$c{file} =~ m#(\w+?)\.(core)?tag$# or
 				warn "I know $c{file} is a tag but regex doesn't match it\n";
+			}
 
 			my %specific; # Item-specific data
 			my @tags; # Support multiple tags defined in the same file
