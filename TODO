@@ -1,8 +1,10 @@
 
 PRIMARY:
+- if the place of item definition (a file) changes its path, in the Source
+  context the old version is shown instead of the newest one.
 - agree on rules for writing Synopsis lines (should be flexible enough to
   support all symbol types in an uniform way)
-- rewrite bin/refs-autogen
+- rewrite bin/refs-autogen AND bin/stattree
 - Make docbook/symbol-type-skel/* contents of a glossary, and display a 
   glossary entry instead of those files.
 - Under availability, if applicable, display cvs line (modification time,
@@ -63,6 +65,9 @@ thus a source of civilized delight.
 </para>
 </epigraph>
 
+
+"In times of universal deceit, telling the truth becomes
+ a revolutionary act." -- George Orwell.
 
 ######################################################################
 

@@ -1,0 +1,10 @@
+  * Added tag which adds a GPG/PGP key to the keyring, used in new
+	    CommerceLauncher store builder.
+
+
+			[L]add[/L]: [add-gpg-key name=pgpkeytext return_id=1 failure=FAILED]
+
+
+			add-gpg-key text="[value pgpkeytext]" return_id=1]
+
+

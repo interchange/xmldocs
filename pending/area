@@ -1,0 +1,16 @@
+>   <FORM ACTION="[area process]" METHOD=POST>
+>        <INPUT TYPE=hidden NAME=mv_todo VALUE="refresh">
+>        <INPUT TYPE=hidden NAME=mv_order_item VALUE="000101">
+>        Qty: <INPUT SIZE=2 NAME=mv_order_quantity VALUE="1"><BR>
+>        <INPUT TYPE=hidden NAME=mv_order_fly
+>            VALUE="description=An on-the-fly item|price=100.00">
+>        <INPUT TYPE=hidden NAME=mv_order_item VALUE="000102">
+>        Qty: <INPUT SIZE=2 NAME=mv_order_quantity VALUE="1"><BR>
+>        <INPUT TYPE=hidden NAME=mv_order_fly
+>            VALUE="description=Another on-the-fly item|price=200.00">
+>        <INPUT TYPE=submit VALUE="Order two different with a button">
+>    </FORM>
+
+my $u = $Tag->area({ href => "$basedir$page", form => $form, });
+lang="Perl" $Tag->area(  { href => "dir/page", arg  => "arguments", }  );
+$Tag->area($href, $arg, $attribute_hash_reference);

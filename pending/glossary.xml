@@ -1,0 +1,100 @@
+<?xml version="1.0" standalone="no"?>
+
+<!DOCTYPE glossary PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+  "docbook/docbookix.dtd">
+
+<glossary>
+	<title>Interchange Documentation: Glossary</title>
+
+
+<glossdiv><title>A</title>
+</glossdiv>
+
+<glossdiv><title>B</title>
+</glossdiv>
+
+<glossdiv><title>C</title>
+</glossdiv>
+
+<glossdiv><title>D</title>
+</glossdiv>
+
+<glossdiv><title>E</title>
+</glossdiv>
+
+<glossdiv><title>F</title>
+</glossdiv>
+
+<glossdiv><title>G</title>
+</glossdiv>
+
+<glossdiv><title>H</title>
+</glossdiv>
+
+<glossdiv><title>I</title>
+</glossdiv>
+
+<glossdiv><title>J</title>
+</glossdiv>
+
+<glossdiv><title>K</title>
+</glossdiv>
+
+<glossdiv><title>L</title>
+</glossdiv>
+
+<glossdiv><title>M</title>
+</glossdiv>
+
+<glossdiv><title>N</title>
+</glossdiv>
+
+<glossdiv><title>O</title>
+</glossdiv>
+
+<glossdiv><title>P</title>
+
+	<glossentry id="pragma">
+		<glossterm>Pragma</glossterm>
+		<!--<acronym></acronym>-->
+		<!--<abbrev>ISO 8879:1986</abbrev>-->
+		<glossdef>
+			<para>Some reasonable definition here.</para>
+			<!-- <glosssee otherterm="sgml"/> -->
+			<glossseealso otherterm="globvar">Global variable</glossseealso>
+		</glossdef>
+	</glossentry>
+
+</glossdiv>
+
+<glossdiv><title>Q</title>
+</glossdiv>
+
+<glossdiv><title>R</title>
+</glossdiv>
+
+<glossdiv><title>S</title>
+</glossdiv>
+
+<glossdiv><title>T</title>
+</glossdiv>
+
+<glossdiv><title>U</title>
+</glossdiv>
+
+<glossdiv><title>V</title>
+</glossdiv>
+
+<glossdiv><title>W</title>
+</glossdiv>
+
+<glossdiv><title>X</title>
+</glossdiv>
+
+<glossdiv><title>Y</title>
+</glossdiv>
+
+<glossdiv><title>Z</title>
+</glossdiv>
+
+</glossary>
