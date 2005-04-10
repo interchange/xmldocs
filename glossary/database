@@ -49,25 +49,71 @@ Text source files are not databases themselves, of course
 By default, all database source files are kept in the 
 <filename class='directory'>products/</filename> subdirectory of your
 &glos-CATROOT;. The &conf-ProductDir; directive controls the exact location.
+</para><para>
+The ASCII files can have
+<literal>^M</literal> (carriage return) characters, but must have a
+newline character at the end of the line to work. <emphasis role='bold'>
+Mac users uploading files must use ascii mode, not binary mode</emphasis>.
 </para>
+<para>
+Interchange's default ASCII delimiter is TAB. <emphasis role='bold'>Keep in
+mind that the items must be separated by a single delimiter (that is, a single
+TAB by default)</emphasis>. Due to the nature of TABs, TAB-delimited files
+look messy and unaligned when viewed in a text editor. Do not try to fix these;
+better use the <command>te</command> utility that comes as part of the 
+&IC; distribution to edit files more conveniently.
+</para>
+Format examples:
+<itemizedlist>
+	<listitem>
+	<para>TAB-delimited file:
+Fields are separated by TAB characters. No whitespace is allowable
+at the beginning of the line.
+</para>
+<screen>
+code	description	price image
+SH543	Men's fine cotton shirt	14.95	shirts.jpg
+</screen>
+<para>
+Using the default TAB delimiter is recommended if you plan on
+searching the ASCII source file of the database.
+	</para></listitem>
+
+	<listitem>
+	<para>PIPE-delimited file:
+Fields are separated by the pipe ("<literal>|</literal>") characters which 
+resemble vertical lines. No whitespace is allowable at the beginning of the
+line.
+</para>
+<screen>
+code|description|price|image
+SH543|Men's fine cotton shirt|14.95|shirts.jpg
+</screen>
+<para>
+PIPE-delimited files perform fairly well with ASCII text searching routines.
+	</para></listitem>
+	<listitem>
+	<para>CVS-delimited file:
+Fields are enclosed in quotes and separated by commas. Again, no whitespace
+should be at the beginning of the line.
+</para>
+<screen>
+"code","description","price","image"
+"SH543","Men's fine cotton shirt","14.95","shirts.jpg"
+</screen>
+<para>
+CSV-delimiter schemes might cause problems with ASCII text searching routines.
+	</para></listitem>
+	</itemizedlist>
 
 <note>
-<title>Database updates</title>
-<para>
-It is important to note that, when using &IC; internal database methods 
-(which are some variant of DB_File or DBM, depending on what's available
-on your system), changes to text files cause databases to be resynchronized
-with plaintext file contents.
-</para><para>
-This behavior can be controlled via the &conf-NoImport; config directive,
-but by default, changes in text files will trigger a 
-rewrite of DBM or DB_File databases. This might lead to unexpected problems
-if you edit databases from &IC; and don't sync <emphasis>files</emphasis>
-with the databases first, or have a larger data sets
-(say, over a few thousand records) which take noticeable time to get
-re-imported.
+	<para>
+Field names are usually case-sensitive. Use
+consistency when naming or you might encounter problems. All lower or
+all upper case names are recommended.
 </para>
 </note>
+
 </section>
 
 <section>
@@ -155,7 +201,25 @@ appropriate database text source file is checked for being newer than the
 actual DB file itself.
 When it happens that it is, the database table is re-imported
 from the text source file.
+</para>
+<note>
+<title>Database updates</title>
+<para>
+It is important to note that, when using &IC; internal database methods 
+(which are some variant of DB_File or DBM, depending on what's available
+on your system), changes to text files cause databases to be resynchronized
+with plaintext file contents.
 </para><para>
+This behavior can be controlled via the &conf-NoImport; config directive,
+but by default, changes in text files will trigger a 
+rewrite of DBM or DB_File databases. This might lead to unexpected problems
+if you edit databases from &IC; and don't sync <emphasis>files</emphasis>
+with the databases first, or have a larger data sets
+(say, over a few thousand records) which take noticeable time to get
+re-imported.
+</para>
+</note>
+<para>
 For a complete discussion, please see the &conf-Database; configuration
 directive.
 </para>
@@ -180,5 +244,86 @@ directive.
 </section>
 
 
+<section>
+	<title>Interchange Database Conventions</title>
+<para>
+This section describes naming and file usage conventions used with
+&IC;. This is very important for both understanding &IC; and developing
+your own custom solutions which build upon officially recommended practices.
+</para><para>
+Term definitions:
+</para>
+<itemizedlist>
+<listitem>
+	<para><emphasis>key</emphasis> or <emphasis>code</emphasis></para>
+	<para>
+	The words reference the database key. In &IC;, the key is usually the
+	product <emphasis>code</emphasis> or &glos-SKU;, which is the product
+	part number. Otherwise, key values may be used to generate relationships
+	to other database tables.
+	</para><para>
+	It is recommended that the key be the first column of the database
+	text source file, since Interchange's import, export, and search
+	facilities rely on this practice.
+	</para>
+</listitem>
+<listitem>
+	<para><emphasis>field</emphasis> or <emphasis>column</emphasis></para>
+	<para>
+	The vertical row of a database. One of the columns is always the key
+	and it is usually the first one, as explained above.
+	</para>
+</listitem>
+<listitem>
+	<para><emphasis>table</emphasis> or <emphasis>database</emphasis></para>
+	<para>
+	A table in the database. Because &IC; has evolved from a
+	single-table database to an access method for an unlimited number of
+	tables (and databases, for that matter), a table will occasionally be
+	referred to as a database. The only time the term database refers to
+	something different is when describing the concept as it relates to
+	SQL, where a database contains a series of tables. While &IC;
+	cannot create SQL databases, it can drop and create tables with that
+	database if given the proper permissions.
+	</para>
+</listitem>
+</itemizedlist>
+
+
+<para>
+	&IC; uses one mandatory database, which is referred to as the
+	<database>products</database> database. In the supplied catalog, the
+	database is directly called <literal>products</literal> 
+	and the ASCII source is kept in the file <filename>products.txt</filename>
+	This is also the default file for searching contents with
+	the search engine, such as Glimpse or HTDig.
+</para><para>
+	Interchange also has a two of standard, but optional, databases that
+	are <emphasis role='bold'>in fixed formats</emphasis>:
+	</para>
+	<itemizedlist>
+<listitem>
+<para>
+	<database>shipping.asc</database> database contains shipping options that are
+	accessed if the	&conf-CustomShipping; directive is in use.
+	This is a fixed-format database, and must be created as specified.
+	For more information, see &glos-shipping; glossary entry and the 
+	&tag-shipping; tag.
+</para>
+</listitem>
+<listitem><para>
+	<database>salestax.asc</database> database contains 
+	sales tax information if the &tag-salestax; tag is to
+	be used. A default is supplied.
+	<emphasis role='bold'>Caution, these things change and need 
+	periodic updating!</emphasis> See &glos-tax; glossary entry for more
+	information.
+</para>
+</listitem>
+</itemizedlist>
+<para>
+	The two above tables are never stored in SQL or DBM.
+</para>
+</section>
 
 <para>
