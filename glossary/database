@@ -1,0 +1,184 @@
+In general, databases contain some information, usually in tabular format,
+where columns define the names and types of contained data, and rows
+represent <emphasis>entries</emphasis> &mdash; database
+<emphasis>records</emphasis>.
+</para><para>
+&IC; is primarily using databases to just retrieve values from specific
+tables, and does not use any higher-level functions of RDBM databases
+(such as views, triggers, or stored procedures in &PGSQL;).
+Such things can, however, be implemented in the database independently 
+of &IC;, as Interchange will properly pass any warning or error messages back
+and forth.
+</para><para>
+We should say right away that &IC; is completely database-independent.
+The choice of actual database types that can work with Interchange is large,
+and &IC; can use some database-like methods automatically when you're not
+explicitly interested in paying attention to databases working behind
+the scenes.
+</para><para>
+Common features are transparently available
+everywhere (with absolutely no code hacks or special cases required),
+regardless of the underlying database type used. In addition, almost no
+field names are hard-coded, allowing for unlimited flexibility.
+</para><para>
+<emphasis role='bold'>
+Keep in mind that the terms <literal>database</literal> and 
+<literal>database table</literal> actually mean the same thing in &IC; 
+parlance - a <literal>database table</literal>.
+</emphasis>
+</para><para>
+&IC; works with GDBM, DB_File, SQL, LDAP and in-memory types of databases. 
+Regardless of the type, each database must be registered with &IC; before it's
+ready to be used, and this is achieved using the &conf-Database; configuration
+directive. Pay special attention to the fact that &conf-Database; is both
+catalog and global directive, indicating that you can share databases 
+among catalogs.
+</para><para>
+Three parameters needed to complete the &conf-Database; specification are
+an arbitrary database name, text source file with initial content, and the
+type of database.
+</para>
+
+<section>
+	<title>Text Source Files</title>
+<para>
+Text source files are not databases themselves, of course
+(for performance and other reasons); they are only used to provide
+<emphasis>initial data</emphasis> for the corresponding database tables.
+</para><para>
+By default, all database source files are kept in the 
+<filename class='directory'>products/</filename> subdirectory of your
+&glos-CATROOT;. The &conf-ProductDir; directive controls the exact location.
+</para>
+
+<note>
+<title>Database updates</title>
+<para>
+It is important to note that, when using &IC; internal database methods 
+(which are some variant of DB_File or DBM, depending on what's available
+on your system), changes to text files cause databases to be resynchronized
+with plaintext file contents.
+</para><para>
+This behavior can be controlled via the &conf-NoImport; config directive,
+but by default, changes in text files will trigger a 
+rewrite of DBM or DB_File databases. This might lead to unexpected problems
+if you edit databases from &IC; and don't sync <emphasis>files</emphasis>
+with the databases first, or have a larger data sets
+(say, over a few thousand records) which take noticeable time to get
+re-imported.
+</para>
+</note>
+</section>
+
+<section>
+	<title>SQL Databases</title>
+<para>
+As hinted above, you do not need to use an external SQL database. If you only
+have a small data set, you could use Interchange's internal databases.
+This is a tremendeous gain for small and quick setups, or &IC; evaluation.
+However, some functions (order management, for example) will be slower
+and not as robust without an SQL database. SQL is strongly recommended for
+at least the <database>state</database>,
+<database>country</database>,
+<database>orderline</database>,
+<database>transactions</database>
+and <database>userdb</database> tables. Any other tables that will
+have programmed updates, such as <database>inventory</database>, are
+also best placed in SQL.
+</para>
+
+<note>
+<title>Database performance</title>
+<para>
+Do not, however, fall in the jaws of <ulink url="http://c2.com/cgi/wiki?PrematureOptimization">premature optimisation</ulink>, <ulink url="http://www.flounder.com/optimization.htm">your worst enemy</ulink>.
+</para>
+</note>
+
+<para>
+If you plan on using Interchange Admin UI, you should make the additional 
+effort of also configuring SQL databases and switching databases to it.
+Admin UI provides easy import routines for text files that should
+replace traditional FTP text-file uploads.
+</para><para>
+Using SQL also makes your data sets easily available for integration with
+other applications.
+</para><para>
+Speaking of the source files' behavior, if a file named
+<filename><replaceable>table</replaceable>.sql</filename> is present
+in the same directory as
+<filename><replaceable>table</replaceable>.txt</filename>, then database
+table will not be imported from the ASCII text source file.
+If there is no products.sql, the DBI/SQL import will happen once at
+&IC; startup or catalog reconfiguration time;
+Interchange will connect to the SQL database using the specified DSN
+(DNS is a standard DBI parameter meaning "Database Source Name").
+The table, if it already exists, will be dropped using a line similar to
+<literal>DROP TABLE <replaceable>table</replaceable></literal>.
+This will occur without warning, but &conf-NoImport; can be used to 
+prevent it or otherwise change the default behavior.
+The table will then be created again.
+</para><para>
+If there are any
+<literal>COLUMN_DEF</literal> specifications present in &gcf;, &ccf; or
+<filename>products/<replaceable>table</replaceable>.sql</filename>,
+they will be used in table specification (which is recommended for clean
+and correct database
+layout). If there aren't any, however, then the key (first field in the text
+file, by default) will be created with the type <literal>char(16)</literal>,
+and all other fields will be created as <literal>char(128)</literal>. This is 
+very unfortunate, but the best &IC; can do without your help.
+Table creation statements will be written to the <filename>error.log</filename>
+along with, of course, any errors. From my experience, the most common
+mistake at this step is picking column names which happen to be reserved
+keywords in &MYSQL;.
+</para><para>
+Once the &glos-database; (database table actually, remember we said 
+"database" and "table" simply mean a "table" in &IC; parlance)
+is created, the text source file will be imported into it.
+For this step to succeed, data typing must be user-configured. In other words,
+if <literal>none</literal> is placed in a field, and the field in question
+is defined to be of numeric type, database import will not succeed;
+consequently, the problematic catalog won't configure successfully 
+(it will be skipped) and it won't be available when &IC; starts up.
+</para><para>
+For a complete discussion, please see the &conf-Database; configuration
+directive.
+</para>
+</section>
+
+<section>
+	<title>*DB* Databases</title>
+<para>
+By "*DB*" databases we primarily assume Berkeley (DB_File) and GNU DBM. Those
+database types usually work in a way that, on every client access, the
+appropriate database text source file is checked for being newer than the
+actual DB file itself.
+When it happens that it is, the database table is re-imported
+from the text source file.
+</para><para>
+For a complete discussion, please see the &conf-Database; configuration
+directive.
+</para>
+</section>
+
+<section>
+	<title>Memory Databases</title>
+<para>
+Memory databases are used by default only if no database type is
+explicity specified, and there is no DB_File or gdbm found on
+the system. Otherwise they can be used for small but high-traffic
+tables. Keep in mind, however, that since their contents are not saved back
+to the text files, you'll want to either take care of the data export yourself,
+or keep the tables stuffed with read-only data.
+</para><para>
+As with SQL databases, the import will only be performed once at 
+&IC; startup or catalog reconfiguration time.
+</para><para>
+For a complete discussion, please see the &conf-Database; configuration
+directive.
+</para>
+</section>
+
+
+
+<para>

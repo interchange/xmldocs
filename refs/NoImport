@@ -1,0 +1,26 @@
+__NAME__ purpose
+do not re-import text source files to databases unless the database disappears
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>table_name</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies &glos-database; tables that should not be 
+re-imported from the text source files, unless the database disappears
+(for example, if the <filename><replaceable>table</replaceable>.gdbm</filename>
+is deleted).
+__END__
+
+__NAME__ example: Disabling 'products' table import
+Put the following in &gcf;:
+<programlisting>
+NoImport products
+</programlisting>
+__END__
+

@@ -1,0 +1,44 @@
+__NAME__ purpose
+register existing database table for use with Interchange
+__END__
+
+__NAME__ synopsis
+	<arg choice='plain'><replaceable>name</replaceable></arg>
+	<arg choice='plain'><replaceable>source_file</replaceable></arg>
+	<arg choice='plain'><replaceable>type</replaceable></arg>
+__END__
+
+__NAME__ see also
+TableRestrict,data,DatabaseDefault
+__END__
+
+__NAME__ description
+The directive registers a database table for use with &IC;. 
+<arg choice='plain'>name</arg> specifies an arbitrary name &mdash; name
+that will be used to refer to the table within &IC;. Names can be composed
+of alphanumeric characters including underscore, and we recommend they're in
+all lower- or upper-case.
+<arg choice='plain'>source_file</arg> specifies the initial database
+source file, and <arg choice='plain'>type</arg> specifies its format.
+</para><para>
+For more about &IC; and databases, and supported formats, see &glos-database;
+glossary entry.
+__END__
+
+__NAME__ notes
+In &IC;, words <literal>table</literal> and <literal>database</literal>
+are used to refer to the same thing &mdash; database table.
+__END__
+
+__NAME__ example: Default, most basic products database
+<programlisting>
+Database products products.txt TAB
+</programlisting>
+__END__
+
+__NAME__ example: Simple definition of a CSV-style database source format
+<programlisting>
+Database reviews reviews.txt CVS
+</programlisting>
+__END__
+
