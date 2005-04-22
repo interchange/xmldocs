@@ -27,7 +27,7 @@ Keep in mind that the terms <literal>database</literal> and
 parlance - a <literal>database table</literal>.
 </emphasis>
 </para><para>
-&IC; works with GDBM, DB_File, SQL, LDAP and in-memory types of databases. 
+&IC; works with &GDBM;, DB_File, SQL, LDAP and in-memory types of databases. 
 Regardless of the type, each database must be registered with &IC; before it's
 ready to be used, and this is achieved using the &conf-Database; configuration
 directive. Pay special attention to the fact that &conf-Database; is both
@@ -57,8 +57,8 @@ Mac users uploading files must use ascii mode, not binary mode</emphasis>.
 </para>
 <para>
 Interchange's default ASCII delimiter is TAB. <emphasis role='bold'>Keep in
-mind that the items must be separated by a single delimiter (that is, a single
-TAB by default)</emphasis>. Due to the nature of TABs, TAB-delimited files
+mind that the items must be separated by a single delimiter (that is, by a
+single TAB only)</emphasis>. Due to the nature of TABs, TAB-delimited files
 look messy and unaligned when viewed in a text editor. Do not try to fix these;
 better use the <command>te</command> utility that comes as part of the 
 &IC; distribution to edit files more conveniently.
@@ -108,8 +108,9 @@ CSV-delimiter schemes might cause problems with ASCII text searching routines.
 
 <note>
 	<para>
-Field names are usually case-sensitive. Use
-consistency when naming or you might encounter problems. All lower or
+Field names are usually case-sensitive (in fact, that depends on the
+underlying database type). Always be consistent when
+naming or referencing fields and you'll avoid the trouble. All lower or
 all upper case names are recommended.
 </para>
 </note>
@@ -136,7 +137,8 @@ also best placed in SQL.
 <note>
 <title>Database performance</title>
 <para>
-Do not, however, fall in the jaws of <ulink url="http://c2.com/cgi/wiki?PrematureOptimization">premature optimisation</ulink>, <ulink url="http://www.flounder.com/optimization.htm">your worst enemy</ulink>.
+Do not, however, try to optimize too soon and for no measureable difference.
+Do not fall in the jaws of <ulink url="http://c2.com/cgi/wiki?PrematureOptimization">premature optimisation</ulink>, <ulink url="http://www.flounder.com/optimization.htm">your worst enemy</ulink>.
 </para>
 </note>
 
@@ -154,7 +156,8 @@ Speaking of the source files' behavior, if a file named
 in the same directory as
 <filename><replaceable>table</replaceable>.txt</filename>, then database
 table will not be imported from the ASCII text source file.
-If there is no products.sql, the DBI/SQL import will happen once at
+If there is no <filename><replaceable>table</replaceable>.sql</filename>,
+the DBI/SQL import will happen once at
 &IC; startup or catalog reconfiguration time;
 Interchange will connect to the SQL database using the specified DSN
 (DNS is a standard DBI parameter meaning "Database Source Name").
@@ -193,10 +196,10 @@ directive.
 </section>
 
 <section>
-	<title>*DB* Databases</title>
+	<title>File-based Databases</title>
 <para>
-By "*DB*" databases we primarily assume Berkeley (DB_File) and GNU DBM. Those
-database types usually work in a way that, on every client access, the
+By file-based databases we primarily assume Berkeley (DB_File) and GNU DBM.
+Those database types usually work in a way that, on every client access, the
 appropriate database text source file is checked for being newer than the
 actual DB file itself.
 When it happens that it is, the database table is re-imported
@@ -220,6 +223,21 @@ re-imported.
 </para>
 </note>
 <para>
+To check if you have &GDBM; and GDBM &PERL; support available, run 
+<command>perl -le'require GDBM_File and print "I have GDBM."'</command>.
+To check if you have &BDBM; and DBM &PERL; support available, run 
+<command>perl -le'require DB_File and print "I have Berkeley DB."'</command>.
+Sometimes you want to use &BDBM; even if &GDBM; is installed and would 
+naturally take precedence; in such cases, set the 
+<envar>MINIVEND_DBFILE</envar> environment variable to a true value
+(<command>setenv MINIVEND_DBFILE 1</command> in <application>csh</application>,
+<command>MINIVEND_DBFILE=1 ; export MINIVEND_DBFILE</command> in 
+<application>sh</application>,
+<application>b(a)sh</application> or 
+<application>ksh</application>).
+It is also possible to use &BDBM; for just specific databases.
+</para>
+<para>
 For a complete discussion, please see the &conf-Database; configuration
 directive.
 </para>
@@ -228,15 +246,28 @@ directive.
 <section>
 	<title>Memory Databases</title>
 <para>
+Memory &IC; databases 
+use &PERL; hashes to store the data directly in memory. Every time
+the &IC; server is restarted, it will re-import all in-memory
+databases for every catalog.
+</para>
+<para>
 Memory databases are used by default only if no database type is
 explicity specified, and there is no DB_File or gdbm found on
 the system. Otherwise they can be used for small but high-traffic
 tables. Keep in mind, however, that since their contents are not saved back
 to the text files, you'll want to either take care of the data export yourself,
 or keep the tables stuffed with read-only data.
-</para><para>
-As with SQL databases, the import will only be performed once at 
-&IC; startup or catalog reconfiguration time.
+</para>
+<para>
+if you want to force memory databases despite of GDBM_File or DB_File
+being present, set the <envar>MINIVEND_NODBM</envar> environment variable
+to a true value (look above for hints).
+It is also possible to use memory type for just specific databases.
+</para>
+<para>
+Memory databases import will be performed once at 
+every &IC; startup or catalog reconfiguration time.
 </para><para>
 For a complete discussion, please see the &conf-Database; configuration
 directive.
@@ -297,7 +328,10 @@ Term definitions:
 	and the ASCII source is kept in the file <filename>products.txt</filename>
 	This is also the default file for searching contents with
 	the search engine, such as Glimpse or HTDig.
-</para><para>
+</para>
+
+<note>
+<para>
 	Interchange also has a two of standard, but optional, databases that
 	are <emphasis role='bold'>in fixed formats</emphasis>:
 	</para>
@@ -324,6 +358,85 @@ Term definitions:
 <para>
 	The two above tables are never stored in SQL or DBM.
 </para>
+</note>
+
+	<section>
+	<title>"Products" Database</title>
+	<para>
+		The <database>products</database> databases contain items that
+		you're selling.
+		Each product listed should be given a product code, usually
+		referred to as &glos-SKU; &mdash; a short code that identifies the
+		product on the
+		ordering page and in the catalog. The <filename>products.txt</filename>
+		file is an ASCII-delimited text source file. It should contain
+		product SKUs, along with an arbitrary
+		number of fields which must contain at least the fields
+		<database class='field'>description</database> and 
+		<database class='field'>price</database> (or however the
+		&conf-PriceField; and &conf-DescriptionField;
+		directives have been set). Any additional information needed in the
+		catalog can be placed in any arbitrary field.
+	</para>
+	<para>
+		The field names must be defined on the first line of the
+		<filename>products.txt</filename> file. These field names must match
+		exactly the field
+		names of the <tag>item-field</tag> tags in the catalog pages, or the
+		&IC; server will not access them properly. Field names can
+		contain the characters <literal>A-Za-z0-9</literal> and underscore
+		(<literal>_</literal>).
+	</para>
+	<para>
+		It is important to adjust the &conf-PriceField; and &conf-DescriptionField;
+		directives appropriately if you change the default field names, or 
+		&IC; tags such as <tag>item-price</tag> or <tag>item-description</tag>
+		won't work.
+	</para>
+	<para>
+		For each product entry in the text source file, the product code must
+		be the first field in the line, and
+		must be unique. Product codes can contain the characters
+		<literal>A-Za-z0-9</literal>,
+		along with hyphens (<literal>-</literal>), underscores
+		(<literal>_</literal>), pound signs/hash marks
+		(<literal>#</literal>), slashes (<literal>/</literal>) and periods
+		(<literal>.</literal>). Note that slashes will
+		interfere with on-the-fly page references; avoid them if at all possible.
+	</para>
+	<para>
+		The columns in text source files should be separated by one of the
+		approved delimiting
+		schemes (TAB, PIPE, or CSV), and are case-sensitive in some cases. If
+		the case of the "description" or "price" fields have been modified,
+		the &conf-PriceField; and &conf-DescriptionField; directives must be
+		adjusted appropriately.
+	</para>
+	<note>
+		<para>
+		CSV format is not recommended as the scheme for the products
+		database. It is much slower than TAB- or PIPE-delimited files, and
+		dramatically reduces search engine functionality. No field-specific
+		searches are possible. Using CSV for any small database that will not
+		be searched is fine.
+		</para>
+	</note>
+	<para>
+		More than one database may be used as a products database. If the
+		&conf-ProductFiles; directive is set to a space-separated list of
+		valid &IC; database identifiers, all listed databases will be
+		searched (in the order specified) for any items that are ordered, or
+		for product information (such as with <code>price code</code> or
+		<code>field code</code>
+		tags).
+	</para>
+	<para>
+		If you are modifying the database on-the-fly, it is recommended that
+		the file
+		be locked while it is being modified. Interchange's supplied import
+		routines do this.
+	</para>
+	</section>
 </section>
 
 <para>
