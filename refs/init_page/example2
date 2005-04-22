@@ -1,0 +1,55 @@
+<example>
+
+<title>
+Auto-wrapping pages in templates, deciding about a template depending on page path
+</title>
+
+<para>
+In this real-life example, we want to automatically attach header and 
+footer to every served page. We also have four different templates, and
+want to include them depending on the path of the page being served.
+</para>
+
+<programlisting><![CDATA[
+Pragma  init_page=wrap_page
+Sub <<EOS
+sub wrap_page {
+  my $pref = shift;
+  my $tmpl;
+
+  if ( $Session->{last_url} =~ m#^/www(/|$)# ) {
+    $tmpl = "www"
+  } elsif ( $Session->{last_url} =~ m#^/plus(/|$)# ) {
+    $tmpl = "plus"
+  } elsif ( $Session->{last_url} =~ m#^/hp(/|$)# ) {
+    $tmpl = "hp"
+  } elsif ( $Session->{last_url} =~ m#^/adm(/|$)# ) {
+    $tmpl = "adm"
+  }
+
+  $Scratch->{subsite} = $tmpl || $Scratch->{subsite} || "plus";
+
+  $$pref = "[include templates/$Scratch->{subsite}-top]" .
+    $$pref .
+    "[include templates/$Scratch->{subsite}-bottom]";
+
+  return;
+}
+EOS
+]]></programlisting>
+<para>
+Note that we explicitly check for supported template types 
+(<literal>www</literal>, <literal>plus</literal>, <literal>hp</literal>
+or <literal>adm</literal>) to minimize the chance of abuse.
+Invalid or unmatched templates default to the previously used template, or
+<literal>plus</literal> as a bottom line and
+the files <filename>templates/plus-top</filename> and 
+<filename>templates/plus-bottom</filename> are included then.
+</para>
+<para>
+You might wonder in what cases would the code fail to match the template?
+Well, obviously, users could simply try to access non-existent pages. 
+The other common issue are &glos-form-action;s such as 
+<literal>/scan</literal> or <literal>/process</literal>.
+</para>
+</example>
