@@ -1,0 +1,47 @@
+__NAME__ purpose
+insert hidden form field containing the session ID
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'></arg>
+</group>
+__END__
+
+
+__NAME__ description
+It is necessary to include the &IC; session ID on &glos-HTML; forms when 
+users are not accepting cookies, or they might lose the session information.
+The <tag>form-session-id</tag> tag inserts the appropriate hidden form field
+containing session ID on a page, but only when necessary.
+</para><para>
+In most cases, the tag <emphasis role='bold'>will</emphasis> insert the
+hidden form field (that is, when users are not accepting cookies or public
+display of session IDs &mdash; <mv>no_session_id</mv> &mdash; is not disabled).
+It will <emphasis role='bold'>not</emphasis>, however, insert the field if
+the user <emphasis role='bold'>is</emphasis> accepting browser cookies
+and <mv>no_session_id</mv> is enabled.
+__END__
+
+
+__NAME__ example: Simple form with an optional session ID form field
+Here's a very simple login form. As you can see, all you have to do to
+include the session ID on the form is to include <tag>form-session-id</tag>
+somewhere in it.
+<programlisting><![CDATA[
+<form action="[process secure=1]" method="POST">
+  <input type="hidden" name="mv_todo"  value="return">
+  <input type="hidden" name="mv_click" value="Login">
+  <input type="hidden" name="mv_failpage" value="login">
+  <input type="hidden" name="mv_successpage" value="[either][scratchd mv_successpage][or]member/service[/either]">
+  <input type="hidden" name="mv_nextpage" value="index">
+  [form-session-id]
+
+  [L]Username[/L]: <input name="mv_username" value="[scratch cookie_username]"><br/>
+  [L]Password[/L]: <input type="password" name="mv_password" VALUE=""><br/>
+  <input class="button3" type=submit value="[L]Log In[/L]">
+</form>
+]]></programlisting>
+__END__
+
