@@ -9,7 +9,6 @@ __END__
 
 __NAME__ synopsis
 &ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
 __END__
 
 

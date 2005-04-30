@@ -62,6 +62,7 @@ __NAME__ synopsis
 </row>
 &ROW_UMASK_none;
 &ROW_HIDE_0;
+&ROW_INTERPOLATE_0;
 __END__
 
 __NAME__ description

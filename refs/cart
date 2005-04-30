@@ -34,6 +34,10 @@ This simple tag sets the default cart name for tags that operate on it
 <tag>nitems</tag>).
 __END__
 
+__NAME__ notes
+See the &glos-cart; glossary entry.
+__END__
+
 __NAME__ example: Set new default cart name
 Place the following on an Interchange page:
 <programlisting>
@@ -41,3 +45,5 @@ Place the following on an Interchange page:
 </programlisting>
 __END__
 
+__NAME__ see also
+__END__

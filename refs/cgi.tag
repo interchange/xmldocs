@@ -60,6 +60,7 @@ __NAME__ synopsis
 </row>
 &ROW_FILTER_none;
 &ROW_HIDE_0;
+&ROW_INTERPOLATE_0;
 __END__
 
 

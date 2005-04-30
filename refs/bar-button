@@ -23,7 +23,8 @@ __NAME__ synopsis
 	Name of the current page. Usually you do not want to override the default.
 	</entry>
 </row>
-
+&ROW_INTERPOLATE_0;
+&ROW_REPARSE_1;
 __END__
 
 

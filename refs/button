@@ -91,11 +91,18 @@ __NAME__ synopsis2
 &ROW_EXTRA_none;
 &ROW_HTML_std;
 &ROW_CSS_std;
+&ROW_INTERPOLATE_0;
+&ROW_REPARSE_1;
 __END__
 
 
 __NAME__ see also
 env
+__END__
+
+
+__NAME__ notes
+The &tag-button; tag can work with unnamed forms.
 __END__
 
 

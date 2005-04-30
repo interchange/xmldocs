@@ -100,25 +100,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-<row>
-
-	<entry>
-	hide
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
+&ROW_HIDE_0;
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
 __END__
@@ -190,3 +172,8 @@ The proper way to provide error handling is something like this:
 </programlisting>
 __END__
 
+
+
+__NAME__ missing
+description for exact, joiner, error_set, error_scratch options
+__END__

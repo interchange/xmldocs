@@ -341,7 +341,9 @@ We will explain <arg choice='plain'>interpolate</arg> and
 <arg choice='plain'>reparse</arg> attributes here. <emphasis role='bold'>
 It is very important to remember that the behavior of the
 <arg choice='plain'>interpolate</arg> attribute (unfortunately) differs,
-depending on whether a tag is stand-alone or a container. In addition,
+depending on whether a tag is <emphasis>stand-alone</emphasis> or a
+<emphasis>container</emphasis>.
+In addition,
 the <arg choice='plain'>reparse</arg> attribute is only used with
 container tags (because its function is performed by
 <arg choice='plain'>interpolate</arg> in stand-alone tags).
@@ -352,7 +354,7 @@ With container tags, the <arg choice='plain'>interpolate</arg> attribute
 specifies whether the <emphasis>tag body</emphasis> will be
 &glos-interpolate;d before being passed to the tag. 
 <!-- </para><para> -->
-With stand-alone tags, the <arg choice='plain'>interpolate</arg> attribute
+With non-container tags, the <arg choice='plain'>interpolate</arg> attribute
 specifies whether the <emphasis>output</emphasis> of the tag will be
 &glos-interpolate;d. This is very confusing because it's not intuitive, but
 once you get to remember it a few times in practice, it will stop being a 
