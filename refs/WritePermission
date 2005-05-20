@@ -1,0 +1,30 @@
+__NAME__ purpose
+affect file mode (write permissions, specifically) on Interchange-generated files
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><literal>user</literal></arg>
+	<arg choice='plain'><literal>group</literal></arg>
+	<arg choice='plain'><literal>world</literal></arg>
+</group>
+__END__
+
+
+__NAME__ description
+By default, only the user account that &IC; runs under,
+can read and write files created by &IC;. The specified option allows
+adjustment of file &glos-mode;s (write permissions, specifically).
+__END__
+
+__NAME__ example: Producing desired read and write file modes
+<programlisting>
+ReadPermission      group
+WritePermission     group
+</programlisting>
+__END__
+
+__NAME__ see also
+ReadPermission
+__END__

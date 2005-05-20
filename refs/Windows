@@ -1,0 +1,47 @@
+__NAME__ purpose
+(obsolete) indicate that Interchange is running under Microsoft Windows
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The option should be enabled to indicate that &IC; is running on Microsoft
+Windows family of products.
+</para><para>
+However, Unix is best. The Windows version, while perhaps more than just a toy,
+is not suitable for high-volume catalog serving. This is mostly due to Windows
+NT not fitting the UNIX <function>fork()</function> model which works so well
+with &IC;.
+</para><para>
+On Microsoft Windows, you will want to stop and re-start your &IC; server at
+least once per day. You can use a system agent to automate it &mdash; you will
+want to stop the server to expire the session database anyway. You need to do
+this because &IC; requires the Unix-specific fork() call to spawn multi-tasked
+servers, and without multi-tasked servers there is a strong possibility of
+a memory leak &mdash; especially if you use embedded &PERL; or conditional tags.
+__END__
+
+
+__NAME__ notes
+&IC; support for Microsoft Windows support has been abandoned.
+This configuration directive has no purpose; if you think you need it,
+think twice.
+__END__
+
+
+__NAME__ example: Enabling "Windows"
+<programlisting>
+Windows 1
+</programlisting>
+__END__
+
+__NAME__ see also
+LockType
+__END__
