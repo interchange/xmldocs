@@ -1,0 +1,45 @@
+
+__NAME__ purpose
+affect Interchange to output XHTML compatible HTML output
+__END__
+
+__NAME__ see also
+MV_HTML4_COMPLIANT
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+__NAME__ description
+If the directive is enabled, &IC; produces more XHTML-compliant &glos-HTML;
+output. This just includes the insertion of "<literal>/</literal>" 
+in standalone tag endings, since argument name lowercasing and argument
+option quoting (the other two "things" that make XHTML XHTML)
+have been already adopted practices for all HTML output.
+</para><para>
+To illustrate with an example, tere's say, &tag-br; tag that will, by default,
+output &lt;br&gt;, or &lt;br/&gt; if &conf-XHTML; is in effect.
+__END__
+
+__NAME__ notes
+&IC; is gradually adopting XHTML-compliant &glos-HTML; code. Therefore,
+some things might still not be XHTML-ready even after users enable
+&conf-XHTML;.
+</para><para>
+Making HTML output XHTML-compliant is extremely easy (basically, you only
+need to lowercase argument names, quote argument options, and include 
+<varname>$Vend::Xtrailer</varname> before the ending
+"<literal>&lt;</literal>" for standalone tags. That said, XHTML-compliance
+patches are gladly accepted to speed up the transition process.
+__END__
+
+__NAME__ example: Enabling XHTML
+<programlisting>
+XHTML 1
+</programlisting>
+__END__
+

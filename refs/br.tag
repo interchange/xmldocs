@@ -3,6 +3,7 @@ insert HTML BR (break) element
 __END__
 
 __NAME__ see also
+XHTML
 __END__
 
 
