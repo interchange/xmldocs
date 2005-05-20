@@ -1,0 +1,54 @@
+
+With &IC; 5.3.0, &IC; supports so-called "features". 
+The whole purpose of the new "Feature" facility is to allow easy
+installation of new capabilities to &IC;.
+</para><para>
+&IC; already has the convention of "extensions" which allow you to put together
+features to add to Interchange. But the installation is manual, and requires
+good docs to make it easily installable for end-users. Also, many features
+require access to the global configuration.
+There's also another problem at sight, namely that of feature creep, since 
+everything was just being added to the "&std-catalog;" catalog.
+</para><para>
+The basic mechanism is simple:
+Inside "feature" modules, there are two special kinds of files, called by
+extensions <literal>.global</literal> and <literal>.init</literal>.
+(In the included <literal>quickpoll</literal> feature, these are named
+<filename>quickpoll.global</filename> and <filename>quickpoll.init</filename>).
+</para><para>
+If a file has the extension <literal>.global</literal>, it is added to the global
+configuration. The included <literal>quickpoll</literal> feature, for example,
+adds the <am>quickpoll</am> &glos-ActionMap;, and two usertags:
+&tag-poll-answer; and &tag-ascii-graph;.
+</para><para>
+
+If a file has the extension <literal>.init</literal>, it is run once &mdash;
+the first time
+the target catalog is accessed. Again, in the <literal>quickpoll</literal> example, it is used to add
+<database>mv_metadata</database> entries and a couple of sample polls.
+</para><para>
+
+All other files in the directory are catalog configuration
+(<filename>quickpoll.catalog.cfg</filename> for a concrete example).
+It could have also been
+broken up into say, files <filename>quickpoll.sql</filename> and
+<filename>quickpoll_answer.sql</filename>.
+</para><para>
+All subdirectories contain files which are copied to the
+catalog directory with the same relative path. In this
+case,
+<filename>&ICROOT;/features/quickpoll/templates/components/quickpoll</filename>
+would go to 
+<filename>&CATROOT;/templates/components/quickpoll</filename>.
+</para><para>
+The <literal>.init</literal> file, when run, sends its output to
+<filename>&conf-ConfDir;/init/<replaceable>FEATURE</replaceable>/<replaceable>FEATURE</replaceable>.init</filename>
+(and that would be <filename>etc/init/quickpoll/quickpoll.init</filename> for
+the concrete example.)
+Once it is run, the existence of the file prevents it being run again.
+<!-- TODO: Doesnt it always check for existence of the file on (re)start?
+When the server is restarted, the file test is no longer needed, as the 
+init procedure has already been done.
+ -->
+</para><para>
+Currently, the uninstallation procedure is missing.

@@ -1,0 +1,32 @@
+__NAME__ purpose
+specify Interchange "feature" for activation in the catalog
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>feature_name</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify &IC; "feature" for inclusion in the current &glos-catalog;.
+</para><para>
+For an introduction to &IC; "features", please see the 
+&glos-feature; glossary entry.
+__END__
+
+__NAME__ example: Setting FeatureDir
+<programlisting>
+Feature quickpoll
+</programlisting>
+__END__
+
+__NAME__ see also
+FeatureDir
+__END__
+
+__NAME__ author
+&mheins;
+__END__

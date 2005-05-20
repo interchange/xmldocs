@@ -1,0 +1,28 @@
+__NAME__ purpose
+specify "feature" directory
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>directory</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify directory containing &IC; "feature" modules.
+</para><para>
+For an introduction to &IC; "features", please see the 
+&glos-feature; glossary entry.
+__END__
+
+__NAME__ example: Setting FeatureDir
+<programlisting>
+FeatureDir /usr/local/interchange/features
+</programlisting>
+__END__
+
+__NAME__ author
+&mheins;
+__END__
