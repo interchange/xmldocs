@@ -17,7 +17,7 @@ For an introduction to &IC; "features", please see the
 &glos-feature; glossary entry.
 __END__
 
-__NAME__ example: Setting FeatureDir
+__NAME__ example: Activating a feature
 <programlisting>
 Feature quickpoll
 </programlisting>

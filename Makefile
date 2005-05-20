@@ -7,7 +7,7 @@
 #
 
 # Those two need to be adjusted with time
-export XMLDOCS_CUR_DEVEL = 5.3.0
+export XMLDOCS_CUR_DEVEL = 5.3.1
 IC_VERSIONS = 4.6.0 4.8.0 5.0.0 5.2.0 cvs-head
 
 #############################################################
@@ -43,8 +43,9 @@ VPATH       = guides refs howtos glossary
 #############################################################
 # Complete build
 all: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) \
-  skel refxmls olinks-nc olinks-c                              \
-  glossary howtos guides symbols
+  skel refxmls glossary howtos                                 \
+	olinks-nc olinks-c                                           \
+	guides symbols
 
 guides:   $(foreach doc,$(GUIDES),$O/$(doc).html  )            \
           $(foreach doc,$(GUIDES),$O/$(doc))
