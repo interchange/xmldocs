@@ -3,7 +3,6 @@
 	SYSTEM "/usr/share/xml/docbook/stylesheet/nwalsh/common/targetdatabase.dtd" [
 	<!ENTITY iccattut SYSTEM "../tmp/iccattut-c.db"> 
 	<!ENTITY upgrade SYSTEM "../tmp/upgrade-c.db"> 
-	<!ENTITY xmldocs SYSTEM "../tmp/xmldocs-c.db"> 
 	<!ENTITY howtos SYSTEM "../tmp/howtos-c.db"> 
 	<!ENTITY glossary SYSTEM "../tmp/glossary-c.db"> 
 	<!ENTITY pragmas SYSTEM "../tmp/pragmas-c.db"> 
@@ -30,12 +29,6 @@
 			<dir name='upgrade'>
 				<document targetdoc="upgrade">
 				&upgrade;
-				</document>
-			</dir>
-			
-			<dir name='xmldocs'>
-				<document targetdoc="xmldocs">
-				&xmldocs;
 				</document>
 			</dir>
 			

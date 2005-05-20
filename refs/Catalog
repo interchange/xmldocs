@@ -89,7 +89,7 @@ __END__
 __NAME__ example: Defining catalog-specific directives in the global config file
 Re-using the elaborate example from just above, it is also possible to define
 catalog-specific directives in the global &gcf; file.
-This is most useful to do with the &glos-ErrorFile; and &glos-DisplayErrors; 
+This is most useful to do with the &conf-ErrorFile; and &conf-DisplayErrors; 
 directives:
 <programlisting>
 Catalog simple  directive ErrorFile /var/log/interchange/simple-error.log

@@ -15,6 +15,24 @@ The (new) Interchange XML documentation set is completely self-contained.
 To build the complete documentation set, run:
 
   make
+   ^
+** ^  -- -- --   -- -- -- --   -- -- -- --   -- -- -- --   -- -- -- --  **
+** ^-- Well, not really ;-| I didn't manage to get this totally right,
+so the (complete) procedure to build the docs is:
+
+( cvs checkout first, then: ) 
+make cvs cache skel
+make refxmls
+make refxmls (yes, twice or trice)
+make olinkdbs-nc olinkdbs-c
+( and then the usual targets: )
+make pragmas vars tags confs filters iccattut programming-style howtos glossary
+
+Also the problem is that the whole thing takes enormous time to build, even
+with xsltproc which is like by far the fastest docbook processor ;-)
+But well, on a >2GHz machine, it's bearable.
+
+**  -- -- --   -- -- -- --   -- -- -- --   -- -- -- --   -- -- -- --  **
 
 To build specific targets, see Makefile for target names. Few useful
 targets would include:

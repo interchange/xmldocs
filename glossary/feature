@@ -37,9 +37,9 @@ broken up into say, files <filename>quickpoll.sql</filename> and
 All subdirectories contain files which are copied to the
 catalog directory with the same relative path. In this
 case,
-<filename>&ICROOT;/features/quickpoll/templates/components/quickpoll</filename>
+<filename>&glos-ICROOT;/features/quickpoll/templates/components/quickpoll</filename>
 would go to 
-<filename>&CATROOT;/templates/components/quickpoll</filename>.
+<filename>&glos-CATROOT;/templates/components/quickpoll</filename>.
 </para><para>
 The <literal>.init</literal> file, when run, sends its output to
 <filename>&conf-ConfDir;/init/<replaceable>FEATURE</replaceable>/<replaceable>FEATURE</replaceable>.init</filename>
