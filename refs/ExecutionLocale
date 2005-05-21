@@ -1,0 +1,44 @@
+__NAME__ purpose
+specify the lowest-level locale
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>locale definition</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies the "lowest-level" &glos-locale;; the one that
+will be re-set on every page so that the daemon cannot even accidentally be
+left with a bad locale.
+__END__
+
+__NAME__ example: Defining ExecutionLocale
+Put the following in &gcf;:
+<programlisting>
+ExecutionLocale de_DE
+</programlisting>
+__END__
+
+
+__NAME__ notes
+&conf-ExecutionLocale; defaults to "<literal>C</literal>" and you'll probably
+never want to change it. There <emphasis>is</emphasis> the need to change
+locale while &IC; is 
+running, of course, but this is done only for critical code sections and not
+for the majority of other, "locale-independent" code.
+To see the list of code "groups" that require a locale adjustment, run
+<command>locale</command> and <command>man locale</command> on your Unix
+system.
+__END__
+
+__NAME__ see also
+Locale
+__END__
+
+__NAME__ author
+&mheins;
+__END__

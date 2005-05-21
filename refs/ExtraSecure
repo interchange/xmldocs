@@ -1,0 +1,28 @@
+__NAME__ purpose
+disallow unencrypted access to pages which are listed under AlwaysSecure
+__END__
+
+
+__NAME__ see also
+AlwaysSecure
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Disallow access to pages which are listed under &conf-AlwaysSecure; unless
+the browser is in HTTPS mode.
+__END__
+
+__NAME__ example: Enabling ExtraSecure
+<programlisting>
+ExtraSecure 1
+</programlisting>
+__END__
+

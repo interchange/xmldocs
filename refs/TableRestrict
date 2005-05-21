@@ -4,12 +4,10 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
 	<arg choice='plain'><replaceable>database</replaceable></arg>
 	<arg choice='plain'>
 		<replaceable>field</replaceable><literal>=</literal><replaceable>value</replaceable>
 	</arg>
-</group>
 __END__
 
 

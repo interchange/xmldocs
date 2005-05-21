@@ -5,8 +5,8 @@ __END__
 
 __NAME__ synopsis
 <group choice='req'>
-	<arg choice='plain'>Yes</arg>
 	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
 </group>
 __END__
 
@@ -14,7 +14,8 @@ __END__
 __NAME__ description
 Instruct Interchange to dump the structure of catalogs and the Interchange server to files named <filename><replaceable>catalog_name</replaceable>.structure</filename>. Use this to see how directives have been set.
 </para><para>
-The catalog structure files are dumped relative to catalog roots (CATROOTs).
+The catalog structure files are dumped relative to catalog roots
+(&glos-CATROOT;s).
 __END__
 
 __NAME__ see also

@@ -34,6 +34,9 @@ TODO: show conditionals in config:
 __NAME__ notes
 See the &glos-configuration; glossary entry for complete information 
 on &IC; config files.
+</para><para>
+Make sure you don't get confused by the existence of all
+&conf-DirConfig;, &conf-ConfDir; and &conf-ConfigDir;.
 __END__
 
 __NAME__ example: Setting ConfigDir

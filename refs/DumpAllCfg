@@ -1,0 +1,39 @@
+__NAME__ purpose
+dump global Interchange server configuration
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Instruct &IC; to dump the complete server configuration (with &conf-Include;s expanded) to <filename>allconfigs.cfg</filename> in the &IC; run 
+directory.
+</para><para>
+The dump file does not contain catalog configurations.
+__END__
+
+__NAME__ see also
+DumpStructure
+__END__
+
+__NAME__ example: Enabling DumpAllCfg
+<programlisting>
+DumpAllCfg 1
+</programlisting>
+__END__
+
+__NAME__ notes
+&IC; "run directory" is <filename>/usr/local/interchange/etc/</filename> on
+tarball installs, and <filename>/var/run/interchange</filename> on
+LSB setups.
+</para><para>
+&conf-DumpAllCfg; was previously known as "<literal>OutputAllCfg</literal>", but
+was renamed to ideologically match &conf-DumpStructure;.
+__END__
+

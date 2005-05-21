@@ -1,0 +1,65 @@
+__NAME__ purpose
+batch-set a bunch of variables (or values in general) from files
+__END__
+
+
+__NAME__ synopsis
+	<arg choice='plain'><replaceable>directive_name</replaceable></arg>
+	<arg choice='plain'><replaceable>directory_glob</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive allows you to batch-set a bunch of variables from files.
+</para><para>
+<literal><replaceable>directive_name</replaceable></literal> is usually
+<literal>Variable</literal>, but can practically be any hash-based directive.
+<literal><replaceable>directory_glob</replaceable></literal> is a filespec
+that can encompass multiple directories (files are ignored).
+</para><para>
+The specified directories are read for file <emphasis>names</emphasis> that
+contain only word characters, i.e. something that would be a valid
+&conf-Variable;. (This alone might make
+it unsuitable for some other uses, but picking up the junk from the
+in-directory-backup-file people would be intolerable.)
+Then the contents of the found files are used to set the variables (or other
+values) named after file names.
+</para><para>
+The source file name is kept in
+<varname>$Vend::Cfg->{DirConfig}{Variable}{VARNAME}</varname>,
+if <pragma>dynamic_variables</pragma> &glos-pragma; is set.
+<pragma>dynamic_variables</pragma> enables <emphasis>dynamic</emphasis>
+updating of variables from files.
+<pragma>dynamic_variables_files_only</pragma> restricts dynamic variables to
+files only &mdash; otherwise variables are dynamically read from the
+&conf-VariableDatabase; definition as well.
+</para><para>
+With dynamic variables, all
+<code>@_<replaceable>VARIABLE</replaceable>_@</code> and
+<code>__<replaceable>VARIABLE</replaceable>__</code> calls are checked
+first to see if their source file is defined. If they are &mdash; if there is
+a hash key present for the source file &mdash; even if its contents are blank,
+it is returned as the value.
+__END__
+
+
+__NAME__ notes
+Make sure you don't get confused by the existence of all
+&conf-DirConfig;, &conf-ConfDir; and &conf-ConfigDir;.
+__END__
+
+
+__NAME__ see also
+VariableDatabase
+__END__
+
+__NAME__ example: Setting DirConfig
+<programlisting>
+DirConfig Variable templates/foundation/regions
+</programlisting>
+If the file <filename>NOLEFT_TOP</filename> is present at catalog config time
+at the specified location, code <code>__NOLEFT_TOP__</code> encountered on
+a page will mimick
+<code>[include templates/foundation/regions/NOLEFT_TOP]</code>.
+__END__
+
