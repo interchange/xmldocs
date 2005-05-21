@@ -1,0 +1,34 @@
+__NAME__ purpose
+in table editor, keep error text (mistakenly) hidden, as it was the case up to Interchange 5.2
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ default
+0
+__END__
+
+
+__NAME__ description
+When the pragma is enabled, error text is (mistakenly) displayed within
+an &glos-HTML; comment, instead of being visible on the page.
+</para><para>
+This omission has been fixed, and the pragma forces old behavior, if you 
+depend on it.
+__END__
+
+
+__NAME__ example: Enable compatible_5_2
+Put the following in your &ccf;:
+<programlisting>
+Pragma compatible_5_2
+</programlisting>
+__END__
+

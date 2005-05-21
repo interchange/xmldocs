@@ -1,0 +1,34 @@
+__NAME__ purpose
+allow ITL interpolation of reference-based ITL attributes
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ default
+0
+__END__
+
+
+__NAME__ description
+If it is desirable to turn on &PERL; warnings for pages, you can use
+<code>[pragma perl_warnings_in_page]</code> and see warnings for that page
+(or all pages by default if you put in &ccf;).
+__END__
+
+
+__NAME__ example: Enable perl_warnings_in_page page-wide
+<programlisting>
+[pragma perl_warnings_in_page]
+</programlisting>
+__END__
+
+__NAME__ missing
+Concrete example where a warning would be printed (cant do it now with IC 5.2)
+__END__

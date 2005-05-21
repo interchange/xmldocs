@@ -1,0 +1,36 @@
+__NAME__ purpose
+(obsolete) specify databases which are dynamic, so pages using them must not be cached
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>database</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+When set to one or more &IC; database names, any pages using data
+items from the specified databases will not be cached or built statically.
+This allows for dynamic updating of certain arbitrary databases (even the
+products database) while still allowing static/cached page performance gains
+on pages not using those data items.
+__END__
+
+__NAME__ see also
+NoCache
+__END__
+
+__NAME__ notes
+The directive is no longer used and a warning is issued if it is accidentally
+defined.
+__END__
+
+__NAME__ example: Setting DynamicData
+<programlisting>
+DynamicData inventory
+</programlisting>
+__END__
+
+

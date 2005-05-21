@@ -1,0 +1,38 @@
+__NAME__ purpose
+allow ITL interpolation of reference-based ITL attributes
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ default
+0
+__END__
+
+
+__NAME__ description
+When the pragma is enabled, ITL interpolation of reference-based ITL attributes
+is enabled.
+__END__
+
+
+__NAME__ example: Enable interpolate_itl_references
+The pragma allows the following type of code:
+<programlisting>
+[tmp testing]foobar'ed[/tmp]
+
+[record
+  table=inventory
+  key=newkey
+  col.quantity=300
+  col.stock_message="[scratch testing]"
+]
+</programlisting>
+__END__
+
