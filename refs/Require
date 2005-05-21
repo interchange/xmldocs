@@ -1,5 +1,5 @@
 __NAME__ purpose
-require existence of a feature
+require existence of a capability
 __END__
 
 __NAME__ see also
@@ -23,6 +23,13 @@ in global configuration.
 </para><para>
 This is useful when transporting catalogs to different locations, to make
 sure they will have all the needed facilities available.
+</para><para>
+"Capabilities" you can check for are
+<literal>globalsub</literal>,
+<literal>sub</literal>,  
+<literal>taggroup</literal>,
+<literal>usertag</literal> and
+<literal>module</literal> .
 __END__
 
 __NAME__ example: Requireing features

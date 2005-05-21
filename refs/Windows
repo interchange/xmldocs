@@ -12,8 +12,8 @@ __END__
 
 
 __NAME__ description
-The option should be enabled to indicate that &IC; is running on Microsoft
-Windows family of products.
+The option should be enabled to indicate (an unfortunate) situation where
+&IC; is running on Microsoft Windows family of products.
 </para><para>
 However, Unix is best. The Windows version, while perhaps more than just a toy,
 is not suitable for high-volume catalog serving. This is mostly due to Windows
@@ -23,7 +23,8 @@ with &IC;.
 On Microsoft Windows, you will want to stop and re-start your &IC; server at
 least once per day. You can use a system agent to automate it &mdash; you will
 want to stop the server to expire the session database anyway. You need to do
-this because &IC; requires the Unix-specific fork() call to spawn multi-tasked
+this because &IC; requires the Unix-specific <function>fork()</function> call
+to spawn multi-tasked
 servers, and without multi-tasked servers there is a strong possibility of
 a memory leak &mdash; especially if you use embedded &PERL; or conditional tags.
 __END__

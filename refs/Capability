@@ -1,5 +1,5 @@
 __NAME__ purpose
-test existence of a feature
+test existence of a capability
 __END__
 
 __NAME__ see also
@@ -18,10 +18,17 @@ __END__
 
 __NAME__ description
 Just like &conf-Require; or &conf-Suggest;, this directive checks for
-a feature or capability, but unlike the first two it never causes a
+a capability, but unlike the first two it never causes a
 warning or other message. This allows a module to be loaded if available
 and a program can later check for the capability and dynamically adapt to the
 configuration.
+</para><para>
+"Capabilities" you can check for are
+<literal>globalsub</literal>,
+<literal>sub</literal>,  
+<literal>taggroup</literal>,
+<literal>usertag</literal> and
+<literal>module</literal> .
 __END__
 
 __NAME__ example: Testing for existence of Archive::Zip Perl module

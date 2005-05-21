@@ -1,0 +1,35 @@
+__NAME__ purpose
+display prices with tax amount included
+__END__
+
+__NAME__ see also
+__END__
+
+__NAME__ notes
+For a complete introduction to taxes, please see the 
+&glos-tax; glossary entry.
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Display product prices with tax amount included (instead of calculating
+and displaying tax amount separately).
+This is common in european countries.
+__END__
+
+__NAME__ example: Enabling TaxInclusive
+<programlisting>
+TaxInclusive 1
+</programlisting>
+__END__
+
+__NAME__ author
+&racke;
+__END__

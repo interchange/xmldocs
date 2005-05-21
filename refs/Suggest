@@ -1,5 +1,5 @@
 __NAME__ purpose
-check existence of a feature
+check existence of a capability
 __END__
 
 __NAME__ see also
@@ -15,16 +15,17 @@ __NAME__ synopsis
 </group>
 __END__
 
-__NAME__ missing
-Which values can appear for 'type' ? module, usertag, globalsub, ... ?
-Also make notes @ Require and Capability entries.
-__END__
-
-
 __NAME__ description
 Just like &conf-Require; or &conf-Suggest;, this directive checks for
 a feature or capability. When the tested feature is missing, a 
 warning message is shown.
+</para><para>
+"Capabilities" you can check for are 
+<literal>globalsub</literal>, 
+<literal>sub</literal>, 
+<literal>taggroup</literal>, 
+<literal>usertag</literal> and
+<literal>module</literal> .
 __END__
 
 __NAME__ example: Testing for features

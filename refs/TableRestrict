@@ -1,0 +1,76 @@
+__NAME__ purpose
+restrict database searches to rows satisfying given criteria
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>database</replaceable></arg>
+	<arg choice='plain'>
+		<replaceable>field</replaceable><literal>=</literal><replaceable>value</replaceable>
+	</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive is used to emulate database "views" in database-based searches.
+</para><para>
+For each &glos-database; search, additional "filtering" will be performed
+and only rows satisfying given condition will be returned. Commonly,
+you will want to use something like <literal>owner=username</literal>, to
+restrict searches to just rows that the corresponding users "own".
+</para><para>
+As you can see from the ad-hoc example above, <literal>owner</literal> is a 
+&glos-database; column name, and <literal>username</literal> is the key
+from the session database. (The user's <code>[data session username]</code>
+must match the value of the <database class='field'>owner</database> field
+if record is to be returned in a search operation).
+__END__
+
+__NAME__ notes
+&conf-TableRestrict; does not affect the text searches.
+</para><para>
+The directive may be useful in "mall" situations, where user is allowed to
+only see products from the current store ID.
+__END__
+
+
+__NAME__ example: Restricting database searches to username
+The following would prevent database searches from returning any records,
+except those where the column <database class='field'>owner</database>
+contains the current value of <code>[data session username]</code>.
+<programlisting>
+TableRestrict  products  owner=username
+</programlisting>
+__END__
+
+
+__NAME__ example: Restricting edit to owned fields
+&conf-TableRestrict; is also useful in embedded &PERL; code:
+<programlisting>
+[calc]
+  # Restrict edit to owned fields
+  $Config->{TableRestrict}{products} = 'owner=username';
+  return;
+[/calc]
+</programlisting>
+(Note that the above example works because value of the &conf-TableRestrict; 
+config directive is overriden only for the duration of the current page &mdash;
+for next page or access, &conf-TableRestrict; will again have the original
+value).
+__END__
+
+
+__NAME__ example: Searching using SQL
+When using SQL-based database searches, the above directive examples in effect
+turn the base search query of say,
+<programlisting>
+SELECT * FROM products
+</programlisting>
+into
+<programlisting>
+SELECT * FROM products WHERE owner = '[data session username]'
+</programlisting>
+__END__
+

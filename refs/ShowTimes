@@ -1,0 +1,47 @@
+__NAME__ purpose
+insert timing information in debug output
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The &conf-ShowTimes; directive makes &IC; include timing statistics
+in debug output.
+__END__
+
+__NAME__ notes
+Calls to the <function>show_times()</function> function are commented out
+in most of the &IC; source. To enable &conf-ShowTimes;, you also need to 
+search for occurences of <literal>ShowTimes</literal> in the actual source,
+and un-comment the appropriate lines, then restart &IC; of course. You can
+effectively search the source by executing
+<command>grep -r ShowTimes *</command> within &glos-ICROOT;.
+Lines you're interested for will look like this:
+<screen>
+lib/Vend/Server.pm:#show_times("begin response send") if $Global::ShowTimes;
+</screen>
+and you will need to remove the "#".
+__END__
+
+__NAME__ see also
+DebugFile
+__END__
+
+__NAME__ author
+&racke;
+__END__
+
+
+__NAME__ example: Enabling ShowTimes
+<programlisting>
+ShowTimes 1
+</programlisting>
+__END__
+
