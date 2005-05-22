@@ -1,0 +1,55 @@
+__NAME__ purpose
+define maximum child process lifetime
+__END__
+
+
+__NAME__ see also
+PreFork,MaxServers,PIDcheck,PIDfile,HouseKeeping
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>interval</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Occasionally, in &conf-PreFork; mode, you will find child processes that get
+"starved", in other words they never seem to win the battle and receive a
+page request so they just sit there forever.
+</para><para>
+The &conf-ChildLife; directive times out a page server after a period
+of time.
+</para><para>
+If &conf-ChildLife; is not set, the default, the server will act just
+like it does now, stuck in that internal loop forever until
+<command>kill -9</command> happens.
+</para><para>
+All the directive does is set the start_time of the server, and then when
+&conf-HouseKeeping; gets triggered, it checks the current time and terminates
+the server (just like &conf-MaxRequestsPerChild;, basically) if it
+has expired.
+</para><para>
+This should clear up the problem where people see with a growing number of
+servers over time.
+__END__
+
+__NAME__ notes
+The directive is only used when &IC; is in <literal>PreFork</literal>
+&glos-ic-run-mode;.
+</para><para>
+The directive value can be any Interchange &glos-interval;.
+__END__
+
+
+__NAME__ example: Setting ChildLife
+<programlisting>
+ChildLife 30 minutes
+</programlisting>
+__END__
+
+__NAME__ author
+&mheins;
+__END__

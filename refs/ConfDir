@@ -1,5 +1,30 @@
+__NAME__ purpose
+specify catalog "config" directory
+__END__
 
 
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>directory</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify catalog "config" directory. By default, this is
+<filename>etc/</filename> inside &glos-CATROOT;.
+__END__
+
+__NAME__ notes
+Make sure you don't get confused by the existence of all
+&conf-DirConfig;, &conf-ConfDir; and &conf-ConfigDir;.
+__END__
+
+__NAME__ example: Redefining ConfDir
+<programlisting>
+ConfDir etc2
+</programlisting>
+__END__
 
 __NAME__ notes
 Make sure you don't get confused by the existence of all

@@ -1,0 +1,30 @@
+__NAME__ purpose
+specify name of the "category" field in the Interchange database
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>field_name</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+By default, &IC; expects item category to be in the 
+<database class='field'>category</database> field in the database,
+if a system of categories is used.
+This directive allows modification of the default name.
+__END__
+
+
+__NAME__ notes
+The field can also be set according to a &conf-Locale;.
+__END__
+
+__NAME__ example: Redefining CategoryField
+<programlisting>
+CategoryField type
+</programlisting>
+__END__
+

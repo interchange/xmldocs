@@ -1,0 +1,43 @@
+__NAME__ purpose
+specify default locale
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>locale definition</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies the default &glos-locale;.
+__END__
+
+__NAME__ notes
+If two locales are set "default" using &conf-Locale;, and no
+&conf-DefaultLocale; is specified, the behavior is undefined as the first
+"default" found will be set as the actual default.
+__END__
+
+__NAME__ example: Defining DefaultLocale
+<programlisting>
+DefaultLocale hr_HR
+</programlisting>
+__END__
+
+__NAME__ example: Achieving effect of DefaultLocale using Locale directive
+Exactly the same effect as in the above example can be produced with:
+<programlisting>
+Locale  hr_HR  default 1
+</programlisting>
+__END__
+
+
+__NAME__ see also
+Locale
+__END__
+
+__NAME__ author
+&mheins;
+__END__
