@@ -18,7 +18,7 @@ HOWTOS      = howtos
 GLOSSARY    = glossary
 ALL_DOCS    = $(GLOSSARY) $(HOWTOS) $(GUIDES) $(SYMBOL_TYPES)
 SHELL       = /bin/sh
-export O    = OUTPUT
+export O    = OUTPUT$(OUTPUT)
 export T    = tmp
 export XCF  = docbook/catalog.xml
 DC          = "/etc/xml/catalog"
@@ -69,6 +69,8 @@ $T:
 $O:
 	echo "U     $O/"
 	mkdir -p $O
+	echo "S     OUTPUT -> $O/"
+	ln -sf $O OUTPUT
 $O/files: $(shell find files) bin/dbgen
 	echo "C     $@/"
 	rm -rf $@/
@@ -217,7 +219,7 @@ cache/%/.cache.bin: sources/% bin/stattree
 # Silly, rewrite this, I forgot about $*. Or $* wouldn't help? I'm not 
 # willing to think about it right now.
 refxmls: BOTH = --both
-refxmls: bin/refs-autogen glossary/glossary.xml howtos/howtos.xml $(foreach stype,$(SYMBOL_TYPES),refs/$(stype).xml)
+refxmls: bin/refs-autogen $(foreach stype,$(SYMBOL_TYPES),refs/$(stype).xml)
 	:
 $T/%.list: BNAME = $(subst $T/,,$@)
 refs/%.xml: BNAME = $(subst refs/,,$@)
@@ -243,10 +245,10 @@ docbook/autorefs.ent: refxmls
 
 
 # Helper target, only used by docelic
-colt-preview:
-	tar jcf OUTPUT.tar.bz2 OUTPUT
-	scp OUTPUT.tar.bz2 colt.projectgamma.com:web/ic/xmldocs/
-
+#colt-preview:
+#	tar jcf OUTPUT.tar.bz2 OUTPUT
+#	scp OUTPUT.tar.bz2 colt.projectgamma.com:web/ic/xmldocs/
+#
 ## Man pages
 #$(OUTPUT)/%.man: %.xml
 #	mkdir -p $(OUTPUT)/man
