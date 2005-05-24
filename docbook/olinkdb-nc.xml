@@ -3,6 +3,8 @@
 	SYSTEM "/usr/share/xml/docbook/stylesheet/nwalsh/common/targetdatabase.dtd" [
 	<!ENTITY iccattut SYSTEM "../tmp/iccattut-nc.db"> 
 	<!ENTITY upgrade SYSTEM "../tmp/upgrade-nc.db"> 
+	<!ENTITY faq SYSTEM "../tmp/faq-nc.db"> 
+	<!ENTITY programming-style SYSTEM "../tmp/programming-style-nc.db"> 
 	<!ENTITY howtos SYSTEM "../tmp/howtos-nc.db"> 
 	<!ENTITY glossary SYSTEM "../tmp/glossary-nc.db"> 
 	<!ENTITY pragmas SYSTEM "../tmp/pragmas-nc.db"> 
@@ -21,6 +23,8 @@
 		<dir name="OUTPUT"> 
 			<document targetdoc="iccattut" baseuri="iccattut.html"> &iccattut; </document>
 			<document targetdoc="upgrade" baseuri="upgrade.html"> &upgrade; </document>
+			<document targetdoc="faq" baseuri="faq.html"> &faq; </document>
+			<document targetdoc="programming-style" baseuri="programming-style.html"> &programming-style; </document>
 			<document targetdoc="howtos" baseuri="howtos.html"> &howtos; </document>
 			<document targetdoc="glossary" baseuri="glossary.html"> &glossary; </document>
 			<document targetdoc="pragmas" baseuri="pragmas.html"> &pragmas; </document>

@@ -177,8 +177,14 @@ my $buf = qq{<a href="http://google.com/">Visit Google!</a>};
 		tags are treated as containers. This is easy to follow for container tags
 		such as &lt;p&gt; &mdash; simply remember not to omit the closing tag.
 		With non-container tags, such as &lt;input&gt;, &lt;br&gt; or &lt;hr&gt;,
-		a new &glos-pragma; will be introduced to automatically replace the 
-		closing <literal>&gt;</literal> with <literal>/&gt;</literal>.
+		closing <literal>&gt;</literal> needs to be replaced with
+		<literal>/&gt;</literal>, but not unconditionally (&IC; must be able to
+		output both the usual, and XHTML variant).
+		In such constructs, you can use <varname>$Vend::Xtrailer</varname>
+		that's set to <literal>/</literal> if &conf-XHTML; is enabled, 
+		and we could eventually replace all "raw" calls like &lt;input&gt;
+		with &tag-formel;, &tag-widget; and other tags that will honor 
+		<varname>$Vend::Xtrailer</varname>.
 <programlisting><![CDATA[
 <form action="[process]">
   <input type="text"   name="city" value="[value city]" >

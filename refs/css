@@ -131,7 +131,7 @@ __NAME__ example: Simplest tag example
 [css THEME_CSS]
 </programlisting>
 In the example above, the <tag>css</tag> will look for the 
-<filename>images/theme_css.css</filename>, and generate a HTML link to it
+<filename>images/theme_css.css</filename>, and generate an HTML link to it
 (&lt;link rel="stylesheet" href="/images/theme_css.css"&gt;).
 __END__
 

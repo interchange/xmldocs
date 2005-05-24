@@ -1,5 +1,3 @@
-
-
 Outstanding:
 =======
 files/pricing/ dir is missing?!
@@ -25,20 +23,15 @@ On config directives, include parse_<> function in source context
 	<ulink url="http://www.icdevgroup.org/pipermail/interchange-users/2004-December/041539.html">2004-December/041539</ulink>.
 - match style (no starting verb or all starting verbs) in all Example titles
 - check if all Default fields are properly formated (<literal> or none)
-- s/a HTML/an HTML/
 
 Coding:
 - script to [un]comment debug lines!!
-- use Interchange.pm to make an Interchange shell
-- finish ML stats
+- use Interchange.pm to make an Interchange shell (External.pm!)
+- finish ML stats <-- MAILPOND on ocelic2! 
 
 DOCUMENTATION SYSTEM:
 - Add support to document tags which are NOT found in separate files
   (like [restrict] or [subject]).
-- Read all possible options for tag files from vend/config.pm
-  (%tag.* structures) and warn if invalid option is found in any tag file.
-
-
 
  Mid-term:
 - Ask ndw about including [NEW!] and [TODO!] in titles in TOC. --> This is a 
@@ -123,8 +116,6 @@ Misc:
   - give examples for the tasks in 'do yourself' section (in progress)
   - give good practices about filtering, security
   - see problems from old docs/TODO notes on iccattut
-  - ICCATTUT MUST NOT STOP WHERE it stops now. it needs to show all stuff
-    from current "excercise for readers" section, and also many more things.
   - files/tutorial*: s/tutorial-*.log/tutorial.*.log/
 
 GLOSSARY:

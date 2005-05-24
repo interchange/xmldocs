@@ -1,0 +1,125 @@
+<?xml version="1.0" standalone="no"?>
+
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+	"../docbook/docbookxi.dtd">
+
+<article id='faq'>
+
+<articleinfo>
+	<title>&IC; Frequently Asked Questions (FAQ)</title>
+	<titleabbrev>faq</titleabbrev>
+
+	<copyright>
+		<year>2003</year><year>2004</year><year>2005</year>
+		<holder>&IC; Development Group</holder>
+	</copyright>
+	<copyright>
+		<year>2002</year>
+		<holder>Red Hat, Inc.</holder>
+	</copyright>
+
+	<authorgroup>
+		<author>
+			<firstname>Davor</firstname><surname>Ocelic</surname>
+			<email>docelic@icdevgroup.org</email>
+		</author>
+		<author>
+			<firstname>Mike</firstname><surname>Heins</surname>
+			<email>mike@perusion.com</email>
+		</author>
+	</authorgroup>
+
+	<legalnotice>
+		<para>
+		This documentation is free; you can redistribute it and/or modify
+		it under the terms of the &GNU; General Public License as published by
+		the Free Software Foundation; either version 2 of the License, or
+		(at your option) any later version.
+		</para>
+		<para>
+		It is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+		</para>
+	</legalnotice>
+
+	<abstract>
+		<para>
+		The purpose of this FAQ is to provide quick answers to quick questions.
+		Where ever appropriate, pointers to more "formal" documentation
+		(guides, HOWTOs, reference pages) will be provided.
+		</para>
+	</abstract>
+
+</articleinfo>
+
+
+
+
+<qandaset>
+
+
+<qandadiv><title>How does &IC; work</title>
+
+<qandaentry>
+<question><para>
+Where are the pages?
+</para></question>
+<answer><para>
+&IC; pages are not kept in normal HTML space. Look in the catalog subdirectory pages. The pages are always filtered through the &IC; daemon before being delivered.
+</para></answer>
+</qandaentry>
+
+<qandaentry>
+<question><para>
+Where are the images?
+</para></question>
+<answer><para>
+&IC; is a &glos-CGI; program, and if relative image paths were used, erroneous 
+&glos-img; output like the following would have occured:
+
+<programlisting><![CDATA[
+<img src="/cgi-bin/simple/../whatever.jpg">
+]]></programlisting>
+
+For that reason, by default, &IC; uses &conf-ImageDir; or
+&conf-ImageDirSecure; for a prefix used to rewrite image URLs.
+In the demo, image
+specs that have no absolute path information are prefixed with
+<literal>/simple/images/</literal>.
+</para><para>
+In an &IC; page, this tag:
+
+<programlisting><![CDATA[
+<img src="ordernow.gif">
+]]></programlisting>
+
+will become this:
+
+<programlisting><![CDATA[
+<img src="/simple/images/ordernow.gif">
+]]></programlisting>
+
+This tag:
+
+<programlisting><![CDATA[
+<img src="items/00-0011.jpg">
+]]></programlisting>
+
+will become this:
+
+<programlisting><![CDATA[
+<img src="/simple/images/items/00-0011.jpg">
+]]></programlisting>
+
+Absolute image paths are not affected. An image such as
+<literal>/other/images/whatever.gif</literal> will not be changed.
+</para></answer>
+</qandaentry>
+
+</qandadiv>
+</qandaset>
+        
+</article>
+

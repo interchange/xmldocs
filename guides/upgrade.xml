@@ -51,8 +51,17 @@
 	<abstract>
 		<para>
 		The purpose of this document is to provide general notes for upgrading
-		from Minivend 3 to Minivend 4, and from Minivend 4 to current 
+		from Minivend 3 to Minivend 4, and from Minivend 4 to 
 		&IC;.
+		</para><para>
+		By saying "Interchange", we <emphasis>primarily</emphasis> mean the
+		early releases, such as 4.6 or 4.8. To be sure you did not miss anything
+		while upgrading to Interchange 5.0 and beyond, please review
+		WHATSNEW entries.
+		</para><para>
+		This Guide will be slowly losing on relevance, and users running
+		Interchange 5.0 or later should monitor WHATSNEW entries for 
+		upgrade information.
 		</para>
 	</abstract>
 
