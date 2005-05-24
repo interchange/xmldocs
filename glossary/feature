@@ -11,8 +11,9 @@ There's also another problem at sight, namely that of feature creep, since
 everything was just being added to the "&std-catalog;" catalog.
 </para><para>
 The basic mechanism is simple:
-Inside "feature" modules, there are two special kinds of files, called by
-extensions <literal>.global</literal> and <literal>.init</literal>.
+Inside "feature" modules, there are three special kinds of files, called by
+extensions <literal>.global</literal>, <literal>.init</literal> and 
+<literal>.uninstall</literal>.
 (In the included <literal>quickpoll</literal> feature, these are named
 <filename>quickpoll.global</filename> and <filename>quickpoll.init</filename>).
 </para><para>
@@ -51,4 +52,36 @@ When the server is restarted, the file test is no longer needed, as the
 init procedure has already been done.
  -->
 </para><para>
-Currently, the uninstallation procedure is missing.
+Uninstall files, those with the <literal>.uninstall</literal> extension,
+are &glos-ITL; files that can perform any uninstall
+functions, and they run with temporary &conf-AllowGlobal; access to
+allow dropping of tables, unlinking of files, etc.
+</para><para>
+Automated uninstall features include removing any files installed
+as a part of the feature -- providing they have not changed. If
+the file was edited and is not identical to the originally installed
+file, then it is left there and a warning issued.
+Uninstall creates file
+<filename>&conf-ConfDir;/init/<replaceable>FEATURE</replaceable>/uninstall</filename>
+to note the uninstall, and which prevents the Init process from happening
+again (assuming &IC; has not been restarted since the
+feature installation).
+</para><para>
+The uninstall routine is called with the &tag-uninstall-feature; tag.
+</para>
+<caution>
+<para>
+The catalog user must remove the &conf-Feature; directive from their
+&ccf; <emphasis>before</emphasis> running &tag-uninstall-feature;, otherwise
+the &conf-Feature; will be re-installed the next time &IC; is
+restarted!
+</para><para>
+Also, there is a short window where a SQL table, if dropped
+as a part of the uninstall procedure, could be re-instantiated
+based on the existence of the configuration in memory. It
+is recommended that if &tag-uninstall-feature; is called, a
+&tag-reconfig; tag is called shortly thereafter to reduce this
+possiblility to a minimum.
+</para>
+</caution>
+<para>

@@ -2,19 +2,36 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	tables
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	Tables to back-up
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	dir
 	</entry>
 	<entry>
-	<!-- POS -->
 	</entry>
 	<entry>
-	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<varname>BACKUP_DIRECTORY</varname> or 
+	<filename class='directory'>&glos-CATROOT;/backup/</filename>
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Backup directory to dump database contents to
 	</entry>
 
 </row> 
@@ -30,10 +47,11 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Save all backed databases to a gnumeric file
+	<filename>DBDOWNLOAD.all</filename> in the backup directory?
 	</entry>
 
 </row> 
@@ -49,10 +67,13 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Save all backed databases to a Microsoft Excel file
+	<filename>DBDOWNLOAD.xls</filename> in the backup directory?
+	This option requires 
+	<classname>Spreadsheet::WriteExcel</classname> &PERL; module.
 	</entry>
 
 </row> 
@@ -68,10 +89,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	255
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Maximum length of a field within the Microsoft Excel .xls format
 	</entry>
 
 </row> 
@@ -90,7 +111,8 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	An additional WHERE= &glos-SQL; clause to selectively back-up only 
+	parts of databases
 	</entry>
 
 </row> 
@@ -106,13 +128,44 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	GZip output backup files? This option requires 
+	<classname>Compress:Zlib</classname> &PERL; module.
 	</entry>
 
 </row> 
+&ROW_HIDE_0;
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
 __END__
+
+
+__NAME__ description
+The tag allows database backups. Databases are dumped into the backup directory,
+and named after their corresponding source files (taken from &conf-Database; 
+definitions).
+</para><para>
+The tag can also produce dumps in gnumeric or Microsoft Excel formats.
+__END__
+
+
+__NAME__ notes
+The backup directory, whichever it is, must exist before 
+&tag-backup-database; is called.
+__END__
+
+__NAME__ example: Backing-up the products database
+For this example to work,
+<filename class='directory'>&glos-CATROOT;/backup/</filename> directory must
+exist:
+<programlisting>
+[either]
+  [tmp name=backup set="[backup-database tables=products]" hide=1]
+[or]
+  [scratch ui_error]
+[/either]
+</programlisting>
+__END__
+
