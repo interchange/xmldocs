@@ -67,19 +67,19 @@ to note the uninstall, and which prevents the Init process from happening
 again (assuming &IC; has not been restarted since the
 feature installation).
 </para><para>
-The uninstall routine is called with the &tag-uninstall-feature; tag.
+The uninstall routine is called with the &tag-uninstall_feature; tag.
 </para>
 <caution>
 <para>
 The catalog user must remove the &conf-Feature; directive from their
-&ccf; <emphasis>before</emphasis> running &tag-uninstall-feature;, otherwise
+&ccf; <emphasis>before</emphasis> running &tag-uninstall_feature;, otherwise
 the &conf-Feature; will be re-installed the next time &IC; is
 restarted!
 </para><para>
 Also, there is a short window where a SQL table, if dropped
 as a part of the uninstall procedure, could be re-instantiated
 based on the existence of the configuration in memory. It
-is recommended that if &tag-uninstall-feature; is called, a
+is recommended that if &tag-uninstall_feature; is called, a
 &tag-reconfig; tag is called shortly thereafter to reduce this
 possiblility to a minimum.
 </para>

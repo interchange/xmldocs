@@ -23,14 +23,25 @@ so the (complete) procedure to build the docs is:
 ( cvs checkout first, then: ) 
 make cvs cache skel
 make refxmls
-make refxmls (yes, twice or trice)
 make olinkdbs-nc olinkdbs-c
 ( and then the usual targets: )
-make pragmas vars tags confs filters iccattut programming-style howtos glossary
+make glossary symbols guides howtos
 
 Also the problem is that the whole thing takes enormous time to build, even
 with xsltproc which is like by far the fastest docbook processor ;-)
 But well, on a >2GHz machine, it's bearable.
+
+It's possible now to change OUTPUT directory to something else, named
+OUTPUT<yourstring>. However, places where I couldn't have inserted variables
+have OUTPUT/ hardcoded, so OUTPUT is made a symbolic link to the current
+output dir. 
+
+Here's an example:
+
+  OUTPUT=-std make skel
+
+After that point, you can omit OUTPUT= from subsequent calls to "make"
+and things will still clap together nicely.
 
 **  -- -- --   -- -- -- --   -- -- -- --   -- -- -- --   -- -- -- --  **
 

@@ -32,7 +32,7 @@ VPATH       = guides refs howtos glossary
 .PHONY: all complete
 .PHONY: skel
 .PHONY: guides howtos symbols glossary
-.PHONY: olinkdbs-nc olinks-nc olinkdbs-c olinks-c
+#.PHONY: olinkdbs-nc olinks-nc olinkdbs-c olinks-c
 .PHONY: clean clean-cache clean-refs distclean look-clean
 .PHONY: up-all cvs-sources srcs cvsrcs cvs cvss all-up cvsup
 .PHONY: up-% cvs-% %-up %-cvs
@@ -47,20 +47,23 @@ all: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) \
 	olinks-nc olinks-c                                           \
 	guides symbols
 
-guides:   $(foreach doc,$(GUIDES),$O/$(doc).html  )            \
-          $(foreach doc,$(GUIDES),$O/$(doc))
+guides:   $(foreach doc,$(GUIDES),OUTPUT/$(doc).html  )            \
+          $(foreach doc,$(GUIDES),OUTPUT/$(doc))
 
-howtos:   $(foreach doc,$(HOWTOS),$O/$(doc).html  )            \
-          $(foreach doc,$(HOWTOS),$O/$(doc))
+howtos:   $(foreach doc,$(HOWTOS),OUTPUT/$(doc).html  )            \
+          $(foreach doc,$(HOWTOS),OUTPUT/$(doc))
 
-symbols:  $(foreach doc,$(SYMBOL_TYPES),$O/$(doc).html  )      \
-          $(foreach doc,$(SYMBOL_TYPES),$O/$(doc))
+symbols:  $(foreach doc,$(SYMBOL_TYPES),OUTPUT/$(doc).html  )      \
+          $(foreach doc,$(SYMBOL_TYPES),OUTPUT/$(doc))
 
-glossary: $(foreach doc,$(GLOSSARY),$O/$(doc).html  )
+glossary: $(foreach doc,$(GLOSSARY),OUTPUT/$(doc).html  )
 
 #############################################################
 # Skel
-skel: $T $O $O/files $O/images $O/xmldocs.css
+skel: $T $O
+	make OUTPUT/files
+	make OUTPUT/images
+	make OUTPUT/xmldocs.css
 $T:
 	if test -e $T.temporary; then                                \
 		echo "U     $T/"; mv $T.temporary $T;                      \
@@ -71,7 +74,7 @@ $O:
 	mkdir -p $O
 	echo "S     OUTPUT -> $O/"
 	ln -sf $O OUTPUT
-$O/files: $(shell find files) bin/dbgen
+OUTPUT/files: $(shell find files) bin/dbgen
 	echo "C     $@/"
 	rm -rf $@/
 	cp -a files $O/
@@ -87,12 +90,12 @@ $O/files: $(shell find files) bin/dbgen
 	    ; fi                                                     \
 	  ; fi                                                       \
 	; done
-$O/images: $(shell find images)
+OUTPUT/images: $(shell find images)
 	echo "C     $@/"
 	rm -rf $@/
 	cp -a images $O/
 	rm -rf `find $@ -name CVS`
-$O/xmldocs.css: docbook/xmldocs.css
+OUTPUT/xmldocs.css: docbook/xmldocs.css
 	echo "C     $@"
 	cp $< $@
 
@@ -100,7 +103,7 @@ $O/xmldocs.css: docbook/xmldocs.css
 #############################################################
 # OLINK DBs (interlinking between documents)
 olinkdbs-nc olinks-nc: $(foreach f,$(ALL_DOCS),$T/$f-nc.db)
-$T/%-nc.db: %.xml $T
+$T/%-nc.db: %.xml
 	$(PSR) $(PSR_FLAGS)                                               \
 	  $(PROFILE)                                                      \
 	  --stringparam collect.xref.targets only                         \
@@ -108,7 +111,7 @@ $T/%-nc.db: %.xml $T
 	  docbook/html-nochunks.xsl $<
 	  perl -ni -e'print unless $$.==1 and /^<!DOCTYPE/' $@
 olinkdbs-c olinks-c: $(foreach f,$(ALL_DOCS),$T/$f-c.db)
-$T/%-c.db: %.xml $T
+$T/%-c.db: %.xml
 	$(PSR) $(PSR_FLAGS)                                               \
 	  $(PROFILE)                                                      \
 	  --stringparam collect.xref.targets only                         \
@@ -119,7 +122,7 @@ $T/%-c.db: %.xml $T
 
 #############################################################
 # STANDARD TARGETS || two-pass processing method
-$O/%.html: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent skel
+OUTPUT/%.html: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent skel
 	echo "C     $@"
 	$(PSR) $(PSR_FLAGS)                                                \
 	  $(PROFILE)                                                       \
@@ -131,7 +134,7 @@ $O/%.html: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowto
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
 	  -o $@ docbook/html-nochunks.xsl $T/$*-nc.profiled
-$O/%: %.xml skel
+OUTPUT/%: %.xml skel
 	echo "C     $@/"
 	$(PSR) $(PSR_FLAGS)                                                \
 	  $(PROFILE)                                                       \
@@ -177,7 +180,7 @@ $O/%: %.xml skel
 #############################################################
 # Cleaning
 clean:
-	-rm -rf $O
+	-rm -rf $O OUTPUT
 clean-cache:
 	-rm -f cache/*/.cache.bin 2>/dev/null
 clean-refs:
@@ -219,7 +222,7 @@ cache/%/.cache.bin: sources/% bin/stattree
 # Silly, rewrite this, I forgot about $*. Or $* wouldn't help? I'm not 
 # willing to think about it right now.
 refxmls: BOTH = --both
-refxmls: bin/refs-autogen $(foreach stype,$(SYMBOL_TYPES),refs/$(stype).xml)
+refxmls: bin/refs-autogen $(foreach stype,$(SYMBOL_TYPES),refs/$(stype).xml) howtos/howtos.xml glossary/glossary.xml
 	:
 $T/%.list: BNAME = $(subst $T/,,$@)
 refs/%.xml: BNAME = $(subst refs/,,$@)
@@ -237,10 +240,8 @@ $T/%.list refs/%.xml: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) 
 # One-shot targets
 glossary/glossary.xml docbook/autoglossary.ent: $(shell find glossary/ -regex '.+[^(\.xml)]$$') bin/generic-autogen
 	bin/generic-autogen glossary
-	make tmp/glossary-nc.db tmp/glossary-c.db
 howtos/howtos.xml docbook/autohowtos.ent: $(shell find howtos/ -regex '.+[^(\.xml)]$$') bin/generic-autogen
 	bin/generic-autogen howtos
-	make tmp/howtos-nc.db tmp/howtos-c.db
 docbook/autorefs.ent: refxmls
 
 
