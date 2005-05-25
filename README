@@ -12,29 +12,14 @@ the documentation generated. For XMLDOCS authoring, see file WRITING.
 INTRODUCTION
 
 The (new) Interchange XML documentation set is completely self-contained.
-To build the complete documentation set, run:
+To build the complete documentation set, just run:
 
   make
-   ^
-** ^  -- -- --   -- -- -- --   -- -- -- --   -- -- -- --   -- -- -- --  **
-** ^-- Well, not really ;-| I didn't manage to get this totally right,
-so the (complete) procedure to build the docs is:
 
-( cvs checkout first, then: ) 
-make cvs cache skel
-make refxmls
-make olinkdbs-nc olinkdbs-c
-( and then the usual targets: )
-make glossary symbols guides howtos
-
-Also the problem is that the whole thing takes enormous time to build, even
-with xsltproc which is like by far the fastest docbook processor ;-)
-But well, on a >2GHz machine, it's bearable.
-
-It's possible now to change OUTPUT directory to something else, named
+It's also possible to change OUTPUT/ directory to something else, named
 OUTPUT<yourstring>. However, places where I couldn't have inserted variables
-have OUTPUT/ hardcoded, so OUTPUT is made a symbolic link to the current
-output dir. 
+have OUTPUT/ hardcoded, so OUTPUT is made a symbolic link to the output dir
+of your choice. 
 
 Here's an example:
 
@@ -49,7 +34,7 @@ To build specific targets, see Makefile for target names. Few useful
 targets would include:
 
  -- Those that you would have to run manually:
-  make cvs          (to auto-create complete sources/ directory)
+  make cvs          (to create complete sources/ directory, or update existing)
   make clean        (removes OUTPUT/)
   make distclean    (remove OUTPUT/ and tmp/)
   make look-clean   (clean + 'mv tmp tmp.temporary'. Useful to only make
@@ -59,12 +44,12 @@ targets would include:
                     regenerating OlinkDB files).
 
  -- And those already covered by 'make':
-  make caches
+  make skel
+  make cache
   make refxmls
   make olinkdbs-nc olinkdbs-c
-  make tmp/iccattut-nc.db tmp/iccattut-c.db
-  make skel
   make OUTPUT/xmldocs.css
+  make tmp/iccattut-nc.db tmp/iccattut-c.db
   make OUTPUT/iccattut.html OUTPUT/iccattut
 
 See Makefile for a complete list, of course.
@@ -76,17 +61,22 @@ To perform a successful build, the following programs and modules
 must be available:
 
   - Perl
-  - Shell commands: mkdir, cp, tar, gzip, bzip2
+  - Shell commands: mkdir, cp, ln, find, tar, gzip, bzip2
   - docbook-xml
   - docbook-xsl
   - xsltproc
   - exuberant-ctags
-  - passivetex (not yet)
+  - passivetex
 
 
 FINAL OUTPUT
 
 During the invocation of 'make', few files will be created:
+
+  docbook/auto*.ent - Files containing XML entities that we can use in our
+                   sources. For example, configuration directive Include is
+                   referenced simply as &conf-Include;, tag [include] is 
+                   referenced simply as &tag-include;.
   
   tmp/*.db       - OLink DB files generated from source .xml files,
                    and other, on-the-fly .xmls. 
@@ -109,6 +99,9 @@ During the invocation of 'make', few files will be created:
                    and interlinked documentation set. Once it's created, you
                    can move it out of the build tree and package as you see
                    fit.
+                   
+                   This can also be OUTPUT<yourprefix>, if you pass e.g.
+                   OUTPUT=-std in a call to make (as shown near the top).
 
 
 DEVELOPMENT NOTES
@@ -131,9 +124,7 @@ DEVELOPMENT NOTES
                    yourself, just drop it in there and someone will pick
                    it up.
    sources       - (not in CVS). run 'make cvs' to auto-create this 
-                   directory with all needed contents. 'make cvs' is not
-                   part of the global 'make' run, but 'make caches', which
-                   needs to run after 'make cvs', is.
+                   directory with all needed contents. 
    whatsnew      - A directory containing whatsnew.xml, continuously updated
                    what's new list. The items are added automatically; just
                    place copies of the CVS commit messages in the whatsnew/
@@ -148,18 +139,21 @@ DEVELOPMENT NOTES
    in directories named after release numbers (with the exception of
    "cvs-head"). Run 'make cvs' to create that sources/ directory with
    all the contents. Run 'make up-all' to invoke cvs update on all
-   versions (or 'make up-<ver>' for specific).
+   versions (or 'make up-<ver>' for specific). ('make cvs' can also be used
+   to update repositories).
 
-   ** Leftover information, not important for standard procedure: **
-   * Once that's in place, make sure all available versions are mentioned in 
-   * Makefile's IC_VERSIONS variable, and then run 'make cache'.
+
+   ** Leftover information, not important for standard procedure: ************
+   * Once sources/ is in place, make sure all available versions are mentioned
+   * in Makefile's IC_VERSIONS variable, and then run 'make cache'.
    * This will regenerate files for the versions you have.
    *
    * It is important to have as many releases as possible in sources/, because
    * when you generate the documentation (reference pages most notably), the
    * symbols there are considered "added" the first time they're encountered
    * in the sources (so they'll appear more recent than they actually are).
-   ** End of leftover information **
+   ** End of leftover information ********************************************
+
 
    When bin/mkreport runs later, it parses the .cache.bin file and produces
    number of output files (interesting "leaf nodes" in a hash). Those 
@@ -178,6 +172,7 @@ DEVELOPMENT NOTES
    There's bin/coup tool that helps you manage sources/ directory.
    See the script or the Makefile for invocation examples.
    ('make cvs' and 'make up-<ver|all>' invoke bin/coup).
+
 
 
  Autogeneration of the reference pages: ** IMPORTANT **
@@ -203,9 +198,9 @@ DEVELOPMENT NOTES
       and can effectively be used as a comment area.
 
    The refs/<symbol> single-file-based approach is now preferred. It's more
-   convenient and keeps the number of files in CVS at minimum. The bin/editem
+   convenient, and keeps the number of files in CVS at minimum. The bin/editem
    script advises to use it.
-   Use refs/<symbol>/* only if you have special requirements.
+   Use refs/<symbol>/* only in special cases (which is never, or close to it).
    
    Regardless of the way you document an item, the following information
    is needed to consider the symbol documentation complete:
@@ -219,11 +214,12 @@ DEVELOPMENT NOTES
      - Autogenerated (can be overriden if really neccesary):
         id, name, symbol type, availability, source occurences
 
+
    *** Obscure information START /// Not needed in general ***
    * All of above fields can both be overriden or appended with user-supplied
    * information:
    *
-   * o  refs/<symbol> method (one-file):
+   *oo  refs/<symbol> method (one-file, the preferred way):
    *
    *   To fill the template of the reference page, you add content to sections
    *   in the following way:
@@ -236,7 +232,7 @@ DEVELOPMENT NOTES
    *   override it, so this method does not have a way to override a value
    *   like refs/<symbol>/control (in multi-file method) can do.
    * 
-   * o  refs/<symbol>/* method (one-directory, multiple-files):
+   *oo  refs/<symbol>/* method (one-directory, multiple-files):
    *
    *   To unconditionally override values and/or provide one-liner contents, use
    *   refs/<symbol>/control file. It has pretty much inflexible
@@ -264,9 +260,8 @@ DEVELOPMENT NOTES
    *** Obscure information END /// Not needed in general ***
 
 
-** To create the documentation for a yet non-existant item or modify an 
-** existing item, simply run bin/editem <name>. It will create all the
-** skeleton files, auto-let you edit the important files and do basic checks.
+** To create the documentation for a yet non-existant item, your best bet
+** is to start off by copying an existing item over.
 
 ** When adding documentation entries, please favor QUALITY over QUANTITY.
 ** That means you should grep the whole CVS for ALL information about a 

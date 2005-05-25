@@ -42,10 +42,9 @@ VPATH       = guides refs howtos glossary
 
 #############################################################
 # Complete build
-all: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) \
-  skel refxmls glossary howtos                                 \
-	olinks-nc olinks-c                                           \
-	guides symbols
+all: skel cvs cache refxmls                                        \
+     olinkdbs-nc olinkdbs-c                                        \
+		 glossary symbols guides howtos
 
 guides:   $(foreach doc,$(GUIDES),OUTPUT/$(doc).html  )            \
           $(foreach doc,$(GUIDES),OUTPUT/$(doc))
