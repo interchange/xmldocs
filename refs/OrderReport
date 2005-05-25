@@ -1,0 +1,26 @@
+__NAME__ purpose
+specify location of the order report form
+__END__
+
+
+__NAME__ see also
+Profiles
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>filename</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify location of the simple order report file.
+__END__
+
+__NAME__ example: Setting OrderReport
+<programlisting>
+OrderReport /data/order-form
+</programlisting>
+__END__
+

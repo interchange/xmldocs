@@ -1,0 +1,38 @@
+__NAME__ purpose
+parse (interpolate ITL and variables) variable values before storing them
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify that global and catalog variables should be parsed in catalog
+configuration directives (not including the &conf-Variable; directives
+themselves, which never have their contents parsed).
+</para><para>
+Applies only to variables with names in ALL CAPS. Our catalogs enable
+&conf-ParseVariables; and usually rely on that behavior.
+__END__
+
+__NAME__ example: Enabling ParseVariables globally
+<programlisting>
+ParseVariables 1
+</programlisting>
+__END__
+
+__NAME__ example: Defining a variable containing parse-needing data
+<programlisting>
+Variable STORE_ID topshop
+
+ParseVariables Yes
+StaticDir  /home/__STORE_ID__/www/cat
+ParseVariables No
+</programlisting>
+__END__
+

@@ -1,0 +1,28 @@
+__NAME__ purpose
+specify all databases containing products that form one big "products" database
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>database</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify &glos-database; tables that should be, all together, logically seen
+as one bigger <database>products</database> database.
+</para><para>
+For example, when doing product searches, all &conf-ProductFiles; databases
+will be searched.
+__END__
+
+
+__NAME__ example: Setting ProductFiles
+<programlisting>
+ProductFiles vendor_a vendor_b
+</programlisting>
+__END__
+
+

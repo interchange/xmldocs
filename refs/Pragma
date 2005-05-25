@@ -1,0 +1,39 @@
+__NAME__ purpose
+specify pragma's default value
+__END__
+
+
+__NAME__ synopsis
+	<arg choice='plain'><replaceable>pragma_name</replaceable></arg>
+	<arg choice='opt'><replaceable>value</replaceable></arg>
+__END__
+
+
+__NAME__ description
+Sets the default value of an Interchange &glos-pragma;.
+__END__
+
+__NAME__ notes
+Please see the &glos-pragma; glossary entry for complete information.
+__END__
+
+
+__NAME__ example: Enabling 'dynamic_variables' pragma (variant 1)
+<programlisting>
+Pragma dynamic_variables
+</programlisting>
+__END__
+
+__NAME__ example: Enabling 'dynamic_variables' pragma (variant 2)
+<programlisting>
+Pragma dynamic_variables 1
+</programlisting>
+__END__
+
+__NAME__ example: Disabling 'dynamic_variables' pragma
+<programlisting>
+Pragma dynamic_variables 0
+</programlisting>
+__END__
+
+

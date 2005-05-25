@@ -1,0 +1,30 @@
+__NAME__ purpose
+specify required value of the REMOTE_USER environment variable
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>username</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify required value of the <envar>REMOTE_USER</envar> HTTP environment 
+variable that will enable catalog reconfiguration. HTTP basic authentication
+must be set configured independently at web server side, for this to work.
+__END__
+
+
+__NAME__ see also
+Environment
+__END__
+
+__NAME__ example: Setting RemoteUser
+<programlisting>
+RemoteUser interchange
+</programlisting>
+__END__
+
+

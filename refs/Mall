@@ -1,0 +1,31 @@
+__NAME__ purpose
+issue cookies only for the current catalog, and not the base domain
+__END__
+
+
+__NAME__ see also
+CookieDomain,Cookies,CookieLogin
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Issue cookies only for the current catalog's script. By
+default, when &IC; issues a cookie, it does so for the whole base domain.
+</para><para>
+This setting will allow multiple catalogs to operate on the same domain
+without interfering with each others session ID.
+__END__
+
+__NAME__ example: Enabling Mall
+<programlisting>
+Mall 1
+</programlisting>
+__END__
+

@@ -1,0 +1,35 @@
+__NAME__ purpose
+specify directory containing database files
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>directory</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify the directory containing database files.
+The directory cannot be absolute, unless &conf-NoAbsolute; is disabled.
+__END__
+
+__NAME__ notes
+The specified location is, unless absolute, treated relative to &glos-CATROOT;.
+__END__
+
+__NAME__ example: Setting ProductDir
+<programlisting>
+ProductDir databases
+</programlisting>
+__END__
+
+__NAME__ example: Setting ProductDir to an absolute value
+<programlisting>
+NoAbsolute 0
+
+ProductDir /data/catalog/for-sale
+</programlisting>
+__END__
+

@@ -60,7 +60,7 @@
 <qandaset>
 
 
-<qandadiv><title>How does &IC; work</title>
+<qandadiv><title>How does Interchange work</title>
 
 <qandaentry>
 <question><para>
@@ -76,7 +76,7 @@ Where are the pages?
 Where are the images?
 </para></question>
 <answer><para>
-&IC; is a &glos-CGI; program, and if relative image paths were used, erroneous 
+&IC; is a &glos-CGI;; program, and if relative image paths were used, erroneous 
 &glos-img; output like the following would have occured:
 
 <programlisting><![CDATA[
@@ -116,6 +116,113 @@ will become this:
 Absolute image paths are not affected. An image such as
 <literal>/other/images/whatever.gif</literal> will not be changed.
 </para></answer>
+</qandaentry>
+
+</qandadiv>
+
+<qandadiv><title>Installation</title>
+
+<qandaentry>
+<question><para>
+Configuration Problems
+</para></question>
+<answer><para>
+Most &IC; configuration and setup problems are due to one of the following:
+</para>
+
+<itemizedlist>
+<listitem><para>Wrong information given to makecat program.
+</para><para>
+This is by far the most common problem. To install a working demo,
+&IC; needs to know what the &glos-DOCROOT; is and how to run &glos-CGI;
+programs. Details of this setup are server- and site-specific, which may
+require some research.
+</para><para>
+Re-run the configuration again, and pay close attention to the prompts
+given. There are examples given which apply to most systems.
+</para><para>
+If the web server is &APACHE; or NCSA, &IC; will try and parse its
+<filename>httpd.conf</filename> file to help you along, but many ISPs
+don't allow users to
+read these and it may fail.
+</para></listitem>
+<listitem><para>Too-low version of &PERL;.
+</para><para>
+If you have a &PERL; earlier than 5.005, &IC; will not work. Don't
+even try an earlier version.
+</para></listitem>
+
+<listitem><para>&PERL; compiled with <literal>USE_THREADS</literal>.
+</para><para>
+Run <command>perl -V</command>. If you see
+<literal>-DUSE_THREADS</literal> in the compilation definition,
+you might run into problems with &IC;.
+</para></listitem>
+
+<listitem>
+<para>Running &IC; as root</para>
+<para>You cannot run &IC; software as <systemitem class='username'>root</systemitem>.</para>
+</listitem>
+</itemizedlist>
+</answer></qandaentry>
+
+
+
+<qandaentry>
+<question><para>
+Proper file ownership and permissions
+</para></question>
+<answer><para>
+If you are setting &IC; up for the entire machine, and not just
+as a virtual host user, it is usual to create a special
+<systemitem class='username'>interch</systemitem> user
+to run the daemon and the link program. This means the directory listing
+for your <filename>cgi-bin/</filename> directory should be something like:
+
+<programlisting><![CDATA[
+-rwsr-xr-x   1 interchange users        6312 Dec 30 11:39 cgi-bin/simple
+]]></programlisting>
+
+and for the socket file it should be:
+
+<programlisting><![CDATA[
+srw-------   1 interchange users           0 Dec 30 11:41 etc/socket
+]]></programlisting>
+
+Once you have set up the software, you can easily install catalogs as
+<systemitem class='username'>root</systemitem> as long as your &glos-umask;
+is set to <literal>2</literal> or <literal>22</literal>.
+</para><para>
+
+(The following assumes you have made the &IC; software owned and run by the
+special user <systemitem class='username'>interch</systemitem> and that each
+user has a &IC; catalogs directory <filename>/home/user/catalogs</filename>).
+</para><para>
+
+The best way to set permissions on a multi-user system is to make all
+files group readable and writable (<literal>660</literal> or
+<literal>664</literal> &glos-mode;). If you have a
+system setup that places each user in their own group, make
+<systemitem class='username'>interch</systemitem> a member of each user's
+group and set ownership and permissions with:
+
+<programlisting>
+find <replaceable>/home/user/catalogs</replaceable> -print | xargs chown <replaceable>USER</replaceable>
+find <replaceable>/home/user/catalogs</replaceable> -print | xargs chgrp <replaceable>USER</replaceable>
+find <replaceable>/home/user/catalogs</replaceable> -print | xargs chmod g+rw
+</programlisting>
+
+For best results, set the user's default &glos-umask; to <literal>2</literal>,
+so that they will,
+by default, create files that have the proper permissions. If you have
+all users in the same group, the above is not secure. You should put
+<systemitem class="username">interch</systemitem> in a group of which no
+user is a member (perhaps
+<literal>interch</literal> would be a good choice ;-) and set all files
+owned by the group <literal>interch</literal> and all directories to &glos-mode;
+<literal>2770</literal>:
+</para>
+</answer>
 </qandaentry>
 
 </qandadiv>

@@ -1,0 +1,41 @@
+__NAME__ purpose
+specify number to divide the price by, to obtain price in units
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>number</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The number the price should be divided by, to get the price in base units
+(dollars or such).
+</para><para>
+For example, if you keep your prices specified in pennies (100th part of a
+dollar), set the directive to <literal>100</literal>.
+__END__
+
+
+__NAME__ notes
+This directive is overriden by eventual &conf-Locale; definition which,
+by design of &conf-Locale;, allows it to be set differently for different
+currencies.
+__END__
+
+
+__NAME__ see also
+Locale
+__END__
+
+
+__NAME__ example: Setting PriceDivide
+<programlisting>
+PriceDivide 100
+</programlisting>
+__END__
+
+
+

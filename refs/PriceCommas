@@ -1,0 +1,41 @@
+__NAME__ purpose
+show thousands separator in price pictures
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>1</arg>
+	<arg choice='plain'>0</arg>
+</group>
+__END__
+
+
+__NAME__ description
+If no commas are desired in price numbers (for the &tag-item-price; tag etc.),
+disable this directive. 
+</para><para>
+Despite the possibly misleading directive name, &IC; does not always insert
+a comma ("<literal>,</literal>") but a proper &glos-locale;-equivalent of it.
+__END__
+
+
+__NAME__ notes
+This directive is overriden by eventual
+&conf-Locale; <literal>price_picture</literal> definition.
+__END__
+
+
+__NAME__ see also
+Locale
+__END__
+
+
+__NAME__ example: Disabling PriceCommas
+<programlisting>
+PriceCommas 0
+</programlisting>
+__END__
+
+
+
