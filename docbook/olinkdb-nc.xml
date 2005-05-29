@@ -12,6 +12,7 @@
 	<!ENTITY vars SYSTEM "../tmp/vars-nc.db"> 
 	<!ENTITY tags SYSTEM "../tmp/tags-nc.db"> 
 	<!ENTITY confs SYSTEM "../tmp/confs-nc.db"> 
+	<!ENTITY filters SYSTEM "../tmp/filters-nc.db"> 
 ]>
 
 <targetset>
@@ -32,6 +33,7 @@
 			<!-- COMPOUNDS -->
 			<document targetdoc="tags" baseuri="tags.html"> &tags; </document>
 			<document targetdoc="confs" baseuri="confs.html"> &confs; </document>
+			<document targetdoc="filters" baseuri="filters.html"> &filters; </document>
 		</dir>
 	</sitemap>
 

@@ -10,8 +10,9 @@
 	<!ENTITY pragmas SYSTEM "../tmp/pragmas-c.db"> 
 	<!-- COMPOUNDS -->
 	<!ENTITY tags SYSTEM "../tmp/tags-c.db"> 
-	<!ENTITY confs SYSTEM "../tmp/confs-c.db"> 
 	<!ENTITY vars SYSTEM "../tmp/vars-c.db"> 
+	<!ENTITY confs SYSTEM "../tmp/confs-c.db"> 
+	<!ENTITY filters SYSTEM "../tmp/filters-c.db"> 
 ]>
 
 <targetset>
@@ -79,6 +80,12 @@
 			<dir name='confs'>
 				<document targetdoc="confs">
 				&confs;
+				</document>
+			</dir>
+
+			<dir name='filters'>
+				<document targetdoc="filters">
+				&filters;
 				</document>
 			</dir>
 
