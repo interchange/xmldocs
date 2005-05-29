@@ -1,0 +1,17 @@
+__NAME__ purpose
+replace null-characters (\0) with literal "\0"
+__END__
+
+
+__NAME__ description
+The filter makes null characters in input visible, by escaping and making
+them appear as usual "\0"s.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[filter show_null] Input text \0 with \0 null \0 characters[/filter]
+</programlisting>
+__END__
+

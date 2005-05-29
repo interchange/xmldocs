@@ -244,11 +244,11 @@ howtos/howtos.xml docbook/autohowtos.ent: $(shell find howtos/ -regex '.+[^(\.xm
 docbook/autorefs.ent: refxmls
 
 
-# Helper target, only used by docelic
+## Helper target, only used by docelic
 #colt-preview:
 #	tar jcf OUTPUT.tar.bz2 OUTPUT
 #	scp OUTPUT.tar.bz2 colt.projectgamma.com:web/ic/xmldocs/
-#
+
 ## Man pages
 #$(OUTPUT)/%.man: %.xml
 #	mkdir -p $(OUTPUT)/man

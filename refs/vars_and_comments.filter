@@ -1,0 +1,21 @@
+__NAME__ purpose
+interpolate variables and remove comments
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter interpolates variables and removes comments from input.
+__END__
+
+
+MISSING
+_NAME__ online: Filter example
+<programlisting>
+[filter vars_and_comments]Hello, World![/filter]
+</programlisting>
+_END__
+

@@ -1,0 +1,20 @@
+__NAME__ purpose
+enclose input in HTML &lt;small&gt; tag
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter encloses input data in &glos-HTML; &lt;small&gt; tag.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+You can see that "[filter small] This text is smaller than usual. [/filter]"
+</programlisting>
+__END__
+

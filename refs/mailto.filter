@@ -1,0 +1,22 @@
+__NAME__ purpose
+enclose input in HTML &lt;a href='mailto: ...'&gt; link
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter encloses input data in &glos-HTML;
+&lt;a href='mailto: ...'&gt;...&lt;/a&gt; tag.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+Mail [filter mailto]docelic@icdevgroup.org[/filter] with comments or
+suggestions.
+</programlisting>
+__END__
+

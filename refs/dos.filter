@@ -1,14 +1,14 @@
 __NAME__ purpose
-convert DOS or Mac ASCII text to Unix format
+convert UNIX or Max ASCII text to DOS format
 __END__
 
 __NAME__ see also
-unix,dos,mac
+unix,dos
 __END__
 
 
 __NAME__ description
-convert DOS or Mac ASCII newlines to Unix format.
+convert UNIX or Mac ASCII newlines to DOS format.
 </para><para>
 Unix uses LF (Line feed: \n) sequence to identify a newline.
 </para><para>
@@ -18,25 +18,9 @@ Mac uses CR (Carriage return: \r) sequence to identify a newline.
 __END__
 
 
-__NAME__ notes
-For more information on &PERL; Regular Expressions, pattern matching and
-character classes, see
-<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
-__END__
-
-
 __NAME__ online: Filter example
-<programlisting>
-[filter unix]Those pesky DOS characters, we can only be lucky that there are
-none hiding in this text ;-)[/filter]
-</programlisting>
-__END__
-
-
-
-__NAME__ online: Filter example
-<programlisting>
-[filter unix]<![CDATA[
+<programlisting><![CDATA[
+[filter dos]
   Input text with Unix newlines
   Input text with DOS newlines
   Input text with Max newlines
@@ -44,9 +28,9 @@ __NAME__ online: Filter example
 ]]></programlisting>
 __END__
 
+
 __NAME__ missing
 DOS and Mac line in example doesnt contain \r because of docbook problems
 __END__
-
 
 

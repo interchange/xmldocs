@@ -15,6 +15,12 @@ The directive specifies the global &glos-locale; for error messages.
 The content is usually loaded from a file.
 __END__
 
+__NAME__ notes
+If two locales are set "default" using &conf-Locale;, and no
+&conf-DefaultLocale; is specified, the behavior is undefined as the first
+"default" found will be set as the actual default.
+__END__
+
 __NAME__ example: Defining Locale
 Put the following in &gcf;:
 <programlisting>

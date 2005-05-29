@@ -1,0 +1,25 @@
+__NAME__ purpose
+transform any "NAME" to "Name"
+__END__
+
+__NAME__ see also
+name
+__END__
+
+
+__NAME__ description
+The filter transforms uppercase text, usually "LAST" (as in 'last name')
+input to "Last".
+</para><para>
+"lowercase" words are not replaced with "Lowercase", just ALL-CAPS words
+are "normalized".
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[filter name]OCELIC, Davor[/filter]
+</programlisting>
+__END__
+
+

@@ -24,7 +24,7 @@ The &conf-ChildLife; directive times out a page server after a period
 of time.
 </para><para>
 If &conf-ChildLife; is not set, the default, the server will act just
-like it does now, stuck in that internal loop forever until
+like it did before, stuck in that internal loop forever until
 <command>kill -9</command> happens.
 </para><para>
 All the directive does is set the start_time of the server, and then when

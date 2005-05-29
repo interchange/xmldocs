@@ -1,0 +1,21 @@
+__NAME__ purpose
+enclose input in HTML &lt;pre&gt; (preformatted) tag
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter encloses input data in &glos-HTML; &lt;pre&gt;
+(<emphasis role='bold'>preformatted</emphasis>) tag.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+"[filter pre]Preformatted text[/filter]"
+</programlisting>
+__END__
+

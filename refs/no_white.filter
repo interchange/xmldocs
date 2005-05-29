@@ -1,0 +1,21 @@
+__NAME__ purpose
+eliminate all whitespace in input
+__END__
+
+
+__NAME__ see also
+strip
+__END__
+
+
+__NAME__ description
+The filter eliminates all whitespace appearing in input.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+"[filter strip]  X  X  [/filter]"
+</programlisting>
+__END__
+

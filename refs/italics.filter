@@ -1,0 +1,23 @@
+__NAME__ purpose
+enclose input in HTML &lt;i&gt; (italic) tag
+__END__
+
+
+__NAME__ see also
+bold,pre,strikeout,tt,small
+__END__
+
+
+__NAME__ description
+The filter encloses input data in &glos-HTML; &lt;i&gt;
+(<emphasis>italics</emphasis>) tag.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+"[filter italics]To Italicly Go Where No One Has Gone Before![/filter]"
+  -- Modified Star Trek ;-)
+</programlisting>
+__END__
+

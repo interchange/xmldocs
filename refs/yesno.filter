@@ -1,0 +1,32 @@
+__NAME__ purpose
+return Yes for non-empty input, No otherwise
+__END__
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+Return <literal>Yes</literal> (or it's &glos-locale;-specific variant) 
+on non-empty input (whitespace is considered non-empty too).
+Return <literal>No</literal> 
+(or it's &glos-locale;-specific variant) otherwise.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+OK (yes)? [filter yesno]Good input[/filter] [br]
+OK (no)? [filter yesno][/filter]            [br]
+OK (no)? [filter yesno /]
+</programlisting>
+__END__
+
+__NAME__ online: Reaching "yesno" decision after any whitespace is removed first
+<programlisting>
+OK (yes)? [filter yesno]Good input[/filter]  [br]
+OK (yes)? [filter yesno]   [/filter]         [br]
+OK (no)? [filter no_white yesno]   [/filter] [br]
+</programlisting>
+__END__
+

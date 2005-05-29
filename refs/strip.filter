@@ -1,0 +1,21 @@
+__NAME__ purpose
+trim leading and trailing whitespace
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter eliminates whitespace appearing at the beginning or end of
+input.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+"[filter strip]  XX  [/filter]"
+</programlisting>
+__END__
+

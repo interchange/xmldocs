@@ -1,0 +1,24 @@
+__NAME__ purpose
+calculate MD5 sum of input
+__END__
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter outputs MD5 sum for the input text.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[filter md5][/filter]                  [br]
+[filter md5]One[/filter]               [br]
+[filter md5]Two[/filter]               [br]
+[filter md5]MyPassword[/filter]        [br]
+[filter md5]Very long string[/filter]  [br]
+</programlisting>
+__END__
+
+

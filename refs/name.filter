@@ -1,0 +1,21 @@
+__NAME__ purpose
+transform "Last, First" name format to "First Last"
+__END__
+
+__NAME__ see also
+namecase
+__END__
+
+
+__NAME__ description
+The filter transforms "Last, First" input to "First Last".
+Most of the time, of course, this is used with people's names.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[filter name]Ocelic, Davor[/filter]
+</programlisting>
+__END__
+

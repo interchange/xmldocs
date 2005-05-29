@@ -1,0 +1,21 @@
+__NAME__ purpose
+enclose input in HTML &lt;strike&gt; tag
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter encloses input data in &glos-HTML; &lt;strike&gt;
+(<emphasis role='bold'>strikeout</emphasis>) tag.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+"[filter strikeout] STRIKEOUT [/filter]"
+</programlisting>
+__END__
+
