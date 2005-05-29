@@ -1,0 +1,28 @@
+__NAME__ purpose
+make sure the input is ready for use as a filename
+__END__
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter makes sure (possibly by intervening) that the input string is
+ready and safe to be used as a filename.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+
+
+__NAME__ online: Filter example
+Here's a hypothetical download filename from the <ulink url="http://www.archive.org/details/prelinger">Prelinger Collection</ulink> at <ulink url="http://www.archive.org/">archive.org</ulink>.
+<programlisting>
+[filter filesafe]/tmp/uploads/new_world_through_chemistry/new_world_through_chemistry_edit.mp4[/filter]
+</programlisting>
+__END__
+

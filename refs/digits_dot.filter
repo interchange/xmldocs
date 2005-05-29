@@ -1,0 +1,29 @@
+__NAME__ purpose
+eliminate non-digit characters, with the exception of a dot
+__END__
+
+__NAME__ see also
+digits
+__END__
+
+
+__NAME__ description
+The filter eliminates any non-digit characters, except a dot. (That is,
+anything that's not a dot ("<literal>.</literal>") or
+in a <literal>0-9</literal> range).
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[filter digits_dot]Only the date should come out, and it is 03.06.1982[/filter]
+</programlisting>
+__END__
+

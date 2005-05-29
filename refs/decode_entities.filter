@@ -1,0 +1,29 @@
+__NAME__ purpose
+decode encoded HTML characters back to their normal representation
+__END__
+
+__NAME__ description
+The filter decodes encoded &glos-HTML; characters back to their normal 
+representation.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+</para><para>
+The filter is most commonly used as <literal>pre_filter</literal> in 
+<database>mv_metadata</database> entries, for fields that contain 
+characters from a character set other than iso8859-1.
+</para><para>
+For example, &amp;amp; is replaced with &amp;, &amp;lt; with &lt; etc.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[filter decode_entities]One &amp; Two &amp; Three[filter]
+</programlisting>
+__END__
+

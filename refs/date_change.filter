@@ -1,0 +1,64 @@
+__NAME__ purpose
+convert MMDDYYYY date (possibly with specified time) to YYYYMMDDhhmm
+__END__
+
+
+__NAME__ see also
+date2time
+__END__
+
+
+__NAME__ description
+The filter replaces date specification in form of
+</para><para>
+<literal><replaceable>MM</replaceable>[/-]<replaceable>DD</replaceable>[/-]<replaceable>YY(YY)?</replaceable>(:<replaceable>hh</replaceable>(<replaceable>mm</replaceable>)?)?</literal>
+</para><para>
+or
+</para><para>
+<literal><replaceable>YYYY</replaceable>[/-]<replaceable>MM</replaceable>[/-]<replaceable>DD</replaceable>(:<replaceable>hh</replaceable>(<replaceable>mm</replaceable>)?)?</literal>
+</para><para>
+to <literal><replaceable>YYYYMMDD</replaceable>((<replaceable>hh</replaceable>)?(<replaceable>mm</replaceable>)?)?</literal>.
+</para><para>
+If the year specification contains 2 digits only and is less than 
+<literal>50</literal>, as is say, <literal>02</literal>, 
+then it is treated as an offset from year <literal>2000</literal>, and not
+<literal>1900</literal>. In other words, <literal>05</literal> is understood
+as year <literal>2005</literal>, <literal>80</literal> is understood as year
+<literal>1980</literal>.
+</para><para>
+Time specification unspecified in input get omitted from output as well.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+</para><para>
+The filter is most commonly used with date selection fields.
+</para><para>
+If only two out of four time digits are specified, then due to the operation
+of the <function>sprintf()</function> function, they tend to indicate minutes
+and not hours!
+</para><para>
+When the input data starts with year specification, the year must have
+4-digit format (i.e. <literal>2005</literal> and
+<emphasis role='bold'>not</emphasis> just <literal>05</literal>)!
+__END__
+
+__NAME__ online: Using date_change
+<programlisting><![CDATA[
+[filter date_change]2005-01-01[/filter]    <br/>
+[filter date_change]2005/01/01[/filter]    <br/>
+<br/>
+[filter date_change]2005-01-01:10[/filter]    <br/>
+[filter date_change]2005/05/29:1536[/filter]    <br/>
+<br/>
+[filter date_change]05-29-2005:1536[/filter]    <br/>
+[filter date_change]05-29-05:1536[/filter]    <br/>
+]]></programlisting>
+__END__
+
+__NAME__ missing
+Example from real date widget
+__END__

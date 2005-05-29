@@ -1,0 +1,28 @@
+__NAME__ purpose
+make sure the input is ready for use as an Interchange page
+__END__
+
+__NAME__ see also
+filesafe
+__END__
+
+
+__NAME__ description
+The filter makes sure (possibly by intervening) that the input string is
+ready and safe to be used as an &IC; page name.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[filter pagefile]report[/filter]
+</programlisting>
+__END__
+

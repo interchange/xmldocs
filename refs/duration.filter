@@ -1,0 +1,36 @@
+__NAME__ purpose
+calculate end date from given start date and duration
+__END__
+
+
+__NAME__ see also
+date2time,date_change
+__END__
+
+
+__NAME__ description
+The filter takes a start date and a duration as inputs, and outputs
+the end date.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+</para><para>
+The <function>timelocal()</function> function used in the filter comes from the
+<classname>Time::Local</classname> &PERL; module.
+__END__
+
+__NAME__ online: Obtaining an end date string
+The following example sets start date to Feb 12, 2005 (at 8:00 am),
+and the duration to 12 hours. Filter output should return again, Feb 12, 2005,
+but with the time set to 8:00 pm. So exactly, it should return 
+<literal>200502122000</literal>.
+<programlisting>
+[cgi name=start_date set=200502120800 hide=1]
+[cgi name=length     set="12 hours"   hide=1]
+[filter op=duration.start_date.length /]
+</programlisting>
+__END__

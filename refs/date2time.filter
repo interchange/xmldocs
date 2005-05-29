@@ -1,0 +1,49 @@
+__NAME__ purpose
+convert date (possibly with specified time) to number of seconds since Epoch
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter replaces date specification in form of
+</para><para>
+<literal><replaceable>MM</replaceable>[/-]<replaceable>DD</replaceable>[/-]<replaceable>YY(YY)?</replaceable>(:<replaceable>hh</replaceable>(<replaceable>mm</replaceable>)?)?</literal>
+</para><para>
+to a number of seconds since &glos-epoch;.
+</para><para>
+If the year specification contains 2 digits only and is less than 
+<literal>50</literal>, as is say, <literal>02</literal>, 
+then it is treated as an offset from year <literal>2000</literal>, and not
+<literal>1900</literal>. In other words, <literal>05</literal> is understood
+as year <literal>2005</literal>, <literal>80</literal> is understood as
+<literal>1980</literal>.
+</para><para>
+Unspecified month or day default to <literal>1</literal>, unspecified
+hours or minutes default to <literal>0</literal>.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+</para><para>
+The <function>timelocal()</function> function used in the filter comes from the
+<classname>Time::Local</classname> &PERL; module.
+__END__
+
+__NAME__ online: Converting dates and times to seconds since Epoch
+<programlisting><![CDATA[
+[filter date2time]01/01/2005[/filter]    <br/>
+[filter date2time]01/01/05[/filter]      <br/>
+<br/>
+[filter date2time]01-01-2005[/filter]    <br/>
+[filter date2time]01-01-05[/filter]      <br/>
+<br/>
+[filter date2time]01-01-2005:10[/filter] <br/>
+[filter date2time]01-01-05:1045[/filter] <br/>
+]]></programlisting>
+__END__

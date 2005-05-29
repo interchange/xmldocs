@@ -18,7 +18,6 @@ __NAME__ online: Filter example
 <programlisting>
 OK (yes)? [filter yesno]Good input[/filter] [br]
 OK (no)? [filter yesno][/filter]            [br]
-OK (no)? [filter yesno /]
 </programlisting>
 __END__
 
@@ -26,7 +25,7 @@ __NAME__ online: Reaching "yesno" decision after any whitespace is removed first
 <programlisting>
 OK (yes)? [filter yesno]Good input[/filter]  [br]
 OK (yes)? [filter yesno]   [/filter]         [br]
-OK (no)? [filter no_white yesno]   [/filter] [br]
+OK (no)? [filter strip yesno]   [/filter] [br]
 </programlisting>
 __END__
 

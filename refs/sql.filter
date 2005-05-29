@@ -1,0 +1,26 @@
+__NAME__ purpose
+replace quoting with SQL quoting
+__END__
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter replaces single quotes (<literal>'</literal>) with 
+"double" single quotes (<literal>''</literal>).
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+
+
+_NAME__ online: Filter example
+<programlisting>
+</programlisting>
+_END__
+

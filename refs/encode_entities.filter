@@ -1,0 +1,28 @@
+__NAME__ purpose
+encode non-standard HTML characters
+__END__
+
+__NAME__ description
+The filter encodes non-standard &glos-HTML; characters to their encoded 
+representation.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+</para><para>
+The filter is most commonly used to make untrusted &glos-CGI; input variables
+harmless to the &IC; environment.
+</para><para>
+For example, &amp; is replaced with &amp;amp;, &lt; with &amp;lt; etc.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting><![CDATA[
+[filter encode_entities]One & Two & Three[filter]
+]]></programlisting>
+__END__
+

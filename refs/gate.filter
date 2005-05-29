@@ -1,0 +1,27 @@
+__NAME__ purpose
+return input verbatim if the specified Scratch variable exists, empty string otherwise
+__END__
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter allows "conditional output" of the input string, based on the
+value of a &glos-scratch; variable.
+</para><para>
+In other words, received input is passed through verbatim, if the specified
+&glos-scratch; variable holds a &glos-true; value. Empty string is returned
+otherwise.
+__END__
+
+
+
+__NAME__ online: Filter example
+<programlisting>
+[set tide]1[/set]
+
+[filter gate.tide]The Gate is open.[/filter]
+</programlisting>
+__END__
+
