@@ -49,9 +49,14 @@ __END__
 
 
 __NAME__ example: Defining a variable
-Put the following in &ccf;:
 <programlisting>
 Variable EMAIL root@&def-domain;
+</programlisting>
+__END__
+
+__NAME__ example: Defining a variable
+<programlisting>
+Variable DOCUMENT_ROOT /usr/local/etc/httpd/htdocs
 </programlisting>
 __END__
 

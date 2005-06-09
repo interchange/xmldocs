@@ -1,7 +1,5 @@
-UNVERIFIED
-
 __NAME__ purpose
-modify or define custom Interchange form actions
+modify or define custom Interchange actions
 __END__
 
 
@@ -19,11 +17,16 @@ __END__
 
 
 __NAME__ description
-The directive allows the definition of &IC; form actions, and its content is 
-usually with a &PERL; subroutine.
+The directive allows the definition of Interchange &glos-ActionMap;s, whose
+contents are usually &PERL; subroutines.
 </para><para>
-For an introduction to Action Maps, see &glos-form-action;s glossary
-entry.
+The leading part of the incoming page path is taken and checked if it represents
+a valid action. If it does, the action name itself will be stripped from the
+path, and the appropriate action will be called with the rest of the argument.
+__END__
+
+__NAME__ notes
+For an introduction to Action Maps, see &glos-ActionMap; glossary entry.
 __END__
 
 

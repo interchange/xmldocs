@@ -682,7 +682,7 @@ for my $group ( keys %symbols ) {
 
   <partintro>
   <para>
-	<phrase condition='online'>[restrict log=none]</phrase>
+	<phrase condition='online'>[restrict log='none']</phrase>
   $preamble{$group}
   </para>
   </partintro>
@@ -997,7 +997,7 @@ sub update_field {
 <phrase condition='online'>
 [/restrict]
 $code
-[restrict]
+[restrict log='none']
 </phrase>
 </textobject>
 </programlisting>

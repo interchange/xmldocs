@@ -15,9 +15,11 @@ Specify the <emphasis>usertrack</emphasis> log file location.
 </para><para>
 User &glos-tracking; can be used in back office administration to summarize
 traffic by affiliates.
-</para><para>
-The Interchange daemon must have the permission to create and write to the
-specified file.
+__END__
+
+__NAME__ notes
+The &IC; daemon must have the permission to create and write to the
+specified file, of course.
 __END__
 
 __NAME__ example: Setting TrackFile

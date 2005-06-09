@@ -1,0 +1,64 @@
+__NAME__ purpose
+define global Perl functions for use within Interchange
+__END__
+
+__NAME__ see also
+CodeDef,Sub,AllowGlobal
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>
+		<literal>Sub</literal>
+		<replaceable>perl_code</replaceable>
+	</arg>
+</group>
+__END__
+
+__NAME__ description
+Define a global subroutine for use within &tag-perl;, &tag-mvasp;, or
+embedded &PERL; languages.
+</para><para>
+The use of "here document" syntax in &IC; makes subroutine definitions
+visually convenient.
+__END__
+
+__NAME__ example: Defining a global subroutine
+<programlisting><![CDATA[
+GlobalSub <<EOF
+sub count_orders {
+  my $counter = new File::CounterFile "/tmp/count_orders", '1';
+  my $number = $counter->inc();
+  return "There have been $number orders placed.\n";
+}
+EOF
+]]></programlisting>
+
+The above code would be called from an &IC; page in the following way:
+<programlisting><![CDATA[
+Items, sorted by quantity:
+[perl tables=products subs='sort_cart_by_quantity']
+  my $cart = $Carts->{main};
+  return sort_cart_by_quantity($cart);
+[/perl]
+]]></programlisting>
+__END__
+
+
+__NAME__ notes
+As with &PERL; "here documents," the "<literal>EOF</literal>" (or arbitrarily
+named end marker) must be the <emphasis>only</emphasis> thing on the line,
+without leading or trailing white space. Do not even append a semicolon to the
+marker (as you would in &PERL;).
+</para><para>
+Global subroutines are not subject to <classname>Safe</classname> security 
+checks. Therefore, &glos-scratch; or catalog subroutines (&conf-Sub;s) are
+preferred in most cases.
+__END__
+
+
+__NAME__ missing
+Example isn't working? Sub gets called, but doesnt sort!
+PORT_OLD
+__END__
+

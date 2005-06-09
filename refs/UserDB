@@ -1,0 +1,76 @@
+__NAME__ purpose
+adjust default behavior of Interchange user database functions
+__END__
+
+
+__NAME__ see also
+Database,
+__END__
+
+
+__NAME__ synopsis
+<!--
+	<arg choice='plain'><replaceable>NAME</replaceable></arg>
+	<arg choice='plain'><replaceable>value</replaceable></arg>
+	-->
+__END__
+
+
+__NAME__ description
+The directive sets parameters to adjust the behavior of Interchange's
+user database functions.
+__END__
+
+
+__NAME__ notes
+See &glos-UserDB; glossary entry for more information.
+__END__
+
+
+
+!block table
+Parameter|Default|Explanation
+acl|acl|Set field for simple access control storage
+addr_field|address_book|Set field name for address book
+assign_username|0|Tell interchange to automatically assign username
+bill_field|accounts|Set field name for accounts
+cart_field|carts|Set field name for cart storage
+clear_coookie||Comma-separated list of cookies to clear on explicit logout
+clear_session||Clear user session completely on logout
+counter||Counter file for assign_username function
+crypt|1|Encrypt (1) or not encrypt (0) passwords
+database|userdb|Sets user database table
+db_acl|db_acl|Set field for database access control storage
+expire_field|expiration|Set field for expiration date
+file_acl|file_acl|Set field for file access control storage
+force_lower|0|Force possibly upper-case database fields to lower case session variable names
+ignore_case|0|Ignore case in usernames/passwords
+indirect_login||Log in field if different than real username
+logfile|error.log|File to log authentications/errors
+md5|0|Use MD5 for encryption algorithm instead of crypt
+no_get|0|Don't get values from database on login
+no_login|0|Log people in to accounts even if they are already logged in
+outboard_key_col||Set field providing key for outboard tables
+outboard||Set fields that live in another table
+pass_field|password|Set field name for password
+passminlen|2|Minimum length for password
+pref_field|preferences|Set field name for preferences
+scratch||Fields to set in user Scratch space (instead of Values)
+sql_counter||SQL counter spec (sequence or AUTO_INCREMENT) for assign_username function
+super_field|super|Field to determine superuser status if admin profile
+time_field|time|Set field for storing last login time
+unix_time|0|Set if unix (seconds since 1970) time to go in log files
+userminlen|2|Minimum length for username
+username_mask||Regular expression usernames must not match
+!endblock
+
+These are set in a C<catalog.cfg> file with something like:
+
+	UserDB  default  crypt   0
+	UserDB  admin    crypt   1
+	UserDB  admin    md5     1
+
+where C<default> or C<admin> is the name of the profile to set. These can
+be overriden if passed in the tag:
+
+>   [userdb userminlen=6 new-account=1]

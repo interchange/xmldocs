@@ -1,0 +1,35 @@
+__NAME__ purpose
+define an Interchange tag
+__END__
+
+
+__NAME__ see also
+CodeDef
+__END__
+
+
+__NAME__ synopsis
+<!--
+	<arg choice='plain'><replaceable>NAME</replaceable></arg>
+	<arg choice='plain'><replaceable>value</replaceable></arg>
+	-->
+__END__
+
+
+_NAME__ description
+_END__
+
+
+__NAME__ notes
+Catalog-based usertag will run under <classname>Safe</classname> restrictions
+and will only be accessible from the corresponding catalog.
+For many purposes, a global &conf-UserTag;s are better. They're not restricted
+by <classname>Safe</classname> and are available to all catalogs running on
+the server.
+__END__
+
+
+_NAME__ example: Defining a simple tag
+_END__
+
+

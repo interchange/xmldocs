@@ -18,3 +18,8 @@ My commified value, trimed to 2 decimal places is:
 </programlisting>
 __END__
 
+
+__NAME__ missing
+Why 12345.6789 with [filter commify.2] becomes 0.67 ?
+__END__
+

@@ -121,6 +121,7 @@ $T/%-c.db: %.xml
 
 #############################################################
 # STANDARD TARGETS || two-pass processing method
+#OUTPUT/howtos.html: DEPTH = "--stringparam toc.max.depth 1"
 OUTPUT/%.html: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent skel
 	echo "C     $@"
 	$(PSR) $(PSR_FLAGS)                                                \
@@ -145,15 +146,6 @@ OUTPUT/%: %.xml skel
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
 	  -o $@/ docbook/html-chunks.xsl $T/$*-c.profiled
-
-
-
-### ALPHA SUPPORT FOR PDF
-#
-#   --stringparam  passivetex.extensions  1
-#       --stringparam  rootid  "using" 
-#
-
 #$O/%.pdf: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent skel
 #	echo "C     $@"
 #	$(PSR) $(PSR_FLAGS)                                                \
@@ -172,7 +164,15 @@ OUTPUT/%: %.xml skel
 #	  --stringparam appendix.autolabel 0                               \
 #	  --stringparam section.autolabel 0                                \
 #	  -o $T/$*.fo docbook/fo.xsl $T/$*-nc.profiled
-#	fop.sh  -fo  myfile.fo  -pdf  myfile.pdf
+#	#fop.sh  -fo  myfile.fo  -pdf  myfile.pdf
+#
+#
+#   --stringparam  passivetex.extensions  1
+#       --stringparam  rootid  "using" 
+#
+
+
+
 
 
 

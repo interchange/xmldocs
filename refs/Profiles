@@ -1,0 +1,37 @@
+__NAME__ purpose
+specify files containing OrderProfile and SearchProfile definitions
+__END__
+
+
+__NAME__ missing
+Add self-contained profile example
+PORT_OLD
+__END__
+
+
+__NAME__ see also
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>filename</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify filenames that contain &conf-OrderProfile; and &conf-SearchProfile; 
+definitions.
+__END__
+
+
+__NAME__ notes
+For the complete discussion, please see the &glos-profile; glossary entry.
+__END__
+
+__NAME__ example: Defining Profiles
+<programlisting>
+Profiles etc/profiles.common etc/profiles.login
+</programlisting>
+__END__
+

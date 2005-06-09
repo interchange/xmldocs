@@ -1,0 +1,42 @@
+__NAME__ purpose
+register subcatalog with the Interchange server
+__END__
+
+__NAME__ see also
+FullUrl,Mall,Catalog
+__END__
+
+__NAME__ synopsis
+	<arg choice='plain'><replaceable>subcatalog_name</replaceable></arg>
+	<arg choice='plain'><replaceable>base_catalog_name</replaceable></arg>
+	<arg choice='plain'><replaceable>&glos-CATROOT;</replaceable></arg>
+	<arg choice='plain' rep='repeat'><replaceable>&glos-link-program;</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive allows definition of "subcatalogs" &mdash; &glos-catalog;s that
+share most of the characteristics of
+another, "base" catalog. Only the directives that are changed from the
+base catalog are added.
+</para><para>
+&IC;'s subcatalogs feature isn't used much, but primary reasons for its use
+would be memory savings, or some kind of chained-configuration catalogs.
+__END__
+
+__NAME__ notes
+For a complete discussion, see &glos-catalog; glossary entry and the
+&conf-Catalog; config directive.
+__END__
+
+__NAME__ example: Registering a sub catalog
+<programlisting>
+Catalog simple /home/catalogs/simple /cgi-bin/ic/simple
+Catalog subsimple simple /home/catalogs/simple /cgi-bin/ic/subsimple
+</programlisting>
+__END__
+
+__NAME__ missing
+PORT_OLD
+some concrete example, tested and working standalone
+__END__

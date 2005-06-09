@@ -1,0 +1,41 @@
+__NAME__ purpose
+generic subroutine mapper
+__END__
+
+__NAME__ see also
+CodeDef,UserTag,Filter,ActionMap,FormAction,GlobalSub,ItemAction,CoreTag
+__END__
+
+_NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>
+		<literal>Sub</literal>
+		<replaceable>perl_code</replaceable>
+	</arg>
+</group>
+_END__
+
+__NAME__ description
+A generic &PERL; subroutine mapper which allows mapping of subroutines to
+&glos-ActionMap;s,
+CoreTags, &conf-UserTag;s,
+&glos-Filter;s,
+&glos-form-action;s,
+&conf-GlobalSub;s,
+ItemActions,
+LocaleChanges and 
+OrderChecks.
+__END__
+
+_NAME__ example: Defining a subroutine
+_END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ missing
+PORT_OLD
+__END__
+

@@ -1,0 +1,78 @@
+__NAME__ purpose
+define Perl functions for use within a catalog
+__END__
+
+__NAME__ see also
+CodeDef,UserTag,AllowGlobal
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>
+		<replaceable>perl_code</replaceable>
+	</arg>
+</group>
+__END__
+
+__NAME__ description
+Define a catalog subroutine for use within &tag-perl;, &tag-mvasp;, or
+embedded &PERL; languages.
+</para><para>
+The use of "here document" syntax in &IC; makes subroutine definitions
+visually convenient.
+__END__
+
+__NAME__ example: Defining a subroutine
+<programlisting><![CDATA[
+Sub <<EOF
+sub sort_cart_by_quantity {
+  my($items) = @_;
+  $items = $Items if ! $items;
+
+  my $out = '<table border="1">';
+
+  @$items = sort { $a->{quantity} <=> $b->{quantity} } @$items;
+  foreach $item (@$items) {
+    my $code = $item->{code};
+    $out .= '<tr><td>';
+    $out .= $code;
+    $out .= '</td><td>';
+    $out .= $Tag->data('products', 'name', $code);
+    $out .= '</td><td>';
+    $out .= $Tag->data('products', 'price', $code);
+    $out .= '</td></tr>';
+  }
+  $out .= '&lt/table>';
+  return $out;
+}
+EOF
+]]></programlisting>
+
+The above code would be called from an &IC; page in the following way:
+<programlisting><![CDATA[
+Items, sorted by quantity:
+[perl tables=products subs='sort_cart_by_quantity']
+  my $cart = $Carts->{main};
+  return sort_cart_by_quantity($cart);
+[/perl]
+]]></programlisting>
+__END__
+
+
+__NAME__ notes
+As with &PERL; "here documents," the "<literal>EOF</literal>" (or arbitrarily
+named end marker) must be the <emphasis>only</emphasis> thing on the line,
+without leading or trailing white space. Do not even append a semicolon to the
+marker (as you would in &PERL;).
+</para><para>
+Catalog subroutines may not perform unsafe operations. The
+<classname>Safe</classname>
+module enforces this unless global operations are allowed for the
+catalog. See &glos-safe; glossary entry for more information.
+__END__
+
+
+__NAME__ missing
+Example isn't working? Sub gets called, but doesnt sort!
+__END__
+

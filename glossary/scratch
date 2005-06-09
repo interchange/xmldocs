@@ -21,3 +21,7 @@ The following tags manipulate the scratch space:
 <para>
 Scratch variables are also used in form processing. See the 
 <tag>button</tag> tag for examples.
+
+
+<!--
+howto define/call scratch sub -->

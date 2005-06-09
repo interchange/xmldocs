@@ -14,26 +14,28 @@ __END__
 
 
 __NAME__ description
-The directive registers a catalog that will run on the corresponding &IC;
+The directive registers a &glos-catalog; that will run on the corresponding &IC;
 installation.
 </para><para>
 The directive expects three or more arguments.
 </para><para>
-First expected is the name of the catalog. It will be referred to by the specified
+First expected is the name of the &glos-catalog;. It will be referred to by the specified
 name in error, warning, and informational messages. It must contain only
 alphanumeric characters, hyphens, and underscores. It is highly recommended that
 it is also all lowercase.
 </para><para>
 Second argument specifies the local filesystem base directory of the catalog.
 If the directory does not exist, the required &ccf; is not there, or &IC;
-detects any other problem, catalog configuration will be skipped and the catalog
+detects any other problem, catalog configuration will be skipped and the
+&glos-catalog;
 won't be activated.
 </para><para>
 Third argument is the so called <literal>SCRIPT_NAME</literal> of the 
 &glos-link-program;. It is a webserver path by which the catalog can be 
 accessed. It can be followed by different
 <emphasis role='bold'>aliases</emphasis>, all allowing you to access
-the same catalog. For example, this is useful when calling an SSL server or a
+the same &glos-catalog;. For example, this is useful when calling an SSL
+server or a
 members-only alias that requires a Basic HTTP authorization using the 
 username/password pair. All subsequently generated links would be called using
 the aliased URL.
@@ -50,7 +52,8 @@ __END__
 __NAME__ notes
 &conf-Catalog; is one of the basic Interchange &glos-configuration; directives.
 </para><para>
-<command>makecat</command>, the catalog creation helper script, automatically inserts
+<command>makecat</command>, the &glos-catalog; creation helper script,
+automatically inserts
 the &conf-Catalog; line in the &gcf; file as part of the standard procedure.
 </para><para>
 If the &ccf; file, expected in the catalog base directory, is not found, or is

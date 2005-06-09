@@ -1,0 +1,77 @@
+__NAME__ purpose
+designate certain IP addresses or hostnames as trusted HTTP proxies
+__END__
+
+
+__NAME__ see also
+WideOpen,Mall,IpHead,IpQuad
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+  <arg choice='plain' rep='repeat'><replaceable>hostname</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive 
+allows &IC; administrator to designate certain IP addresses or hostnames
+as trusted HTTP proxies, whose claims (via the
+<envar>HTTP_X_FORWARDED_FOR</envar>
+environment variable set by the web server) about the original requesting
+host will be assumed truthful and accurate.
+</para><para>
+For example, if you are using a front-end proxy for &IC;, all requests will
+appear to come from the proxy address (say, <literal>127.0.0.1</literal> if
+on the same machine).  In turn, all clients will appear as having the same
+source IP address (much like if you enabled &conf-WideOpen;). Under such
+circumstances, user session hijacking becomes trivial enough that it can even
+happen by accident (if, say, someone copies an URL that includes his/her
+session cookie and gives it to others to visit &mdash; they all will end up
+having the same user info and shopping cart!).
+</para><para>
+Having said the above, &conf-TrustProxy; takes a comma-separated list of
+IP addresses and/or hostnames (globbing possible - see examples) that are
+trusted proxies and whose value of <envar>HTTP_X_FORWARDED_FOR</envar>
+should be used as request source instead of the actual IP directly.
+__END__
+
+
+__NAME__ notes
+"Globs" are <literal>*</literal> and <literal>?</literal>. The
+<literal>*</literal> stands for any number of characters (including 0), while
+<literal>?</literal> stands for 1 character exactly.
+</para><para>
+The directive could, in general, be also used with external, untrusted HTTP
+proxies (which you can only hope aren't lying) by using a <literal>*</literal>
+glob (see examples).
+</para><para>
+Note that the environment variables are not modified in any way; only
+&IC;'s idea of the remote host is altered, as you see with
+<code>[data session host]</code>.
+
+__END__
+
+__NAME__ missing
+PORT_OLD
+__END__
+
+__NAME__ example: Defining TrustProxy
+<programlisting>
+TrustProxy 127.0.0.1 192.168.8.4
+</programlisting>
+__END__
+
+__NAME__ example: Defining TrustProxy with "glob" values
+<programlisting>
+TrustProxy 127.0.0.? 10.0.* 192.168.?.1
+</programlisting>
+__END__
+
+__NAME__ example: Trusting all external proxies (a bad idea generally)
+<programlisting>
+TrustProxy *
+</programlisting>
+__END__
+
