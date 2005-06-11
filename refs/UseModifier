@@ -38,3 +38,24 @@ UseModifier size,color
 </programlisting>
 __END__
 
+
+
+
+
+
+
+
+
+LI1: UseModifier
+
+.Changes the fields from the set shopping cart options.
+
+!block example; listitem=2
+    # Default at startup is 1 if not set
+    # Franc is strong these days!
+    UseModifier format
+    Locale fr_FR  UseModifier formats
+!endblock
+
+.If a previous setting was made for an item based on another locale, it will be maintained.
+

@@ -15,9 +15,19 @@ Specify extension to append to the filename when looking for the source
 file in the <filename class='directory'>pages/</filename> directory.
 __END__
 
+
+__NAME__ notes
+The way &IC; looks for pages is &glos-locale;-sensitive. Besides the default
+HTML suffix which is set using this &conf-HTMLsuffix; directive, you can 
+set locale-dependent suffixes using &conf-Locale;.
+__END__
+
 __NAME__ example: Setting HTMLsuffix
 <programlisting>
 HTMLsuffix .htm
 </programlisting>
 __END__
 
+__NAME__ see also
+Locale
+__END__

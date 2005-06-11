@@ -190,6 +190,9 @@ distclean: clean clean-cache
 	-rm -rf docbook/auto{refs,glossary,howtos}.ent
 look-clean:
 	-mv $T $T.temporary 2>/dev/null
+commit:
+	make look-clean
+	cvs commit
 
 
 

@@ -1,0 +1,10 @@
+
+LI1: PriceAdjustment
+
+.Changes the fields set by C<UseModifier> that will be used to adjust pricing for an automatic conversion factor based on locale. For example:
+
+!block example; listitem=2
+    # Default at startup
+    PriceAdjustment  format
+    Locale fr_FR  PriceAdjustment  formats
+!endblock

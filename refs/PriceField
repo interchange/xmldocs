@@ -24,7 +24,7 @@ __NAME__ notes
 The existence of the field is not exactly crucial, but it's important
 for say, &glos-flypage;s.
 </para><para>
-The field can also be set according to a &conf-Locale;.
+It's also useful to set the directive based on current &glos-locale;.
 __END__
 
 __NAME__ example: Redefining PriceField
@@ -34,3 +34,25 @@ PriceField cijena
 "Cijena", for example, is a croatian equivalent of "price".
 __END__
 
+__NAME__ example: Setting PriceField depending on current locale
+<programlisting>
+# Establish the default at startup
+PriceField    price
+
+# Establish locale-specific price field
+Locale fr_FR  PriceField  prix
+</programlisting>
+Just by the way, if &conf-PriceBreaks; is enabled, the
+<database class='field'>prix</database> field from the
+<database>pricing</database> database will be used to develop quantity-based
+pricing.
+</para><para>
+To fully understand the example and implicitly presented &IC; features, make
+sure you're familiar with &glos-internationalization; and &glos-locale;
+glossary
+entries.
+__END__
+
+__NAME__ see also
+PriceDivide,PriceCommas
+__END__

@@ -19,7 +19,7 @@ __NAME__ description
 A generic &PERL; subroutine mapper which allows mapping of subroutines to
 &glos-ActionMap;s,
 CoreTags, &conf-UserTag;s,
-&glos-Filter;s,
+&glos-filter;s,
 &glos-form-action;s,
 &conf-GlobalSub;s,
 ItemActions,

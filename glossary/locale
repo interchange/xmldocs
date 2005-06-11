@@ -1,0 +1,157 @@
+See &glos-internationalization; (I18N) glossary entry for a general
+introduction.
+</para><para>
+Localization (or "I10N") is a process of making an I18N-enabled application
+to use specific locale definition (messages, currency format, etc.).
+</para><para>
+The important thing to have in mind is that &IC; allows customers to access
+the same catalog in an unlimited number of languages, currencies and regional
+settings. What's more, you can switch locales at will, at any time!
+</para><para>
+The simplest and recommended way to set the <emphasis>default</emphasis>
+catalog locale is to define a starting value for <mv>mv_locale</mv> in
+&ccf;:
+<programlisting>
+ScratchDefault mv_locale de_DE
+</programlisting>
+</para><para>
+The <emphasis>per-user</emphasis> locale change can be made permanent
+(for the duration of the user
+session, of course), or temporary (if you're, say, displaying pricing 
+information in multiple currencies). See &tag-setlocale; for more discussion
+and examples.
+</para><para>
+Besides using actual "programmatic" methods to set locales, you can achieve
+the same effect by using one terrific feature of the <literal>process</literal>
+&glos-ActionMap;; to display page named "<literal>pricelist</literal>" in
+locale <literal>fr_FR</literal> and currency <literal>en_US</literal>, simply
+call &glos-ITL; tag
+<code>[page process/locale/fr_FR/currency/en_US/page/pricelist]</code>.
+</para><para>
+The localized messages you want to display must previously be defined, of
+course.
+The simplest way to define localized messages is to use
+the &conf-Locale; directive in any of the ways shown:
+<programlisting><![CDATA[
+Locale de_DE "Value setting" Werteinstellung
+Locale de_DE "Search"        Suchen
+
+Locale fr_FR <<EOF
+{
+  "Value setting",
+  "Configuration de valeur",
+  
+  "Search",
+  "Recherche"
+}
+EOF
+]]></programlisting>
+This method, however, is not practical when you have a lot of messages;
+for robust setups use &conf-LocaleDatabase;.
+</para><para>
+With the above, to display an appropriate translation of "Value setting",
+you would call "<literal>[L]Value setting[/L]</literal>", which would display as
+"<literal>Configuration de valeur</literal>" in
+locale <literal>fr_FR</literal>, 
+"<literal>Werteinstellung</literal>" in locale <literal>de_DE</literal>, and as
+a fallback, it would be displayed unmodified as "Value setting" &mdash; if the
+locale is neither 
+<literal>fr_FR</literal> not <literal>de_DE</literal>, or no localized string
+for the message was found at all.
+Keep in mind that the "<literal>[L]</literal>" tags must be capitalized &mdash;
+this is done for both processing speed and easy visual distinction within 
+pages.
+</para>
+<note>
+  <title>A word on localization tag [L]</title>
+  <para>
+	&IC; tries to substitute text for its localized variant very early in the
+	page serving process &mdash; even before &glos-variable;s are expanded or
+	tags interpolated.
+	</para><para>
+	On one hand, this means you can use variables and tags in localized strings
+	as they will be handled properly.
+	</para><para>
+	On the other hand, it means code constructs like 
+	<code>[L][item-data table field][/L]</code> will fail, as &IC; would try to
+	translate "<literal>[item-data table field]</literal>" literally.
+	There's a &tag-loc; tag available which is functionally identical to 
+	&tag-L;, but is parsed in normal order and therefore solves the problem.
+  </para>
+</note>
+<para>
+Another way to display localized messages is to supply localization text
+directly within &IC; pages, inside &tag-LC; tag; have a look at this
+intuitive example:
+<programlisting>
+[LC]
+  This is the default text.
+  [fr_FR] Text for the fr_FR locale. [/fr_FR]
+  [de_DE] Text for the de_DE locale. [/de_DE]
+[/LC]
+</programlisting>
+</para><para>
+It's also possible to display completely different pages, based on the
+locale in effect. You probably know the default &conf-HTMLsuffix; in
+&IC; is "<literal>.html</literal>", but you probably do not know it is 
+locale-sensitive. With a request for page named "index"
+(<code>[page index]</code>), <literal>fr_FR</literal> locale in effect, and a
+&ccf; directive of
+<programlisting>
+Locale fr_FR HTMLsuffix .fr_FR
+</programlisting>
+&IC; would first look for <filename>pages/index.fr_FR</filename>, and only if 
+it's not found go to the usual <filename>pages/index.html</filename>.
+</para>
+
+<note>
+	<title>A general note on locale-sensitivity of config directives</title>
+	<para>
+	We've said &conf-HTMLsuffix; is locale-sensitive, but the story gets 
+	much better. In reality, any &conf-Locale; key that matches the name of a
+	config directive, causes the directive to be re-set on locale change &mdash;
+	in other words, all config directives are locale-sensitive! (And now I
+	know you know I am no fan of exclamation marks, but can you say this feature
+	isn't just ingenious?!).
+	</para>
+</note>
+
+
+<section>
+	<title>Effect of locales on sorting</title>
+	<para>
+	&IC; sorting features (such as &mdash; but not only &mdash; the
+	&tag-sort; tag)
+	will honor a setting of <literal>LC_COLLATE</literal>, provided that
+	the operating system and C compiler support locales for POSIX,
+	have the locale definitions set, and the locale chosen matches one of
+	locales available.
+	</para>
+	<para>
+	Suppose we have a
+	<ulink url="files/locales/letters.txt">letters</ulink> database, containing
+	some of the letters of the alphabet.
+	<!--
+	<xi:include parse='text'  href='../files/locales/letters.txt'/>
+	-->
+	A code of:
+
+<programlisting><![CDATA[
+[loop 19-202 00-0011 99-102]
+  [sort letters:letter]
+  [loop-data letters letter]   [loop-code] <br/>
+[/loop]
+]]></programlisting>
+	would provide different order for locale <literal>C</literal> than
+	<literal>fr_FR</literal>.
+	</para>
+</section>
+
+<para>
+
+<!-- TODO mention script/localize.PL 
+A C<localize> script is included with Interchange. It will parse files included on the command line and produce output that can be easily edited to produce localized information. Given an existing file, it will merge new information where appropriate.
+-->
+
+
+

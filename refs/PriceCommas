@@ -12,6 +12,10 @@ __END__
 
 
 __NAME__ description
+The directive specifies whether <literal>mon_thousands_sep</literal> 
+(specified as part of &conf-Locale;) will be used in currency formatting
+for display.
+</para><para>
 If no commas are desired in price numbers (for the &tag-item-price; tag etc.),
 disable this directive. 
 </para><para>
@@ -35,6 +39,23 @@ __NAME__ example: Disabling PriceCommas
 <programlisting>
 PriceCommas 0
 </programlisting>
+__END__
+
+
+
+__NAME__ example: Setting PriceCommas depending on current locale
+<programlisting>
+# Establish a default
+PriceCommas    1
+
+# Establish locale-specific price commas
+Locale fr_FR  PriceCommas  0
+Locale en_US  PriceCommas  1
+</programlisting>
+To fully understand the example and implicitly presented &IC; features, make
+sure you're familiar with &glos-internationalization; and &glos-locale;
+glossary
+entries.
 __END__
 
 

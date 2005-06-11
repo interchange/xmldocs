@@ -1,0 +1,18 @@
+Internationalization (or "I18N") features are those being in relation to 
+program's ability to support localized messages (see &glos-locale;),
+currencies, and other region-specific settings.
+</para><para>
+&IC; has a rich set of I18N features that allow conditional message display,
+differing price formats, different currency definitions, price factoring,
+sorting, and other settings. Currently, those features are implemented as
+&IC;-specific, and do not rely on &PERL;'s I18N/L10N features, except for
+the built-in POSIX support (<code>use locale</code>,
+<function>getlocale()</function> and <function>setlocale()</function>).
+</para><para>
+The definitions are maintained in the &ccf; file, through the use of 
+Interchange's &conf-Locale; directive. All settings are
+independent for each catalog <emphasis role='bold'>and</emphasis> each user
+visiting that catalog; in other words, customers can access the same catalog
+in an unlimited number of languages, currencies and regional settings.
+</para><para>
+See &glos-locale; glossary entry for more specific information.

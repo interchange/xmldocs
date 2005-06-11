@@ -23,6 +23,8 @@ __END__
 __NAME__ notes
 The existence of the field is not exactly crucial, but it's important
 for say, &glos-flypage;s.
+</para><para>
+It's also useful to set the directive value based on &glos-locale;.
 __END__
 
 TODO: Clarify this? "If there is an
@@ -36,4 +38,19 @@ DescriptionField opis
 </programlisting>
 "Opis", for example, is a croatian equivalent of "description".
 __END__
+
+__NAME__ example: Setting DecriptionField depending on current locale
+<programlisting>
+# Establish the default at startup
+DecriptionField    description
+
+# Establish locale-specific description field
+Locale fr_FR  DecriptionField  desc_fr
+</programlisting>
+To fully understand the example and implicitly presented &IC; features, make
+sure you're familiar with &glos-internationalization; and &glos-locale;
+glossary
+entries.
+__END__
+
 

@@ -1,0 +1,69 @@
+Cookies are typically short
+<literal><replaceable>key</replaceable>/<replaceable>value</replaceable></literal> parts supported by the HTTP protocol. Their importance is in the fact that
+the server can send them to clients, and read and modify their value.
+In addition, cookies have their expiry time, which can be set, also by the 
+server, to any intended value.
+</para><para>
+Clients can control whether they reject or accept cookies from all or 
+some sites, and can enforce their expiry time.
+</para><para>
+Requests arriving from users
+are "anonymous" and unrelated to each other, even of course if they are
+coming from the same user, because the server can't conclude that for sure,
+based on just IP addresses it sees.
+Therefore, cookies are a crucial mechanism for preserving state
+information in programs with web-based interfaces. By reading the session ID
+value (stored in a cookie on client's computer), the server can now recognize
+and differentiate users and ongoing, active sessions.
+</para>
+
+<note>
+	<title>Interchange and its non-dependence on client cookies</title>
+	<para>
+	Large majority of any state-dependent software out there simply 
+	<emphasis role='bold'>requires</emphasis> that the clients accept 
+	storage and retrieval of cookies. Even solutions put forth eBay require
+	cookies, let alone any much weaker competitors such as Microsoft, or the
+	wanna-be rival "shopping carts".
+	</para><para>
+	&IC;, on the other side, does not require client support for cookies.
+	If the storage of cookies is denied by the client, &IC; appends session
+	information in generated URLs and uses them to continue keeping track of
+	user sessions. (An example session ID "embedded" in an URl looks like
+	<literal>?id=YjiSdrek</literal>).
+	</para><para>
+	One possibly confusing thing is that, by default, &IC; always appends
+	session ID information to the URLs it generates &mdash; even if clients
+	have no cookie-handing problems. For ultimate elegance, you sometimes
+	wish &IC; to stop appending session IDs to non-problematic clients, and we
+	can just say this is possible, as you'll learn from further discussion.
+	</para>
+</note>
+
+<para>
+When a new client accesses its first page from the &IC; catalog, &IC; gives
+it both the requested page and a cookie in return. At that point, &IC; can't
+know whether the client accepted the cookie or not &mdash; it has to wait for
+the client to initiate the next page request.
+If the user sends a cookie back to &IC; (which, as you see, can happen no
+sooner than on second request), &IC; knows the client is cookie-capable and
+there's no <emphasis>need</emphasis> to embed session ID in URLs.
+</para><para>
+Having said the above,
+if the &glos-scratch; variable <mv>mv_no_session_id</mv> is set in their
+session, the session ID will not be appended to the URL. Furthermore,
+on a somewhat related note (the elegance of generated URLs), if the scratch
+value <mv>mv_no_count</mv> is set, then the page count
+(<literal>mv_pc=<replaceable>random</replaceable></literal>) will not be
+appended either (page counter otherwise serves to prevent client browsers
+from caching pages).
+
+<!--
+.No session ID or count will be shown. That makes the URL shown above to be http://machine.company.com/cgi-bin/vlink/shirts.html. Once again, this is on the second page the user accesses, if they are taking and sending cookies. If the user has a pre-existing C<MV_SESSION_ID> or C<MV_USERNAME> cookie from a prior session, the effect will be immediate.
+
+.The C<argument> will be passed to Interchange and placed in the C<mv_arg> session parameter. This allows programming of a conditional page display based on where the link came from. The argument is then available with the tag [data session arg], or the embedded Perl session variable $Session->{arg}. Spaces and some other characters will be escaped with the %NN URL-style notation and unescaped when the argument is read back into the session.
+
+.A bit of magic occurs if Interchange has built a static plain HTML page for the target page. Instead of generating a normal Interchange-parsed page reference, a static page reference will be inserted if the user has accepted and sent back a cookie with the session ID.
+-->
+
+

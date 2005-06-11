@@ -1,0 +1,8 @@
+It is recommended to use the C<ScratchDefault> directive for setting the
+catalog's default locale:
+
+!block example
+   ScratchDefault mv_locale de_DE
+	 !endblock
+
+

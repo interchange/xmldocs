@@ -1,6 +1,8 @@
 Outstanding:
 =======
+- across glossary entries, insert <section>s
 - At least in filters, <<EOR messes up the thing, only < is printed and stops
+s/0-1/No-Yes/
 On config directives, include parse_<> function in source context
 - See that if 'crypt' is put in see also, all symbols of that name appear
   in see also line and their type is distinguished visually.
@@ -80,6 +82,9 @@ guide on setting complete IC environment
 explain version naming.. stable/unstable and how 5.3.0 implies next stable
 Documentation on how to create replicated catalog online and at your
 desktop machine for ultimate convenience.
+- Whereever we count things, (like, valid Locale keys are decimal_point, 
+  mon_grouping, price_picture,n_cs_precedes etc.) make that information
+  derived by scripting in stattree, not manually counting
 
 
 Notes:
@@ -138,3 +143,12 @@ Nice but not fitting the idea
 - Suppress inline docs (in source)  for items that have xmldocs docs
 - In source contexts, for tags, highlight tagCanon and provide <acronym> with
   short explanation and example
+
+
+
+In IC source:
+
+- No $Vend::XTrailer on <input>, etc..
+- missing </p>s
+- lowercase SELECTED/CHECKED ? 
+

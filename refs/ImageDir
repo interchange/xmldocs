@@ -1,0 +1,31 @@
+
+__NAME__ example: Setting PageDir depending on current locale
+To use a different page directory for different locales, say French and
+English, help yourself with the robust &conf-Locale; directive:
+<programlisting>
+# Establish the default at startup
+PageDir   english
+
+# Establish locale-dependent directories
+Locale fr_FR  PageDir  francais
+Locale en_US  PageDir  english
+</programlisting>
+To fully understand the example and implicitly presented &IC; features, make
+sure you're familiar with &glos-internationalization; and &glos-locale;
+glossary
+entries.
+__END__
+
+
+
+LI1: ImageDir
+
+.To use a different image directory for different locales, set the C<ImageDir> key. To have two separate language button sets, French and English, set:
+
+!block example; listitem=2
+# Establish the default at startup
+ImageDir   /images/english/
+Locale fr_FR  ImageDir   /images/francais/
+Locale en_US  ImageDir   /images/english/
+!endblock
+

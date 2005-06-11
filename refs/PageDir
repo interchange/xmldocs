@@ -13,8 +13,9 @@ __END__
 __NAME__ description
 Specify the directory containing catalog pages.
 </para><para>
-This directive can be set in &glos-locale; settings to allow different page
-sets for different locales.
+Speaking of &glos-internationalization;, it can be useful to set this
+directive to
+different values, depending on current &glos-locale;.
 __END__
 
 __NAME__ notes
@@ -23,7 +24,28 @@ __END__
 
 __NAME__ example: Setting PageDir
 <programlisting>
-PageDir /html
+PageDir html
 </programlisting>
 __END__
 
+__NAME__ example: Setting PageDir depending on current locale
+To use a different page directory for different locales, say French and 
+English, help yourself with the robust &conf-Locale; directive:
+<programlisting>
+# Establish the default at startup
+PageDir   english
+
+# Establish locale-dependent directories
+Locale fr_FR  PageDir  francais
+Locale en_US  PageDir  english
+</programlisting>
+To fully understand the example and implicitly presented &IC; features, make
+sure you're familiar with &glos-internationalization; and &glos-locale;
+glossary
+entries.
+__END__
+
+
+__NAME__ see also
+Locale
+__END__

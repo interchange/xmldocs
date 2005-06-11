@@ -38,4 +38,22 @@ PriceDivide 100
 __END__
 
 
+__NAME__ example: Setting PriceDivide depending on current locale
+<programlisting>
+# (Default is PriceDivide 1, so no special setting required)
+#PriceDivide    1
+
+# Establish locale-specific price division
+Locale fr_FR  PriceDivide  .20
+</programlisting>
+The following would make prices expressed in French francs five times
+higher than corresponding dollar amounts.
+</para><para>
+To fully understand the example and implicitly presented &IC; features, make
+sure you're familiar with &glos-internationalization; and &glos-locale;
+glossary
+entries.
+__END__
+
+
 

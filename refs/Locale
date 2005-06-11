@@ -29,5 +29,93 @@ Locale &lt;locale.error
 __END__
 
 __NAME__ missing
+purpose and description is wrong completely
 The description doesnt seem to match the description of the same variable when set in catalog.cfg
 __END__
+
+
+
+
+LI1: price_picture
+
+.Interchange will format a currency number based on a "picture" given to it. The basic form is:
+
+!block example; listitem=2
+    Locale en_US price_picture "$ ###,###,###.##"
+!endblock
+
+.The C<en_US> locale, for the United States, would display C<4452.3> as C<$ 4,452.30>. The same display can be achieved with:
+
+!block example; listitem=2
+     Locale en_US mon_thousands_sep ,
+     Locale en_US mon_decimal_point .
+     Locale en_US p_cs_precedes     1
+     Locale en_US currency_symbol   $
+!endblock
+
+.A common price_picture for European countries would be C<###.###.###,##>, which would display that same number as C<4.452,30>. To add a franc notation at the end for the locale C<fr_FR>, use the setting:
+
+!block example; listitem=2
+    Locale fr_FR price_picture "##.###,## fr"
+!endblock
+
+Note[label='IMPORTANT NOTE: '] The decimal point in use, set by C<mon_decimal_point>, and the thousands separator, set by C<mon_thousands_sep> must match the settings in the price_picture. The C<frac_digits> setting is not used in this case. It is derived from the location of the decimal (if any).
+
+.The same setting for C<fr_FR> above can be achieved with:
+
+!block example; listitem=2
+     Locale fr_FR mon_thousands_sep .
+     Locale fr_FR mon_decimal_point ,
+     Locale fr_FR p_cs_precedes     0
+     Locale fr_FR currency_symbol   fr
+!endblock
+
+.If the number of digits is greater than the # locations in the price_picture, the digits will be changed to asterisks. An overflow number above would show as C<**.***,** fr>.
+
+LI1: picture
+
+.Same as C<price_picture>, but sets the value returned if the C<[currency]> tag is not used. If the number of digits is greater than the # locations in the picture, the digits will be changed to asterisks, displaying something like C<**,***.**>.
+
+
+
+
+
+
+H2: Placing Locale Information in a Database
+
+Interchange has the capability to read its locale information from a database, named with the C<LocaleDatabase> directive. The database can be of any valid Interchange type. The locales are in columns, and the keys are in rows. For example, to set up price information:
+
+!block example
+   key                 en_US   fr_FR   de_DE
+   PriceDivide         1       .1590   .58
+   mon_decimal_point   .       ,       ,
+   mon_thousands_sep   ,       .
+   currency_symbol     $        frs    DM
+   ps_cs_precedes      1       0       0
+!endblock
+
+This would translate to the following:
+
+!block example
+   Locale en_US PriceDivide         1
+   Locale en_US mon_decimal_point   .
+   Locale en_US mon_thousands_sep   ,
+   Locale en_US currency_symbol     $
+   Locale en_US ps_cs_precedes      1
+
+   Locale fr_FR PriceDivide         .1590
+   Locale fr_FR mon_decimal_point   ,
+   Locale fr_FR mon_thousands_sep   .
+   Locale fr_FR currency_symbol     " frs"
+   Locale fr_FR ps_cs_precedes      0
+
+   Locale de_DE PriceDivide         .58
+   Locale de_DE mon_decimal_point   ,
+   Locale de_DE mon_thousands_sep   " "
+   Locale de_DE currency_symbol     "DM "
+   Locale de_DE ps_cs_precedes      1
+!endblock
+
+These settings append and overwrite any that are set in the catalog configuration files, including any include files. 
+
+Important note: This information is only read during catalog configuration. It is not reasonable to access a database for translation or currency conversion in the normal course of events.
