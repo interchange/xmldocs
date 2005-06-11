@@ -2,6 +2,9 @@ Outstanding:
 =======
 - across glossary entries, insert <section>s
 - At least in filters, <<EOR messes up the thing, only < is printed and stops
+- bin/refs-autogen should report which refs/* files have comments in them
+  (text outside __NAME__ __END__ markers). It indicates there's a work to do
+  on the item
 s/0-1/No-Yes/
 On config directives, include parse_<> function in source context
 - See that if 'crypt' is put in see also, all symbols of that name appear

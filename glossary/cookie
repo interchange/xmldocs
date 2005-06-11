@@ -3,6 +3,9 @@ Cookies are typically short
 the server can send them to clients, and read and modify their value.
 In addition, cookies have their expiry time, which can be set, also by the 
 server, to any intended value.
+Whether &IC; will try to land session cookies in clients' browsers is
+determined by the &conf-Cookies; directive, and their default expiry time
+is set by &conf-SaveExpire;.
 </para><para>
 Clients can control whether they reject or accept cookies from all or 
 some sites, and can enforce their expiry time.
@@ -10,7 +13,7 @@ some sites, and can enforce their expiry time.
 Requests arriving from users
 are "anonymous" and unrelated to each other, even of course if they are
 coming from the same user, because the server can't conclude that for sure,
-based on just IP addresses it sees.
+based on just the IP addresses it sees.
 Therefore, cookies are a crucial mechanism for preserving state
 information in programs with web-based interfaces. By reading the session ID
 value (stored in a cookie on client's computer), the server can now recognize
@@ -23,20 +26,27 @@ and differentiate users and ongoing, active sessions.
 	Large majority of any state-dependent software out there simply 
 	<emphasis role='bold'>requires</emphasis> that the clients accept 
 	storage and retrieval of cookies. Even solutions put forth eBay require
-	cookies, let alone any much weaker competitors such as Microsoft, or the
-	wanna-be rival "shopping carts".
+	cookies, let alone any much weaker competitors such as Microsoft or the
+	wanna-be rivalling "shopping carts".
 	</para><para>
+	<emphasis role='bold'>
 	&IC;, on the other side, does not require client support for cookies.
+	</emphasis>
 	If the storage of cookies is denied by the client, &IC; appends session
 	information in generated URLs and uses them to continue keeping track of
-	user sessions. (An example session ID "embedded" in an URl looks like
+	user sessions. (An example session ID "embedded" in an URL looks like
 	<literal>?id=YjiSdrek</literal>).
 	</para><para>
-	One possibly confusing thing is that, by default, &IC; always appends
-	session ID information to the URLs it generates &mdash; even if clients
-	have no cookie-handing problems. For ultimate elegance, you sometimes
-	wish &IC; to stop appending session IDs to non-problematic clients, and we
-	can just say this is possible, as you'll learn from further discussion.
+	Session IDs embedded in URLs should theoretically be equivalent	to cookies,
+	and they <emphasis>almost</emphasis> are. The drawback is namely the fact
+	that once you visit a non-&IC; page, you lose the <literal>id=</literal>
+	argument from the URL (because &IC; isn't there to insert it appropriately).
+	The end result is the users will lose their session information when they
+	return back to &IC; pages, unless they copied the session ID information and
+	put it back in the URL manually (which is a bit too much to expect from 
+	random visitors). In practice, this isn't a problem when you're
+	not sending users out of &IC; space, and when you build the site with this
+	fact in mind.
 	</para>
 </note>
 
@@ -48,6 +58,12 @@ the client to initiate the next page request.
 If the user sends a cookie back to &IC; (which, as you see, can happen no
 sooner than on second request), &IC; knows the client is cookie-capable and
 there's no <emphasis>need</emphasis> to embed session ID in URLs.
+</para><para>
+One possibly confusing thing is that, by default, &IC; always appends
+session ID information to the URLs it generates &mdash; even if clients
+have no cookie-handing problems. For ultimate elegance, you sometimes
+wish &IC; to stop appending session IDs to non-problematic clients, and we
+can just say this is possible, as you'll learn from further discussion.
 </para><para>
 Having said the above,
 if the &glos-scratch; variable <mv>mv_no_session_id</mv> is set in their
