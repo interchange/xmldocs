@@ -27,6 +27,7 @@ __NAME__ example: Setting NoCache
 Put the following in &ccf;:
 <programlisting>
 NoCache ord special
+NoCache special2
 </programlisting>
 __END__
 

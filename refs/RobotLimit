@@ -1,0 +1,38 @@
+__NAME__ purpose
+specify maximum number of pages a user can visit without a 30 second pause
+__END__
+
+
+__NAME__ see also
+LockoutCommand,OrderLineLimit
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>count</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify maximum number of 
+consecutive pages a user may access without a 30 second pause.
+</para><para>
+When the &conf-RobotLimit; is 
+exceeded, the command defined in &conf-LockoutCommand; will be executed and
+the catalog URLs will be rewritten to 
+<literal>127.0.0.1</literal>, effectively pointing the robot back to itself.
+__END__
+
+
+__NAME__ notes
+Set the directive to a number greater than the number of pages users are
+ever expected to visit in a short time frame.
+__END__
+
+__NAME__ example: Setting RobotLimit
+<programlisting>
+RobotLimit 200
+</programlisting>
+__END__
+

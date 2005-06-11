@@ -1,0 +1,20 @@
+<programlisting><![CDATA[
+> In any case, you can create the encrypted pwds with:
+>
+> 1) makepasswd --crypt
+>   makepasswd --crypt-md5
+>
+> 2) or help yourself with htpasswd/htpasswd2 and htdigest/htdigest2
+>   that come with apache (htpasswd for crypt(), htdigest for MD5):
+>
+>   htpasswd2 -c /tmp/temp test
+>   htdigest2 -c /tmp/temp test test
+
+It's done with simple Unix crypt by default.
+
+To have Apache's htpasswd output to stdout instead of a file, you can do:
+
+htpasswd -n test
+
+Jon
+]]></programlisting>

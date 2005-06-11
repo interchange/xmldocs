@@ -1,0 +1,39 @@
+__NAME__ purpose
+specify the amount of time for which Interchange cookies should be valid (their expiry time)
+__END__
+
+
+__NAME__ missing
+__END__
+
+
+__NAME__ see also
+HammerLock,SessionExpire
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>interval</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify &glos-interval;, an amount of time, that &IC;-issued &glos-cookie;s
+should
+be valid for.
+</para><para>
+This, of course, only applies to &glos-cookie;s other than session ID
+cookie (<literal>MV_SESSION_ID</literal>), which always lasts only for the
+duration of the session.
+The ones used in &IC; by default (and which are affected by this directive)
+are <literal>MV_USERNAME</literal> and <literal>MV_PASSWORD</literal>, for
+the &conf-CookieLogin; feature.
+__END__
+
+__NAME__ example: Defining SaveExpire
+<programlisting>
+SaveExpire 52 weeks
+</programlisting>
+__END__
+

@@ -39,7 +39,7 @@ __END__
 
 __NAME__ example: Specifying EncryptProgram
 <programlisting>
-EncryptProgram /usr/local/bin/gpg -feat sales@company.com
+EncryptProgram /usr/local/bin/gpg -feat orders@&def-domain;
 </programlisting>
 __END__
 

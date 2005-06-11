@@ -1,0 +1,26 @@
+__NAME__ purpose
+specify directory to use for "offline" files
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>directory</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify directory to use for the offline database files, which are generated
+by the offline database build command.
+__END__
+
+__NAME__ example: Setting OfflineDir
+<programlisting>
+OfflineDir /usr/data/interchange/offline
+</programlisting>
+__END__
+
+__NAME__ missing
+PORT_OLD
+__END__

@@ -1,0 +1,40 @@
+__NAME__ purpose
+do not re-import external databases
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies that all external &glos-database; tables 
+should not be re-imported.
+</para><para>
+<emphasis>External</emphasis> database types are DBI (&MYSQL;, &PGSQL;,
+&ORACLE; etc.) and LDAP (&OPENLDAP; etc.). In contrast,
+<emphasis>internal</emphasis> database types are DBM variants
+(&GDBM;, &BDBM;, SDBM) and in-memory.
+__END__
+
+__NAME__ notes
+For an introduction to "importing" and the times it can occur, see 
+&glos-database; glossary entry and the &conf-NoImport; configuration
+directive.
+__END__
+
+
+__NAME__ see also
+NoImport
+__END__
+
+__NAME__ example: Enabling NoImportExternal
+<programlisting>
+NoImportExternal 1
+</programlisting>
+__END__
+

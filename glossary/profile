@@ -164,3 +164,9 @@ Check types, however, can take on one of the following values:
 
 <para>
 
+
+<!-- TODO 
+ Multiple profiles can reside in the same file, if separated by C<__END__> tokens, which must be on a line by themselves.
+-->
+
+

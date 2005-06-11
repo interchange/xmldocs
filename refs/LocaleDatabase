@@ -1,0 +1,30 @@
+__NAME__ purpose
+specify database that contains locale settings
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>database_name</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies Interchange &glos-database; that 
+contains &conf-Locale; settings.
+__END__
+
+__NAME__ notes
+Settings from &conf-LocaleDatabase; add on to (and override)
+any that are already defined in the catalog configuration files through
+the use of &conf-Locale;.
+__END__
+
+__NAME__ example: Defining LocaleDatabase
+<programlisting>
+Database locale locale.asc TAB
+LocaleDatabase locale
+</programlisting>
+__END__
+

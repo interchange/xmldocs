@@ -1,0 +1,36 @@
+__NAME__ purpose
+specify databases on which Interchange-style searches cannot be performed
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>database_name_glob</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify one or more filename fragments that will be matched against the file
+name used in any attempted search (the <mv>mv_search_file</mv> attribute).
+You may separate multiple match strings with whitespace, and may include
+shell-style wildcards (globs).
+</para><para>
+The default setting is <literal>userdb</literal>, which
+means that, by default, you cannot use &IC;-style searches on the
+<database>userdb</database> table.
+__END__
+
+__NAME__ notes
+This directive only disables file/database-based searches, pure SQL
+searches still work with it, however.
+__END__
+
+__NAME__ example: Defining NoSearch
+Disable searching on <database>userdb</database>, and other databases
+beginning with "<literal>.</literal>" or ending in "<literal>.secret</literal>".
+<programlisting>
+NoSearch userdb  .*  *.secret
+</programlisting>
+__END__
+

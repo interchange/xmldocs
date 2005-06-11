@@ -1,0 +1,39 @@
+__NAME__ purpose
+specify files containing order profile definitions
+__END__
+
+
+__NAME__ see also
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>filename</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify filenames that contain &glos-profile; definitions.
+__END__
+
+
+__NAME__ notes
+The actions defined in order profiles can also used for
+<literal>mv_click</literal> actions
+if the actions are not defined in &glos-scratch; space. They are accessed by
+setting the <mv>mv_order_profile</mv> variable to the name of the order
+profile.
+</para><para>
+For the complete discussion, please see the &glos-profile; glossary entry.
+__END__
+
+__NAME__ example: Defining OrderProfile
+<programlisting>
+OrderProfile etc/profiles.order etc/profiles.login
+</programlisting>
+__END__
+
+__NAME__ missing
+Diff between Profiles and OrderProfile ?
+__END__

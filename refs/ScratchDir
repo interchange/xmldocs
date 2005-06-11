@@ -1,0 +1,29 @@
+__NAME__ purpose
+specify directory containing temporary files
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>directory</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify the directory containing temporary, runtime files.
+</para><para>
+The kind of files &IC; drops to the &conf-ScratchDir; directory include
+cached searches and retired &glos-session; IDs.
+__END__
+
+__NAME__ notes
+The specified location is, unless absolute, treated relative to &glos-CATROOT;.
+__END__
+
+__NAME__ example: Setting ScratchDir
+<programlisting>
+ScratchDir /tmp
+</programlisting>
+__END__
+

@@ -1,0 +1,43 @@
+__NAME__ purpose
+specify maximum number of items the user is allowed to place in the shopping cart
+__END__
+
+
+__NAME__ see also
+LockoutCommand
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>count</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify maximum number of items that the user is allowed to place in the
+shopping cart.
+</para><para>
+Some poorly-mannered robots may "attack" a site by following
+all links one after another. Some even ignore any
+<filename>robots.txt</filename> file that may have been created. If one of
+these bad robots orders several dozen or more items, the time required to
+save and restore the shopping cart from the user session may become excessive.
+</para><para>
+When the &conf-OrderLineLimit; is 
+exceeded, the command defined in &conf-LockoutCommand;  will be executed and
+the shopping cart will be emptied. 
+__END__
+
+
+__NAME__ notes
+Set the directive to a number greater than the number of line items a user
+is ever expected to order.
+__END__
+
+__NAME__ example: Setting OrderLineLimit
+<programlisting>
+OrderLineLimit 50
+</programlisting>
+__END__
+

@@ -1,0 +1,41 @@
+__NAME__ purpose
+specify file that keeps and increments order count
+__END__
+
+
+__NAME__ see also
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>filename</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify location of the file keeping and incrementing order numbers.
+</para><para>
+If not set, the order will be
+assigned a string based on the time of the order and the user's session number.
+__END__
+
+
+__NAME__ notes
+Bear in mind that &IC; provides this order number counter only as a convenience
+for display, and that no internal functions depend on it. Custom order number
+routines may be defined and used without fear of consequences.
+</para><para>
+If &conf-Route; is set to <literal>supplant</literal> and the
+<literal>counter</literal> attribute is set there, this directive is ignored.
+</para><para>
+See &glos-order; glossary entry for complete discussion of &IC;'s
+ordering process.
+__END__
+
+__NAME__ example: Setting OrderCounter
+<programlisting>
+OrderCounter etc/order.number
+</programlisting>
+__END__
+

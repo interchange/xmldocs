@@ -1,5 +1,5 @@
 __NAME__ purpose
-do not re-import text source files to databases unless the database disappears
+specify databases not to re-import, unless the database completely disappears
 __END__
 
 
@@ -12,15 +12,25 @@ __END__
 
 __NAME__ description
 The directive specifies &glos-database; tables that should not be 
-re-imported from the text source files, unless the database disappears
-(for example, if the <filename><replaceable>table</replaceable>.gdbm</filename>
-is deleted).
+re-imported from the text source files. The database would then be
+re-imported only on critical events, such as 
+<filename><replaceable>table</replaceable>.gdbm</filename> being deleted.
 __END__
 
-__NAME__ example: Disabling 'products' table import
+__NAME__ notes
+The import would ordinarily happen when a change in appropriate
+text source file is detected, &IC; is (re)started, or the catalog
+is reconfigured.
+</para><para>
+This setting is useful for &glos-SQL; databases used by other applications
+besides &IC;, or large databases you load and back up outside of Interchange.
+With this option, you can omit text source files for databases entirely.
+__END__
+
+__NAME__ example: Disabling 'products' and 'inventory' table import
 Put the following in &gcf;:
 <programlisting>
-NoImport products
+NoImport products inventory
 </programlisting>
 __END__
 

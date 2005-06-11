@@ -1,5 +1,5 @@
 __NAME__ purpose
-list catalogs that may define subroutines and tags which operate with full Interchange server permissions
+specify catalogs that may define subroutines and tags which operate with full Interchange server permissions
 __END__
 
 

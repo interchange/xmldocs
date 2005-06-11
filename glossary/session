@@ -1,3 +1,4 @@
+<!--
 =item Session parameters
 
 Things like where the user originally found your catalog ([data session source]
@@ -31,14 +32,14 @@ pay, and provide any other information you may ask for. They then place
 (or "submit") the order.
 
 Their payment may be taken at that point via real-time credit card
-approval and a soft-goods product downloaded -- or their order
+approval and a soft-goods product downloaded - or their order
 information may be simply sent to you, the store owner, via encrypted
 email. The order is saved to a database table (and a file as backup),
 or in the case of fully-automated systems sent directly to an order
 entry program or database link.
 
 All of these operations are fully configurable by you.  The base Interchange
-distribution includes a sample store -- some users have simply customized
+distribution includes a sample store - some users have simply customized
 the text and images inside, changed the database entries, and opened
 their store. You will probably want to fully customize for a distinctive
 catalog look and feel.
@@ -131,5 +132,4 @@ is needed to ensure the user's session is retained.
 The page, which is now entirely in regular HTML, is delivered to
 the HTTP server, which returns it to the browser.
 
-=back
-
+-->

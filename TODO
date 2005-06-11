@@ -1,12 +1,14 @@
 Outstanding:
 =======
 - across glossary entries, insert <section>s
+- s/crypt/cypher/ , encrypt/encypher, etc..
+- in refs, replace "database" with "database_name", that kind of things
 - import my hand-made test from /var/lib/.../pages/* to appropriate
   ref pages as online examples
 - At least in filters, <<EOR messes up the thing, only < is printed and stops
 - bin/refs-autogen should report which refs/* files have comments in them
   (text outside __NAME__ __END__ markers). It indicates there's a work to do
-  on the item
+  on the item. Also XML files that have <!-- --> in them
 s/0-1/No-Yes/
 On config directives, include parse_<> function in source context
 - See that if 'crypt' is put in see also, all symbols of that name appear

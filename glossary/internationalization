@@ -6,8 +6,8 @@ currencies, and other region-specific settings.
 differing price formats, different currency definitions, price factoring,
 sorting, and other settings. Currently, those features are implemented as
 &IC;-specific, and do not rely on &PERL;'s I18N/L10N features, except for
-the built-in POSIX support (<code>use locale</code>,
-<function>getlocale()</function> and <function>setlocale()</function>).
+the built-in POSIX support (<code>use locale</code>
+and <function>setlocale()</function>).
 </para><para>
 The definitions are maintained in the &ccf; file, through the use of 
 Interchange's &conf-Locale; directive. All settings are

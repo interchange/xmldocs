@@ -1,0 +1,35 @@
+__NAME__ purpose
+specify e-mail address that completed orders should be sent to
+__END__
+
+__NAME__ see also
+VendURL,Catalog
+__END__
+
+__NAME__ synopsis
+	<arg choice='plain'><replaceable>e-mail_address</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive specifies
+an e-mail address that completed orders should be sent to.
+__END__
+
+__NAME__ notes
+&conf-MailOrder>To; is one of the basic Interchange &glos-configuration;
+directives.
+</para><para>
+If the &ccf; file, expected in the catalog base directory, is not found, or is
+unreadable by the &IC; server, somewhat misguiding error message will be reported.
+Namely, instead of the appropriate permissions-problem message, this mandatory
+&conf-MailOrderTo; directive will be reported undefined.
+__END__
+
+__NAME__ example: Defining MailOrderTo
+<programlisting>
+MailOrderTo orders@&def-domain;
+</programlisting>
+__END__
+
+

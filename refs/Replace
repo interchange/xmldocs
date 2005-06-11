@@ -1,0 +1,32 @@
+__NAME__ purpose
+re-set directive to a new value, or its default
+__END__
+
+
+__NAME__ synopsis
+	<arg choice='plain'><replaceable>directive_name</replaceable></arg>
+	<arg choice='opt'><replaceable>value</replaceable></arg>
+__END__
+
+
+__NAME__ description
+Cause another directive's value to be emptied and re-set to the specified 
+value, or to its default.
+</para><para>
+This is primarily useful for directives which append to existing
+definition by default, so at first glance there's no way to "clean" them.
+__END__
+
+__NAME__ notes
+Capitalization must be exact on each directive.
+__END__
+
+__NAME__ example: Replacing NoCache
+<programlisting>
+Replace NoCache ord special multi reconfig query
+</programlisting>
+__END__
+
+__NAME__ see also
+__END__
+

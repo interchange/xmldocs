@@ -1,8 +1,42 @@
-It is recommended to use the C<ScratchDefault> directive for setting the
-catalog's default locale:
+__NAME__ purpose
+define default scratch variable values
+__END__
 
-!block example
-   ScratchDefault mv_locale de_DE
-	 !endblock
 
+__NAME__ see also
+ScratchDefault,ValuesDefault
+__END__
+
+
+__NAME__ synopsis
+	<arg choice='plain'><replaceable>name</replaceable></arg>
+	<arg choice='plain' rep='repeat'><replaceable>value</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive sets default &glos-scratch; variable values.
+__END__
+
+__NAME__ example: Defining default scratch values
+Make Interchange URLs elegant &mdash; do not include the session ID information
+or the "counter", and append <literal>.html</literal> to pages if it is 
+missing.
+<programlisting>
+ScratchDefault  mv_no_session_id  1 mv_no_count       1
+ScratchDefault  mv_add_dot_html   1
+</programlisting>
+To understand this example, see &glos-scratch; and &glos-session; glossary
+entries, and the &conf-HTMLsuffix; configuration directive.
+__END__
+
+__NAME__ example: Using ScratchDefault to define default locale
+It is recommended to use this directive for setting the catalog's
+default locale:
+<programlisting>
+ScratchDefault  mv_locale de_DE
+</programlisting>
+To understand this example, see &glos-internationalization; and &glos-locale;
+glossary entries.
+__END__
 

@@ -10,6 +10,7 @@ __END__
 
 
 __NAME__ see also
+OrderProfile,SearchProfile
 __END__
 
 __NAME__ synopsis
@@ -31,7 +32,7 @@ __END__
 
 __NAME__ example: Defining Profiles
 <programlisting>
-Profiles etc/profiles.common etc/profiles.login
+Profiles etc/profiles.common
 </programlisting>
 __END__
 
