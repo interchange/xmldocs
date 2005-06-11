@@ -4,29 +4,45 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
 	<arg choice='plain'><replaceable>filename</replaceable></arg>
-</group>
+	<arg choice='opt'><replaceable>arguments</replaceable></arg>
 __END__
 
 
 __NAME__ description
-Specify default encryption program. It will be called to perform tasks such
-as encrypting credit card numbers (<emphasis role='bold'>if</emphasis> they 
-are stored on the server).
+Specify default encryption program, and a template to call it. The encryption
+program will be called to perform tasks such as encrypting credit card
+numbers (<emphasis role='bold'>if</emphasis> they are stored on the server).
+</para><para>
+Two placeholders can be used, <literal>%p</literal> and 
+<literal>%f</literal>. At encryption time, the former expands to a password,
+the latter one to a temporary file name.
 </para><para>
 If &IC; can found a variant of <command>gpg</command>/<command>pgp</command>
 on your system, it is the default. Setting of <literal>none</literal> disables
 encryption.
 __END__
 
-__NAME__ see also
-DEBUG, DataTrace, DebugFile
+
+__NAME__ notes
+This directive is different from &conf-PGP;, which is used to encrypt
+<emphasis>complete</emphasis> orders and not just part of their contents.
+</para><para>
+If the order &conf-Route; method of sending orders is used (default in the
+&std-catalog; demo), then this directive sets the default value of
+the <literal>encrypt_program</literal> attribute.
 __END__
 
-__NAME__ example: Enabling DumpStructure
+__NAME__ see also
+DEBUG, DataTrace, DebugFile,PGP
+__END__
+
+__NAME__ example: Specifying EncryptProgram
 <programlisting>
-DumpStructure Yes
+EncryptProgram /usr/local/bin/gpg -feat sales@company.com
 </programlisting>
 __END__
 
+__NAME__ missing
+PORT_OLD
+__END__

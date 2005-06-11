@@ -1,6 +1,8 @@
 Outstanding:
 =======
 - across glossary entries, insert <section>s
+- import my hand-made test from /var/lib/.../pages/* to appropriate
+  ref pages as online examples
 - At least in filters, <<EOR messes up the thing, only < is printed and stops
 - bin/refs-autogen should report which refs/* files have comments in them
   (text outside __NAME__ __END__ markers). It indicates there's a work to do

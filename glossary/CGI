@@ -28,3 +28,13 @@ As CGI variables contain user-supplied data, they are obviously of
 great concern from a security standpoint.
 <!-- TODO what to read on the topic -->
 <!-- TODO: IC functionality to deal with CGI data security .. filters etc. -->
+<!--
+&IC; is, by default, eager to collect user information, at least for the 
+duration of the session (so they don't have to retype it again).
+When a form is submitted, form values from the <emphasis>directly</emphasis>
+submitted form (and only values from the directly submitted form)
+are accessible by the &tag-cgi; tag. During processing, those variables
+are also propagated to the &glos-value;s space, so they are available 
+to the &tag-value; tag on subsequent requests.
+FormIgnore stops propagation.
+-->

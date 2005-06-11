@@ -1,0 +1,38 @@
+__NAME__ purpose
+allow fractional quantities in the shopping cart
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies whether 
+the quantity of items in the shopping cart could be fractional,
+such as <literal>2.5</literal> or <literal>1.25</literal>.
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ example: Enabling FractionalItems
+<programlisting>
+FractionalItems 1
+</programlisting>
+__END__
+
+
+
+
+

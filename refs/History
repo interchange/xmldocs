@@ -1,0 +1,26 @@
+__NAME__ purpose
+how many most-recent user clicks should be saved in session history
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>count</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies
+how many of the most recent user clicks should be stored in the session history.
+__END__
+
+__NAME__ see also
+__END__
+
+__NAME__ example: Defining History
+<programlisting>
+History 10
+</programlisting>
+__END__
+

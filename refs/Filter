@@ -1,0 +1,40 @@
+__NAME__ purpose
+specify variables and filters through which they should be run through automatically
+__END__
+
+__NAME__ see also
+filter
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>
+		<replaceable>variable_name</replaceable>
+		<replaceable>filter_name</replaceable>
+	</arg>
+</group>
+__END__
+
+__NAME__ description
+The directive assigns one or more filters (comma separated) that should be
+automatically applied to a variable.
+__END__
+
+
+__NAME__ example: Automatically filtering "mail_lists" variable
+Some variables submitted by the user come back null-separated, such as 
+values from multi-select boxes where the selected items are separated
+by null (<literal>\0</literal>) characters. To automatically change those
+nulls to spaces, you could use this directive:
+<programlisting><![CDATA[
+Filter mail_lists  null_to_space
+]]></programlisting>
+__END__
+
+
+__NAME__ notes
+You could also use the &tag-filter; tag to help yourself, but in the long
+run the &conf-Filter; approach reduces typing and minimizes the chance
+of omission.
+__END__
+

@@ -1,0 +1,36 @@
+__NAME__ purpose
+specify variables that should not be propagated from the CGI to Values space
+__END__
+
+__NAME__ see also
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'>
+		<replaceable>variable_name</replaceable>
+	</arg>
+</group>
+__END__
+
+__NAME__ description
+The directive specifies variables that should not be propagated from the
+&glos-CGI; into &glos-value;s space.
+__END__
+
+__NAME__ example: Defining FormIgnore
+<programlisting><![CDATA[
+FormIgnore mv_searchtype
+]]></programlisting>
+__END__
+
+
+__NAME__ notes
+See &glos-CGI; glossary entry for introduction and discussion.
+__END__
+
+
+__NAME__ missing
+PORT_OLD
+__END__
+
