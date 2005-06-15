@@ -17,7 +17,7 @@ an e-mail address that completed orders should be sent to.
 __END__
 
 __NAME__ notes
-&conf-MailOrder>To; is one of the basic Interchange &glos-configuration;
+&conf-MailOrderTo; is one of the basic Interchange &glos-configuration;
 directives.
 </para><para>
 If the &ccf; file, expected in the catalog base directory, is not found, or is

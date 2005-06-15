@@ -8,10 +8,14 @@
 use warnings;
 use strict;
 
+use Data::Dumper;
+
 my %items;
 my %alphabet;
 my $verbose = 0;
 my $cat = shift; $cat ||= "glossary";
+my %invalid;
+my $invalid_file = "tmp/missing2";
 my @loaded;
 my $document;
 my %sn = ( # short name
@@ -56,7 +60,6 @@ my $howtos = <<__ENDP__;
 	<bookinfo>
 
 		<title>Interchange HOWTOs collection</title>
-		<titleabbrev>howtos</titleabbrev>
 
 		<legalnotice>
 			<para>
@@ -116,6 +119,12 @@ ENDO
 }
 closedir DIR or warn "Error closing $cat/ ($!)\n";
 
+# Find TODO notes or XML comments
+while (my ($k,$v)= each %items ) {
+	"@$v" =~ m/TODO/s and push @{ $invalid{$k} }, "Contains TODO item";
+	"@$v" =~ m/<!--/s and push @{ $invalid{$k} }, "Contains XML comment";
+}
+
 
 # ADD ITEMS TO HEAD  (TYPE-SPECIFIC)
 if ( $cat eq 'glossary' ) {
@@ -151,6 +160,14 @@ open OUT, "> $cat/$cat.xml" or
 die "Can't wropen $cat/$cat.xml ($!)\n";
 print OUT $document;
 close OUT or warn "Cant close $cat/$cat.xml ($!)\n";
+
+# Print out missing list
+print "GEN: tmp/mising2\n";
+open OUT, "> tmp/missing2" or
+die "Can't wropen tmp/missing2 ($!)\n";
+print OUT Dumper \%invalid;
+close OUT or warn "Cant close tmp/missing2 ($!)\n";
+
 
 exit 0;
 

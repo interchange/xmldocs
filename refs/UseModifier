@@ -21,28 +21,48 @@ __NAME__ description
 Specify item &glos-attribute;s (or <emphasis>modifiers</emphasis>) that can
 be be attached to items.
 </para><para>
-Some of the names are protected and can't be used as modifier names
-are 
-<literal>mv_*</literal> variables,
-<literal>group</literal>,
-<literal>code</literal>,
-<literal>quantity</literal> and
-<literal>item</literal>.
-Don't worry about it too much, however, as &IC; will warn you if you
-happen to accidentally use some of them.
+Some of the names are reserved for use by &IC;, and you must not use them
+in modifier names. Namely, they include 
+	<literal>item</literal>,
+	<literal>group</literal>,
+	<literal>quantity</literal>,
+	<literal>free</literal>,
+	<literal>free_message</literal>,
+	<literal>code</literal> and, of course,
+	all <literal>mv_</literal> variables.
+</para>
+<para>
+You can see a quick list of those "reserved" names by entering the &IC;
+source tree and issuing <userinput>grep -r 'item->{[^$]' * | less</userinput>.
 __END__
 
-__NAME__ example: Defining UseModifier
+__NAME__ example: Simple and standalone UseModifier example
+We first need to define &conf-UseModifier; in the &ccf; file (and restart
+&IC; afterwards):
 <programlisting>
 UseModifier size,color
 </programlisting>
+Then we need to add the appropriate columns &mdash; 
+<database class='field'>size</database> and
+<database class='field'>color</database> &mdash; to the
+<database>products</database> database. Here's
+<ulink url="files/attributes/products.txt">an example</ulink>:
+<programlisting>
+<xi:include parse='text'  href='../files/attributes/products.txt'/>
+</programlisting>
+(The entry signified with "<literal>*</literal>" will be understood as the
+default).
+</para><para>
+And now all we need to display item size options is call 
+<code>[accessories <replaceable>SKU</replaceable> size]</code> on an 
+&IC; page. Let's create a sample 
+<ulink url="files/attributes/attributes.html">attributes.html</ulink> page:
+<programlisting>
+<xi:include parse='text'  href='../files/attributes/attributes.html'/>
+</programlisting>
+I hope this completes a very simple but working example, and 
+breaks the entry-barrier to the world of &IC; modifiers.
 __END__
-
-
-
-
-
-
 
 
 

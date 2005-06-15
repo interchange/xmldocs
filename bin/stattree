@@ -765,8 +765,13 @@ sub file_parseVendConfig {
 		$opens -= ( $line =~ s/([\)\]\}])/$1/g );
 		$directive .= $line;
 
-		if (! $opens) { # Read the whole thing
+		if (! $opens) { # Have read the whole thing
 			$multiline = 0;
+
+			# Discover parse function for a directive
+			$directive =~ m/^\s*\['(.*?)',\s*'(.*?)',/s and
+				file_extractSub($1, "Vend::Config::parse_$2",
+						\%c, {group => $context,name=>$1});
 
 			# Register the directive and do some statistics
 			if ( $context eq 'globconf' ) {
@@ -803,6 +808,22 @@ sub file_parseVendConfig {
 			%c,
 			lnum => $lnum,
 			ctx => [ format_ctx(split(/\n/, $ln)) ],
+		};
+
+		# Push whole resolved chain (parse_* function), but only if the catalog
+		# version of this directive doesn't exist, or exists but doesn't use the
+		# same parse function.
+		if ( $resolver_path{globconf}{$1} and
+		     ( !$resolver_path{catconf}{$1} or
+				   ( $resolver_path{globconf}{$1}->[0]->{ctx}->[0] ne
+					   $resolver_path{catconf}{$1}->[0]->{ctx}->[0]))) {
+				while (my $spath=shift @{ $resolver_path{globconf}{$1}}){
+					push @{ $hash{symbols}{globconf}{$1} }, {
+						ctxpre => 0,
+						ctxpost => 0,
+						%$spath,
+				};
+			}
 		}
 	}
 	for my $itm (@catconf) {
@@ -812,6 +833,18 @@ sub file_parseVendConfig {
 			%c,
 			lnum => $lnum,
 			ctx => [ format_ctx(split(/\n/, $ln)) ],
+		};
+
+		# Push whole resolved chain (parse_* function).
+		# (Here, we do it unconditionally, unlike 25 lines above)
+		if ( $resolver_path{catconf}{$1} ) {
+			while (my $spath=shift @{ $resolver_path{catconf}{$1}}){
+				push @{ $hash{symbols}{catconf}{$1} }, {
+					ctxpre => 0,
+					ctxpost => 0,
+					%$spath,
+				};
+			}
 		}
 	}
 }
@@ -867,7 +900,10 @@ sub file_extractSub {
 				if ( !$opens) { $done++; $end = $j+1; last }
 			}
 
-			die "NOT FOUND FOR $func ?\n" unless $done;
+			unless ( $done ) {
+				warn "NOT FOUND OR RUNAWAY FOR $func\n";
+				return
+			}
 		}
 	}
 

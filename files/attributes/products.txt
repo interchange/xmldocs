@@ -1,0 +1,4 @@
+sku	description	price	size	color
+50595	Standard T-Shirt	15	S=Small, M=Medium, L=Large*, XL=Extra Large	red=Red, blue=Blue, white=White
+50623	Winter Jacket	140	S=Small, M=Medium, L=Large, XL=Extra Large*, XXL=Extra Extra Large	blue=Blue, white=White, black=Black
+50198	Long-sleeved Cotton Shirt	45	M=Medium*, L=Large	red=Red, blue=Blue, white=White, maroon=Maroon

@@ -1,130 +1,201 @@
 
-=head1 DISTRIBUTION AND SUPPORT INFORMATION
+<chapter id="obtain">
 
-Interchange is free of charge, and is distributed under the GNU
+	<chapterinfo>
+		<title>Obtain and Run &IC;</title>
+
+		<keywordset>
+			<keyword>interchange</keyword>
+			<keyword>obtain</keyword>
+			<keyword>get</keyword>
+			<keyword>download</keyword>
+			<keyword>find</keyword>
+			<keyword>minivend</keyword>
+			<keyword>tallyman</keyword>
+			<keyword>vend</keyword>
+			<keyword>install</keyword>
+			<keyword>run</keyword>
+			<keyword>configure</keyword>
+			<keyword>reconfig</keyword>
+		</keywordset>
+
+		<authorgroup>
+			<author>
+				<firstname>Mike</firstname>
+				<surname>Heins</surname>
+				<affiliation>
+					<email>mheins@icdevgroup.org</email>
+				</affiliation>
+			</author>
+		</authorgroup>
+
+	</chapterinfo>
+
+	<sect1 id='obtain_introduction'>
+		<title>Introduction</title>
+		<para>
+		HOW-TO version: $Id: obtain-and-run-interchange,v 1.2 2005-06-15 10:30:12 docelic Exp $
+		</para>
+		<para>
+		How to obtain and run &IC;.
+		</para>
+	</sect1>
+
+	<sect1 id='obtain_solution'>
+		<title>Solution</title>
+
+<para>
+&IC; is free of charge, and is distributed under the GNU
 General Public License.  This means that individuals and organizations,
-both commercial and non-commercial, may use Interchange without charge. If
+both commercial and non-commercial, may use &IC; without charge. If
 you modify and redistribute it, there are certain obligations you
-must fulfill. See the file Copying which came with your Interchange
-distribution for the full license.
-
-Interchange is not guaranteed to be supported other than by making
+must fulfill. See the file <filename>LICENSE</filename> which came with your
+&IC; distribution for the full license.
+</para><para>
+&IC; is not guaranteed to be supported other than by making
 full source code available. If it breaks you get to keep both pieces.
-However, in practice Interchange is supported by a developer group and
-user community at it's mail list, interchange-users@icdevgroup.org. There
-are dozens of consultants who make Interchange-based systems their full-time 
-work, and their are scores more who develop Interchange catalogs and sites.
+However, in practice &IC; is supported by a developer group and
+user community at its mail lists,
+<ulink url="http://new.icdevgroup.org/i/new/community.html">http://new.icdevgroup.org/i/new/community.html</ulink>.
+. There
+are dozens of consultants who make &IC;-based systems their full-time 
+work, and there are many more who develop &IC; catalogs and sites.
+</para><para>
+&IC; is officially available from 
+<ulink url="http://new.icdevgroup.org/i/new/download.html">http://new.icdevgroup.org/i/new/download.html</ulink>. If you are not a skilled Unix user and do
+not have experience with Unix software installation and configuration,
+definitely choose ready-to-use &IC; packages for Red Hat or Debian GNU based
+systems. The rest of the notes apply to the manual, tarball installation 
+process.
+</para>
 
-=head2 Where to Download Interchange
-
-The Interchange version described in this document is available from:
-
-    http://ftp.icdevgroup.org/
-
-=head2 Perl
-
-You will need Perl version 5.601 or higher to run Interchange 5.4, and
-Perl 5.8.3 or higher is recommended. Interchange requires the modules
-in Bundle::Interchange plus one of GDBM_File and DB_File.
-
-Interchange can run on Windows with the cygwin extensions,
+<sect2>
+<title>Pre-requirements</title>
+<para>
+You will need &PERL; version 5.601 or higher to run &IC;, and
+Perl 5.8.3 or higher is recommended. &IC; requires the modules
+in <classname>Bundle::&IC;</classname> plus one of GDBM_File and DB_File.
+</para><para>
+&IC; can run on Windows with the cygwin extensions,
 but it is not supported and there are no known production sites
-using Windows. The majority of Interchange sites run on Linux,
+using Windows. The majority of &IC; sites run on Linux,
 but there are also sites running FreeBSD, Irix, Mac OS/X, and Solaris.
-There is no reason Interchange cannot run on any Unix-like
-operating system.
-
-=head2 Setup for HTTP Servers
-
-Interchange requires a that a web server be installed on your system
+&IC; can run on any Unix-like operating system.
+</para><para>
+&IC; requires that a web server be installed on your system
 in the normal course of events.
+As detailed previously, &IC; is always running in the background
+as a daemon. It monitors either a UNIX-domain file-based socket (located
+in the &conf-RunDir; directory) or a series of INET-domain sockets.
+The small CGI &glos-link-program; is used to connect to one of those sockets
+and provide the link between &IC; and the web server.
+(Since Apache web servers are the most popular, in the rest of the HOW-TO
+we will talk in the terms they use.)
+</para>
+</sect2>
 
-As detailed previously, Interchange is always running in the background
-as a daemon. It monitors either 1) a UNIX-domain file-based socket, located
-in the RunDir directory (often etc/ in the main directory); or 2) a
-series of INET-domain sockets.
-
-The small CGI link program, called in the demo standard, is run to 
-connect to one of those sockets and provide the link between Interchange
-and the web server.
-
-NOTE: Since Apache servers are the most popular, we will talk in the
-terms they use.
-
-You need to have a ScriptAlias or other CGI execution capability
-to use the link program. (The default ScriptAlias for many web
-servers is /cgi-bin.) If you have ExecCGI set for all of your
+<sect2>
+<title>Web Server Setup</title>
+<para>
+You need to have a ScriptAlias or other CGI execution capability on your
+web server to use the &glos-link-program;. (The default ScriptAlias for many web
+servers is <literal>/cgi-bin</literal>.) If you have ExecCGI set for all of your
 directories, then any program ending in a particular file suffix (usually
 .cgi) will be seen as a CGI program.
+</para>
+</sect2>
 
-=head2 UNIX-domain sockets
-
-This is a socket which is not reachable from the Internet directly,
-but which must come from a request on your own server. The link program
-vlink is the provided facility for such communication with Interchange.
-
+<sect2>
+<title>UNIX Domain Sockets</title>
+<para>
+Unix domain sockets are not reachable from the Internet directly,
+but only locally from a request on your own server. The link program
+vlink is the provided facility for such communication with &IC;.
+(Note that this does not prevent visitors from seeing an &IC; website,
+in only makes it mandatory to run the Web server and &IC; server on 
+the same computer).  
 This is the most secure way to run your catalog, for there is no way
-for systems on the Internet to interact with Interchange except through
-its link program.
-
-The most important issue with UNIX-domain sockets on Interchange is the
-permissions with which the CGI program and the Interchange server run.
-
-To improve security, Interchange normally runs with the socket file
-having 0600 permissions (rw-------), which mandates that the CGI
+for systems on the Internet to interact with &IC; except through
+its &glos-link-program;.
+</para><para>
+The most important issue with UNIX-domain sockets on &IC; is the
+permissions with which the CGI program and the &IC; server run.
+To improve security, &IC; normally runs with the socket file
+having &glos-mode; <literal>0600 (rw&mdash;&mdash;&mdash;-)</literal>, which mandates that
+the CGI
 program and the server run as the same user ID. This means
 that the vlink program must be SUID to the same user ID as
 the server executes under. (Or that CGIWRAP or suexec is used
 on a single catalog system).
-
-With Interchange multiple catalog capability, the permissions situation
-gets a bit tricky. Interchange comes with a program, makecat, which
+</para><para>
+With &IC; multiple catalog capability, the permissions situation
+gets a bit tricky. &IC; comes with a program, <command>makecat</command>, which
 configures catalogs for a multiple catalog system. It should properly set
 up ownership and permissions for multiple users if run as the superuser.
+</para>
+</sect2>
 
-=head2 INET-domain sockets
-
+<sect2>
+<title>INET Domain Sockets</title>
+<para>
 These are sockets which are reachable from the Internet directly.
 The link program tlink is the provided facility for such communication with
-Interchange; you may also use your browser to talk to the socket directly
+&IC;; you may also use your browser to talk to the socket directly
 if you have it mapped to a catalog with the global TcpMap directive.
 
-To improve security, Interchange usually checks that the request comes
+To improve security, &IC; usually checks that the request comes
 from one of a limited number of systems, defined in the global TcpHost
 directive.
+</para>
+</sect2>
 
-=head1 QUICK START
+<sect2>
+<title>Quick Start</title>
+<para>
 
 Obtain, decompress and untar the distribution:
 
-    gzip -dc interchange-5.x.tar.gz | tar xvf -
+<programlisting>
+gzip -dc interchange-5.x.tar.gz | tar xvf -
+</programlisting>
 
 Change to the created directory, something like:
-
-    cd interchange-5.4.0
+ 
+<programlisting> 
+cd interchange-5.4.0
+</programlisting>
 
 Run the configure script with:
 
-    ./configure
+<programlisting>
+./configure
+</programlisting>
 
-If you have trouble with ./configure, try this:
+If you have trouble with <command>./configure</command>, try this:
 
-    perl Makefile.PL
-    make
-    make test
-    make install
+<programlisting>
+perl Makefile.PL
+make
+make test
+make install
+</programlisting>
 
 Replace the perl with the proper path to your Perl binary.
-
-You will be asked for the directory where you want to install Interchange --
+</para><para>
+You will be asked for the directory where you want to install &IC; &mdash;
 any directory will do. You must of course have write permission there;
 and you will eventually need to have write permission on your CGI-BIN
 and HTML directories. This directory is referred to later in the
-documentation as VendRoot or the Interchange software directory.
-
+documentation as VendRoot or the &glos-ICROOT; directory.
+</para><para>
 The process should be self-explanatory. If you have trouble answering
 the questions asked, look closely at the examples provided. If you
 still have trouble, you will need to find a tutorial about the World
-Wide Web -- the WWW FAQ at http://www.boutell.com/newfaq/ would be a
+Wide Web &mdash; the WWW FAQ at http://www.boutell.com/newfaq/ would be a
 good place to look.
+		</para>
+	</sect2>
+</sect1>
+
+</chapter>
 

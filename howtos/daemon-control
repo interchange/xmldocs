@@ -2,7 +2,6 @@
 
 	<chapterinfo>
 		<title>Control Interchange Daemon</title>
-		<titleabbrev>daemon-control</titleabbrev>
 
 		<keywordset>
 			<keyword>control</keyword>
@@ -35,7 +34,7 @@
 	<sect1 id='daemon-control_introduction'>
 		<title>Introduction</title>
 		<para>
-		HOW-TO version: $Id: daemon-control,v 1.2 2004-11-22 00:18:43 docelic Exp $
+		HOW-TO version: $Id: daemon-control,v 1.3 2005-06-15 10:30:12 docelic Exp $
 		</para>
 		<para>
 		Knowing how to manage the Interchange daemon is one of the very basic

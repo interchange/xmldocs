@@ -44,13 +44,18 @@ useful only if some content is provided in their <emphasis>body</emphasis>
 </para>
 <para>
 Additionally, container tags for which you do not provide any
-<emphasis>body</emphasis> can be closed using "XML-style", but make sure to
-add an extra space, to unambiguously separate <literal>/]</literal> from the
-tag arguments. The following two lines are identical in effect:
+<emphasis>body</emphasis> can be closed using "XML-style" syntax.
+The following two lines are identical in effect:
 <programlisting>
 [forum top="[item-code]" display_page="forum/display"][/forum]
 [forum top="[item-code]" display_page="forum/display" /]
 </programlisting>
+</para>
+<para>
+Note, however, that <emphasis role='bold'>you can use "<literal>/]</literal>"
+only with tags for which you provide no parameters, or the parameters are named
+and quoted</emphasis>. Positional parameters "eat" everything (including 
+the "<literal>/</literal>") up to the closing bracket.
 </para>
 <para>
 It's probably also useful to mention that there must be no whitespace

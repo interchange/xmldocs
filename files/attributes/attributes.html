@@ -1,0 +1,29 @@
+<html>
+<body>
+
+<table cellpadding="5">
+  <tr>
+    <th>Test #</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Modifiers</th>
+  </tr>
+  [loop search="ra=yes/fi=products"]
+  <tr>
+    <td>[loop-code]</td>
+    <td>
+      [page [loop-code]]
+      [loop-field description]
+      </a>
+    </td>
+    <td align="right">[loop-field price]</td>
+    <td>
+			[loop-accessories size]
+   		[loop-accessories color]
+		</td>
+  </tr>
+  [/loop]
+</table>
+
+</body>
+</html>

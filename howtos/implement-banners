@@ -2,7 +2,6 @@
 
 	<chapterinfo>
 		<title>Implement Banner Ads</title>
-		<titleabbrev>implementbanners</titleabbrev>
 
 		<keywordset>
 			<keyword>banner</keyword>
@@ -29,7 +28,7 @@
 	<sect1 id='implementbanners_introduction'>
 		<title>Introduction</title>
 		<para>
-		HOW-TO version: $Id: implement-banners,v 1.4 2004-11-12 22:26:26 docelic Exp $
+		HOW-TO version: $Id: implement-banners,v 1.5 2005-06-15 10:30:12 docelic Exp $
 		</para>
 		<para>
 		Banner display in &IC; is implemented using the <tag>banner</tag> tag.

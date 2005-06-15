@@ -3,7 +3,11 @@ introduction.
 </para><para>
 Localization (or "I10N") is a process of making an I18N-enabled application
 to use specific locale definition (messages, currency format, etc.).
-</para><para>
+</para>
+
+<section>
+<title>Localized Catalogs</title>
+<para>
 The important thing to have in mind is that &IC; allows customers to access
 the same catalog in an unlimited number of languages, currencies and regional
 settings. What's more, you can switch locales at will, at any time!
@@ -20,14 +24,19 @@ The <emphasis>per-user</emphasis> locale change can be made permanent
 session, of course), or temporary (if you're, say, displaying pricing 
 information in multiple currencies). See &tag-setlocale; for more discussion
 and examples.
-</para><para>
+</para>
+<para>
 Besides using actual "programmatic" methods to set locales, you can achieve
 the same effect by using one terrific feature of the <literal>process</literal>
 &glos-ActionMap;; to display page named "<literal>pricelist</literal>" in
 locale <literal>fr_FR</literal> and currency <literal>en_US</literal>, simply
-call &glos-ITL; tag
+Sall &glos-ITL; tag
 <code>[page process/locale/fr_FR/currency/en_US/page/pricelist]</code>.
-</para><para>
+</para>
+</section>
+<section>
+<title>Locale-specific Messages and Locale Database</title>
+<para>
 The localized messages you want to display must previously be defined, of
 course.
 The simplest way to define localized messages is to use
@@ -115,10 +124,10 @@ it's not found go to the usual <filename>pages/index.html</filename>.
 	isn't just ingenious?!).
 	</para>
 </note>
-
+</section>
 
 <section>
-	<title>Effect of locales on sorting</title>
+	<title>Effect of Locales on Sorting</title>
 	<para>
 	&IC; sorting features (such as &mdash; but not only &mdash; the
 	&tag-sort; tag)

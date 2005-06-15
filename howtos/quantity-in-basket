@@ -2,7 +2,6 @@
 
 	<chapterinfo>
 		<title>Provide Item Quantity Fields in the Basket Page</title>
-		<titleabbrev>quantityfields</titleabbrev>
 
 		<keywordset>
 			<keyword>quantity</keyword>
@@ -39,7 +38,7 @@
 	<sect1 id='quantityfields_introduction'>
 		<title>Introduction</title>
 		<para>
-		HOW-TO version: $Id: quantity-in-basket,v 1.4 2005-05-24 21:42:18 docelic Exp $
+		HOW-TO version: $Id: quantity-in-basket,v 1.5 2005-06-15 10:30:12 docelic Exp $
 		</para>
 		<para>
 		On your Interchange pages, you must provide some kind of an HTML form

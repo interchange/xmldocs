@@ -1,47 +1,26 @@
 
+Attributes are various "sub-features" of a product. If you are selling
+t-shirts in different colors and sizes, you are an ideal candidate for
+item attributes.
 &IC; allows item <emphasis>attributes</emphasis> (also called
 <emphasis>modifiers</emphasis> or <emphasis>options</emphasis>)
-to be set for each ordered item. This
-allows a varying size, color, or any other modifier to be attached to
-an otherwise common
-part number.
+to be set for each ordered item. This allows a varying size, color, or
+any other modifier to be attached to an otherwise common part number.
+</para>
+<para>
+See &conf-UseModifier; for more information and concrete examples.
+</para>
 
-<!-- TODO move some of this to UseModifier -->
-
+<!-- TODO move some of this to UseModifier
 If multiple attributes are set, then they should be
 separated by commas. Previous attribute values can be saved by means
 of a hidden field on a form, and multiple attributes for each item
 can be "stacked" on top of each other.
+ -->
 
-The configuration file directive &conf-UseModifier; is used to set
-the name of the modifier or modifiers. Here's an example of attaching
-both the size and color attributes to each item ordered.
-</para>
-
-<programlisting>
-UseModifier        size,color
-</programlisting>
-
-<important>
-<para>
-Some of the names are reserved for use by &IC;, and you must not use them
-in modifier names. Namely, they include 
-	<literal>item</literal>,
-	<literal>group</literal>,
-	<literal>quantity</literal>,
-	<literal>free</literal>,
-	<literal>free_message</literal>,
-	<literal>code</literal> and, of course,
-	all <literal>mv_</literal> variables.
-</para>
-<para>
-You can see a quick list of those "reserved" names by entering the &IC;
-source tree and issuing <userinput>grep -r 'item->{[^$]' * | less</userinput>.
-</para>
-</important>
 
 <para>
-Besides setting modifier names the config files, you can also set them as
+Besides setting modifier names in the config files, you can also set them as
 &glos-scratch; variables with <mv>mv_UseModifier</mv>. For example,
 the above modifiers would be set with
 <code>[set mv_UseModifier]size color[/set]</code>.
@@ -50,7 +29,7 @@ or even same product &glos-SKU;s. Those specified in <mv>mv_UseModifier</mv> at
 the time of order will be used (just be careful, because you cannot set it
 more than once on the same page).
 </para><para>
-Setting &conf-SeparateItems; or <mv>mv_separate_items</mv>
+In addition, setting &conf-SeparateItems; or <mv>mv_separate_items</mv>
 places each ordered item on a separate line even if they have the same
 &glos-SKU;, simplifying attribute handling.
 </para><para>

@@ -36,6 +36,7 @@ my %symbols; # FINAL symbol refentries (looks almost like %symbol_lists now ;-)
 my %templates; # Templates for various symbol types
 my $max_ctxs = 20; # Trim more than $max_ctxs source context reports
 my @set_missing_all; # Helper to better manage %invalid
+my %todo; # Helper to better manage "Contains TODO item" messages
 my @set_unused; # Notice which files inside refs/ were not used
 my @parsed_versions; # IC versions we parsed
 my $specific_only; # Build only one specific .xml ?
@@ -722,6 +723,7 @@ if ( $output_list ) {
 
 # Output the 'invalid' list
 $invalid{$_} = ("Missing all (undocumented)") for @set_missing_all;
+print "GEN: tmp/missing\n";
 open INVOUT, "> tmp/missing" or
 	die "Can't open tmp/missing ($!)\n";
 print INVOUT Dumper \%invalid;
@@ -946,9 +948,21 @@ sub populate {
 					$pre_content = "";
 					$content = "";
 					$post_content = "";
+				} elsif ( $line =~ /TODO/ ) {
+					push @{ $invalid{$name} }, "Contains TODO item" unless
+						$todo{$group}{$name}++
 				}
 				# If not a beginning or end of section, simply add line to content
-				$content .= $line if $section;
+				if ( $section ) {
+					$content .= $line;
+					push @{ $invalid{$name} }, "Contains XML comment" if
+						$line =~ /<!--/ and !$todo{$group}{$name}++
+				} elsif ( $line =~ /^__END__/ ) {
+					# Nothing
+				} elsif ( $line =~ /\S/ ) {
+					push @{ $invalid{$name} }, "Contains 'out of band' text" unless
+						$todo{$group}{$name}++ 
+				}
 			}
 
 		} else {

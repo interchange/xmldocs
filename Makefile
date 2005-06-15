@@ -214,7 +214,7 @@ up-% cvs-% %-up %-cvs: sources/% $T
 #############################################################
 # Cache files
 cache caches: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) $T
-cache/%/.cache.bin: sources/% bin/stattree
+cache/%/.cache.bin: sources/%
 	echo "C     $@"
 	bin/stattree $<
 

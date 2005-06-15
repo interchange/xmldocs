@@ -2,7 +2,6 @@
 
 	<chapterinfo>
 		<title>Setup and Monitor Log Files</title>
-		<titleabbrev>setupandmonitorlog</titleabbrev>
 
 		<keywordset>
 			<keyword>log</keyword>
@@ -31,7 +30,7 @@
 	<sect1 id='setupandmonitorlog_introduction'>
 		<title>Introduction</title>
 		<para>
-		HOW-TO version: $Id: log-files,v 1.1 2004-11-23 18:01:00 docelic Exp $
+		HOW-TO version: $Id: log-files,v 1.2 2005-06-15 10:30:12 docelic Exp $
 		</para>
 		<para>
 		To monitor all relevant log files at once, first adjust the
