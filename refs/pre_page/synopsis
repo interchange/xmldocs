@@ -1,1 +1,1 @@
-  <arg choice='req'><replaceable>subroutine name</replaceable></arg>
+  <arg choice='req'><replaceable>subroutine_name</replaceable></arg>

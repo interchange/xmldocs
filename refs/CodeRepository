@@ -1,0 +1,127 @@
+__NAME__ purpose
+specify directory containing code that can be included in the running installation when needed
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>directory_name</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+There is a huge base of &IC; code included in the default installation.
+Much of it is not needed in even the '&std-catalog;' catalog with full 
+user interface (UI).  This causes a larger memory profile than necessary.
+</para><para>
+Furthermore, it is difficult to determine from the &IC; pages what code is
+needed (especially when an &glos-ITL; tag can call <code>$Tag->{}</code>
+can call a filter can call some sort of action &mdash; 
+you see the point).
+</para><para>
+A feature was needed to allow building catalogs with a more optimal
+set of code than just "everything". And as we'll see in a second,
+&conf-CodeRepository; does just that.
+</para><para>
+&conf-CodeRepository; depends on a related directive, &conf-AccumulateCode;.
+If &conf-AccumulateCode; is disabled, operation is traditional and everything
+gets loaded. (There have
+been some code initialization changes and routine calling changes,
+but the data structures are identical and no difference in operation
+should be seen).
+</para><para>
+It's when you enable &conf-AccumulateCode; that things get interesting.
+&IC; starts looking into &conf-CodeRepository; for pieces it is
+missing (&glos-ITL; tags, &glos-ActionMap;s, &glos-filter;s, widgets, etc.)
+and compiles these as needed, in runtime!
+The code is sent to the master process for compilation and
+incorporation, so that the next iteration of a page (after
+&conf-HouseKeeping; seconds expire) will find the code already compiled
+and ready to go.
+</para><para>
+It also copies the code file to the <literal>code/</literal>
+(<varname>$Global::TagDir</varname> actually) directory, in the
+<filename class='directory'>Accumulated</filename> subdirectory tree.
+When you restart &IC; the next time, these code blocks will be found,
+read normally and need not be recompiled on the fly again.
+</para><para>
+Over time, as you access pages and routines, a full set of tags
+will be developed and you can then disable &conf-AccumulateCode;.
+(Infact, &code-AccumulateCode; is recommended for development and should 
+really be turned off in production systems).
+__END__
+
+__NAME__ notes
+There can be failures due to calling <code>$Tag->{...}</code> from within
+embedded
+&PERL; for the first time, particularly when it uses a "MapRoutine" or
+calls another <code>$Tag->{...}</code> within. This is due to
+<classname>Safe</classname>, and there is probably
+not much to be done about it. The good news is that the error should
+go away after &conf-HouseKeeping; seconds, when the tag gets compiled by the
+master.
+The &tag-area;, &tag-tmp;, &tag-tmpn;, and &tag-image; tags are known to
+fail in this manner in the '&std-catalog;' catalog.
+Tags that are frequently called
+in this fashion should probably be placed in directory
+<filename class='directory'>code/Vital/</filename> directory and not
+be accumulated.
+This "failure" could be avoided if the catalog is listed under the 
+&conf-AllowGlobal; directive, and it
+might be possible to make a directive that turns on &conf-AllowGlobal; for
+the catalog only when in &conf-AccumulateCode; mode.
+</para><para>
+Another nice feature is that you can easily add a tag simply
+by adding its code to the &conf-CodeRepository; directory and having it
+compiled.
+It might also
+be possible to remove code from the master and recompile it on next access
+on-the-fly, but this has yet to be looked at.
+</para>
+
+<warning>
+<para>
+Nice features are often dangerous! Don't run this in
+production &mdash; you have been warned!
+</para><para>
+&conf-OrderCheck; is not yet implemented, and a full audit has
+not been done on all compiled code directives.
+</para><para>
+Not fully tested in &conf-PreFork; mode, and really not intended for
+that mode.
+</para><para>
+Including multiple tags in a code definition file may have unpredictable
+behavior. You should try to keep related Alias and tag things in
+the same file.
+</para><para>
+This feature only applies to global code &mdash; catalog-based code
+is not affected and behaves as usual.
+</para>
+</warning>
+<para>
+__END__
+
+__NAME__ see also
+AccumulateCode
+__END__
+
+__NAME__ author
+&mheins;
+__END__
+
+
+__NAME__ example: Enabling CodeRepository
+Put the following in &gcf;:
+<programlisting>
+AccumulateCode Yes
+CodeRepository /usr/interchange/code.pool/
+</programlisting>
+To prepare the <filename class='directory'>code.pool/</filename>
+directory, you can do something like this:
+<programlisting>
+$ mkdir /usr/interchange/code.pool/
+$ mv /usr/interchange/code/* /usr/interchange/code.pool/
+</programlisting>
+__END__
+

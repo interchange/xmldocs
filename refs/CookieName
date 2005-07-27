@@ -1,0 +1,30 @@
+__NAME__ purpose
+specify Interchange session cookie name
+__END__
+
+
+__NAME__ see also
+CookieLogin,SessionExpire
+__END__
+
+
+__NAME__ synopsis
+	<arg choice='plain'><replaceable>cookie_name</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive sets the name of the &IC; session ID cookie.
+The default value is <literal>MV_SESSION_ID</literal>.
+__END__
+
+
+__NAME__ notes
+__END__
+
+__NAME__ example: Redefining CookieName
+<programlisting>
+CookieName SESSIONID
+</programlisting>
+__END__
+

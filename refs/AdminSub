@@ -1,0 +1,35 @@
+__NAME__ purpose
+specify global subroutines that can be used only by catalogs listed under AllowGlobal
+directive
+__END__
+
+
+__NAME__ missing
+__END__
+
+
+__NAME__ see also
+AllowGlobal
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>subroutine_name</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify global subroutines that may only be used by catalogs which are listed under
+the &conf-AllowGlobal; directive.
+</para><para>
+Otherwise, in a normal course of action, global subroutines can be used
+by all catalogs.
+__END__
+
+__NAME__ example: Defining AdminSub
+<programlisting>
+AdminSub dangerous1 dangerous2
+</programlisting>
+__END__
+

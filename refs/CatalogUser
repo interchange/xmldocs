@@ -1,0 +1,46 @@
+__NAME__ purpose
+specify catalog-specific usernames to use when accessing files with absolute pathnames
+__END__
+
+
+__NAME__ synopsis
+<group choice='req' rep='repeat'>
+	<arg choice='plain'><replaceable>catalog_name username</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies catalogs and the corresponding usernames
+which will be used in accessing files with absolute pathnames.
+Actually, the file access itself is still performed under the &IC;
+server username, but the &conf-CatalogUser; values are used for
+a "would-be" kind of check.
+</para><para>
+This directive is only honored when &conf-NoAbsolute; is enabled.
+Then, the situation is as follows:
+<itemizedlist>
+	<listitem><para>
+		&IC; allows the file to be read or written if the absolute pathname 
+		points somewhere in the catalog directory (&glos-CATROOT;) or
+		&conf-TemplateDir;.
+	</para></listitem>
+	<listitem><para>
+		&IC; allows the file to be read if the appropriate catalog's
+		&conf-CatalogUser; is file owner, or belongs to a user group that
+		can read the file. (The same analogy is used for write access).
+	</para></listitem>
+</itemizedlist>
+__END__
+
+__NAME__ notes
+__END__
+
+
+__NAME__ example: Defining CatalogUser
+<programlisting>
+CatalogUser  foundation  joe
+CatalogUser  reports     jane
+</programlisting>
+__END__
+

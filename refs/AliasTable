@@ -1,0 +1,57 @@
+__NAME__ purpose
+specify database that contains page aliases ("redirect" instructions)
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>database_name</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies Interchange &glos-database; that 
+contains page aliases (default database name is 
+<literal>alias</literal>).
+</para><para>
+This way, flypages can be aliased and redirected to different locations
+without performing file lookup cycles.
+</para><para>
+Primary applications include content management and creation of
+pseudo-paths.
+__END__
+
+__NAME__ notes
+__END__
+
+__NAME__ example: Creating AliasTable database 
+<programlisting>
+<xi:include parse='text' href='../files/various/alias.txt'/>
+</programlisting>
+You might notice that the fields names and values in the tables
+above are not properly aligned. This is an unfortunate nature of
+<glossterm linkend="tab_delimited">TAB-delimited</glossterm> files.
+</para><para>
+In our example database, a flypage for the item SKU 
+<literal>4595</literal> redirects back to the index page.
+</para><para>
+To minimize the chance of confusion, you can download properly composed
+<ulink url="files/various/alias.txt">alias.txt</ulink>.
+__END__
+
+__NAME__ example: Defining AliasTable
+<programlisting>
+Database alias alias.txt TAB
+AliasTable alias
+</programlisting>
+</para><para>
+With the above in &ccf;, a visit to the page <literal>4595.html</literal>
+should redirect you to the index page.
+__END__
+
+
+TODO : describe cgi passing of control:
+"Allows initialization of CGI inputs via base_control field."
+TODO: produce working example
+

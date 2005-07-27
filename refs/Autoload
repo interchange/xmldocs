@@ -1,0 +1,90 @@
+__NAME__ purpose
+specify actions to be executed automatically at the beginning of every page access
+__END__
+
+
+__NAME__ see also
+AutoEnd
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>subroutine_name_or_ITL_code</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify actions (in form of &PERL; subroutines or &glos-ITL; tags)
+that are to be invoked automatically, on every 
+page access. This step is performed before any page parsing occurs,
+and before the action or page is even determined.
+</para><para>
+The directive can be set to the name of a subroutine (&conf-Sub; or
+&conf-GlobalSub;), or to a string containing &glos-ITL; tags.
+The return value from the code run is discarded.
+__END__
+
+
+__NAME__ notes
+__END__
+
+__NAME__ example: Simple Autoload example
+Put the following in &gcf;:
+<programlisting><![CDATA[
+GlobalSub <<EOR
+  sub simple_gsub {
+    open OUT, "> /tmp/out";
+    print OUT scalar localtime, "\n";
+    close OUT;
+	}
+EOR
+]]></programlisting>
+Put the following in &ccf;:
+<programlisting>
+Autoload simple_gsub
+</programlisting>
+Now, at each page visit, the file <filename>/tmp/out</filename> will
+contain the access time. This example is pretty useless and does not
+convey good programming practice (the file opening part), but it does
+show a practical, stand-alone example.
+__END__
+
+__NAME__ example: Redirect page accesses
+Let's say that a new page visit is "triggered" as a result of users
+submitting a &glos-HTML; form. At that point, <mv>mv_nextpage</mv>
+contains the name of the page to display next, of course.
+</para><para>
+The following would redirect accesses from
+directory <filename class='directory'>public/</filename> to
+directory <filename class='directory'>private/</filename>:
+<programlisting><![CDATA[
+Autoload  [perl] $CGI->{mv_nextpage} =~ s:^public/:private/:; [/perl]
+]]></programlisting>
+__END__
+
+__NAME__ example: Temporary change of configuration directives
+As you might know, on each page access, all catalog
+&glos-configuration; directives (global and catalog) are "re-instantiated",
+and valid for the current page. This particularly convenient feature
+allows us to change (modify, add or delete) configuration directives
+as we see fit, without worrying about them being persistent, and consequently,
+even without the need to re-set them back to original values.
+</para><para>
+The following example (put in &ccf;) displays a different flypage for
+Opera web browsers:
+<programlisting><![CDATA[
+Autoload <<EOA
+[perl] 
+  if ($Session->{browser} =~ /opera/i) {
+	  $Config->{Special}->{flypage} = 'opera_flypage';
+  }
+[/perl]
+EOA
+]]></programlisting>
+Please note that &conf-SpecialPage; is the corresponding directive in 
+the catalog &glos-configuration; (and not <literal>Special</literal> as
+we see above). This is an exceptional case &mdash; the hash keys otherwise
+have the same name as the catalog configuration directives themselves.
+__END__
+
