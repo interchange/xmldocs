@@ -36,7 +36,7 @@ __NAME__ author
 &mheins;
 __END__
 
-__NAME__ example: Enabling DeliverIMage
+__NAME__ example: Enabling DeliverImage
 Put the following in &ccf;:
 <programlisting>
 DeliverImage Yes

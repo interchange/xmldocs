@@ -483,7 +483,13 @@ sub wanted {
 
 			$hash{total}{$fsubtype . "s"}++;
 			last;
+
+		##########################################################
+		# Found a HTML page
+		#} elsif ( $c{fsubtype} =~ /^html$/ )  {
+		#	line_findGlobVars(\%c);
 		}
+
 	} # END of 'FOR each (line of file)'
 
 

@@ -347,7 +347,7 @@ while ( $path = shift @paths) { # For each version specified
 
 				# We 'shift' here because we unshifted 1 row to match line
 				# numbers with array indexes
-				my $ctxsdata = join "\n", @{ $$ctx{ctx} };
+				my $ctxsdata = join( "\n", @{ $$ctx{ctx} }) || "";
 				if ( length $ctxsdata ) {
 					my $ls = $$ctx{ctxs}; # line start nr.
 					( my $plf = $$ctx{file} ) =~ s#.+?/##;

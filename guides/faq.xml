@@ -1114,83 +1114,64 @@ More automated or user-friendly setups are left as an exercise for the user.
 </para>
 </answer>
 </qandaentry>
+</qandadiv>
 
-<!--
-
-<qandaentry>
-	<question><para>How do i....</para></question>
-<answer><para>
-
-<para>
-
-</para>
-</answer></qandaentry>
-
+<qandadiv><title>How do i....</title>
 
 <qandaentry>
-	<question><para>How do I get the number of items in a shopping cart?</para></question>
+	<question><para>How do I get the number of items
+	in a shopping cart?</para></question>
 <answer><para>
 
-<para>
-
-If it is simply the total number, extended according to quantity, you can use the [nitems] tag. If you need this number for use in an embedded &PERL; script, you can use:
-
+If it is simply the total number, extended according to quantity, you can
+use the &tag-nitems; tag. If you need this number for use in an embedded
+&PERL; script, you can use:
 
 <programlisting><![CDATA[
-
+$number = $Tag->nitems();
 ]]></programlisting>
-
-   $number = $Tag->nitems();
 
 If it is the number of line items you need, then you can use a &PERL; script:
 
-
 <programlisting><![CDATA[
-
+[perl]
+  return scalar @{$Carts->{main}};
+[/perl]
 ]]></programlisting>
 
-   [perl]
-       return scalar @{$Carts->{main}};
-   [/perl]
-
-(The 'main' refers to the main shopping cart.)
-
-If you have SeparateItems in effect, and need the number of unique items, you could use:
-
+(The 'main' above refers to the main shopping cart.)
+</para><para>
+If you have &conf-SeparateItems; in effect, and need the number of
+unique items, you could use:
 
 <programlisting><![CDATA[
-
+[perl]
+  my $cart = $Carts->{main};
+	my $item;
+  foreach $item (@$cart) {
+    @items = split /\|/, $items;
+    $count = 0;
+    for (@items) {
+      $count++ unless $seen{$_}++;
+		}
+	}
+  $count;
+[/perl]
 ]]></programlisting>
-
-   [perl]
-       my $cart = $Carts->{main};
-       foreach my $item (@$cart) {
-   @items = split /\|/, $items;
-   $count = 0;
-   for (@items) {
-   $count++ unless $seen{$_}++;
-   }
-   $count;
-   [/perl]
 
 </para>
 </answer></qandaentry>
 
 
 <qandaentry>
-	<question><para>How do I delete an item from the cart in &PERL;?</para></question>
+	<question><para>How do I delete an item from the
+	cart in Perl?</para></question>
 <answer><para>
 
-<para>
-
-(Answered by Racke)
-
-
 <programlisting><![CDATA[
-
-]]></programlisting>
-
 [calc] @$Items = grep {$_->{code} ne '123.456.789'} @$Items [/calc]
+]]></programlisting>
+('123.456.789' is the SKU of the product you want to delete, of course).
 
 </para>
 </answer></qandaentry>
@@ -1200,11 +1181,10 @@ If you have SeparateItems in effect, and need the number of unique items, you co
 	<question><para>The demo doesn't do ... (pick one)</para></question>
 <answer><para>
 
-<para>
-
-That is because it is a demo. It is not intended to be a finished catalog, just
+That is because it is a demo. It is not intended to be a finished catalog,
+just
 a starting point.
-
+</para><para>
 That being said, you should think long and hard before abandoning the
 checkout schema. Years of experience have led to the production of the
 userdb, transactions, and orderline tables, and the structure of the
@@ -1217,46 +1197,48 @@ order logging.
 
 
 <qandaentry>
-	<question><para>How can I trace the source of a purchase and run a partners program?</para></question>
+	<question><para>How can I trace the source of a purchase and run a
+	partners program?</para></question>
 <answer><para>
 
-<para>
+&IC; has a facility that adds a parameter called <literal>source</literal>
+to the session database for that user. You should give your partners a
+source code, which must contain at least one letter character
+(<literal>A-Za-z</literal> only). It is placed in the sourcing URL as a
+query string of:
 
-&IC; has a facility that adds a parameter called <emphasis>source</emphasis> to the session database for that user. You should give your partners a source code, which must contain at least one letter character (A-Za-z only). It is placed in the sourcing URL as a query string of:
-
-
-<programlisting><![CDATA[
-
-]]></programlisting>
-
-   mv_pc=Source1
+<programlisting>
+mv_pc=<replaceable>Source1</replaceable>
+</programlisting>
 
 If this is appended to the URL with which the user calls &IC;,
 it will then be placed in the session identifier <literal>source</literal>.
 
-This URL:
+URL <literal>http://&def-hostname;/cgi-bin/ic/sp_offer?mv_pc=<replaceable>Source1</replaceable></literal>
+would yield <literal>Source1</literal> from the &IC; call
+<code>[data session source]</code>.
+</para><para>
 
-E:http://yourcatalog.com/cgi-in/yourcat/sp_offer?mv_pc=Source1
-
-will yield <literal>Source1</literal> from the &IC; tag [data session source].
-
-The Minivend 3 idiom <literal>?;;Source1</literal> continues to be supported, so existing partner sites should work without change.
+The Minivend 3 idiom <literal>?;;<replaceable>Source1</replaceable></literal>
+continues to be supported, so existing partner sites should work without change.
 
 </para>
 </answer></qandaentry>
 
 
 <qandaentry>
-	<question><para>How can I send an email copy of the receipt to a user?</para></question>
+	<question><para>How can I send an email copy of
+	the receipt to a user?</para></question>
 <answer><para>
 
-<para>
-
-There are several ways, but this is a more complex question than it may seem like it is. You will have to deal with bad email addresses, deciding which
-information to send, showing delivery times, etc. You also have to be very careful with credit card information. If you have not taken the proper security measures (by enabling PGP credit card encryption or using CyberCash), you might just mail them their own unencrypted credit card number!
-
-This is supported in &IC; via a UserTag, [email ...]. See the "simple" and "basic" demos.
-
+There are several ways, but this is a more complex question than it may
+seem. You will have to deal with bad email addresses, deciding which
+information to send, showing delivery times, etc. You also have to be very
+careful with credit card information. If you have not taken the proper
+security measures (by enabling PGP credit card encryption or using CyberCash),
+you might just mail them their own unencrypted credit card number!
+</para><para>
+This is supported in &IC; via a &tag-email; or related tags linked from there.
 </para>
 </answer></qandaentry>
 
@@ -1265,18 +1247,16 @@ This is supported in &IC; via a UserTag, [email ...]. See the "simple" and "basi
 	<question><para>How do I display Euro pricing?</para></question>
 <answer><para>
 
-<para>
-
-You can use &IC;'s II8N facilty via the Locale directive. In catalog.cfg:
+You can use &IC;'s &glos-internationalization; facilty via the
+&conf-Locale; directive. In &ccf;:
 
 
 <programlisting><![CDATA[
-
-]]></programlisting>
-
 # to define the euro-Settings (PriceDivide is for converting from DM)
+
 Locale eur_EUR PriceDivide         1.95583
 Locale eur_EUR p_cs_precedes       0
+
 # this is great - you can even use HTML-Tags to display an euro-image
 Locale eur_EUR currency_symbol     "<img src="/path/to/image/euro.gif">"
 Locale eur_EUR p_sep_by_space      2
@@ -1286,22 +1266,19 @@ Locale eur_EUR mon_decimal_point   ,
 Locale de_DE
 Locale de_DE p_cs_precedes  0
 Locale de_DE p_sep_by_space 2
-
-Note: Be sure to use the latest exchange rates when you establish your catalog.
-
-On your pages (this is from a search results page, the [item-.... ...] notation may be different depending on your context):
-
-
-<programlisting><![CDATA[
-
 ]]></programlisting>
 
-[item-price]<br><!- german is default ->
-[setlocale eur_EUR]
-  [currency  convert="1"][item-field price][/currency]<br><!- the euro ->
-[setlocale]
+Be sure to use the latest exchange rates when you establish your catalog.
+On your pages (this is from a search results page, the <code>[item...]</code>
+notation may be different depending on your context):
 
-Any questions? Read the docs about "Internationalization."
+<programlisting><![CDATA[
+[item-price]<br>    [comment] german is default [/comment]
+[setlocale eur_EUR]
+  [comment]EURO[/comment]
+  [currency  convert="1"][item-field price][/currency]<br>
+[setlocale]
+]]></programlisting>
 
 </para>
 </answer></qandaentry>
@@ -1311,57 +1288,42 @@ Any questions? Read the docs about "Internationalization."
 	<question><para>How do I empty the shopping cart?</para></question>
 <answer><para>
 
-<para>
+Here are three examples of ways to empty/drop/clear the shopping cart contents. 
 
-N: Here are three examples of ways to empty/drop/clear the shopping cart contents. 
-
-H3: Empty shopping cart
-
+</para><para>
+Empty the cart:
 <programlisting><![CDATA[
-
-]]></programlisting>
-
 [calc]
-        @{$Carts->{$CGI->{mv_cartname} || 'main'}} = ();
+  @{$Carts->{$CGI->{mv_cartname} || 'main'}} = ();
 [/calc]
 
-H3: Empty shopping cart
-
-<programlisting><![CDATA[
-
 ]]></programlisting>
 
+</para><para>
+Empty the cart on a button press:
+
+<programlisting><![CDATA[
 [set clear_basket]
-        [calc]
-                @{$Carts->{$CGI->{mv_cartname} || 'main'}} = ();
-        [/calc]
+  [calc]
+    @{$Carts->{$CGI->{mv_cartname} || 'main'}} = ();
+  [/calc]
 [/set]
 
-[button
-        text="Clear Basket"
-        src="clear_basket.gif"
-        hidetext=1
-        form=basket
-        ]
-                mv_todo=refresh
-                mv_click=clear_basket
+[button text="Clear Basket" src="clear_basket.gif" hidetext=1 form=basket]
+  mv_todo=refresh
+  mv_click=clear_basket
 [/button]
-
-H3: Erase the user session (includes shopping cart)
-
-<programlisting><![CDATA[
-
 ]]></programlisting>
 
-[button
-        text="Clear Basket"
-        src="clear_basket.gif"
-        hidetext=1
-        form=basket
-        ]
-                mv_todo=cancel
-                mv_nextpage=index
+</para><para>
+Delete user session (emptying cart as a consequence):
+
+<programlisting><![CDATA[
+[button text="Clear Basket" src="clear_basket.gif" hidetext=1 form=basket]
+  mv_todo=cancel
+  mv_nextpage=index
 [/button]
+]]></programlisting>
 
 </para>
 </answer></qandaentry>
@@ -1370,15 +1332,9 @@ H3: Erase the user session (includes shopping cart)
 <qandaentry>
 	<question><para>How do I e-mail credit card numbers in plain text?</para></question>
 <answer><para>
-
-<para>
-
-(Answered by Mike Heins)
-
-The position of ICDEVGROUP is that we will not tell you what you can and
+The position of &ICDEVGROUP; is that we will not tell you what you can and
 cannot do, but that we simply will not help you send unencrypted CC
 numbers by email.
-
 </para>
 </answer></qandaentry>
 
@@ -1386,138 +1342,109 @@ numbers by email.
 <qandaentry>
 	<question><para>How do I setup multiple shipping addresses?</para></question>
 <answer><para>
-
-<para>
-
 &IC; has the facility to handle multiple addresses.
-See the {{C[jump="icdatabase.html#User Database Functions"]User Database Functions}}
-section of the &IC; Database manual.
-        
+See &glos-UserDB;.
 </para>
 </answer></qandaentry>
 
 
 <qandaentry>
-	<question><para>How do I change the order number from TEST0001, TEST0002 to something else?</para></question>
+	<question><para>How do I change the order number from TEST0001,
+	TEST0002 to something else?</para></question>
 <answer><para>
-
-<para>
-
-(Answered by Aaron Hazelton &amp; Paul Jordan)
-
-        * Go to the IC admin and click on "Administration"
-        then click on the 'last order' which will be something
-        like "TEST00001".  It will bring up a page which will allow
-        you to change it to whatever you want.
-        
-        * Or, modify the CATROOT/etc/order.number
-
+Go to the IC admin, click on "Administration"
+then click on the 'last order' which will be something
+like "TEST00001".  It will bring up a page which will allow
+you to change it to whatever you want.
+</para><para>
+Alternatively, without the GUI, modify
+<filename>etc/order.number</filename> in your catalog.
 </para>
 </answer></qandaentry>
 
 
 <qandaentry>
 	<question><para>How do I move a catalog from a test server to a production server?</para></question>
-<answer><para>
+<answer>
 
-<para>
+<itemizedlist>
+<listitem><para>
+Copy the complete catalog root with all files and subfolders.
+</para></listitem>
 
-(Answered by Jonathan Clark)
+<listitem><para>
+Make sure the permissions are appropriate (&IC; daemon user needs rw
+access to all of it.
+</para></listitem>
 
-N:
+<listitem><para>
+Link <filename>error.log</filename> to
+<filename>/var/log/interchange/catalog/error.log</filename> or wherever.
+</para></listitem>
 
-1) copy the complete catalog root with all files and subfolders.
+<listitem><para>
+Link catroot/images to images folder in your public html space.
+</para></listitem>
 
-2) make sure the permissions are appropriate (&IC; daemon user needs rw access to all of it.
+<listitem><para>
+Link the admin ui images folder '&IC;' in public html space to actual location.
+</para></listitem>
 
-3) link <catroot>/error.log to /var/logs/&IC;/catalog/error.log or wherever.
+<listitem><para>
+Copy any global usertags which are not in your catalog structure.
+</para></listitem>
 
-4) link catroot/images to images folder in your public html space.
+<listitem><para>
+Edit the <filename>variable.txt</filename> to set appropriate domain names
+if these have changed.
+</para></listitem>
 
-5) link the admin ui images folder '&IC;' in public html space to actual location.
+<listitem><para>
+If using MySQL/Postgres/Oracle, set up database access.
+</para></listitem>
 
-6) copy any global usertags which are not in your catalog structure.
+<listitem><para>
+Put a link program in your <literal>cgi-bin</literal>, make sure it is
+chmod u+s and owned by the &IC; daemon user.
+</para></listitem>
 
-7) edit the &glos-variable;.txt to set appropriate domain names if these have changed.
+<listitem><para>
+Add the catalog to the &gcf; file.
+</para></listitem>
 
-8) if using MySQL/Postgres/Oracle, set up database access.
+<listitem><para>
+Restart &IC;.
+</para></listitem>
 
-9) put a link program in your cgi-bin, make sure it is chmod u+s and owned by the &IC; daemon user.
+<listitem><para>
+Check global <filename>error.log</filename> for any error messages.
+</para></listitem>
+</itemizedlist>
 
-10) add the catalog to the &gcf; file.
-
-11) restart ic.
-
-12) check global error.log for any error messages.
-
-</para>
 </answer></qandaentry>
 
 
 <qandaentry>
 	<question><para>How do I access the raw match count?</para></question>
 <answer><para>
-
-<para>
-
-(Answered by Kevin Walsh)
-N:
-
-{{EX:[value mv_search_match_count]}}
-
+<code>[value mv_search_match_count]</code>
 </para>
 </answer></qandaentry>
 
 
 <qandaentry>
-	<question><para>How do I add the thumbnail to the results page?</para></question>
+	<question><para>How do I add thumbnails to
+	the results page?</para></question>
 <answer><para>
-
-<para>
-
-(Answered by Ed LaFrance &amp; Dan Browning)
-
-It's as easy as <img src="thumb/[item-field thumb]">, but 
-you may want to add a check to see if the image is actually 
+It's as easy as <code><![CDATA[<img src="thumb/[item-field thumb]">]]></code>,
+but you may want to add a check to see if the image is actually 
 there before you try to display it:
 
 <programlisting><![CDATA[
-
-]]></programlisting>
-
 [if file images/thumb/[item-field thumb]]
         <img src="thumb/[item-field thumb]">
 [/if]
-
-For example:
-
-
-<programlisting><![CDATA[
-
 ]]></programlisting>
-
-- results.html.orig   Sat Jun 29 21:25:49 2002
-+++ results.html        Sat Jun 29 21:28:57 2002
-@@ -100,6 +100,7 @@
-
- <table width="90%" border="0" cellspacing="0" cellpadding="3">
- <tr class="contentbar2">
-+  <td>&amp;nbsp;</td>
-   <td><b>&amp;nbsp;Product</b></td>
-   <td align="center"><b>SKU</b></td>
-   <td align="center"><b>Stock</b></td>
-@@ -120,6 +121,11 @@
-
- <tr valign="middle">
-       <td>
-+                  [if file images/thumb/[item-field thumb]]
-+                     <img src="thumb/[item-field thumb]">
-+                  [/if]
-+      </td>
-+      <td>
-        <input  type="hidden"  name="mv_order_item"  value="[item-code]">
-        <a href="[area [item-code]]">[item-description]</a>
-       </td>
 
 </para>
 </answer></qandaentry>
@@ -1527,58 +1454,64 @@ For example:
 	<question><para>How do I do a random display of items?</para></question>
 <answer><para>
 
-<para>
-
-(Answered by Bill Carr)
-
-If you are using mysql (and others probably), you should be able to add "ORDER BY RAND()" to your SQL query.  For example:
-
+If you are using mysql (and others probably), you should be able to add
+"ORDER BY RAND()" to your SQL query.  For example:
 
 <programlisting><![CDATA[
-
-]]></programlisting>
-
 [query
-   list=1
-   sql=|SELECT * FROM products ORDER BY RAND() LIMIT 3|
+  list=1
+  sql=|SELECT * FROM products ORDER BY RAND() LIMIT 3|
 ]
 [list]
-        [sql-param description]<br>
+  [sql-param description]<br>
 [/list]
 [/query]
+]]></programlisting>
 
 </para>
 </answer></qandaentry>
 
 
 <qandaentry>
-	<question><para>How do I setup a new real time payment processor that isn't yet supported by &IC;?</para></question>
+	<question><para>How do I setup a new real time payment processor
+	that isn't yet supported by Interchange?</para></question>
 <answer><para>
-
-<para>
-
-If the payment processor that you would like to use isn't supported by &IC; out of the box, then a new payment module would need to be developed for that processor before you could use them.
-
-If you are up to the task of programming a new payment processor module yourself, the ICDEVGROUP would be happy to add your contribution to the growing list of &IC;-supported payment processors.  Feel free to take a look at the lib/Vend/Payment directory to see examples of current payment modules.
-
-If developing the module on your own isn't an option, you may engage a competent &IC; developer to do it for you or use one of the already-supported payment modules.
-
+If the payment processor that you would like to use isn't supported by &IC;
+out of the box, then a new payment module would need to be developed for
+that processor before you could use them.
+</para><para>
+If you are up to the task of programming a new payment processor module
+yourself, the &ICDEVGROUP; would be happy to add your contribution to the
+growing list of &IC;-supported payment processors.  Feel free to take a
+look at the <filename class='directory'>lib/Vend/Payment</filename> directory
+to see examples of current payment modules.
+</para><para>
+If developing the module on your own isn't an option, you may engage a
+competent &IC; developer to do it for you or use one of the already-supported payment modules.
+TODO: commercial support plug
 </para>
 </answer></qandaentry>
 
 
 <qandaentry>
-	<question><para>How do I modify orders after they are placed, change items, shipping, etc.?</para></question>
+	<question><para>How do I modify orders after they are placed,
+	change items, shipping, etc.?</para></question>
 <answer><para>
 
-<para>
+Example question:  "Occasionally, I need to modify orders... Add an Item, Change shipping, etc.   What is the best way or how can it be done?"
+</para><para>
 
-N:Example question:  "Occasionally, I need to modify orders... Add an Item, Change shipping, etc.   What is the best way or how can it be done?"
-
-The Foundation template does not have this functionality "out of the box".  While one can manually modify the tables via the Admin UI, it would not cause IC to automatically recalculate subtotals, tax, shipping, etc. to account for the  modifications.
-
-Until someone gets the "itch" to program that feature into the Admin UI, some users are solving the problem by handling all of these modifications in a Back Office / Accounting / ERP software system.  For example, IC comes with "out of the box" support for integration with Quickbooks.  At that point, however, it becomes necessary to analyze what (if any) syncronization will be performed between the two systems.
-
+The Foundation template does not have this functionality "out of the box".
+While one can manually modify the tables via the Admin UI, it would not cause
+&IC; to automatically recalculate subtotals, tax, shipping, etc. to account
+for the  modifications.
+</para><para>
+Until someone gets the "itch" to program that feature into the Admin UI,
+some users are solving the problem by handling all of these modifications in
+a Back Office / Accounting / ERP software system.  For example, &IC; comes
+with "out of the box" support for integration with Quickbooks.  At that point,
+however, it becomes necessary to analyze what (if any) syncronization will
+be performed between the two systems.
 </para>
 </answer></qandaentry>
 
@@ -1587,213 +1520,196 @@ Until someone gets the "itch" to program that feature into the Admin UI, some us
 	<question><para>How do I make or get a certificate for SSL?</para></question>
 <answer><para>
 
-<para>
-
-This is handled separately and independantly from &IC;, and there are lots of documentation on buying and installing certificates for your platform and http server, as well as generating certificate signing requests (CSR).  Companies such as GeoTrust and Thawte sell certificates, and often have some documentation on what the process entails.  The Apache, mod_ssl, and OpenSSL user groups may be of assistance as well.
-
-While it is technically feasible to generate your own self-signed certificate, modern browsers will display a warning if the certificate is not signed by a signing authority known to that browser.
-
+This is handled separately and independantly from &IC;, and there are lots
+of documentation on buying and installing certificates for your platform and
+http server, as well as generating certificate signing requests (CSR). 
+Companies such as GeoTrust and Thawte sell certificates, and often have some
+documentation on what the process entails.  The Apache, mod_ssl, and OpenSSL
+user groups may be of assistance as well.
+</para><para>
+While it is technically feasible to generate your own self-signed certificate,
+modern browsers will display a warning if the certificate is not signed by a
+signing authority known to that browser.
 </para>
 </answer></qandaentry>
 
 
 <qandaentry>
-	<question><para>How do I perform multi-table SQL queries and/or joins using dot notation?</para></question>
+	<question><para>How do I perform multi-table SQL queries and/or joins
+	using dot notation?</para></question>
 <answer><para>
 
-<para>
-
-(Answered by Mike Heins)
-
-Example question: "How come I can't use [sql-param tablename.fieldname] notation when I do a multi-table query?"
-
+Example question: "How come I can't use
+<code>[sql-param tablename.fieldname]</code> notation when I do a
+multi-table query?"
+</para><para>
 DBI simply does not support tablename.fieldname in the return value.
-
-You can just refer to them by the fieldname. In the case of field names that are the same but need to be selected from different tables, you can use "SELECT orderline.quantity as o_quan,..." and refer to it as [sql-param o_quan].
+You can just refer to them by the fieldname. In the case of field names that
+are the same but need to be selected from different tables, you can use
+<literal>SELECT orderline.quantity as o_quan,...</literal> and refer to it as
+<code>[sql-param o_quan]</code>.
 
 </para>
 </answer></qandaentry>
 
 
 <qandaentry>
-	<question><para>How do I modify the Save Cart and Recurring Cart feature?  How do they work?</para></question>
+	<question><para>How do I modify the Save Cart and Recurring Cart feature?
+	How do they work?</para></question>
 <answer><para>
 
-<para>
-
-The code for these features is in templates/components/cart.  The relative portion that is executed first when you call the basket page is this:
-
-
-<programlisting><![CDATA[
-
-]]></programlisting>
-
-      [button
-          text="Save This Cart"
-          src="__THEME__/savecart.gif"
-          extra="class=contentbar2"
-          hidetext=1
-          form=basket
-          mv_check="Save This Cart"
-      ]
-          mv_todo=return
-          mv_nextpage=ord/basket
-          save_cart=cart
-      [/button]
-      [button
-          text="Set As Recurring Order"
-          src="__THEME__/saverecur.gif"
-          extra="class=contentbar2"
-          hidetext=1
-          form=basket
-          mv_check="Set As Recurring Order"
-      ]
-          [set save_cart]recurring[/set]
-          mv_todo=return
-          mv_nextpage=ord/basket
-          save_cart=recurring
-      [/button]
-
-This creates two buttons that set save_cart to either 'cart' or 'recurring', then go to the ord/basket page (where you are already).  When clicked, one of these two code blocks will be executed:
+The code for these features is in
+<filename>templates/components/cart</filename>. The relative portion that
+is executed first when you call the basket page is this:
 
 
 <programlisting><![CDATA[
+[button text="Save This Cart" src="__THEME__/savecart.gif"
+  extra="class=contentbar2" hidetext=1 form=basket mv_check="Save This Cart"
+]
+  mv_todo=return
+  mv_nextpage=ord/basket
+  save_cart=cart
+[/button]
 
+
+[button
+  text="Set As Recurring Order" src="__THEME__/saverecur.gif"
+  extra="class=contentbar2" hidetext=1 form=basket
+  mv_check="Set As Recurring Order"
+]
+  [set save_cart]recurring[/set]
+  mv_todo=return
+  mv_nextpage=ord/basket
+  save_cart=recurring
+[/button]
 ]]></programlisting>
 
- [if value save_cart eq 'recurring']
-            <form action="[process-target]"  method="POST">
-            To save this recurring order, give it a nickname, then press 'Save Cart'.<br>
-            Nickname:
-            <input  type="TEXT" name="c_nickname"  size="11" value="[scratch just_nickname]">
-            <input  type="hidden"  name="mv_session_id" value="[data session id]">
-                        <input  type="HIDDEN" name="c_recurring" value="1">
-            <input  type="HIDDEN" name="save_cart" value="recurring">
-            <input  type="HIDDEN" name="mv_todo" value="return">
-            <input  type="HIDDEN" name="mv_check" value="Save Cart">
-            <input  type="SUBMIT" value="Save Cart">
-            </FORM>
-  [elsif value save_cart eq 'cart']
-            <form action="[process-target]"  method="POST">
-            To save this cart, give it a nickname, then press 'Save Cart'.<br>
-            Nickname:
-            <input  type="TEXT" name="c_nickname"  size="11" value="[scratch just_nickname]">
-            <input  type="HIDDEN" name="c_recurring" value="0">
-            <input  type="HIDDEN" name="save_cart" value="cart">
-            <input  type="HIDDEN" name="mv_todo" value="return">
-            <input  type="HIDDEN" name="mv_check" value="Save Cart">
-                        <input  type="hidden"  name="mv_session_id" vlaue="[data session id]">
-            <input  type="SUBMIT" value="Save Cart">
-            </FORM>
-  [/elsif]
-!endblock  
+
+This creates two buttons that set save_cart to either 'cart' or 'recurring',
+then go to the <filename>ord/basket</filename> page (where you are already).
+When clicked, one of these two code blocks will be executed:
+
+<programlisting><![CDATA[
+[if value save_cart eq 'recurring']
+  <form action="[process-target]"  method="POST">
+    To save this recurring order, give it a nickname,
+		then press 'Save Cart'.<br>
+    Nickname:
+    <input  type="TEXT" name="c_nickname"  size="11" value="[scratch just_nickname]">
+    <input  type="hidden"  name="mv_session_id" value="[data session id]">
+    <input  type="HIDDEN" name="c_recurring" value="1">
+    <input  type="HIDDEN" name="save_cart" value="recurring">
+    <input  type="HIDDEN" name="mv_todo" value="return">
+    <input  type="HIDDEN" name="mv_check" value="Save Cart">
+    <input  type="SUBMIT" value="Save Cart">
+  </form>
+
+[elsif value save_cart eq 'cart']
+
+  <form action="[process-target]"  method="POST">
+    To save this cart, give it a nickname, then press 'Save Cart'.<br>
+    Nickname:
+    <input  type="TEXT" name="c_nickname"  size="11" value="[scratch just_nickname]">
+    <input  type="HIDDEN" name="c_recurring" value="0">
+    <input  type="HIDDEN" name="save_cart" value="cart">
+    <input  type="HIDDEN" name="mv_todo" value="return">
+    <input  type="HIDDEN" name="mv_check" value="Save Cart">
+    <input  type="hidden"  name="mv_session_id" vlaue="[data session id]">
+    <input  type="SUBMIT" value="Save Cart">
+  </form>
+
+[/elsif]
+]]></programlisting>
 
 The "nickname" for the cart is set earlier via:
 
-
 <programlisting><![CDATA[
-
-]]></programlisting>
-
 [if !scratch just_nickname]
   [seti just_nickname][tag time]%b-%d-%Y[/tag][/seti]
 [/if]
+]]></programlisting>
 
-The real work is done because of this:  {{EX:<input  type="HIDDEN" name="mv_check" value="Save Cart">}} which calls the following code after the the user clicks "Save Cart":
+The real work is done because of this chunk:
+
+<programlisting><![CDATA[
+<input  type="HIDDEN" name="mv_check" value="Save Cart">
+]]></programlisting>
+
+which calls the following code after the the user clicks "Save Cart":
 
 
 <programlisting><![CDATA[
-
+[set Save Cart]
+  mv_todo=return
+  mv_nextpage=ord/basket
+  save_cart=none
+  [save_cart nickname="[value c_nickname]" recurring="[value c_recurring]"]
+[/set]
 ]]></programlisting>
 
-  [set Save Cart]
-   mv_todo=return
-   mv_nextpage=ord/basket
-   save_cart=none
-   [save_cart nickname="[value c_nickname]" recurring="[value c_recurring]"]
-  [/set]
-
-Which in turn calls the usertag "save_cart" with a nickname parameter and a recurring parameter.  Depending on which button was clicked, recurring will either be 0 (for "Save This Cart") or 1 (for "Set As Recurring Order").  The save_cart usertag adds the cart to the userdb.carts field as a &PERL; data structure (hashes, arrays, etc.).
-
+Which in turn calls the usertag &tag-save_cart; with a nickname parameter
+and a recurring parameter.  Depending on which button was clicked, recurring
+will either be 0 (for "Save This Cart") or 1 (for "Set As Recurring Order").
+The save_cart usertag adds the cart to the userdb.carts field as a &PERL;
+data structure (hashes, arrays, etc.).
 </para>
+</answer>
 </qandaentry>
+</qandadiv>
 
-
-<qandaentry>
-	<question><para>Errors</para></question>
-<answer><para>
-
-<para>
-
-</para>
-</answer></qandaentry>
-
+<qandadiv><title>Errors</title>
 
 <qandaentry>
 	<question><para>Sorting doesn't work across multiple pages.</para></question>
 <answer><para>
 
-<para>
-
-If you are using the [sort table:field] idiom, it cannot. It sorts data
-present in the list only.
-
+If you are using the <code>[sort table:field]</code> idiom, it cannot.
+It sorts data present in the list only.
 </para>
 </answer></qandaentry>
 
 
 <qandaentry>
-	<question><para>I am searching for a string and it is not found. I know it is there!</para></question>
+	<question><para>I am searching for a string and it is not found.
+	I know it is there!</para></question>
 <answer><para>
-
-<para>
-
-Set <literal>mv_substring_match</literal> to <literal>yes</literal> (<literal>su=yes</literal> in one-clicks). This most
-commonly happens when searching for non-ISO-8859 (Cyrillic, or characters like
-umlaut and eacute) characters in word-match mode. The problem is, that unless
-your locale is set up properly, &PERL; doesn't think a non-ISO-8859 and a space
-character is a boundary.
-
+Set <mv>mv_substring_match</mv> to <literal>yes</literal>
+(<literal>su=yes</literal> in one-clicks). This most
+commonly happens when searching for non-ISO-8859-1 (Latin2, Cyrillic, or
+characters like umlaut and eacute) characters in word-match mode.
+The problem is, that unless your locale is set up properly, &PERL;
+doesn't think a non-ISO-8859-1 and a space character is a boundary.
+</para><para>
 Also, if you are searching for non-alpha characters, they will also not be
 interpreted as word characters and the boundary problems will still exist.
-
 </para>
+</answer>
 </qandaentry>
 
 
 <qandaentry>
 	<question><para>Performance issues</para></question>
 <answer><para>
-
-<para>
-
 &IC; is not a lightweight program. If you are running it on a low-end
 ISP, whose major selling point is low cost, you will frequently find that
-&IC; performance is very poor. This is due to either:
-
-LI1: Not enough memory
-
-.If memory is low, the program will "swap" to disk. If lots of swap is
+&IC; performance is very poor.
+</para><para>
+If memory is low, the program will "swap" to disk. If lots of swap is
 used, you can expect very bad performance. This is the most common
 speed problem.
-
-.If your ISP uses IDE hard disks, you can expect REALLY bad performance.
+If your ISP uses IDE hard disks, you can expect REALLY bad performance.
 IDE disks are very slow for multi-user machines, which should have SCSI
 if ANY swapping is to be done.
-
-LI1: Too many domains
-
-.If there is a huge amount of traffic on the system, then it can run at
+</para><para>
+If there is a huge amount of traffic on the system, then it can run at
 a very high "load average." If the machine's load average is routinely
 above 2, you can expect problems.
-
-LI1: Underpowered machine
-
-.If it is an old machine, it may be too slow for &IC;. A
+</para><para>
+If it is an old machine, it may be too slow for &IC;. A
 Pentium of less than 300MHz is probably not good enough unless it is
 completely dedicated to &IC;. The faster the processor, the
 happier you will be.
-
 </para>
 </answer></qandaentry>
 
@@ -1801,14 +1717,10 @@ happier you will be.
 <qandaentry>
 	<question><para>&IC; runs, but it's sooo sllooowww...</para></question>
 <answer><para>
-
-<para>
-
 This is almost certainly due to a system that has inadequate memory or
 network bandwidth. On a moderately fast ISP server with sufficient
 memory, pages should start displaying in less than 2 seconds. On a fast
 server, pages should start loading almost instantaneously.
-
 </para>
 </answer></qandaentry>
 
@@ -1816,92 +1728,79 @@ server, pages should start loading almost instantaneously.
 <qandaentry>
 	<question><para>&IC; slows down over time.</para></question>
 <answer><para>
-
-<para>
-
 There are many possible reasons for this, but most have to do with
 memory or session database size.
-
-*See the documentation on &IC; administration (icadmin) and learn
-how to expire your session database. If it is megabytes in size,
+</para><para>
+Learn how to expire &IC; session database. If it is megabytes in size,
 accessing a key will significantly slow down the session.
-
-*Second, if your machine is memory-poor, you will find that &IC;
+</para><para>
+Second, if your machine is memory-poor, you will find that &IC;
 gets swapped to disk. Unless your system is very fast, this will greatly
 hurt performance. &IC; works best on a machine that rarely if
 ever swaps to disk.
-
-*Third, this often has nothing to do with &IC; at all but has to
+</para><para>
+Third, this often has nothing to do with &IC; at all but has to
 do with your HTTP server. Any long-running daemon has the potential for
 a memory leak. Try stopping and starting your HTTP server and seeing
 what happens to performance.
-
 </para>
 </answer></qandaentry>
 
 
 <qandaentry>
-	<question><para>I am using SQL, and &IC; is slow ...</para></question>
+	<question><para>I am using SQL, and Interchange is slow ...</para></question>
 <answer><para>
-
-<para>
 
 It isn't &IC;. First of all, did you index your 'SKU' or other
 key fields? The reason &IC; doesn't do it for you is that every
 SQL database seems to do that a bit differently. Even then, you can try
-&IC;'s COLUMN_DEF parameter:
+&IC;'s <literal>COLUMN_DEF</literal> parameter:
 
-        Database  products  COLUMN_DEF  code=char(16) PRIMARY KEY
+<programlisting>
+Database  products  COLUMN_DEF  code=char(16) PRIMARY KEY
+</programlisting>
 
-This will at least index the <literal>code</literal> field for MySQL. Other databases differ.
-
+This will at least index the <literal>code</literal> field for MySQL.
+Other databases differ.
 &IC; can return VERY fast SQL search results. But you need to at
+</para><para>
 least give it something to work with. The proper method for fast
 selection is:
 
-
 <programlisting><![CDATA[
-
-]]></programlisting>
-
 [query sql="select code,category,title,price from products" ]
 
 Category: [sql-param category]<br>
 Title:    <a href="[area [sql-code]]"> [sql-param title] </A><br>
 Price:    <a href="[area order [sql-param 0]]"> [sql-param price] </A><br>
-
-[/sql]
+[/query]
+]]></programlisting>
 
 This is especially powerful when you consider a joined query like:
 
-
 <programlisting><![CDATA[
-
+SELECT code, price, title, extended.desc
+FROM   products, extended
+WHERE  products.category = 'Renaissance'
 ]]></programlisting>
 
-       SELECT code, price, title, extended.desc
-       FROM   products, extended
-       WHERE  products.category = 'Renaissance'
-
-Note that the extended.desc field will be accessed as [sql-param desc].
+Note that the extended.desc field will be accessed as
+<code>[sql-param desc]</code>.
 Don't forget that you must index your fields if you want fast searching
 with them as a criteria.
-
 </para>
+</answer>
 </qandaentry>
 
 
 <qandaentry>
-	<question><para>Using &ic; with apache and suexec</para></question>
+	<question><para>Using Interchange with apache and suexec</para></question>
 <answer><para>
-
-<para>
-
 Apache with SUEXEC: VLINK/UNIX socket mode will not work well unless
 installed as a normal user. If supporting multiple users, the TLINK/INET
 mode must be used.
-
 </para>
+</answer>
 </qandaentry>
 
 
@@ -1909,173 +1808,165 @@ mode must be used.
 	<question><para>A friendly reminder</para></question>
 <answer><para>
 
-<para>
-
-{{B:When in doubt, restart the server.}} It won't take but a few
+When in doubt, restart the server. It won't take but a few
 seconds, and changes in configurable options don't take effect until it
 is done. You may even change a page and not see the effect until the
 server is restarted.
-
 </para>
+</answer>
 </qandaentry>
+</qandadiv>
 
 
-<qandaentry>
-	<question><para>Tips and tricks</para></question>
-<answer><para>
-
-<para>
-
-These are slightly edited postings to the &IC;-users mail
-list made by Mike Heins, lead author of &IC;.
-
-</para>
-</answer></qandaentry>
-
+<qandadiv><title>Tips and tricks</title>
 
 <qandaentry>
 	<question><para>Locking down your system</para></question>
 <answer><para>
 
-<para>
-
 &IC; has lots of built-in protections to make developing your
 catalogs pretty care-free. But it will definitely pass you the ammo
 to shoot yourself in the foot, as will any templating system that has
 power. So you have to be careful, as you do in any scripting environment.
-
+</para><para>
 Most of the protections have to do with:
+</para>
 
-+ Tags like [cgi foo], [data ...] and such are not reparsed for tags. 
-+ The [value foo] tag never allows a left square bracket to be output.
-+ Safe is used for &PERL;, which means that arbitrary perl code which reads/writes or uses IO is not possible.
-+The &IC; files don't need to be readable or writable by any other user ID, so CGI/PHP programs run by the web server can't get at them.
-+Dangerous operations are allowed only via global UserTag, and not by catalog UserTag.
+<itemizedlist>
+<listitem><para>
+Tags like &tag-cgi; or &tag-data; are not reparsed for tags. 
+</para></listitem>
+<listitem><para>
+The <code>[value foo]</code> tag never allows a left square bracket
+to be output.
+</para></listitem>
+<listitem><para>
+<classname>Safe</classname> module is used for &PERL;, which means
+that arbitrary &PERL; code which reads/writes or uses IO is not possible.
+</para></listitem>
+<listitem><para>
+The &IC; files don't need to be readable or writable by any other user ID,
+so CGI/PHP programs run by the web server can't get at them.
+</para></listitem>
+<listitem><para>
+Dangerous operations are allowed only via global UserTag, and not by
+catalog UserTag.
+</para></listitem>
+</itemizedlist>
 
+<para>
 But there are ways that user-entered data could end up getting
 parsed for tags. The most common breach is to take possibly
 tainted user data entered into a form and put it in a database
 without filtering it first. There are several ways to do
 that:
-
-</para>
-
-</para></listitem> <listitem><para>
-
+</para><para>
 For user-entered form fields like name, address, etc
-you should always use the [value ...] tag to display
+you should always use the <code>[value ...]</code> tag to display
 them.
-
-</para></listitem> <listitem><para>
-
 You can filter lists of &glos-variable;s automatically with
 
-
 <programlisting><![CDATA[
-
+Filter  name     textarea_put
+Filter  address  textarea_put
+Filter  comments textarea_put
+Filter  email    textarea_put
 ]]></programlisting>
 
-    Filter  name     textarea_put
-    Filter  address  textarea_put
-    Filter  comments textarea_put
-    Filter  email    textarea_put
+in &ccf;.
 
-in catalog.cfg.
-
-</para></listitem> <listitem><para>
-
+</para><para>
 You can prevent problems in some cases by using the data tag
-(i.e. [data table=foo col=bar key="[item-param something]"])
-which is not reparsed for tags as [item-data ....] is.
+(i.e. <code>[data table=foo col=bar key="[item-param something]"]</code>)
+which is not reparsed for tags as &tag-item-data; is.
 This is not foolproof unless you control the key in some fashion -
-in most cases, you will use [data session username] or something
-you control.
+in most cases, you will use <code>[data session username]</code> or something
+else you control.
 
-</para></listitem> <listitem><para>
+</para><para>
+You should never put user-entered data directly in a &glos-scratch;
+variable which can be called with <mv>mv_click</mv> and <mv>mv_check</mv>.
 
-You should never put user-entered data directly in a Scratch
-&glos-variable;, which can be called with mv_click and mv_check.
-
-</para></listitem> <listitem><para>
-
+</para><para>
 Process all user-entered data before putting it in a database that could
 be displayed in a page later. Or process it before it is displayed.
 
-</para></listitem> <listitem><para>
-
+</para><para>
 When putting data inside a container tag, the output of which is
-reparsed for more tags by default, consider setting reparse=0.
+reparsed for more tags by default, consider
+setting <literal>reparse=0</literal>.
 
-</para></listitem> <listitem><para>
+</para><para>
 There are other ways to nail down your system and make it more
 difficult to have a security problem.
-
-</para>
-
-</para></listitem> <listitem><para>
-
 Use the WRITE_CONTROL database settings.
 
-
 <programlisting><![CDATA[
-
+Database products WRITE_CONTROL 1
 ]]></programlisting>
 
-  Database products WRITE_CONTROL 1
 
-It is the default for MV DBM databases (i.e. you have to have a [flag type=write table=foo] to write) but not for SQL.
-
+</para><para>
+It is the default for MV DBM databases (i.e. you have to have a
+<code>[flag type=write table=foo]</code> to write) but not for SQL.
 The UI does the proper write flagging, so this should have
 no effect on it.
+</para>
 
-AUTHORS NOTE: I should have made WRITE_CONTROL the default for SQL
+<note><para>
+I should have made <literal>WRITE_CONTROL</literal> the default for SQL
 in MV4, my bad. As long as MV3 compatibility was as poor as it turned
 out to be, I should have gone for it.
+</para></note>
 
-</para></listitem> <listitem><para>
+<para>
+Enable &conf-NoAbsolute; in &gcf;, it prevents <code>[file /some/dir]</code>
+or <code>[include /some/rogue/file]</code> from being used. This is the
+default starting with IC 4.7.x.
 
-Set "NoAbsolute Yes" in interchange.cfg, it prevents [file /some/dir]
-or [include /some/rogue/file] from being used. NOTE: This is the
-default starting in IC 4.7.x.
-
-</para></listitem> <listitem><para>
-
+</para><para>
 Split the admin server onto a different IC iteration from your
 production catalog, and disable the UI for the production catalog. That
-allows you to set the pages/ directory to be read-only for the
-production server, and to put WRITE_CONTROL in the production
-catalog_after.cfg or etc/<catalog id>.after file.
+allows you to set the <filename class='directory'>pages/</filename> directory
+to be read-only for the production server, and to put
+<literal>WRITE_CONTROL</literal> in the production
+<filename>catalog_after.cfg</filename>.
 
+</para><para>
 You could also use a different username to access the SQL data, and make
 the production server username have read-only access.
 
+</para><para>
 You can use a different UID for the admin server iteration, and make all
-directories except products/, upload/, tmp/, session/, and logs/
+directories except
+<filename class='directory'>products/</filename>,
+<filename class='directory'>upload/</filename>,
+<filename class='directory'>tmp/</filename>,
+<filename class='directory'>session/</filename>, and
+<filename class='directory'>logs/</filename>
 read-only for the production server UID.
- 
-</para></listitem> <listitem><para>
 
+</para><para>
 Make as much stuff read-only as you can. Develop a script which
 sets things read-write while you are admin-ing, and read-only
 otherwise.
 
-</para></listitem> <listitem><para>
+</para><para>
+Always make
+<filename>*.cfg</filename>,
+<filename>bin/*</filename>, and
+<filename>lib/*</filename> read-only for the &IC; user.
 
-Always make ICDIR/*.cfg, ICDIR/bin/*, and ICDIR/lib/* read-only for
-the IC user.
-
-</para></listitem> <listitem><para>
-
+</para><para>
 Don't let the &IC; daemon user ID have read or write permission
 on things it doesn't need.
 
-</para></listitem> <listitem><para>
+</para><para>
+Never use &conf-AllowGlobal; in production if you have user-entered data
+going into a database. (&conf-AllowGlobal; is not the default, so many
+people won't know what it is).
 
-Never use AllowGlobal in production if you have user-entered data
-going into a database. (AllowGlobal is not the default, so many
-people won't know what it is - see &IC; Configuration.)
-
-</para></listitem> <listitem><para>
+</para><para>
 All in all, &IC; has been proven to be securable over time.
 But we all have to do our part and think about what we are doing
 with user-entered data.
@@ -2083,6 +1974,7 @@ with user-entered data.
 </para>
 </answer></qandaentry>
 
+<!--
 
 <qandaentry>
 	<question><para>Optimizing lists</para></question>
