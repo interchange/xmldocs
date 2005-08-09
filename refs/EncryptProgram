@@ -31,6 +31,9 @@ This directive is different from &conf-PGP;, which is used to encrypt
 If the order &conf-Route; method of sending orders is used (default in the
 &std-catalog; demo), then this directive sets the default value of
 the <literal>encrypt_program</literal> attribute.
+</para><para>
+Since &IC; 4.7.7, specifying program filename only is enough &mdash;
+no arguments are needed, although they will still work as expected.
 __END__
 
 __NAME__ see also
@@ -38,6 +41,12 @@ DEBUG, DataTrace, DebugFile,PGP
 __END__
 
 __NAME__ example: Specifying EncryptProgram
+<programlisting>
+EncryptProgram gpg
+</programlisting>
+__END__
+
+__NAME__ example: Specifying EncryptProgram with full path and arguments
 <programlisting>
 EncryptProgram /usr/local/bin/gpg -feat orders@&def-domain;
 </programlisting>

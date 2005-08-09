@@ -1,5 +1,6 @@
 Outstanding:
 =======
+- Can *_page pragmas take ITL and not just subroutine names?
 - See that if 'crypt' is put in see also, all symbols of that name appear
   in see also line and their type is distinguished visually.
 - TAXAREA is not discovered in source by bin/stattree

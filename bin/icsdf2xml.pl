@@ -26,6 +26,8 @@ for (my $i=0; $i<@input; $i++) {
 	s#^=item\s+.*#</para></listitem> <listitem><para>#;
 	s#^=back\s*.*#</para></listitem> <listitem><para>#;
 
+	s#\{\{URL:(\S+?)\}\}#<ulink url="$1">$1</ulink>#g;
+
 	!$in_pl and do {
 		s/&/&amp;/g;
 		s/interchange/&IC;/gi;

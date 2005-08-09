@@ -1,0 +1,49 @@
+__NAME__ purpose
+allow delivery of images through Interchange
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies whether images can be fetched directly over
+the &glos-link-program;.
+</para><para>
+If the requested file is present and the MimeType for the file's 
+extension begins with <literal>image/</literal>, the path will be adjusted
+to add &conf-ImageDir; or &conf-ImageDirSecure;, and a
+<ulink url="http://www.checkupdown.com/status/E302.html">status 302</ulink>
+("Moved temporarily") issued. At that point, the image should
+be visible on users' screens.
+</para><para>
+This whole thing happens before database or session opens, and is quite fast.
+<varname>$Vend::tmp_session</varname> is set so no cookie is issued.
+__END__
+
+__NAME__ notes
+This feature was introduced to help cope with the unpleasant behavior
+of the Mozilla HTML editor.
+__END__
+
+
+__NAME__ author
+&mheins;
+__END__
+
+__NAME__ example: Enabling DeliverIMage
+Put the following in &ccf;:
+<programlisting>
+DeliverImage Yes
+</programlisting>
+Now to request an image, instead of the usual page (such as
+<literal>index.html</literal>), ask &IC; for say,
+<literal>interchange.png</literal> (given that the file is present in
+&conf-ImageDir; or &conf-ImageDirSecure;, of course).
+__END__
+

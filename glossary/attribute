@@ -204,4 +204,166 @@ The value can then be displayed with C<[item-modifier size]> on the
 order report, order receipt, or any other page containing an
 C<[item-list]>. 
 
+
+
+
+
+<qandaentry>
+	<question><para>How are simple product options structured?</para></question>
+<answer><para>
+
+&IC; has three types of options;
+<emphasis>simple</emphasis>, <emphasis>matrix</emphasis>,
+and <emphasis>modular</emphasis>.
+They are based on the <literal>options</literal> database table.
+</para><para>
+
+To enable options for a product, it needs to have a master record in "options"
+with the SKU as the key. The only fields that matter in the master record are:
+
+
+<programlisting><![CDATA[
+code        The SKU of the item
+o_master    Indicates not a product, but an option for a product in another database
+o_enable    Options enabled for that item
+o_matrix    Set to 1 for all-in-one widgets, 2 for separate widgets
+o_modular   Modular options (alpha)
+]]></programlisting>
+
+
+If <literal>o_enable</literal> is set, but neither <literal>o_matrix</literal>
+or <literal>o_modular</literal> are, the item is using simple options.
+
+For the option itself in simple mode, the following fields apply:
+
+
+<programlisting><![CDATA[
+code        Arbitrary key
+sku         SKU this option applies to
+o_group     The attribute name of the option
+o_label     The label the widget for the option will bear
+o_value     The options, in IC option format
+o_widget    The widget type used to display
+o_height    The widget height (if any)
+o_width     The widget width (if any)
+price       Price adjustment
+]]></programlisting>
+
+Here are the fields for an item with a simple size option:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+code:os28009
+o_master:1
+o_enable:1
+o_matrix:0
+o_modular:0
+#
+code:os28009-size
+sku:os28009
+o_group:size
+o_label:Size
+o_value:S=Small,M=Medium,L=Large,XL=Extra Large
+o_widget:select
+o_height:
+o_width:
+price:S=-1.00,XL=1.00
+#
+
+The price field accepts option modifiers based on the option value;
+for example, to adjust the price of an S down 1.00 and the price
+of an XL up 1.00, you use the values shown above. This works in
+conjunction with the special ==:options atom in CommonAdjust. To
+activate the pricing adjustment, you must have something like
+this for your <literal>CommonAdjust</literal> setting:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+ CommonAdjust    :sale_price, ;:price, ==:options
+
+The actual names of the fields used for these can be changed with
+the Variable MV_OPTION_TABLE_MAP, i.e.
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+Variable MV_OPTION_TABLE_MAP <<eom
+	o_widget  widget
+	o_value   value
+EOM
+
+That would allow you to use "widget" and "value" in place of o_widget
+and o_value as field names.
+
+</para>
+</answer></qandaentry>
+
+
+
+<qandaentry>
+	<question><para>But what do these options do? Where do they live?</para></question>
+<answer><para>
+
+<para>
+
+If you know &PERL;, you know what a hash reference is. An &IC; shopping
+cart consists of an <emphasis>array of hash references</emphasis>. If you dump the structure
+of the <literal>main</literal> shopping cart you would see something like:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+	[
+        {
+            mv_ip       => '0',
+            price_group => 'general',
+            mv_ib       => 'products',
+            code        => 'os28080',
+            quantity    => '1',
+        },
+        {
+            mv_ip       => '1',
+            price_group => 'general',
+            mv_ib       => 'products',
+            code        => 'os28080',
+            size        => 'L',
+            color       => 'black',
+            quantity    => '1',
+        },
+     ]
+
+Each key of the hash is an attribute. There are a number of
+special attributes:
+
+!block table; colvaligns="TT"
+Attribute|Description
+code|The item SKU
+sku|The SKU of the base item (in the case of matrix options)
+mv_ip|The line number of the shopping cart (minus 1)
+mv_ib|The database table the product was ordered from
+quantity|The number on order
+group|The order group for a master item or subitem
+mv_si|Subitem indicator
+mv_mi|Master item code
+mv_mp|Modular item
+mv_price|Price of the item (to directly set pricing)
+mv_order_route|Special order route for this item
+
+Any attribute besides the above is a product <emphasis>option</emphasis> or <emphasis>modifier</emphasis>, and can
+be displayed with <code>[item-modifier attribute_name]</code>.
+
+</para>
+</qandaentry>
+
+
 -->

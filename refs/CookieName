@@ -28,3 +28,6 @@ CookieName SESSIONID
 </programlisting>
 __END__
 
+
+TODO: Seems it needs CookiePattern to work, but currently the whole
+thing is a little broken

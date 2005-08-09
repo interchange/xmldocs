@@ -68,8 +68,8 @@ Where are the pages?
 </para></question>
 <answer><para>
 &IC; pages are not kept in normal HTML space. Look in the catalog subdirectory pages. The pages are always filtered through the &IC; daemon before being delivered.
-</para></answer>
-</qandaentry>
+</para>
+</answer></qandaentry>
 
 <qandaentry>
 <question><para>
@@ -115,8 +115,8 @@ will become this:
 
 Absolute image paths are not affected. An image such as
 <literal>/other/images/whatever.gif</literal> will not be changed.
-</para></answer>
-</qandaentry>
+</para>
+</answer></qandaentry>
 
 </qandadiv>
 
@@ -207,9 +207,9 @@ system setup that places each user in their own group, make
 group and set ownership and permissions with:
 
 <programlisting>
-find <replaceable>/home/user/catalogs</replaceable> -print | xargs chown <replaceable>USER</replaceable>
-find <replaceable>/home/user/catalogs</replaceable> -print | xargs chgrp <replaceable>USER</replaceable>
-find <replaceable>/home/user/catalogs</replaceable> -print | xargs chmod g+rw
+$ find <replaceable>/home/user/catalogs</replaceable> -print | xargs chown <replaceable>USER</replaceable>
+$ find <replaceable>/home/user/catalogs</replaceable> -print | xargs chgrp <replaceable>USER</replaceable>
+$ find <replaceable>/home/user/catalogs</replaceable> -print | xargs chmod g+rw
 </programlisting>
 
 For best results, set the user's default &glos-umask; to <literal>2</literal>,
@@ -220,10 +220,2667 @@ all users in the same group, the above is not secure. You should put
 user is a member (perhaps
 <literal>interch</literal> would be a good choice ;-) and set all files
 owned by the group <literal>interch</literal> and all directories to &glos-mode;
-<literal>2770</literal>:
+<literal>2770</literal>. This will make files default to the proper group when
+created (on most UNIX versions, anyway).
+
+<programlisting>
+$ find <replaceable>/home/user/catalogs</replaceable> -print | xargs chown <replaceable>USER</replaceable>
+$ find <replaceable>/home/user/catalogs</replaceable> -print | xargs chgrp <replaceable>interch</replaceable>
+$ find <replaceable>/home/user/catalogs</replaceable> -print | xargs chmod g+rw
+$ find <replaceable>/home/user/catalogs</replaceable> -type d -print | xargs chmod g+s
+</programlisting>
+
+If you are on a virtual hosting system, the procedure varies. Making the
+program setuid should work for most systems. If your setup uses CGI-WRAP or
+another setuid scheme, it should still work. However, you may have to unset the
+setuid bit with
+<programlisting>
+$ chmod u-s cgi-bin/<replaceable>CATALOG_NAME</replaceable>
+</programlisting> or the like.
+If you have a
+non-standard CGI setup, as some virtual host systems do, you will need to know
+something about UNIX and the web or engage a consultant to properly set up the
+paths. Usually switching to TLINK/INET mode is the easiest thing to do, though
+with Iserver and a few others it may take more than that.
+</para><para>
+
+If you used the <literal>makecat</literal> program to build the catalog, it
+should have warned
+you if it was not able to make the link program setuid. To set the program (
+<literal>cgi-bin/<replaceable>CATALOG_NAME</replaceable></literal>) setuid,
+use the command:
+
+<programlisting>
+$ chmod u+s cgi-bin/<replaceable>CATALOG_NAME</replaceable>
+</programlisting>
+
+</para>
+</answer></qandaentry>
+
+
+
+<qandaentry>
+<question><para>Error -- the Interchange server was not running...</para>
+</question>
+<answer>
+<para>
+This indicates that the &glos-link-program; is not communicating with the &IC;
+server.
+</para>
+
+<note><para>The server should always be started by the same
+user ID which owns the suid vlink program
+(the note does not apply to TLINK/INET mode).
+</para></note>
+
+<para>
+The server must be running, first of all. If you didn't start it, you can do so
+by going to the &IC; home directory and typing:
+
+<programlisting><![CDATA[
+bin/interchange -r
+]]></programlisting>
+
+You can check to see if your server is running by typing:
+<programlisting><![CDATA[
+ps aux  | grep interch         # Linux and BSD (BSD style)
+ps -elf | grep interch         # Most other Unices (SysV style)
+]]></programlisting>
+
+Solaris and IRIX truncate the string, however, and do not allow setting of
+the <literal>$0</literal> parameter, so you might have to grep for
+<literal>perl</literal> instead.
+
+</para><para>
+If the server is not running, it may have failed due to another process
+occupying the TCP socket on port 7786. If using VLINK, try starting &IC; with
+<literal>start -u</literal>, which will make sure the internet-domain socket
+is not used.
+
+</para><para>
+If VLINK is not communicating with the server, there are a number of possible
+reasons. First, if you are trying to run &IC; on an ISP, go to the
+section about ISP problems. It is probably one of those. If you are running
+&IC; on a single machine, it is probably one of:
+
+<programlisting><![CDATA[
+1. Permissions problems
+2. Interchange on NFS-mounted file system
+3. Both of the above ;)
+]]></programlisting>
+
+Check the <filename>error.log</filename> file for your HTTP server
+&mdash; it will almost always tell you what the problem is,
+unless there is a simple permissions problem.
+
+</para><para>
+Permissions are easy. If starting &IC; like this works:
+<programlisting><![CDATA[
+bin/interchange -r SocketPerms=0666
+]]></programlisting>
+
+then you have a socket permission problem. Try restarting &IC;
+without the above adjustment of <literal>SocketPerms=0666</literal>,
+and then try accessing it again with each of these mode changes:
+
+<programlisting>
+chmod u+s cgi-bin/<replaceable>CATALOG_NAME</replaceable>
+
+chmod u-s cgi-bin/<replaceable>CATALOG_NAME</replaceable>
+</programlisting>
+
+If neither of those work, either the UID of the vlink program is wrong,
+the vlink program is looking for the socket file in the wrong place,
+or your HTTP server is interfering in some fashion. 
+If you are running &IC; on an NFS-mounted file system, it cannot run
+because UNIX-domain sockets don't work on NFS. You will need to
+change to INET mode from UNIX mode, or better yet, put &IC; on a
+file system that is directly mounted.
+
+</para><para>
+If you have not changed the configured defaults,
+and still it will not communicate, you should try setting the
+<literal>LINK_FILE</literal> (for vlink) or 
+<literal>LINK_HOST</literal> and
+<literal>LINK_PORT</literal> (for tlink) 
+in <filename>config.h</filename> and recompiling.
+
+</para><para>
+You can recompile manually like this:
+
+<programlisting>
+$ cd <replaceable>interchange-installation-dir</replaceable>/dist/src
+$ ./configure
+  (edit config.h as described above)
+$ gcc -o vlink vlink.c       # For vlink - Unix socket communication
+$ gcc -o tlink tlink.c       # For tlink - Inet socket communication
+  (copy vlink.c or tlink.c to the cgi-bin directory and rename to your catalog name)
+</programlisting>
+
+</para><para>
+You can use &IC; in INET mode along with the <filename>tlink.c</filename>
+program to allow running across NFS boundaries.
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+<question><para>Config.pm not found</para></question>
+<answer><para>
+This means your &PERL; is not properly installed, or that &IC; is not
+using the proper &PERL; binary. On UNIX, try reinstalling &IC; and using
+the standard &PERL; installation sequence (instead of the shorthand
+<literal>./configure</literal>):
+
+<programlisting><![CDATA[
+/complete/path/to/proper/perl Makefile.PL
+make
+make test
+make install
+]]></programlisting>
+</para>
+</answer></qandaentry>
+
+<qandaentry>
+<question><para>
+Can't locate lib.pm in @INC. BEGIN failed--compilation aborted.</para>
+</question>
+
+<answer>
+<para>
+Again, your &PERL; is not properly installed. Someone has put a &PERL; up
+on your system, then either moved or removed the library directory.
+Contact your system administrator and request that &PERL; be re-installed.
+</para>
+</answer></qandaentry>
+
+<qandaentry>
+<question><para>
+Segmentation fault or other core dump
+</para></question>
+
+<answer>
+<para>
+If this happens when you run the &IC; test or server, it is
+<emphasis role='bold'>always</emphasis> &PERL;
+that has a problem. Not sometimes, always. A proper &PERL; should never have a
+segmentation violation, period. And it should not dump core (unless you passed
+it a <literal>-u</literal> option somehow).
+</para><para>
+You will need to either update &PERL; or report the bug to the proper personnel.
+Depending on your situation and technical ability, this may be your system
+admin, ISP, or the &PERL; porters.
+</para>
+</answer></qandaentry>
+
+<qandaentry>
+<question>
+<para>Configuring catalog whatever...Use of uninitialized value at Config.pm line 1614, &lt;config&gt; chunk 322.</para>
+</question>
+
+<answer>
+<para>
+This is a warning from &PERL; indicating that an empty value was found where one is expected. The warning is left in so that you know that something is missing. Whatever it is, it can be found at the specified "chunk," or line, of &ccf;. If you use the include capability, it would have to be factored in as well.
+</para><para>
+The usual reason is that a file is specified in one of the directives (usually one of &conf-SearchProfile;, &conf-OrderProfile;, or &conf-UpsZoneFile;) and does not exist. See the documentation for the directive on how the file name should be specified.
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>Why isn't the above error more enlightening?</para></question>
+<answer><para>
+
+Because &PERL; won't tell us what exactly went wrong. See its FAQ for why.
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>XXXXXX.pm does not match executable version.</para></question>
+<answer><para>
+This is a &PERL; which does not have the right &PERL; library installed. It usually
+results from a naive system administrator who thinks they can bypass the 'make
+install' for &PERL; and just copy the &PERL; binary or directories.
+</para><para>
+If you installed <classname>Bundle::Interchange</classname> locally in
+your &IC; directory,
+it may mean that your system administrator updated &PERL; and failed to select
+the binary compatibility option.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>Can I run &IC; on Macintosh or Windows?</para></question>
+<answer><para>
+
+&IC; will not run on a MacOS 7, 8, or 9 operating system. It will run on
+Mac OS X and other PowerPC Unix variants.
+</para><para>
+&IC;'s *files* can be manipulated by any computer. As long as
+uploads/downloads of database source, pages, and configuration files are done
+in ASCII mode, there is no reason why they can't be edited on a Mac. And with
+&MYSQL; or other ODBC databases on your UNIX-based ISP, you can even directly
+interface to the database you use with &IC; provided you have the scarce
+ODBC middleware needed for the Mac.
+</para><para>
+&IC; can be run on Windows with the Cygwin tool set (1.3.2 or higher)
+available from <ulink url="http://www.cygwin.com/">www.cygwin.com</ulink>,
+but there are numerous anomalies and it may be difficult
+to get operating reliably. It is never recommended that you run a production
+catalog on a Windows system; if you do get it working you should only use 
+for catalog development. 
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>Error - 'make: command not found'</para></question>
+<answer><para>
+
+The error is caused when the system you are installing on does not have the program called <literal>make</literal>.  It is recommended that you install make as well as a C compiler ("cc" or "gcc") for the installation of &IC;.  If you are unsure of how to do this for your operating system, it may help to ask a mailing list related to your operating system.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>Templates aren't showing, only the center content of the page itself</para></question>
+<answer><para>
+
+Did this happened after moving the site to a new host, uploading new &ccf; or
+restarting &IC;?
+</para><para>
+This can happen if the files were uploaded in binary instead of ASCII
+(when using FTP), or Windows-style carriage returns were put in the file
+by a Windows editor or file transfer program.
+On unix, do an octal dump on some of the files to see if you have the
+CR chars:
+
+<programlisting><![CDATA[
+od -a templates/foundation/theme.cfg | grep cr
+od -a catalog.cfg | grep cr
+]]></programlisting>
+
+If something appears on the screen, then your file needs to be cleaned.  Among the other 10-million ways to clean it, here are few:
+
+
+<programlisting><![CDATA[
+perl -pi -e 's/\r//g' file.cfg
+
+perl -p -e 's/\r\n/\n/g' < old_file.cfg > new_file.cfg
+
+dos2unix file.cfg
+
+tr -d '\r' < old_file.cfg > new_file.cfg
+]]></programlisting>
+
+Also, if you are using FTP to transfer the files from a Windows machine,
+try using ASCII mode instead of binary mode.
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>When I try to install the RPM packages, I get "failed dependencies" errors</para></question>
+<answer><para>
+
+There are, as always, few solutions to the problem:
+
+</para><para>
+One, install the modules manually, then use the <literal>-nodeps</literal>
+option to RPM during install.
+</para><para>
+Two, <command>perl -MCPAN -e "install Bundle::Interchange"</command>.
+</para><para>
+Three, properly install RPM modules from the distribution media to
+satisfy the dependencies.
+</para><para>
+If, for some reason, you can't use the distribution media,
+ then some modules are available from <ulink url="http://ftp.icdevgroup.org/perl/">http://ftp.icdevgroup.org/perl/</ulink> while others can be found on
+ <ulink url="http://rpmfind.net/">rpmfind.net</ulink>.
+</para>
+</answer></qandaentry>
+</qandadiv>
+
+
+<qandadiv><title>SSL problems</title>
+
+<qandaentry>
+	<question><para>Shopping cart is dropped when using SSL.</para></question>
+<answer><para>
+
+If you are using a separate secure and non-secure domain, this is due
+to the cookies from the user not matching as well as the session ID not
+being able to be transferred due to differing source IP addresses.
+</para>
+
+<note>
+<para>
+&IC; does not support this configuration. You may be able to get
+it to work in some circumstances, but it is not supported. See the next
+set of questions for help on how you may be able to get it to work to some
+extent in your configuration. It will not work in every circumstance with
+every feature.
+</para>
+</note>
+
+<para>
+This is sometimes due to the "HostnameLookups" (Stronghold/Apache parameter) not
+matching for the two servers, secure and non-secure. It can also be caused by
+the user having different web proxy addresses for HTTP and HTTPS.
+Try changing some of the appropriate configuration parameters in
+&gcf;:
+
+<programlisting><![CDATA[
+DomainTail   No
+IpHead       Yes
+]]></programlisting>
+
+If you still are having problems, try this combination in catalog.cfg, the catalog configuration file:
+
+<programlisting><![CDATA[
+SessionExpire  10 minutes
+WideOpen       Yes
+]]></programlisting>
+
+The above setting will typically make &IC; work when it is possible to
+work. Sometimes when you have multiple &IC; servers sharing the same
+secure server, you will have problems after accessing the second one. (The
+first one issues a session ID cookie, and that causes problems).
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>I have a different secure server domain. Why does the shopping cart get dropped?</para></question>
+<answer><para>
+
+First of all, it is questionable business practice to not certify your
+secure server. Besides violating the terms of use of many certificate
+issuers, customers notice the changed domain and it is proven by user
+surveys and long experience that you will receive fewer orders as a
+result. Certs can be obtained for $125 US per year, less than the
+typical cost of one hour of a top consultant's time. Do your business
+a favor - spend the money to get a cert.
+</para><para>
+If you insist on doing it anyway, probably driven by the fact that
+you need a dedicated IP address for a secure server, you can use the
+solutions in the previous FAQ question and get some relief.
+</para><para>
+
+But by far the best way is to have all orders and shopping cart calls go
+only to the secure domain.  Your users may get a different session when
+browsing the non-secure catalog pages, but it will matter little.
+</para><para>
+
+To do this on the Foundation demo, place in &ccf;:
+
+<programlisting>
+AlwaysSecure  order ord/basket ord/checkout
+</programlisting>
+
+A more complete list might be:
+
+<programlisting><![CDATA[
+AlwaysSecure <<EOF
+ account
+ change_password
+ customerservice
+ login
+ logout
+ new_account
+ ord/basket
+ ord/checkout
+ order
+ process
+ query/check_orders
+ query/order_detail
+ query/order_return
+ returns
+ saved_carts
+ ship_addresses
+EOF
+]]></programlisting>
+
+Add pages of your own that need to be sure of coherent session information.
+</para><para>
+
+For all *forms* to be secure, make sure <literal>process</literal> is on
+that list. (Your search
+forms will still be non-secure if you use <code>[process-search]</code>
+to produce the &glos-form-action;.)
+</para><para>
+
+To make individual order links secure, use this instead of <code>[order]</code>:
+<programlisting><![CDATA[
+<a href="[area
+  href=order
+  secure=1
+  form='mv_order_item=SKU'
+]">Order it</A>
+]]></programlisting>
+
+To make a form-based order button secure, use <code>[process secure=1]</code>
+as the action.
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>My images aren't there on the secure server!!! (With the !s and all)</para></question>
+<answer><para>
+
+You have a different document root, or the permissions are not such
+that you can access them. You can set a different base URL for images
+with:
+
+<programlisting>
+ImageDirSecure   https://&def-hostname;/somewhere/images
+</programlisting>
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>My secure pages fail when the browser is MSIE.</para></question>
+<answer><para>
+
+MSIE has several SSL bugs, particularly in V5.01.
+See the <literal>Apache-SSL</literal> or <literal>mod_ssl</literal> FAQ.
+You can sometimes fix this with an <filename>httpd.conf</filename> change:
+
+<programlisting>
+SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+</programlisting>
+
+</para>
+</answer></qandaentry>
+</qandadiv>
+
+
+<qandadiv><title>ISP problems</title>
+
+<qandaentry>
+<question><para>General problems</para></question>
+<answer>
+<para>
+
+The great majority of ISPs provide some CGI service, and more and more
+run systems that are compatible with &IC;. Our catalog
+configurator (<command>makecat</command>) makes setup much easier.
+</para>
+
+<warning><para>
+if you chose your ISP mostly on price, you can expect problems. The
+low-cost providers typically have heavily-loaded machines and many
+domains. The more domains and the more load the unhappier you will be
+with &IC;. &IC; works best on a fast machine with plenty
+of memory.
+</para></warning>
+
+<para>
+A few Internet Service Provider (ISP) systems still have difficulty with one or
+the other aspect of running &IC;. A few cannot (or will not) run
+&IC; at all. On top of that, many times ISP personnel are too busy to
+help, won't help, or don't know enough to help. Some are secretive about
+details of the setup of their systems.
+</para><para>
+All in all, you can have a fair amount of confidence that your ISP can run
+&IC;. Or, you can get one who will for sure. 8-)
+
 </para>
 </answer>
 </qandaentry>
+
+<qandaentry>
+	<question><para>No shell access allowed on my ISP.</para></question>
+<answer><para>
+
+Generally it is a waste of time to try to use &IC; without shell access.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>We're sorry, the &IC; server is unavailable...</para></question>
+<answer><para>
+
+(The following assumes that you were able to start the &IC; server).
+</para><para>
+
+This could be almost anything, but with a properly configured &IC; it is
+almost undoubtedly due to your <filename class='directory'>cgi-bin</filename>
+and/or your &IC; directory being
+located on a different filesystem than the actual machine that is executing the
+program. VLINK uses UNIX-domain sockets, which don't work on NFS-mounted
+filesystems.
+</para><para>
+
+Iserver.com and other systems which use chroot HTTP servers require quite a bit
+of extra configuration to get going. If you have not been careful to set
+permissions properly when running in VLINK/UNIX mode, the link CGI will not be
+able to communicate with the &IC; server. Please read the documentation
+that covers this in detail.
+</para><para>
+
+You can run in INET mode with the <literal>tlink</literal> link program
+to prevent those problems.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>Document contains no data or premature end of script headers (especially on BSDI or FreeBSD).</para></question>
+<answer><para>
+
+This usually means that your HTTP server ran out of resources during the
+execution of the link program. It couldn't create more sockets, is unable to
+create a process, or can't open any more files.
+</para><para>
+
+This usually happens in catalogs containing frames, when &IC; is sending
+more than
+one page simultaneously. And even more especially on FreeBSD and BSDI, which
+are often distributed with the kernel parameters
+<literal>SOMAXCONN</literal> and <literal>CHILD_MAX</literal> set to
+levels unsuitable for serving the web.
+</para><para>
+
+Go to <ulink url='http://www.deja.com'>www.deja.com</ulink> and try
+searching for <literal>MAXUSERS</literal>. This should give
+you plenty of pointers on how to set these parameters properly.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>&IC; server only runs for a while, then dies.</para></question>
+<answer><para>
+
+Many ISPs don't allow your user ID to run a program unless it is logged in! The
+moment a watchdog program notices a daemon running with a non-logged-in UID, it
+terminates the program. Or, it terminates programs that haven't been active for
+some time. Contact your ISP about this. They may be able to do something for
+you.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>My entire home directory is in HTML document space.</para></question>
+<answer><para>
+
+If working with an ISP where all of the files are in HTML document space,
+disable all access to the &IC; catalog directory with the proper HTTP
+access restrictions. Normally that is done by creating a
+<filename>.htaccess</filename> file like this:
+
+
+<programlisting><![CDATA[
+<Limit GET POST>
+  order allow,deny
+  deny from all
+</Limit>
+]]></programlisting>
+
+
+If unable to do this, do not run &IC; unless file permissions can be set
+such that files will not be served. However, security will be a problem and
+customers' personal information could be placed at risk.
+
+</para>
+</answer>
+</qandaentry>
+
+</qandadiv>
+
+	<qandadiv><title>System configuration</title>
+
+
+<qandaentry>
+	<question><para>Can I run multiple catalogs on one server?</para></question>
+<answer><para>
+
+Yes. &IC; supports multiple independent catalogs. There are users who
+run more than 500 catalogs on a single machine. The capacity is usually a
+function of how busy the catalogs are and how much memory and processor speed
+your system has.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I start &IC; when I reboot?</para></question>
+<answer><para>
+
+Use the standard facility on your operating system. For BSD-style systems, the
+file is usually called <filename>/etc/rc.local</filename>.
+</para><para>
+
+On SVR4 systems, it is quite a bit more complex. Look for the
+<filename class='directory'>/etc/rc.d</filename>
+directory and see what other programs do. Often the file is called
+<filename>S99startup</filename> or something similar.
+</para><para>
+
+Linux systems have a SysV init scheme as well. Our Debian GNU and
+Red Hat packages already include the proper init script for those 
+systems.
+</para>
+
+<caution><para>
+&IC; must not run as root. The technique to start up the daemon under
+a different username depends on the facility of your su(1) command.
+However, this should work on most systems:
+
+<programlisting><![CDATA[
+su interchange <<EOF
+/your/interchange/dir/bin/restart
+EOF
+]]></programlisting>
+
+The <literal>EOF</literal> must be the only thing on the line
+(no leading or trailing whitespace). If your su(1) command has a
+<literal>-c</literal> option (as most System 5 UNIXes do), you can just do:
+
+<programlisting><![CDATA[
+su -c /your/interchange/dir/bin/restart interchange
+]]></programlisting>
+
+&IC; supplies a <command>restart</command> script which tries to do the
+above portably. It works on many operating systems.
+</para>
+</caution>
+
+</answer></qandaentry>
+
+<qandaentry>
+	<question><para>I installed the Interchange RPM, and I can't restart.</para></question>
+<answer><para>
+
+This usually means that you tried to run
+<filename>/usr/lib/interhcnage/bin/interchange</filename>.
+which fails to take into account the Linux Standard Base (LSB) file setup. Instead,
+run
+
+<programlisting>
+/etc/rc.d/init.d/interchange restart
+</programlisting>
+
+or
+
+<programlisting>
+/usr/sbin/interchange -r
+</programlisting>
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I set up a mall?</para></question>
+<answer><para>
+
+&IC; can share product databases, session files, and any other
+databases. It has many features which support mall building. You can easily
+build separate and mostly identical catalogs which you link to via HTML. But
+building a mall is as much an exercise in data and process as in software.
+Consider the following questions:
+</para>
+
+<itemizedlist>
+<listitem><para>
+Who will be clearing payment?
+</para></listitem>
+<listitem><para>
+What happens if everyone doesn't have the same tax rate?
+</para></listitem>
+<listitem><para>
+How will you clear orders to multiple vendors?
+</para></listitem>
+<listitem><para>
+How will you bring together multiple types of shipping?
+</para></listitem>
+<listitem><para>
+How will the vendors get product data (including images) to you?
+</para></listitem>
+</itemizedlist>
+
+<para>
+If you cannot answer those questions and visualize how to build a mall, you
+probably should not try.
+
+</para></answer>
+</qandaentry>
+
+</qandadiv>
+
+
+	<qandadiv><title>Product options</title>
+
+<qandaentry>
+	<question><para>Can I attach a size or color to a product?</para></question>
+<answer><para>
+
+&IC; has product modifiers, or attributes, which can be carried around with the product. Inside an item list or the product page (flypage), the
+<tag>item-options</tag> tag will automatically place suitable widgets on
+an &glos-HTML; form, and "remember" what should be selected. See the
+&glos-attribute; glossary entry for complete information.
+</para><para>
+
+You can use the &conf-SeparateItems; directive or set the
+<mv>mv_separate_items</mv> &glos-variable;
+on the order form to cause ordered items to be put on separate lines in the
+shopping basket (this is the default in the demo catalogs).
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>Can I change the price based on size or color (or other attribute)?</para></question>
+<answer><para>
+
+Yes. Use the &IC; UI to set up your product options. It operates on
+the <literal>options</literal> database table to set up options that
+can affect price.
+
+</para>
+</answer></qandaentry>
+</qandadiv>
+
+	<qandadiv><title>Encryption</title>
+
+<qandaentry>
+	<question><para>PGP encryption - Server Error</para></question>
+<answer><para>
+
+As always, check the error log. The most common problem is something like:
+
+<programlisting><![CDATA[
+> Encryption error:
+> akopia.com 3Ex5lvta:akopia.com - [01/Sep/1997:09:08:43] simple /cgi-bin/simple
+]]></programlisting>
+
+Check the &conf-ScratchDir; (usually
+<filename class='directory'>tmp/</filename>) for
+<filename>*.err</filename> files; they will contain PGP or GPG's error output.
+
+</para><para>
+Probable causes:
+</para>
+
+<itemizedlist>
+
+<listitem><para>
+&IC; user ID doesn't have keyring. You must have a
+<filename>.pgp</filename> or <filename>.gnupg</filename> directory in the
+home directory of the interchange daemon user. It is also possible to set
+an environment &glos-variable;
+(variously <envar>PGPPATH</envar> or <envar>GNUPGHOME</envar>) to orient
+the program correctly.
+</para></listitem>
+
+<listitem><para>
+EncryptProgram directive set wrong. In &IC; 4.7.7 and above, you only need to
+specify <literal>gpg</literal>,
+<literal>pgp</literal>
+or <literal>pgpe</literal>.
+The key is set in &conf-EncryptKey;. If you don't set a value for
+&conf-EncryptProgram;, &IC; will look for <literal>gpg</literal> first,
+then <literal>pgpe</literal>, then finally <literal>pgp</literal>,
+using the first it finds. If it can't find one of those,
+it is set to none and encryption can't be done. You can specify a full
+path to the program in the directive, but no arguments need be set
+(old values in &conf-EncryptProgram; will still work, just are not needed).
+</para></listitem>
+</itemizedlist>
+
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>PGP encryption - What do I do now that it is working?</para></question>
+<answer><para>
+
+This depends on what you do with orders once you receive them by email.
+Some PC mail agents (notably Eudora) will decrypt the PGP message
+embedded within the message text. In that case, you can simply embed
+the <code>[value mv_credit_card_info]</code> call right in the message and be
+done with it.
+
+</para><para>
+If your mailer will not decrypt on the fly, the best way to read the
+credit card number is to set up MIME encoding of the order email. To do
+this, find the order report you are using. In the standard demos it is
+<filename>pages/ord/report.html</filename> or <filename>etc/report</filename>.
+
+</para><para>
+Set up two MIME regions in that file. First, at the top of the file insert:
+
+
+<programlisting><![CDATA[
+[tag mime type TEXT/PLAIN; CHARSET=US-ASCII][/tag]
+[tag mime Order Text]
+
+  ORDER DATE: [calc]localtime[/calc]
+  ORDER NUMBER: [value mv_order_number]
+
+  Name: [value name]
+  Company: [value company]
+
+  [comment] Rest of order text, including item list [/comment]
+
+[/tag]
+]]></programlisting>
+
+Then, at the bottom of the <filename>report.html</filename> file,
+put the credit card info:
+
+
+<programlisting><![CDATA[
+[if value mv_credit_card_info]
+  [tag mime type application/pgp-encrypted][/tag]
+  [tag mime Credit Card Information]
+  
+    [value mv_credit_card_info]
+  
+  [/tag]
+[/if]
+]]></programlisting>
+
+
+Once this is done, you can read mail using your PGP client as a helper
+application to decode the MIME attachment. This does not require a fancy
+setup - you can use the standard MIT PGP 2.6.2 if desired. If you are
+using UNIX, set up as the helper for the MIME type
+<literal>application/pgp-encrypted</literal>:
+
+<programlisting><![CDATA[
+xterm -e pgp -m %s
+]]></programlisting>
+
+More automated or user-friendly setups are left as an exercise for the user.
+
+</para>
+</answer>
+</qandaentry>
+
+<!--
+
+<qandaentry>
+	<question><para>How do i....</para></question>
+<answer><para>
+
+<para>
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I get the number of items in a shopping cart?</para></question>
+<answer><para>
+
+<para>
+
+If it is simply the total number, extended according to quantity, you can use the [nitems] tag. If you need this number for use in an embedded &PERL; script, you can use:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+   $number = $Tag->nitems();
+
+If it is the number of line items you need, then you can use a &PERL; script:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+   [perl]
+       return scalar @{$Carts->{main}};
+   [/perl]
+
+(The 'main' refers to the main shopping cart.)
+
+If you have SeparateItems in effect, and need the number of unique items, you could use:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+   [perl]
+       my $cart = $Carts->{main};
+       foreach my $item (@$cart) {
+   @items = split /\|/, $items;
+   $count = 0;
+   for (@items) {
+   $count++ unless $seen{$_}++;
+   }
+   $count;
+   [/perl]
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I delete an item from the cart in &PERL;?</para></question>
+<answer><para>
+
+<para>
+
+(Answered by Racke)
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+[calc] @$Items = grep {$_->{code} ne '123.456.789'} @$Items [/calc]
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>The demo doesn't do ... (pick one)</para></question>
+<answer><para>
+
+<para>
+
+That is because it is a demo. It is not intended to be a finished catalog, just
+a starting point.
+
+That being said, you should think long and hard before abandoning the
+checkout schema. Years of experience have led to the production of the
+userdb, transactions, and orderline tables, and the structure of the
+checkout page. Any changes to the data structure should be thoroughly
+tested before deployment, as obscure errors can cause major problems in
+order logging.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How can I trace the source of a purchase and run a partners program?</para></question>
+<answer><para>
+
+<para>
+
+&IC; has a facility that adds a parameter called <emphasis>source</emphasis> to the session database for that user. You should give your partners a source code, which must contain at least one letter character (A-Za-z only). It is placed in the sourcing URL as a query string of:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+   mv_pc=Source1
+
+If this is appended to the URL with which the user calls &IC;,
+it will then be placed in the session identifier <literal>source</literal>.
+
+This URL:
+
+E:http://yourcatalog.com/cgi-in/yourcat/sp_offer?mv_pc=Source1
+
+will yield <literal>Source1</literal> from the &IC; tag [data session source].
+
+The Minivend 3 idiom <literal>?;;Source1</literal> continues to be supported, so existing partner sites should work without change.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How can I send an email copy of the receipt to a user?</para></question>
+<answer><para>
+
+<para>
+
+There are several ways, but this is a more complex question than it may seem like it is. You will have to deal with bad email addresses, deciding which
+information to send, showing delivery times, etc. You also have to be very careful with credit card information. If you have not taken the proper security measures (by enabling PGP credit card encryption or using CyberCash), you might just mail them their own unencrypted credit card number!
+
+This is supported in &IC; via a UserTag, [email ...]. See the "simple" and "basic" demos.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I display Euro pricing?</para></question>
+<answer><para>
+
+<para>
+
+You can use &IC;'s II8N facilty via the Locale directive. In catalog.cfg:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+# to define the euro-Settings (PriceDivide is for converting from DM)
+Locale eur_EUR PriceDivide         1.95583
+Locale eur_EUR p_cs_precedes       0
+# this is great - you can even use HTML-Tags to display an euro-image
+Locale eur_EUR currency_symbol     "<img src="/path/to/image/euro.gif">"
+Locale eur_EUR p_sep_by_space      2
+Locale eur_EUR mon_decimal_point   ,
+
+# and the DM
+Locale de_DE
+Locale de_DE p_cs_precedes  0
+Locale de_DE p_sep_by_space 2
+
+Note: Be sure to use the latest exchange rates when you establish your catalog.
+
+On your pages (this is from a search results page, the [item-.... ...] notation may be different depending on your context):
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+[item-price]<br><!- german is default ->
+[setlocale eur_EUR]
+  [currency  convert="1"][item-field price][/currency]<br><!- the euro ->
+[setlocale]
+
+Any questions? Read the docs about "Internationalization."
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I empty the shopping cart?</para></question>
+<answer><para>
+
+<para>
+
+N: Here are three examples of ways to empty/drop/clear the shopping cart contents. 
+
+H3: Empty shopping cart
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+[calc]
+        @{$Carts->{$CGI->{mv_cartname} || 'main'}} = ();
+[/calc]
+
+H3: Empty shopping cart
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+[set clear_basket]
+        [calc]
+                @{$Carts->{$CGI->{mv_cartname} || 'main'}} = ();
+        [/calc]
+[/set]
+
+[button
+        text="Clear Basket"
+        src="clear_basket.gif"
+        hidetext=1
+        form=basket
+        ]
+                mv_todo=refresh
+                mv_click=clear_basket
+[/button]
+
+H3: Erase the user session (includes shopping cart)
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+[button
+        text="Clear Basket"
+        src="clear_basket.gif"
+        hidetext=1
+        form=basket
+        ]
+                mv_todo=cancel
+                mv_nextpage=index
+[/button]
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I e-mail credit card numbers in plain text?</para></question>
+<answer><para>
+
+<para>
+
+(Answered by Mike Heins)
+
+The position of ICDEVGROUP is that we will not tell you what you can and
+cannot do, but that we simply will not help you send unencrypted CC
+numbers by email.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I setup multiple shipping addresses?</para></question>
+<answer><para>
+
+<para>
+
+&IC; has the facility to handle multiple addresses.
+See the {{C[jump="icdatabase.html#User Database Functions"]User Database Functions}}
+section of the &IC; Database manual.
+        
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I change the order number from TEST0001, TEST0002 to something else?</para></question>
+<answer><para>
+
+<para>
+
+(Answered by Aaron Hazelton &amp; Paul Jordan)
+
+        * Go to the IC admin and click on "Administration"
+        then click on the 'last order' which will be something
+        like "TEST00001".  It will bring up a page which will allow
+        you to change it to whatever you want.
+        
+        * Or, modify the CATROOT/etc/order.number
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I move a catalog from a test server to a production server?</para></question>
+<answer><para>
+
+<para>
+
+(Answered by Jonathan Clark)
+
+N:
+
+1) copy the complete catalog root with all files and subfolders.
+
+2) make sure the permissions are appropriate (&IC; daemon user needs rw access to all of it.
+
+3) link <catroot>/error.log to /var/logs/&IC;/catalog/error.log or wherever.
+
+4) link catroot/images to images folder in your public html space.
+
+5) link the admin ui images folder '&IC;' in public html space to actual location.
+
+6) copy any global usertags which are not in your catalog structure.
+
+7) edit the &glos-variable;.txt to set appropriate domain names if these have changed.
+
+8) if using MySQL/Postgres/Oracle, set up database access.
+
+9) put a link program in your cgi-bin, make sure it is chmod u+s and owned by the &IC; daemon user.
+
+10) add the catalog to the &gcf; file.
+
+11) restart ic.
+
+12) check global error.log for any error messages.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I access the raw match count?</para></question>
+<answer><para>
+
+<para>
+
+(Answered by Kevin Walsh)
+N:
+
+{{EX:[value mv_search_match_count]}}
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I add the thumbnail to the results page?</para></question>
+<answer><para>
+
+<para>
+
+(Answered by Ed LaFrance &amp; Dan Browning)
+
+It's as easy as <img src="thumb/[item-field thumb]">, but 
+you may want to add a check to see if the image is actually 
+there before you try to display it:
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+[if file images/thumb/[item-field thumb]]
+        <img src="thumb/[item-field thumb]">
+[/if]
+
+For example:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+- results.html.orig   Sat Jun 29 21:25:49 2002
++++ results.html        Sat Jun 29 21:28:57 2002
+@@ -100,6 +100,7 @@
+
+ <table width="90%" border="0" cellspacing="0" cellpadding="3">
+ <tr class="contentbar2">
++  <td>&amp;nbsp;</td>
+   <td><b>&amp;nbsp;Product</b></td>
+   <td align="center"><b>SKU</b></td>
+   <td align="center"><b>Stock</b></td>
+@@ -120,6 +121,11 @@
+
+ <tr valign="middle">
+       <td>
++                  [if file images/thumb/[item-field thumb]]
++                     <img src="thumb/[item-field thumb]">
++                  [/if]
++      </td>
++      <td>
+        <input  type="hidden"  name="mv_order_item"  value="[item-code]">
+        <a href="[area [item-code]]">[item-description]</a>
+       </td>
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I do a random display of items?</para></question>
+<answer><para>
+
+<para>
+
+(Answered by Bill Carr)
+
+If you are using mysql (and others probably), you should be able to add "ORDER BY RAND()" to your SQL query.  For example:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+[query
+   list=1
+   sql=|SELECT * FROM products ORDER BY RAND() LIMIT 3|
+]
+[list]
+        [sql-param description]<br>
+[/list]
+[/query]
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I setup a new real time payment processor that isn't yet supported by &IC;?</para></question>
+<answer><para>
+
+<para>
+
+If the payment processor that you would like to use isn't supported by &IC; out of the box, then a new payment module would need to be developed for that processor before you could use them.
+
+If you are up to the task of programming a new payment processor module yourself, the ICDEVGROUP would be happy to add your contribution to the growing list of &IC;-supported payment processors.  Feel free to take a look at the lib/Vend/Payment directory to see examples of current payment modules.
+
+If developing the module on your own isn't an option, you may engage a competent &IC; developer to do it for you or use one of the already-supported payment modules.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I modify orders after they are placed, change items, shipping, etc.?</para></question>
+<answer><para>
+
+<para>
+
+N:Example question:  "Occasionally, I need to modify orders... Add an Item, Change shipping, etc.   What is the best way or how can it be done?"
+
+The Foundation template does not have this functionality "out of the box".  While one can manually modify the tables via the Admin UI, it would not cause IC to automatically recalculate subtotals, tax, shipping, etc. to account for the  modifications.
+
+Until someone gets the "itch" to program that feature into the Admin UI, some users are solving the problem by handling all of these modifications in a Back Office / Accounting / ERP software system.  For example, IC comes with "out of the box" support for integration with Quickbooks.  At that point, however, it becomes necessary to analyze what (if any) syncronization will be performed between the two systems.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I make or get a certificate for SSL?</para></question>
+<answer><para>
+
+<para>
+
+This is handled separately and independantly from &IC;, and there are lots of documentation on buying and installing certificates for your platform and http server, as well as generating certificate signing requests (CSR).  Companies such as GeoTrust and Thawte sell certificates, and often have some documentation on what the process entails.  The Apache, mod_ssl, and OpenSSL user groups may be of assistance as well.
+
+While it is technically feasible to generate your own self-signed certificate, modern browsers will display a warning if the certificate is not signed by a signing authority known to that browser.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I perform multi-table SQL queries and/or joins using dot notation?</para></question>
+<answer><para>
+
+<para>
+
+(Answered by Mike Heins)
+
+Example question: "How come I can't use [sql-param tablename.fieldname] notation when I do a multi-table query?"
+
+DBI simply does not support tablename.fieldname in the return value.
+
+You can just refer to them by the fieldname. In the case of field names that are the same but need to be selected from different tables, you can use "SELECT orderline.quantity as o_quan,..." and refer to it as [sql-param o_quan].
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>How do I modify the Save Cart and Recurring Cart feature?  How do they work?</para></question>
+<answer><para>
+
+<para>
+
+The code for these features is in templates/components/cart.  The relative portion that is executed first when you call the basket page is this:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+      [button
+          text="Save This Cart"
+          src="__THEME__/savecart.gif"
+          extra="class=contentbar2"
+          hidetext=1
+          form=basket
+          mv_check="Save This Cart"
+      ]
+          mv_todo=return
+          mv_nextpage=ord/basket
+          save_cart=cart
+      [/button]
+      [button
+          text="Set As Recurring Order"
+          src="__THEME__/saverecur.gif"
+          extra="class=contentbar2"
+          hidetext=1
+          form=basket
+          mv_check="Set As Recurring Order"
+      ]
+          [set save_cart]recurring[/set]
+          mv_todo=return
+          mv_nextpage=ord/basket
+          save_cart=recurring
+      [/button]
+
+This creates two buttons that set save_cart to either 'cart' or 'recurring', then go to the ord/basket page (where you are already).  When clicked, one of these two code blocks will be executed:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+ [if value save_cart eq 'recurring']
+            <form action="[process-target]"  method="POST">
+            To save this recurring order, give it a nickname, then press 'Save Cart'.<br>
+            Nickname:
+            <input  type="TEXT" name="c_nickname"  size="11" value="[scratch just_nickname]">
+            <input  type="hidden"  name="mv_session_id" value="[data session id]">
+                        <input  type="HIDDEN" name="c_recurring" value="1">
+            <input  type="HIDDEN" name="save_cart" value="recurring">
+            <input  type="HIDDEN" name="mv_todo" value="return">
+            <input  type="HIDDEN" name="mv_check" value="Save Cart">
+            <input  type="SUBMIT" value="Save Cart">
+            </FORM>
+  [elsif value save_cart eq 'cart']
+            <form action="[process-target]"  method="POST">
+            To save this cart, give it a nickname, then press 'Save Cart'.<br>
+            Nickname:
+            <input  type="TEXT" name="c_nickname"  size="11" value="[scratch just_nickname]">
+            <input  type="HIDDEN" name="c_recurring" value="0">
+            <input  type="HIDDEN" name="save_cart" value="cart">
+            <input  type="HIDDEN" name="mv_todo" value="return">
+            <input  type="HIDDEN" name="mv_check" value="Save Cart">
+                        <input  type="hidden"  name="mv_session_id" vlaue="[data session id]">
+            <input  type="SUBMIT" value="Save Cart">
+            </FORM>
+  [/elsif]
+!endblock  
+
+The "nickname" for the cart is set earlier via:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+[if !scratch just_nickname]
+  [seti just_nickname][tag time]%b-%d-%Y[/tag][/seti]
+[/if]
+
+The real work is done because of this:  {{EX:<input  type="HIDDEN" name="mv_check" value="Save Cart">}} which calls the following code after the the user clicks "Save Cart":
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+  [set Save Cart]
+   mv_todo=return
+   mv_nextpage=ord/basket
+   save_cart=none
+   [save_cart nickname="[value c_nickname]" recurring="[value c_recurring]"]
+  [/set]
+
+Which in turn calls the usertag "save_cart" with a nickname parameter and a recurring parameter.  Depending on which button was clicked, recurring will either be 0 (for "Save This Cart") or 1 (for "Set As Recurring Order").  The save_cart usertag adds the cart to the userdb.carts field as a &PERL; data structure (hashes, arrays, etc.).
+
+</para>
+</qandaentry>
+
+
+<qandaentry>
+	<question><para>Errors</para></question>
+<answer><para>
+
+<para>
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>Sorting doesn't work across multiple pages.</para></question>
+<answer><para>
+
+<para>
+
+If you are using the [sort table:field] idiom, it cannot. It sorts data
+present in the list only.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>I am searching for a string and it is not found. I know it is there!</para></question>
+<answer><para>
+
+<para>
+
+Set <literal>mv_substring_match</literal> to <literal>yes</literal> (<literal>su=yes</literal> in one-clicks). This most
+commonly happens when searching for non-ISO-8859 (Cyrillic, or characters like
+umlaut and eacute) characters in word-match mode. The problem is, that unless
+your locale is set up properly, &PERL; doesn't think a non-ISO-8859 and a space
+character is a boundary.
+
+Also, if you are searching for non-alpha characters, they will also not be
+interpreted as word characters and the boundary problems will still exist.
+
+</para>
+</qandaentry>
+
+
+<qandaentry>
+	<question><para>Performance issues</para></question>
+<answer><para>
+
+<para>
+
+&IC; is not a lightweight program. If you are running it on a low-end
+ISP, whose major selling point is low cost, you will frequently find that
+&IC; performance is very poor. This is due to either:
+
+LI1: Not enough memory
+
+.If memory is low, the program will "swap" to disk. If lots of swap is
+used, you can expect very bad performance. This is the most common
+speed problem.
+
+.If your ISP uses IDE hard disks, you can expect REALLY bad performance.
+IDE disks are very slow for multi-user machines, which should have SCSI
+if ANY swapping is to be done.
+
+LI1: Too many domains
+
+.If there is a huge amount of traffic on the system, then it can run at
+a very high "load average." If the machine's load average is routinely
+above 2, you can expect problems.
+
+LI1: Underpowered machine
+
+.If it is an old machine, it may be too slow for &IC;. A
+Pentium of less than 300MHz is probably not good enough unless it is
+completely dedicated to &IC;. The faster the processor, the
+happier you will be.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>&IC; runs, but it's sooo sllooowww...</para></question>
+<answer><para>
+
+<para>
+
+This is almost certainly due to a system that has inadequate memory or
+network bandwidth. On a moderately fast ISP server with sufficient
+memory, pages should start displaying in less than 2 seconds. On a fast
+server, pages should start loading almost instantaneously.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>&IC; slows down over time.</para></question>
+<answer><para>
+
+<para>
+
+There are many possible reasons for this, but most have to do with
+memory or session database size.
+
+*See the documentation on &IC; administration (icadmin) and learn
+how to expire your session database. If it is megabytes in size,
+accessing a key will significantly slow down the session.
+
+*Second, if your machine is memory-poor, you will find that &IC;
+gets swapped to disk. Unless your system is very fast, this will greatly
+hurt performance. &IC; works best on a machine that rarely if
+ever swaps to disk.
+
+*Third, this often has nothing to do with &IC; at all but has to
+do with your HTTP server. Any long-running daemon has the potential for
+a memory leak. Try stopping and starting your HTTP server and seeing
+what happens to performance.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>I am using SQL, and &IC; is slow ...</para></question>
+<answer><para>
+
+<para>
+
+It isn't &IC;. First of all, did you index your 'SKU' or other
+key fields? The reason &IC; doesn't do it for you is that every
+SQL database seems to do that a bit differently. Even then, you can try
+&IC;'s COLUMN_DEF parameter:
+
+        Database  products  COLUMN_DEF  code=char(16) PRIMARY KEY
+
+This will at least index the <literal>code</literal> field for MySQL. Other databases differ.
+
+&IC; can return VERY fast SQL search results. But you need to at
+least give it something to work with. The proper method for fast
+selection is:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+[query sql="select code,category,title,price from products" ]
+
+Category: [sql-param category]<br>
+Title:    <a href="[area [sql-code]]"> [sql-param title] </A><br>
+Price:    <a href="[area order [sql-param 0]]"> [sql-param price] </A><br>
+
+[/sql]
+
+This is especially powerful when you consider a joined query like:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+       SELECT code, price, title, extended.desc
+       FROM   products, extended
+       WHERE  products.category = 'Renaissance'
+
+Note that the extended.desc field will be accessed as [sql-param desc].
+Don't forget that you must index your fields if you want fast searching
+with them as a criteria.
+
+</para>
+</qandaentry>
+
+
+<qandaentry>
+	<question><para>Using &ic; with apache and suexec</para></question>
+<answer><para>
+
+<para>
+
+Apache with SUEXEC: VLINK/UNIX socket mode will not work well unless
+installed as a normal user. If supporting multiple users, the TLINK/INET
+mode must be used.
+
+</para>
+</qandaentry>
+
+
+<qandaentry>
+	<question><para>A friendly reminder</para></question>
+<answer><para>
+
+<para>
+
+{{B:When in doubt, restart the server.}} It won't take but a few
+seconds, and changes in configurable options don't take effect until it
+is done. You may even change a page and not see the effect until the
+server is restarted.
+
+</para>
+</qandaentry>
+
+
+<qandaentry>
+	<question><para>Tips and tricks</para></question>
+<answer><para>
+
+<para>
+
+These are slightly edited postings to the &IC;-users mail
+list made by Mike Heins, lead author of &IC;.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>Locking down your system</para></question>
+<answer><para>
+
+<para>
+
+&IC; has lots of built-in protections to make developing your
+catalogs pretty care-free. But it will definitely pass you the ammo
+to shoot yourself in the foot, as will any templating system that has
+power. So you have to be careful, as you do in any scripting environment.
+
+Most of the protections have to do with:
+
++ Tags like [cgi foo], [data ...] and such are not reparsed for tags. 
++ The [value foo] tag never allows a left square bracket to be output.
++ Safe is used for &PERL;, which means that arbitrary perl code which reads/writes or uses IO is not possible.
++The &IC; files don't need to be readable or writable by any other user ID, so CGI/PHP programs run by the web server can't get at them.
++Dangerous operations are allowed only via global UserTag, and not by catalog UserTag.
+
+But there are ways that user-entered data could end up getting
+parsed for tags. The most common breach is to take possibly
+tainted user data entered into a form and put it in a database
+without filtering it first. There are several ways to do
+that:
+
+</para>
+
+</para></listitem> <listitem><para>
+
+For user-entered form fields like name, address, etc
+you should always use the [value ...] tag to display
+them.
+
+</para></listitem> <listitem><para>
+
+You can filter lists of &glos-variable;s automatically with
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+    Filter  name     textarea_put
+    Filter  address  textarea_put
+    Filter  comments textarea_put
+    Filter  email    textarea_put
+
+in catalog.cfg.
+
+</para></listitem> <listitem><para>
+
+You can prevent problems in some cases by using the data tag
+(i.e. [data table=foo col=bar key="[item-param something]"])
+which is not reparsed for tags as [item-data ....] is.
+This is not foolproof unless you control the key in some fashion -
+in most cases, you will use [data session username] or something
+you control.
+
+</para></listitem> <listitem><para>
+
+You should never put user-entered data directly in a Scratch
+&glos-variable;, which can be called with mv_click and mv_check.
+
+</para></listitem> <listitem><para>
+
+Process all user-entered data before putting it in a database that could
+be displayed in a page later. Or process it before it is displayed.
+
+</para></listitem> <listitem><para>
+
+When putting data inside a container tag, the output of which is
+reparsed for more tags by default, consider setting reparse=0.
+
+</para></listitem> <listitem><para>
+There are other ways to nail down your system and make it more
+difficult to have a security problem.
+
+</para>
+
+</para></listitem> <listitem><para>
+
+Use the WRITE_CONTROL database settings.
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+  Database products WRITE_CONTROL 1
+
+It is the default for MV DBM databases (i.e. you have to have a [flag type=write table=foo] to write) but not for SQL.
+
+The UI does the proper write flagging, so this should have
+no effect on it.
+
+AUTHORS NOTE: I should have made WRITE_CONTROL the default for SQL
+in MV4, my bad. As long as MV3 compatibility was as poor as it turned
+out to be, I should have gone for it.
+
+</para></listitem> <listitem><para>
+
+Set "NoAbsolute Yes" in interchange.cfg, it prevents [file /some/dir]
+or [include /some/rogue/file] from being used. NOTE: This is the
+default starting in IC 4.7.x.
+
+</para></listitem> <listitem><para>
+
+Split the admin server onto a different IC iteration from your
+production catalog, and disable the UI for the production catalog. That
+allows you to set the pages/ directory to be read-only for the
+production server, and to put WRITE_CONTROL in the production
+catalog_after.cfg or etc/<catalog id>.after file.
+
+You could also use a different username to access the SQL data, and make
+the production server username have read-only access.
+
+You can use a different UID for the admin server iteration, and make all
+directories except products/, upload/, tmp/, session/, and logs/
+read-only for the production server UID.
+ 
+</para></listitem> <listitem><para>
+
+Make as much stuff read-only as you can. Develop a script which
+sets things read-write while you are admin-ing, and read-only
+otherwise.
+
+</para></listitem> <listitem><para>
+
+Always make ICDIR/*.cfg, ICDIR/bin/*, and ICDIR/lib/* read-only for
+the IC user.
+
+</para></listitem> <listitem><para>
+
+Don't let the &IC; daemon user ID have read or write permission
+on things it doesn't need.
+
+</para></listitem> <listitem><para>
+
+Never use AllowGlobal in production if you have user-entered data
+going into a database. (AllowGlobal is not the default, so many
+people won't know what it is - see &IC; Configuration.)
+
+</para></listitem> <listitem><para>
+All in all, &IC; has been proven to be securable over time.
+But we all have to do our part and think about what we are doing
+with user-entered data.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>Optimizing lists</para></question>
+<answer><para>
+
+<para>
+
+&IC; has powerful search capabilities that allow you to produce
+lists of items for use in category lists, product lists, indexes, and other
+navigation tools.
+
+These are a two-edged sword, though. Lists of hundreds or thousands of entries
+can be returned, and techniques that work well displaying only a few items may
+slow to a crawl when a large list is returned.
+
+In general, when you are returning one item (i.e. a flypage) or a small list
+(i.e. a shopping cart) you can be pretty carefree in your use of [if ...]
+and [calc] and [perl] tags. When there are hundreds of items, though, you cannot;
+each complex test or embedded &PERL; snippet causes the Safe module to have to
+evaluate code, and each ITL tag requires parsing and argument building.
+
+The Safe module is pretty fast considering what it does, but it can only generate
+a few thousand instances per second even on a fast system. And the ITL tag
+parser can likewise only parse thousands of tags per CPU second.
+
+What to do? You want to provide complex conditional tests but you don't want
+your system to slow to a crawl. Luckily, there are techniques which can speed
+up complex lists by orders of magnitude.
+
+H3: Benchmarking
+
+A non-precise benchmark of different iteration options can be done
+with the following global UserTag. Place this in a file in the
+usertag/ directory in the &IC; root:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+UserTag benchmark Order start display
+UserTag benchmark AddAttr
+UserTag benchmark Routine <<eor
+my $bench_start;
+my @bench_times;
+sub {
+    my ($start, $display, $opt) = @_;
+    my @times = times();
+    if($start or ! defined $bench_start) {
+        $bench_start = 0;
+        @bench_times = @times;
+        for(@bench_times) {
+            $bench_start += $_;
+        }
+    }
+    my $current_total;
+    if($display or ! $start) {
+        for(@times) {
+            $current_total += $_;
+        }
+        unless ($start) {
+            $current_total = sprintf '%.3f', $current_total - $bench_start;
+            for(my $i = 0; $i < 4; $i++) {
+                $times[$i] = sprintf '%.3f', $times[$i] - $bench_times[$i];
+            }
+        }
+        return $current_total if ! $opt->{verbose};
+        return  "total=$current_total user=$times[0] sys=$times[1] " .
+                "cuser=$times[2] csys=$times[3]";
+    }
+    return;
+}
+EOR
+
+Then at the beginning of the code to check, call
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+        [benchmark start=1]
+
+to start the measurement. At the end
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+        [benchmark]
+
+will display the time used. Bear in mind that it is not precise, and
+that there may be variation due to system conditions. Also, the longer
+the times and the bigger the list, the better the comparison.
+
+To see the system/user breakdown, do:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+        [benchmark verbose=1]
+
+In general, "user" time measures &IC; processing time and and
+the rest are indicative of the database access overhead, which can vary
+widely from database to database.
+
+H3: Optimizations
+
+* [PREFIX-tag] is faster than [parsed-tag]
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+    [loop prefix=foo search="ra=yes"]
+
+        [foo-data products image]
+                is slightly faster than
+        [foo-field image]
+                which is MUCH faster than
+        [data products image [foo-code]]
+                which is faster than
+        [data table=products column=image key="[foo-code]"]
+
+    [/loop]
+
+The loop tags are interpreted by means of fast regular expression
+scans of the loop container text, and fetch an entire row of
+data in one query. The [data ...]  ITL tag interpretation is
+delayed until after the loop is finished, whereby the ITL tag
+parser must find the tag, build a parameter list, then fetch the
+data with a separate query. If there are repeated references to
+the same field in the loop, the speedup can be 10x or more.
+
+* Pre-fetch data with rf=field1,field2,field3 and access with [PREFIX-param field1].
+
+mv_return_fields (otherwise known as "rf" in one-click
+terminology) sets the fields that are returned from a search.
+Once they are returned, they can be accessed with [PREFIX-param field].
+They can also be referenced with [PREFIX-pos N], where N is a digit 
+representing the ordinal position (i.e. starting with 0) in the
+list of fields.
+
+The following are equivalent:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+        Benchmark loop-field list: [benchmark start=1]
+        <!- [loop search="ra=yes/st=db"]
+                [loop-code] price: [loop-field price] [/loop] ->
+        TIME: [benchmark]
+
+        Benchmark loop-param list: [benchmark start=1]
+        <!- [loop search="ra=yes/st=db/rf=sku,price"]
+                [loop-code] price: [loop-param price] [/loop] ->
+        TIME: [benchmark]
+
+but the second is much, much faster.
+
+* [PREFIX-alternate N] is available for row counting and display.
+
+A common need when building tables is to conditionally close the table
+row or data containers. I see a lot of:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+        [loop search="ra=yes"]
+        [calc] return '<tr>' if [loop-increment] == 1; return[/calc]
+        [calc] return '' if [loop-increment] % 3; return '</TR>' [/calc]
+        [/loop]
+
+Much faster, by a few orders of magnitude, is:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+        [loop search="ra=yes"]
+        [loop-change 1][condition]1[/condition]<tr>[/loop-change 1]
+        [loop-alternate 3]</TR>[/loop-alternate]
+        [/loop]
+
+        If you think you need to close the final row by checking the
+        final count, look at this:
+
+        [loop search="ra=yes"]
+        [on-match]
+                <table>
+                <tr>
+        [/on-match]
+
+        [list]
+                        <td>[loop-code]</TD>
+                [loop-alternate 3]</TR><tr>[/loop-alternate]
+        [/list]
+
+        [on-match]
+                </TR>
+                </TABLE>
+        [/on-match]
+
+        [no-match]
+                No match, sorry.
+        [/no-match]
+
+[/loop]
+
+This is a hundred times faster than anything you can build with
+multiple [calc] tags.
+
+* Use simple go/nogo comparisons in [if ...]
+
+Consider these two snippets:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+        [if scratch|value|cgi key] THEN [/if]
+
+and:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+        [if scratch|value|cgi key == '1'] THEN [/if]
+
+The first one doesn't require &PERL; evaluation. It simply checks to see
+if the value is blank or 0, and returns true if it is anything but.
+Of course this requires setting your test values to blank or 0 instead
+of "No" or " " or somesuch, but it is anywhere from 20-35% faster.
+
+Try it on the foundation demo:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+    - begin test -
+
+    Overhead: 
+    [benchmark start=1]
+        <!- [loop search="ra=yes"]
+                    [set cert][loop-field gift_cert][/set]
+            [/loop] ->
+    [benchmark]
+    <p>
+
+
+    if scratch compare: 
+    [benchmark start=1]
+        <!-
+        [loop search="ra=yes"]
+        [set cert][loop-field gift_cert][/set]
+        [loop-code] [if scratch cert] YES [else] NO [/else][/if]
+        [loop-code] [if scratch cert] YES [else] NO [/else][/if]
+        [loop-code] [if scratch cert] YES [else] NO [/else][/if]
+        [loop-code] [if scratch cert] YES [else] NO [/else][/if]
+        [loop-code] [if scratch cert] YES [else] NO [/else][/if]
+        [/loop]
+        ->
+
+    [benchmark]
+    <p>
+
+    if scratch compare eq 1: 
+    [benchmark start=1]
+        <!-
+        [loop search="ra=yes"]
+        [set cert][loop-field gift_cert][/set]
+        [loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
+        [loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
+        [loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
+        [loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
+        [loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
+        [/loop]
+        ->
+    [benchmark]
+    <p>
+
+    [page @@MV_PAGE@@]Again</a>
+
+    - end test -
+
+* Use [PREFIX-calc] instead of [calc] or [perl]
+
+You can execute the same code as [calc] with [PREFIX-calc], which has
+two benefits:
+
++ It doesn't require ITL parsing.
++ It is executed during the loop instead of after it.
+
+The [PREFIX-calc] object has complete access to all normal
+embedded &PERL; objects like $Values, $Carts, $Tag, and such. If
+you want to make a data table (i.e. "products" or "pricing")
+available for access inside of it, just do:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+        [perl tables="products pricing"] [/perl]
+
+prior to list start. Now you can do something like:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+    [loop search="ra=yes"]
+        [loop-calc]
+            $desc = $Tag->data('products', 'description', '[loop-code]');
+            $link = $Tag->page('[loop-code]');
+            return "$link $desc </A>";
+        [/loop-calc] <br>
+    [/loop]
+
+* ADVANCED: Precompile and execute with [PREFIX-sub] and [PREFIX-exec]
+
+For repetitive routines, you can achieve a considerable savings
+in CPU by pre-compiling your embedded &PERL; code.
+
+In the "Construct Something" demo, the bar_link() routine in
+catalog_before.cfg is an example of compiling the subroutine once
+at catalog configuration time.
+
+You can also compile routines at the time of the list execution
+with [item-sub routine] CODE [/item-sub]. This means only one
+Safe evaluation is done - every time the [loop-exec routine]
+is called, it is done fast as a call to the routine. This can be
+10 times or more faster than separate [calc] calls, or 5 times
+faster than separate [PREFIX-calc] calls.
+
+.Example:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+    [benchmark start=1]
+    loop-calc:
+      <!-
+            [loop search="st=db/fi=country/ra=yes/ml=1000"]
+            [loop-calc]
+                    my $code = q{[loop-code]};
+                    return "code '$code' reversed is " . reverse($code);
+            [/loop-calc]
+            [/loop]
+      ->
+                    
+    [benchmark]
+
+    <p>
+
+    [benchmark start=1]
+    loop-sub and loop-exec:
+      <!-
+            [loop search="st=db/fi=country/ra=yes/ml=1000"]
+            [loop-sub country_compare]
+                    my $code = shift;
+                    return "code '$code' reversed is " . reverse($code);
+            [/loop-sub]
+            [loop-exec country_compare][loop-code][/loop-exec]
+            [/loop]
+      ->
+                    
+    [benchmark]
+
+* ADVANCED: Execute and save with [query ...], then use an embedded &PERL;
+routine.
+
+You can run [query arrayref=myref sql="query"], which saves the
+results of the search/query in a &PERL; reference. It is then
+available in $Tmp->{myref}. (Of course, "myref" can be any 
+arbitrary name.)
+
+This is the fastest possible method to display a list.
+
+.Observe:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+  - begin test code -
+  [set waiting_for]os28004[/set]
+  
+  [benchmark start=1] Embedded &PERL;
+  <!-
+  [query arrayref=myref sql="select sku,price,description from products"]
+        <!- make query, this container text is not used. ->
+  [/query]
+  
+  [perl]
+    # Get the query results, has multiple fields
+    my $ary = $Tmp->{myref};
+    my $out = '';
+    foreach $line (@$ary) {
+        my ($sku, $price, $desc) = @$line;
+        if($sku eq $Scratch->{waiting_for}) {
+                $out .= "We were waiting for this one!!!!\n";
+        }
+        $out .= "sku: $sku price: $price description: $desc\n";
+    }
+    return $out;
+  [/perl]
+  ->
+  TIME: [benchmark]
+  
+  [benchmark start=1] All loop
+  <!-
+  [query list=1 sql="select sku,price,description from products"]
+        [if scratch waiting_for eq '[sql-code]']
+            We were waiting for this one!!!!
+        [/if]
+        sku: [sql-code]
+        price: [sql-param price]
+        desc: [sql-param description]  
+  [/query]
+  ->
+  
+  TIME: [benchmark]
+  
+  - end test code -
+
+* Other things that help:
+
+** Avoid interpolate=1 when possible. A separate tag parser must be spawned
+    every time you do this. Many times people use this without needing it.
+
+** Avoid saving large values to Scratch, as these have to be written to the users session. If you need them only for the current page, clear at the end by using [tmp scratch_var] contents [/tmp], which is the same as  [seti scratch_var] contents [/seti] except clears the value before the session is written. You can also use [scratchd scratch_var] to return the contents and delete them from the session at the same time.
+
+** Use the [more-list] facility to break up your large searches. You can use them in [query ....] and [loop ...] searches as well - see the docs.
+
+</para>
+</qandaentry>
+
+
+<qandaentry>
+	<question><para>Using &ic; with oracle</para></question>
+<answer><para>
+
+<para>
+
+N:Question: should we be using the DBI ChopBlanks setting for Oracle or is &IC; trimming trailing space from CHAR fields itself?
+
+IC daemon user should have environment &glos-variable;s ORACLE_HOME and
+possibly NLS_LANG set.
+
+Mark Johnson (mark@endpoint.com) wrote this
+trigger on TABLE_NAME to update the MOD_TIME column on insert or update.
+The user must have been granted the RESOURCE role to create triggers.
+Here it is:
+ 
+CREATE TRIGGER tr_modtime_for_TABLE_NAME
+BEFORE INSERT OR UPDATE ON TABLE_NAME
+FOR EACH ROW
+BEGIN
+  :new.MOD_TIME := SYSDATE;
+END;
+/
+
+</para>
+</qandaentry>
+
+
+<qandaentry>
+	<question><para>Using &ic; with postgresql</para></question>
+<answer><para>
+
+<para>
+
+Make sure you have DBD::Pg installed and tested.
+Make sure POSTGRES_INCLUDE and POSTGRES_LIB environment &glos-variable;s are set.
+
+
+</para>
+</qandaentry>
+
+
+<qandaentry>
+	<question><para>Using &ic; with mysql</para></question>
+<answer><para>
+
+<para>
+
+Permissions. test_ databases usually special.
+
+
+</para>
+</qandaentry>
+
+
+<qandaentry>
+	<question><para>Using &ic; with apache</para></question>
+<answer><para>
+
+<para>
+
+Slightly modified article posted to the old minivend-users mail list.
+Minivend-users is now &IC;-users.
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+Date: Thu, 7 Sep 2000 12:08:37 -0700
+From: Bill Randle <billr@exgate.tek.com>
+To: minivend-users@minivend.com
+Subject: Re: [mv] no /cgi-bin/storename/
+ 
+On Sep 6,  5:13am, Victor Nolton wrote:
+} Subject: [mv] no /cgi-bin/storename/
+} ******    message to minivend-users from Victor Nolton <ven@pragakhan.com> ******
+}
+} I've noticed some of the catalogs I've done are not indexed well with
+} the search engine, though most pages have meta tags, there is a
+} robot.txt file and so on and so forth.I assume it's due to the
+} cgi-bin in the url (not sure).
+}
+} I'd like to start having stores be like
+}
+} http://www.yourdomain.com/index.html
+} http://www.yourdomain.com/ord/basket.html
+} instead of
+} http://www.yourdomain.com/cgi-bin/yourstore/index.html
+} http://www.yourdomain.com/cgi-bin/yourstore/ord/basket.html
+}
+} how do you accomplish this? I assume it can be done somehow.
+ 
+In addition to using mod_minivend, previosuly suggested, you can do this
+with Apache rewrite rules in the VirtualHost directive for yourdomain.com:
+ 
+<virtualhost a.b.c.d>
+    ServerAdmin support@mainhost.com
+    DocumentRoot /home/httpd/html/yourstore
+    ServerName www.yourdomain.com
+    ErrorLog logs/yourdomain-error_log
+    CustomLog logs/yourdomain-access_log common
+    ScriptAlias /cgi-bin/ "/home/httpd/cgi-bin/"
+    RewriteEngine On
+    RewriteRule ^$  /cgi-bin/yourstore/index.html            [PT,L]
+    RewriteRule ^/$ /cgi-bin/yourstore/index.html            [PT,L]
+    RewriteRule ^/index\.html$ /cgi-bin/yourstore/index.html [PT,L]
+    RewriteRule ^/cgi-bin/yourstore/.* -                     [PT,L]
+    RewriteRule ^/.*images/.* -                              [PT,L]
+    RewriteRule ^/(.*) /cgi-bin/yourstore/$1                 [PT,L]
+</VirtualHost>
+ 
+I just did this for a client and it works quite well (as long as you're
+using a fairly recent version of Apache as your webserver).
+ 
+        -Bill
+
+
+</para>
+</qandaentry>
+
+
+<qandaentry>
+	<question><para>&PERL;/&ic; faq</para></question>
+<answer><para>
+
+<para>
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>Cameron Prince's local &PERL; installation how-to</para></question>
+<answer><para>
+
+<para>
+
++Login as user. In this example, we'll call the user bob. Bob's home directory is /home/bob.
+
++Get the perl tarball and extract it in /home/bob. (tar -xzvf perl-5.6.0.tar.gz)
+
++Create a directory for the local perl. (mkdir /home/bob/local-perl)
+
++Compile perl.
+
+++cd perl-5.6.0
+
+++sh Configure
+
+++Choose all the defaults until you get to: "Directories to use for library searches?" Here you want to enter the new local perl path, as well as the defaults. So you should enter something like: /home/bob/local-perl/lib /usr/local/lib /lib /usr/lib
+
+++Continue choosing defaults till you get to: "Any additional ld flags (NOT including libraries)?" This should be: -L/home/bob/local-perl/lib
+
+++Continue choosing defaults till you get to: "Installation prefix to use? (~name ok)" This should be: /home/bob/local-perl
+
+++Choose all defaults till you get to: "Directory /home/bob/local-perl/bin doesn't exist.  Use that name anyway?" Enter y.
+
+++Continue choosing defaults till you get to: "Do you want to install perl as /usr/bin/perl?" Enter n.
+
+++Continue choosing defaults till you get to: "Directory /home/bob/local-perl/bin doesn't exist.  Use that name anyway?" Enter y.
+
+++Directory /home/bob/local-perl/bin doesn't exist.  Use that name anyway? Enter y.
+
+++Continue taking defaults till you return to a prompt.
+
+++make
+
+++make test
+
+++make install
+
++/home/bob/local-perl/bin/perl -v
+
+.You should see: This is perl, v5.6.0
+
+
++edit /home/bob/.bash_rc
+
+.Change: PATH=$PATH:$HOME/bin
+.To: PATH=/home/bob/local-perl/bin:$PATH:$HOME/bin
+
++Logout and log back in.
+
++which perl
+
+.You should see: ~/local-perl/bin/perl or /home/bob/local-perl/bin/perl
+
+
++perl -MCPAN -e 'install Bundle::&IC;'
+
+.Keep running this until you see:
+
+
+<programlisting><![CDATA[
+
+]]></programlisting>
+
+MD5 is up to date.
+MIME::Base64 is up to date.
+URI is up to date.
+Net::FTP is up to date.
+MIME::Base64 is up to date.
+Digest::MD5 is up to date.
+HTML::Tagset is up to date.
+HTML::Parser is up to date.
+HTML::HeadParser is up to date.
+LWP is up to date.
+Term::ReadKey is up to date.
+Term::ReadLine::Perl is up to date.
+Business::UPS is up to date.
+SQL::Statement is up to date.
+Storable is up to date.
+DBI is up to date.
+Safe::Hole is up to date.
+
+You may need to get the modules via ftp and install them by hand. For instance, during the test used to create this document, I had to get URI and LWP and install by hand before everything reported that it was up to date. To do this, follow these steps:
+
+++ftp ftp.cpan.org
+++cd /CPAN/modules/by-module/URI
+++bin
+++get URI-1.10.tar.gz
+++quit
+++tar -xzvf URI-1.10.tar.gz
+++cd URI-1.10
+++perl Makefile.pl
+++make
+++make test
+++make install
+
+Use the same basic steps for any module not properly installed by using perl -MCPAN -e 'install Bundle::&IC;'
+
+Now, install &IC; as normal.
+
+</para>
+</qandaentry>
+
+
+<qandaentry>
+	<question><para>Other / miscellaneous questions</para></question>
+<answer><para>
+
+<para>
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>What does the "mv_pc" &glos-variable; added to every URL mean?</para></question>
+<answer><para>
+
+<para>
+
+It can be used to prevent the users' browser from caching dynamic content, or, combined with the session 'id', it can make every link unique so that the users behind a proxy (e.g. AOL) will not have dynamic content cached. 
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>Where is process.html?</para></question>
+<answer><para>
+
+<para>
+
+(Answered by Ed LaFrance &amp; Kevin Walsh)
+
+It is in the guts of &IC;. The [process] form action tells &IC;
+to process the posted form vars according to the action set with mv_todo. The
+processing is not associated with any specific target page (though a page to
+display when processing is complete can be specified with mv_nextpage), so
+&IC; just builds a target URL that ends in an 'imaginary' page called
+'process.html'.
+
+There are other ways to handle a form post.
+For more information,
+see the {{C[jump="ictemplates.html#Form Actions"]Form Actions}}
+section &IC; Templates manual.
+
+Basically, when you submit a <form> using the [process] tag, you
+get sent to the 'imaginary' process.html page.  That page is derived
+from the page specified in the form's mv_nextpage CGI submission.
+
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>What PGP / GPG encryption software is available for Windows?</para></question>
+<answer><para>
+
+<para>
+
+(Answered by Daryl Houston, Jonathan Clark, Aaron Hazelton, Mike Heins and Michael Goldfarb)
+
+</para>
+
+</para></listitem> <listitem><para>
+        
+<ulink url="http://www.pgpi.org/products/pgp/versions/freeware/">http://www.pgpi.org/products/pgp/versions/freeware/</ulink>  
+        
+</para></listitem> <listitem><para>
+        
+<ulink url="http://www.winpt.org">http://www.winpt.org</ulink>
+
+A universal encrypt/decrypt program that operates 
+generally via the clipboard so would be compatable with most programs, but
+there is also an Outlook Express plugin.  It comes with GPG (below).
+
+</para></listitem> <listitem><para>
+        
+<ulink url="http://www.gnupg.org/download.html">http://www.gnupg.org/download.html</ulink>      
+
+</para></listitem> <listitem><para>
+        
+<ulink url="http://web.mit.edu/network/pgp.html">http://web.mit.edu/network/pgp.html</ulink>
+
+Only for US and Canada for non-commercial use. There may also 
+be an international version without those restrictions.
+
+</para></listitem> <listitem><para>
+</para>
+</answer></qandaentry>
+
+
+<qandaentry>
+	<question><para>When are the results_big.html or results_either.html files called/used?</para></question>
+<answer><para>
+
+<para>
+
+(Answered by Mike Heins)
+
+They are just there as examples and are not used in the demo. If you
+don't use them, you can delete them.
+        
+Line:
+
+N:Copyright 2002-2004 &IC; Development Group. Copyright 2001-2002 Red Hat, Inc. Freely redistributable under terms of the GNU General Public License.
+-->
 
 </qandadiv>
 </qandaset>

@@ -42,7 +42,7 @@ VPATH       = guides refs howtos glossary
 
 #############################################################
 # Complete build
-all: skel cvs cache refxmls                                        \
+all: skel cache refxmls                                        \
      olinkdbs-nc olinkdbs-c                                        \
 		 glossary symbols guides howtos
 
