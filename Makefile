@@ -122,7 +122,7 @@ $T/%-c.db: %.xml
 #############################################################
 # STANDARD TARGETS || two-pass processing method
 #OUTPUT/howtos.html: DEPTH = "--stringparam toc.max.depth 1"
-OUTPUT/%.html: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent skel
+OUTPUT/%.html: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent
 	echo "C     $@"
 	$(PSR) $(PSR_FLAGS)                                                \
 	  $(PROFILE)                                                       \
@@ -134,7 +134,7 @@ OUTPUT/%.html: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autoh
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
 	  -o $@ docbook/html-nochunks.xsl $T/$*-nc.profiled
-OUTPUT/%: %.xml skel
+OUTPUT/%: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent
 	echo "C     $@/"
 	$(PSR) $(PSR_FLAGS)                                                \
 	  $(PROFILE)                                                       \
@@ -146,6 +146,19 @@ OUTPUT/%: %.xml skel
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
 	  -o $@/ docbook/html-chunks.xsl $T/$*-c.profiled
+OUTPUT/%.man: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent
+	echo "C     $@/"
+	mkdir -p "$@"
+	$(PSR) $(PSR_FLAGS)                                                \
+	  $(PROFILE)                                                       \
+	  --stringparam current.docid $*                                   \
+	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
+	  -o $T/$*-c.profiled docbook/profile.xsl $<
+	$(PSR) $(PSR_FLAGS)                                                \
+	  $(PROFILE)                                                       \
+	  --stringparam current.docid $*                                   \
+	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
+	  -o $@/ docbook/reference.xsl $T/$*-c.profiled
 #$O/%.pdf: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent skel
 #	echo "C     $@"
 #	$(PSR) $(PSR_FLAGS)                                                \
@@ -251,14 +264,6 @@ docbook/autorefs.ent: refxmls
 #colt-preview:
 #	tar jcf OUTPUT.tar.bz2 OUTPUT
 #	scp OUTPUT.tar.bz2 colt.projectgamma.com:web/ic/xmldocs/
-
-## Man pages
-#$(OUTPUT)/%.man: %.xml
-#	mkdir -p $(OUTPUT)/man
-#	$(XMLTO) $(XMLTO_FLAGS)                                        \
-#	-x docbook/reference.xsl                                       \
-#	-o $(OUTPUT)/man/                                              \
-#	man $<
 ##
 ##tmp/olinkdbs: $(LTMPDIR) \
 ##  $(patsubst guides/%.xml,$(LTMPDIR)/%-c.db,$(wildcard guides/*.xml))  \
