@@ -1,0 +1,132 @@
+__NAME__ purpose
+automatically register existing database tables for use with Interchange
+__END__
+
+__NAME__ synopsis
+	<arg choice='plain'><replaceable>DSN</replaceable></arg>
+	<arg choice='plain'><replaceable>username</replaceable></arg>
+	<arg choice='plain'><replaceable>password</replaceable></arg>
+__END__
+
+__NAME__ see also
+DatabaseAutoIgnore,Database,DatabaseDefault
+__END__
+
+__NAME__ description
+The directive automatically registers database tables found for use with &IC;. 
+</para><para>
+This only works for SQL databases, and the parameters provided to
+&conf-DatabaseAuto; are used to establish the connection to the database.
+</para><para>
+For example, a setting of
+<programlisting>
+DatabaseAuto   dbi:<replaceable>mysql:test_foundation  interch  pass</replaceable>
+</programlisting>
+
+would do the equivalent of:
+
+<programlisting>
+NoImport <replaceable>TABLENAME</replaceable>
+Database <replaceable>TABLENAME</replaceable> <replaceable>TABLENAME</replaceable>.txt dbi:<replaceable>mysql:test_foundation</replaceable>
+Database <replaceable>TABLENAME</replaceable> USER <replaceable>interch</replaceable>
+Database <replaceable>TABLENAME</replaceable> PASS <replaceable>pass</replaceable>
+</programlisting>
+
+for every table (not view) found in the database
+<database>test_foundation</database>.
+</para><para>
+
+If the &PERL; module <classname>DBIx::DBSchema</classname> was found,
+it would also dump the specification needed to re-create the table structures
+(which you can use as the <literal>CREATE_SQL</literal> parameter to
+&conf-Database;:
+
+<programlisting>
+Database  <replaceable>TABLENAME</replaceable> CREATE_SQL   CREATE TABLE <replaceable>TABLENAME ( ...)</replaceable>
+</programlisting>
+
+</para><para>
+This information is available in <varname>$Vend:Cfg</varname> or 
+<varname>$Config</varname> (depending on whether the context is global 
+or local) and it is trivial to dump it to the screen or file.
+See <xref linkend="DatabaseAuto_examples"/>.
+__END__
+
+__NAME__ notes
+</para><para>
+For more about &IC; and databases, and supported formats, see &glos-database;
+glossary entry.
+__END__
+
+__NAME__ example: Standard DatabaseAuto definition, a standalone example
+First, make sure MySQL is installed, then connect to it as root (using the
+<command>mysql</command> command-line tool), and issue the following 
+commands to both create a sample database and allow access to it:
+
+<programlisting>
+create database interchange;
+use interchange;
+create table table1(code INT, price INT, description VARCHAR(60));
+create table table2(code INT, price INT, description VARCHAR(60));
+create table table3(code INT, price INT, description VARCHAR(60));
+create table table4(code INT, price INT, description VARCHAR(60));
+grant all privileges on interchange.* to interchange@localhost identified by 'pass';
+</programlisting>
+
+Add the following to your &ccf;:
+<programlisting>
+DatabaseAuto dbi:mysql:interchange interchange pass
+</programlisting>
+
+At &IC; restart or catalog reconfiguration time, &IC; should discover the
+tables in the database and make them available for use.
+__END__
+
+
+
+__NAME__ example: Getting a dump of $Vend::Cfg and extracting table creation commands
+If <classname>DBIx::DBSchema</classname> &PERL; module is installed, &IC;
+is able to produce the commands that you need to run to recreate the structure
+of the database tables. This can be useful for backup purposes and remote 
+copying, or just to get the layout, tune it to your needs, insert literally in
+&ccf; and finally turn off &conf-DatabaseAuto;.
+</para><para>
+So first of all, implement the above base example.
+</para><para>
+
+Then make sure the <classname>DBIx::DBSchema</classname> module is
+installed by making &IC; fail to configure the catalog if it's missing &mdash;
+add the following to your &ccf;:
+<programlisting>
+Require module DBIx::DBSchema
+</programlisting>
+
+Then, to dump <literal>CREATE_TABLE</literal> sequence for say,
+<database>table1</database>, add the following to a separate Interchange page:
+<programlisting><![CDATA[
+Creation sequence:
+<pre>
+[perl] $Config->{Database}->{table1}->{CREATE_SQL}; [/perl]
+</pre>
+]]></programlisting>
+
+Alternatively, to dump the complete <varname>$Vend::Cfg</varname> structure,
+you could create a "<literal>cfgdump</literal>" usertag by saving the 
+following contents as <filename>code/UserTag/cfgdump.tag</filename>:
+<programlisting><![CDATA[
+UserTag cfgdump  Routine   <<EOR
+sub {
+        use Data::Dumper;
+        Dumper $Vend::Cfg;
+}
+EOR
+]]></programlisting>
+Then you could simply restart &IC; and call 
+<code><![CDATA[<pre>[cfgdump]</pre>]]></code> in any &IC; page, and search
+for <database>table1</database> in the output.
+__END__
+
+__NAME__ author
+&mheins;
+__END__
+

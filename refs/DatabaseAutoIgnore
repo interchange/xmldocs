@@ -1,0 +1,38 @@
+__NAME__ purpose
+prevent DatabaseAuto from bringing in tables whose names match this regex pattern
+__END__
+
+__NAME__ synopsis
+	<arg choice='plain'><replaceable>regexp</replaceable></arg>
+__END__
+
+__NAME__ see also
+DatabaseAuto,Database
+__END__
+
+__NAME__ description
+The directive prevents &conf-DatabaseAuto;
+from automatially bringing in tables that match the specified
+regular expression.
+</para><para>
+This directive <emphasis role='bold'>must</emphasis> be set before
+&conf-DatabaseAuto;.
+__END__
+
+__NAME__ notes
+</para><para>
+For more about &IC; and databases, and supported formats, see &glos-database;
+glossary entry.
+__END__
+
+__NAME__ example: Specifying DatabaseAutoIgnore
+This prevents &IC; from bringing in the new tables that get auto-added
+to PostgreSQL 7.4 schema and cause errors.
+<programlisting>
+DatabaseAutoIgnore  ^sql_
+</programlisting>
+__END__
+
+__NAME__ author
+&mheins;
+__END__

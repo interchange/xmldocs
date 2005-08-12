@@ -1,0 +1,49 @@
+__NAME__ purpose
+insert specified variables' values in the user track file
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'>page_name cgi_var1,cgi_var2</arg>
+</group>
+__END__
+
+__NAME__ see also
+TrackFile
+__END__
+
+__NAME__ description
+Specify &IC; pages and &glos-CGI; variables whose values should be
+inserted into user tracking file along with the visited page information.
+</para><para>
+Variable names and values are only printed if they are selected for
+output using this directive, and they have really been passed onto the
+target page.
+__END__
+
+__NAME__ notes
+__END__
+
+__NAME__ example: Setting TrackPageParam
+First enable &conf-TrackFile; and then insert the following in &ccf;:
+<programlisting>
+TrackPageParam  index  var1,var2      index2 var3,var4
+</programlisting>
+The example will monitor values of the <literal>var1</literal>
+and <literal>var2</literal> CGI variables on page
+<filename>index.html</filename>, and 
+values of the <literal>var3</literal>
+and <literal>var4</literal> CGI variables on page
+<filename>index2.html</filename>.
+</para><para>
+To see it in practice, visit the index page of your catalog, append 
+<literal><![CDATA[&var1=TEST&var2=500]]></literal> to its URL, and press enter
+to visit the page with those CGI variables defined. You'll see 
+page accesses recorded in the user tracking file, along with the names
+and values of the two variables. The log in the trackfile might look like this:
+<programlisting>
+20050812  fft2VXwJ  127.0.0.1  1123868228  VIEWPAGE=index  var1=TEST var2=500
+</programlisting>
+__END__
+
