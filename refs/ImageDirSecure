@@ -1,0 +1,49 @@
+__NAME__ purpose
+specify base location for all IMG and INPUT src= files served over HTTPS
+__END__
+
+
+__NAME__ see also
+ImageDir, ImageDirSecure, VendURL, SecureURL,no_image_rewrite
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>location</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies a base location, accessible over the web,
+where &IC; should look for IMG and INPUT &glos-HTML;
+<literal>src=</literal> file specifications,
+<emphasis role='bold'>when the originating page is being served
+over a secure connection (HTTPS)</emphasis>.
+To be precise, actually, this setting applies to image locations mentioned in <![CDATA[ <img src="">, <input src="">, <body background="">, <table background=""> and table subelements (<th>, <tr> and <td>).]]>
+</para><para>
+This is useful if you are using separate HTTPS and HTTP servers, and cannot
+make the image directory path heads match. If &conf-ImageDirSecure; is
+unspecified, it defaults to &conf-ImageDir;.
+__END__
+
+__NAME_ notes
+<emphasis role='bold'>In most setups, you want to include the 
+trailing "<literal>/</literal>" at the end to achieve the intended behavior.
+</emphasis>
+</para><para>
+As with all directives, &conf-ImageDirSecure; can be made locale-dependent to
+elegantly allow for multilingual setups.
+</para><para>
+If you count on &conf-ImageDirSecure; being unspecified and falling back
+to &conf-ImageDir;, then you don't want to have your &conf-ImageDir; 
+location starting with "<literal>http://</literal>".
+__END__
+
+__NAME__ example: Setting ImageDirSecure
+<programlisting>
+ImageDir /images.ssl/
+</programlisting>
+__END__
+

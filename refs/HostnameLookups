@@ -1,0 +1,30 @@
+__NAME__ purpose
+perform hostname lookups (DNS resolving)?
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies whether to perform DNS lookups to resolve
+remote users' hostname from their IP address. Hostnames are required
+for some facilities, such as &conf-RobotHost; (use &conf-RobotIP; if you
+want to keep DNS lookups off).
+</para><para>
+If the web server is configured to perform hostname lookups itself, then
+this directive should remain disabled.
+__END__
+
+__NAME__ example: Enabling HostnameLookups
+Put the following in &gcf;:
+<programlisting>
+HostnameLookups Yes
+</programlisting>
+__END__
+

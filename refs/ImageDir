@@ -1,31 +1,69 @@
-
-__NAME__ example: Setting PageDir depending on current locale
-To use a different page directory for different locales, say French and
-English, help yourself with the robust &conf-Locale; directive:
-<programlisting>
-# Establish the default at startup
-PageDir   english
-
-# Establish locale-dependent directories
-Locale fr_FR  PageDir  francais
-Locale en_US  PageDir  english
-</programlisting>
-To fully understand the example and implicitly presented &IC; features, make
-sure you're familiar with &glos-internationalization; and &glos-locale;
-glossary
-entries.
+__NAME__ purpose
+specify base location for all IMG and INPUT src= files
 __END__
 
 
+__NAME__ see also
+ImageDir, ImageDirSecure, VendURL, SecureURL,no_image_rewrite
+__END__
 
-LI1: ImageDir
 
-.To use a different image directory for different locales, set the C<ImageDir> key. To have two separate language button sets, French and English, set:
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>location</replaceable></arg>
+</group>
+__END__
 
-!block example; listitem=2
-# Establish the default at startup
-ImageDir   /images/english/
-Locale fr_FR  ImageDir   /images/francais/
-Locale en_US  ImageDir   /images/english/
-!endblock
+
+__NAME__ description
+&conf-ImageDir; is one of quite basic settings in every &ccf;.
+</para><para>
+The directive specifies a base location, accessible over the web,
+where &IC; should look for IMG and INPUT &glos-HTML;
+<literal>src=</literal> file specifications.
+To be precise, actually, this setting applies to image locations mentioned
+in <![CDATA[
+<img src="">, <input src="">, <body background="">, <table background=""> and table subelements (<th>, <tr> and <td>).]]>
+</para><para>
+As you might know, &IC; keeps its pages in a special directory
+<filename class='directory'>pages/</filename> (which is a subdirectory of 
+your catalog's &glos-CATROOT;). That directory can be readable only by the 
+&IC; user, and contents in it cannot be accessed by the web server without
+&IC; mediating the connection. This directory is generally supposed to 
+only contain directories and Interchange-enabled &glos-HTML; pages,
+and nothing else.
+</para><para>
+It is therefore obvious that an alternative way has to be provided
+to serve images. When you define &conf-ImageDir;, &IC; will appropriately
+and transparently prefix all &lt;img src=...&gt; &glos-HTML; tags with
+your value.
+</para><para>
+For example, if the &glos-link-program; and images are kept on the same
+server, and images are found in your web server's document root,
+in the <filename class='directory'>images/</filename> subdirectory, then
+you would set &conf-ImageDir; to <literal>/images/</literal>.
+With this setting in effect, a link such as &lt;img src="order.png"&gt;
+would be changed to &lt;img src="/images/order.png"&gt;.
+__END__
+
+__NAME_ notes
+<emphasis role='bold'>In most setups, you want to include the 
+trailing "<literal>/</literal>" at the end to achieve the intended behavior.
+</emphasis>
+</para><para>
+As with all directives, &conf-ImageDir; can be made locale-dependent to
+elegantly allow for multilingual setups.
+__END__
+
+__NAME__ example: Setting ImageDir
+<programlisting>
+ImageDir /images/
+</programlisting>
+__END__
+
+__NAME__ example: Setting ImageDir using full URL specification
+<programlisting>
+ImageDir http://images.&def-domain;/images/
+</programlisting>
+__END__
 

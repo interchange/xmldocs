@@ -1,0 +1,25 @@
+__NAME__ purpose
+specify catalogs that should use persistant database connections
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>catalog</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify catalogs that should use persistent database connections.
+When a connection is persistent, it will be maintained and cached without
+reconnecting for every page request.
+__END__
+
+__NAME__ example: Specifying HotDBI
+<programlisting>
+HotDBI tutorial1
+</programlisting>
+__END__
+
+TODO: so what exactly happens? Where is the connection cached? 
+  In IC instance? In user session? Why wouldn't all people want this?

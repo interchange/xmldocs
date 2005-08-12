@@ -1975,36 +1975,40 @@ with user-entered data.
 </answer></qandaentry>
 
 <!--
-
 <qandaentry>
 	<question><para>Optimizing lists</para></question>
 <answer><para>
-
-<para>
-
 &IC; has powerful search capabilities that allow you to produce
 lists of items for use in category lists, product lists, indexes, and other
 navigation tools.
+</para><para>
 
 These are a two-edged sword, though. Lists of hundreds or thousands of entries
 can be returned, and techniques that work well displaying only a few items may
 slow to a crawl when a large list is returned.
+</para><para>
 
 In general, when you are returning one item (i.e. a flypage) or a small list
-(i.e. a shopping cart) you can be pretty carefree in your use of [if ...]
-and [calc] and [perl] tags. When there are hundreds of items, though, you cannot;
-each complex test or embedded &PERL; snippet causes the Safe module to have to
-evaluate code, and each ITL tag requires parsing and argument building.
+(i.e. a shopping cart) you can be pretty carefree in your use of &tag-if;,
+&tag-calc; and &tag-perl; tags. When there are hundreds of items, though,
+you cannot;
+each complex test or embedded &PERL; snippet causes the
+<classname>Safe</classname> module to have to
+evaluate code, and each &glos-ITL; tag requires parsing and argument building.
+</para><para>
 
-The Safe module is pretty fast considering what it does, but it can only generate
-a few thousand instances per second even on a fast system. And the ITL tag
+The <classname>Safe</classname> module is pretty fast considering what it does, but it can only generate
+a few thousand instances per second even on a fast system. And the
+&glos-ITL; tag
 parser can likewise only parse thousands of tags per CPU second.
+</para><para>
 
 What to do? You want to provide complex conditional tests but you don't want
 your system to slow to a crawl. Luckily, there are techniques which can speed
 up complex lists by orders of magnitude.
+</para><para>
 
-H3: Benchmarking
+Benchmarking
 
 A non-precise benchmark of different iteration options can be done
 with the following global UserTag. Place this in a file in the
@@ -2320,7 +2324,7 @@ at catalog configuration time.
 
 You can also compile routines at the time of the list execution
 with [item-sub routine] CODE [/item-sub]. This means only one
-Safe evaluation is done - every time the [loop-exec routine]
+<classname>Safe</classname> evaluation is done - every time the [loop-exec routine]
 is called, it is done fast as a call to the routine. This can be
 10 times or more faster than separate [calc] calls, or 5 times
 faster than separate [PREFIX-calc] calls.
@@ -2431,14 +2435,13 @@ This is the fastest possible method to display a list.
 </para>
 </qandaentry>
 
-
 <qandaentry>
-	<question><para>Using &ic; with oracle</para></question>
+	<question><para>Using Interchange with Oracle</para></question>
 <answer><para>
 
-<para>
-
-N:Question: should we be using the DBI ChopBlanks setting for Oracle or is &IC; trimming trailing space from CHAR fields itself?
+should we be using the DBI ChopBlanks setting for Oracle or is &IC;
+trimming trailing space from CHAR fields itself?
+</para><para>
 
 IC daemon user should have environment &glos-variable;s ORACLE_HOME and
 possibly NLS_LANG set.
@@ -2552,25 +2555,16 @@ using a fairly recent version of Apache as your webserver).
 
 </para>
 </qandaentry>
+</qandadiv>
 
-
-<qandaentry>
-	<question><para>&PERL;/&ic; faq</para></question>
-<answer><para>
-
-<para>
-
-</para>
-</answer></qandaentry>
+<qandadiv><title>Perl/Interchange FAQ</title>
 
 
 <qandaentry>
 	<question><para>Cameron Prince's local &PERL; installation how-to</para></question>
 <answer><para>
 
-<para>
-
-+Login as user. In this example, we'll call the user bob. Bob's home directory is /home/bob.
+Login as user. In this example, we'll call the user bob. Bob's home directory is /home/bob.
 
 +Get the perl tarball and extract it in /home/bob. (tar -xzvf perl-5.6.0.tar.gz)
 
@@ -2646,7 +2640,7 @@ Business::UPS is up to date.
 SQL::Statement is up to date.
 Storable is up to date.
 DBI is up to date.
-Safe::Hole is up to date.
+<classname>Safe</classname>::Hole is up to date.
 
 You may need to get the modules via ftp and install them by hand. For instance, during the test used to create this document, I had to get URI and LWP and install by hand before everything reported that it was up to date. To do this, follow these steps:
 
