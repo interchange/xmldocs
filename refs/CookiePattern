@@ -1,0 +1,43 @@
+__NAME__ purpose
+specify regular expression to extract session ID out of a client cookie
+__END__
+
+
+__NAME__ see also
+CookieName
+__END__
+
+
+__NAME__ synopsis
+	<arg choice='plain'><replaceable>regex_pattern</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive sets the regular expression that &IC; will use to extract
+the session ID out of the client browser's &glos-cookie;.
+__END__
+
+__NAME__ notes
+By default, &IC; cookie planted in user's browser consists of 
+a session ID followed by a colon followed by an IP address, username
+or domain name.
+__END__
+
+__NAME__ example: Setting CookiePattern
+The default regular expression pattern used for &conf-CookiePattern;
+might work sometimes, but I find it unsuitable if you just want to change
+the &conf-CookieName;, because it then breaks the usual behavior.
+Here's a better value for common setups:
+<programlisting>
+CookiePattern \w{8,32}
+</programlisting>
+In general, however, you should only modify &conf-CookiePattern; default
+value if you somehow change the <emphasis role='bold'>content</emphasis>
+that &IC; stores in browser cookies (by say, letting other program create
+the cookie).
+__END__
+
+
+TODO: Seems it needs CookiePattern to work, but currently the whole
+thing is a little broken

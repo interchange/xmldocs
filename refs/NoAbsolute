@@ -1,5 +1,5 @@
 __NAME__ purpose
-disable catalogs to read absolute filenames on the system
+deny catalogs to read absolute filenames on the system
 __END__
 
 

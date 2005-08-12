@@ -1,0 +1,75 @@
+__NAME__ purpose
+set domain common to all servers providing Interchange content
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>domain</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ see also
+CookieDomain,CookieLogin,Cookies,SaveExpire
+__END__
+
+
+__NAME__ description
+The directive specifies the domain common to all servers providing 
+&IC; content.
+</para><para>
+By default, the &glos-session; ID cookie domain is set to the hostname
+that you're accessing. For example, if you access the catalog using
+server <literal>&def-hostname;</literal>, then cookie will be set by
+<literal>&def-hostname;</literal>.
+</para><para>
+Things, however, go bad if you use more &IC; servers
+(in a non-transparent way for the user) to provide content.
+For example, if SSL content was served from host
+<literal>ssl.&def-domain;</literal>, then users would have one 
+session for <literal>&def-hostname;</literal> and one for 
+<literal>ssl.&def-domain;</literal>. This is undesired, of course.
+</para><para>
+To fix the described problem, we need to find part of the
+FQDN that is common to all servers (<literal>&def-domain;</literal>
+in our example), and add it as the 
+<literal>domain=</literal> parameter to the
+<literal>Set-Cookie</literal> directive that we send off to users'
+browsers. That's what the &conf-CookieDomain; does.
+__END__
+
+
+__NAME__ notes
+The cookie specification mandates that the domain part must contain
+at least two fields (or 1 dot lying in between). The value 
+of <literal>.&def-domain;</literal> is valid, but <literal>.local</literal>
+wouldn't be.
+</para><para>
+Furthermore, cookie source can only be the FQDN of the host itself, or
+some of the subdomains, or domain it belongs to. Browsers will ignore
+all cookies that do not satisfy this requirement. Host 
+<literal>&def-hostname;</literal> can set a cookie for itself or the
+domain <literal>&def-domain;</literal>, but it cannot set a cookie
+for say, <literal>&def-domain;2</literal>. It is very fortunate we
+have this protection, or unrelated sites would read and set each other's
+cookies &mdash; something we definitely don't want to happen!
+</para><para>
+At least in Mozilla-like browsers, the domain is prefixed with a 
+dot even if you omit it in the &conf-CookieDomain; specification
+(<literal>&def-domain;</literal> ends up being the same as
+<literal>.&def-domain;</literal>).
+</para><para>
+&conf-CookieDomain; accepts a space-separated list of domains to set
+cookies for, in which case the <literal>Set-Cookie: ...</literal> 
+is sent to the client for each of the specified domains. Due to the
+restrictions described above, specifying multiple domains is needed and
+possible to implement only rarely, if ever.
+__END__
+
+__NAME__ example: Specifying CookieDomain
+<programlisting>
+CookieLogin .&def-domain;
+</programlisting>
+__END__
+

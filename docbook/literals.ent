@@ -49,8 +49,8 @@
 <!-- Do we need to be so verbose? Isn't just empty space ok?
 <!ENTITY DEF_SYNOPSIS  "None specified.">
 <!ENTITY DEF_DESCRIPTION "No more specific information was supplied. We know
-<!ENTITY DEF_NOTES "None.">
 this piece is missing and we'll try to update it.">
+<!ENTITY DEF_NOTES "None.">
 -->
 <!ENTITY DEF_SYNOPSIS  "">
 <!ENTITY DEF_DESCRIPTION "">

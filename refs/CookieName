@@ -1,10 +1,10 @@
 __NAME__ purpose
-specify Interchange session cookie name
+specify Interchange cookie name
 __END__
 
 
 __NAME__ see also
-CookieLogin,SessionExpire
+CookiePattern,CookieLogin
 __END__
 
 
@@ -14,20 +14,30 @@ __END__
 
 
 __NAME__ description
-The directive sets the name of the &IC; session ID cookie.
+The directive sets the name of the Interchange &glos-cookie; that 
+will be used to retrieve session ID information in users' browsers.
 The default value is <literal>MV_SESSION_ID</literal>.
+</para><para>
+The default should never be changed, but this configuration directive
+can save the day if you need to use cookies issued by programs other
+than &IC; itself.
 __END__
 
 
 __NAME__ notes
+By default, &IC; cookie planted in user's browser consists of
+a session ID followed by a colon followed by an IP address, username
+or domain name.
 __END__
 
-__NAME__ example: Redefining CookieName
+__NAME__ example: Defining CookieName
 <programlisting>
 CookieName SESSIONID
 </programlisting>
 __END__
 
 
-TODO: Seems it needs CookiePattern to work, but currently the whole
-thing is a little broken
+THE THING HERE is that IC will respect the cookie it finds if
+CookieName is set, and won't override it with a new one like it
+does in standard setup when you provide the cookie but IC doesn't like
+it because it's say, expired.

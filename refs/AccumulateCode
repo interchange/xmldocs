@@ -1,0 +1,51 @@
+__NAME__ purpose
+fetch Interchange code on-demand from CodeRepository instead of starting up with everything
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive instructs &IC; to fetch code blocks "on-demand" from the
+&conf-CodeRepository;, instead of starting up with everything.
+</para><para>
+So, at runtime, when particular functionality is needed but is not
+yet present in the running &IC; installation, it is copied from 
+&conf-CodeRepository; to 
+<filename class='directory'>$Global::TagDir/Accumulated/</filename>.
+When you restart &IC; the next time, these code blocks will be found,
+read normally and need not be recompiled on the fly again.
+</para><para>
+Over time, as you access pages and routines, a full set of tags
+will be developed and you can then disable &conf-AccumulateCode;.
+(Infact, &code-AccumulateCode; is recommended for development and should 
+really be turned off in production systems).
+__END__
+
+__NAME__ notes
+See &conf-CodeRepository; for a complete discussion.
+__END__
+
+__NAME__ see also
+CodeRepository
+__END__
+
+__NAME__ author
+&mheins;
+__END__
+
+
+__NAME__ example: Enabling AccumulateCode
+Put the following in &gcf;:
+<programlisting>
+AccumulateCode Yes
+</programlisting>
+See &conf-CodeRepository; for a complete example.
+__END__
+

@@ -42,7 +42,7 @@ and ready to go.
 </para><para>
 It also copies the code file to the <literal>code/</literal>
 (<varname>$Global::TagDir</varname> actually) directory, in the
-<filename class='directory'>Accumulated</filename> subdirectory tree.
+<filename class='directory'>Accumulated/</filename> subdirectory tree.
 When you restart &IC; the next time, these code blocks will be found,
 read normally and need not be recompiled on the fly again.
 </para><para>
@@ -111,7 +111,7 @@ __NAME__ author
 __END__
 
 
-__NAME__ example: Enabling CodeRepository
+__NAME__ example: Setting up CodeRepository
 Put the following in &gcf;:
 <programlisting>
 AccumulateCode Yes

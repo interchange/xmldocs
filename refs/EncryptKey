@@ -1,0 +1,34 @@
+__NAME__ purpose
+specify default key to use for encryption
+__END__
+
+
+__NAME__ synopsis
+	<arg choice='req'><replaceable>key_or_user_identifier</replaceable></arg>
+__END__
+
+
+__NAME__ description
+Specify default key to use for encryption.
+</para><para>
+GnuPG accepts both a key identifier or a part of user identifier.
+__END__
+
+
+__NAME__ see also
+EncryptProgram
+__END__
+
+__NAME__ example: Specifying key identifier to EncryptKey
+<programlisting>
+EncryptKey 9B726B71
+</programlisting>
+__END__
+
+
+__NAME__ example: Specifying user identifier to EncryptKey
+<programlisting>
+EncryptKey racke@linuxia.de
+</programlisting>
+__END__
+

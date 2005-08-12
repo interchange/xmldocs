@@ -1,0 +1,54 @@
+__NAME__ purpose
+specify products database columns containing values for product attributes
+__END__
+
+
+__NAME__ missing
+__END__
+
+
+__NAME__ see also
+UseModifier
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>column</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies names of the &glos-attribute;s attached to
+your products, for which the value is provided in the equally-named 
+<database>products</database> database column.
+</para><para>
+In other words, 
+when an item is added to the shopping cart using &IC;'s routines, the
+attributes declared in &conf-AutoModifier; will be set to the values of the
+equally-named fields in the <database>products database</database>.
+</para><para>
+As you see, this is mostly useful for internal use and giving your
+code specific hints about the items ordered.
+__END__
+
+
+__NAME__ notes
+This can useful when doing shipping calculations or in embedded
+&PERL; code that works on item attributes.
+</para><para>
+See &glos-attribute; for a complete introduction to item attributes.
+__END__
+
+__NAME__ example: Specifying AutoModifier
+To set whether an item is defined as "heavy" and requires truck shipment, or
+is "downloadable", set:
+<programlisting>
+AutoModifier heavy downloadable
+</programlisting>
+Also make sure to have the
+<database class='field'>heavy</database> and 
+<database class='field'>downloadable</database> columns defined in your 
+<database>products</database> database.
+__END__
+

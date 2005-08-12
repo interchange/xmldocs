@@ -1,0 +1,32 @@
+__NAME__ purpose
+
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+__END__
+
+__NAME__ notes
+__END__
+
+__NAME__ see also
+__END__
+
+__NAME__ author
+__END__
+
+
+__NAME__ example: Enabling AcrossLocks
+<programlisting>
+AcrossLocks yes
+</programlisting>
+__END__
+

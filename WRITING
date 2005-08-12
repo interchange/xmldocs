@@ -97,7 +97,7 @@ The system separates documentation contents into 5 major groups:
 WRITING
 
 Not to waste words, and to give practical examples, best see the existing
-documentation for reference how to write new or fix existing pieces.
+documentation for reference on how to write new or update existing material.
 
 You also need to look at docbook/*.ent files, they contain XML entities
 that you are encouraged to use instead of writing common symbols, words and
