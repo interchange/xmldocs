@@ -1,0 +1,35 @@
+__NAME__ purpose
+do not reparse Interchange output by default
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ default
+0
+__END__
+
+
+__NAME__ description
+This &glos-pragma; disables default &glos-reparse; of Interchange output.
+</para><para>
+Reparsing can, of course, still be enforced by the
+<literal>Reparse</literal> setting
+in individual &glos-ITL; tag definition, or by providing
+<literal>reparse=1</literal> attribute to the tag.
+__END__
+
+
+__NAME__ example: Enable no_default_reparse pragma page-wide
+Put the following anywhere on your page:
+<programlisting>
+[pragma no_default_reparse]
+</programlisting>
+__END__
+
