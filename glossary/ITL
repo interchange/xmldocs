@@ -453,6 +453,11 @@ Kilroy was here
 [value name] was here
 </programlisting>
 
+</para><para>
+In &IC; 5.3.1, the &pragma-no_default_reparse; pragma was added, which 
+disables the default reparsing of container tags' output. It is therefore
+advisable to always specify the <literal>reparse=1</literal> attribute at
+places where you want reparsing to really occur.
 
 </para><para> <sbr/><sbr/>
 The third attribute, <arg choice='plain'>send</arg>, was deprecated long ago

@@ -1,17 +1,33 @@
-Pragmas are used to control various aspects of page and data parsing and display. They are processed before an Interchange page goes to the normal processing
+Pragmas are used to control various aspects of page and data parsing and display. They are processed before an &IC; page goes to the normal processing
 routine.
 </para><para>
-Pragma values can be defined catalog-wide, page-wide and ITL-block wide.
+Pragma values can be defined at any level; catalog-wide, page-wide or
+&glos-ITL;-block wide.
 To define a pragma catalog-wide, use the <option>Pragma</option> directive:
-<cmdsynopsis>Pragma NAME <group choice='req'><arg choice='plain'>0</arg><arg choice='plain'>1</arg><arg choice='plain'>=<replaceable>pragma-specific value</replaceable></arg></group>
-</cmdsynopsis>
+<programlisting>
+Pragma <replaceable>NAME</replaceable> <group choice='req'><arg choice='plain'>0</arg><arg choice='plain'>1</arg><arg choice='plain'>=<replaceable>pragma-specific value</replaceable></arg></group>
+</programlisting>
 </para><para>
-To define a pragma value for a particular page, use the <tag>pragma</tag> tag anywhere on a page: <code>[pragma NAME]</code> to enable, or
-<code>[pragma NAME 0]</code> to disable.
+To define a pragma for a particular page, use the &tag-pragma;
+tag anywhere on a page. For readability, however, we suggest to always 
+define pragmas at the top.
 </para><para>
-To define a pragma for a small ITL block inside the page, enclose the block in <code>[tag pragma NAME]1[/tag]...[tag pragma NAME]0[/tag]</code>.
+The following two lines, of which you would 
+usually use only one at a time, present pragma activation and deactivation:
+<programlisting>
+[pragma <replaceable>NAME</replaceable>]
+[pragma <replaceable>NAME</replaceable> 0]
+</programlisting>
 </para><para>
-Starting with Interchange 5.0, the <code>$::Pragma->{name}</code> syntax is used in the Interchange source instead of the old <code>$Vend::Cfg->{Pragma}{name}</code>.
+To define a pragma for a &glos-ITL; block inside the page, enclose the
+block in <code>[tag pragma ...]</code>:
+<programlisting>
+[tag pragma <replaceable>NAME</replaceable>]1[/tag]
+  ...
+[tag pragma <replaceable>NAME</replaceable>]0[/tag]
+</programlisting>
+</para><para>
+Starting with Interchange 5.0, the <code>$::Pragma->{name}</code> syntax
+is used in the &IC; source, instead of the old
+<code>$Vend::Cfg->{Pragma}{name}</code>.
 
-<!-- <glosssee otherterm="sgml"/>
-<glossseealso otherterm="globvar">Global variable</glossseealso> -->
