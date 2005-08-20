@@ -1,3 +1,7 @@
+__NAME__ purpose
+backup Interchange databases, optionally 
+__END__
+
 __NAME__ synopsis 
 <row>
 

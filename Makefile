@@ -159,32 +159,37 @@ OUTPUT/%.man: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autoho
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
 	  -o $@/ docbook/reference.xsl $T/$*-c.profiled
-#$O/%.pdf: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent skel
+#OUTPUT/%.pdf: tmp/%.latex
 #	echo "C     $@"
-#	$(PSR) $(PSR_FLAGS)                                                \
-#	  $(PROFILE)                                                       \
-#	  --stringparam current.docid $*                                   \
-#	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
-#	  -o $T/$*-nc.profiled docbook/profile.xsl $<
-#	$(PSR) $(PSR_FLAGS)                                                \
-#	  $(PROFILE)                                                       \
-#	  --stringparam current.docid $*                                   \
-#	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
-#	  --stringparam paper.type A4                                      \
-#	  --stringparam page.orientation portrait                          \
-#	  --stringparam double.sided 1                                     \
-#	  --stringparam chapter.autolabel 0                                \
-#	  --stringparam appendix.autolabel 0                               \
-#	  --stringparam section.autolabel 0                                \
-#	  -o $T/$*.fo docbook/fo.xsl $T/$*-nc.profiled
-#	#fop.sh  -fo  myfile.fo  -pdf  myfile.pdf
+#	pdflatex $<
+
+
+
+
+#############################################################
+# Supporting tagret - FO output
+tmp/%.latex: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent
+	$(PSR) $(PSR_FLAGS)                                                \
+	  $(PROFILE)                                                       \
+	  --stringparam current.docid $*                                   \
+	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
+	  -o $T/$*-nc.profiled docbook/profile.xsl $<
+	$(PSR) $(PSR_FLAGS)                                                \
+	  $(PROFILE)                                                       \
+	  --stringparam current.docid $*                                   \
+	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
+	  --stringparam paper.type A4                                      \
+	  --stringparam page.orientation portrait                          \
+	  --stringparam double.sided 1                                     \
+	  --stringparam chapter.autolabel 0                                \
+	  --stringparam appendix.autolabel 0                               \
+	  --stringparam section.autolabel 0                                \
+	  -o $T/$*.latex docbook/latex.xsl $T/$*-nc.profiled
 #
 #
 #   --stringparam  passivetex.extensions  1
 #       --stringparam  rootid  "using" 
 #
-
-
 
 
 

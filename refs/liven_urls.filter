@@ -36,7 +36,7 @@ __END__
 
 __NAME__ author
 &docelic;
-__END_
+__END__
 
 __NAME__ online: Filter example
 Here's an incomplete collection of URLs that the filter can recognize.

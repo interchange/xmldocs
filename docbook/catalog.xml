@@ -11,4 +11,14 @@
 
 	<system systemId="xmldocs.css" uri="xmldocs.css" />
 
+	<!-- map URLs to local files -->
+	<rewriteURI
+		uriStartString="http://db2latex.sourceforge.net/xsl/"
+		rewritePrefix="/usr/share/xml/docbook/stylesheet/db2latex/" />
+
+	<rewriteURI
+		uriStartString="http://docbook.sourceforge.net/release/xsl/current/"
+		rewritePrefix="/usr/share/xml/docbook/stylesheet/nwalsh/" />
+
 </catalog>
+

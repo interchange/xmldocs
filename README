@@ -67,8 +67,9 @@ must be available:
   - docbook-xml
   - docbook-xsl
   - xsltproc
-  - exuberant-ctags
-  - passivetex
+  - exuberant-ctags (to be)
+	- db2latex-xsl
+	- tetex-extra (and actually, packages it depends on)
 
 If running on Red Hat and not Debian GNU, apply this patch:
 http://icdevgroup.org/~docelic/xmldocs-rh.diff . It allows you to get
