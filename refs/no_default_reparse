@@ -17,19 +17,36 @@ __END__
 
 
 __NAME__ description
-This &glos-pragma; disables default &glos-reparse; of Interchange output.
+This &glos-pragma; disables default &glos-reparse; of Interchange output
+from container tags.
 </para><para>
-Reparsing can, of course, still be enforced by the
+Reparsing can, of course, still be requested by the
 <literal>Reparse</literal> setting
-in individual &glos-ITL; tag definition, or by providing
+in individual &glos-ITL; tag definition, or by providing the
 <literal>reparse=1</literal> attribute to the tag.
+</para><para>
+Because this pragma exists, and can be set at the page- or even
+catalog-wide level, it is wise to always specify reparse=1 when you
+really need the output from a container tag to be reparsed, so it will
+work regardless of later changes to this pragma setting.
 __END__
 
 
 __NAME__ example: Enable no_default_reparse pragma page-wide
-Put the following anywhere on your page:
+Put the following anywhere on your page (at the top, to be most polite
+to other developers):
 <programlisting>
 [pragma no_default_reparse]
 </programlisting>
+__END__
+
+
+__NAME__ example: Enable no_default_reparse pragma catalog-wide
+Put this directive in catalog.cfg (or any file included from it):
+<programlisting>
+Pragma no_default_reparse
+</programlisting>
+If you experience any unexpected reparse behavior, check catalog.cfg
+and any included files, to see if someone added or removed this pragma.
 __END__
 
