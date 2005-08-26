@@ -63,7 +63,8 @@ To perform a successful build, the following programs and modules
 must be available:
 
   - Perl
-  - Shell commands: mkdir, cp, ln, find, tar, gzip, bzip2
+  - Shell commands: mkdir, cp, ln, find, tar, gzip, bzip2, make
+  - cvs
   - docbook-xml
   - docbook-xsl
   - xsltproc
