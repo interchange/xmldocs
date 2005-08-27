@@ -81,7 +81,7 @@ ifdef ORDERS_TO
   ParseVariables No
 endif
 
-ifdef ORDERS_TO =~ /foo.com/
+ifdef ORDERS_TO =~ /\@foo\.com$/
   # Send all orders at foo.com to one place now
   # Set ORDERS_TO to stop default setting
   Variable  ORDERS_TO  1
