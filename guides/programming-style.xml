@@ -252,6 +252,23 @@ if (
   ) {
 ]]></programlisting>
 		</para></listitem>
+		<listitem><para>
+		Do not break blocks of code that obviously follow a lexical pattern.
+		For example, do not introduce double quotes or structural changes 
+		to the below:
+<programlisting><![CDATA[
+  ['FormAction',		 'action',			 ''],
+  ['MaxServers',       'integer',          10],
+  ['GlobalSub',		 'subroutine',       ''],
+  ['Database',		 'database',         ''],
+  ['FullUrl',			 'yesno',            'No'],
+  ['Locale',			 'locale',            ''],
+  ['HitCount',		 'yesno',            'No'],
+  ['IpHead',			 'yesno',            'No'],
+  ['IpQuad',			 'integer',          '1'],
+  ['TagDir',      	 'root_dir_array', 	 'code'],
+]]></programlisting>
+		</para></listitem>
 	</itemizedlist>
 </sect1>
 

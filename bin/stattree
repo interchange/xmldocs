@@ -858,7 +858,7 @@ sub file_parseVendConfig {
 
 # This is basically an excersize in bracket-matching
 sub file_extractSub {
-	my ( $tagname, $func, $c, $context_data) = @_;
+	my ( $funcname, $func, $c, $context_data) = @_;
 
 	my $done = 0;
 	$func or die "file_extractSub with no args?\n";
@@ -877,7 +877,7 @@ sub file_extractSub {
 		my $line = $fc[$i];
 
 		if ( $line =~ /^\*$func = \\\&(\S+);/ ) {
-			push @{ $resolver_path{$$context_data{group}}{$tagname} }, {
+			push @{ $resolver_path{$$context_data{group}}{$funcname} }, {
 				name => $func,
 				file => "lib/$path",
 				lnum => $start,
@@ -887,7 +887,7 @@ sub file_extractSub {
 				ctx_n => 0,
 				ctx => [ format_ctx($line) ],
 			};
-			file_extractSub( $tagname, $1, $c, $context_data);
+			file_extractSub( $funcname, $1, $c, $context_data);
 			return;
 
 		} elsif ( $line =~ /^sub $func \{/ ) {
@@ -915,7 +915,7 @@ sub file_extractSub {
 
 	# func in lib/$path from $start to $end
 	$content = join '', @content;
-	push @{ $resolver_path{$$context_data{group}}{$tagname} }, {
+	push @{ $resolver_path{$$context_data{group}}{$funcname} }, {
 		name => $func,
 		file => "lib/$path",
 		lnum => $start,
