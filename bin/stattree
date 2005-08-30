@@ -40,6 +40,7 @@ my $ctx_n = 4; #                                after
 my %resolver_path; # Support for stack (a -> b -> c -> d   =>
                    # a = d with full "path" recorded). This expands
                    # MapRoutines, parse_ functions and things like that.
+my ($filelist,@filelist); # Keep and dump list of all files found
 
 # All file types should be listed here or the stats wont be accurate.
 # It should be reported if an unknown file is found in the archive (you can 
@@ -146,12 +147,22 @@ if ( $verbose ) {
 	close OUT;
 }
 
+# Dump out file list
+local $" = "\n";
+open OUT, "> tmp/$i{ver}.filelist" or
+	die "Can't open tmp/$i{ver}.filelist ($!)\n";
+print OUT "@filelist";
+close OUT;
+
 exit 0;
 
 #################################################################
 # Helpers below
 sub wanted {
 	( my $file = $_ ) =~ s/^\.\///;
+	return if $file eq '.';
+
+	push @filelist, $file;
 
 	# Things we ignore
 	return if /(^|\/)(CVS|\.cvs|\.svn|\.autoload)(\/.+[^\/])?$/;
