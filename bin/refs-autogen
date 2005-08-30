@@ -47,6 +47,8 @@ my $autopath = "docbook/autorefs.ent";
 my %dups; # List of symbols names that are not unique
 my $last_path; # Last version we want docs generated for (say, 5.2.0).
 my $compounds = 1; # Summarize similar symbol groups to single page?
+my @fileentities; # List of generated file entities (they point to CVS)
+my $fileentitiespath = "docbook/icfiles.ent";
 
 my @page_order = (qw/purpose default structure synopsis description online example notes bugs/, "symbol type", "source", "author", "copyright", "see also", "directive type", "variable type");
 
@@ -157,7 +159,6 @@ my @paths = @ARGV; # Versions requested
 my $path; # Current path, used in loop for each version requested
 my $dumppath; # Path to cache dump file
 my $dumpdir;
-my $lastpath; # Used if we want to stop before cvs-head
 
 load_templates();
 
@@ -168,8 +169,10 @@ opendir DIR, "refs" or die "Can't opendir refs/ ($!)\n";
 @set_unused = readdir DIR; @set_unused = grep {!/^\.|^CVS$/} @set_unused;
 closedir DIR;
 
+open FILE_ENTITIES, "> $fileentitiespath" or
+	die "Can't open '$fileentitiespath' ($!)\n";
+
 while ( $path = shift @paths) { # For each version specified
-	$lastpath = $path;
 	$dumppath = $path;
 	$i{ver} = $dumppath;
 	$dumpdir = "$dumppath/";
@@ -181,6 +184,70 @@ while ( $path = shift @paths) { # For each version specified
 	loaddb( "$cachedir/$dumppath" );
 
 	push @parsed_versions, $hash{version};
+
+
+
+	# Ok, before doing the REAL work, let's dump file entities. We will create
+	# file $fileentitiespath, and dump entities to it. That file will contain
+	# entities from ALL IC versions.
+	# For non-last version, only one entity will be generated. Example:
+	# IC4.8/README -> &cvs4.8-README; -> cvs.icdevgroup.org ->
+	# icdevgroup.org/cgi-bin/cvsweb/interchange/?only_with_tag=STABLE_4_8-root.
+	# However, entities for last version will, in addition to above,
+	# get a default entity &cvs-README;, and it will point to some particular
+	# version of cvs-head.
+	# $i{ver} that we will use here is X.Y.Z or 'cvs-head'.
+
+	# First derive IC series (in format X_Y) and cvs tag for it.
+	# If we're in cvs-head, we don't do this
+	unless ( $i{ver} eq 'cvs-head' ) {
+		( $i{series_} = $i{ver} ) =~ s/\./_/; $i{series_} =~ s/\..*//;
+		( $i{series} = $i{series_} ) =~ s/_/./;
+		$i{cvstag} = "?only_with_tag=STABLE_$i{series_}-root";
+	} else {
+		$i{series} = '';
+		$i{cvstag} = '';
+	}
+
+	# Load in list of files. It's prepared for us by bin/stattree.
+	open IN, "< tmp/$i{ver}.filelist" or
+		die "Can't rdopen 'tmp/$i{ver}.filelist' ($!)\n";
+	my @filelist = <IN>;
+	close IN;
+	chomp for @filelist;
+	# DocBook doesn't like '%' in entitity content, so let's
+	# just weed out pages having %20 in the name
+	@filelist = grep {!/%/} @filelist;
+	my @filelist_ent = @filelist;
+	s/\//_/g for @filelist_ent;
+
+	for (my $i=0; $i<@filelist_ent;$i++) {
+		$_ = $filelist_ent[$i];
+
+		print FILE_ENTITIES
+			'<!ENTITY cvsfile' .
+			$i{series} . '-' .
+			$_ .
+			qq{ "<ulink url='http://www.icdevgroup.org/cgi-bin/cvsweb/interchange/} .
+			$filelist[$i] . $i{cvstag} . "'>" .
+			$filelist[$i] . qq{</ulink>"} . ">\n";
+
+		# If this is the last version we generate docs for, also provide
+		# entity with no version in its name:
+		if ( $last_path and $last_path eq $path ) {
+			print FILE_ENTITIES
+				'<!ENTITY cvsfile' .
+				'-' . # Just $i{series} removed from here.
+				$_ .
+				qq{ "<ulink url='http://www.icdevgroup.org/cgi-bin/cvsweb/interchange/}.
+				$filelist[$i] . $i{cvstag} . "'>" .
+				$filelist[$i] . qq{</ulink>"} . ">\n";
+		}
+	}
+
+
+
+	# Ok, real work begins.
 
 	# Outer loop: $gkey: symbol types (pragmas, globvars, ...)
 	# Inner loop (~15 lines below): $key: actual symbols 
@@ -736,6 +803,10 @@ open INVOUT, "> tmp/missing" or
 	die "Can't open tmp/missing ($!)\n";
 print INVOUT Dumper \%invalid;
 close INVOUT;
+
+# Just print out that we created docbook/icfiles.ent
+close FILE_ENTITIES;
+print "GEN: docbook/icfiles.ent\n";
 
 # Output autorefs.ent
 unless ( $no_autorefs ) {

@@ -1,6 +1,7 @@
 
 <!ENTITY % literals	SYSTEM "literals.ent">  %literals;
 <!ENTITY % autorefs	SYSTEM "autorefs.ent">  %autorefs;
+<!ENTITY % icfiles	SYSTEM "icfiles.ent">  %icfiles;
 <!ENTITY % glossary	SYSTEM "autoglossary.ent">  %glossary;
 <!ENTITY % howtos	  SYSTEM "autohowtos.ent">  %howtos;
 
