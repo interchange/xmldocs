@@ -191,20 +191,22 @@ while ( $path = shift @paths) { # For each version specified
 	# file $fileentitiespath, and dump entities to it. That file will contain
 	# entities from ALL IC versions.
 	# For non-last version, only one entity will be generated. Example:
-	# IC4.8/README -> &cvs4.8-README; -> cvs.icdevgroup.org ->
-	# icdevgroup.org/cgi-bin/cvsweb/interchange/?only_with_tag=STABLE_4_8-root.
+	# FILE: IC4.8/README
+	# ENTITY: &cvsfile4.8-README;
+	# LOCATION: SITE/cgi-bin/cvsweb/interchange/?only_with_tag=STABLE_4_8-root
 	# However, entities for last version will, in addition to above,
-	# get a default entity &cvs-README;, and it will point to some particular
-	# version of cvs-head.
-	# $i{ver} that we will use here is X.Y.Z or 'cvs-head'.
+	# get a default entity (like &cvsfile-README;), and it will point to
+	# some particular version or cvs-head.
 
-	# First derive IC series (in format X_Y) and cvs tag for it.
-	# If we're in cvs-head, we don't do this
+	# First derive IC series_ (in format X_Y) and series (in format X.Y), 
+	# and cvs tag for non-cvs-head. (If we're in cvs-head, we don't do this
+	# since cvs-head has no special tag).
 	unless ( $i{ver} eq 'cvs-head' ) {
 		( $i{series_} = $i{ver} ) =~ s/\./_/; $i{series_} =~ s/\..*//;
 		( $i{series} = $i{series_} ) =~ s/_/./;
 		$i{cvstag} = "?only_with_tag=STABLE_$i{series_}-root";
 	} else {
+		$i{series_} = '';
 		$i{series} = '';
 		$i{cvstag} = '';
 	}
