@@ -5,6 +5,7 @@
 	<!ENTITY upgrade SYSTEM "../tmp/upgrade-c.db"> 
 	<!ENTITY faq SYSTEM "../tmp/faq-c.db"> 
 	<!ENTITY programming-style SYSTEM "../tmp/programming-style-c.db"> 
+	<!ENTITY index SYSTEM "../tmp/index-c.db"> 
 	<!ENTITY howtos SYSTEM "../tmp/howtos-c.db"> 
 	<!ENTITY glossary SYSTEM "../tmp/glossary-c.db"> 
 	<!ENTITY pragmas SYSTEM "../tmp/pragmas-c.db"> 
@@ -44,6 +45,12 @@
 			<dir name='programming-style'>
 				<document targetdoc="programming-style">
 				&programming-style;
+				</document>
+			</dir>
+			
+			<dir name='index'>
+				<document targetdoc="index">
+				&index;
 				</document>
 			</dir>
 			

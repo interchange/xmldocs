@@ -11,6 +11,12 @@
 	<!-- till we use catalog for this -->
   <xsl:template name="user.footer.content" >
   <p class='w3c'>
+    <a href="http://www.docbook.org/">
+      <img
+        src="images/docbook.png"
+        alt="DocBook!"
+        class='w3cimg'/>
+    </a>
     <a href="http://jigsaw.w3.org/css-validator/">
       <img
         src="images/colophon_css.png"

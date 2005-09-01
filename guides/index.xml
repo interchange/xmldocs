@@ -1,0 +1,209 @@
+<?xml version="1.0" standalone="no"?>
+
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+"../docbook/docbookxi.dtd">
+
+<book id='index'>
+
+<bookinfo>
+<title>XMLDOCS - Interchange Documentation Set</title>
+<titleabbrev>index</titleabbrev>
+
+<copyright>
+	<year>2005</year>
+	<holder>Davor Ocelic</holder>
+	<holder>Interchange Development Group</holder>
+</copyright>
+
+<authorgroup>
+	<author>
+		<firstname>Davor</firstname><surname>Ocelic</surname>
+		<email>docelic@icdevgroup.org</email>
+	</author>
+</authorgroup>
+
+<legalnotice>
+	<para>
+	This documentation is free; you can redistribute it and/or modify
+	it under the terms of the &GNU; General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
+	</para>
+	<para>
+	It is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	</para>
+</legalnotice>
+</bookinfo>
+
+<informaltable
+	align='center' pgwide='1' orient='port' title='' label='' frame='vsides'
+	summary='' cellspacing='2' cellpadding='2' border='0' rowheader='firstcol'>
+
+	<tgroup cols='3'>
+		<colspec colname="refs" />
+		<colspec colname="misc" />
+		<colspec colname="guides" />
+
+		<thead>
+			<row>
+				<entry>References</entry>
+				<entry>FAQs and Misc</entry>
+				<entry>Guides</entry>
+			</row>
+		</thead>
+
+		<tbody>
+			<row>
+				<entry>
+					<emphasis role='bold'>
+						(<olink targetdoc='glossary' targetptr='configuration'>?</olink>)
+						Configuration Directives
+					</emphasis><sbr/>
+					<ulink url="confs/index.html">Multi-HTML</ulink> |
+					<ulink url="confs.html">HTML</ulink>
+				</entry>
+
+				<entry>
+					<emphasis role='bold'>
+						Installation/Configuration FAQ
+					</emphasis><sbr/>
+					<ulink url="install.html">HTML</ulink> |
+					<ulink url="install/index.html">Multi-HTML</ulink>
+				</entry>
+
+				<entry>
+					<emphasis role='bold'>
+						Catalog Tutorial
+					</emphasis><sbr/>
+					<ulink url="iccattut.html">HTML</ulink> |
+					<ulink url="iccattut/index.html">Multi-HTML</ulink>
+				</entry>
+			</row>
+
+
+			<row>
+				<entry>
+					<emphasis role='bold'>
+						(<olink targetdoc='glossary' targetptr='ITL'>?</olink>)
+						ITL Tags
+					</emphasis><sbr/>
+					<ulink url="tags/index.html">Multi-HTML</ulink> |
+					<ulink url="tags.html">HTML</ulink>
+				</entry>
+
+				<entry>
+					<emphasis role='bold'>
+						HOWTOs Collection
+					</emphasis><sbr/>
+					<ulink url="howtos.html">HTML</ulink> |
+					<ulink url="howtos/index.html">Multi-HTML</ulink>
+				</entry>
+
+				<entry>
+					<emphasis role='bold'>
+						Programming Style
+					</emphasis><sbr/>
+					<ulink url="programming-style.html">HTML</ulink> |
+					<ulink url="programming-style/index.html">Multi-HTML</ulink>
+				</entry>
+			</row>
+
+
+			<row>
+				<entry>
+					<emphasis role='bold'>
+						(<olink targetdoc='glossary' targetptr='variable'>?</olink>)
+						Variables
+					</emphasis><sbr/>
+					<ulink url="vars/index.html">Multi-HTML</ulink> |
+					<ulink url="vars.html">HTML</ulink>
+				</entry>
+
+				<entry>
+					<emphasis role='bold'>
+						Optimization/Efficiency FAQ
+					</emphasis><sbr/>
+					<ulink url="optimization.html">HTML</ulink> |
+					<ulink url="optimization/index.html">Multi-HTML</ulink>
+				</entry>
+
+				<entry>
+					<emphasis role='bold'>
+						Upgrade Guide
+					</emphasis><sbr/>
+					<ulink url="upgrade.html">HTML</ulink> |
+					<ulink url="upgrade/index.html">Multi-HTML</ulink>
+				</entry>
+			</row>
+
+
+			<row>
+				<entry>
+					<emphasis role='bold'>
+						(<olink targetdoc='glossary' targetptr='filter'>?</olink>)
+						Filters
+					</emphasis><sbr/>
+					<ulink url="filters/index.html">Multi-HTML</ulink> |
+					<ulink url="filters.html">HTML</ulink>
+				</entry>
+
+				<entry>
+				<!--
+					<emphasis role='bold'>
+					</emphasis><sbr/>
+					<ulink url=".html">HTML</ulink> |
+					<ulink url="/">Multi-HTML</ulink>
+				-->
+				</entry>
+
+				<entry>
+				<!--
+					<emphasis role='bold'>
+					</emphasis><sbr/>
+					<ulink url=".html">HTML</ulink> |
+					<ulink url="/">Multi-HTML</ulink>
+				-->
+				</entry>
+			</row>
+
+
+			<row>
+				<entry>
+					<emphasis role='bold'>
+						(<olink targetdoc='glossary' targetptr='pragma'>?</olink>)
+						Pragmas
+					</emphasis><sbr/>
+					<ulink url="pragmas/index.html">Multi-HTML</ulink> |
+					<ulink url="pragmas.html">HTML</ulink>
+				</entry>
+
+				<entry>
+				<!--
+					<emphasis role='bold'>
+					</emphasis><sbr/>
+					<ulink url=".html">HTML</ulink> |
+					<ulink url="/">Multi-HTML</ulink>
+				-->
+				</entry>
+
+				<entry>
+				<!--
+					<emphasis role='bold'>
+					</emphasis><sbr/>
+					<ulink url=".html">HTML</ulink> |
+					<ulink url="/">Multi-HTML</ulink>
+				-->
+				</entry>
+			</row>
+
+
+		</tbody>
+
+	</tgroup>
+
+</informaltable>
+
+</book>

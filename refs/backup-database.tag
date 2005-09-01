@@ -1,5 +1,5 @@
 __NAME__ purpose
-backup Interchange databases, optionally 
+backup Interchange databases, even rows selectively
 __END__
 
 __NAME__ synopsis 

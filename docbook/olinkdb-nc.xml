@@ -5,6 +5,7 @@
 	<!ENTITY upgrade SYSTEM "../tmp/upgrade-nc.db"> 
 	<!ENTITY faq SYSTEM "../tmp/faq-nc.db"> 
 	<!ENTITY programming-style SYSTEM "../tmp/programming-style-nc.db"> 
+	<!ENTITY index SYSTEM "../tmp/index-nc.db"> 
 	<!ENTITY howtos SYSTEM "../tmp/howtos-nc.db"> 
 	<!ENTITY glossary SYSTEM "../tmp/glossary-nc.db"> 
 	<!ENTITY pragmas SYSTEM "../tmp/pragmas-nc.db"> 
@@ -26,6 +27,7 @@
 			<document targetdoc="upgrade" baseuri="upgrade.html"> &upgrade; </document>
 			<document targetdoc="faq" baseuri="faq.html"> &faq; </document>
 			<document targetdoc="programming-style" baseuri="programming-style.html"> &programming-style; </document>
+			<document targetdoc="index" baseuri="index.html"> &index; </document>
 			<document targetdoc="howtos" baseuri="howtos.html"> &howtos; </document>
 			<document targetdoc="glossary" baseuri="glossary.html"> &glossary; </document>
 			<document targetdoc="pragmas" baseuri="pragmas.html"> &pragmas; </document>

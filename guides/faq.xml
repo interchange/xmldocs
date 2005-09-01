@@ -1974,7 +1974,6 @@ with user-entered data.
 </para>
 </answer></qandaentry>
 
-<!--
 <qandaentry>
 	<question><para>Optimizing lists</para></question>
 <answer><para>
@@ -2009,19 +2008,18 @@ up complex lists by orders of magnitude.
 </para><para>
 
 Benchmarking
+</para><para>
 
 A non-precise benchmark of different iteration options can be done
-with the following global UserTag. Place this in a file in the
-usertag/ directory in the &IC; root:
+with the following &glos-ITL; tag. Place this in a file in the
+<filename class='directory'>usertag/</filename>
+directory in the &IC; root:
 
 
 <programlisting><![CDATA[
-
-]]></programlisting>
-
 UserTag benchmark Order start display
 UserTag benchmark AddAttr
-UserTag benchmark Routine <<eor
+UserTag benchmark Routine <<EOR
 my $bench_start;
 my @bench_times;
 sub {
@@ -2052,24 +2050,19 @@ sub {
     return;
 }
 EOR
+]]></programlisting>
 
 Then at the beginning of the code to check, call
 
-
 <programlisting><![CDATA[
-
+[benchmark start=1]
 ]]></programlisting>
-
-        [benchmark start=1]
 
 to start the measurement. At the end
 
-
 <programlisting><![CDATA[
-
+[benchmark]
 ]]></programlisting>
-
-        [benchmark]
 
 will display the time used. Bear in mind that it is not precise, and
 that there may be variation due to system conditions. Also, the longer
@@ -2077,42 +2070,35 @@ the times and the bigger the list, the better the comparison.
 
 To see the system/user breakdown, do:
 
-
 <programlisting><![CDATA[
-
+[benchmark verbose=1]
 ]]></programlisting>
-
-        [benchmark verbose=1]
 
 In general, "user" time measures &IC; processing time and and
 the rest are indicative of the database access overhead, which can vary
 widely from database to database.
+</para><para>
 
-H3: Optimizations
+Optimizations
 
 * [PREFIX-tag] is faster than [parsed-tag]
 
 
 <programlisting><![CDATA[
+[loop prefix=foo search="ra=yes"]
 
+  [foo-data products image] is slightly faster than
+  [foo-field image] which is MUCH faster than
+  [data products image [foo-code]] which is faster than
+  [data table=products column=image key="[foo-code]"]
+
+[/loop]
 ]]></programlisting>
-
-    [loop prefix=foo search="ra=yes"]
-
-        [foo-data products image]
-                is slightly faster than
-        [foo-field image]
-                which is MUCH faster than
-        [data products image [foo-code]]
-                which is faster than
-        [data table=products column=image key="[foo-code]"]
-
-    [/loop]
 
 The loop tags are interpreted by means of fast regular expression
 scans of the loop container text, and fetch an entire row of
-data in one query. The [data ...]  ITL tag interpretation is
-delayed until after the loop is finished, whereby the ITL tag
+data in one query. The &tag-data; ITL tag interpretation is
+delayed until after the loop is finished, whereby the &glos-ITL; tag
 parser must find the tag, build a parameter list, then fetch the
 data with a separate query. If there are repeated references to
 the same field in the loop, the speedup can be 10x or more.
@@ -2130,18 +2116,17 @@ The following are equivalent:
 
 
 <programlisting><![CDATA[
+Benchmark loop-field list: [benchmark start=1]
+  <!-- [loop search="ra=yes/st=db"]
+       [loop-code] price: [loop-field price] [/loop] -->
+       TIME: [benchmark]
 
+Benchmark loop-param list: [benchmark start=1]
+  <!-- [loop search="ra=yes/st=db/rf=sku,price"]
+       [loop-code] price: [loop-param price] [/loop] -->
+       TIME: [benchmark]
 ]]></programlisting>
 
-        Benchmark loop-field list: [benchmark start=1]
-        <!- [loop search="ra=yes/st=db"]
-                [loop-code] price: [loop-field price] [/loop] ->
-        TIME: [benchmark]
-
-        Benchmark loop-param list: [benchmark start=1]
-        <!- [loop search="ra=yes/st=db/rf=sku,price"]
-                [loop-code] price: [loop-param price] [/loop] ->
-        TIME: [benchmark]
 
 but the second is much, much faster.
 
@@ -2152,53 +2137,50 @@ row or data containers. I see a lot of:
 
 
 <programlisting><![CDATA[
-
+[loop search="ra=yes"]
+  [calc] return '<tr>' if [loop-increment] == 1; return[/calc]
+  [calc] return '' if [loop-increment] % 3; return '</tr>' [/calc]
+[/loop]
 ]]></programlisting>
 
-        [loop search="ra=yes"]
-        [calc] return '<tr>' if [loop-increment] == 1; return[/calc]
-        [calc] return '' if [loop-increment] % 3; return '</TR>' [/calc]
-        [/loop]
 
 Much faster, by a few orders of magnitude, is:
 
 
 <programlisting><![CDATA[
-
-]]></programlisting>
-
-        [loop search="ra=yes"]
-        [loop-change 1][condition]1[/condition]<tr>[/loop-change 1]
-        [loop-alternate 3]</TR>[/loop-alternate]
-        [/loop]
-
-        If you think you need to close the final row by checking the
-        final count, look at this:
-
-        [loop search="ra=yes"]
-        [on-match]
-                <table>
-                <tr>
-        [/on-match]
-
-        [list]
-                        <td>[loop-code]</TD>
-                [loop-alternate 3]</TR><tr>[/loop-alternate]
-        [/list]
-
-        [on-match]
-                </TR>
-                </TABLE>
-        [/on-match]
-
-        [no-match]
-                No match, sorry.
-        [/no-match]
-
+[loop search="ra=yes"]
+  [loop-change 1][condition]1[/condition]<tr>[/loop-change 1]
+  [loop-alternate 3]</TR>[/loop-alternate]
 [/loop]
 
+If you think you need to close the final row by checking the
+final count, look at this:
+
+[loop search="ra=yes"]
+  [on-match]
+    <table>
+    <tr>
+  [/on-match]
+  
+  [list]
+    <td>[loop-code]</TD>
+    [loop-alternate 3]</TR><tr>[/loop-alternate]
+  [/list]
+  
+  [on-match]
+    </tr>
+    </table>
+  [/on-match]
+  
+  [no-match]
+    No match, sorry.
+  [/no-match]
+[/loop]
+]]></programlisting>
+
+
 This is a hundred times faster than anything you can build with
-multiple [calc] tags.
+multiple &tag-calc; tags.
 
 * Use simple go/nogo comparisons in [if ...]
 
@@ -2206,19 +2188,14 @@ Consider these two snippets:
 
 
 <programlisting><![CDATA[
-
+[if scratch|value|cgi key] THEN [/if]
 ]]></programlisting>
-
-        [if scratch|value|cgi key] THEN [/if]
 
 and:
 
-
 <programlisting><![CDATA[
-
+[if scratch|value|cgi key == '1'] THEN [/if]
 ]]></programlisting>
-
-        [if scratch|value|cgi key == '1'] THEN [/if]
 
 The first one doesn't require &PERL; evaluation. It simply checks to see
 if the value is blank or 0, and returns true if it is anything but.
@@ -2227,56 +2204,57 @@ of "No" or " " or somesuch, but it is anywhere from 20-35% faster.
 
 Try it on the foundation demo:
 
-
 <programlisting><![CDATA[
+Overhead: 
 
+[benchmark start=1]
+
+<!--
+[loop search="ra=yes"]
+  [set cert][loop-field gift_cert][/set]
+[/loop]
+-->
+
+[benchmark]
+<p>
+
+
+if scratch compare: 
+[benchmark start=1]
+
+<!--
+[loop search="ra=yes"]
+  [set cert][loop-field gift_cert][/set]
+  [loop-code] [if scratch cert] YES [else] NO [/else][/if]
+  [loop-code] [if scratch cert] YES [else] NO [/else][/if]
+  [loop-code] [if scratch cert] YES [else] NO [/else][/if]
+  [loop-code] [if scratch cert] YES [else] NO [/else][/if]
+  [loop-code] [if scratch cert] YES [else] NO [/else][/if]
+[/loop]
+-->
+
+[benchmark]
+<p>
+
+
+if scratch compare eq 1: 
+[benchmark start=1]
+<!--
+[loop search="ra=yes"]
+  [set cert][loop-field gift_cert][/set]
+  [loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
+  [loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
+  [loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
+  [loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
+  [loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
+[/loop]
+-->
+
+[benchmark]
+<p>
+
+[page @@MV_PAGE@@]Again</a>
 ]]></programlisting>
-
-    - begin test -
-
-    Overhead: 
-    [benchmark start=1]
-        <!- [loop search="ra=yes"]
-                    [set cert][loop-field gift_cert][/set]
-            [/loop] ->
-    [benchmark]
-    <p>
-
-
-    if scratch compare: 
-    [benchmark start=1]
-        <!-
-        [loop search="ra=yes"]
-        [set cert][loop-field gift_cert][/set]
-        [loop-code] [if scratch cert] YES [else] NO [/else][/if]
-        [loop-code] [if scratch cert] YES [else] NO [/else][/if]
-        [loop-code] [if scratch cert] YES [else] NO [/else][/if]
-        [loop-code] [if scratch cert] YES [else] NO [/else][/if]
-        [loop-code] [if scratch cert] YES [else] NO [/else][/if]
-        [/loop]
-        ->
-
-    [benchmark]
-    <p>
-
-    if scratch compare eq 1: 
-    [benchmark start=1]
-        <!-
-        [loop search="ra=yes"]
-        [set cert][loop-field gift_cert][/set]
-        [loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
-        [loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
-        [loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
-        [loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
-        [loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
-        [/loop]
-        ->
-    [benchmark]
-    <p>
-
-    [page @@MV_PAGE@@]Again</a>
-
-    - end test -
 
 * Use [PREFIX-calc] instead of [calc] or [perl]
 
@@ -2293,25 +2271,23 @@ available for access inside of it, just do:
 
 
 <programlisting><![CDATA[
-
+[perl tables="products pricing"] [/perl]
 ]]></programlisting>
 
-        [perl tables="products pricing"] [/perl]
 
 prior to list start. Now you can do something like:
 
 
 <programlisting><![CDATA[
-
+[loop search="ra=yes"]
+  [loop-calc]
+    $desc = $Tag->data('products', 'description', '[loop-code]');
+    $link = $Tag->page('[loop-code]');
+    return "$link $desc </A>";
+  [/loop-calc] <br>
+[/loop]
 ]]></programlisting>
 
-    [loop search="ra=yes"]
-        [loop-calc]
-            $desc = $Tag->data('products', 'description', '[loop-code]');
-            $link = $Tag->page('[loop-code]');
-            return "$link $desc </A>";
-        [/loop-calc] <br>
-    [/loop]
 
 * ADVANCED: Precompile and execute with [PREFIX-sub] and [PREFIX-exec]
 
@@ -2333,37 +2309,37 @@ faster than separate [PREFIX-calc] calls.
 
 
 <programlisting><![CDATA[
+[benchmark start=1]
 
+loop-calc:
+<!--
+[loop search="st=db/fi=country/ra=yes/ml=1000"]
+  [loop-calc]
+    my $code = q{[loop-code]};
+    return "code '$code' reversed is " . reverse($code);
+  [/loop-calc]
+[/loop]
+-->
+
+[benchmark]
+
+<p>
+
+[benchmark start=1]
+loop-sub and loop-exec:
+<!--
+[loop search="st=db/fi=country/ra=yes/ml=1000"]
+  [loop-sub country_compare]
+    my $code = shift;
+    return "code '$code' reversed is " . reverse($code);
+  [/loop-sub]
+  [loop-exec country_compare][loop-code][/loop-exec]
+[/loop]
+-->
+
+[benchmark]
 ]]></programlisting>
 
-    [benchmark start=1]
-    loop-calc:
-      <!-
-            [loop search="st=db/fi=country/ra=yes/ml=1000"]
-            [loop-calc]
-                    my $code = q{[loop-code]};
-                    return "code '$code' reversed is " . reverse($code);
-            [/loop-calc]
-            [/loop]
-      ->
-                    
-    [benchmark]
-
-    <p>
-
-    [benchmark start=1]
-    loop-sub and loop-exec:
-      <!-
-            [loop search="st=db/fi=country/ra=yes/ml=1000"]
-            [loop-sub country_compare]
-                    my $code = shift;
-                    return "code '$code' reversed is " . reverse($code);
-            [/loop-sub]
-            [loop-exec country_compare][loop-code][/loop-exec]
-            [/loop]
-      ->
-                    
-    [benchmark]
 
 * ADVANCED: Execute and save with [query ...], then use an embedded &PERL;
 routine.
@@ -2379,50 +2355,54 @@ This is the fastest possible method to display a list.
 
 
 <programlisting><![CDATA[
+[set waiting_for]os28004[/set]
 
-]]></programlisting>
+[benchmark start=1] Embedded &PERL;
+<!--
+[query arrayref=myref sql="select sku,price,description from products" /]
 
-  - begin test code -
-  [set waiting_for]os28004[/set]
-  
-  [benchmark start=1] Embedded &PERL;
-  <!-
-  [query arrayref=myref sql="select sku,price,description from products"]
-        <!- make query, this container text is not used. ->
-  [/query]
-  
-  [perl]
-    # Get the query results, has multiple fields
-    my $ary = $Tmp->{myref};
-    my $out = '';
-    foreach $line (@$ary) {
-        my ($sku, $price, $desc) = @$line;
-        if($sku eq $Scratch->{waiting_for}) {
-                $out .= "We were waiting for this one!!!!\n";
-        }
-        $out .= "sku: $sku price: $price description: $desc\n";
+[perl]
+  # Get the query results, has multiple fields
+  my $ary = $Tmp->{myref};
+  my $out = '';
+
+  foreach $line (@$ary) {
+    my ($sku, $price, $desc) = @$line;
+    if($sku eq $Scratch->{waiting_for}) {
+      $out .= "We were waiting for this one!!!!\n";
     }
-    return $out;
-  [/perl]
-  ->
-  TIME: [benchmark]
-  
-  [benchmark start=1] All loop
-  <!-
-  [query list=1 sql="select sku,price,description from products"]
-        [if scratch waiting_for eq '[sql-code]']
-            We were waiting for this one!!!!
-        [/if]
-        sku: [sql-code]
-        price: [sql-param price]
-        desc: [sql-param description]  
-  [/query]
-  ->
-  
-  TIME: [benchmark]
-  
-  - end test code -
+    $out .= "sku: $sku price: $price description: $desc\n";
+  }
+  return $out;
+[/perl]
+-->
 
+TIME: [benchmark]
+
+
+[benchmark start=1] All loop
+
+<!--
+[query list=1 sql="select sku,price,description from products"]
+
+  [if scratch waiting_for eq '[sql-code]']
+    We were waiting for this one!!!!
+  [/if]
+  
+  sku: [sql-code]
+  price: [sql-param price]
+  desc: [sql-param description]  
+[/query]
+-->
+
+TIME: [benchmark]
+]]></programlisting>
+</para>
+</answer>
+</qandaentry>
+
+
+<!--
 * Other things that help:
 
 ** Avoid interpolate=1 when possible. A separate tag parser must be spawned

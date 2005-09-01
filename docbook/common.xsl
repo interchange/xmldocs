@@ -26,6 +26,19 @@
 	<xsl:param name="use.extensions">0</xsl:param>
 	<xsl:param name="textinsert.extension">1</xsl:param>
 
+	<!--
+		Define which document types get which ToC elements generated.
+		We only use article and reference doctypes in xmldocs.
+		Book.
+	-->
+	<xsl:param name="generate.toc">
+		article    toc,title,figure,table,example,equation
+		reference  toc,title,example
+		book       nop
+		glossary   toc,title
+	</xsl:param>
+
+
 	<!--<xsl:template match="tag"><xsl:text>[</xsl:text><xsl:call-template name="inline.monoseq"/><xsl:text>]</xsl:text></xsl:template>-->
 	<xsl:template match="tag">[<xsl:call-template name="inline.monoseq"/>]</xsl:template>
 	<xsl:template match="pragma"><xsl:call-template name="inline.monoseq"/></xsl:template>

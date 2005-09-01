@@ -13,7 +13,7 @@ IC_VERSIONS = 4.6.0 4.8.0 5.0.0 5.2.0 cvs-head
 #############################################################
 # Base definitions
 SYMBOL_TYPES= pragmas vars tags confs filters
-GUIDES      = iccattut programming-style upgrade faq
+GUIDES      = iccattut programming-style upgrade faq index
 HOWTOS      = howtos
 GLOSSARY    = glossary
 ALL_DOCS    = $(GLOSSARY) $(HOWTOS) $(GUIDES) $(SYMBOL_TYPES)
@@ -122,7 +122,7 @@ $T/%-c.db: %.xml
 #############################################################
 # STANDARD TARGETS || two-pass processing method
 #OUTPUT/howtos.html: DEPTH = "--stringparam toc.max.depth 1"
-OUTPUT/%.html: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent
+OUTPUT/%.html: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/icfiles.ent
 	echo "C     $@"
 	$(PSR) $(PSR_FLAGS)                                                \
 	  $(PROFILE)                                                       \
@@ -134,7 +134,7 @@ OUTPUT/%.html: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autoh
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
 	  -o $@ docbook/html-nochunks.xsl $T/$*-nc.profiled
-OUTPUT/%: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent
+OUTPUT/%: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/icfiles.ent
 	echo "C     $@/"
 	$(PSR) $(PSR_FLAGS)                                                \
 	  $(PROFILE)                                                       \
@@ -146,7 +146,7 @@ OUTPUT/%: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
 	  -o $@/ docbook/html-chunks.xsl $T/$*-c.profiled
-OUTPUT/%.man: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent
+OUTPUT/%.man: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/icfiles.ent
 	echo "C     $@/"
 	mkdir -p "$@"
 	$(PSR) $(PSR_FLAGS)                                                \
@@ -167,8 +167,8 @@ OUTPUT/%.man: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autoho
 
 
 #############################################################
-# Supporting tagret - FO output
-tmp/%.latex: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent
+# Supporting target - LATEX output
+tmp/%.latex: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/icfiles.ent
 	$(PSR) $(PSR_FLAGS)                                                \
 	  $(PROFILE)                                                       \
 	  --stringparam current.docid $*                                   \
@@ -185,13 +185,6 @@ tmp/%.latex: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohow
 	  --stringparam appendix.autolabel 0                               \
 	  --stringparam section.autolabel 0                                \
 	  -o $T/$*.latex docbook/latex.xsl $T/$*-nc.profiled
-#
-#
-#   --stringparam  passivetex.extensions  1
-#       --stringparam  rootid  "using" 
-#
-
-
 
 
 #############################################################
@@ -263,6 +256,7 @@ glossary/glossary.xml docbook/autoglossary.ent: $(shell find glossary/ -regex '.
 howtos/howtos.xml docbook/autohowtos.ent: $(shell find howtos/ -regex '.+[^(\.xml)]$$') bin/generic-autogen
 	bin/generic-autogen howtos
 docbook/autorefs.ent: refxmls
+docbook/icfiles.ent: refxmls
 
 
 ## Helper target, only used by docelic

@@ -330,6 +330,32 @@ thead {
 }
 
 /*
+	Book element styling. Only used for first index page
+	that links to other pages.
+*/
+
+.book thead {
+	background-color: #be7109;
+}
+
+
+.book td, .book table {
+	border: none;
+}
+
+.book th {
+	border: 1px dashed #fff;
+}
+
+.book table a {
+	font-size: 70%;
+}
+
+.book .authorgroup {
+	background: url(images/lightlogo.png) no-repeat scroll center right;
+}
+
+/*
 	Glossary styling:
 
 	.glossary .titlepage . . h2.title <a/> /h2 / / . / / 

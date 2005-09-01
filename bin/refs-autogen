@@ -89,6 +89,8 @@ my %longname = (
 	var => "Global and catalog variable",
 );
 
+# Translation from granular internal types to 
+# XML output tag names.
 my %tagname = (
 	globvar => "varname",
 	catvar => "varname",
@@ -125,8 +127,8 @@ my %defaults = (
 
 my @mandatory = (qw/synopsis example description purpose/);
 
-# General section intros and "outros"; they are set per-item and not
-# only per-section as you could achieve with putting them in a template.
+# General section intros and "outros"; this header repeats per-item,
+# unlike the effect of using templates which are just one per-section.
 # The header is inserted
 # *after* <title>, if title was specified in section definition.
 my %item_header = (
@@ -212,27 +214,31 @@ while ( $path = shift @paths) { # For each version specified
 	}
 
 	# Load in list of files. It's prepared for us by bin/stattree.
-	open IN, "< tmp/$i{ver}.filelist" or
-		die "Can't rdopen 'tmp/$i{ver}.filelist' ($!)\n";
-	my @filelist = <IN>;
+	open IN, "< tmp/$i{ver}.MANIFEST" or
+		die "Can't rdopen 'tmp/$i{ver}.MANIFEST' ($!).\n" .
+			"Run 'make clean-cache cache'?\n";
+	my @MANIFEST = <IN>;
 	close IN;
-	chomp for @filelist;
+	chomp for @MANIFEST;
 	# DocBook doesn't like '%' in entitity content, so let's
 	# just weed out pages having %20 in the name
-	@filelist = grep {!/%/} @filelist;
-	my @filelist_ent = @filelist;
-	s/\//_/g for @filelist_ent;
+	@MANIFEST = grep {!/%/} @MANIFEST;
+	# The following line deals with /^MANIFEST/ line in MANIFEST file
+	s/\s.*// for @MANIFEST;
+	
+	my @MANIFEST_ent = @MANIFEST;
+	s/\//_/g for @MANIFEST_ent;
 
-	for (my $i=0; $i<@filelist_ent;$i++) {
-		$_ = $filelist_ent[$i];
+	for (my $i=0; $i<@MANIFEST_ent;$i++) {
+		$_ = $MANIFEST_ent[$i];
 
 		print FILE_ENTITIES
 			'<!ENTITY cvsfile' .
 			$i{series} . '-' .
 			$_ .
 			qq{ "<ulink url='http://www.icdevgroup.org/cgi-bin/cvsweb/interchange/} .
-			$filelist[$i] . $i{cvstag} . "'>" .
-			$filelist[$i] . qq{</ulink>"} . ">\n";
+			$MANIFEST[$i] . $i{cvstag} . "'>" .
+			$MANIFEST[$i] . qq{</ulink>"} . ">\n";
 
 		# If this is the last version we generate docs for, also provide
 		# entity with no version in its name:
@@ -242,8 +248,8 @@ while ( $path = shift @paths) { # For each version specified
 				'-' . # Just $i{series} removed from here.
 				$_ .
 				qq{ "<ulink url='http://www.icdevgroup.org/cgi-bin/cvsweb/interchange/}.
-				$filelist[$i] . $i{cvstag} . "'>" .
-				$filelist[$i] . qq{</ulink>"} . ">\n";
+				$MANIFEST[$i] . $i{cvstag} . "'>" .
+				$MANIFEST[$i] . qq{</ulink>"} . ">\n";
 		}
 	}
 
