@@ -1,0 +1,501 @@
+<?xml version="1.0" standalone="no"?>
+
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+	"../docbook/docbookxi.dtd">
+
+<article id='optimization'>
+
+<articleinfo>
+	<title>Interchange Guides: Optimization</title>
+	<titleabbrev>optimization</titleabbrev>
+
+	<copyright>
+		<year>2003</year><year>2004</year><year>2005</year>
+		<holder>Interchange Development Group</holder>
+	</copyright>
+	<copyright>
+		<year>2002</year>
+		<holder>Red Hat, Inc.</holder>
+	</copyright>
+
+	<authorgroup>
+		<author>
+			<firstname>Davor</firstname><surname>Ocelic</surname>
+			<email>docelic@icdevgroup.org</email>
+		</author>
+		<author>
+			<firstname>Mike</firstname><surname>Heins</surname>
+			<email>mike@perusion.com</email>
+		</author>
+	</authorgroup>
+
+
+	<legalnotice>
+		<para>
+		This documentation is free; you can redistribute it and/or modify
+		it under the terms of the &GNU; General Public License as published by
+		the Free Software Foundation; either version 2 of the License, or
+		(at your option) any later version.
+		</para>
+		<para>
+		It is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+		</para>
+	</legalnotice>
+
+	<abstract>
+		<para>
+		</para>
+	</abstract>
+
+</articleinfo>
+
+
+<sect1>
+	<title>Software optimizations</title>
+
+	<sect2>
+		<title>Interchange</title>
+
+		<sect3>
+			<title>General-purpose benchmarking</title>
+
+			<para>
+			One of the most simple and straightforward methods to check whether
+			the code is able to complete a task within a reasonable time is
+			<emphasis>benchmarking</emphasis>. For the purpose, &IC; offers
+			the &tag-benchmark; tag which is found in the 
+			<filename class='directory'>eg/usertag/</filename> directory of 
+			the Interchange &glos-tarball; distribution.
+			<!-- TODO my benchmark variant -->
+			</para><para>
+			The &tag-benchmark; reference page contains all the relevant 
+			installation and usage notes.
+			</para>
+		</sect3>
+
+		<sect3>
+			<title>Optimizing lists</title>
+
+			<para>
+			&IC; has powerful capabilities (such as searching) that allow
+			you to produce lists of items for use in category lists, product lists,
+			indexes, and other navigation tools or data reports.
+			</para><para>
+			These are a two-edged sword, though. Lists of hundreds or thousands of
+			entries can be returned, and techniques that work well displaying only
+			a few items may slow to a crawl when a large list is returned.
+			</para><para>
+			In general, when you are displaying only one item (such as on a
+			&glos-flypage;) or a small list (such as shopping cart contents),
+			you can be pretty carefree in your use of &glos-ITL; tags.
+			When there are thousands of items, though, you cannot; each
+			&glos-ITL; tag requires parsing and argument building, and all
+			complex tests or embedded &PERL; blocks cause the
+			<classname>Safe</classname> module to evaluate code.
+			</para><para>
+			The <classname>Safe</classname> module is pretty fast considering
+			what it does, but it can only generate a few thousand instances per
+			second even on a fast system. And the &glos-ITL; tag
+			parser can likewise only parse thousands of tags per CPU second.
+			</para><para>
+			What to do? You want to provide complex conditional tests but you
+			don't want your system to slow to a crawl. Luckily, there are
+			techniques which can speed up complex lists by orders of magnitude.
+			</para>
+
+			<sect4>
+				<title>[PREFIX-tag]</title>
+				<para>
+				<code>[<replaceable>PREFIX</replaceable>-tag]</code> constructs
+				are the fastest way to retrieve loop data. Let's say we want to 
+				find all our products (search in all &conf-ProductFiles; databases)
+				and display descriptions of all the products found:
+<programlisting><![CDATA[
+[loop prefix=foo search="ra=yes"]
+
+  [foo-data products description]
+  [comment]is slightly faster than   [/comment]
+
+  [foo-field description]
+  [comment]which is MUCH faster than [/comment]
+
+  [data products description [foo-code]]
+  [comment]which is faster than      [/comment]
+
+  [data table=products column=description key="[foo-code]"]
+
+[/loop]
+]]></programlisting>
+
+				The loop tags are interpreted by means of fast regular expression
+				scans of the loop container text, and fetch an entire row of
+				data in one query.
+				</para><para>
+				The &tag-data; ITL tag interpretation is
+				delayed until after the loop is finished, whereby the &glos-ITL; tag
+				parser must find the tag, build a parameter list, and then fetch the
+				data with a separate query.
+				</para><para>
+				If there are repeated references to the same field in the loop,
+				the speedup can be 10x or more.
+				</para>
+			</sect4>
+
+			<sect4>
+				<title>Pre-fetch data</title>
+				<!-- TODO diff between loop-field and loop-param ? -->
+
+				<para>
+				The <mv>mv_return_fields</mv> variable (otherwise known as the
+				"<literal>rf</literal>" parameter in one-click terminology) defines
+				a comma-separated list of fields you want returned from a search.
+				This, in effect, kind of pre-fetches the data you want to use within
+				a loop.
+				</para><para>
+				Once the records are returned, the fields can be accessed using the
+				<code>[<replaceable>PREFIX</replaceable>-param <replaceable>field</replaceable>]</code> syntax.
+				The fields can also be referenced using <code>[<replaceable>PREFIX</replaceable>-pos <replaceable>N</replaceable>]</code>,
+				where the <replaceable>N</replaceable> represents the ordinal position
+				(starting from <literal>0</literal>) in the field list.
+				</para><para>
+				That said, the following are equivalent in effect but the 
+				<emphasis role='bold'>second variant is much, much faster</emphasis>:
+<programlisting><![CDATA[
+<pre>
+
+Benchmark loop-field list: [benchmark start=1]
+  <!-- [loop search="ra=yes/st=db"]
+       [loop-code] price: [loop-field price] [/loop] -->
+       TIME: [benchmark]
+
+Benchmark loop-param list: [benchmark start=1]
+  <!-- [loop search="ra=yes/st=db/rf=sku,price"]
+       [loop-code] price: [loop-param price] [/loop] -->
+       TIME: [benchmark]
+
+</pre>
+]]></programlisting>
+				</para>
+			</sect4>
+
+			<sect4>
+				<title>Row counting and display</title>
+
+				<para>
+				<code>[<replaceable>PREFIX</replaceable>-alternate <replaceable>N</replaceable>]</code> can be used for row counting and display.
+				</para><para>
+				A common need when building tables is to conditionally close the table
+				row or data containers. I see a lot of code that manually inserts
+				new rows every three columns:
+<programlisting><![CDATA[
+[loop search="ra=yes"]
+  [calc] return '<tr>' if [loop-increment] == 1; return[/calc]
+  [calc] return '' if [loop-increment] % 3; return '</tr>' [/calc]
+[/loop]
+]]></programlisting>
+
+				Much faster, by a few orders of magnitude than the above, is:
+
+<programlisting><![CDATA[
+[loop search="ra=yes"]
+  [loop-change 1][condition]1[/condition]<tr>[/loop-change 1]
+  [loop-alternate 3]</tr>[/loop-alternate]
+[/loop]
+]]></programlisting>
+
+				If you think you need to close the final row by checking the
+				final count, look at this complete example done the right way:
+
+<programlisting><![CDATA[
+[loop search="ra=yes"]
+  [on-match]
+    <table>
+    <tr>
+  [/on-match]
+
+  [list]
+    <td>[loop-code]</td>
+    [loop-alternate 3]</tr><tr>[/loop-alternate]
+  [/list]
+
+  [on-match]
+    </tr>
+    </table>
+  [/on-match]
+
+  [no-match]
+    No match, sorry.
+  [/no-match]
+[/loop]
+]]></programlisting>
+
+				The above is a hundred times faster than anything you can build with
+				multiple &tag-calc; tags.
+				</para>
+			</sect4>
+
+			<sect4>
+				<title>Use [PREFIX-calc] instead of [calc] or [perl]</title>
+
+				<para>
+				Using <code>[<replaceable>PREFIX</replaceable>-calc]</code>, you
+				can execute the same code as with &tag-calc;, but with two benefits: 
+				you will not trigger &glos-ITL; parsing, and the code will be 
+				executed <emphasis>during</emphasis> the loop instead of
+				after it.
+				</para><para>
+				The <code>[<replaceable>PREFIX</replaceable>-calc]</code> object
+				has complete access to all normal embedded &PERL; objects like
+				<varname>$Values</varname>, <varname>$Carts</varname>,
+				<varname>$Tag</varname>, and such. If you want to access data tables
+				from within the loop (such as  <database>products</database> or
+				<database>pricing</database>), just call the following
+				<emphasis>above</emphasis> the loop:
+
+<programlisting><![CDATA[
+[perl tables="products pricing" /]
+]]></programlisting>
+
+<!--
+			<programlisting><![CDATA[
+			[loop search="ra=yes"]
+				[loop-calc]
+					$desc = $Tag->data('products', 'description', '[loop-code]');
+					$link = $Tag->page('[loop-code]');
+					return "$link $desc </A>";
+				[/loop-calc] <br>
+			[/loop]
+			]]></programlisting>
+-->
+
+				</para>
+			</sect4>
+
+			<sect4>
+				<title>ADVANCED: Precompile and execute</title>
+
+				<para>
+				For repetitive routines, you can achieve a considerable savings
+				in CPU by pre-compiling your embedded &PERL; code. The precompilation
+				can occur either once at &conf-catalog; configuration time,
+				or once at time of list execution.
+				</para><para>
+				When you compile routines at the time of the list execution
+				(using <code>[item-sub <replaceable>NAME</replaceable>] <replaceable> ... CODE ...</replaceable> [/item-sub]</code>), only one
+				<classname>Safe</classname> evaluation will be done, and every
+				time the <code>[loop-exec <replaceable>NAME</replaceable>]</code>
+				is called, it will be a direct call to the routine. This can be
+				10 times or more faster than separate &tag-calc; calls, or 5 times
+				faster than separate
+				<code>[<replaceable>PREFIX</replaceable>-calc</code> calls. Here's
+				an example:
+
+<programlisting><![CDATA[
+[benchmark start=1]
+
+loop-calc:
+<!--
+  [loop search="st=db/fi=country/ra=yes/ml=1000"]
+    [loop-calc]
+      my $code = q{[loop-code]};
+      return "code '$code' reversed is " . reverse($code);
+    [/loop-calc]
+  [/loop]
+-->
+
+[benchmark]
+
+<p>
+[benchmark start=1]
+
+loop-sub and loop-exec:
+<!--
+  [loop search="st=db/fi=country/ra=yes/ml=1000"]
+    [loop-sub country_compare]
+      my $code = shift;
+      return "code '$code' reversed is " . reverse($code);
+    [/loop-sub]
+    [loop-exec country_compare][loop-code][/loop-exec]
+  [/loop]
+-->
+
+[benchmark]
+]]></programlisting>
+				</para>
+			</sect4>
+
+			<sect4>
+				<title>ADVANCED: Execute and save with [query ...]</title>
+				<para>
+				You can run <code>[query arrayref=<replaceable>KEYNAME</replaceable> sql="<replaceable>... SQL ...</replaceable>"]</code>, which saves the
+				results of the search/query in a &PERL; reference. It is then
+				available in
+				<varname>$Tmp->{<replaceable>KEYNAME</replaceable>}</varname>.
+				</para><para>
+				This is the fastest possible method to display a list. Observe:
+
+<programlisting><![CDATA[
+[set waiting_for]os28004[/set]
+
+[benchmark start=1] Query plus embedded Perl
+<!--
+  [query arrayref=myref sql="select sku,price,description from products" /]
+  
+  [perl]
+    # Get the query results, has multiple fields
+    my $ary = $Tmp->{myref};
+    my $out = '';
+    
+    foreach $line (@$ary) {
+      my ($sku, $price, $desc) = @$line;
+      if($sku eq $Scratch->{waiting_for}) {
+        $out .= "We were waiting for this one!!!!\n";
+      }
+      $out .= "sku: $sku price: $price description: $desc\n";
+    }
+    return $out;
+  [/perl]
+-->
+
+TIME: [benchmark]
+<p>
+
+[benchmark start=1] Just query
+
+<!--
+  [query list=1 sql="select sku,price,description from products"]
+  
+  [if scratch waiting_for eq '[sql-code]']
+    We were waiting for this one!!!!
+  [/if]
+  
+  sku: [sql-code]
+  price: [sql-param price]
+  desc: [sql-param description]  
+  [/query]
+-->
+
+TIME: [benchmark]
+]]></programlisting>
+				</para>
+			</sect4>
+		</sect3>
+
+		<sect3>
+			<title>Take advantage of "implicit" TRUE and FALSE values</title>
+
+			<para>
+			Consider these two snippets:
+
+<programlisting><![CDATA[
+[if scratch KEY]
+... do something ...
+[/if]
+]]></programlisting>
+
+			and:
+
+<programlisting><![CDATA[
+[if scratch KEY == '1']
+... do something ...
+[/if]
+]]></programlisting>
+
+			The first variant does not require &PERL; evaluation. It simply checks
+			to see if the value is blank or <literal>0</literal>, and assumes
+			TRUE if it is anything but.
+			</para><para>
+			Of course, this requires your code to return blank or value
+			<literal>0</literal> for FALSE results (instead of say,
+			"<literal>No</literal>" or " "), but then we can talk about a
+			20-35% speed-up.
+			</para><para>
+			Here's a sample program to time the results:
+
+<programlisting><![CDATA[
+Overhead: 
+
+[benchmark start=1]
+
+<!--
+	[loop search="ra=yes"]
+		[set cert][loop-field gift_cert][/set]
+	[/loop]
+-->
+
+[benchmark]
+<p>
+
+
+"if scratch cert": 
+[benchmark start=1]
+
+<!--
+[loop search="ra=yes"]
+	[set cert][loop-field gift_cert][/set]
+	[loop-code] [if scratch cert] YES [else] NO [/else][/if]
+	[loop-code] [if scratch cert] YES [else] NO [/else][/if]
+	[loop-code] [if scratch cert] YES [else] NO [/else][/if]
+	[loop-code] [if scratch cert] YES [else] NO [/else][/if]
+	[loop-code] [if scratch cert] YES [else] NO [/else][/if]
+[/loop]
+-->
+
+[benchmark]
+<p>
+
+
+"if scratch cert == 1": 
+[benchmark start=1]
+
+<!--
+[loop search="ra=yes"]
+[set cert][loop-field gift_cert][/set]
+[loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
+[loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
+[loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
+[loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
+[loop-code] [if scratch cert == 1] YES [else] NO [/else][/if]
+[/loop]
+-->
+
+[benchmark]
+<p>
+
+[page @@MV_PAGE@@]Run again</a>
+]]></programlisting>
+			</para>
+		</sect3>
+
+		<sect3>
+			<title>Interpolation and reparsing</title>
+			<para>
+			Avoid <literal>interpolate=1</literal> and 
+			<literal>reparse=1</literal> whenever possible. A separate tag parser
+			must be spawned every time you do this. Many times people use this
+			without needing it.
+			</para>
+		</sect3>
+
+		<sect3>
+			<title>Session variables</title>
+
+			<para>
+			Avoid saving large values to &glos-scratch; space, as these will be
+			written to the users session. If you need them only for the current
+			page, use &tag-tmpn; and &tag-tmp; instead of &tag-set; and &tag-seti;
+			(temporary variables are automatically deleted at the end of current 
+			page processing - before the user's session is saved).
+			</para><para>
+			You can also retrieve values using <code>[scratchd <replaceable>VARIABLE_NAME</replaceable>]</code>
+			to return the contents and delete them from the session at the same
+			time.
+			</para>
+		</sect3>
+	</sect2>
+</sect1>
+
+</article>
