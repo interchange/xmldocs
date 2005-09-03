@@ -18,6 +18,7 @@ HOWTOS      = howtos
 GLOSSARY    = glossary
 ALL_DOCS    = $(GLOSSARY) $(HOWTOS) $(GUIDES) $(SYMBOL_TYPES)
 SHELL       = /bin/sh
+OUTPUT     ?= -std
 export O    = OUTPUT$(OUTPUT)
 export T    = tmp
 export XCF  = docbook/catalog.xml
@@ -38,6 +39,7 @@ VPATH       = guides refs howtos glossary
 .PHONY: up-% cvs-% %-up %-cvs
 .PHONY: cache caches
 .PHONY: refxmls
+.PHONY: $O
 
 
 #############################################################
@@ -59,10 +61,11 @@ glossary: $(foreach doc,$(GLOSSARY),OUTPUT/$(doc).html  )
 
 #############################################################
 # Skel
-skel: $T $O
-	make OUTPUT/files
-	make OUTPUT/images
-	make OUTPUT/xmldocs.css
+skel:
+	make $T
+	make $O
+	make OUTPUT/files OUTPUT/images OUTPUT/xmldocs.css
+
 $T:
 	if test -e $T.temporary; then                                \
 		echo "U     $T/"; mv $T.temporary $T;                      \
@@ -72,7 +75,8 @@ $O:
 	echo "U     $O/"
 	mkdir -p $O
 	echo "S     OUTPUT -> $O/"
-	ln -sf $O OUTPUT
+	rm -f OUTPUT
+	ln -s $O OUTPUT
 OUTPUT/files: $(shell find files) bin/dbgen
 	echo "C     $@/"
 	rm -rf $@/
@@ -122,7 +126,7 @@ $T/%-c.db: %.xml
 #############################################################
 # STANDARD TARGETS || two-pass processing method
 #OUTPUT/howtos.html: DEPTH = "--stringparam toc.max.depth 1"
-OUTPUT/%.html: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/icfiles.ent
+OUTPUT/%.html: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/autofiles.ent
 	echo "C     $@"
 	$(PSR) $(PSR_FLAGS)                                                \
 	  $(PROFILE)                                                       \
@@ -134,7 +138,7 @@ OUTPUT/%.html: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autoh
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
 	  -o $@ docbook/html-nochunks.xsl $T/$*-nc.profiled
-OUTPUT/%: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/icfiles.ent
+OUTPUT/%: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/autofiles.ent
 	echo "C     $@/"
 	$(PSR) $(PSR_FLAGS)                                                \
 	  $(PROFILE)                                                       \
@@ -146,7 +150,7 @@ OUTPUT/%: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
 	  -o $@/ docbook/html-chunks.xsl $T/$*-c.profiled
-OUTPUT/%.man: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/icfiles.ent
+OUTPUT/%.man: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/autofiles.ent
 	echo "C     $@/"
 	mkdir -p "$@"
 	$(PSR) $(PSR_FLAGS)                                                \
@@ -168,7 +172,7 @@ OUTPUT/%.man: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autoho
 
 #############################################################
 # Supporting target - LATEX output
-tmp/%.latex: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/icfiles.ent
+tmp/%.latex: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/autofiles.ent
 	$(PSR) $(PSR_FLAGS)                                                \
 	  $(PROFILE)                                                       \
 	  --stringparam current.docid $*                                   \
@@ -256,7 +260,7 @@ glossary/glossary.xml docbook/autoglossary.ent: $(shell find glossary/ -regex '.
 howtos/howtos.xml docbook/autohowtos.ent: $(shell find howtos/ -regex '.+[^(\.xml)]$$') bin/generic-autogen
 	bin/generic-autogen howtos
 docbook/autorefs.ent: refxmls
-docbook/icfiles.ent: refxmls
+docbook/autofiles.ent: refxmls
 
 
 ## Helper target, only used by docelic

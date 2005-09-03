@@ -1,5 +1,5 @@
 __NAME__ purpose
-do not dynamically update directives from databases
+dynamically update the directives from files only
 __END__
 
 

@@ -37,6 +37,10 @@ is the same as:
 Database variables variables.txt TAB
 VariableDatabase variables
 </programlisting>
+So as you see, if you want to use a non-default &glos-database;, you must
+explicitely
+define it using the &conf-Database; directive and do so before the 
+&conf-VariableDatabase; line.
 __END__
 
 
@@ -60,3 +64,5 @@ __HELLO__, [scratch user]!
 ]]></programlisting>
 __END__
 
+TODO: It's easy. Just make sure you do before "VariableDatabase variable":
+ Database variable variable.txt dbi:mysql:database=foo;host=hostname;etc=etc

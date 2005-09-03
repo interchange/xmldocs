@@ -48,7 +48,7 @@ my %dups; # List of symbols names that are not unique
 my $last_path; # Last version we want docs generated for (say, 5.2.0).
 my $compounds = 1; # Summarize similar symbol groups to single page?
 my @fileentities; # List of generated file entities (they point to CVS)
-my $fileentitiespath = "docbook/icfiles.ent";
+my $fileentitiespath = "docbook/autofiles.ent";
 
 my @page_order = (qw/purpose default structure synopsis description online example notes bugs/, "symbol type", "source", "author", "copyright", "see also", "directive type", "variable type");
 
@@ -812,9 +812,9 @@ open INVOUT, "> tmp/missing" or
 print INVOUT Dumper \%invalid;
 close INVOUT;
 
-# Just print out that we created docbook/icfiles.ent
+# Just print out that we created docbook/autofiles.ent
 close FILE_ENTITIES;
-print "GEN: docbook/icfiles.ent\n";
+print "GEN: docbook/autofiles.ent\n";
 
 # Output autorefs.ent
 unless ( $no_autorefs ) {

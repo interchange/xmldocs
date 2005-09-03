@@ -49,7 +49,7 @@ the files <filename>templates/plus-top</filename> and
 <para>
 You might wonder in what cases would the code fail to match the template?
 Well, obviously, users could simply try to access non-existent pages. 
-The other common issue are &glos-form-action;s such as 
+The other common issue are &glos-ActionMap;s such as 
 <literal>/scan</literal> or <literal>/process</literal>.
 </para>
 </example>

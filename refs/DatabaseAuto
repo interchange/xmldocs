@@ -39,7 +39,7 @@ for every table (not view) found in the database
 If the &PERL; module <classname>DBIx::DBSchema</classname> was found,
 it would also dump the specification needed to re-create the table structures
 (which you can use as the <literal>CREATE_SQL</literal> parameter to
-&conf-Database;:
+&conf-Database;):
 
 <programlisting>
 Database  <replaceable>TABLENAME</replaceable> CREATE_SQL   CREATE TABLE <replaceable>TABLENAME ( ...)</replaceable>
