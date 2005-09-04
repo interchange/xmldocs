@@ -135,7 +135,8 @@ find({
 
 
 # Copy MANIFEST to "cache":
-`cp MANIFEST "../../tmp/$i{ver}.MANIFEST"`;
+
+`cp MANIFEST "$cpath/tmp/$i{ver}.MANIFEST"`;
 print "GEN: tmp/$i{ver}.MANIFEST\n";
 
 chdir $cpath; # Return to starting location
