@@ -12,6 +12,9 @@
 <copyright>
 	<year>2005</year>
 	<holder>Davor Ocelic</holder>
+</copyright>
+<copyright>
+	<year>2005</year>
 	<holder>Interchange Development Group</holder>
 </copyright>
 
@@ -70,16 +73,16 @@
 					<emphasis role='bold'>
 						Installation/Configuration FAQ
 					</emphasis><sbr/>
-					<ulink url="install.html">HTML</ulink> |
-					<ulink url="install/index.html">Multi-HTML</ulink>
+					<ulink url="install/index.html">Multi-HTML</ulink> |
+					<ulink url="install.html">HTML</ulink>
 				</entry>
 
 				<entry>
 					<emphasis role='bold'>
 						Catalog Tutorial
 					</emphasis><sbr/>
-					<ulink url="iccattut.html">HTML</ulink> |
-					<ulink url="iccattut/index.html">Multi-HTML</ulink>
+					<ulink url="iccattut/index.html">Multi-HTML</ulink> |
+					<ulink url="iccattut.html">HTML</ulink>
 				</entry>
 			</row>
 
@@ -98,16 +101,16 @@
 					<emphasis role='bold'>
 						HOWTOs Collection
 					</emphasis><sbr/>
-					<ulink url="howtos.html">HTML</ulink> |
-					<ulink url="howtos/index.html">Multi-HTML</ulink>
+					<ulink url="howtos/index.html">Multi-HTML</ulink> |
+					<ulink url="howtos.html">HTML</ulink>
 				</entry>
 
 				<entry>
 					<emphasis role='bold'>
 						Programming Style
 					</emphasis><sbr/>
-					<ulink url="programming-style.html">HTML</ulink> |
-					<ulink url="programming-style/index.html">Multi-HTML</ulink>
+					<ulink url="programming-style/index.html">Multi-HTML</ulink> |
+					<ulink url="programming-style.html">HTML</ulink>
 				</entry>
 			</row>
 
@@ -126,16 +129,16 @@
 					<emphasis role='bold'>
 						Optimization/Efficiency FAQ
 					</emphasis><sbr/>
-					<ulink url="optimization.html">HTML</ulink> |
-					<ulink url="optimization/index.html">Multi-HTML</ulink>
+					<ulink url="optimization/index.html">Multi-HTML</ulink> |
+					<ulink url="optimization.html">HTML</ulink>
 				</entry>
 
 				<entry>
 					<emphasis role='bold'>
 						Upgrade Guide
 					</emphasis><sbr/>
-					<ulink url="upgrade.html">HTML</ulink> |
-					<ulink url="upgrade/index.html">Multi-HTML</ulink>
+					<ulink url="upgrade/index.html">Multi-HTML</ulink> |
+					<ulink url="upgrade.html">HTML</ulink>
 				</entry>
 			</row>
 

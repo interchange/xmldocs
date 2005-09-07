@@ -59,9 +59,12 @@
 		while upgrading to Interchange 5.0 and beyond, please review
 		WHATSNEW entries.
 		</para><para>
+		<emphasis role='bold'>
 		This Guide will be slowly losing on relevance, and users running
 		Interchange 5.0 or later should monitor WHATSNEW entries for 
 		upgrade information.
+		<!-- TODO link to whatsnew -->
+		</emphasis>
 		</para>
 	</abstract>
 

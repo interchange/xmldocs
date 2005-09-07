@@ -143,6 +143,7 @@ my %item_footer = (
 # Support preamble texts
 my %preamble = (
 	# Dude, this is 15 pages of text in place where there shouldn't be any really
+	# so replace it with a link to another page.
 	#tag => scalar readfile('glossary/ITL'),
 	tag => "For a complete introduction to the &IC; Tag Language and " .
 	"the supported syntax, please see the &glos-ITL; glossary entry.",
@@ -150,7 +151,8 @@ my %preamble = (
 	"the supported syntax, please see the &glos-configuration; glossary entry.",
 	globvar => "",
 	catvar => "",
-	pragma => "",
+	pragma => "For a complete introduction to &IC; pragmas, " .
+	"please see the &glos-pragma; glossary entry.",
 	filter => "For a complete introduction to &IC; filters, " .
 	"please see the &glos-filter; glossary entry.",
 	var => "For a complete introduction to &IC; variables, " .
@@ -174,7 +176,7 @@ closedir DIR;
 open FILE_ENTITIES, "> $fileentitiespath" or
 	die "Can't open '$fileentitiespath' ($!)\n";
 
-while ( $path = shift @paths) { # For each version specified
+while ( $path = shift @paths) { # Now, for each IC version specified
 	$dumppath = $path;
 	$i{ver} = $dumppath;
 	$dumpdir = "$dumppath/";
@@ -188,20 +190,20 @@ while ( $path = shift @paths) { # For each version specified
 	push @parsed_versions, $hash{version};
 
 
-
+	#########################################################################
 	# Ok, before doing the REAL work, let's dump file entities. We will create
 	# file $fileentitiespath, and dump entities to it. That file will contain
 	# entities from ALL IC versions.
 	# For non-last version, only one entity will be generated. Example:
-	# FILE: IC4.8/README
-	# ENTITY: &cvsfile4.8-README;
-	# LOCATION: SITE/cgi-bin/cvsweb/interchange/?only_with_tag=STABLE_4_8-root
+	# FILE: IC4.8/README   ---->  ENTITY: &cvsfile4.8-README;
+	# (LOCATION: SITE/cgi-bin/cvsweb/interchange/?only_with_tag=STABLE_4_8-root)
+	#
 	# However, entities for last version will, in addition to above,
-	# get a default entity (like &cvsfile-README;), and it will point to
-	# some particular version or cvs-head.
+	# get a default entity (like &cvsfile-README;) where no version is specified
+	# in the entity, and it will point to some particular file in CVS-HEAD.
 
 	# First derive IC series_ (in format X_Y) and series (in format X.Y), 
-	# and cvs tag for non-cvs-head. (If we're in cvs-head, we don't do this
+	# and cvs tag for non-cvs-head. (If we're in cvs-head, we don't make cvs tag
 	# since cvs-head has no special tag).
 	unless ( $i{ver} eq 'cvs-head' ) {
 		( $i{series_} = $i{ver} ) =~ s/\./_/; $i{series_} =~ s/\..*//;
@@ -212,8 +214,9 @@ while ( $path = shift @paths) { # For each version specified
 		$i{series} = '';
 		$i{cvstag} = '';
 	}
-
-	# Load in list of files. It's prepared for us by bin/stattree.
+	# Now load in list of files for which to generate entities.
+	# The list is already prepared for us by bin/stattree (a MANIFEST file,
+	# basically).
 	open IN, "< tmp/$i{ver}.MANIFEST" or
 		die "Can't rdopen 'tmp/$i{ver}.MANIFEST' ($!).\n" .
 			"Run 'make clean-cache cache'?\n";
@@ -252,13 +255,16 @@ while ( $path = shift @paths) { # For each version specified
 				$MANIFEST[$i] . qq{</ulink>"} . ">\n";
 		}
 	}
+	# File entities dumped....
+	#########################################################################
 
 
 
-	# Ok, real work begins.
+
+	# Ok, now we're done with the by-the-way tasks, and the real work begins.
 
 	# Outer loop: $gkey: symbol types (pragmas, globvars, ...)
-	# Inner loop (~15 lines below): $key: actual symbols 
+	# Inner loop (~25 lines below): $key, actual symbols from symbol groups
 	while ( my ($gkey,$gval) = each %{ $hash{symbols} } ) {
 		# Unfortunately - $specific_only is of limited use. If you use it,
 		# the script won't catch symbol "migrations" - that is, for example,

@@ -34,7 +34,7 @@
 	<sect1 id='daemon-control_introduction'>
 		<title>Introduction</title>
 		<para>
-		HOW-TO version: $Id: daemon-control,v 1.3 2005-06-15 10:30:12 docelic Exp $
+		HOW-TO version: $Id: daemon-control,v 1.4 2005-09-07 16:29:16 docelic Exp $
 		</para>
 		<para>
 		Knowing how to manage the Interchange daemon is one of the very basic
@@ -90,6 +90,21 @@
 		</para>
 
 		<!-- TODO mention kill, pkill, killall, pidfile -->
+		<!-- 
+\NOTE: You can adjust time globally for an Interchange installation by
+setting the $ENV{TZ} variable on many systems. Set TZ in your environment
+and then restart Interchange:
+
+>        ## bash/ksh/sh
+>        TZ=PST7PDT; export TZ
+>        interchange -restart
+>
+>        ## csh/tcsh
+>        setenv TZ PST7PDT
+>        interchange -restart
+
+On most modern UNIX systems, all times will now be in the PST zone.
+-->
 
 	</sect1>
 

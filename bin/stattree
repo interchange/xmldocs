@@ -96,7 +96,7 @@ unless ( GetOptions (
 @ARGV == 1 or die "Usage: $0 path[/] \n";
 
 # $path is the directory to process, $dumppath is relocated name, say
-# sources/cvs-head becomes cvs-head/cache/.cache.bin
+# sources/cvs-head becomes cache/cvs-head/.cache.bin
 my $path = shift;
 ( my $dumppath = $path ) =~ s#.+?/##;
 my $dumpdir = $dumppath; # Directory to dump to, without file name
@@ -370,7 +370,7 @@ sub wanted {
 				next unless $_l =~ /^usertag\s/i;
 				my @lis = split /\s+/, $_l;
 
-				# Remove "Usertag" which is first in the list. (Safety check
+				# Remove "Usertag" which is first word in every line. (Safety check
 				# done just above so we can go ahead unconditionally)
 				shift @lis;
 
@@ -381,12 +381,13 @@ sub wanted {
 				my $tn = shift @lis;
 
 				my $tagopt = lc(shift @lis);
-				# Check if there's a sub defined for this $tagopt.
+				# Check if there's a sub defined for this $tagopt (if it is, it
+				# would be above in %tagCanon hash).
 				$tagCanon{lc $tagopt} and &{ $tagCanon{lc $tagopt} }(\%c);
 				
-				next if $tagopt =~ /^documentation$/; # Docs sections are ignored
-				# in a way that the dony begin with ^UserTag so they're completely
-				# disregarded.
+				next if $tagopt =~ /^documentation$/; # Docs inside this section
+				# are ignored by a "side-effect": namely, all lines not matching
+				# /^UserTag/ are ignored...
 
 
 				#

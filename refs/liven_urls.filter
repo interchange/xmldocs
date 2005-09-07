@@ -10,7 +10,7 @@ __END__
 
 __NAME__ description
 The filter searches the input for all kinds of links, and wraps them
-into the standard &glos-HTML; &lt;a href=&gt;&lt;&gt; package.
+into the standard &glos-HTML; &lt;a href=&gt;&lt;/a&gt; package.
 </para><para>
 The filter can recognize all sorts of URLs and to a great detail.
 __END__
@@ -26,7 +26,7 @@ Abigail's
 <ulink url="http://ucan.foad.org/~abigail/Perl/url2.html">Regex for URLs</ulink>.
 </para><para>
 To save on processing time, only the most common protocols 
-(http, ftp and mailto) are actually enabled in the filter.
+(http/https, ftp and mailto) are actually enabled in the filter.
 For the rest of the protocols, you need to uncomment the appropriate
 lines in the filter source and restart &IC;.
 </para><para>
@@ -64,9 +64,6 @@ cid:foo4*foo1@bar.net<br/>
 mid:960830.1639@XIson.com/partA.960830.1639@XIson.com<br/>
 [/filter]
 ]]></programlisting>
-
-If some of the links are not clickable, then the appropriate regular 
-expressions have been deactivated in the filter source.
 __END__
 
 
