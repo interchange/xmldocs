@@ -196,6 +196,9 @@ for security reasons.
 Using the <literal>set=</literal> attribute, you can also set values.
 __END__
 
+__NAME__ see also
+default
+__END__
 
 __NAME__ example: displaying user's first name
 <programlisting>

@@ -1,6 +1,27 @@
+__NAME__ purpose
+dump named user session in whole or partially
+__END__
+
+
 __NAME__ synopsis 
 <row>
+	<entry>
+	name
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	User &glos-session; ID.
+	</entry>
 
+</row> 
+<row>
 	<entry>
 	joiner
 	</entry>
@@ -11,10 +32,9 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	A space
 	</entry>
 	<entry>
-	<!-- DSC -->
 	</entry>
 
 </row> 
@@ -52,10 +72,39 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Hash key to use as top-level value in session dump,
+	instead of the complete session.
 	</entry>
 
 </row> 
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
 __END__
+
+
+__NAME__ description
+The tag dumps content of a named &glos-session;.
+</para><para>
+If the <literal>key=</literal> argument is specified, 
+that will become the top-level element for display.
+__END__
+
+
+__NAME__ see also
+dump
+__END__
+
+__NAME__ example: Displaying current user's session dump
+<programlisting><![CDATA[
+<pre> [dump-session name="[data session id]"] </pre>
+]]></programlisting>
+__END__
+
+__NAME__ example: Displaying a specific part of current user's session
+<programlisting><![CDATA[
+<pre> [dump-session name="[data session id]" key=browser] </pre>
+]]></programlisting>
+__END__
+
+
+TODO: clarify find=1, joiner=, and add appropriate examples

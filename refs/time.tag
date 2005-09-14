@@ -139,7 +139,7 @@ __NAME__ synopsis
 
 	<entry>
 	<group choice='opt'>
-	<arg>format</arg><arg>fmt</arg>
+	<arg choice='plain'>format</arg><arg choice='plain'>fmt</arg>
 	</group>
 	</entry>
 	<entry>
@@ -152,27 +152,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	POSIX strftime format specifier. See <command>man strftime</command>
-	for details.
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	fmt
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
+	POSIX strftime format specifier.
 	</entry>
 
 </row> 

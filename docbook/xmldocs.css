@@ -253,7 +253,7 @@ a:hover { text-decoration: underline; }
 .screen {
 	margin-top: 0;
 	padding: 4px 4px 4px 4px;
-	border-left: dashed 1px #ffd1d1;
+	border-left: dashed 1px #ff8300; /*#ffd1d1;*/
 	padding-left: 8px;
 }
 

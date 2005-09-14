@@ -1,4 +1,27 @@
+__NAME__ purpose
+print all sorts of Interchange-related system information
+__END__
+
 __NAME__ synopsis 
+<row>
+
+	<entry>
+	extended
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	0
+	</entry>
+	<entry>
+	Print extended version report?
+	</entry>
+
+</row> 
 <row>
 
 	<entry>
@@ -11,10 +34,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>&lt;br&gt;</literal>
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Record/line separator.
 	</entry>
 
 </row> 
@@ -30,10 +53,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Print location of the global (Interchange) error file?
 	</entry>
 
 </row> 
@@ -49,10 +72,11 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Print location of the local (catalog) error file? (The filename is
+	provided as a hyperlink).
 	</entry>
 
 </row> 
@@ -68,10 +92,11 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Print &glos-environment; variable names? (the environment variables specified
+	in &conf-Environment;).
 	</entry>
 
 </row> 
@@ -87,10 +112,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Print &conf-SafeUntrap; value?
 	</entry>
 
 </row> 
@@ -106,10 +131,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Print child process PID?
 	</entry>
 
 </row> 
@@ -128,7 +153,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Test for availability of the specified &glos-PERL; module.
 	</entry>
 
 </row> 
@@ -144,10 +169,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Print parent PID?
 	</entry>
 
 </row> 
@@ -163,10 +188,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Print Interchange &glos-ic-run-mode;?
 	</entry>
 
 </row> 
@@ -182,10 +207,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Print &IC; process username and numerical ID?
 	</entry>
 
 </row> 
@@ -201,10 +226,11 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Print &glos-locale; information? (Available locale codes
+	and language names)
 	</entry>
 
 </row> 
@@ -220,10 +246,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Print &PERL; information? (Perl version and the location of the Perl binary)
 	</entry>
 
 </row> 
@@ -239,10 +265,11 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Print &PERL; config information? (output of the 
+	<function>Config::myconfig()</function> function)
 	</entry>
 
 </row> 
@@ -258,29 +285,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	db
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
+	Print hostname?
 	</entry>
 
 </row> 
@@ -296,13 +304,64 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Print modules information? (List of &IC;-related modules found and
+	their installed versions. For optional modules, print why one would
+	want to have them).
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	db
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	1, if none of the above options were set
+	</entry>
+	<entry>
+	Print database information?
 	</entry>
 
 </row> 
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
 __END__
+
+__NAME__ description
+The tag produces all sorts of system information that is in some relation
+to &IC;.
+__END__
+
+__NAME__ example: Invoking the tag with the full set of options
+<programlisting>
+[version
+  extended=1
+  global_error=1
+  local_error=1
+  env=1
+  safe=1
+  pid=1
+  child_pid=1
+  mode=1
+  uid=1
+  global_locale_options=1
+  perl=1
+  perl_config=1
+  hostname=1
+  db=1
+  modules=1
+  modtest=DBI
+]
+</programlisting>
+__END__
+
+
