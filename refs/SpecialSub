@@ -1,0 +1,29 @@
+__NAME__ purpose
+specify directory containing special catalog pages
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>directory</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Specify the directory containing &glos-special; catalog pages.
+</para><para>
+This directive can be set in &glos-locale; settings to allow different page
+sets for different locales.
+__END__
+
+__NAME__ notes
+The specified location is always treated relative to &glos-CATROOT;.
+__END__
+
+__NAME__ example: Setting SpecialPageDir
+<programlisting>
+SpecialPageDir /special_html
+</programlisting>
+__END__
+
