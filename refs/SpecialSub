@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify directory containing special catalog pages
+set subroutines that process certain events/conditions
 __END__
 
 
@@ -11,10 +11,92 @@ __END__
 
 
 __NAME__ description
-Specify the directory containing &glos-special; catalog pages.
-</para><para>
-This directive can be set in &glos-locale; settings to allow different page
-sets for different locales.
+
+Sets the routine which is run when a page is not found. Passed the name of
+the page, returns two parameters.
+
+
+</para>
+
+<para>
+<screen>
+    ($handled, $newpage) = $sub-&gt;($name)
+</screen>
+
+
+</para>
+
+<para>
+If <literal>$handled</literal> is true, Interchange does not follow its normal missing page procedure of
+displaying the special page <literal>missing</literal>. It will display the page <literal>$newpage</literal> if present,
+otherwise will simply return without sending any response -- it assumes
+your routine handled any response phase.
+
+
+</para>
+
+</listitem></varlistentry>
+<varlistentry><term><emphasis>guess_cc_type
+
+</emphasis></term>
+<listitem><para></para>
+
+<para>
+The name of a subroutine which will provide a credit card type given the
+number. Interchange normally recognizes some major ones like Visa,
+Mastercard, etc., but if you are in a country with local credit cards you
+may need more.
+
+
+</para>
+
+<para>
+Here is an example as placed in catalog.cfg:
+
+
+</para>
+
+<para>
+<screen>
+        ## Map a subroutine to guess custom credit card types
+        SpecialSub  guess_cc_type  special_cc
+</screen>
+
+
+</para>
+
+<para>
+<screen>
+        Sub special_cc &lt;&lt;EOS
+        sub {
+                my $num = shift;
+                return 'foobar' if $num =~ /^41/;
+                return undef;
+        }
+        EOS
+</screen>
+
+
+</para>
+
+<para>
+The call in Vend::Order is:
+
+
+</para>
+
+<para>
+<screen>
+        $guess = $sub-&gt;($ccnum)
+</screen>
+
+
+</para>
+
+<para>
+If your routine returns a non-false value, that is returned as the credit
+card type. If your routine returns false, it allows Interchange to guess.
+
 __END__
 
 __NAME__ notes
