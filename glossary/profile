@@ -133,6 +133,10 @@ Check types, however, can take on one of the following values:
 		(case-<emphasis>insensitive</emphasis>)
 	</para></listitem>
 	<listitem><para>
+		<literal>always_pass</literal> - always passess, used to generate
+		update of field value no matter what it is.
+	</para></listitem>
+	<listitem><para>
 		<literal>email</literal> - form field content must pass rudimentary
 		e-mail address check; it must contain "AT" 
 		(<literal>@</literal>), a name, and a minimal domain 
