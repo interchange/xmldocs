@@ -133,8 +133,8 @@ Check types, however, can take on one of the following values:
 		(case-<emphasis>insensitive</emphasis>)
 	</para></listitem>
 	<listitem><para>
-		<literal>always_pass</literal> - always passess, used to generate
-		update of field value no matter what it is.
+		<literal>always_pass</literal> - form field always passes.
+		This can be used to update the field regardless of the value
 	</para></listitem>
 	<listitem><para>
 		<literal>email</literal> - form field content must pass rudimentary
@@ -155,7 +155,7 @@ Check types, however, can take on one of the following values:
 	</para></listitem>
 	<listitem><para>
 		<literal>unique <replaceable>DATABASE</replaceable></literal>
-		- form field content must not exist in a given DATABASE.
+		- form field content must not exist in a given DATABASE
 	</para></listitem>
 	<listitem><para>
 		<literal>filter <replaceable>FILTER</replaceable></literal>
