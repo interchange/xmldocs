@@ -1,50 +1,7 @@
+Obtain and Run Interchange
+</para></question>
 
-<chapter id="obtain">
-
-	<chapterinfo>
-		<title>Obtain and Run &IC;</title>
-
-		<keywordset>
-			<keyword>interchange</keyword>
-			<keyword>obtain</keyword>
-			<keyword>get</keyword>
-			<keyword>download</keyword>
-			<keyword>find</keyword>
-			<keyword>minivend</keyword>
-			<keyword>tallyman</keyword>
-			<keyword>vend</keyword>
-			<keyword>install</keyword>
-			<keyword>run</keyword>
-			<keyword>configure</keyword>
-			<keyword>reconfig</keyword>
-		</keywordset>
-
-		<authorgroup>
-			<author>
-				<firstname>Mike</firstname>
-				<surname>Heins</surname>
-				<affiliation>
-					<email>mheins@icdevgroup.org</email>
-				</affiliation>
-			</author>
-		</authorgroup>
-
-	</chapterinfo>
-
-	<sect1 id='obtain_introduction'>
-		<title>Introduction</title>
-		<para>
-		HOW-TO version: $Id: obtain-and-run-interchange,v 1.3 2005-08-27 03:25:42 jon Exp $
-		</para>
-		<para>
-		How to obtain and run &IC;.
-		</para>
-	</sect1>
-
-	<sect1 id='obtain_solution'>
-		<title>Solution</title>
-
-<para>
+<answer><para>
 &IC; is free of charge, and is distributed under the GNU
 General Public License.  This means that individuals and organizations,
 both commercial and non-commercial, may use &IC; without charge. If
@@ -57,8 +14,7 @@ full source code available. If it breaks you get to keep both pieces.
 However, in practice &IC; is supported by a developer group and
 user community at its mail lists,
 <ulink url="http://new.icdevgroup.org/i/new/community.html">http://new.icdevgroup.org/i/new/community.html</ulink>.
-. There
-are dozens of consultants who make &IC;-based systems their full-time 
+There are dozens of consultants who make &IC;-based systems their full-time 
 work, and there are many more who develop &IC; catalogs and sites.
 </para><para>
 &IC; is officially available from 
@@ -69,8 +25,6 @@ systems. The rest of the notes apply to the manual, tarball installation
 process.
 </para>
 
-<sect2>
-<title>Pre-requirements</title>
 <para>
 You will need &PERL; version 5.6.1 or higher to run &IC;, and
 Perl 5.8.3 or higher is recommended. &IC; requires the modules
@@ -92,10 +46,7 @@ and provide the link between &IC; and the web server.
 (Since Apache web servers are the most popular, in the rest of the HOW-TO
 we will talk in the terms they use.)
 </para>
-</sect2>
 
-<sect2>
-<title>Web Server Setup</title>
 <para>
 You need to have a ScriptAlias or other CGI execution capability on your
 web server to use the &glos-link-program;. (The default ScriptAlias for many web
@@ -103,10 +54,7 @@ servers is <literal>/cgi-bin</literal>.) If you have ExecCGI set for all of your
 directories, then any program ending in a particular file suffix (usually
 .cgi) will be seen as a CGI program.
 </para>
-</sect2>
 
-<sect2>
-<title>UNIX Domain Sockets</title>
 <para>
 Unix domain sockets are not reachable from the Internet directly,
 but only locally from a request on your own server. The link program
@@ -133,69 +81,16 @@ gets a bit tricky. &IC; comes with a program, <command>makecat</command>, which
 configures catalogs for a multiple catalog system. It should properly set
 up ownership and permissions for multiple users if run as the superuser.
 </para>
-</sect2>
 
-<sect2>
-<title>INET Domain Sockets</title>
 <para>
-These are sockets which are reachable from the Internet directly.
+INET domain sockets are sockets which are reachable from the Internet directly.
 The link program tlink is the provided facility for such communication with
 &IC;; you may also use your browser to talk to the socket directly
-if you have it mapped to a catalog with the global TcpMap directive.
+if you have it mapped to a catalog with the global &conf-TcpMap; directive.
 
 To improve security, &IC; usually checks that the request comes
-from one of a limited number of systems, defined in the global TcpHost
-directive.
-</para>
-</sect2>
-
-<sect2>
-<title>Quick Start</title>
-<para>
-
-Obtain, decompress and untar the distribution:
-
-<programlisting>
-gzip -dc interchange-5.x.tar.gz | tar xvf -
-</programlisting>
-
-Change to the created directory, something like:
- 
-<programlisting> 
-cd interchange-5.4.0
-</programlisting>
-
-Run the configure script with:
-
-<programlisting>
-./configure
-</programlisting>
-
-If you have trouble with <command>./configure</command>, try this:
-
-<programlisting>
-perl Makefile.PL
-make
-make test
-make install
-</programlisting>
-
-Replace the perl with the proper path to your Perl binary.
+from one of a limited number of systems, defined in the global
+&conf-TcpHost; directive.
 </para><para>
-You will be asked for the directory where you want to install &IC; &mdash;
-any directory will do. You must of course have write permission there;
-and you will eventually need to have write permission on your CGI-BIN
-and HTML directories. This directory is referred to later in the
-documentation as VendRoot or the &glos-ICROOT; directory.
-</para><para>
-The process should be self-explanatory. If you have trouble answering
-the questions asked, look closely at the examples provided. If you
-still have trouble, you will need to find a tutorial about the World
-Wide Web &mdash; the WWW FAQ at http://www.boutell.com/newfaq/ would be a
-good place to look.
-		</para>
-	</sect2>
-</sect1>
 
-</chapter>
-
+See &cvsfile-README; for further information.

@@ -1,41 +1,19 @@
-<chapter id="DefineCustomSendmailRoutine">
+Define Custom Sendmail Routine
+</para></question>
 
-	<chapterinfo>
-		<title>Define Custom Sendmail Routine</title>
+<answer><para>
+Someone <ulink url="http://www.icdevgroup.org/pipermail/interchange-users/2004-July/039811.html">
+was wondering</ulink> how to optimize the order processing on a busy site.
+It was observed that about once in every ten times, the
+<filename>etc/mail_receipt</filename> takes a few <emphasis>extra</emphasis>
+seconds before it's mailed out.
+</para><para>
+The delay occured because in the code used, the &conf-SendMailProgram; ran in
+foreground so the ordering process "stalled" for a few seconds (or at least
+that's how the average customer saw it). The critical section was reduced to:
+</para>
 
-		<keywordset>
-			<keyword>custom</keyword>
-			<keyword>send</keyword>
-			<keyword>mail</keyword>
-			<keyword>routine</keyword>
-			<keyword>delay</keyword>
-		</keywordset>
-
-		<authorgroup>
-			<author>
-				<firstname>Mike</firstname>
-				<surname>Heins</surname>
-				<affiliation>
-					<email>mheins@perusion.net</email>
-				</affiliation>
-			</author>
-		</authorgroup>
-
-	</chapterinfo>
-
-	<sect1 id='customsendmail_introduction'>
-		<title>Introduction</title>
-		<para>
-		HOW-TO version: $Id: custom-sendmail-routine,v 1.5 2005-06-15 10:30:12 docelic Exp $
-		</para>
-		<para>
-		Someone <ulink url="http://www.icdevgroup.org/pipermail/interchange-users/2004-July/039811.html">was wondering</ulink> how to optimize the order processing on a busy site. It was observed that about once in every ten times, the <filename>etc/mail_receipt</filename> takes a few <emphasis>extra</emphasis> seconds before it's mailed out.
-		</para>
-		<para>
-		The delay occured because in the code used, the <option>SendMailProgram</option> ran in foreground so the ordering process "stalled" for a few seconds (or at least that's how the average customer saw it). The critical section was reduced to:
-		</para>
-
-		<screen>
+<screen>
 <![CDATA[
 [email to="[scratch to_email], __MAIL_RECEIPT_CC__"
        subject="__COMPANY__ Order #[value mv_order_number]: [scratch subject_end]"
@@ -45,19 +23,18 @@
 
 [/email]
 ]]>
-		</screen>
-	</sect1>
 
-	<sect1 id='customsendmail_solution'>
-		<title>Solution</title>
-		<para>
-		To eliminate this "delay", you could use a custom script that accepts the message on standard input (STDIN), and then calls <application>Sendmail</application> in the background.
-		</para> <para>
-		Save the script with the following contents to <filename>/usr/local/bin/sendmail-bg</filename>:
-		</para>
+</screen>
+<para>
+To eliminate this "delay", you could use a custom script that accepts the
+message on standard input (STDIN), and then calls
+<application>Sendmail</application> in the background.
+</para> <para>
+Save the script with the following contents to
+<filename>/usr/local/bin/sendmail-bg</filename>:
+</para>
 
-		<programlisting>
-<![CDATA[
+<programlisting><![CDATA[
 #!/usr/bin/perl
 
 #use strict;
@@ -81,18 +58,15 @@ system($cmdline);
 
 if($?) { die "Failed to fork sendmail: $!\n" }
 
-]]>
-		</programlisting>
+]]></programlisting>
 
-	<para>
-	And of course, don't forget to add/modify the <option>SendMailProgram</option> directive:
-	</para>
+<para>
+And of course, don't forget to add/modify the &conf-SendMailProgram; directive
+in &ccf;:
+</para>
 
-	<programlisting>
+<programlisting>
 SendMailProgram /usr/local/bin/sendmail-bg
-	</programlisting>
+</programlisting>
 
-	</sect1>
-
-</chapter>
-
+<para>

@@ -1,63 +1,26 @@
-<chapter id="log-files">
+Setup and monitor log files
+</para></question>
 
-	<chapterinfo>
-		<title>Setup and Monitor Log Files</title>
-
-		<keywordset>
-			<keyword>log</keyword>
-			<keyword>file</keyword>
-			<keyword>ssl</keyword>
-			<keyword>apache</keyword>
-			<keyword>error.log</keyword>
-			<keyword>error</keyword>
-			<keyword>global</keyword>
-			<keyword>catalog</keyword>
-		</keywordset>
-
-		<authorgroup>
-			<author>
-				<firstname>Davor</firstname>
-				<surname>Ocelic</surname>
-				<affiliation>
-					<email>docelic@icdevgroup.org</email>
-				</affiliation>
-			</author>
-		</authorgroup>
+<answer><para>
+	To monitor all relevant log files at once, first adjust the
+	neccessary config files, restart the daemons, and issue<sbr/>
+	<userinput>tail -f /var/log/{apache,interchange}/*log</userinput>.
+</para><para>
+	Best results are achieved with vertically maximized 80-column terminal.
+	If you want selective results, colorized output, or output to a 
+	root window in your X session, see 
+	<command>grep</command>,
+	<command>glark</command>,
+	<command>ccze</command>,
+	<command>colorize</command> or
+	<command>root-tail</command>.
+</para>
 
 
-	</chapterinfo>
-
-	<sect1 id='setupandmonitorlog_introduction'>
-		<title>Introduction</title>
-		<para>
-		HOW-TO version: $Id: log-files,v 1.2 2005-06-15 10:30:12 docelic Exp $
-		</para>
-		<para>
-		To monitor all relevant log files at once, first adjust the
-		neccessary config files, restart the daemons, and issue<sbr/>
-		<userinput>tail -f /var/log/{apache,interchange}/*log</userinput>.
-		</para>
-		<para>
-		Best results are achieved with vertically maximized 80-column terminal.
-		If you want selective results, colorized output, or output to a 
-		root window in your X session, see 
-		<application>grep</application>,
-		<application>glark</application>,
-		<application>ccze</application>,
-		<application>colorize</application> and
-		<application>root-tail</application>.
-		</para>
-	</sect1>
-
-	<sect1 id='setupandmonitorlog_solution'>
-		<title>Solution</title>
-
-		<sect2>
-			<title>Apache Log Files</title>
-			<para>
-			Add the following to your &APACHE; configuration:
-			</para>
-			<programlisting>
+<para>
+	Add the following to your &APACHE; configuration:
+</para>
+<programlisting>
 ErrorLog /var/log/apache/&def-hostname;.error.log
 CustomLog /var/log/apache/&def-hostname;.log \
   "%h %l %u %t \"%r\" %&lt;s %b \"%{Referer}i\" \"%{User-Agent}i\""
@@ -65,35 +28,32 @@ CustomLog /var/log/apache/&def-hostname;.log \
 CustomLog /var/log/apache/&def-hostname;.ssl.log \
   "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
 &lt;/IfModule&gt;
-			</programlisting>
-		</sect2>
+</programlisting>
 
-		<sect2>
-			<title>Interchange Log Files</title>
-			<para>
-			Add the following to your global &IC; configuration:
-			</para>
-			<programlisting>
+
+<para>
+	Add the following to your global &IC; configuration:
+</para>
+<programlisting>
 Variable DEBUG 1
 DebugFile /var/log/interchange/debug.log
 ErrorFile /var/log/interchange/error.log
-			</programlisting>
-			<para>
-			Add the following to your &IC; catalog configuration:
-			</para>
-			<programlisting>
+</programlisting>
+
+<para>
+	Add the following to your &IC; catalog configuration:
+</para>
+
+<programlisting>
 ErrorFile /var/log/interchange/tutorial.error.log
 TrackFile /var/log/interchange/tutorial.track.log
-			</programlisting>
+</programlisting>
 
-			<note><para>
-			If you reached this HOW-TO by reading 
-			<olink targetdoc='iccattut' targetptr='iccattut'/>, then you
-			didn't arrive to the catalog configuration step yet, so you can
-			safely ignore this section.
-			</para></note>
-		</sect2>
-	</sect1>
+<note><para>
+	If you reached this HOW-TO by reading 
+	<olink targetdoc='iccattut' targetptr='iccattut'/>, then you
+	didn't arrive to the catalog configuration step yet, so you can
+	safely ignore the above catalog configuration step.
+</para></note>
 
-</chapter>
-
+<para>

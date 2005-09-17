@@ -1,133 +1,81 @@
-<chapter id="Provide Item Quantity Fields in the Basket Page">
+Provide Item Quantity Fields in the Basket Page
+</para></question>
 
-	<chapterinfo>
-		<title>Provide Item Quantity Fields in the Basket Page</title>
-
-		<keywordset>
-			<keyword>quantity</keyword>
-			<keyword>checkout</keyword>
-			<keyword>basket</keyword>
-			<keyword>item</keyword>
-			<keyword>recalculate</keyword>
-			<keyword>add</keyword>
-			<keyword>remove</keyword>
-			<keyword>total</keyword>
-			<keyword>number</keyword>
-			<keyword>client</keyword>
-			<keyword>form</keyword>
-			<keyword>data</keyword>
-			<keyword>return</keyword>
-			<keyword>todo</keyword>
-			<keyword>action</keyword>
-			<keyword>post</keyword>
-		</keywordset>
-
-		<authorgroup>
-			<author>
-				<firstname>Davor</firstname>
-				<surname>Ocelic</surname>
-				<affiliation>
-					<email>docelic@icdevgroup.org</email>
-				</affiliation>
-			</author>
-		</authorgroup>
-
-
-	</chapterinfo>
-
-	<sect1 id='quantityfields_introduction'>
-		<title>Introduction</title>
-		<para>
-		HOW-TO version: $Id: quantity-in-basket,v 1.5 2005-06-15 10:30:12 docelic Exp $
-		</para>
-		<para>
-		On your Interchange pages, you must provide some kind of an HTML form
-		if you want to receive any data from the client. We will use the 
-		<filename>pages/ord/basket.html</filename> page from the
-		<!-- XXX LINK IT -->
-		tutorial catalog to demonstrate this.
-		</para>
-		<para>
-		This particular HOWTO deals with the <emphasis>Item Quantity</emphasis>
-		field, but you can take it as a general Interchange HTML form submission
-		example. I hope you would recognize the enormous power of the
-		Interchange server running behind the scene.
-		</para>
-		<para>
-		The page we're starting with only displays a table of the products found
-		in your shopping cart.
-		The <database class='field'>Quantity</database> field is provided but
-		the only way to increase the number is to click the appropriate 
-		<guibutton>Order Now</guibutton> button multiple times. Reducing the
-		quantity
-		is not supported. Just to remind ourselves, here's how this initial
-		page looks like:
-		</para>
-		<screen>
+<answer>
+	<para>
+	On your &IC; pages, you should provide some kind of an &glos-HTML; form
+	if you want to receive any data from the client. We will use the 
+	<filename>pages/ord/basket.html</filename> page from the
+	<olink targetdoc='iccattut'/> to demonstrate this.
+</para><para>
+	This particular HOWTO deals with the <emphasis>Item Quantity</emphasis>
+	field, but you can take it as a general Interchange &glos-HTML; form
+	submission example. I hope you would recognize the enormous power of the
+	Interchange server running behind the scene.
+</para><para>
+	The page we're starting with only displays a table of the products found
+	in your shopping cart.
+	The <database class='field'>Quantity</database> field is provided but
+	the only way to increase the number is to click the appropriate 
+	<guibutton>Order Now</guibutton> button multiple times. Reducing the
+	quantity
+	is not supported. Just to remind ourselves, let's see our initial page.
+	(This is the one used in the <olink targetdoc='iccattut'/>).
+</para>
+<screen>
 <xi:include parse='text' href='../files/tutorial-phase5/pages/ord/basket.html'/>
-		</screen>
-	</sect1>
+</screen>
 
-	<sect1 id='quantityfields_solution'>
-		<title>Solution</title>
-		<para>
-		What we need to do is:
-		<itemizedlist>
-			<listitem><para>
-			Create an HTML form which is neccesary to submit any client information
-			back to Interchange:<sbr/>
-			<code><![CDATA[<form method='post' action='[process]'>]]></code>
-			</para></listitem>
-			<listitem><para>
-			Replace the <database class='field'>Quantity</database> label 
-			(<code>[item-quantity]</code>) with
-			an HTML text field where quantity can be edited:<sbr/>
-			<code><![CDATA[<input type='text' size='2' name='[quantity-name]' value='[item-quantity]'/>]]></code>
-			</para>
-			<para>
-			What we have introduced here is the <tag>quantity-name</tag> tag.
-			Interchange
-			will expand it to the appropriate field name for each item in the
-			cart (<literal>quantity0</literal>, <literal>quantity1</literal>,
-			<literal>quantity2</literal>, ...). This all happens automatically and
-			you have nothing to worry about.
-			</para></listitem>
-			<listitem><para>
-			Provide the submit button that triggers an action and sends information
-			back to Interchange:<sbr/>
-			<screen><![CDATA[
+<para>
+	What we need to do is:
+	<itemizedlist>
+	<listitem><para>
+		Create an HTML form which is neccesary to submit any client information
+		back to Interchange:<sbr/>
+		<code><![CDATA[<form method='post' action='[process]'>]]></code>
+	</para></listitem>
+	<listitem><para>
+		Replace the <database class='field'>Quantity</database> label 
+		(<code>[item-quantity]</code>) with
+		an HTML text field where quantity can be edited:<sbr/>
+		<code><![CDATA[<input type='text' size='2' name='[quantity-name]' value='[item-quantity]'/>]]></code>
+		</para><para>
+		What we have introduced here is the <tag>quantity-name</tag> tag.
+		Interchange
+		will expand it to the appropriate field name for each item in the
+		cart (<literal>quantity0</literal>, <literal>quantity1</literal>,
+		<literal>quantity2</literal>, ...). This all happens automatically and
+		you have nothing to worry about.
+	</para></listitem>
+	<listitem><para>
+		Provide the submit button that triggers an action and sends information
+		back to Interchange:<sbr/>
+<screen><![CDATA[
 [button text='Recalculate']
-  mv_todo=refresh
+mv_todo=refresh
 [/button]
-			]]>
-			</screen>
-			</para></listitem>
-			<listitem><para>
-			Close the HTML form with <code><![CDATA[</form>]]></code>.
-			</para></listitem>
-		</itemizedlist>
-		</para>
+]]>
+</screen>
+	</para></listitem>
+	<listitem><para>
+		Close the HTML form with <code><![CDATA[</form>]]></code>.
+	</para></listitem>
+	</itemizedlist>
+</para>
 
-		<para>
-		Here's a copy of the finished <filename>pages/ord/basket.html</filename>.
-		</para>
+<para>
+Here's a copy of the finished <filename>pages/ord/basket.html</filename>.
+</para>
 
-		<screen>
+<screen>
 <xi:include parse='text' href='../files/various/tut-phase5-basket+quantity.html'/>
-		</screen>
+</screen>
 
-		<para>
-		Test the <filename>ord/basket</filename> page in your browser. Try
-		adjusting the quantity and pressing <guibutton>Recalculate</guibutton>.
-		Note that setting <database class='field'>Quantity</database> to 
-		<literal>0</literal> effectively removes the item from your shopping
-		cart.
-		</para>
-
-		<para>
-		Have a great time and enjoy hacking Interchange :-)
-		</para>
-	</sect1>
-
-</chapter>
-
+<para>
+	Test the <filename>ord/basket</filename> page in your browser. Try
+	adjusting the quantity and pressing <guibutton>Recalculate</guibutton>.
+	Note that setting <database class='field'>Quantity</database> to 
+	<literal>0</literal> effectively removes the item from your shopping
+	cart.
+</para><para>
+	Have a great time and enjoy hacking Interchange :-)
