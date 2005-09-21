@@ -43,6 +43,8 @@ my $specific_only; # Build only one specific .xml ?
 my $output_spec; # 'list' produces tag list, 'xml' produces real xml source
 my $output_both; # Unconditionally override $output_spec
 my $no_autorefs; # Generate autorefs.ent collection of entities by default
+my $validate = 0; # Whether to validate XML chunks
+my $skip_invalid = 0; # Whether to skip invalid XML chunks
 my $autopath = "docbook/autorefs.ent";
 my %dups; # List of symbols names that are not unique
 my $last_path; # Last version we want docs generated for (say, 5.2.0).
@@ -60,6 +62,8 @@ unless ( GetOptions (
 	"both|b!"    => \$output_both,
 	"noentities|noents!" => \$no_autorefs,
 	"last-path|last|lp=s" => \$last_path,
+	"validate|c!" => \$validate,
+	"skip-invalid|s" => \$skip_invalid,
 )) { die "Error parsing options\n" }
 
 # Determine which stuff to output
@@ -68,6 +72,10 @@ if (!$output_both and $output_spec) {
 	$output_spec =~ /\.?list$/ and ($output_list,$output_xml) = (1,0) or
 	$output_spec =~ /\.?xml$/  and ($output_list,$output_xml) = (0,1) or
 	die "Unknown output combination '$output_spec'\n";
+}
+
+if ($validate) {
+	require XML::Twig;
 }
 
 $specific_only and $specific_only =~ s/s$//; # if user entered name in plural
@@ -781,7 +789,25 @@ ENDD
 
 	## Add items
 	for my $key (sort keys %{ $symbols{$group} }) {
-		$refpage .= $symbols{$group}{$key}
+		## Validate item
+		my ($buf, $msg);
+
+		$buf = '<!DOCTYPE reference PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+	"../docbook/docbookxi.dtd">';
+		$buf .= $symbols{$group}{$key};
+
+		if ($validate) {
+			unless (validate_xml($buf, \$msg)) {
+				if ($skip_invalid) {
+					warn "ERR: symbol ${group}::$key: $msg\n";
+					next;
+				} else {
+					die "ERR: symbol ${group}::$key: $msg\n";
+				}
+			}
+		}
+		
+		$refpage .= $symbols{$group}{$key};
 	}
 
 	## Close up
@@ -1182,6 +1208,39 @@ sub compress_availability {
 	} else {
 		return "@orig"
 	}
+}
+
+sub validate_xml {
+	my ($xml, $msgref) = @_;
+	my ($buf);
+
+	my $twig = new XML::Twig;
+
+	if ($twig->safe_parse($xml)) {
+		# sane XML
+		return 1;
+	}
+
+	# try to analyze error message
+	my $error = $@;
+		
+	if ($error =~ /^\s+(.*?) at line (\d+), column (\d+), byte (\d+)/s) { # at(.*?)line (\d+)$/) {
+		my ($cause, $line, $col, $byte) = ($1, $2, $3, $4);
+		
+		$cause = $1;
+		if ($cause eq 'undefined entity') {
+			$buf = substr($xml, $4);
+			if ($buf =~ /^&([\w_-]+);/) {
+				$$msgref = "undefined entity $1";
+				return;
+			}
+		}
+
+		$$msgref = "$cause " . substr($xml, $4, 60);
+	} else {
+		$$msgref = $error;
+	}
+	return;
 }
 
 sub O { print "@_\n"; print STDOUT "@_\n" if $verbose }

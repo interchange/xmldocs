@@ -28,6 +28,10 @@ DC          = "/etc/xml/catalog"
 PSR         = xsltproc
 PSR_FLAGS   = --xinclude
 
+# Scripts and options
+REFS_AUTOGEN = bin/refs-autogen
+REFS_AUTOGEN_FLAGS ?=
+
 VPATH       = guides refs howtos glossary
 .SILENT:
 .PHONY: all complete
@@ -239,7 +243,7 @@ cache/%/.cache.bin: sources/%
 # Silly, rewrite this, I forgot about $*. Or $* wouldn't help? I'm not 
 # willing to think about it right now.
 refxmls: BOTH = --both
-refxmls: bin/refs-autogen $(foreach stype,$(SYMBOL_TYPES),refs/$(stype).xml) howtos/howtos.xml glossary/glossary.xml
+refxmls: $(REFS_AUTOGEN) $(foreach stype,$(SYMBOL_TYPES),refs/$(stype).xml) howtos/howtos.xml glossary/glossary.xml
 	:
 $T/%.list: BNAME = $(subst $T/,,$@)
 refs/%.xml: BNAME = $(subst refs/,,$@)
@@ -247,10 +251,10 @@ $T/%.list: FNAME = $(subst .list,,$(BNAME))
 refs/%.xml: FNAME = $(subst .xml,,$(BNAME))
 # A little 'overwork' here: we regenerate all .xml files even if just
 # one file changes.
-$T/%.list refs/%.xml: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) $(shell find refs/ -regex '.+[^(\.xml)]$$') bin/refs-autogen
+$T/%.list refs/%.xml: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) $(shell find refs/ -regex '.+[^(\.xml)]$$') $(REFS_AUTOGEN)
 	# PEH, -g is useless since tags migrate between tag groups
-	#bin/refs-autogen -g $(FNAME) -o $@ $(BOTH) $(IC_VERSIONS)
-	bin/refs-autogen -o $@ $(BOTH) $(TARGET_RELEASE) $(IC_VERSIONS)
+	#$(REFS_AUTOGEN) $(REFS_AUTOGEN_FLAGS) -g $(FNAME) -o $@ $(BOTH) $(IC_VERSIONS)
+	$(REFS_AUTOGEN) $(REFS_AUTOGEN_FLAGS) -o $@ $(BOTH) $(TARGET_RELEASE) $(IC_VERSIONS)
 
 
 #############################################################
