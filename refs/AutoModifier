@@ -19,19 +19,19 @@ __END__
 
 
 __NAME__ description
-The directive specifies names of the &glos-attribute;s attached to
-your products, for which the value is provided in the equally-named 
-<database>products</database> database column.
+The directive specifies names of the product &glos-attribute;s 
+which should be automatically loaded from a database column.
 </para><para>
 In other words, 
 when an item is added to the shopping cart using &IC;'s routines, the
 attributes declared in &conf-AutoModifier; will be set to the values of the
-equally-named fields in the <database>products database</database>.
+fields in the <database>products database</database>.
 </para><para>
-As you see, this is mostly useful for internal use and giving your
-code specific hints about the items ordered.
+This facility will often be used in determining pricing, shipping,
+or other custom product attributes. These attributes are usually used
+in custom embedded Perl code which will scan the items in the shopping
+cart and make decisions.
 __END__
-
 
 __NAME__ notes
 This can useful when doing shipping calculations or in embedded
@@ -50,5 +50,37 @@ Also make sure to have the
 <database class='field'>heavy</database> and 
 <database class='field'>downloadable</database> columns defined in your 
 <database>products</database> database.
+</para><para>
+Example: to set the heavy attribute from the 
+<database class='table'>inventory</database> table with the same
+key as the product code, do:
+<programlisting>
+AutoModifier inventory:heavy
+</programlisting>
+</para><para>
+Example: to set the heavy attribute from the <database
+class='field'>heavy</database> field in the <database
+class='table'>inventory</database> table with the same key as the product
+code, do:
+<programlisting>
+AutoModifier inventory:heavy
+</programlisting>
+</para><para>
+Example: to set the "weighty" attribute from the <database
+class='field'>heavy</database> field in the <database
+class='table'>inventory</database> table with the same key as the product
+code, do:
+<programlisting>
+AutoModifier weighty=inventory:heavy
+</programlisting>
+</para><para>
+Example: to set the heavy attribute from the <database
+class='field'>heavy</database> field in the <database
+class='table'>inventory</database> table with the the 
+base SKU for a variant, do:
+<programlisting>
+AutoModifier inventory:heavy:mv_sku
+</programlisting>
+
 __END__
 
