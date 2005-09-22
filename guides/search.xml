@@ -1,0 +1,83 @@
+<?xml version="1.0" standalone="no"?>
+
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+	"../docbook/docbookxi.dtd">
+
+<article id='search'>
+
+<articleinfo>
+	<title>Interchange Guides: Search</title>
+	<titleabbrev>search</titleabbrev>
+
+	<copyright>
+		<year>2005</year>
+		<holder>Interchange Development Group</holder>
+	</copyright>
+
+	<authorgroup>
+		<author>
+			<firstname>Stefan</firstname><surname>Hornburg</surname>
+			<email>racke@linuxia.de</email>
+		</author>
+	</authorgroup>
+
+
+	<legalnotice>
+		<para>
+		This documentation is free; you can redistribute it and/or modify
+		it under the terms of the &GNU; General Public License as published by
+		the Free Software Foundation; either version 2 of the License, or
+		(at your option) any later version.
+		</para>
+		<para>
+		It is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+		</para>
+	</legalnotice>
+
+	<abstract>
+		<para>
+		</para>
+	</abstract>
+
+</articleinfo>
+
+
+<sect1>
+	<title>Search</title>
+
+	<sect2>
+		<title>Swish</title>
+<para>
+
+To use, you must add to interchange.cfg:
+<screen>
+	Require module Vend::Swish
+	AddDirective Swish hash
+	Variable swish Vend::Swish
+</screen>
+  The search is called with st=swish (or mv_searchtype=swish).
+
+</para>
+<para>
+ The fields to return are configurable, and default to;
+<screen>
+	rf=code score title url mod_date filesize
+	fn=code score title url mod_date filesize
+</screen>
+  These correspond to:
+<screen>
+			code		swishreccount
+			score		swishrank
+			url			swishdocpath
+			title		swishtitle
+			filesize	swishdocsize
+			mod_date	swishlastmodified
+</screen>
+</para>
+	</sect2>
+</sect1>
+
+</article>
