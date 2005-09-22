@@ -53,29 +53,29 @@
 <para>
 
 To use, you must add to interchange.cfg:
-<screen>
+<programlisting>
 	&conf-Require; module Vend::Swish
 	&conf-AddDirective; Swish hash
 	&conf-Variable; swish Vend::Swish
-</screen>
+</programlisting>
   The search is called with st=swish (or mv_searchtype=swish).
 
 </para>
 <para>
  The fields to return are configurable, and default to;
-<screen>
+<programlisting>
 	rf=code score title url mod_date filesize
 	fn=code score title url mod_date filesize
-</screen>
+</programlisting>
   These correspond to:
-<screen>
+<programlisting>
 			code		swishreccount
 			score		swishrank
 			url			swishdocpath
 			title		swishtitle
 			filesize	swishdocsize
 			mod_date	swishlastmodified
-</screen>
+</programlisting>
 </para>
 	</sect2>
 </sect1>
