@@ -519,11 +519,15 @@ sub wanted {
 		# ICVERSION must be known here, or someone's playing, or
 		# it's a pre-5.0 version which doesnt have that.
 		unless ( $hash{version} ) {
-			warn "Wasn't able to determine " .
-				'^ICVERSION=([\'"])(\d+\.\d+\.\d+)\1 from the main ' .
-				"./configure script. Will use one from directory name ($i{ver}).\n"
-				unless $i{ver} =~ /^4/; # ignore warning for 4.x versions
-				$hash{version} = $i{ver};
+
+			# In 5.3.1, we removed VERSION = from the ./configure script,
+			# so this will fail in the future.
+			#
+			# So if this is CVS Head that we can't retrieve version for,
+			# read XMLDOCS_CUR_DEVEL (variable exported by Makefile).
+			# Else, take that version == directory name.
+			$hash{version} = ( $i{ver} eq 'cvs-head' ) ? 
+				$ENV{XMLDOCS_CUR_DEVEL} : $i{ver};
 		}
 	}
 
