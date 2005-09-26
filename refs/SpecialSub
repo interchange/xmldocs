@@ -1,111 +1,126 @@
 __NAME__ purpose
-set subroutines that process certain events/conditions
+specify subroutines that handle certain events or conditions
 __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>directory</arg>
-</group>
+	<arg choice='plain'><replaceable>event_name</replaceable></arg>
+	<arg choice='plain'><replaceable>subroutine_name</replaceable></arg>
 __END__
 
 
 __NAME__ description
-
-Sets the routine which is run when a page is not found. Passed the name of
-the page, returns two parameters.
-
-
-</para>
-
-<para>
-<screen>
-    ($handled, $newpage) = $sub-&gt;($name)
-</screen>
-
-
-</para>
-
-<para>
-If <literal>$handled</literal> is true, Interchange does not follow its normal missing page procedure of
-displaying the special page <literal>missing</literal>. It will display the page <literal>$newpage</literal> if present,
-otherwise will simply return without sending any response -- it assumes
-your routine handled any response phase.
-
-
-</para>
-
-</listitem></varlistentry>
-<varlistentry><term><emphasis>guess_cc_type
-
-</emphasis></term>
-<listitem><para></para>
-
-<para>
-The name of a subroutine which will provide a credit card type given the
-number. Interchange normally recognizes some major ones like Visa,
-Mastercard, etc., but if you are in a country with local credit cards you
-may need more.
-
-
-</para>
-
-<para>
-Here is an example as placed in catalog.cfg:
-
-
-</para>
-
-<para>
-<screen>
-        ## Map a subroutine to guess custom credit card types
-        SpecialSub  guess_cc_type  special_cc
-</screen>
-
-
-</para>
-
-<para>
-<screen>
-        Sub special_cc &lt;&lt;EOS
-        sub {
-                my $num = shift;
-                return 'foobar' if $num =~ /^41/;
-                return undef;
-        }
-        EOS
-</screen>
-
-
-</para>
-
-<para>
-The call in Vend::Order is:
-
-
-</para>
-
-<para>
-<screen>
-        $guess = $sub-&gt;($ccnum)
-</screen>
-
-
-</para>
-
-<para>
-If your routine returns a non-false value, that is returned as the credit
-card type. If your routine returns false, it allows Interchange to guess.
-
+The directive specifies subroutines that should be called in an effort
+to handle certain events or conditions.
+</para><para>
+Supported events are
+<itemizedlist>
+<listitem><para>
+  <literal>missing</literal> &mdash; event triggered on a requested &IC;
+  page missing event.
+  The subroutine is called with the name of the page missing.
+  A &glos-false; return value from the subroutine will instruct &IC;
+  to continue executing the default, built-in action. A &glos-true; return
+  value will indicate all actions (including the response to the client)
+  have been performed by your function, and the default, built-in action
+  will not be executed.
+  Optionally, the function can return a list consisting of the true value
+  and the page name that is to be displayed to the user.
+</para></listitem>
+<listitem><para>
+  <literal>init_session</literal> &mdash; event triggered at the
+  &glos-session; creation time.
+  The subroutine is called with the pointer to the newly created
+  &glos-session; variables space. Subroutine return value is not used.
+</para></listitem>
+<listitem><para>
+  <literal>guess_cc_type</literal> &mdash; event triggered at the time
+  of deriving <varname>MV_CREDIT_CARD_TYPE</varname>. &IC; recognizes
+  major types but local areas might need more.
+  The subroutine is called with the credit card number.
+  The return value should either be a type name, or a &glos-false; value
+  (in which case &IC; proceeds with built-in detection algorithm).
+</para></listitem>
+</itemizedlist>
+</para><para>
 __END__
 
 __NAME__ notes
-The specified location is always treated relative to &glos-CATROOT;.
+If the actions you want to take are disallowed to &glos-catalog; 
+subroutines (to &conf-Sub;s, due to &glos-safe; restrictions), you may
+define a &conf-GlobalSub; and use it instead.
 __END__
 
-__NAME__ example: Setting SpecialPageDir
-<programlisting>
-SpecialPageDir /special_html
-</programlisting>
+__NAME__ example: Defining SpecialSub missing
+Put the following in &ccf;:
+<programlisting><![CDATA[
+SpecialSub  missing  check_category
+
+Sub check_category <<EOS
+  sub {
+    my ($name) = @_;
+    return unless $name =~ m{^[A-Z]};
+    $name =~ s,_, ,g;
+    my ($prod_group, $category) = split m{/}, $name;
+
+    $CGI->{co} = 1;
+    $CGI->{fi} = 'products';
+    $CGI->{st} = 'db';
+    $CGI->{sf} = join "\0", 'prod_group', 'category';
+    $CGI->{op} = join "\0", 'eq', 'eq';
+    $CGI->{se} = join "\0", $prod_group, $category;
+    $CGI->{sp} = 'results';
+    $CGI->{mv_todo} = 'search';
+    $Tag->update('process');
+
+    return (1, 'results');
+  }
+EOS
+]]></programlisting>
 __END__
+
+__NAME__ example: Defining SpecialSub init_session
+Put the following in &ccf;:
+<programlisting><![CDATA[
+SpecialSub  init_session  check_blacklist
+
+Sub check_blacklist <<EOS
+  sub {
+    my ($session) = @_;
+
+    if ( grep { $CGI::remote_addr } @blacklisted_IPs ) {
+      $session->{blacklist} = 1;
+    }
+
+    return;
+  }
+EOS
+]]></programlisting>
+In the event of a client coming from a "blacklisted" IP address,
+the <literal>blacklist</literal> entry in the user's &glos-session; would be
+created. At a later stage, "blacklisted" sessions could be prevented from
+checking out with the &glos-cart; contents as the order is markedly more
+likely to be fraudulent.
+__END__
+
+__NAME__ example: Defining SpecialSub guess_cc_type
+Put the following in &ccf;:
+<programlisting><![CDATA[
+SpecialSub  guess_cc_type  check_cc
+
+Sub check_cc <<EOS
+  sub {
+    my $num = shift;
+    return 'LOCAL_TYPE' if $num =~ /^41/;
+    return;
+  }
+EOS
+]]></programlisting>
+__END__
+
+__NAME__ author
+&mheins;
+__END__
+
+TODO clarify examples, optionally make them testable
 
