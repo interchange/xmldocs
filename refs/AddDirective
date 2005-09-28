@@ -3,36 +3,45 @@ add a new configuration directive
 __END__
 
 __NAME__ synopsis
-	<arg choice='req'>name</arg>
-	<arg>parse function</arg>
-	<arg>default value</arg>
+	<arg choice='req'><replaceable>directive_name</replaceable></arg>
+	<arg>
+		<replaceable>parse_function_name</replaceable>
+		<arg><replaceable>default_value</replaceable></arg>
+	</arg>
 __END__
 
 
 __NAME__ description
 The directive allows you to extend the set of regular configuration
-directives accepted in each &ccf; with your custom ones, which are then
-treated the same as the "built-in" ones.
+directives accepted in each &ccf; with your custom ones. The added 
+directives are then treated the same as the existing "built-ins".
 </para><para>
-The 3 standard arguments can be specified, just as you can see in 
+Three standard arguments can be specified, just as you can see in 
 <filename>lib/Vend/Config.pm</filename>: the new directive name, name of
 the parser/validating function, and a default value.
 </para><para>
-If the parser function is not defined, then no parser will be called at all,
+If the parser function is not defined (either by omitting it or 
+literally specifying <literal>undef</literal>), then no parser
+will be called at all,
 and the value of the directive will be exactly what users specify in their
 &ccf; files (which is usually a &PERL; scalar value). If the parser
-argument <emphasis>is</emphasis> supplied, then the parser must already be
-defined because it can't be referenced <emphasis>in advance</emphasis>.
+argument <emphasis>is</emphasis> supplied, then the requested parser function
+must already be defined because it can't be referenced
+<emphasis>in advance</emphasis>. It can be defined either as a 
+&conf-Sub; or &conf-GlobalSub; block, or can refer to an existing parser
+function from <filename>lib/Vend/Config.pm</filename>.
 </para><para>
 <filename>lib/Vend/Config.pm</filename> contains all the default 
 parser functions, which are recognized by the mandatory prefix
-<literal>parse_</literal>.
+<literal>parse_</literal>. (You do not, however, include
+<literal>parse_</literal> in the parser function name argument to
+&conf-AddDirective;).
 </para><para>
 Directly modifying <filename>Config.pm</filename> (or any other 
 files from the &IC; installation) is discouraged for portability and other
 reasons. Therefore, to add your custom parsing function, you should
 modify &gcf; as seen in <xref linkend="AddDirective_examples"/>
-(note that the parser definition
+(note again that the parser definition
 must logically come before &conf-AddDirective;).
 __END__
 
@@ -48,21 +57,36 @@ __END__
 __NAME__ example: Adding a new catalog configuration directive
 Let's add the <literal>DocRoot</literal> directive. Put the following 
 in your &gcf;:
-<programlisting>
-AddDirective Foo bar "Hello, World!"
-</programlisting>
+<programlisting><![CDATA[
+GlobalSub <<EOS
+sub parse_docroot {
+	my ($var, $value) = @_;
+
+	unless ( -d $value ) { $@ = errmsg("Directory $value: $!") }
+	if ($@) { config_warn($@) }
+
+	return;
+}
+EOS
+
+AddDirective DocRoot docroot "/tmp"
+]]></programlisting>
 __END__
 
-__NAME__ example: Enabling Swish search
-This example shows how to enable the Swish search in your &gcf;:
+__NAME__ example: Adding the Swish directive
+The first step in add support for searching using Swish, is the 
+inclusion of relevant &PERL; modules and the creation of the
+new <literal>Swish</literal> directive. At the same time, we can use
+it as an &conf-AddDirective; example. Put the following in your &gcf;:
 <programlisting> 
-Require module Vend::Swish
-AddDirective Swish hash
-Variable swish Vend::Swish
+Require       module  Vend::Swish
+Variable      swish   Vend::Swish
+AddDirective  Swish   hash
 </programlisting>
 __END__
 u	
 __NAME__ missing
 Make better example, and exactly show how to define a new parser function without modifying Config.pm directly.
+Docroot example doesn't work
 __END__
 
