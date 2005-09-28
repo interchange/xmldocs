@@ -53,6 +53,15 @@ AddDirective Foo bar "Hello, World!"
 </programlisting>
 __END__
 
+__NAME__ example: Enabling Swish search
+This example shows how to enable the Swish search in your &gcf;:
+<programlisting> 
+Require module Vend::Swish
+AddDirective Swish hash
+Variable swish Vend::Swish
+</programlisting>
+__END__
+u	
 __NAME__ missing
 Make better example, and exactly show how to define a new parser function without modifying Config.pm directly.
 __END__
