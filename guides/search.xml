@@ -51,6 +51,10 @@
 	<sect2>
 		<title>Swish</title>
 <para>
+The Swish search module allows you to search index files generated
+by Swish-e <ulink url="http://www.swish-e.org/"/>.
+</para>
+<para>
 
 To use, you must add to interchange.cfg:
 <programlisting>
