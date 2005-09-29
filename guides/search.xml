@@ -54,9 +54,9 @@
 
 To use, you must add to interchange.cfg:
 <programlisting>
-	&conf-Require; module Vend::Swish
-	&conf-AddDirective; Swish hash
-	&conf-Variable; swish Vend::Swish
+	Require module Vend::Swish
+	AddDirective Swish hash
+	Variable swish Vend::Swish
 </programlisting>
   The search is called with st=swish (or mv_searchtype=swish).
 
