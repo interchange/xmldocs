@@ -56,12 +56,23 @@ by Swish-e <ulink url="http://www.swish-e.org/"/>.
 </para>
 <para>
 
-To use, you must add to interchange.cfg:
+First of all, enable Swish search in your interchange.cfg:
 <programlisting>
-	Require module Vend::Swish
-	AddDirective Swish hash
-	Variable swish Vend::Swish
+Require module Vend::Swish
+AddDirective Swish hash
+Variable swish Vend::Swish
 </programlisting>
+</para>
+
+<para>
+Now you can configure Swish search in your catalog.cfg:
+<programlisting>
+Swish command /usr/bin/swish-e
+Swish index products/swish-e.db
+</programlisting>
+</para>
+
+<para>
   The search is called with st=swish (or mv_searchtype=swish).
 
 </para>
