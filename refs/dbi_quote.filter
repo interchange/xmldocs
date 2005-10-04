@@ -1,0 +1,66 @@
+__NAME__ purpose
+safely quote strings for use in SQL statements using DBI's quote method
+__END__
+
+__NAME__ see also
+the sql filter
+the query tag and [PREFIX-quote] sub-tag
+__END__
+
+
+__NAME__ description
+
+This filter uses DBI's quote method (or the DBD's, if it overrides)
+to make a string safe to use in SQL. It takes into account any
+database-specific quoting needs, such as <literal>\</literal> for
+PostgreSQL or MySQL, truncating at the first ASCII NUL for PostgreSQL,
+turning a newline into a literal two-character <literal>\n</literal> for
+MySQL, etc.
+
+The default database handle is used (the first ProductFiles database),
+unless another is specified. (See the example.)
+
+
+
+Note the containing quotes, which is different than Interchange's native
+"sql" filter. See also the DBI man page details about the quote method.
+
+Since this uses database handles, Safe must be considered if it's being
+used via the $Tag object in a Perl block.
+__END__
+
+
+__NAME__ notes
+For more information see
+<citerefentry><refentrytitle>DBI</refentrytitle><manvolnum>3</manvolnum></citerefentry>
+and the DBD documentation for your database.
+__END__
+
+
+_NAME__ online: Filter example
+To use the filter to safely quote the example CGI variable "code",
+with the value "that's all":
+
+<programlisting>
+    [cgi name=code filter=dbi_quote keep=1]
+</programlisting>
+
+If the default products database is a typical SQL database, that returns:
+
+<literal>'that''s all'</literal>
+
+To quote a literal string, specifying the desired database handle's quote method:
+
+<programlisting>
+    [filter dbi_quote.inventory]some string \ or other[/filter]
+</programlisting>
+
+If "inventory" is a MySQL database, this returns:
+
+<literal>'some string \\ or other'</literal>
+
+Whereas if it were an Oracle database, it would return:
+
+<literal>'some string \ or other'</literal>
+_END__
+

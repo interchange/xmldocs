@@ -1,0 +1,33 @@
+__NAME__ purpose
+do not escape backslashes in "sql" filter
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ default
+0
+__END__
+
+
+__NAME__ description
+This &glos-pragma; disables default doubling of backslashes by the "sql" filter.
+You may want to set this pragma if using a database other than PostgreSQL and MySQL.
+(SQL standard strings do not treat <literal>\</literal> specially, so it normally
+doesn't need to be escaped.)
+__END__
+
+
+__NAME__ example: Enable filter_sql_no_backslash pragma catalog-wide
+Put the following in catalog.cfg:
+<programlisting>
+Pragma filter_sql_no_backslash
+</programlisting>
+__END__
+
