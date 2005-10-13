@@ -32,23 +32,45 @@ Database <replaceable>TABLENAME</replaceable> USER <replaceable>interch</replace
 Database <replaceable>TABLENAME</replaceable> PASS <replaceable>pass</replaceable>
 </programlisting>
 
-for every table (not view) found in the database
+for every table (not view by default) found in the database
 <database>test_foundation</database>.
+</para><para>
+Any additional space-separated arguments are passed to DBI's table_info
+method as the catalog, schema, name, and type (optionally quoted in
+shell syntax). Since order is significant, use '' to skip a value.
+Currently the catalog setting is not used by any database driver, but it
+may be in the future. See the DBI manual and your DBD module's manual
+for details on these arguments.
+</para><para>
+For example, for a PostgreSQL database, a setting of
+<programlisting>
+DatabaseAuto   dbi:<replaceable>Pg:standard  interch  pass  ''  public
+</programlisting>
+
+would only see tables in the "public" schema of database <database>standard</database>,
+not other schemas such as "information_schema". This avoids the need of the
+&conf-DatabaseAutoIgnore; directive, which may exclude tables you want.
+
+To find views, a separate directive is needed. For example, again in PostgreSQL:
+
+<programlisting>
+DatabaseAuto   dbi:<replaceable>Pg:standard  interch  pass  ''  public  ''  VIEW
+</programlisting>
+
 </para><para>
 
 If the &PERL; module <classname>DBIx::DBSchema</classname> was found,
 it would also dump the specification needed to re-create the table structures
-(which you can use as the <literal>CREATE_SQL</literal> parameter to
-&conf-Database;):
+(just like the <literal>CREATE_SQL</literal> parameter to &conf-Database;):
 
 <programlisting>
 Database  <replaceable>TABLENAME</replaceable> CREATE_SQL   CREATE TABLE <replaceable>TABLENAME ( ...)</replaceable>
 </programlisting>
 
 </para><para>
-This information is available in <varname>$Vend:Cfg</varname> or 
-<varname>$Config</varname> (depending on whether the context is global 
-or local) and it is trivial to dump it to the screen or file.
+This information is available in <varname>$Vend:Cfg</varname> (global
+context) or <varname>$Config</varname> (catalog context) and it is
+trivial to dump it to the screen or file.
 See <xref linkend="DatabaseAuto_examples"/>.
 __END__
 
