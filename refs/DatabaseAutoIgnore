@@ -26,11 +26,13 @@ glossary entry.
 __END__
 
 __NAME__ example: Specifying DatabaseAutoIgnore
-This prevents &IC; from bringing in the new tables that get auto-added
-to PostgreSQL 7.4 schema and cause errors.
+This prevents &IC; from bringing in tables in non-default schemas
+in PostgreSQL 7.4 and newer, which cause errors.
 <programlisting>
 DatabaseAutoIgnore  ^sql_
 </programlisting>
+You may prefer instead to specify a particular schema, such as "public",
+in the &conf-DatabaseAuto; directive.
 __END__
 
 __NAME__ author
