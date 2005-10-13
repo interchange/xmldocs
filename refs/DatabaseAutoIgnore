@@ -12,14 +12,17 @@ __END__
 
 __NAME__ description
 The directive prevents &conf-DatabaseAuto;
-from automatially bringing in tables that match the specified
+from automatically configuring tables that match specified
 regular expression.
 </para><para>
-This directive <emphasis role='bold'>must</emphasis> be set before
-&conf-DatabaseAuto;.
+Note that instead of using this directive, you may prefer to directly
+specify <literal>schema</literal> argument to the &conf-DatabaseAuto; directive.
+(&conf-DatabaseAutoIgnore; easily ignores more tables than you intend).
 __END__
 
 __NAME__ notes
+This directive <emphasis role='bold'>must</emphasis> be set before
+&conf-DatabaseAuto;.
 </para><para>
 For more about &IC; and databases, and supported formats, see &glos-database;
 glossary entry.
@@ -31,8 +34,6 @@ in PostgreSQL 7.4 and newer, which cause errors.
 <programlisting>
 DatabaseAutoIgnore  ^sql_
 </programlisting>
-You may prefer instead to specify a particular schema, such as "public",
-in the &conf-DatabaseAuto; directive.
 __END__
 
 __NAME__ author

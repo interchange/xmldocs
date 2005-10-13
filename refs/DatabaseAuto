@@ -6,6 +6,18 @@ __NAME__ synopsis
 	<arg choice='plain'><replaceable>DSN</replaceable></arg>
 	<arg choice='plain'><replaceable>username</replaceable></arg>
 	<arg choice='plain'><replaceable>password</replaceable></arg>
+	<arg>
+		<replaceable>catalog</replaceable>
+		<arg>
+			<replaceable>schema</replaceable>
+			<arg>
+				<replaceable>name</replaceable>
+				<arg>
+					<replaceable>type</replaceable>
+				</arg>
+			</arg>
+		</arg>
+	</arg>
 __END__
 
 __NAME__ see also
@@ -15,7 +27,7 @@ __END__
 __NAME__ description
 The directive automatically registers database tables found for use with &IC;. 
 </para><para>
-This only works for SQL databases, and the parameters provided to
+This only works for &glos-SQL; databases, and the parameters provided to
 &conf-DatabaseAuto; are used to establish the connection to the database.
 </para><para>
 For example, a setting of
@@ -32,31 +44,20 @@ Database <replaceable>TABLENAME</replaceable> USER <replaceable>interch</replace
 Database <replaceable>TABLENAME</replaceable> PASS <replaceable>pass</replaceable>
 </programlisting>
 
-for every table (not view by default) found in the database
+for every table (and not view, by default) found in the database
 <database>test_foundation</database>.
 </para><para>
-Any additional space-separated arguments are passed to DBI's table_info
-method as the catalog, schema, name, and type (optionally quoted in
-shell syntax). Since order is significant, use '' to skip a value.
-Currently the catalog setting is not used by any database driver, but it
+Any additional space-separated arguments are passed to DBI's
+<literal>table_info</literal>
+method as the <literal>catalog</literal>, <literal>schema</literal>,
+<literal>name</literal>, and <literal>type</literal> (optionally quoted in
+shell syntax). Since order is significant, you could use <literal>''</literal>
+to skip values.
+</para><para>
+Currently, the <literal>catalog</literal> argument is not used by any
+database driver, but it
 may be in the future. See the DBI manual and your DBD module's manual
 for details on these arguments.
-</para><para>
-For example, for a PostgreSQL database, a setting of
-<programlisting>
-DatabaseAuto   dbi:<replaceable>Pg:standard  interch  pass  ''  public
-</programlisting>
-
-would only see tables in the "public" schema of database <database>standard</database>,
-not other schemas such as "information_schema". This avoids the need of the
-&conf-DatabaseAutoIgnore; directive, which may exclude tables you want.
-
-To find views, a separate directive is needed. For example, again in PostgreSQL:
-
-<programlisting>
-DatabaseAuto   dbi:<replaceable>Pg:standard  interch  pass  ''  public  ''  VIEW
-</programlisting>
-
 </para><para>
 
 If the &PERL; module <classname>DBIx::DBSchema</classname> was found,
@@ -78,6 +79,10 @@ __NAME__ notes
 </para><para>
 For more about &IC; and databases, and supported formats, see &glos-database;
 glossary entry.
+</para><para>
+The <literal>schema</literal> argument to this directive can be specified to
+avoids using the &conf-DatabaseAutoIgnore; directive, which can easily ignore
+more tables than you really intended.
 __END__
 
 __NAME__ example: Standard DatabaseAuto definition, a standalone example
@@ -147,6 +152,26 @@ Then you could simply restart &IC; and call
 <code><![CDATA[<pre>[cfgdump]</pre>]]></code> in any &IC; page, and search
 for <database>table1</database> in the output.
 __END__
+
+
+__NAME__ example: Specifying PostgreSQL schema
+</para><para>
+The following setting for &PGSQL; would make &IC; only see the tables
+in the <literal>public</literal> schema of a database, and not in
+any other schemas.
+<programlisting>
+DatabaseAuto dbi:Pg:DBNAME USERNAME PASSWORD '' public
+</programlisting>
+__END__
+
+__NAME__ example: Making Interchange recognize views
+<programlisting>
+DatabaseAuto dbi:Pg:DBNAME USERNAME PASSWORD  ''  public  ''  VIEW
+</programlisting>
+(The <literal>VIEW</literal> argument should be passed as shown
+&mdash; literally and in uppercase).
+__END__
+
 
 __NAME__ author
 &mheins;
