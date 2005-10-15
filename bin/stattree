@@ -63,6 +63,7 @@ my %ascii_types = (
 	usertag => [qw|UserTag/\S+\.tag \.tag dist/usertag/|],
 	filter => [qw/\.filter/],
 	actionmap => [qw/\.am/],
+	ordercheck => [qw/\.oc/],
 	html => [qw/\.html?/],
 	widget => [qw/\.widget/],
 	profile => [qw|/profiles/.+ \.profiles \.login \.order|],
@@ -493,6 +494,26 @@ sub wanted {
 			$hash{total}{$fsubtype . "s"}++;
 			last;
 
+		##########################################################
+		# Found an ordercheck 
+		} elsif ( $c{fsubtype} =~ /^ordercheck$/ )  {
+			( my $fn = $file ) =~ s#.+/##;
+			$fn =~ s/\.oc$//;
+
+			push @{ $hash{symbols}{$c{fsubtype}}{$fn} }, {
+				%c,
+				file => "$i{ver}/$c{file}",
+				lnum => scalar @filedata,
+				ctxpre => $ctx_p,
+				ctxpost => $ctx_n,
+				ctxs => 1,
+				ctxe => scalar @filedata,
+				ctx => [ format_ctx(@filedata) ]
+			};
+
+			$hash{total}{$fsubtype . "s"}++;
+			last;
+			
 		##########################################################
 		# Found a HTML page
 		#} elsif ( $c{fsubtype} =~ /^html$/ )  {
