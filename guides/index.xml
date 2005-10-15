@@ -172,6 +172,34 @@
 				</entry>
 			</row>
 
+<row>
+				<entry>
+					<emphasis role='bold'>
+						(<olink targetdoc='glossary' targetptr='checks'>?</olink>)
+						Checks
+					</emphasis><sbr/>
+					<ulink url="orderchecks/index.html">Multi-HTML</ulink> |
+					<ulink url="orderchecks.html">HTML</ulink>
+				</entry>
+
+				<entry>
+				<!--
+					<emphasis role='bold'>
+					</emphasis><sbr/>
+					<ulink url=".html">HTML</ulink> |
+					<ulink url="/">Multi-HTML</ulink>
+				-->
+				</entry>
+
+				<entry>
+				<!--
+					<emphasis role='bold'>
+					</emphasis><sbr/>
+					<ulink url=".html">HTML</ulink> |
+					<ulink url="/">Multi-HTML</ulink>
+				-->
+				</entry>
+			</row>
 
 			<row>
 				<entry>

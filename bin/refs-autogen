@@ -91,6 +91,7 @@ my %longname = (
 	globconf => "Global Configuration Directive",
 	catconf => "Catalog Configuration Directive",
 	filter => "Filter",
+	ordercheck => "Check",
 	# Summarized / compounds:
 	tag => "Tag",
 	conf => "Configuration directive",
@@ -879,6 +880,8 @@ unless ( $no_autorefs ) {
 				$tag = 'option';
 			} elsif ( $g =~ /filter$/ ) {
 				$tag = 'filter';
+			} elsif ( $g =~ /ordercheck$/ ) {
+				$tag = 'check';
 			} else {
 				die "UNKNOWN $g\n";
 			}
@@ -1715,6 +1718,6 @@ $templates{catvar} = $templates{globvar};
 $templates{uitag} = $templates{usertag};
 $templates{systemtag} = $templates{usertag};
 $templates{catconf} = $templates{globconf};
-
+$templates{ordercheck} = $templates{filter};
 }
 
