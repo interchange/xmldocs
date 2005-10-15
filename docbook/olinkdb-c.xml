@@ -14,6 +14,7 @@
 	<!ENTITY vars SYSTEM "../tmp/vars-c.db"> 
 	<!ENTITY confs SYSTEM "../tmp/confs-c.db"> 
 	<!ENTITY filters SYSTEM "../tmp/filters-c.db"> 
+	<!ENTITY filters SYSTEM "../tmp/orderchecks-c.db"> 
 ]>
 
 <targetset>
@@ -93,6 +94,12 @@
 			<dir name='filters'>
 				<document targetdoc="filters">
 				&filters;
+				</document>
+			</dir>
+
+			<dir name='orderchecks'>
+				<document targetdoc="orderchecks">
+				&orderchecks;
 				</document>
 			</dir>
 
