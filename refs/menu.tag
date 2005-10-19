@@ -38,3 +38,7 @@ __NAME__ example: Simple Menubar
 [/menu]
 ]]></programlisting>
 __END__
+
+__NAME__ see also
+MV_MENU_DIRECTORY
+__END__
