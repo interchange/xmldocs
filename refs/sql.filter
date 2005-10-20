@@ -1,21 +1,25 @@
 __NAME__ purpose
-quote strings for use in SQL statements, without reference to a specific database
+quote strings for use in SQL statements, without referencing a specific database
 __END__
 
 __NAME__ see also
+dbi_quote
 __END__
 
 
 __NAME__ description
 The filter replaces single quotes (<literal>'</literal>) with 
-"double" single quotes (<literal>''</literal>). By default it will also
-replace a backslash (<literal>\</literal>) with two backslashes
-(<literal>\\</literal>) (as is needed to escape PostgreSQL and MySQL
-strings) but that can be disabled by setting the filter_sql_no_backslash pragma.
+two single quotes (<literal>''</literal>). In addition, it
+replaces each backslash (<literal>\</literal>) with two backslashes
+(<literal>\\</literal>) to properly &glos-escape; all content, but
+backslash escaping can be turned off by setting the
+&pragma-filter_sql_no_backslash; pragma.
 __END__
 
 
 __NAME__ notes
+The filter is intended to be used on &glos-SQL; strings.
+</para><para>
 For more information on &PERL; Regular Expressions, pattern matching and
 character classes, see
 <citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.

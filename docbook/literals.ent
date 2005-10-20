@@ -12,6 +12,7 @@
 <!ENTITY ICDL "<ulink url='http://www.icdevgroup.org/i/dev/download.html'>download</ulink>">
 <!ENTITY ICCVS "<ulink url='http://www.icdevgroup.org/i/dev/cvs.html'>CVS</ulink>">
 <!ENTITY APACHE "<ulink url='http://www.apache.org/'>Apache</ulink>">
+<!ENTITY MATHOPD "<ulink url='http://www.mathopd.org/'>Mathopd</ulink>">
 <!ENTITY W3 "<ulink url='http://www.w3c.org/'>W3C</ulink>">
 <!ENTITY W3C "<ulink url='http://www.w3c.org/'>W3C</ulink>">
 <!ENTITY PERL "<ulink url='http://www.perl.org/'>Perl</ulink>">
@@ -23,6 +24,8 @@
 <!ENTITY GDBM "<ulink url='http://www.delorie.com/gnu/docs/gdbm/'>GNU DBM</ulink>">
 <!ENTITY NFS "<ulink url='http://nfs.sourceforge.net/'>NFS</ulink>">
 <!ENTITY IMAGEMAGICK "<ulink url='http://www.imagemagick.org/'>ImageMagick</ulink>">
+<!ENTITY DOCBOOK "<ulink url='http://www.docbook.org/'>DocBook</ulink>">
+<!ENTITY ECHO "<ulink url='http://www.echo-inc.com/'>ECHO</ulink>">
 
 
 

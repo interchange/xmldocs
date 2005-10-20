@@ -59,68 +59,26 @@
 
 <qandaset>
 
+<qandadiv><title>Interchange Installation</title>
 
-<qandadiv><title>How does Interchange work</title>
-
-<qandaentry>
+<qandaentry id="install-howto">
 <question><para>
-Where are the pages?
+How do I install Interchange?
 </para></question>
 <answer><para>
-&IC; pages are not kept in normal HTML space. Look in the catalog subdirectory pages. The pages are always filtered through the &IC; daemon before being delivered.
-</para>
-</answer></qandaentry>
-
-<qandaentry>
-<question><para>
-Where are the images?
-</para></question>
-<answer><para>
-&IC; is a &glos-CGI;; program, and if relative image paths were used, erroneous 
-&glos-img; output like the following would have occured:
-
-<programlisting><![CDATA[
-<img src="/cgi-bin/simple/../whatever.jpg">
-]]></programlisting>
-
-For that reason, by default, &IC; uses &conf-ImageDir; or
-&conf-ImageDirSecure; for a prefix used to rewrite image URLs.
-In the demo, image
-specs that have no absolute path information are prefixed with
-<literal>/simple/images/</literal>.
+&ICDEVGROUP; distributes &IC; in the basic format of &glos-tarball;s.
+To install &IC; this way, obtain the tarball from the &ICDL; page
+and read file &cvsfile-README;.
 </para><para>
-In an &IC; page, this tag:
-
-<programlisting><![CDATA[
-<img src="ordernow.gif">
-]]></programlisting>
-
-will become this:
-
-<programlisting><![CDATA[
-<img src="/simple/images/ordernow.gif">
-]]></programlisting>
-
-This tag:
-
-<programlisting><![CDATA[
-<img src="items/00-0011.jpg">
-]]></programlisting>
-
-will become this:
-
-<programlisting><![CDATA[
-<img src="/simple/images/items/00-0011.jpg">
-]]></programlisting>
-
-Absolute image paths are not affected. An image such as
-<literal>/other/images/whatever.gif</literal> will not be changed.
+Besides tarballs, there are also "precompiled" packages available 
+for specific platforms. For &DEBGNU;, see file &cvsfile-README.debian;.
+For &RH; and derivatives, see file &cvsfile-README.rpm-dist;.
+</para><para>
+Finally, you can install &IC; directly out of CVS to get a copy
+of the latest code. To do so, see file &cvsfile-README.cvs;.
 </para>
-</answer></qandaentry>
-
-</qandadiv>
-
-<qandadiv><title>Installation</title>
+</answer>
+</qandaentry>
 
 <qandaentry>
 <question><para>
@@ -200,8 +158,8 @@ user has a &IC; catalogs directory <filename>/home/user/catalogs</filename>).
 </para><para>
 
 The best way to set permissions on a multi-user system is to make all
-files group readable and writable (<literal>660</literal> or
-<literal>664</literal> &glos-mode;). If you have a
+files group readable and writable (&glos-mode; <literal>660</literal> or
+<literal>664</literal>). If you have a
 system setup that places each user in their own group, make
 <systemitem class='username'>interch</systemitem> a member of each user's
 group and set ownership and permissions with:
@@ -544,6 +502,67 @@ If, for some reason, you can't use the distribution media,
 </para>
 </answer></qandaentry>
 </qandadiv>
+
+<qandadiv><title>How does Interchange work</title>
+
+<qandaentry>
+<question><para>
+Where are the pages?
+</para></question>
+<answer><para>
+&IC; pages are not kept in normal HTML space. Look in the catalog subdirectory pages. The pages are always filtered through the &IC; daemon before being delivered.
+</para>
+</answer></qandaentry>
+
+<qandaentry>
+<question><para>
+Where are the images?
+</para></question>
+<answer><para>
+&IC; is a &glos-CGI;; program, and if relative image paths were used, erroneous 
+&glos-img; output like the following would have occured:
+
+<programlisting><![CDATA[
+<img src="/cgi-bin/simple/../whatever.jpg">
+]]></programlisting>
+
+For that reason, by default, &IC; uses &conf-ImageDir; or
+&conf-ImageDirSecure; for a prefix used to rewrite image URLs.
+In the demo, image
+specs that have no absolute path information are prefixed with
+<literal>/simple/images/</literal>.
+</para><para>
+In an &IC; page, this tag:
+
+<programlisting><![CDATA[
+<img src="ordernow.gif">
+]]></programlisting>
+
+will become this:
+
+<programlisting><![CDATA[
+<img src="/simple/images/ordernow.gif">
+]]></programlisting>
+
+This tag:
+
+<programlisting><![CDATA[
+<img src="items/00-0011.jpg">
+]]></programlisting>
+
+will become this:
+
+<programlisting><![CDATA[
+<img src="/simple/images/items/00-0011.jpg">
+]]></programlisting>
+
+Absolute image paths are not affected. An image such as
+<literal>/other/images/whatever.gif</literal> will not be changed.
+</para>
+</answer></qandaentry>
+
+</qandadiv>
+
 
 
 <qandadiv><title>SSL problems</title>

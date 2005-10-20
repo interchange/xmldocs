@@ -99,7 +99,7 @@ __END__
 
 __NAME__ example: Displaying the discount ammount received
 If you want to display the discount amount to the user, simply use the
-&glos-item-discount; tag:
+&tag-item-discount; tag:
 <!-- TODO move this to refpage for item-discount -->
 
 <programlisting>

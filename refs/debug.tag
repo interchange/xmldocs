@@ -18,7 +18,7 @@ __NAME__ synopsis
 __END__
 
 __NAME__ description
-The tags sends a message to &IC; debug log.
+The tag sends a message to &IC; debug log.
 __END__
 
 

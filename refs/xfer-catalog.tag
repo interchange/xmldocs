@@ -191,7 +191,7 @@ The steps include:
 		Exporting non-&MYSQL; and non-&PGSQL; databases to text files
 	</para></listitem>
 	<listitem><para>
-		Dumping MySQL and PostgreSQL &glos-databases; with their native tools
+		Dumping MySQL and PostgreSQL &glos-database;s with their native tools
 		(usually <command>mysqldump</command> and <command>pg_dump</command>
 	</para></listitem>
 	<listitem><para>

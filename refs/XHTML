@@ -20,9 +20,6 @@ output. This just includes the insertion of "<literal>/</literal>"
 in standalone tag endings, since argument name lowercasing and argument
 option quoting (the other two "things" that make XHTML XHTML)
 have been already adopted practices for all HTML output.
-</para><para>
-To illustrate with an example, tere's say, &tag-br; tag that will, by default,
-output &lt;br&gt;, or &lt;br/&gt; if &conf-XHTML; is in effect.
 __END__
 
 __NAME__ notes

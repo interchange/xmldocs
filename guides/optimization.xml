@@ -280,7 +280,7 @@ Benchmark loop-param list: [benchmark start=1]
 				<para>
 				For repetitive routines, you can achieve a considerable savings
 				in CPU by pre-compiling your embedded &PERL; code. The precompilation
-				can occur either once at &conf-catalog; configuration time,
+				can occur either once at &glos-catalog; configuration time,
 				or once at time of list execution.
 				</para><para>
 				When you compile routines at the time of the list execution

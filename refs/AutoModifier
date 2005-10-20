@@ -25,12 +25,12 @@ which should be automatically loaded from a database column.
 In other words, 
 when an item is added to the shopping cart using &IC;'s routines, the
 attributes declared in &conf-AutoModifier; will be set to the values of the
-fields in the <database>products database</database>.
+fields in the <database>products</database> database.
 </para><para>
 This facility will often be used in determining pricing, shipping,
-or other custom product attributes. These attributes are usually used
-in custom embedded Perl code which will scan the items in the shopping
-cart and make decisions.
+or other custom product attributes. These attributes will probably
+be used in a custom &PERL; code which will scan the items in the electronic
+&glos-cart; and make decisions.
 __END__
 
 __NAME__ notes
@@ -84,3 +84,4 @@ AutoModifier inventory:heavy:mv_sku
 
 __END__
 
+TODO Fix example section

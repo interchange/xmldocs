@@ -153,7 +153,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	Test for availability of the specified &glos-PERL; module.
+	Test for availability of the specified &PERL; module.
 	</entry>
 
 </row> 

@@ -3,64 +3,56 @@ safely quote strings for use in SQL statements using DBI's quote method
 __END__
 
 __NAME__ see also
-the sql filter
-the query tag and [PREFIX-quote] sub-tag
+sql,query
 __END__
 
 
 __NAME__ description
-
-This filter uses DBI's quote method (or the DBD's, if it overrides)
-to make a string safe to use in SQL. It takes into account any
-database-specific quoting needs, such as <literal>\</literal> for
-PostgreSQL or MySQL, truncating at the first ASCII NUL for PostgreSQL,
-turning a newline into a literal two-character <literal>\n</literal> for
-MySQL, etc.
-
-The default database handle is used (the first ProductFiles database),
-unless another is specified. (See the example.)
-
-
-
-Note the containing quotes, which is different than Interchange's native
-"sql" filter. See also the DBI man page details about the quote method.
-
-Since this uses database handles, Safe must be considered if it's being
-used via the $Tag object in a Perl block.
+This filter uses the &PERL; DBI quoting method (or actually the DBD, if
+it redefines it) to make strings safe for use in &glos-SQL; commands.
+</para><para>
+All database-specific needs are honored, including (but not limited
+to) <literal>\</literal> &glos-escape;s for &PGSQL; or &MYSQL;,
+truncating at the first ASCII NUL for &PGSQL;, and turning a newline into a
+literal two-character <literal>\n</literal> for &MYSQL;.
+</para><para>
+The default database handle is used (the first &conf-ProductFiles; database),
+unless a different one is specified.
 __END__
 
 
 __NAME__ notes
+DBI quoting is different from &IC;'s native &filter-sql; filter.
+See the DBI man page details about the DBI quoting method.
+</para><para>
+Since the filter uses database handles, &glos-safe; must be considered if
+it is being used via the <varname>$Tag</varname> object in a &PERL; block.
+</para><para>
 For more information see
 <citerefentry><refentrytitle>DBI</refentrytitle><manvolnum>3</manvolnum></citerefentry>
 and the DBD documentation for your database.
 __END__
 
 
-_NAME__ online: Filter example
-To use the filter to safely quote the example CGI variable "code",
-with the value "that's all":
+_NAME__ example: Filter example
+<programlisting><![CDATA[
+[cgi name=code set="That's all" hide=1]
 
+[cgi name=code filter=dbi_quote keep=1]
+]]></programlisting>
+
+If the default &conf-ProductFiles; database is a typical &glos-SQL; database,
+the filter would return <literal>'that''s all'</literal>, including all the 
+quotes.
+__END__
+
+__NAME__ example: Quoting a literal string, specifying DBI quote method
 <programlisting>
-    [cgi name=code filter=dbi_quote keep=1]
+[filter dbi_quote.DATABASE_NAME]some string \ or other[/filter]
 </programlisting>
 
-If the default products database is a typical SQL database, that returns:
-
-<literal>'that''s all'</literal>
-
-To quote a literal string, specifying the desired database handle's quote method:
-
-<programlisting>
-    [filter dbi_quote.inventory]some string \ or other[/filter]
-</programlisting>
-
-If "inventory" is a MySQL database, this returns:
-
-<literal>'some string \\ or other'</literal>
-
-Whereas if it were an Oracle database, it would return:
-
-<literal>'some string \ or other'</literal>
-_END__
+The above would produce <literal>'some string \\ or other'</literal>
+for &MYSQL; or &PGSQL;, and
+<literal>'some string \ or other'</literal> for &ORACLE;.
+__END__
 

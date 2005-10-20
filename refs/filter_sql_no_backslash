@@ -17,15 +17,20 @@ __END__
 
 
 __NAME__ description
-This &glos-pragma; disables default doubling of backslashes by the "sql" filter.
-You may want to set this pragma if using a database other than PostgreSQL and MySQL.
-(SQL standard strings do not treat <literal>\</literal> specially, so it normally
-doesn't need to be escaped.)
+This &glos-pragma; disables default backslash &glos-escape;s performed by
+the &filter-sql; filter.
+</para><para>
+For databases like &MYSQL; or &PGSQL; which treat <literal>\</literal> in 
+a special way, the default behavior of escaping backslashes is the right choice.
+</para><para>
+The &glos-SQL; standard, however, does not treat <literal>\</literal>
+specially, so you would want to enable this &glos-pragma; (effectively
+disabling escaping) for conforming databases, such as &ORACLE;.
 __END__
 
 
 __NAME__ example: Enable filter_sql_no_backslash pragma catalog-wide
-Put the following in catalog.cfg:
+Put the following in &ccf;:
 <programlisting>
 Pragma filter_sql_no_backslash
 </programlisting>

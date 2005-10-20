@@ -19,3 +19,9 @@ __NAME__ online: Filter example
 </programlisting>
 __END__
 
+__NAME__ online: Filter example for name and namecase correction
+<programlisting>
+[filter op="name namecase"]OCELIC, Davor[/filter]
+</programlisting>
+__END__
+
