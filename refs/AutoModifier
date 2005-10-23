@@ -31,6 +31,39 @@ This facility will often be used in determining pricing, shipping,
 or other custom product attributes. These attributes will probably
 be used in a custom &PERL; code which will scan the items in the electronic
 &glos-cart; and make decisions.
+</para><para>
+There are several forms of the specification. The simplest is
+a field with no table specification:
+<programlisting>
+	AutoModifier heavy
+</programlisting>
+This one has a bit of "magic" associated. To account for matrix-option
+products, the various product tables are searched, for both the item
+code and the base SKU associated with the item.
+</para><para>
+You can also rename the attribute to something different than the
+field:
+<programlisting>
+	AutoModifier heavy=heavy_item
+</programlisting>
+This would place the contents of the "heavy_item" field in the
+"heavy" attribute.
+</para><para>
+If you want to use a non-products table to load the modifier, you
+specify it in the usual Interchange colon-separated syntax:
+<programlisting>
+	AutoModifier extra:heavy
+</programlisting>
+This would look in the <database>extra</database> table for the
+"heavy" field.
+</para><para>
+You can also specify that another attribute holds the key for
+the modifier:
+	AutoModifier extra:heavy:category
+</programlisting>
+This would look in the <database>extra</database> table for the
+"heavy" field, using the "category" attribute in the item as
+the key.
 __END__
 
 __NAME__ notes
