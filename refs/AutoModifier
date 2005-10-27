@@ -34,33 +34,42 @@ be used in a custom &PERL; code which will scan the items in the electronic
 </para><para>
 There are several forms of the specification. The simplest is
 a field with no table specification:
+</para>
 <programlisting>
 	AutoModifier heavy
 </programlisting>
+<para>
 This one has a bit of "magic" associated. To account for matrix-option
 products, the various product tables are searched, for both the item
 code and the base SKU associated with the item.
 </para><para>
 You can also rename the attribute to something different than the
 field:
+</para>
 <programlisting>
 	AutoModifier heavy=heavy_item
 </programlisting>
+<para>
 This would place the contents of the "heavy_item" field in the
 "heavy" attribute.
 </para><para>
 If you want to use a non-products table to load the modifier, you
 specify it in the usual Interchange colon-separated syntax:
+</para>
 <programlisting>
 	AutoModifier extra:heavy
 </programlisting>
+<para>
 This would look in the <database>extra</database> table for the
 "heavy" field.
 </para><para>
 You can also specify that another attribute holds the key for
 the modifier:
+</para>
+<programlisting>
 	AutoModifier extra:heavy:category
 </programlisting>
+<para>
 This would look in the <database>extra</database> table for the
 "heavy" field, using the "category" attribute in the item as
 the key.
