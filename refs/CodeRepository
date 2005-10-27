@@ -16,9 +16,9 @@ Much of it is not needed in even the '&std-catalog;' catalog with full
 user interface (UI).  This causes a larger memory profile than necessary.
 </para><para>
 Furthermore, it is difficult to determine from the &IC; pages what code is
-needed (especially when an &glos-ITL; tag can call <code>$Tag->{}</code>
-can call a filter can call some sort of action &mdash; 
-you see the point).
+needed (especially when an &glos-ITL; tag calls <code>$Tag->{}</code>
+which calls a filter which calls some sort of action &mdash; 
+you get the picture).
 </para><para>
 A feature was needed to allow building catalogs with a more optimal
 set of code than just "everything". And as we'll see in a second,
