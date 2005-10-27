@@ -1,0 +1,17 @@
+__NAME__ purpose
+default settings for Database directives
+__END__
+
+__NAME__ example: Default username and password
+Most Interchange applications use only one SQL database. In that case
+it is handy to specify SQL username and password at once instead of 
+for each table separately.
+<programlisting>
+Variable SQLUSER interchange
+Variable SQLPASS nevairbe
+ParseVariables Yes
+DatabaseDefault USER __SQLUSER__
+DatabaseDefault PASS __SQLPASS__
+ParseVariables No
+</programlisting>
+__END__ 
