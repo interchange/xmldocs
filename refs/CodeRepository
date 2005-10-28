@@ -16,7 +16,7 @@ Much of it is not needed in even the '&std-catalog;' catalog with full
 user interface (UI).  This causes a larger memory profile than necessary.
 </para><para>
 Furthermore, it is difficult to determine from the &IC; pages what code is
-needed (especially when an &glos-ITL; tag calls <code>$Tag->{}</code>
+needed (especially when an &glos-ITL; tag calls <code>$Tag->example()</code>
 which calls a filter which calls some sort of action &mdash; 
 you get the picture).
 </para><para>
@@ -48,15 +48,15 @@ read normally and need not be recompiled on the fly again.
 </para><para>
 Over time, as you access pages and routines, a full set of tags
 will be developed and you can then disable &conf-AccumulateCode;.
-(Infact, &conf-AccumulateCode; is recommended for development and should 
+(In fact, &conf-AccumulateCode; is recommended for development and should 
 really be turned off in production systems).
 __END__
 
 __NAME__ notes
-There can be failures due to calling <code>$Tag->{...}</code> from within
+There can be failures due to calling <code>$Tag->example()</code> from within
 embedded
 &PERL; for the first time, particularly when it uses a "MapRoutine" or
-calls another <code>$Tag->{...}</code> within. This is due to
+calls another <code>$Tag->example()</code> within. This is due to
 <classname>Safe</classname>, and there is probably
 not much to be done about it. The good news is that the error should
 go away after &conf-HouseKeeping; seconds, when the tag gets compiled by the
