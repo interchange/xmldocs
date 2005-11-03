@@ -1,0 +1,9 @@
+Intercept all outgoing email and instead send it to the address
+(or addresses, comma-separated) defined in this global or catalog
+variable. This is primarily intended to allow developers to write
+functions that send email and test them without worrying about
+accidentally sending mail to end-users.
+</para><para>
+Headers in the form <literal>X-Intercepted-To:</literal> etc. are added to
+show what the original destination of the mail was, and the interception
+is also noted in the catalog error log.

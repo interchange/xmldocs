@@ -1,0 +1,2 @@
+purpose: intercept all outgoing email and instead send to this address
+default: undefined

@@ -1,0 +1,15 @@
+<example>
+
+<title>
+Setting MV_EMAIL_INTERCEPT to "user@example.com"
+</title>
+
+<para>
+Set the following in <filename>interchange.cfg</filename> or <filename>catalog.cfg</filename>:
+</para>
+
+<programlisting><![CDATA[
+Variable MV_EMAIL_INTERCEPT user@example.com
+]]></programlisting>
+
+</example>

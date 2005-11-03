@@ -1,0 +1,3 @@
+  <group choice='req'>
+    <arg choice='plain'><replaceable>email address</replaceable></arg>
+  </group>

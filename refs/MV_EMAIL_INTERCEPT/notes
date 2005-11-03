@@ -1,0 +1,4 @@
+Note that this only works for Interchange's built-in routines for sending
+email. If you use other methods to send mail, for example by directly
+running sendmail or talking to an SMTP server, you'll have to add
+interception support yourself.
