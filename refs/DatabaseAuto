@@ -162,6 +162,9 @@ any other schemas.
 <programlisting>
 DatabaseAuto dbi:Pg:DBNAME USERNAME PASSWORD '' public
 </programlisting>
+Be aware that it's possible to make some confusing configuration mistakes
+here if the schema you specify is not in this database user's <literal>SEARCH_PATH</literal>,
+or comes after some other schema that has tables with the same names.
 __END__
 
 __NAME__ example: Making Interchange recognize views
