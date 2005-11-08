@@ -199,8 +199,11 @@ select tax from state where country = [value country] and state = [value state]
 	(The default option is there to be applied if the
 	<database class='field'>tax_category</database> for a product is zero
 	or unspecified.)
+	The special member <literal>mv_shipping</literal> is used to set tax rate
+	for shipping if shipping is indeed taxed. If shipping is taxed only when
+	taxable items are in the cart, use <literal>mv_shipping_when_taxable</literal> 
+	instead.
 	</para></listitem>
-</itemizedlist>
 
 <!-- Move to appropriate tag's examples
 This product data
@@ -222,6 +225,7 @@ with this country and state data:
     code   country   state   name      tax
     0001   US        IL      Illinois  6.5%
     0002   US        OH      Ohio      default = 5.5%, food = 1%
+    0002   US        NV      Nevada    default = 5.5%, food = 1%, mv_shipping=5.5%
     0003   US        AZ      Arizona
 !endblock
 
