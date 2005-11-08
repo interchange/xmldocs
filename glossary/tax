@@ -204,7 +204,7 @@ select tax from state where country = [value country] and state = [value state]
 	taxable items are in the cart, use <literal>mv_shipping_when_taxable</literal> 
 	instead.
 	</para></listitem>
-
+</itemizedlist>
 <!-- Move to appropriate tag's examples
 This product data
 
