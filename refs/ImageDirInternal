@@ -2,3 +2,14 @@ __NAME__ purpose
 (obsolete)
 __END__
 
+__NAME__ description
+The directive actually specifies value of &conf-ImageDir; directive, for cases
+when &IC;'s internal HTTP server is in use.
+</para><para>
+It must have a trailing <literal>/</literal> to work, and should always begin
+with a fully-qualified path (<literal>http://</literal>).
+__END__
+
+__NAME__ example: Specifying ImageDirInternal
+ImageDirInternal http://&def-hostname;/images/
+__END__

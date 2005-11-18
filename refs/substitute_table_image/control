@@ -1,4 +1,4 @@
-purpose: substitute background image paths in HTML table elements
+purpose: (obsolete) substitute background image paths in HTML table elements
 default: <literal>0</literal>
 see also: no_image_rewrite, ImageDir, ImageSecureDir
 author: &racke;, &ICDEVGROUP;

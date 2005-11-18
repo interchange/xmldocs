@@ -198,11 +198,11 @@ select tax from state where country = [value country] and state = [value state]
 	<database>products</database> database is used to determine tax rate.
 	(The default option is there to be applied if the
 	<database class='field'>tax_category</database> for a product is zero
-	or unspecified.)
-	The special member <literal>mv_shipping</literal> is used to set tax rate
-	for shipping if shipping is indeed taxed. If shipping is taxed only when
-	taxable items are in the cart, use <literal>mv_shipping_when_taxable</literal> 
-	instead.
+	or unspecified.
+	The special field <literal>mv_shipping</literal> is used to set tax rate
+	for shipping, if shipping is indeed taxed. If shipping is taxed only when
+	taxable items are in the cart, then use
+	<literal>mv_shipping_when_taxable</literal> instead.)
 	</para></listitem>
 </itemizedlist>
 <!-- Move to appropriate tag's examples

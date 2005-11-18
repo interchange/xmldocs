@@ -1,0 +1,29 @@
+__NAME__ purpose
+specify "virtual" location of the form processor page
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>page_name</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies the name of the <literal>process</literal> page
+(the &IC; &glos-form-processor; page). The process page does not really
+exist on the disk &mdash; it is defined as an &conf-ActionMap;.
+__END__
+
+__NAME__ notes
+The default of <literal>process</literal> satisfies most needs and
+should rarely be changed.
+__END__
+
+__NAME__ example: Setting ProcessPage
+<programlisting>
+ProcessPage proc
+</programlisting>
+__END__
+

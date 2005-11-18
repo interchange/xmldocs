@@ -48,7 +48,7 @@ read normally and need not be recompiled on the fly again.
 </para><para>
 Over time, as you access pages and routines, a full set of tags
 will be developed and you can then disable &conf-AccumulateCode;.
-(In fact, &conf-AccumulateCode; is recommended for development and should 
+(In fact, &conf-AccumulateCode; is recommended only for development and should 
 really be turned off in production systems).
 __END__
 

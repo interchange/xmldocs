@@ -1,0 +1,37 @@
+__NAME__ purpose
+specify alias location for all image files
+__END__
+
+
+__NAME__ see also
+ImageDir, ImageDirSecure, no_image_rewrite
+__END__
+
+
+__NAME__ synopsis
+	<arg choice='req'>
+		<replaceable>alias_location</replaceable>
+		<replaceable>real_location</replaceable>
+	</arg>
+__END__
+
+
+__NAME__ description
+The directive specifies an alias for the base images location, which is
+set by &conf-ImageDir; and related directives.
+</para><para>
+It is similar in effect to the "alias" feature of Web servers such as 
+&APACHE; or NCSA. 
+__END__
+
+__NAME_ notes
+The directive can be useful in making &IC; pages editable with
+&glos-HTML; editors.
+__END__
+
+__NAME__ example: Setting ImageAlias
+<programlisting>
+ImageAlias /images/ /tutorial/tutorial-images/
+</programlisting>
+__END__
+

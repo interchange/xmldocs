@@ -1,0 +1,25 @@
+__NAME__ purpose
+return last non-null entry from an input consisting of null-separated fields
+__END__
+
+__NAME__ description
+The filter splits the input on a null character (<literal>\0</literal>)
+and returns the last non-null entry.
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting><![CDATA[
+[perl]
+  $Tag->filter({
+    op   => 'last_non_null',
+    body => "One\0Two\0Three\0\0\0"
+  });
+[/perl]
+]]></programlisting>
+__END__
+

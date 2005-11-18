@@ -1,9 +1,11 @@
-Intercept all outgoing email and instead send it to the address
-(or addresses, comma-separated) defined in this global or catalog
-variable. This is primarily intended to allow developers to write
-functions that send email and test them without worrying about
-accidentally sending mail to end-users.
+If defined, the &glos-variable; causes
+all outgoing e-mail to be intercepted, and sent to a specified 
+address or comma-separated addresses.
 </para><para>
-Headers in the form <literal>X-Intercepted-To:</literal> etc. are added to
-show what the original destination of the mail was, and the interception
-is also noted in the catalog error log.
+This feature is intended to allow developers to write and test
+functions that send e-mail, without worrying about
+accidentally sending mail to end users.
+</para><para>
+A header in the form of <literal>X-Intercepted-To:</literal> is inserted 
+in the message to show the original destination. At the same time,
+he interception is also noted in the &glos-catalog; error log file.

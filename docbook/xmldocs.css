@@ -228,8 +228,10 @@ a:hover { text-decoration: underline; }
 	/*background-color: #f7e8e8;*/
 	padding: 4px 4px 4px 4px;
 	border-left: dashed 1px #ff8300; /*#ffd1d1;*/
-	padding-left: 8px;
+	/*border-right: dashed 1px #ff8300;*/ /*#ffd1d1;*/
 	margin: 0;
+	padding-left: 8px;
+	/*padding: 10px 0px 10px 4px;*/
 }
 
 .example .title {
@@ -242,12 +244,14 @@ a:hover { text-decoration: underline; }
 
 .example p {
 	border-left: dashed 1px #ff8300; /*#ffd1d1;*/
+	/*border-right: dashed 1px #ff8300;*/ /*#ffd1d1;*/
 	padding: 10px 0px 10px 4px;
 	margin: 0;
 }
 
 .example {
 	margin-bottom: 24px;
+	/*background-image: url(images/example-vr.png) bottom right;*/
 }
 
 .screen {

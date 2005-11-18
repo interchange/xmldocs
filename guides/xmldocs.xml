@@ -95,13 +95,14 @@
 	</para></listitem>
 	<listitem><para>
 	Instead of writing complete XML documents (those that contain XML
-	"head and tail" and would be valid if taken standalone), you only need to
+	"head and tail" and would be valid if taken standalone), in XMLDOCS 
+	you only need to
 	provide short blocks of input to predefined "slots". These slots
 	already provide all needed XML wrapping, so you can get onto writing
 	actual text right away. For example, the opening
 	<literal>&lt;para&gt;</literal> and the closing
 	<literal>&lt;/para&gt;</literal> are always part of the template, so
-	you can (and infact, must) simply omit them when filling in the
+	you can (and in fact, must) omit them when filling in the
 	documentation slots.
 	</para></listitem>
 	<listitem><para>
@@ -110,7 +111,7 @@
 	<literal><replaceable>&amp;NAME;</replaceable></literal> syntax.
 	XMLDOCS contain a ton of predefined &IC;-suitable entities, to both
 	reduce typing
-	and "formalize" the look and feel. Compare the clarity and convenience
+	and to "formalize" the look and feel. Compare the clarity and convenience
 	of the below examples:
 <screen><![CDATA[
 <!-- Generic DocBook XML way: -->
@@ -301,7 +302,7 @@ There are few different file types whose structure needs to be specified:
 	Symbols are a little different. In general, the symbol refentry pages
 	already contain all the fields, you only need to provide contents for
 	them. To minimize overhead, fields have some default headers and footers
-	which you then can (and, infact, must) omit from your chunks.
+	which you then can (and, in fact, must) omit from your chunks.
 	</para>
 	<para>
 	You can also create more sections that begin with the same name, and

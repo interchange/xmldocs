@@ -81,8 +81,13 @@ For more about &IC; and databases, and supported formats, see &glos-database;
 glossary entry.
 </para><para>
 The <literal>schema</literal> argument to this directive can be specified to
-avoids using the &conf-DatabaseAutoIgnore; directive, which can easily ignore
+avoid using the &conf-DatabaseAutoIgnore; directive, which can easily ignore
 more tables than you really intended.
+</para><para>
+Also be aware that it is possible to make some confusing configuration mistakes
+here, if the schema you specify is not in the database user's
+<envar>SEARCH_PATH</envar>, or comes after some other schema that has tables
+with the same names.
 __END__
 
 __NAME__ example: Standard DatabaseAuto definition, a standalone example
@@ -162,9 +167,6 @@ any other schemas.
 <programlisting>
 DatabaseAuto dbi:Pg:DBNAME USERNAME PASSWORD '' public
 </programlisting>
-Be aware that it's possible to make some confusing configuration mistakes
-here if the schema you specify is not in this database user's <literal>SEARCH_PATH</literal>,
-or comes after some other schema that has tables with the same names.
 __END__
 
 __NAME__ example: Making Interchange recognize views

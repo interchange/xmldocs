@@ -23,6 +23,10 @@ __END__
 __NAME__ notes
 You would use &conf-SocketFile; in combination with the 
 <literal>vlink</literal> &glos-link-program;.
+</para><para>
+The <envar>MINIVEND_SOCKET</envar> &glos-environment; variable
+is <emphasis role='bold'>not</emphasis> honored by &IC;, contrary to
+what you can read in older &IC; documentation.
 __END__
 
 

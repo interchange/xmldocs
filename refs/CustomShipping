@@ -1,0 +1,33 @@
+__NAME__ purpose
+specify SQL query to use in obtaining shipping costs data
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>SQL_query</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies the &glos-SQL; query to use in obtaining 
+data for &glos-shipping; costs calculation.
+</para><para>
+The &glos-SQL; query must start with <literal>select </literal> 
+(case insensitive), or the directive is ignored. If no rows are returned
+from the query, an appropriate error message is issued.
+__END__
+
+__NAME__ example: Specifying CustomShipping
+<programlisting>
+CustomShipping select * from shipping
+</programlisting>
+__END__
+
+__NAME__ missing
+Overview the text, see if it's OK
+Make real-world example
+Make shipping.txt database to supplement the example
+__END__
+

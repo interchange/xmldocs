@@ -1,0 +1,30 @@
+__NAME__ purpose
+automatically store encrypted credit card information
+__END__
+
+
+__NAME__ see also
+EncryptProgram, PGP
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive enables automatic encryption and saving of credit card
+information.
+</para><para>
+The &conf-EncryptProgram; directive must be configured and working first.
+__END__
+
+__NAME__ example: Defining AllowGlobal
+<programlisting>
+CreditCardAuto Yes
+</programlisting>
+__END__
+

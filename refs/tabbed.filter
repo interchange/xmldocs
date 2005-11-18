@@ -1,0 +1,23 @@
+__NAME__ purpose
+replace newlines in input with TAB characters
+__END__
+
+__NAME__ description
+The filter replaces all occurrences of a newline in the input
+with a TAB character.
+</para><para>
+Windows-style newlines (<literal>\r\n</literal>) are supported. 
+"Compression" is not done &mdash; each newline is replaced by one
+TAB.
+__END__
+
+__NAME__ online: Filter example
+<programlisting><![CDATA[
+[filter tabbed]
+One
+Two
+Three
+[/filter]
+]]></programlisting>
+__END__
+

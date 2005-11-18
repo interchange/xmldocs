@@ -1,0 +1,123 @@
+__NAME__ purpose
+specify location of special pages
+__END__
+
+
+__NAME__ synopsis
+<arg choice='req'>
+	<replaceable>type</replaceable>
+	<replaceable>filename</replaceable>
+</arg>
+__END__
+
+
+__NAME__ description
+Specify custom values for Interchange &glos-special; pages.
+</para><para>
+Valid types are:
+<itemizedlist>
+	<listitem><para>
+	<literal>badsearch</literal> &mdash; 
+
+	Defaults to <literal></literal>.
+	</para></listitem>
+	<listitem><para>
+	<literal>canceled</literal> &mdash; 
+
+	Defaults to <literal></literal>.
+	</para></listitem>
+	<listitem><para>
+	<literal>catalog</literal> &mdash; 
+
+	Defaults to <literal></literal>.
+	</para></listitem>
+	<listitem><para>
+	<literal>failed</literal> &mdash; 
+
+	Defaults to <literal></literal>.
+	</para></listitem>
+	<listitem><para>
+	<literal>flypage</literal> &mdash; 
+
+	Defaults to <literal>flypage</literal>.
+	</para></listitem>
+	<listitem><para>
+	<literal>interact</literal> &mdash; 
+
+	Defaults to <literal></literal>.
+	</para></listitem>
+	<listitem><para>
+	<literal>missing</literal> &mdash; 
+
+	Defaults to <literal></literal>.
+	</para></listitem>
+	<listitem><para>
+	<literal>needfield</literal> &mdash; 
+
+	Defaults to <literal></literal>.
+	</para></listitem>
+	<listitem><para>
+	<literal>order</literal> &mdash; 
+
+	Defaults to <literal>ord/basket</literal>.
+	</para></listitem>
+	<listitem><para>
+	<literal>put_handler</literal> &mdash; 
+
+	Defaults to <literal></literal>.
+	</para></listitem>
+	<listitem><para>
+	<literal>receipt</literal> &mdash; 
+
+	Defaults to <literal></literal>.
+	</para></listitem>
+	<listitem><para>
+	<literal>results</literal> &mdash; 
+
+	Defaults to <literal>results</literal>.
+	</para></listitem>
+	<listitem><para>
+	<literal>salestax.asc</literal> &mdash; 
+
+	Defaults to <literal>salestax.asc</literal>.
+	</para></listitem>
+	<listitem><para>
+	<literal>search</literal> &mdash; 
+
+	Defaults to <literal>results</literal>.
+	</para></listitem>
+	<listitem><para>
+	<literal>shipping.asc</literal> &mdash; 
+
+	Defaults to <literal>shipping.asc</literal>.
+	</para></listitem>
+	<listitem><para>
+	<literal>violation</literal> &mdash; 
+
+	Defaults to <literal></literal>.
+	</para></listitem>
+</itemizedlist>
+__END__
+
+__NAME__ example: Setting SpecialPages
+<programlisting>
+SpecialPage  catalog        index
+SpecialPage  violation      special/violation
+SpecialPage  put_handler    admin_publish
+SpecialPage  receipt        ../etc/receipt
+SpecialPage  badsearch      special/badsearch
+SpecialPage  catalog        test
+SpecialPage  canceled       special/canceled
+SpecialPage  failed         special/failed
+SpecialPage  interact       special/interact
+SpecialPage  missing        special/missing
+SpecialPage  needfield      special/needfield
+SpecialPage  order          ord/basket
+SpecialPage  search         results
+SpecialPage  violation      special/violation
+</programlisting>
+__END__
+
+__NAME__ see also
+DirectoryIndex
+__END__

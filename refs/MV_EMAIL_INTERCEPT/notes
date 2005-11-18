@@ -1,12 +1,16 @@
-Note that this only works for Interchange's built-in routines for sending
-email. If you use other methods to send mail, for example by directly
-running sendmail or talking to an SMTP server, you'll have to add
-interception support yourself.
+Note that this only works for &IC;'s built-in e-mail sending
+routines. If you use other methods to send e-mail, for example by directly
+running <command>sendmail</command> or talking to an &glos-SMTP; server
+you'll have to add implement support yourself.
 </para><para>
 Be aware that this setting can mask certain programming errors. For
-example, trying to send an email without a To address normally results
-in an error. But with email interception, a valid To address is actually
-used, so no error results. Before switching off interception, the only
-way to know you have a problem is by checking the X-Intercepted-To:
-header and noticing it's empty, or by looking at the catalog error log
-and seeing that an empty To: header was intercepted.
+example, trying to send an e-mail without a
+<literal>To:</literal> address would normally result
+in an error. With email interception, however, a valid
+<literal>To:</literal> address would be used, and seemingly work as
+expected. Before switching off the interception, the only
+way to know whether you did everything right is to check the
+<literal>X-Intercepted-To:</literal>
+header and verify its correctness. Probably even easier, you should
+just monitor error log files as the original e-mail destination is
+reported there as well.

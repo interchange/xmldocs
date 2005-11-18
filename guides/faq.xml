@@ -6,12 +6,12 @@
 <article id='faq'>
 
 <articleinfo>
-	<title>&IC; Frequently Asked Questions (FAQ)</title>
+	<title>Interchange FAQ: Frequently Asked Questions</title>
 	<titleabbrev>faq</titleabbrev>
 
 	<copyright>
 		<year>2003</year><year>2004</year><year>2005</year>
-		<holder>&IC; Development Group</holder>
+		<holder>Interchange Development Group</holder>
 	</copyright>
 	<copyright>
 		<year>2002</year>
@@ -66,19 +66,15 @@
 How do I install Interchange?
 </para></question>
 <answer><para>
-&ICDEVGROUP; distributes &IC; in the basic format of &glos-tarball;s.
-To install &IC; this way, obtain the tarball from the &ICDL; page
-and read file &cvsfile-README;.
-</para><para>
-Besides tarballs, there are also "precompiled" packages available 
-for specific platforms. For &DEBGNU;, see file &cvsfile-README.debian;.
-For &RH; and derivatives, see file &cvsfile-README.rpm-dist;.
-</para><para>
-Finally, you can install &IC; directly out of CVS to get a copy
-of the latest code. To do so, see file &cvsfile-README.cvs;.
+&IC; pages are not kept in normal &glos-HTML; space. Instead, they are kept in
+a special directory pointed to by the &conf-PageDir; configuration directive
+(with the default of <filename>products/</filename> directory inside
+&glos-CATROOT;).
+The pages served from &conf-PageDir; are always filtered through the
+&IC; daemon before being delivered to the clients &mdash; it's one of the
+crucial things that Interchange does.
 </para>
-</answer>
-</qandaentry>
+</answer></qandaentry>
 
 <qandaentry>
 <question><para>
@@ -92,29 +88,33 @@ Most &IC; configuration and setup problems are due to one of the following:
 <listitem><para>Wrong information given to makecat program.
 </para><para>
 This is by far the most common problem. To install a working demo,
-&IC; needs to know what the &glos-DOCROOT; is and how to run &glos-CGI;
-programs. Details of this setup are server- and site-specific, which may
-require some research.
+&IC; needs to know what the Web server &glos-DOCROOT; is and how to run
+&glos-CGI; programs. Details of this setup are server- and site-specific,
+which may require some research.
 </para><para>
-Re-run the configuration again, and pay close attention to the prompts
-given. There are examples given which apply to most systems.
+Run the <command>makecat</command> command and pay close attention to the
+prompts displayed. There are examples given which apply to most systems.
 </para><para>
 If the web server is &APACHE; or NCSA, &IC; will try and parse its
 <filename>httpd.conf</filename> file to help you along, but many ISPs
 don't allow users to
-read these and it may fail.
+read these.
 </para></listitem>
 <listitem><para>Too-low version of &PERL;.
 </para><para>
-If you have a &PERL; earlier than 5.005, &IC; will not work. Don't
+If you have a &PERL; earlier than 5.6, &IC; will not work. Don't
 even try an earlier version.
 </para></listitem>
 
 <listitem><para>&PERL; compiled with <literal>USE_THREADS</literal>.
 </para><para>
-Run <command>perl -V</command>. If you see
-<literal>-DUSE_THREADS</literal> in the compilation definition,
-you might run into problems with &IC;.
+&IC; does not work well with
+threaded &PERL; installations (it's because of the problems that the
+"threadness" causes to various Perl modules that &IC; uses).
+Run <command>perl -V:usethreads</command>; if the response is
+<literal>define</literal>, you need at least &PERL; 5.8.4 to get any
+results. Even then, we do not encourage the use of threaded Perl with &IC;
+as it causes about 30% performance penalty.
 </para></listitem>
 
 <listitem>
@@ -135,13 +135,13 @@ If you are setting &IC; up for the entire machine, and not just
 as a virtual host user, it is usual to create a special
 <systemitem class='username'>interch</systemitem> user
 to run the daemon and the link program. This means the directory listing
-for your <filename>cgi-bin/</filename> directory should be something like:
+for your <filename>cgi-bin/</filename> directory should be something like
 
 <programlisting><![CDATA[
 -rwsr-xr-x   1 interchange users        6312 Dec 30 11:39 cgi-bin/simple
 ]]></programlisting>
 
-and for the socket file it should be:
+and for the socket file it should be
 
 <programlisting><![CDATA[
 srw-------   1 interchange users           0 Dec 30 11:41 etc/socket
@@ -154,7 +154,8 @@ is set to <literal>2</literal> or <literal>22</literal>.
 
 (The following assumes you have made the &IC; software owned and run by the
 special user <systemitem class='username'>interch</systemitem> and that each
-user has a &IC; catalogs directory <filename>/home/user/catalogs</filename>).
+user has a &IC; catalogs directory
+<filename>/home/<replaceable>USER</replaceable>/catalogs</filename>).
 </para><para>
 
 The best way to set permissions on a multi-user system is to make all
@@ -165,9 +166,9 @@ system setup that places each user in their own group, make
 group and set ownership and permissions with:
 
 <programlisting>
-$ find <replaceable>/home/user/catalogs</replaceable> -print | xargs chown <replaceable>USER</replaceable>
-$ find <replaceable>/home/user/catalogs</replaceable> -print | xargs chgrp <replaceable>USER</replaceable>
-$ find <replaceable>/home/user/catalogs</replaceable> -print | xargs chmod g+rw
+$ find <replaceable>/home/<replaceable>USER</replaceable>/catalogs</replaceable> -print | xargs chown <replaceable>USER</replaceable>
+$ find <replaceable>/home/<replaceable>USER</replaceable>/catalogs</replaceable> -print | xargs chgrp <replaceable>USER</replaceable>
+$ find <replaceable>/home/<replaceable>USER</replaceable>/catalogs</replaceable> -print | xargs chmod g+rw
 </programlisting>
 
 For best results, set the user's default &glos-umask; to <literal>2</literal>,
@@ -182,10 +183,10 @@ owned by the group <literal>interch</literal> and all directories to &glos-mode;
 created (on most UNIX versions, anyway).
 
 <programlisting>
-$ find <replaceable>/home/user/catalogs</replaceable> -print | xargs chown <replaceable>USER</replaceable>
-$ find <replaceable>/home/user/catalogs</replaceable> -print | xargs chgrp <replaceable>interch</replaceable>
-$ find <replaceable>/home/user/catalogs</replaceable> -print | xargs chmod g+rw
-$ find <replaceable>/home/user/catalogs</replaceable> -type d -print | xargs chmod g+s
+$ find <replaceable>/home/<replaceable>USER</replaceable>/catalogs</replaceable> -print | xargs chown <replaceable>USER</replaceable>
+$ find <replaceable>/home/<replaceable>USER</replaceable>/catalogs</replaceable> -print | xargs chgrp <replaceable>interch</replaceable>
+$ find <replaceable>/home/<replaceable>USER</replaceable>/catalogs</replaceable> -print | xargs chmod g+rw
+$ find <replaceable>/home/<replaceable>USER</replaceable>/catalogs</replaceable> -type d -print | xargs chmod g+s
 </programlisting>
 
 If you are on a virtual hosting system, the procedure varies. Making the
@@ -197,16 +198,16 @@ $ chmod u-s cgi-bin/<replaceable>CATALOG_NAME</replaceable>
 </programlisting> or the like.
 If you have a
 non-standard CGI setup, as some virtual host systems do, you will need to know
-something about UNIX and the web or engage a consultant to properly set up the
+something about UNIX and the web, or engage a consultant to properly set up the
 paths. Usually switching to TLINK/INET mode is the easiest thing to do, though
-with Iserver and a few others it may take more than that.
+with Iserver and a few other hosting companies it may take more than that.
 </para><para>
 
-If you used the <literal>makecat</literal> program to build the catalog, it
+If you used the <command>makecat</command> program to build the catalog, it
 should have warned
 you if it was not able to make the link program setuid. To set the program (
 <literal>cgi-bin/<replaceable>CATALOG_NAME</replaceable></literal>) setuid,
-use the command:
+use the command
 
 <programlisting>
 $ chmod u+s cgi-bin/<replaceable>CATALOG_NAME</replaceable>
@@ -227,8 +228,9 @@ server.
 </para>
 
 <note><para>The server should always be started by the same
-user ID which owns the suid vlink program
-(the note does not apply to TLINK/INET mode).
+user ID which owns the suid &glos-link-program;. As there is no visible
+socket file and filesystem permissions for TLINK (Inet socket) mode,
+this note applies to VLINK (Unix socket) setups only.
 </para></note>
 
 <para>
@@ -1135,7 +1137,7 @@ More automated or user-friendly setups are left as an exercise for the user.
 </qandaentry>
 </qandadiv>
 
-<qandadiv><title>How do i....</title>
+<qandadiv><title>How do I....</title>
 
 <qandaentry>
 	<question><para>How do I get the number of items
@@ -2324,7 +2326,7 @@ don't use them, you can delete them.
         
 Line:
 
-N:Copyright 2002-2004 &IC; Development Group. Copyright 2001-2002 Red Hat, Inc. Freely redistributable under terms of the GNU General Public License.
+N:Copyright 2002-2004 Interchange Development Group. Copyright 2001-2002 Red Hat, Inc. Freely redistributable under terms of the GNU General Public License.
 -->
 
 </qandadiv>

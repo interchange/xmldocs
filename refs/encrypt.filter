@@ -1,0 +1,21 @@
+__NAME__ purpose
+PGP-encrypt input
+__END__
+
+__NAME__ description
+The filter PGP-encrypts the provided input.
+__END__
+
+
+__NAME__ see also
+PGP, EncryptProgram
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[filter encrypt.KEY]Secret phrase or a credit card number[filter]
+</programlisting>
+__END__
+
+TODO Standalone example

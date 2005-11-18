@@ -1,9 +1,9 @@
-By default, Interchange does not allow data returned from the databases to be &glos-interpolate;d (all the &#91;s are converted to an &glos-HTML; entity (&amp;#91;) and displayed literally). Setting this pragma eliminates the restriction and passes &#91;s through for interpolation).
+By default, Interchange does not allow data returned from the databases to be &glos-interpolate;d (all the &#91;s are converted to an &glos-HTML; entity &amp;#91; and displayed literally). Setting this pragma eliminates the restriction and passes &#91;s through for interpolation.
 </para><para>
 If you want to have tags in your database and display them in Interchange pages (to say, display <tag>page</tag> links for internal hyperlinks in your product descriptions), you need to enable this pragma.
 Some things to consider, though:
 </para><para>
-It might be better to use the <option>safe_data</option> attribute available to certain tags, or perhaps the <tag>pragma</tag> for a whole page or <tag>tag pragma safe_data</tag><tag>/tag</tag> for a small block of ITL code on a page, instead of setting a catalog-wide <pragma>safe_data</pragma> pragma.
+It might be better to use the <option>safe_data</option> attribute available to certain tags, or perhaps the <tag>pragma</tag> for a whole page or <tag>tag pragma safe_data</tag><tag>/tag</tag> for a small block of &glos-ITL; code on a page, instead of setting a catalog-wide <pragma>safe_data</pragma> pragma.
 </para><para>
 In any case, it is strongly recommended that you surround the area in a <tag>restrict</tag> tag to only allow specific set of tags to appear "in-band" (which should be relatively safe), such as <tag>page</tag> or <tag>area</tag>. Expect security compromises if you allow <tag>calc</tag>, <tag>perl</tag> or any other extremely powerful tags.
 </para><para>

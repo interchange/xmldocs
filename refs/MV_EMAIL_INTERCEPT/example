@@ -1,15 +1,15 @@
 <example>
 
 <title>
-Setting MV_EMAIL_INTERCEPT to "user@example.com"
+Setting MV_EMAIL_INTERCEPT to "root@&def-domain;"
 </title>
 
 <para>
-Set the following in <filename>interchange.cfg</filename> or <filename>catalog.cfg</filename>:
+Set the following in &gcf; or &ccf;:
 </para>
 
 <programlisting><![CDATA[
-Variable MV_EMAIL_INTERCEPT user@example.com
+Variable MV_EMAIL_INTERCEPT root@mydomain.local
 ]]></programlisting>
 
 </example>

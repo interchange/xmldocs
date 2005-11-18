@@ -1,0 +1,37 @@
+__NAME__ purpose
+specify name of the database to use for client verification
+__END__
+
+
+__NAME__ see also
+Database,UserDB
+__END__
+
+
+__NAME__ synopsis
+<arg choice='req'><replaceable>database_name</replaceable></arg>
+__END__
+
+
+__NAME__ description
+__END__
+
+
+__NAME__ notes
+__END__
+
+__NAME__ example: UserDatabase layout
+<programlisting>
+<xi:include parse='text'  href='../files/various/userdatabase.txt'/>
+</programlisting>
+The database can be downloaded 
+<ulink url='files/various/userdatabase.txt'>verbatim</ulink>.
+__END__
+
+__NAME__ example: Specifying UserDatabase
+<programlisting>
+Database      userdatabase  userdatabase.txt  TAB
+UserDatabase  userdatabase
+</programlisting>
+__END__
+

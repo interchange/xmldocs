@@ -51,7 +51,7 @@ __END__
 
 __NAME__ example: Enabling CheckHTML
 <programlisting>
-CheckHTML /usr/local/bin/weblint -s -
+CheckHTML /usr/local/bin/weblint --structure --fluff -
 </programlisting>
 __END__
 

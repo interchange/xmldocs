@@ -1,2 +1,1 @@
-purpose: intercept all outgoing email and instead send to this address
-default: undefined
+purpose: intercept all outgoing email and redirect it to the specified address
