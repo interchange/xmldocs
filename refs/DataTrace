@@ -12,7 +12,7 @@ __END__
 
 __NAME__ description
 Trace DBI calls with variable granularity.
-As this tends to produce large ammounts of output, only use it if
+As this tends to produce large amounts of output, only use it if
 there's a strong chance that your problem is related to DBI.
 </para><para>
 Setting of <literal>0</literal> disables tracing.<sbr/>
