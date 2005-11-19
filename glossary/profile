@@ -1,7 +1,7 @@
 
 &IC; form <emphasis>profiles</emphasis> are used to validate form inputs and
 eventually trigger additional actions. Input fields validation usually contains
-of requireing some of the fields to be non-empty or match a specific regular
+of requiring some of the fields to be non-empty or match a specific regular
 expression pattern at time of submit.
 </para>
 <para>

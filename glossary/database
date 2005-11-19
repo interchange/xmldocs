@@ -93,7 +93,7 @@ SH543|Men's fine cotton shirt|14.95|shirts.jpg
 PIPE-delimited files perform fairly well with ASCII text searching routines.
 	</para></listitem>
 	<listitem>
-	<para>CVS-delimited file:
+	<para>CSV-delimited file:
 Fields are enclosed in quotes and separated by commas. Again, no whitespace
 should be at the beginning of the line.
 </para>
@@ -122,7 +122,7 @@ all upper case names are recommended.
 <para>
 As hinted above, you do not need to use an external SQL database. If you only
 have a small data set, you could use Interchange's internal databases.
-This is a tremendeous gain for small and quick setups, or &IC; evaluation.
+This is a tremendous gain for small and quick setups, or &IC; evaluation.
 However, some functions (order management, for example) will be slower
 and not as robust without an SQL database. SQL is strongly recommended for
 at least the <database>state</database>,
@@ -137,8 +137,8 @@ also best placed in SQL.
 <note>
 <title>Database performance</title>
 <para>
-Do not, however, try to optimize too soon and for no measureable difference.
-Do not fall in the jaws of <ulink url="http://c2.com/cgi/wiki?PrematureOptimization">premature optimisation</ulink>, <ulink url="http://www.flounder.com/optimization.htm">your worst enemy</ulink>.
+Do not, however, try to optimize too soon and for no measurable difference.
+Do not fall in the jaws of <ulink url="http://c2.com/cgi/wiki?PrematureOptimization">premature optimization</ulink>, <ulink url="http://www.flounder.com/optimization.htm">your worst enemy</ulink>.
 </para>
 </note>
 
@@ -160,7 +160,7 @@ If there is no <filename><replaceable>table</replaceable>.sql</filename>,
 the DBI/SQL import will happen once at
 &IC; startup or catalog reconfiguration time;
 Interchange will connect to the SQL database using the specified DSN
-(DNS is a standard DBI parameter meaning "Database Source Name").
+(DSN is a standard DBI parameter meaning "Database Source Name").
 The table, if it already exists, will be dropped using a line similar to
 <literal>DROP TABLE <replaceable>table</replaceable></literal>.
 This will occur without warning, but &conf-NoImport; can be used to 
@@ -253,7 +253,7 @@ databases for every catalog.
 </para>
 <para>
 Memory databases are used by default only if no database type is
-explicity specified, and there is no DB_File or gdbm found on
+explicitly specified, and there is no DB_File or gdbm found on
 the system. Otherwise they can be used for small but high-traffic
 tables. Keep in mind, however, that since their contents are not saved back
 to the text files, you'll want to either take care of the data export yourself,

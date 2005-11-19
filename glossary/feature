@@ -47,7 +47,7 @@ The <literal>.init</literal> file, when run, sends its output to
 (and that would be <filename>etc/init/quickpoll/quickpoll.init</filename> for
 the concrete example.)
 Once it is run, the existence of the file prevents it being run again.
-<!-- TODO: Doesnt it always check for existence of the file on (re)start?
+<!-- TODO: Doesn't it always check for existence of the file on (re)start?
 When the server is restarted, the file test is no longer needed, as the 
 init procedure has already been done.
  -->
@@ -81,7 +81,7 @@ as a part of the uninstall procedure, could be re-instantiated
 based on the existence of the configuration in memory. It
 is recommended that if &tag-uninstall_feature; is called, a
 &tag-reconfig; tag is called shortly thereafter to reduce this
-possiblility to a minimum.
+possibility to a minimum.
 </para>
 </caution>
 <para>

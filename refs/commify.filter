@@ -13,7 +13,7 @@ __NAME__ online: Filter example
 <programlisting>
 [set online_commify_test]1234567890.123456[/set]
 
-My commified value, trimed to 2 decimal places is:
+My commified value, trimmed to 2 decimal places is:
 [filter commify.2][scratchd online_commify_test][/filter]
 </programlisting>
 __END__

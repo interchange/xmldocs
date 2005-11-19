@@ -43,7 +43,7 @@ An example <database>pricing</database> database looks like this:
 __END__
 
 __NAME__ missing
-Say that in the examples, attribute names are arbitrary and that they should see price glossary entry for description of commonadjust strings and atoms.
+Say that in the examples, attribute names are arbitrary and that they should see price glossary entry for description of &CAs; and atoms.
 __END__
 
 __NAME__ example: Adjusting item price based on size
@@ -60,7 +60,7 @@ to achieve the effect:
 You see, the base price of <literal>10.00</literal> will be adjusted
 according to the <literal>size</literal> attribute. If we had a t-shirt
 with &glos-SKU; <literal>99-102</literal> and size <literal>XL</literal>,
-then an ammount of <literal>1.00</literal> would be added and form a total
+then an amount of <literal>1.00</literal> would be added and form a total
 price of <literal>11.00</literal> (according to the
 <database>pricing</database> table above). The same product in size
 <literal>S</literal> (small) would have a "bonus" of <literal>-0.50</literal>

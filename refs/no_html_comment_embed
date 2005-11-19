@@ -47,7 +47,7 @@ the current time.
 __END__
 
 
-__NAME__ example: Enable no_html_comment_embded pragma page-wide
+__NAME__ example: Enable no_html_comment_embed pragma page-wide
 Put the following anywhere on your page:
 <programlisting>
 [pragma no_html_comment_embed]

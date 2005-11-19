@@ -97,7 +97,7 @@ Here is an example of a special discount for item code
 __END__
 
 
-__NAME__ example: Displaying the discount ammount received
+__NAME__ example: Displaying the discount amount received
 If you want to display the discount amount to the user, simply use the
 &tag-item-discount; tag:
 <!-- TODO move this to refpage for item-discount -->

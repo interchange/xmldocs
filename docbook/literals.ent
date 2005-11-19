@@ -26,6 +26,8 @@
 <!ENTITY IMAGEMAGICK "<ulink url='http://www.imagemagick.org/'>ImageMagick</ulink>">
 <!ENTITY DOCBOOK "<ulink url='http://www.docbook.org/'>DocBook</ulink>">
 <!ENTITY ECHO "<ulink url='http://www.echo-inc.com/'>ECHO</ulink>">
+<!ENTITY EBAY "<ulink url='http://www.ebay.de/'>ebay.de</ulink>">
+<!ENTITY SVG "<ulink url='http://www.w3.org/TR/SVG/'>SVG</ulink>">
 
 
 

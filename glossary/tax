@@ -41,7 +41,7 @@ WA	.08
 ]]></programlisting>
 
 <!-- TODO salestax.asc - lookup by many values.. they get added together
-or first or last takes precendence -->
+or first or last takes precedence -->
 Based on user information given on the order form (and given our
 sample &conf-SalesTax; setting), &IC; will attempt a tax lookup by
 zip and state (in that order), and apply the percentage found to the
@@ -70,7 +70,7 @@ program can export to a flat ASCII file format based on zip code.
 <para>
 If some items are not taxable, then you must set up a field in your
 database which indicates that. Announce this field name by using the 
-&conf-NonTaxableField; directive. If the specifield field for that item
+&conf-NonTaxableField; directive. If the specified field for that item
 evaluates to a &glos-true; value, sales tax will not be applied to the item.
 </para>
 
@@ -176,7 +176,7 @@ are applied:
 	</para></listitem>
 	<listitem><para>
 	If string <literal>state</literal> is found, then another lookup
-	in the <database>country</database> databaseis done; it's something along
+	in the <database>country</database> database is done; it's something along
 	the lines of 
 <programlisting>
 select tax from state where country = [value country] and state = [value state]

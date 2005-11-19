@@ -18,7 +18,7 @@ __END__
 __NAME__ description
 Specify whether the &IC; server should listen on an UNIX-domain socket.
 </para><para>
-This &glos-configuration; directive can be overriden using 
+This &glos-configuration; directive can be overridden using 
 <literal>interchange -u</literal> switch on the command line.
 </para><para>
 __END__

@@ -27,7 +27,7 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry></entry>
 	<entry>
-	If the <option>Variable</option> is being used dinamically via 
+	If the <option>Variable</option> is being used dynamically via 
 	<option>DirConfig</option>, this should be the filename the CSS is contained
 	in. The file will be checked for modification time, and the CSS will be
 	rebuilt if it's older than the source file.
@@ -94,7 +94,7 @@ __NAME__ synopsis
 	<entry></entry><entry></entry>
 	<entry>0</entry>
 	<entry>
-	Copy the directory hieararchy in the output directory. Say, the 
+	Copy the directory hierarchy in the output directory. Say, the 
 	<tag>css</tag> tag on the <filename>info/index.html</filename> page
 	would produce output in <filename>images/info/theme_css.css</filename>.
 	</entry>

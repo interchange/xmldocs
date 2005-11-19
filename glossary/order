@@ -211,7 +211,7 @@ items with a positive quantity will be placed in the basket.
 
 <para>
 Note that "on fly" items are those that do not exist in any of the 
-<database>products</database> databases, and are literaly "put together"
+<database>products</database> databases, and are literally "put together"
 on the fly. This is unrelated to &IC; &glos-flypage; functionality.
 </para>
 <para>
@@ -479,7 +479,7 @@ the primary cart!
 </para>
 
 <para>
-And for the sake of completness, here's the above example using form-based
+And for the sake of completeness, here's the above example using form-based
 ordering:
 
 <programlisting><![CDATA[

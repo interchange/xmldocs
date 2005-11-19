@@ -20,7 +20,7 @@ __END__
 
 
 __NAME__ notes
-This directive is overriden by eventual &conf-Locale; definition which,
+This directive is overridden by eventual &conf-Locale; definition which,
 by design of &conf-Locale;, allows it to be set differently for different
 currencies.
 __END__

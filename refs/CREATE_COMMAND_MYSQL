@@ -17,8 +17,8 @@ __NAME__ description
 Specify shell command that will be invoked to create a database
 under &MYSQL;.
 </para><para>
-<!-- TODO first, or all occurences of %s ? -->
-An occurence of <literal>%s</literal> is replaced with the database
+<!-- TODO first, or all occurrences of %s ? -->
+An occurrence of <literal>%s</literal> is replaced with the database
 name prior to command execution.
 __END__
 

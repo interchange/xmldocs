@@ -96,7 +96,7 @@ __NAME__ synopsis2
 	Whitespace-separated list of fields in the <database>products</database>
 	database to pull the description from. This is used for the default
 	<arg choice='plain'>alt</arg> and
-	<arg choice='plain'>title</arg> atributes.
+	<arg choice='plain'>title</arg> attributes.
 	</entry>
 </row>
 <row>
@@ -275,7 +275,7 @@ __END__
 
 
 __NAME__ example: Simple image
-Let's suppose there'a product SKU os29000 present in your 
+Let's suppose there's a product SKU os29000 present in your 
 <database>products</database> database and the
 <database class='field'>image</database> field contains value
 <literal>os29000.png</literal>. Place the <tag>image</tag> on a test

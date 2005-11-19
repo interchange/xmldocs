@@ -10,7 +10,7 @@ The directive accepts a wildcard list - * represents any number of
 characters, ? represents a single character. The elements of the list are
 separated by a comma.
 
-If a User Agent is recognised as a robot, the following will be performed by Interchange:
+If a User Agent is recognized as a robot, the following will be performed by Interchange:
 
 =over 4
 

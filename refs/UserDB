@@ -35,7 +35,7 @@ addr_field|address_book|Set field name for address book
 assign_username|0|Tell interchange to automatically assign username
 bill_field|accounts|Set field name for accounts
 cart_field|carts|Set field name for cart storage
-clear_coookie||Comma-separated list of cookies to clear on explicit logout
+clear_cookie||Comma-separated list of cookies to clear on explicit logout
 clear_session||Clear user session completely on logout
 counter||Counter file for assign_username function
 crypt|1|Encrypt (1) or not encrypt (0) passwords
@@ -71,6 +71,6 @@ These are set in a C<catalog.cfg> file with something like:
 	UserDB  admin    md5     1
 
 where C<default> or C<admin> is the name of the profile to set. These can
-be overriden if passed in the tag:
+be overridden if passed in the tag:
 
 >   [userdb userminlen=6 new-account=1]

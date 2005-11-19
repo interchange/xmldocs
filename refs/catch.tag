@@ -114,7 +114,7 @@ __END__
 __NAME__ description
 The page content contained within <code>[catch
 <replaceable>label_name</replaceable>] ... [/catch]</code> block will
-be executed if the correspondingly labelled &tag-try; block fails.
+be executed if the correspondingly labeled &tag-try; block fails.
 This kind of error handling is common in some general-purpose programming
 languages, such as Java,
 <ulink url="http://www.hprog.org/fhp/MlLanguage">SML</ulink> or even
@@ -127,8 +127,8 @@ __END__
 
 __NAME__ notes
 Note that the &tag-catch; block executes <emphasis role='bold'>at place of
-occurence</emphasis> in place the page (if it is triggered), and not in place
-of the failed &tag-try; block. This gives great flexiblity but must be 
+occurrence</emphasis> in place the page (if it is triggered), and not in place
+of the failed &tag-try; block. This gives great flexibility but must be 
 taken into account.
 </para><para>
 &tag-catch; block must always <emphasis role='bold'>follow</emphasis>

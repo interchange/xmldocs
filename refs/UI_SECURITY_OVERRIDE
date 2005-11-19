@@ -14,7 +14,7 @@ __END__
 
 __NAME__ description
 If configured and no UI_ACCESS_TABLE found, 
-then it will return that there is an acl set. This would allow you to test acls
+then it will return that there is an ACL set. This would allow you to test ACLs
 See sub <literal>ui_acl_enabled()</literal> for more details.
 </para><para>
 StandardCatalog (catalog.cfg)VariableValues

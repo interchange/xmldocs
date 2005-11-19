@@ -32,7 +32,7 @@ sure they will have all the needed facilities available.
 <literal>module</literal> .
 __END__
 
-__NAME__ example: Requireing features
+__NAME__ example: Requiring features
 <programlisting>
 Require module    Archive::Zip
 Require usertag   table_editor

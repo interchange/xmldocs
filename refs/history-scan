@@ -109,7 +109,7 @@ collapseall           1
 	<arg choice='plain'>form</arg> is used in the generated link.
 	The default value shows a meaningful example. Note that since this is
 	a hash, the number <literal>1</literal> (or any true value for that matter)
-	after each entry is neccesary, but redundant.
+	after each entry is necessary, but redundant.
 	</entry>
 </row>
 __END__

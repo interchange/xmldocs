@@ -158,7 +158,7 @@ will be routed to mv_failpage or mv_nextpage in that order.
 When the leading part of the incoming path is equal to C<order>, it will trigger an action. The page name will be shifted up, and the C<order> stripped from the page name. So this custom C<order> action would essentially perform a no-op, and a URL like:
 
 !block example
-   <A HREF="[area order/nextpage]"> Go to the next page </A>
+   <A href="[area order/nextpage]"> Go to the next page </A>
 	 !endblock
 
 	 would be the equivalent of "[area nextpage]." If the action does not return a true (non-zero, non-blank) status, no page will be displayed by Interchange, not even the special C<missing> page. A response may also be generated via Perl or MVASP.

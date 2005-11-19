@@ -1,5 +1,5 @@
 __NAME__ purpose
-evalute the enclosed arithmetic expression or Perl block
+evaluate the enclosed arithmetic expression or Perl block
 __END__
 
 __NAME__ synopsis

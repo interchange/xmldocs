@@ -41,7 +41,7 @@ Direct access to variables (using the <code>__VAR__</code> syntax) is
 faster, so you should only use this tag where the direct access is
 impossible.
 </para><para>
-Here's the equivalency list:
+Here's the equivalence list:
 </para><para>
 <code>[var <replaceable>VAR</replaceable>]</code> == 
 <code>__<replaceable>VAR</replaceable>__</code>
@@ -54,7 +54,7 @@ Here's the equivalency list:
 __END__
 
 
-__NAME__ example: Direct access equivalency example
+__NAME__ example: Direct access equivalence example
 Note that the following two lines are identical in effect:
 <programlisting>
 [image  src="[var IMAGE_DIR]/items/[cgi item_id]" border=0 extra="id='item_img'"]

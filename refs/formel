@@ -169,7 +169,7 @@ __NAME__ example: Define tag defaults with form values
 [value name="mv_formel_order"  set=1 hide=1]
 [value name="mv_formel_signal" set="<blink>%s</blink>" hide=1]
 ]]></programlisting>
-Note that the values, once you set them, remain persistant during the
+Note that the values, once you set them, remain persistent during the
 user's session.
 __END__
 

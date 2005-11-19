@@ -32,7 +32,7 @@ The list of elements can be either passed in from the
 in the tag body.
 </para><para>
 If the <arg choice='plain'>file</arg> argument is specified, it takes
-precendence over the tag body content. Note that using large files
+precedence over the tag body content. Note that using large files
 can impact performance, since they are read in to memory before a random
 element is selected.
 __END__

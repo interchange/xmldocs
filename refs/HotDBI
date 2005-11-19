@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify catalogs that should use persistant database connections
+specify catalogs that should use persistent database connections
 __END__
 
 __NAME__ synopsis

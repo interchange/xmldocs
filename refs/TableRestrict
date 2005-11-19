@@ -54,7 +54,7 @@ __NAME__ example: Restricting edit to owned fields
 [/calc]
 </programlisting>
 (Note that the above example works because value of the &conf-TableRestrict; 
-config directive is overriden only for the duration of the current page &mdash;
+config directive is overridden only for the duration of the current page &mdash;
 for next page or access, &conf-TableRestrict; will again have the original
 value).
 __END__

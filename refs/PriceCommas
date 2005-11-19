@@ -25,7 +25,7 @@ __END__
 
 
 __NAME__ notes
-This directive is overriden by eventual
+This directive is overridden by eventual
 &conf-Locale; <literal>price_picture</literal> definition.
 __END__
 

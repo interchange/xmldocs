@@ -35,7 +35,7 @@ In case of individual item discounts, the formula must be defined in a way
 that it produces a subtotal which includes <emphasis>all items</emphasis> of
 the same SKU that are found in the user's basket.
 In case of an entire order discount, the formula is usually simpler
-and defines a flat discount ammount or percentage.
+and defines a flat discount amount or percentage.
 </para><para>
 <emphasis role='bold'>
 Discounts are applied to the <emphasis>effective</emphasis> price of the

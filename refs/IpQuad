@@ -19,11 +19,11 @@ __NAME__ description
 The directive simply specifies the number of <emphasis>dot-quads</emphasis>
 the session qualifier will look at, if &conf-IpHead; is enabled.
 </para><para>
-In other words, with an IPV4 address (32 bit address, consisting of 
+In other words, with an IPv4 address (32 bit address, consisting of 
 four dot-quads) of value
 <systemitem class='ipadress'>127.0.0.1</systemitem> and &conf-IpQuad; of 
 <literal>3</literal>, 
-<systemitem class='ipadress'><emphasis role='bold'>127.0.0.</emphasis></systemitem>
+<systemitem class='ipaddress'><emphasis role='bold'>127.0.0.</emphasis></systemitem>
 would be enough to qualify the user session.
 __END__
 

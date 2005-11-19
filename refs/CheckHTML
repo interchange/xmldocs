@@ -39,7 +39,7 @@ __END__
 
 __NAME__ notes
 Leaving this directive enabled on a production server usually leads to
-unneccesary performance degradation. The additional process spawn
+unnecessary performance degradation. The additional process spawn
 (and the time it takes to complete) every time a page is visited is
 very costly.
 </para><para>

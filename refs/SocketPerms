@@ -18,7 +18,7 @@ __NAME__ description
 Specify permissions (&glos-mode;) for the Interchange UNIX-domain socket.
 </para><para>
 Prepend a starting <literal>0</literal> to indicate an octal value. The
-directive can be overriden from the command line using <literal>interchange
+directive can be overridden from the command line using <literal>interchange
 -r SocketPerms=<replaceable>value</replaceable></literal>.
 __END__
 

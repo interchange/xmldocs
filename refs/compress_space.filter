@@ -1,11 +1,11 @@
 __NAME__ purpose
-eliminate leading and trailing whitespace and compress all "in-string" whitespace occurences to exactly 1 space each
+eliminate leading and trailing whitespace and compress all "in-string" whitespace occurrences to exactly 1 space each
 __END__
 
 __NAME__ description
 The filter eliminates leading and trailing whitespace, and 
-<emphasis>compresses</emphasis> all occurences of whitespace in a string to
-exactly 1 space on each occurence.
+<emphasis>compresses</emphasis> all occurrences of whitespace in a string to
+exactly 1 space on each occurrence.
 __END__
 
 

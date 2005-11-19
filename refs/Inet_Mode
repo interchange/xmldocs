@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify whether Interchange server should open an Inet socket and listen on a port
+specify whether Interchange server should open an INET socket and listen on a port
 __END__
 
 
@@ -19,13 +19,13 @@ __NAME__ description
 Specify whether the &IC; server should open an INET-domain socket and
 listen on some port.
 </para><para>
-This &glos-configuration; directive can be overriden using 
+This &glos-configuration; directive can be overridden using 
 <literal>interchange -i</literal> switch on the command line.
 </para><para>
 __END__
 
 __NAME__ notes
-You will need &IC; Inet mode in only rare circumstances (that is, only if your
+You will need &IC; INET mode in only rare circumstances (that is, only if your
 Web and &IC; server are not the same machine).
 __END__
 

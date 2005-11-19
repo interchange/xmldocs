@@ -38,7 +38,7 @@ Database variables variables.txt TAB
 VariableDatabase variables
 </programlisting>
 So as you see, if you want to use a non-default &glos-database;, you must
-explicitely
+explicitly
 define it using the &conf-Database; directive and do so before the 
 &conf-VariableDatabase; line.
 __END__

@@ -19,7 +19,7 @@ __END__
 __NAME__ notes
 Calls to the <function>show_times()</function> function are commented out
 in most of the &IC; source. To enable &conf-ShowTimes;, you also need to 
-search for occurences of <literal>ShowTimes</literal> in the actual source,
+search for occurrences of <literal>ShowTimes</literal> in the actual source,
 and un-comment the appropriate lines, then restart &IC; of course. You can
 effectively search the source by executing
 <command>grep -r ShowTimes *</command> within &glos-ICROOT;.

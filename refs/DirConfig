@@ -59,7 +59,7 @@ DirConfig Variable templates/foundation/regions
 </programlisting>
 If the file <filename>NOLEFT_TOP</filename> is present at catalog config time
 at the specified location, code <code>__NOLEFT_TOP__</code> encountered on
-a page will mimick
+a page will mimic
 <code>[include templates/foundation/regions/NOLEFT_TOP]</code>.
 __END__
 

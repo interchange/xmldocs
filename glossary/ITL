@@ -323,7 +323,7 @@ subtags and their availability in a minute.
 </para>
 <para>
 You might wonder why unquoted tags are even allowed. The answer is
-<emphasis>performance</emphasis>. If you have large lists of tagsm you can
+<emphasis>performance</emphasis>. If you have large lists of tags you can
 achieve significant speed-ups by using positional parameters. Parsing and
 disassembling named parameters takes some more CPU cycles.
 </para>
@@ -761,7 +761,7 @@ might look like this:
 ]
 </programlisting>
 
-However, you can explicitely request hash lists to be returned from
+However, you can explicitly request hash lists to be returned from
 queries:
 
 <programlisting>

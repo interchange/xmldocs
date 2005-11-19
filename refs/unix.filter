@@ -45,7 +45,7 @@ __NAME__ online: Filter example
 __END__
 
 __NAME__ missing
-DOS and Mac line in example doesnt contain \r because of docbook problems
+DOS and Mac line in example doesn't contain \r because of docbook problems
 __END__
 
 
