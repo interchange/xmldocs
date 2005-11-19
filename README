@@ -80,6 +80,30 @@ platform. (I suppose with a better patch, by someone know knows Red Hat
 and its DocBook XML setup, Red Hat would produce completely good results
 too - patches welcome).
 
+On Gentoo GNU/Linux systems, the prerequisite ebuild packages are as follows:
+
+  - dev-lang/perl
+  - dev-util/cvs
+  - app-arch/gzip
+  - app-arch/bzip2
+  - app-text/docbook-xml-dtd
+  - app-text/docbook-xsl-stylesheets
+  - dev-libs/libxslt
+  - dev-util/ctags
+  - app-text/tetex
+  - dev-perl/XML-Twig
+
+If running on Gentoo GNU/Linux then you will need to apply the following
+patch to correct the hard-coded, Debian-specific file locations:
+
+    http://icdevgroup.org/~kwalsh/xmldocs-gentoo.diff
+
+TODO: Create a pre-processor for the "docbook/docbookxi.dtd" and
+"docbook/olinkdb*xml" files that would automatically discover the path to
+the "docbookx.dtd" and "targetdatabase.dtd" files.  Running a find(1) in
+"/usr/share" should do the trick on most GNU/Linux OSs, and will remove
+the need for distro-specific patches that will quickly grow stale due
+to package version number changes.
 
 FINAL OUTPUT
 
