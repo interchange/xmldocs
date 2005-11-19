@@ -38,6 +38,13 @@ DOCUMENTATION SYSTEM:
 - Add support to document tags which are NOT found in separate files
   (like [restrict] or [subject]).
 
+TODO: Create a pre-processor for the "docbook/docbookxi.dtd" and
+"docbook/olinkdb*xml" files that would automatically discover the path to
+the "docbookx.dtd" and "targetdatabase.dtd" files.  Running a find(1) in
+"/usr/share" should do the trick on most GNU/Linux OSs, and will remove
+the need for distro-specific patches that will quickly grow stale due
+to package version number changes.
+
  Mid-term:
 - Ask ndw about including [NEW!] and [TODO!] in titles in TOC. --> This is a 
   bug and it will work when they fix it.
