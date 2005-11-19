@@ -7,12 +7,12 @@
 #
 
 # Those two need to be adjusted with time
-export XMLDOCS_CUR_DEVEL = 5.3.1
+export XMLDOCS_CUR_DEVEL = 5.3.2
 IC_VERSIONS = 4.6.0 4.8.0 5.0.0 5.2.0 cvs-head
 
 #############################################################
 # Base definitions
-SYMBOL_TYPES= pragmas vars tags confs filters
+SYMBOL_TYPES= pragmas vars tags confs filters orderchecks
 GUIDES      = iccattut programming-style upgrade faq index optimization search xmldocs
 HOWTOS      = howtos
 GLOSSARY    = glossary
