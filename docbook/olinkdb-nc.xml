@@ -14,7 +14,7 @@
 	<!ENTITY tags SYSTEM "../tmp/tags-nc.db"> 
 	<!ENTITY confs SYSTEM "../tmp/confs-nc.db"> 
 	<!ENTITY filters SYSTEM "../tmp/filters-nc.db"> 
-	<!ENTITY filters SYSTEM "../tmp/orderchecks-nc.db"> 
+	<!ENTITY orderchecks SYSTEM "../tmp/orderchecks-nc.db"> 
 ]>
 
 <targetset>

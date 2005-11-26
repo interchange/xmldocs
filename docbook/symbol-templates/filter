@@ -1,0 +1,60 @@
+<refentry id="$ag{id}">
+
+<refmeta>
+<refentrytitle>$ag{"name"}</refentrytitle>
+<manvolnum>7ic</manvolnum>
+<refmiscinfo class="title">$ag{"name"}</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>$ag{"name"}</refname>
+<refpurpose>$ag{"purpose"}</refpurpose>
+</refnamediv>
+
+<refsect1 id='$ag{"name"}_description'>
+<title>DESCRIPTION</title>
+<para>$ag{"description"}</para>
+</refsect1>
+
+<!--
+<refsect1 id='$ag{"name"}_type'>
+<title>FILTER TYPE</title>
+<para>$ag{"filter type"}</para>
+</refsect1>
+-->
+
+<refsect1 id='$ag{"name"}_examples'>
+<title>EXAMPLES</title>
+$ag{"example"}
+</refsect1>
+
+<refsect1 id='$ag{"name"}_notes'>
+<title>NOTES</title>
+<para>$ag{"notes"}</para>
+</refsect1>
+
+<refsect1 id='$ag{"name"}_availability'>
+<title>AVAILABILITY</title>
+<para>$ag{"name"} is available in Interchange versions:
+</para><para>
+$ag{"available in"}</para>
+</refsect1>
+
+<refsect1 id='$ag{"name"}_source'>
+<title>SOURCE</title>
+<para>Interchange $ag{"source ver"}:
+</para>
+$ag{source}
+</refsect1>
+
+<refsect1 id='$ag{"name"}_authors'>
+<title>AUTHORS</title>
+<para>$ag{"author"}</para>
+</refsect1>
+
+<refsect1 id='$ag{"name"}_seeAlso'>
+<title>SEE ALSO</title>
+<para>$ag{"see also"}</para>
+</refsect1>
+
+</refentry>
