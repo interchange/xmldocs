@@ -31,6 +31,7 @@ __END__
 __NAME__ example: Enable dynamic_variables_file_only pragma catalog-wide
 Put the following in your <filename>catalog.cfg</filename>:
 <programlisting>
+Pragma dynamic_variables
 Pragma dynamic_variables_file_only
 </programlisting>
 __END__
