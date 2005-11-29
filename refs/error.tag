@@ -1,3 +1,7 @@
+__NAME__ purpose
+display and manipulate errors stored in session
+__END__
+
 __NAME__ synopsis 
 <row>
 
@@ -147,7 +151,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	whether to show variable name
 	</entry>
 
 </row> 
