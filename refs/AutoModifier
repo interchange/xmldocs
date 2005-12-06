@@ -31,12 +31,13 @@ This facility will often be used in determining pricing, shipping,
 or other custom product attributes. These attributes will probably
 be used in a custom &PERL; code which will scan the items in the electronic
 &glos-cart; and make decisions.
+<!--
 </para><para>
 There are several forms of the specification. The simplest is
 a field with no table specification:
 </para>
 <programlisting>
-	AutoModifier heavy
+AutoModifier heavy
 </programlisting>
 <para>
 This one has a bit of "magic" associated. To account for matrix-option
@@ -73,6 +74,7 @@ the modifier:
 This would look in the <database>extra</database> table for the
 "heavy" field, using the "category" attribute in the item as
 the key.
+-->
 __END__
 
 __NAME__ notes

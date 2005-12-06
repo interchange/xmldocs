@@ -33,7 +33,7 @@ REFS_AUTOGEN = bin/refs-autogen
 REFS_AUTOGEN_FLAGS ?=
 
 VPATH       = guides refs howtos glossary
-.SILENT:
+#.SILENT:
 .PHONY: all complete
 .PHONY: skel
 .PHONY: guides howtos symbols glossary

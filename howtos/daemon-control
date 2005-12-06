@@ -32,6 +32,14 @@ Specific catalogs are reconfigured by invoking:
 		<userinput>/usr/local/interchange/bin/interchange -reconfig
 		<replaceable>CATNAME</replaceable></userinput> (tarball)
 	</para></listitem>
+	<listitem><para>
+		Using the &tag-reconfig; tag from an &IC; page
+	</para></listitem>
+	<listitem><para>
+		Touching a file named after the target catalog within the 
+		<filename class='directory'>etc/reconfig/</filename> directory in
+		&glos-ICROOT;.
+	</para></listitem>
 </itemizedlist>
 <para>
 Why would you want to reconfigure a catalog?
@@ -46,6 +54,30 @@ To take changes from those files "on air", you must reconfigure a catalog.
 <para>
 Changes to global <filename>interchange.cfg</filename> can only be updated
 by restarting Interchange completely.
+</para>
+<para>
+&IC; is stopped by running:
+</para>
+<itemizedlist>
+	<listitem vendor='deb;rh'><para>
+		<userinput>/usr/sbin/interchange -stop</userinput> 
+		(Debian GNU and Red Hat)
+	</para></listitem>
+	<listitem><para>
+		<userinput>/usr/local/interchange/bin/interchange -stop</userinput>
+		(tarball)
+	</para></listitem>
+</itemizedlist>
+<note>
+<para>
+Because processes that are waiting for selection can block signals on some
+operating systems, it is possible that you have to wait for &conf-HouseKeeping;
+seconds before the server really closes down. To terminate the server with
+prejudice (in the event it will not stop), use
+<command>interchange -kill</command>.
+</para>
+</note>
+<para>
 
 <!-- TODO mention kill, pkill, killall, pidfile -->
 <!-- 
