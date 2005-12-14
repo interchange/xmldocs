@@ -5,7 +5,7 @@ __END__
 
 __NAME__ synopsis
 <group choice='req'>
-	<arg choice='plain'>directory</arg>
+	<arg choice='plain'><replaceable>directory_name</replaceable></arg>
 </group>
 __END__
 

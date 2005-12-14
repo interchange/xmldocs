@@ -1,0 +1,65 @@
+__NAME__ purpose
+specify database which should hold definitions usually found in catalog.cfg
+__END__
+
+
+__NAME__ synopsis
+<arg choice='plain'><replaceable>name</replaceable></arg>
+<arg choice='plain'><replaceable>source_file</replaceable></arg>
+<arg choice='plain'><replaceable>type</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive allows one to keep the usual &ccf; definitions in a
+&glos-database; table.
+</para><para>
+By using the special option <literal>LOAD</literal>, it is also possible to
+instruct &IC; to fill the &glos-database; with initial data found in your
+&ccf; &mdash; just make sure to remove that option on subsequent restarts.
+__END__
+
+__NAME__ notes
+Even though this appears to be both global and catalog &glos-configuration;
+directive, it is only implemented on &glos-catalog; level. 
+__END__
+
+__NAME__ example: Defining ConfigDatabase
+You first need to create the table in an &glos-SQL; database
+that you will use to store config directives. Here's the SQL code needed:
+<programlisting>
+create table config (
+  code  varchar(32) NOT NULL PRIMARY KEY,
+	directive varchar(64) NOT NULL,
+	value varchar(255),
+	extended text
+);     
+</programlisting>
+Just for the record, once you have the above database table,
+sample database contents of:
+<programlisting>
+code|directive|value|extended
+C0001|VariableDatabase|variable
+C0002|SessionExpire|2 hours|
+C0003|Variable|foo|   bar          
+</programlisting>
+will correspond to the usual &ccf; definitions:
+<programlisting>
+VariableDatabase variable
+SessionExpire  2 hours
+Variable foo &lt;&lt;EOF
+   bar
+EOF  
+</programlisting>
+__END__
+
+__NAME__ example: Automatically populating ConfigDatabase with initial data from catalog.cfg
+<programlisting>
+ConfigDatabase config config.txt dbi:mysql:config
+ConfigDatabase config LOAD 1
+</programlisting>
+__END__
+
+__NAME__ author
+__mheins__
+__END__

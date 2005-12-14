@@ -12,7 +12,7 @@ IC_VERSIONS = 4.6.0 4.8.0 5.0.0 5.2.0 cvs-head
 
 #############################################################
 # Base definitions
-SYMBOL_TYPES= pragmas vars tags confs filters
+SYMBOL_TYPES= pragmas vars tags confs filters orderchecks
 GUIDES      = iccattut programming-style upgrade faq index optimization search xmldocs
 HOWTOS      = howtos
 GLOSSARY    = glossary
@@ -33,7 +33,7 @@ REFS_AUTOGEN = bin/refs-autogen
 REFS_AUTOGEN_FLAGS ?=
 
 VPATH       = guides refs howtos glossary
-#.SILENT:
+.SILENT:
 .PHONY: all complete
 .PHONY: skel
 .PHONY: guides howtos symbols glossary

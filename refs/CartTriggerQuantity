@@ -1,0 +1,46 @@
+__NAME__ purpose
+specify whether quantity changes to existing electronic cart items will cause CartTrigger subroutines to execute
+__END__
+
+
+__NAME__ see also
+CartTrigger
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies whether quantity changes on existing electronic cart
+items will cause specified &conf-CartTrigger; subroutines to execute.
+</para><para>
+Note, however, that a quantity change to zero will result in item deletion,
+and will consequently cause &conf-CartTrigger;s to execute regardless
+of &conf-CartTriggerQuantity;'s value.
+__END__
+
+__NAME__ notes
+It must be noted that the &IC; cart subsystem is based on arrayrefs of hashrefs
+(all &PERL; programming terms) &mdash; there is no object encapsulation for
+limiting or monitoring program access to the contents of any cart.
+Consequently, direct manipulation of the cart from within &PERL;
+<emphasis role='bold'>will not</emphasis> cause these triggers to fire. The
+triggers only fire when the cart contents are modified through the standard
+Interchange &glos-CGI;-based variable processing. Therefore, it is assumed
+(for the moment, at least) that any programmer sufficiently comfortable or
+confident to manipulate cart contents directly can also be given the
+responsibility of deciding whether or not it is appropriate to invoke cart
+triggers along the way.
+__END__
+
+__NAME__ example: Setting CartTriggerQuantity
+<programlisting>
+CartTriggerQuantity yes
+</programlisting>
+__END__
+

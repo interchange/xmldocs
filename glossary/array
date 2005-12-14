@@ -1,0 +1,6 @@
+In general terms, "array" can be considered a synonym for "list". It 
+implies a list of elements.
+</para><para>
+In the &PERL; programming language, "list" refers to an unnamed list of any
+kind, while "array" refers to a practical, named &PERL; variable of list
+type.

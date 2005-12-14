@@ -219,7 +219,7 @@ Entering and tracking all bugs, even those you find and then fix yourself,
 	<itemizedlist>
 		<listitem><para>
 		Do not use the hash character <literal>#</literal> in weird contexts.
-		Use it only for comments (putting a space between eventual inline code and
+		Use it only for comments (putting a space between eventual code and inline
 		comment) or simple substitution such as <literal>s#A#B#g</literal>.
 		(Impact: cosmetic)
 <programlisting><![CDATA[
