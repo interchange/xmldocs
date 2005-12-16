@@ -1,0 +1,20 @@
+__NAME__ purpose
+decode hex-encoded entities found within URLs
+__END__
+
+__NAME__ description
+The filter decodes hex-encoded entities found within URLs.
+</para><para>
+The filter is explicitly called <literal>linkdecode</literal> because it
+only operates on <literal>&lt;form action=&gt;</literal>, 
+<literal>href=</literal> and <literal>src=</literal> contents.
+Therefore, it is likely to be useful only when passed lines containing
+&glos-HTML; URLs or source specifiers (such as &lt;a&gt; or &lt;img&gt; tags).
+__END__
+
+__NAME__ online: Filter example
+<programlisting>
+[filter linkdecode][/filter]
+</programlisting>
+__END__
+TODO EXAMPLE!

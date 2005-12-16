@@ -1,0 +1,15 @@
+__NAME__ purpose
+automatically select filter based on HTML widget type
+__END__
+
+__NAME__ description
+The filter identifies the widget type and returns the name of the 
+corresponding suitable filter for it.
+__END__
+
+__NAME__ notes
+Keep in mind that you <emphasis role='bold'>can</emphasis> specify 
+&filter-filter_select; along with your custom filters in the same call.
+__END__
+
+TODO: clarify notes, show example

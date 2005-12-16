@@ -1,0 +1,23 @@
+__NAME__ purpose
+transform input integer to Roman numerals
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter transforms input integer to Roman numerals.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[filter roman]2005[/filter]
+</programlisting>
+__END__
+
+__NAME__ author
+__kwalsh__
+__END__

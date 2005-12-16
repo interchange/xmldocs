@@ -1,0 +1,21 @@
+__NAME__ purpose
+replace &amp;amp; (ampersand) entities in input with literal &amp;
+__END__
+
+
+__NAME__ see also
+textarea_put
+__END__
+
+
+__NAME__ description
+The filter replaces &amp;amp; entities in input with literal &amp;.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+

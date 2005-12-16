@@ -34,8 +34,8 @@ if ( -d ($_ = "sources/$rev") ) { # Source is here, only update
 	if ( $update ) {
 		chdir $_;
 		print STDERR "CUP   $rev\n";
-		DEBUG and print "DBG $ENV{PWD}: cvs -z9 update >& ../../tmp/cup.$rev\n";
-		system("cvs -z9 update >& ../../tmp/cup.$rev");
+		DEBUG and print "DBG $ENV{PWD}: cvs -z9 update -d >& ../../tmp/cup.$rev\n";
+		system("cvs -z9 update -d >& ../../tmp/cup.$rev");
 	}
 }
 else { # Need to perform checkout

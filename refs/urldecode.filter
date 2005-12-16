@@ -1,9 +1,9 @@
 __NAME__ purpose
-replace encoded (hex) characters with their normal representation
+replace encoded (hex) characters with their unencoded representation
 __END__
 
 __NAME__ description
-The filter replaces encoded (hex) characters with their normal 
+The filter replaces encoded (hex) characters with their unencoded 
 representation.
 __END__
 

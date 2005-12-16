@@ -1,0 +1,15 @@
+__NAME__ purpose
+localize provided input
+__END__
+
+__NAME__ description
+The filter uses Interchange &glos-locale; features to localize 
+received input text.
+__END__
+
+__NAME__ online: Filter example
+<programlisting>
+[filter loc.fr_FR]January[/filter]
+</programlisting>
+__END__
+TODO Make sure it says Janvier. fr locale

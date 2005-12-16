@@ -1,0 +1,25 @@
+__NAME__ purpose
+transform UNIX time (number of seconds) to a date/time string, according to specified format
+__END__
+
+
+__NAME__ see also
+time
+__END__
+
+
+__NAME__ description
+The filter transforms UNIX time (measured in a number of seconds since the
+&glos-epoch;) to human-readable date/time string, according to the specified
+format.
+</para><para>
+If the format is unspecified, the system outputs time in the default format,
+such as <literal>Fri Dec 16 15:04:33 2005</literal>.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+</programlisting>
+__END__
+TODO EXAMPLE! Why IC goes nuts when I run an example?

@@ -7,7 +7,7 @@
 #
 
 # Those two need to be adjusted with time
-export XMLDOCS_CUR_DEVEL = 5.3.2
+export XMLDOCS_CUR_DEVEL = 5.3.3
 IC_VERSIONS = 4.6.0 4.8.0 5.0.0 5.2.0 cvs-head
 
 #############################################################
@@ -48,7 +48,7 @@ VPATH       = guides refs howtos glossary
 
 #############################################################
 # Complete build
-all: skel cache refxmls                                        \
+all: skel cache refxmls                                            \
      olinkdbs-nc olinkdbs-c                                        \
 		 glossary symbols guides howtos
 
@@ -233,7 +233,7 @@ up-% cvs-% %-up %-cvs: sources/% $T
 #############################################################
 # Cache files
 cache caches: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) $T
-cache/%/.cache.bin: sources/%
+cache/%/.cache.bin: sources/% bin/stattree
 	echo "C     $@"
 	bin/stattree $<
 
@@ -284,13 +284,6 @@ docbook/autofiles.ent: refxmls
 #	make $(patsubst refs/%.xml,$(LTMPDIR)/%-c.db,$(wildcard refs/*.xml))
 #	make $(patsubst refs/%.xml,$(LTMPDIR)/%-nc.db,$(wildcard refs/*.xml))
 #	touch $(LTMPDIR)/olinkdbs
-#
-#	TODO:
-#	- make cache
-#	- make sources <-- sources as phony, sources-dir creates source/
-#	- s/U/C/ when files are overriden unconditionally
-#	- why make $O/iccattut.html goes some things twice
-#	- make guides/refs/howtos doesn't see proper deps
 #
 
 # Not needed right now

@@ -1,0 +1,19 @@
+__NAME__ purpose
+replace newlines in input with commas
+__END__
+
+__NAME__ description
+The filter replaces newlines in input (any combination of 
+<literal>\r</literal> and <literal>\n</literal>) with commas.
+It also takes care of removing trailing whitespace along the way.
+__END__
+
+__NAME__ online: Filter example
+<programlisting>
+[filter line2options]
+one
+two
+three
+[/filter]
+</programlisting>
+__END__

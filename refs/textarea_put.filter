@@ -1,0 +1,22 @@
+__NAME__ purpose
+replace &amp;, &lt; and &#91; characters with their encoded representation
+__END__
+
+
+__NAME__ see also
+textarea_get
+__END__
+
+
+__NAME__ description
+The filter replaces &amp; characters with &amp;amp;, 
+&#91; with &amp;#91; and &lt; with &amp;lt; entities.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+

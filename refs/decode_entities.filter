@@ -1,9 +1,9 @@
 __NAME__ purpose
-decode encoded HTML characters back to their normal representation
+decode encoded HTML characters back to their unencoded representation
 __END__
 
 __NAME__ description
-The filter decodes encoded &glos-HTML; characters back to their normal 
+The filter decodes encoded &glos-HTML; characters back to their unencoded 
 representation.
 __END__
 

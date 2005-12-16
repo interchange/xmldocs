@@ -1,0 +1,22 @@
+__NAME__ purpose
+replace space " " with \0 (null) character
+__END__
+
+
+__NAME__ see also
+colons_to_null
+__END__
+
+
+__NAME__ description
+The filter replaces space ("<literal> </literal>") characters
+with a <literal>\0</literal> (null) character.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+

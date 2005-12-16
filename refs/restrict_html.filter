@@ -1,0 +1,37 @@
+__NAME__ purpose
+filter out all but the restricted set of allowed HTML tags in input
+__END__
+
+
+__NAME__ see also
+restrict
+__END__
+
+
+__NAME__ description
+The filter restricts the set of HTML tags that can appear in the input.
+Tags not found among the allowed ones are filtered out.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+
+__NAME__ online: Filter example
+<programlisting><![CDATA[
+[filter restrict_html.p.br.ul.li.b]
+<ul>
+<li> Item lists are allowed.
+</ul>
+<p>
+As well as paragraphs and<br>
+newlines.
+</p>
+Links, such as <a href="http://www.icdevgroup.org">ICDEVGROUP</a> are
+<b>not</b> allowed.
+[/filter]
+]]></programlisting>
+__END__

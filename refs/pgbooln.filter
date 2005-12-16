@@ -1,0 +1,26 @@
+__NAME__ purpose
+return undef (NULL), "f" (false) or "t" (true), depending on input data
+__END__
+
+
+__NAME__ see also
+pgbool
+__END__
+
+
+__NAME__ description
+The filter returns undefined value (NULL) if the input is
+undefined. It returns "<literal>f</literal>" (false) if the input is
+<literal>0</literal>, <literal>f</literal> or 
+<literal>false</literal> (in a case-insensitive manner).
+If the said are not met, the filter returns "<literal>t</literal>"
+(true).
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+

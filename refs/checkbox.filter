@@ -1,0 +1,13 @@
+__NAME__ purpose
+return user-supplied value if its length is 1 or more, an empty string otherwise
+__END__
+
+__NAME__ description
+The filter checks for the length of input. In case the input contains one or
+more characters (a &glos-true; number, in fact), it returns the input itself.
+If the length is zero, an empty string is returned.
+</para><para>
+The filter is suitable for retrieving values out of &glos-HTML; checkboxes.
+__END__
+
+

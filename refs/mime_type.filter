@@ -1,0 +1,14 @@
+__NAME__ purpose
+print file MIME type, based on file extension
+__END__
+
+__NAME__ description
+The filter takes a filename as input, determines file extension and
+returns the appropriate &glos-MIME; type for it.
+__END__
+
+__NAME__ online: Filter example
+<programlisting>
+[filter mime_type]image.jpg[/filter]
+</programlisting>
+__END__

@@ -1,0 +1,30 @@
+__NAME__ purpose
+delete everything after first null or newline character, effectively "onelining" the input
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter deletes everything after the first null (<literal>\0</literal>)
+or newline (<literal>\r</literal> or <literal>\n</literal>) character.
+Effectively, it only preserves and returns the first line of input.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+
+__NAME__ online: Filter example
+<programlisting>
+[filter oneline]
+Have no fear,
+for the first line is dear!
+[/filter]
+</programlisting>
+__END__

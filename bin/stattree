@@ -51,7 +51,7 @@ my %binary_types = (
 my %ascii_types = (
 	database => [qw|\.(..)?sql \.ora \..?dbm \.notes \.csv
 		/products/\S+\.txt \.asc|],
-	release_helpfile => [qw/^WHATSNEW-\d+\.\d+ README(\..+)? TODO
+	release_helpfile => [qw/^WHATSNEW(-\d+\.\d+)? README(\..+)? TODO
 		^LICENSE ^MANIFEST(\.skip)? ^UPGRADE \.cvsignore \.append/],
 	build_helpfile => [qw/configure ^debian.* ^SPECS.*/],
 	catalog_helpfile => [qw/\.access \.log \.error \.(auto)?number \.empty/],
@@ -79,7 +79,7 @@ my %tagCanon = (
 
 # A general overview: how many different contents do we have
 # This part of the statistic ( $hash{total} ) should be processed by
-# bin/mkreport once.
+# bin/mkreport once in the future. Well, that future is near I suppose.
 my $binary_types;
 my $ascii_types;
 for ( keys %binary_types ) { $binary_types += scalar @{ $binary_types{$_} } }
@@ -96,8 +96,8 @@ unless ( GetOptions (
 
 @ARGV == 1 or die "Usage: $0 path[/] \n";
 
-# $path is the directory to process, $dumppath is relocated name, say
-# sources/cvs-head becomes cache/cvs-head/.cache.bin
+# $path is the directory to process, $dumppath is relocated filename of the
+# Storable dump, say sources/cvs-head becomes cache/cvs-head/.cache.bin
 my $path = shift;
 ( my $dumppath = $path ) =~ s#.+?/##;
 my $dumpdir = $dumppath; # Directory to dump to, without file name
@@ -135,8 +135,12 @@ find({
 }, ".");
 
 
-# Copy MANIFEST to "cache":
-
+# Copy MANIFEST to "cache". Note that we copy to tmp/, but we refer
+# to that file later in other scripts so it must be there. In fact, we
+# use this in bin/refs-autogen to generate entities for pointing to files
+# in CVS. Like, if you say &cvsfile4.8-README;, it will point to 
+# icdevgroup.org/cgi-bin/cvsweb/interchange/README?TAG_REL=4.8 or something
+# like that...
 `cp MANIFEST "$cpath/tmp/$i{ver}.MANIFEST"`;
 print "GEN: tmp/$i{ver}.MANIFEST\n";
 
@@ -146,7 +150,8 @@ chdir $cpath; # Return to starting location
 # Dump
 dumpdb( "$cachedir/$dumppath" );
 
-# Save human-readable %hash ?
+# Save human-readable %hash ? Great for catch-the-problem and see if
+# everything looks halfway healthy.
 if ( $verbose ) {
 	#print STDERR Dumper \%hash;
 	open OUT, "> tmp/$i{ver}.hash" or die "Can't open tmp/$i{ver}.hash ($!)\n";
@@ -211,7 +216,8 @@ sub wanted {
 			}
 		}
 	}
-	# Unknown // pay more attention to this, this should rarely happen,
+	# If we reach here, the file is unknown.
+	# Pay more attention to this, this should rarely happen, because
 	# even if we're not interested in some files, they *should* be matched
 	# in %ascii_types/%binary_types above to provide accurate statistics.
 	print STDERR "$file UNKNOWN\n" if $verbose;
@@ -242,7 +248,8 @@ sub wanted {
 	return if $file =~ m#^(eg|extra|SPECS|debian|scripts|extensions)/#;
 
 
-	# Open text file, parse contents
+	# Here, we know it's a file, and a text file in fact
+	# So open the file and parse contents
 	open IN, "< $file" or die "Can't open $file ($!)\n";
 	my @filedata = <IN>;
 	unshift @filedata, ""; # Match index numbers with line numbers # MINUS
@@ -307,7 +314,7 @@ sub wanted {
 			if ( $c{line} =~ /^\s*#/ ) {         # commented line
 				$hash{tree}{$c{file}}{comments}++ ;
 				$hash{total}{perl_comments}++;
-				# PLANNED check if the comment contains ::log[A-Z]\w+
+				# PLANNED TODO check if the comment contains ::log[A-Z]\w+
 				# to discover calls to logGlobal/logDebug/logError.
 				# I don't plan this anymore since wasn't there some talk
 				# on replacing those hack routines with some formal logging?
@@ -340,9 +347,9 @@ sub wanted {
 
 				line_findFunctionName(\%c); # See if a function begins on that line
 
-				line_findPragmas(\%c);
-				line_findGlobVars(\%c);
-				line_findCatVars(\%c);
+				line_findPragmas(\%c); # See if there's a pragma on the line
+				line_findGlobVars(\%c); # See if there's a global var on the line
+				line_findCatVars(\%c); # You get the point ....
 
 			} else {
 				die "IMPOSSIBLE case in $file:$c{file}:$c{lnum} -- $c{line}\n";
@@ -351,7 +358,8 @@ sub wanted {
 		##########################################################
 		# Found a tag
 		} elsif ( $c{fsubtype} =~ /^(user|ui|system)tag$/ )  {
-			#$hash{total}{$fsubtype . "s"}++;
+			#$hash{total}{$fsubtype . "s"}++; # Done below now. Had to do this
+			# to support multiple tag definitions within the same file.
 
 			# Skip this simple sanity check for 4.6.0 - those files do not
 			# have .(core)?tag ending.
@@ -381,18 +389,21 @@ sub wanted {
 				# dash-insensitive anyway).
 				my $tn = shift @lis;
 
+				# Extract tagCanon field, it's just the next field
 				my $tagopt = lc(shift @lis);
-				# Check if there's a sub defined for this $tagopt (if it is, it
-				# would be above in %tagCanon hash).
+
+				# Check if there's a sub defined for this tagCanon (if it is, it
+				# would be defined at the top in %tagCanon hash). If there really
+				# is, call that trigger function.
 				$tagCanon{lc $tagopt} and &{ $tagCanon{lc $tagopt} }(\%c);
 				
 				next if $tagopt =~ /^documentation$/; # Docs inside this section
 				# are ignored by a "side-effect": namely, all lines not matching
-				# /^UserTag/ are ignored...
+				# /^UserTag/ are ignored, as you see at the beginning of for() loop...
 
 
 				#
-				# Now follows a SWITCH series, based on value of $tagopt.
+				# Now follows a SWITCH series, based on value of $tagopt (tagCanon).
 
 				# See if it's a routine and parse routine lines as usual perl lines
 				if ( $tagopt =~ /^routine$/ and "@lis" =~ /\s*<<(\S+)\s*$/i ) {
@@ -404,6 +415,8 @@ sub wanted {
 						$c{line} = $_t;
 						$c{lnum} = $lnum2;
 
+						# TODO move those in a discover_everything() wrapper, since we
+						# call it from multiple places
 						line_findPragmas(\%c, {group =>$c{fsubtype}, name=>$tn});
 						# For example, this should find PGP_HOME
 						line_findGlobVars(\%c, {group => $c{fsubtype}, name=>$tn});
@@ -415,7 +428,7 @@ sub wanted {
 				} elsif ( $tagopt =~ /^maproutine$/ ) {
 
 					@lis == 1 or die "$tn MapRoutines, but argc != 1 ?\n";
-					next if "@lis" =~ /^::/; # TODO
+					next if "@lis" =~ /^::/;
 					# TODO : Functions don't end up having proper Line: x-y in source
 					# contexts but have Lines: as if the whole file was shown.
 					file_extractSub($tn, "@lis", \%c, {group => $c{fsubtype},name=>$tn});
@@ -430,7 +443,7 @@ sub wanted {
 				# New tag name we didn't see yet
 				# (either first run or another tag definition in the same file).
 				# We'll record all of them in @tags, then create appropriate records
-				# for each. Body will be shared, this just ensures that they are
+				# for each. File body will be shared, this just ensures that they are
 				# recognized under different names (that no tags 'slip through' as
 				# being undetected if they disguise themselves inside a "host" file).
 				{ no warnings;
@@ -446,8 +459,8 @@ sub wanted {
 					%c,
 					file => "$i{ver}/$c{file}",
 					lnum => scalar @filedata,
-					ctxpre => $ctx_p,
-					ctxpost => $ctx_n,
+					ctx_p => $ctx_p,
+					ctx_n => $ctx_n,
 					ctxs => 1,
 					ctxe => scalar @filedata,
 					ctx => [ format_ctx(@filedata) ]
@@ -465,8 +478,8 @@ sub wanted {
 				if ( $resolver_path{$c{fsubtype}}{$tagname} ) {
 					while (my $spath=shift @{ $resolver_path{$c{fsubtype}}{$tagname}}){
 						push @{ $hash{symbols}{$c{fsubtype}}{$tagname} }, {
-							ctxpre => 0,
-							ctxpost => 0,
+							ctx_p => 0,
+							ctx_n => 0,
 							%$spath,
 						};
 					}
@@ -484,8 +497,8 @@ sub wanted {
 				%c,
 				file => "$i{ver}/$c{file}",
 				lnum => scalar @filedata,
-				ctxpre => $ctx_p,
-				ctxpost => $ctx_n,
+				ctx_p => $ctx_p,
+				ctx_n => $ctx_n,
 				ctxs => 1,
 				ctxe => scalar @filedata,
 				ctx => [ format_ctx(@filedata) ]
@@ -504,8 +517,8 @@ sub wanted {
 				%c,
 				file => "$i{ver}/$c{file}",
 				lnum => scalar @filedata,
-				ctxpre => $ctx_p,
-				ctxpost => $ctx_n,
+				ctx_p => $ctx_p,
+				ctx_n => $ctx_n,
 				ctxs => 1,
 				ctxe => scalar @filedata,
 				ctx => [ format_ctx(@filedata) ]
@@ -559,7 +572,11 @@ sub wanted {
 	}
 }
 
-# Format the context lines before saving to the db
+# Format the context lines before saving to the db.
+# There's been some discussion around this. I still think that, since
+# context reports in xmldocs are NOT verbatim copies of the source,
+# they should be adjusted for display as we do here. Anyway, with time
+# we'll see what's better and I can adjust, no probs.
 sub format_ctx {
 	for $_ ( @_ ) { s/\t/  /g; chomp };
 
@@ -622,8 +639,8 @@ sub line_findPragmas {
 		lnum => $c{lnum},
 		func => ${$c{gfunc}}[0],
 		funclnum => ${$c{gfunc}}[1],
-		ctxpre => $c{ctx_p},
-		ctxpost => $c{ctx_n},
+		ctx_p => $c{ctx_p},
+		ctx_n => $c{ctx_n},
 		ctxs => $c{lnum} - $c{ctx_p},
 		ctxe => $c{lnum} + $c{ctx_n},
 		ctx => [format_ctx(@{$c{filedata}}[$c{lnum}-$c{ctx_p}..$c{lnum}+$c{ctx_n}])]
@@ -668,8 +685,8 @@ sub line_findCatVars {
 			lnum => $c{lnum},
 			func => ${$c{gfunc}}[0],
 			funclnum => ${$c{gfunc}}[1],
-			ctxpre => $c{ctx_p},
-			ctxpost => $c{ctx_n},
+			ctx_p => $ctx_p,
+			ctx_n => $ctx_n,
 			ctxs => $c{lnum} - $c{ctx_p},
 			ctxe => $c{lnum} + $c{ctx_n},
 			ctx => [format_ctx(@{$c{filedata}}[$c{lnum}-$c{ctx_p}..$c{lnum}+$c{ctx_n}])]
@@ -710,8 +727,8 @@ sub line_findGlobVars {
 			lnum => $c{lnum},
 			func => ${$c{gfunc}}[0],
 			funclnum => ${$c{gfunc}}[1],
-			ctxpre => $c{ctx_p},
-			ctxpost => $c{ctx_n},
+			ctx_p => $c{ctx_p},
+			ctx_n => $c{ctx_n},
 			ctxs => $c{lnum} - $c{ctx_p},
 			ctxe => $c{lnum} + $c{ctx_n},
 			ctx => [format_ctx(@{$c{filedata}}[$c{lnum}-$c{ctx_p}..$c{lnum}+$c{ctx_n}])]
@@ -859,8 +876,8 @@ sub file_parseVendConfig {
 					   $resolver_path{catconf}{$1}->[0]->{ctx}->[0]))) {
 				while (my $spath=shift @{ $resolver_path{globconf}{$1}}){
 					push @{ $hash{symbols}{globconf}{$1} }, {
-						ctxpre => 0,
-						ctxpost => 0,
+						ctx_p => 0,
+						ctx_n => 0,
 						%$spath,
 				};
 			}
@@ -880,8 +897,8 @@ sub file_parseVendConfig {
 		if ( $resolver_path{catconf}{$1} ) {
 			while (my $spath=shift @{ $resolver_path{catconf}{$1}}){
 				push @{ $hash{symbols}{catconf}{$1} }, {
-					ctxpre => 0,
-					ctxpost => 0,
+					ctx_p => 0,
+					ctx_n => 0,
 					%$spath,
 				};
 			}

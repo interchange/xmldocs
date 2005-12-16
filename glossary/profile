@@ -171,6 +171,30 @@ Check types, however, can take on one of the following values:
 
 <!-- TODO 
  Multiple profiles can reside in the same file, if separated by C<__END__> tokens, which must be on a line by themselves.
--->
 
+!block example
+ __NAME__ dict_search
+ mv_search_file=dict.product
+ mv_return_fields=1
+ [if value fast_search]
+   mv_dict_limit=-1
+   mv_last=1
+ [/if]
+ __END__
+!endblock
+
+
+The C<__NAME__> is the value to be specified in the C<mv_profile> variable on the search form, as in
+
+!block example
+ <INPUT TYPE=hidden NAME=mv_profile VALUE="dict_search">
+ !endblock
+
+ or with mp=profile in the one-click search.
+
+ !block example
+  [page scan se=Renaissance/mp=dict_search]Renaissance Art</a>
+	!endblock
+
+-->
 

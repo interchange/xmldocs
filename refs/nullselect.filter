@@ -1,0 +1,25 @@
+__NAME__ purpose
+split input on \0 (null) characters and return first non-empty string
+__END__
+
+
+__NAME__ see also
+checkbox
+__END__
+
+
+__NAME__ description
+The filter splits input on <literal>\0</literal> (null) characters
+and returns the first non-empty string found.
+</para><para>
+The filter is suitable for retrieving values out of &glos-HTML; Combo
+boxes.
+__END__
+
+
+__NAME__ notes
+For more information on &PERL; Regular Expressions, pattern matching and
+character classes, see
+<citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
+__END__
+
