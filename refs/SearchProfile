@@ -1,0 +1,43 @@
+__NAME__ purpose
+specify files containing search profile definitions
+__END__
+
+
+__NAME__ see also
+OrderProfile,Profiles
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>filename</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies filenames that contain search
+&glos-profile; definitions.
+</para><para>
+An unlimited number of search profiles
+can be set up, performing complex searches on a
+single user click. At the same time, separately-defined search profiles
+keep your &glos-HTML; pages cleaner.
+</para><para>
+As said, 
+multiple profiles can be defined, and within the same file.
+In that case, profiles must be separated by <literal>__END__</literal>
+tokens. Each opening <literal>__NAME__</literal> token should be left-aligned,
+and each <literal>__END__</literal> should be on a line by itself,
+with no leading or trailing whitespace.
+__END__
+
+
+__NAME__ notes
+For a complete discussion, see &glos-profile; glossary entry.
+__END__
+
+__NAME__ example: Defining SearchProfile
+<programlisting>
+SearchProfile etc/profiles.search etc/search.profiles
+</programlisting>
+__END__

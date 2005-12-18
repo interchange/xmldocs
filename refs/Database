@@ -28,6 +28,11 @@ __END__
 __NAME__ notes
 In &IC;, words <literal>table</literal> and <literal>database</literal>
 are used to refer to the same thing &mdash; database table.
+</para><para>
+Defining databases on an &IC; (global) level
+<emphasis role='bold'>does not work</emphasis>! If you want to share
+databases among catalogs, define them in each &ccf; separately (possibly
+by including the generic file with &conf-Database; definitions).
 __END__
 
 __NAME__ example: Default, most basic products database

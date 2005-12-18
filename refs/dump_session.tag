@@ -1,5 +1,5 @@
 __NAME__ purpose
-dump named user session in whole or partially
+dump named user session partially or in whole
 __END__
 
 

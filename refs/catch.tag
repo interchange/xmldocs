@@ -19,7 +19,7 @@ __NAME__ synopsis
 	</entry>
 	<entry>
 	Name to assign to the &tag-try; block. The name is later used by
-	&tag-cache; (or some custom code) to refer to the proper &tag-try;
+	&tag-catch; (or some custom code) to refer to the proper &tag-try;
 	block.
 	</entry>
 

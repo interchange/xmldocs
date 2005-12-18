@@ -1,3 +1,7 @@
+__NAME__ purpose
+manipulate a persistent, named counter
+__END__
+
 __NAME__ synopsis 
 <row>
 
@@ -56,7 +60,7 @@ __NAME__ synopsis
   <!-- DFL -->
   </entry>
   <entry>
-  A <literal><replaceable>table</replaceable>:<replaceable>field</replaceable></literal> specification, if &tag-counter; is to increment a field in an SQL database.
+  A <literal><replaceable>table</replaceable>:<replaceable>field</replaceable></literal> specification, if &tag-counter; is to increment a field in an &glos-SQL; database.
   </entry>
 
 </row> 
@@ -275,8 +279,8 @@ __END__
 
 
 __NAME__ notes
-The SQL field-updating routine is database-dependent; please see the tag
-source for details.
+The &glos-SQL; field-updating routine is database-dependent; please see the tag
+source for exact behavior.
 </para><para>
 Date-based counters cannot be decremented.
 __END__
@@ -356,4 +360,40 @@ And the following on an &IC; page:
 [counter file=counter.m3 start=20 decrement=1 dec-routine=three_steps_back]
 </programlisting>
 __END__
+
+
+
+__NAME__ example: PostgreSQL database counter
+Create sequence <literal>counter1</literal> in the database:
+<programlisting>
+CREATE SEQUENCE "counter1" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+</programlisting>
+And use the counter on your pages:
+<programlisting>
+[counter sql="table1:counter1"]
+</programlisting>
+__END__
+
+__NAME__ example: MySQL database counter
+Create table <database>table2</literal> and a sequence <literal>counter2</literal> in that database:
+<programlisting>
+create table table2(counter2 int NOT NULL AUTO_INCREMENT PRIMARY KEY);
+</programlisting>
+And use the counter on your pages:
+<programlisting>
+[counter sql="table2:counter2"]
+</programlisting>
+__END__
+
+__NAME__ example: Oracle database counter
+Create a sequence <literal>counter3</literal> in the database:
+<programlisting>
+CREATE SEQUENCE counter3 START WITH 1 INCREMENT BY 1 MAXVALUE 2147483647 MINVALUE 1 CACHE 2;
+</programlisting>
+And use the counter on your pages:
+<programlisting>
+[counter sql="table3:counter3"]
+</programlisting>
+__END__
+
 

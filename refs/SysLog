@@ -1,0 +1,102 @@
+__NAME__ purpose
+instruct Interchange to log to system's syslog
+__END__
+
+__NAME__ see also
+ErrorFile,DebugFile
+__END__
+
+__NAME__ description
+The directive configures
+<citerefentry><refentrytitle>syslog</refentrytitle><manvolnum>8</manvolnum></citerefentry>
+logging for &IC;.
+</para><para>
+Besides just tuning syslog facility and priority settings, it is also
+possible to specify external command to invoke for sending syslog messages.
+This also means it is possible to hook into the message logging
+system and route messages where ever you want. For example,
+a custom wrapper can be created to log to a database. See an example
+of it in <xref linkend="SysLog_examples"/>.
+__END__
+
+
+
+__NAME__ example: Simple syslog setup
+<programlisting>
+SysLog  command  /usr/bin/logger
+SysLog  tag      int1
+SysLog  alert    local3.warn
+SysLog  warn     local3.info
+SysLog  info     local3.info
+SysLog  debug    local3.debug
+</programlisting>
+
+The above would cause messages to be logged with the command
+<command>/usr/bin/logger -t int1 -p local3.alert <replaceable>...</replaceable></command>.
+</para><para>
+The generated system log entries would look somewhat like the following:
+
+<screen>
+Oct 26 17:30:11 bill int1: Config 'co' at server startup
+Oct 26 17:30:11 bill int1: Config 'homefn' at server startup
+Oct 26 17:30:11 bill int1: Config 'simple' at server startup
+Oct 26 17:30:11 bill int1: Config 'test' at server startup
+Oct 26 17:30:13 bill int1: START server (2345) (INET and UNIX)
+</screen>
+__END__
+
+
+__NAME__ example: Sending facility 'local3' messages to appropriate log file
+As you might know, messages sent using syslog reach the syslog daemon
+sooner or later. There, they are examined and "routed" to their final
+destination. For BSD-compatible syslog daemons, the configuration 
+file is probably <filename>/etc/syslog.conf</filename>, and the 
+configuration snippet needed to route &IC; messages to 
+<filename>/var/log/interchange.log</filename> is as follows:
+<programlisting>
+# Log local3 stuff to Interchange log
+local3.*                /var/log/interchange.log
+</programlisting>
+__END__
+
+
+__NAME__ example: Custom logging script for logging to a database
+<programlisting><![CDATA[
+#!/usr/bin/perl
+ 
+my $script_name = "logdatabase";
+use DBI;
+use Getopt::Std;
+ 
+getopts('d:p:T:k:') or die "$script_name options: $@\n";
+ 
+use vars qw/$opt_d $opt_p $opt_T $opt_k/;
+ 
+my $dsn   = $opt_d || $ENV{DBI_DSN};
+my $template = $opt_T
+    || "insert into log values ('~~KEY~~', '~~LEVEL~~', '~~MSG~~')";
+ 
+my $dbh = DBI->connect($dsn)
+    or die "$script_name cannot connect to DBI: $DBI::errstr\n";
+ 
+my %data;
+ 
+$data{KEY} = $opt_k || '';
+ 
+local ($/);
+$data{MSG} = <>;
+ 
+$data{LEVEL} = $opt_p || 'interchange.info';
+ 
+$template =~ s/\~\~(\w+)\~\~/$dbh->quote($data{$1})/;
+ 
+my $sth = $dbh->prepare($template)
+    or die "$script_name error executing query: $template\n";
+ 
+$sth->execute()
+    or die "$script_name error executing query: $template\n";
+ 
+exit;
+]]></programlisting>
+__END__
+
