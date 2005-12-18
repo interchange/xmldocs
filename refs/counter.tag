@@ -375,7 +375,7 @@ And use the counter on your pages:
 __END__
 
 __NAME__ example: MySQL database counter
-Create table <database>table2</literal> and a sequence <literal>counter2</literal> in that database:
+Create table <database>table2</database> and a sequence <literal>counter2</literal> in that database:
 <programlisting>
 create table table2(counter2 int NOT NULL AUTO_INCREMENT PRIMARY KEY);
 </programlisting>
