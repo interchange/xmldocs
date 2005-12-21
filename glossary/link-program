@@ -1,0 +1,265 @@
+First of all, &IC; requires a web server that is already installed on a system.
+Since Interchange is always running in the background as a daemon &mdash;
+parallel to your web server &mdash; there must be some means of communication 
+established between the two.
+</para><para>
+For that reason, at startup, &IC; initializes the UNIX or INET domain socket
+(or both), depending on specific configuration. Few variants of a small
+&glos-CGI; "link program" ship with &IC; and are intended to connect to one
+of those sockets. Then, they provide the data link to the web server (and
+consequently, to the users' browser).
+</para>
+<note><para>
+Since &APACHE; is the most popular web server, further instructions will focus
+on Apache setup. If using another type of web server, some translation of
+terms may be necessary.
+</para></note>
+<para>
+A <literal>ScriptAlias</literal> or other &glos-CGI; execution capability is
+needed on the web server side, to allow use of the link program. The default
+<literal>ScriptAlias</literal> for many web servers is just <filename class='directory'>/cgi-bin/</filename>. Otherwise if the <literal>ExecCGI</literal>
+Apache directive is set, then any program ending in a particular file suffix
+(usually <literal>.cgi</literal>) can be invoked as a CGI program.
+</para><para>
+By convention, &IC; names link programs after &glos-catalog; IDs (catalog
+names as defined in &gcf;), though this is not required.
+Link program name is used to derive <envar>SCRIPT_PATH</envar>, which is then
+used to determine which Interchange catalog is referenced.
+</para>
+
+
+
+<section>
+<title>UNIX-Domain Sockets</title>
+<para>
+UNIX domain sockets are not reachable from the Internet directly; they can only
+be accessed from the local host. This improves security and is the right thing
+to do when the web and &IC; server are running on the same host.
+</para><para>
+The link program <filename>vlink</filename> is the provided facility for such
+communication with &IC;. As said, this is the most secure way to run a catalog,
+as there is no way for systems on the Internet to interact with Interchange
+except through the offered link program.
+</para><para>
+The most important issue with UNIX-domain sockets and &IC; are file permissions
+(Unix sockets appear as files on the local disk). Interchange normally runs
+with the socket file having permissions <literal>0600</literal> (which 
+translates to <literal>rw-------</literal>), which mandates that the CGI
+program and the &IC; server run as the same user ID. This means that the
+<literal>vlink</literal> program must be SUID to the same user ID as the &IC;
+server executes under. (Or that CGIWRAP is used on a single catalog system,
+but CGIWRAP is largely obsolete these days).
+</para><para>
+Even though this is against good security practice, let's say you can put
+<literal>SocketPerms 0666</literal> in your &gcf; (and restart &IC;) to 
+allow wide-open access to the socket file. In fact, you should do this when
+you have connection problems to quickly rule out whether it's just permissions
+or something else.
+</para>
+</section>
+
+<section>
+<title>INET-Domain Sockets</title>
+<para>
+INET sockets are reachable from the Internet directly. The link program
+<literal>tlink</literal> is the provided facility for such communication with
+Interchange. Other browsers can talk to the socket directly if mapped to a
+catalog with the global &conf-TcpMap; directive. To improve security,
+Interchange usually checks that requests come from one of a limited number of
+"trusted" systems defined with the global &conf-TcpHost; directive.
+</para>
+</section>
+
+<section>
+<title>Setting up VLINK and TLINK</title>
+<para>
+<literal>vlink</literal> and <literal>tlink</literal>, compiled
+from <filename>vlink.c</filename> and <filename>tlink.c</filename> source files,
+are very small, fast and low-overhead C programs that contact the running
+Interchange daemon. The <literal>vlink</literal> executable is normally made
+setuid (SUID) to the user account which runs &IC;, so that the UNIX-domain
+socket file can be set to secure permissions (user read-write only, as mentioned
+above). It is normally not necessary for the user to do anything &mdash; the
+link programs will be compiled by the configuration program. If the Interchange
+daemon is not running, either of the programs will display a message indicating
+that the server is not available.
+</para><para>
+Link program source files, found in <filename class='directory'>dist/src/</filename>
+directory with &IC; source tree, share the common C include file
+<filename>config.h</filename> which sets required variables:
+</para>
+
+<itemizedlist>
+<listitem><para>
+<literal>LINK_FILE</literal> - 
+name of the socket file (so, UNIX domain socket) that will be opened,
+usually <filename>/usr/local/lib/interchange/etc/socket</filename> (or
+anyhow, <filename>etc/socket</filename> under your &ICROOT; directory).
+</para></listitem>
+
+<listitem><para>
+<literal>LINK_HOST</literal> - 
+IP number of the host (so, INET domain socket) which should be contacted.
+The default of <literal>127.0.0.1</literal> (the local machine) is probably
+best for many installations.
+</para></listitem>
+
+<listitem><para>
+<literal>LINK_PORT</literal> -
+TCP port number (so, INET domain socket) to connect to. The default is
+<literal>7786</literal> (the decimal ASCII codes for 'M' and 'V') and does
+not normally need to be changed.
+</para></listitem>
+
+
+<listitem><para>
+<literal>LINK_TIMEOUT</literal> - 
+number of seconds <literal>vlink</literal> or <literal>tlink</literal> should
+wait before announcing that the Interchange server is not running. The default
+of <literal>45</literal> is probably a reasonable value.
+</para></listitem>
+</itemizedlist>
+</section>
+
+<section>
+<title>Compiling VLINK and TLINK</title>
+<para>
+There is a <command>compile_link</command> program found within &IC; 
+source tree that will assist you with link program compilation.
+Run <command>perldoc <replaceable>PATH/TO</replaceable>/compile_link</command>
+to read its documentation. (To find where the <command>compile_link</command>
+or <command>compile_link.PL</command> commands are, use 
+<command>locate compile_link</command> or <command>find / -name 'compile_link*'</command>).
+</para><para>
+Anyhow, you can also compile the link programs more "manually" if you 
+position yourself to the &IC; source tree:
+<programlisting>
+$ cd dist/src
+$ ./configure
+$ # (open and inspect config.h)
+$ mkdir ../bin
+$ perl compile.pl
+</programlisting>
+After which the compiled <literal>vlink</literal> and <literal>tlink</literal>
+programs will be in your <filename class='directory'>dist/bin/</filename>
+directory.
+</para><para>
+For yet another iteration, if you want the control over the whole process,
+instead of <command>perl compile.pl</command> invoke simply:
+<programlisting>
+$ gcc vlink.c -o ../bin/vlink
+$ gcc tlink.c -o ../bin/tlink
+</programlisting>
+</para><para>
+The problem with the above approach, however, is that you might be missing
+critical compiler options, or that the compiler isn't <command>gcc</command>
+at all. To ensure that the C compiler will be invoked properly, help yourself
+with this little ditty:
+<programlisting><![CDATA[
+perl -e 'do "syscfg"; system("$CC $LIBS $CFLAGS $DEFS vlink.c -o ../bin/vlink");'
+perl -e 'do "syscfg"; system("$CC $LIBS $CFLAGS $DEFS tlink.c -o ../bin/tlink");'
+]]></programlisting>
+</para><para>
+And finally, you can make the binaries smaller by going to 
+<filename class='directory'>../bin/</filename> and typing
+<command>strip *</command>, if available. (<command>strip</command> removes
+all debugging symbols from the binaries).
+</para><para>
+Have in mind that link programs are the same for all catalogs running on 
+the same server &mdash; it's only their name that makes them refer to 
+different catalogs. In other words, once you get one link program compiled,
+you can simply keep copying it to new names as you create new catalogs.
+</para>
+</section>
+
+
+<section>
+<title>Placing VLINK and TLINK to proper system locations</title>
+
+<para>
+First of all, if Interchange is to run under a different user account than
+the individual configuring the program, change <command>vlink</command> 
+ownership to the &IC; user. Do not make it owned by root, because making
+<command>vlink</command> SETUID root is an huge and unnecessary security risk.
+It should also not normally run as the default Web user
+(often <literal>nobody</literal> or <literal>http></literal>).
+</para><para>
+Here's a prospective session transcript (starting in
+<filename class='directory'>dist/bin/</filename>):
+</para>
+
+<programlisting>
+# Set up ownership and suid bit
+chown <replaceable>INTERCHANGE_USER</replaceable> vlink
+
+# Move the vlink executable to the cgi-bin directory:
+mv vlink /usr/lib/cgi-bin/<replaceable>CATALOG_NAME</replaceable>
+
+# Most systems unset the SUID bit when moving the file,
+# that's why we add suid here and not above:
+chmod u+s /usr/lib/cg-bin/<replaceable>CATALOG_NAME</replaceable>
+</programlisting>
+<para></para>
+</section>
+
+
+<section>
+<title>VLINK or TLINK compile problems</title>
+<para>
+The latest versions of the link programs have been compiled on the
+following systems: 
+</para>
+<itemizedlist>
+<listitem><para>
+   AIX 4.1
+</para></listitem>
+<listitem><para>
+   BSD2.0 (Pentium/x86)
+</para></listitem>
+<listitem><para>
+   Debian GNU/Linux
+</para></listitem>
+<listitem><para>
+   Digital Unix (OSF/Alpha)
+</para></listitem>
+<listitem><para>
+   FreeBSD 2.x, 3.x, 4.x
+</para></listitem>
+<listitem><para>
+   IRIX 5.3, IRIX 6.1, IRIX 6.5 (both SGI MIPSPro and GCC; remove <literal>-lnsl -lsocket</literal> from <filename>syscfg</filename> file on IRIX 6.x)
+</para></listitem>
+<listitem><para>
+   OpenBSD 2.7
+</para></listitem>
+<listitem><para>
+   Red Hat Linux 6.2, 7.0, 7.1, 7.2, 7.3, 8.0
+</para></listitem>
+<listitem><para>
+   SCO OpenServer 5.x
+</para></listitem>
+<listitem><para>
+   Solaris 2.x (both Sun compiler and GCC)
+</para></listitem>
+<listitem><para>
+   Solaris 7 (both Sun compiler and GCC)
+</para></listitem>
+<listitem><para>
+   SunOS 4.1.4
+</para></listitem>
+</itemizedlist>
+<para>
+If nothing works and you have a problem, you can try using the
+<filename>tlink.pl</filename> program found in the same location
+as <literal>link</literal> and <literal>tlink</literal>.
+<filename>tlink.pl</filename> is a <literal>tlink</literal> implementation
+written in &PERL; and should work on a really broad range of systems.
+In any case, unless you are using <filename>tlink.pl</filename> for a 
+specific reason, and you do have a working compiler, tuning the C source
+files to overcome compilation problems is preferred over using
+Perl implementation of <literal>tlink</literal>.
+</para>
+</section>
+
+<para>
+
+

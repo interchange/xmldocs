@@ -1,4 +1,6 @@
 
+.If the user has sent a cookie to Interchange (meaning the second page they access), and the scratch value C<mv_no_session_id> is set in their session, the session ID will not be appended to the URL. If the scratch value C<mv_no_count> is set, then the page count will not be appended. This is not dependent on cookies. So, if placed in the initial page:
+
 !block example; listitem=2
 [set mv_no_session_id]1[/set]
 [set mv_no_count]1[/set]
@@ -12,3 +14,5 @@ ScratchDefault  mv_no_session_id  1
 ScratchDefault  mv_no_count       1
 ScratchDefault  mv_add_dot_html   1
 !endblock
+
+.No session ID or count will be shown. That makes the URL shown above to be http://machine.company.com/cgi-bin/vlink/shirts.html. Once again, this is on the second page the user accesses, if they are taking and sending cookies. If the user has a pre-existing C<MV_SESSION_ID> or C<MV_USERNAME> cookie from a prior session, the effect will be immediate.

@@ -132,4 +132,12 @@ is needed to ensure the user's session is retained.
 The page, which is now entirely in regular HTML, is delivered to
 the HTTP server, which returns it to the browser.
 
+
+EXPIRING 
+
+Some thought should be given to where the databases, error logs, and session files should be located, especially on an ISP that might have multiple users sharing an Interchange server. In particular, put all of the session files and logs in a directory that is not writable by the user. This eliminates the possibility that the catalog may crash if the directory or file is corrupted.
+
+
+Interchange will wait until the current transaction is finished before expiring, so this can be done at any time without disabling web access. Any search paging files for the affected session (kept in C<ScratchDir>) will be removed as well.
+
 -->
