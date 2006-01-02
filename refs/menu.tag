@@ -14,6 +14,15 @@ __NAME__ synopsis
 </row>
 <row>
 <entry>
+<arg choice='plain'>joiner</arg>
+</entry>
+<entry></entry>
+<entry></entry>
+<entry></entry>
+<entry>HTML code appearing between menu entries</entry>
+</row>
+<row>
+<entry>
 <arg choice='plain'>localize</arg>
 </entry>
 <entry></entry>
@@ -31,11 +40,13 @@ __END__
 
 __NAME__ example: Simple Menubar
 <programlisting><![CDATA[
-[menu name=Menubar localize=name]
+<table><tr>
+[menu name=Menubar localize=name joiner='<td><img src="menu_separator.png"></td>']
 <td class="menubar" valign="center" align="center">
 <a href="{HREF}" class="menubar">{NAME}</a>
 </td>
 [/menu]
+</tr></table>
 ]]></programlisting>
 __END__
 
