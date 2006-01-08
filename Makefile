@@ -7,8 +7,8 @@
 #
 
 # Those two need to be adjusted with time
-export XMLDOCS_CUR_DEVEL = 5.3.3
-IC_VERSIONS = 4.6.0 4.8.0 5.0.0 5.2.0 cvs-head
+export XMLDOCS_CUR_DEVEL = 5.5.0
+IC_VERSIONS = 4.6.0 4.8.0 5.0.0 5.2.0 5.4.0 cvs-head
 
 #############################################################
 # Base definitions
@@ -32,7 +32,7 @@ PSR_FLAGS   = --xinclude
 REFS_AUTOGEN = bin/refs-autogen
 REFS_AUTOGEN_FLAGS ?=
 
-VPATH       = guides refs howtos glossary
+VPATH       = guides refs howtos glossary whatsnew
 .SILENT:
 .PHONY: all complete
 .PHONY: skel

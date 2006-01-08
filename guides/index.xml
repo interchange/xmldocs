@@ -181,12 +181,11 @@
 				</entry>
 
 				<entry>
-				<!--
 					<emphasis role='bold'>
+						WHATSNEW entries
 					</emphasis><sbr/>
-					<ulink url=".html">HTML</ulink> |
-					<ulink url="/">Multi-HTML</ulink>
-				-->
+					<ulink url="WHATSNEW/index.html">Multi-HTML</ulink> |
+					<ulink url="WHATSNEW.html">HTML</ulink>
 				</entry>
 
 				<entry>

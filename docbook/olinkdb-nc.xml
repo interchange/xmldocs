@@ -15,6 +15,7 @@
 	<!ENTITY confs SYSTEM "../tmp/confs-nc.db"> 
 	<!ENTITY filters SYSTEM "../tmp/filters-nc.db"> 
 	<!ENTITY orderchecks SYSTEM "../tmp/orderchecks-nc.db"> 
+	<!ENTITY whatsnew SYSTEM "../tmp/whatsnew-nc.db"> 
 ]>
 
 <targetset>
@@ -38,6 +39,7 @@
 			<document targetdoc="confs" baseuri="confs.html"> &confs; </document>
 			<document targetdoc="filters" baseuri="filters.html"> &filters; </document>
 			<document targetdoc="orderchecks" baseuri="orderchecks.html"> &orderchecks; </document>
+			<document targetdoc="whatsnew" baseuri="whatsnew.html"> &whatsnew; </document>
 		</dir>
 	</sitemap>
 

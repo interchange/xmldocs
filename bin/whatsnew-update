@@ -19,7 +19,7 @@ $Data::Dumper::Sortkeys++;
 
 my $archive_dir = "whatsnew/ml";
 my $verbose = 0;
-my $output = "whatsnew/whatsnew.xml";
+my $output = "whatsnew/WHATSNEW.xml";
 my $entry_string = "<!-- AUTO UPDATER -->";
 my @template = <DATA>;
 my $template = join "", @template;
@@ -55,14 +55,14 @@ for $_ (@archive) {
 }
 
 # Finally, update .xml
-open IN, "< whatsnew/whatsnew.xml" or
-	die "Can't open whatsnew/whatsnew.xml ($!)\n";
+open IN, "< $output" or
+	die "Can't open $output ($!)\n";
 my @wn = <IN>;
 close IN;
 
 my $count = 0;
 for $_ (@wn) {
-	/^(\Q$entry_string\E)$/ and do {
+	/^($entry_string)$/ and do {
 		$_ = "$entry_string\n$final_content";
 	}
 }
@@ -70,7 +70,7 @@ for $_ (@wn) {
 # And delete parsed stuff
 unlink for @archive;
 
-open OUT, "> whatsnew/whatsnew.xml";
+open OUT, "> $output";
 print OUT @wn;
 close OUT;
 
@@ -88,13 +88,14 @@ sub read_log {
 
 	my $run = 0;
 	for $_ (@file) {
-		/^User:\s+(\S+)$/ and $user = $1;
+		/^Developer:\s+(\S+)$/ and $user = $1;
 		/^Date:\s+(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} GMT)$/ and $date = $1;
 		/^Log:$/ and do { $run++; next };
 		/^Revision\s+Changes\s+Path$/ and $run=0;
 		$run and push @log, $_;
 	}
 
+	@log = grep {!/^\s*$/} @log;
 	( $user, $date, [ @log ])
 }
 
@@ -105,7 +106,6 @@ __DATA__
 User: $user
 Date: $date
 </emphasis>
-
 @$log
 </literallayout>
 

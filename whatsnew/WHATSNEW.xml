@@ -1,0 +1,51 @@
+<?xml version="1.0" standalone="no"?>
+
+<!-- catalog not working ? -->
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+	"../docbook/docbookxi.dtd">
+
+<article id='whatsnew'>
+
+<articleinfo>
+	<title>Interchange Misc: WHATSNEW entries</title>
+	<titleabbrev>whatsnew</titleabbrev>
+
+	<copyright>
+		<year>2006</year>
+		<holder>Interchange Development Group</holder>
+	</copyright>
+
+	<legalnotice>
+		<para>
+		This documentation is free; you can redistribute it and/or modify
+		it under the terms of the &GNU; General Public License as published by
+		the Free Software Foundation; either version 2 of the License, or
+		(at your option) any later version.
+		</para>
+		<para>
+		It is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+		</para>
+	</legalnotice>
+</articleinfo>
+
+<section id="WHATSNEW-5.5">
+	<title>INTERCHANGE 5.5 (development) and 5.6 (stable)</title>
+	<para>
+<!-- must be on a line itself, no spaces -->
+<!-- AUTO UPDATER -->
+<literallayout>
+<emphasis>
+Developer: heins
+Date: 2006-01-08 17:26:52 GMT
+</emphasis>
+* Update distributed tables to reflect new US Postal service rates.
+
+</literallayout>
+
+	</para>
+</section>
+
+</article>
