@@ -7,7 +7,7 @@ __END__
 __NAME__ synopsis
 <group choice='req'>
 	<arg choice='plain'>0</arg>
-    <arg choice='plain'>1</arg>
+	<arg choice='plain'>1</arg>
 </group>
 __END__
 
@@ -18,12 +18,13 @@ __END__
 
 
 __NAME__ description
-Enables edit metadata links in the UI if set.
+The variable enables display of "Edit metadata" links in the 
+&glos-UI;.
 __END__
 
 
-__NAME__ example: Turn on UI meta links
-<programlisting><![CDATA[
+__NAME__ example: Enable "Edit metadata" UI links
+<programlisting>
 Variable UI_META_LINK 1
-]]></programlisting>
+</programlisting>
 __END__
