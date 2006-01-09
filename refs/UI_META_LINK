@@ -1,37 +1,29 @@
 
 __NAME__ purpose
+toggle UI meta link display
 __END__
 
 
 __NAME__ synopsis
 <group choice='req'>
-	<arg choice='plain'><replaceable></replaceable></arg>
+	<arg choice='plain'>0</arg>
+    <arg choice='plain'>1</arg>
 </group>
 __END__
 
 
 __NAME__ default
-<literal></literal>
+<literal>0</literal>
 __END__
 
 
 __NAME__ description
-It determines whether the edit metadata links are enabled by default.
+Enables edit metadata links in the UI if set.
 __END__
 
 
-__NAME__ notes
-__END__
-
-
-__NAME__ see also
-__END__
-
-
-__NAME__ missing
-More complete information
-__END__
-
-
-__NAME__ example: 
+__NAME__ example: Turn on UI meta links
+<programlisting><![CDATA[
+Variable UI_META_LINK 1
+]]></programlisting>
 __END__
