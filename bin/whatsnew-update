@@ -109,7 +109,7 @@ sub read_log {
 
 	my $run = 0;
 	for $_ (@file) {
-		/^Developer:\s+(\S+)$/ and $user = $1;
+		/^User:\s+(\S+)$/ and $user = $1;
 		/^Date:\s+(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} GMT)$/ and $date = $1;
 		/^Log:$/ and do { $run++; next };
 		/^Revision\s+Changes\s+Path$/ and $run=0;
@@ -124,7 +124,7 @@ sub read_log {
 __DATA__
 <literallayout>
 <emphasis>
-User: $user
+Developer: $user
 Date: $date
 </emphasis>
 @$log
