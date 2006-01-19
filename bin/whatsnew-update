@@ -84,12 +84,16 @@ exit 0;
 
 sub file_list {
 	my $dir = shift;
-	my @files;
+	my ($file, @files);
 
 	if (-d $dir) {
 		opendir (DIR, $dir)
 			|| die "$0: failed to enter directory '$dir'\n";
-		@files = grep {-f $_} readdir(DIR);
+		while ($file = readdir(DIR)) {
+			if (-f "$dir/$file") {
+				push(@files, "$dir/$file");
+			}
+		}
 		closedir (DIR);
 	}
 
