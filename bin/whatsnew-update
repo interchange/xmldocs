@@ -33,9 +33,12 @@ unless ( GetOptions (
 )) { die "Error parsing options\n" }
 
 # Load list of received emails in @archive
-my @archive = `test -d $archive_dir && find $archive_dir -type f -print`;
-@archive or warn "No files in '$archive_dir'?\n" and exit 0;
-chomp for @archive;
+my @archive;
+
+unless (@archive = file_list($archive_dir)) {
+	warn "$0: No files in archive directory '$archive_dir'\n";
+	exit 0;
+}
 
 ## Load list of already parsed messages and delete parsed ones from %archive
 #open IN, "< whatsnew/parsed" or die "Can't open whatsnew/parsed ($!)\n";
@@ -78,6 +81,20 @@ exit 0;
 
 ###################################################################
 # Helpers below
+
+sub file_list {
+	my $dir = shift;
+	my @files;
+
+	if (-d $dir) {
+		opendir (DIR, $dir)
+			|| die "$0: failed to enter directory '$dir'\n";
+		@files = grep {-f $_} readdir(DIR);
+		closedir (DIR);
+	}
+
+	return @files;
+}
 
 sub read_log {
 	open IN, "< $_[0]" or die "Can't open $_[0] ($!)\n";
