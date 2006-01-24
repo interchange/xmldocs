@@ -59,8 +59,10 @@ the &conf-Catalog; line in the &gcf; file as part of the standard procedure.
 If the &ccf; file, expected in the catalog base directory, is not found, or is
 unreadable by the &IC; server, somewhat misguiding error message will be reported.
 Namely, instead of the appropriate permissions-problem message, the mandatory
-&conf-MailOrderTo; directive will be reported undefined.
+&conf-VendURL; directive will be reported undefined.
 __END__
+(Did I do this right? Now that MailOrderTo isn't mandatory anymore, 
+error will be about VendURL? Check that out.)
 
 __NAME__ example: Registering a catalog
 <programlisting>

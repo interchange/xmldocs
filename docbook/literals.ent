@@ -1,6 +1,6 @@
 
 <!-- first IC release shipping with xmldocs -->
-<!ENTITY first-xmldocs-release "5.6">
+<!ENTITY first-xmldocs-release "5.4">
 
 <!-- GENERAL ENTITIES -->
 <!ENTITY GNU "<ulink url='http://www.gnu.org'>GNU</ulink>">

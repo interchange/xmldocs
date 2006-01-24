@@ -13,13 +13,15 @@ TableRestrict,data,DatabaseDefault
 __END__
 
 __NAME__ description
+</para><para>
 The directive registers a database table for use with &IC;. 
-<arg choice='plain'>name</arg> specifies an arbitrary name &mdash; name
+<literal>name</literal> specifies an arbitrary name &mdash; name
 that will be used to refer to the table within &IC;. Names can be composed
 of alphanumeric characters including underscore, and we recommend they're in
 all lower- or upper-case.
-<arg choice='plain'>source_file</arg> specifies the initial database
-source file, and <arg choice='plain'>type</arg> specifies its format.
+</para><para>
+<literal>source_file</literal> specifies the initial database
+source file, and <literal>type</literal> specifies its format.
 </para><para>
 For more about &IC; and databases, and supported formats, see &glos-database;
 glossary entry.

@@ -1,4 +1,4 @@
-In general, databases contain some information, usually in tabular format,
+In general, databases contain information, usually in tabular format,
 where columns define the names and types of contained data, and rows
 represent <emphasis>entries</emphasis> &mdash; database
 <emphasis>records</emphasis>.
@@ -28,11 +28,12 @@ parlance - a <literal>database table</literal>.
 </emphasis>
 </para><para>
 &IC; works with &GDBM;, DB_File, SQL, LDAP and in-memory types of databases. 
-Regardless of the type, each database must be registered with &IC; before it's
+Regardless of type or other characteristics, each database must be registered
+with &IC; before it's
 ready to be used, and this is achieved using the &conf-Database; configuration
 directive. Pay special attention to the fact that &conf-Database; is both
 catalog and global directive, indicating that you can share databases 
-among catalogs.
+between catalogs.
 </para><para>
 Three parameters needed to complete the &conf-Database; specification are
 an arbitrary database name, text source file with initial content, and the
@@ -50,9 +51,11 @@ By default, all database source files are kept in the
 <filename class='directory'>products/</filename> subdirectory of your
 &glos-CATROOT;. The &conf-ProductDir; directive controls the exact location.
 </para><para>
-The ASCII files can have
-<literal>^M</literal> (carriage return) characters, but must have a
-newline character at the end of the line to work. <emphasis role='bold'>
+The ASCII files can contain carriage return
+(<literal>^M</literal>) characters even in data fields, but must have a
+newline character (<literal>^N</literal>) at the end of line to properly
+separate records.
+<emphasis role='bold'>
 Mac users uploading files must use ascii mode, not binary mode</emphasis>.
 </para>
 <para>
@@ -61,7 +64,7 @@ mind that the items must be separated by a single delimiter (that is, by a
 single TAB only)</emphasis>. Due to the nature of TABs, TAB-delimited files
 look messy and unaligned when viewed in a text editor. Do not try to fix these;
 better use the <command>te</command> utility that comes as part of the 
-&IC; distribution to edit files more conveniently.
+&IC; distribution to edit such files more conveniently.
 </para>
 Format examples:
 <itemizedlist>
@@ -120,7 +123,8 @@ all upper case names are recommended.
 <section>
 	<title>SQL Databases</title>
 <para>
-As hinted above, you do not need to use an external SQL database. If you only
+As hinted above, you do not need to use an external &glos-SQL; database.
+If you only
 have a small data set, you could use Interchange's internal databases.
 This is a tremendous gain for small and quick setups, or &IC; evaluation.
 However, some functions (order management, for example) will be slower
@@ -143,13 +147,14 @@ Do not fall in the jaws of <ulink url="http://c2.com/cgi/wiki?PrematureOptimizat
 </note>
 
 <para>
-If you plan on using Interchange Admin UI, you should make the additional 
-effort of also configuring SQL databases and switching databases to it.
-Admin UI provides easy import routines for text files that should
-replace traditional FTP text-file uploads.
-</para><para>
+If you plan on using Interchange Admin UI, you <emphasis>should</emphasis>
+make an additional 
+effort of configuring and using SQL databases to achieve its full potential.
 Using SQL also makes your data sets easily available for integration with
 other applications.
+</para><para>
+In any case, Admin UI provides easy import routines for text files that should
+replace traditional FTP text-file uploads.
 </para><para>
 Speaking of the source files' behavior, if a file named
 <filename><replaceable>table</replaceable>.sql</filename> is present
@@ -170,8 +175,8 @@ The table will then be created again.
 If there are any
 <literal>COLUMN_DEF</literal> specifications present in &gcf;, &ccf; or
 <filename>products/<replaceable>table</replaceable>.sql</filename>,
-they will be used in table specification (which is recommended for clean
-and correct database
+they will be used to create SQL table specification
+(which is recommended for clean and correct database
 layout). If there aren't any, however, then the key (first field in the text
 file, by default) will be created with the type <literal>char(16)</literal>,
 and all other fields will be created as <literal>char(128)</literal>. This is 
@@ -185,7 +190,8 @@ Once the &glos-database; (database table actually, remember we said
 "database" and "table" simply mean a "table" in &IC; parlance)
 is created, the text source file will be imported into it.
 For this step to succeed, data typing must be user-configured. In other words,
-if <literal>none</literal> is placed in a field, and the field in question
+if say, word "<literal>none</literal>" is placed in a field while the field
+in question
 is defined to be of numeric type, database import will not succeed;
 consequently, the problematic catalog won't configure successfully 
 (it will be skipped) and it won't be available when &IC; starts up.
@@ -203,7 +209,8 @@ Those database types usually work in a way that, on every client access, the
 appropriate database text source file is checked for being newer than the
 actual DB file itself.
 When it happens that it is, the database table is re-imported
-from the text source file.
+from the text source file <emphasis>on the fly</emphasis>, and the routine
+proceeds as usual.
 </para>
 <note>
 <title>Database updates</title>
@@ -217,7 +224,7 @@ This behavior can be controlled via the &conf-NoImport; config directive,
 but by default, changes in text files will trigger a 
 rewrite of DBM or DB_File databases. This might lead to unexpected problems
 if you edit databases from &IC; and don't sync <emphasis>files</emphasis>
-with the databases first, or have a larger data sets
+to databases first, or have a larger data sets
 (say, over a few thousand records) which take noticeable time to get
 re-imported.
 </para>
@@ -314,8 +321,8 @@ Term definitions:
 	referred to as a database. The only time the term database refers to
 	something different is when describing the concept as it relates to
 	SQL, where a database contains a series of tables. While &IC;
-	cannot create SQL databases, it can drop and create tables with that
-	database if given the proper permissions.
+	cannot create SQL databases, it can drop and create tables within
+	databases if given the proper permissions.
 	</para>
 </listitem>
 </itemizedlist>
@@ -323,7 +330,8 @@ Term definitions:
 
 <para>
 	&IC; uses one mandatory database, which is referred to as the
-	<database>products</database> database. In the supplied catalog, the
+	<database>products</database> database. In the supplied demo catalog
+	(and in the most of real-world solutions as well), the primary
 	database is directly called <literal>products</literal> 
 	and the ASCII source is kept in the file <filename>products.txt</filename>
 	This is also the default file for searching contents with
@@ -332,8 +340,8 @@ Term definitions:
 
 <note>
 <para>
-	Interchange also has a two of standard, but optional, databases that
-	are <emphasis role='bold'>in fixed formats</emphasis>:
+	Interchange also has two but optional databases that
+	are given <emphasis role='bold'>in special, fixed formats</emphasis>:
 	</para>
 	<itemizedlist>
 <listitem>
@@ -390,8 +398,8 @@ Term definitions:
 	<para>
 		It is important to adjust the &conf-PriceField; and &conf-DescriptionField;
 		directives appropriately if you change the default field names, or 
-		&IC; tags such as <tag>item-price</tag> or <tag>item-description</tag>
-		won't work.
+		&IC; tags such as &tag-price;, &tag-description;, <tag>item-price</tag> or
+		<tag>item-description</tag> won't work.
 	</para>
 	<para>
 		For each product entry in the text source file, the product code must
@@ -407,14 +415,16 @@ Term definitions:
 	<para>
 		The columns in text source files should be separated by one of the
 		approved delimiting
-		schemes (TAB, PIPE, or CSV), and are case-sensitive in some cases. If
+		schemes (TAB, PIPE, or CSV), and are case-sensitive according to the
+		underlying database &mdash; be consistent in field names to avoid
+		trouble. If
 		the case of the "description" or "price" fields have been modified,
 		the &conf-PriceField; and &conf-DescriptionField; directives must be
 		adjusted appropriately.
 	</para>
 	<note>
 		<para>
-		CSV format is not recommended as the scheme for the products
+		CSV format is not recommended for the <database>products</database>
 		database. It is much slower than TAB- or PIPE-delimited files, and
 		dramatically reduces search engine functionality. No field-specific
 		searches are possible. Using CSV for any small database that will not

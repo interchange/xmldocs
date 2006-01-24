@@ -1,36 +1,35 @@
-
 __NAME__ purpose
+contains the current locale for language (localization) display
 __END__
-
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable></replaceable></arg>
-</group>
+<literal>@@LANG@@</literal>
 __END__
-
-
-__NAME__ default
-<literal></literal>
-__END__
-
-
-__NAME__ description
-__END__
-
-
-__NAME__ notes
-__END__
-
 
 __NAME__ see also
 __END__
 
-
-__NAME__ missing
-More complete information
+__NAME__ description
+This variable contains the current &glos-locale; for language
+localization and display.
+The variable is not set in the configuration files, but is
+manipulated by the Interchange daemon while it is runnning.
+</para><para>
+If you want to define &glos-catalog; default language, set the
+<varname>MV_LANG</varname> variable.
 __END__
 
 
-__NAME__ example: 
+__NAME__ example: Reading value of LANG
+Add the following to a test Interchange page:
+<programlisting><![CDATA[
+Currency: @@LANG@@
+]]></programlisting>
+__END__
+
+__NAME__ example: Defining default language for a catalog
+Put the following in &ccf;:
+<programlisting>
+Variable MV_LANG fr_FR
+</programlisting>
 __END__

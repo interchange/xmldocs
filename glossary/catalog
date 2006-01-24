@@ -1,0 +1,18 @@
+A catalog is the basic functional unit in &IC;. A catalog is to &IC; what
+a web site is to a Web server.
+</para><para>
+Catalogs to configure and offer on the &IC; server are defined in the
+global configuration file, &gcf; (or some of the files it includes, of course,
+depending on the actual file layout). The definition directive is called
+&conf-Catalog;. The directive  you should use to register a catalog is
+&mdash; incidentally &mdash; &conf-Catalog;.
+</para><para>
+Each catalog directory (specified as one of &conf-Catalog; parameters) must
+have the file &ccf; in it. For the mandatory directives that need to be
+present in the file, see &conf-Catalog; reference page.
+</para><para>
+For the general syntax accepted in configuration files, see
+&glos-configuration; glossary entry.
+</para><para>
+For the list of available configuration directives, see
+<olink targetdoc='confs' />.

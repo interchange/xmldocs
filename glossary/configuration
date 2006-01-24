@@ -4,20 +4,31 @@ catalog running under the same &IC; server installation.
 The other &mdash; catalog part, is specified in each catalog's
 &glos-CATROOT;/&ccf;, and has no effect on other catalogs.
 </para><para>
-Configuration directives are normally specified with the directive as the
+Each configuration directive is accessible on global or catalog level,
+or both. There's a special field named "<literal>DIRECTIVE TYPE</literal>"
+present in each directive's reference page, where you can look this up.
+Keep in mind, however, that the directives on
+global and catalog level don't have to be parsed by the same code &mdash;
+in fact, they're mostly parsed by related but different code blocks.
+</para>
+
+<section>
+<title>Configuration directives and syntax</title>
+<para>
+Configuration directives are normally specified with the directive name as the
 first word on the line, with its value or values following. Capitalization
-of the directive name is not significant (although it helps readability and
-consistency). Additionally, any leading and trailing whitespace is removed
-("stripped") before processing. Here's an example:
+of the directive name is not significant, but it helps readability and
+consistency. Additionally, any leading and trailing whitespace is removed
+("stripped") before processing. Here's a simple example:
 <programlisting>
-DirectiveName <replaceable>value</replaceable>
+<replaceable>DirectiveName</replaceable> <replaceable>value</replaceable>
 </programlisting>
 </para><para>
 Besides specifying directive values inline, one can conveniently use
 the following syntax to obtain value from external files:
 
 <programlisting>
-DirectiveName &lt;<replaceable>include_filename</replaceable>
+<replaceable>DirectiveName</replaceable> &lt;<replaceable>include_filename</replaceable>
 </programlisting>
 
 <note><para>
@@ -28,7 +39,7 @@ best performance with <option>Variable</option>s.
 </para></note>
 
 Files included from &gcf; are relative to &glos-ICROOT;. Files included
-from &ccf; are relative to specific &glos-CATROOT;.
+from &ccf; are relative to specific catalog's &glos-CATROOT;.
 
 </para><para>
 So-called "here document" syntax is supported as well. You can use it to
@@ -39,9 +50,8 @@ No leading or trailing characters are allowed, not even whitespace. Here
 is a hypothetical directive using a here document:
 
 <programlisting>
-DirectiveName &lt;&lt;EOD<replaceable>
-    setting1
-    setting2
+<replaceable>DirectiveName</replaceable> &lt;&lt;EOD<replaceable>
+    setting1 setting2
     setting3</replaceable>
 EOD
 </programlisting>
@@ -50,12 +60,12 @@ EOD
 </para><para>
 The above is equivalent to:
 <programlisting>
-DirectiveName <replaceable>setting1 setting2 setting3</replaceable>
+<replaceable>DirectiveName</replaceable> <replaceable>setting1 setting2 setting3</replaceable>
 </programlisting>
 
 </para><para>
 Other configuration files can also be included from the current one.
-For example, common settings can be set in one file:
+For example, common settings can be defined in a single file:
 
 <programlisting>
 include common.cfg
@@ -67,10 +77,18 @@ Or all files loaded from a directory:
 include usertag/*
 </programlisting>
 
-</para><para>
-In addition,
-<literal>ifdef/endif</literal> and <literal>ifndef/endif</literal> pairs
-can be used:
+</para>
+</section>
+
+<section>
+<title>Parsing rules</title>
+
+<section>
+<title>Conditional blocks</title>
+
+<para>
+The familiar <literal>ifdef/endif</literal> and <literal>ifndef/endif</literal>
+pairs can be used to affect configuration processing:
 
 <programlisting>
 Variable ORDERS_TO email_address
@@ -99,3 +117,46 @@ ifndef ORDERS_TO
   MailOrderTo  webmaster@&def-domain;
 endif
 </programlisting>
+
+</para>
+</section>
+
+<section>
+<title>Variables and expansion</title>
+<para>
+&IC;, of course, offers a way to define variables. Variables defined
+in your &gcf; or &ccf; can be referenced from both configuration files
+themselves and the usual &IC; pages later, when the catalog is running.
+</para><para>
+Variables are defined using the &conf-Variable; directive (reading its
+short reference now would be a good idea). The usual way to expand
+a variable to it's value is to use the
+<literal>__<replaceable>VARIABLE_NAME</replaceable>__</literal> notation.
+This notation, however, is by default not enabled in RHS 
+("Right-Hand Side") values in configuration files. To enable it, use the
+&conf-ParseVariables; directive which immediately affects the way 
+&IC; parses variables in config files. Here's an example to clarify
+what we're talking about:
+<programlisting>
+# Let's define two variables
+Variable   SERVER_NAME  &def-hostname;
+Variable   CGI_URL      /cgi-bin/ic/tutorial
+
+# Let's make VendURL directive be a combination of __SERVER_NAME__ and __CGI_URL__
+VendURL  http://__SERVER_NAME____CGI_URL__
+
+# To your surprise, after the above, VendURL would literally contain
+# "http://__SERVER_NAME____CGI_URL__". This is not what we want, so
+# we need to enable ParseVariables to achieve the desired effect:
+ParseVariables Yes
+VendURL  http://__SERVER_NAME____CGI_URL__
+ParseVariables No
+
+# VendURL now contains "http://&def-hostname;/cgi-bin/ic/tutorial"
+</programlisting>
+</para>
+</section>
+
+</section>
+<para>
+

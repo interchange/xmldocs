@@ -13,10 +13,10 @@ __NAME__ synopsis
 	</group>
 	</entry>
 	<entry>
-	<!-- POS -->
+	Yes
 	</entry>
 	<entry>
-	<!-- REQ -->
+	Yes
 	</entry>
 	<entry>
 	<!-- DFL -->

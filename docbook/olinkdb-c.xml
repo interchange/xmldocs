@@ -15,7 +15,8 @@
 	<!ENTITY confs SYSTEM "../tmp/confs-c.db"> 
 	<!ENTITY filters SYSTEM "../tmp/filters-c.db"> 
 	<!ENTITY orderchecks SYSTEM "../tmp/orderchecks-c.db"> 
-	<!ENTITY whatsnew SYSTEM "../tmp/whatsnew-c.db"> 
+	<!ENTITY whatsnew SYSTEM "../tmp/WHATSNEW-c.db"> 
+	<!ENTITY optimization SYSTEM "../tmp/optimization-c.db"> 
 ]>
 
 <targetset>
@@ -104,9 +105,15 @@
 				</document>
 			</dir>
 
-			<dir name='whatsnew'>
-				<document targetdoc="whatsnew">
-				&whatsnew;
+			<dir name='WHATSNEW'>
+				<document targetdoc="WHATSNEW">
+				&WHATSNEW;
+				</document>
+			</dir>
+
+			<dir name='optimization'>
+				<document targetdoc="optimization">
+				&optimization;
 				</document>
 			</dir>
 
