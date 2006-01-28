@@ -16,8 +16,8 @@ __NAME__ synopsis
 __END__
 
 __NAME__ description
-The directive assigns one or more filters (comma separated) that should be
-automatically applied to a variable.
+The directive assigns one or more (space separated) &glos-filter;s
+that should be automatically applied to a variable.
 __END__
 
 

@@ -9,19 +9,27 @@ __END__
 __NAME__ synopsis
 	<arg choice='plain'><replaceable>subcatalog_name</replaceable></arg>
 	<arg choice='plain'><replaceable>base_catalog_name</replaceable></arg>
-	<arg choice='plain'><replaceable>&glos-CATROOT;</replaceable></arg>
-	<arg choice='plain' rep='repeat'><replaceable>&glos-link-program;</replaceable></arg>
+	<arg choice='plain'><replaceable>catalog_directory</replaceable></arg>
+	<arg choice='plain' rep='repeat'><replaceable>link_program_path</replaceable></arg>
 __END__
 
 
 __NAME__ description
 The directive allows definition of "subcatalogs" &mdash; &glos-catalog;s that
 share most of the characteristics of
-another, "base" catalog. Only the directives that are changed from the
-base catalog are added.
+another, "base" catalog.
+In a &conf-SubCatalog; setup, the appropriate &ccf; should only contain
+directives that differ from definitions in the base catalog's &ccf;.
 </para><para>
 &IC;'s subcatalogs feature isn't used much, but primary reasons for its use
 would be memory savings, or some kind of chained-configuration catalogs.
+</para><para>
+Concerning the directive arguments, <literal>subcatalog_name</literal> and
+<literal>base_catalog_name</literal> are the names of the new and existing
+catalog respectively. <literal>catalog_directory</literal> (&glos-CATROOT;)
+defines the catalog root directory, and can be the same for both the master-
+and sub-catalog. Finally, the &glos-link-program; is a webserver path by
+which the subcatalog can be accessed.
 __END__
 
 __NAME__ notes

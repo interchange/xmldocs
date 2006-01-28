@@ -156,7 +156,119 @@ ParseVariables No
 </programlisting>
 </para>
 </section>
-
 </section>
+
+<section>
+<title>Subroutine watches</title>
+<para>
+It may come to you as a surprise, to learn that any configuration directive
+can be "tied" to a &PERL; subroutine (if the <classname>Tie::Watch</classname>
+Perl module is installed). This allows for a kind of triggers, watch points,
+or numerous other interesting applications.
+</para><para>
+Similar to "here documents" ("<literal>&lt;&lt;</literal>"), subroutine watches
+are defined using the "<literal>&lt;&amp;</literal>" notation. Consider the 
+following example:
+<programlisting>
+MailOrderTo orders@&def-hostname;
+MailOrderTo &lt;&amp;EOF
+sub {
+	my($self, $default) = @_;
+	if($Values->{special_handling}) {
+		return 'vip@&def-hostname;';
+	}
+	else {
+		return $default;
+	}
+}
+EOF
+</programlisting>
+When &IC; tries to retrieve the value of the &conf-MailOrderTo; configuration
+directive (usually to e-mail out an order), our subroutine watch is called. In 
+turn, it returns a special value (a separate e-mail address) for customers
+having &glos-value; "<literal>special_handling</literal>" defined in their
+session. For the rest, it simply returns the default value.
+</para><para>
+Now that you've grasped the basics, there's more to the story.
+From the above example, you see our watch subroutine was called in style
+of <code>&amp;{$subref}(<replaceable>SELF</replaceable>,
+<replaceable>PREVIOUS_VALUE</replaceable>)</code>.
+"<replaceable>SELF</replaceable>", meaning what it usually means in 
+&PERL; code, is a reference to the appropriate <classname>Tie::Watch</classname>
+object. "<replaceable>PREVIOUS_VALUE</replaceable>" is simply the previously
+set value for a directive (usually its default). Those are the standard
+two arguments we receive in a subroutine watch if the configuration directive
+was of type SCALAR (defined to accept one string or text value).
+</para>
+<note>
+<para>
+Subroutine watches must be defined <emphasis role='bold'>after</emphasis>
+the configuration directives have been set to their values.
+Setting values after subroutine watches will simply 
+destroy them (the watches) and have unpredictable effects.
+</para>
+</note>
+
+<para>
+If the configuration directive being watched was a list (type ARRAY), the
+subroutine would be called in pattern
+<code>&amp;{$subref}(<replaceable>SELF</replaceable>, 
+<replaceable>INDEX</replaceable>,
+<replaceable>PREVIOUS_VALUE</replaceable>)</code>.
+("<replaceable>INDEX</replaceable>" would be an array index of the
+item accessed). Setting watch points on arrays that you don't control
+completely is not recommended. (Namely, most &IC; subroutines call arrays
+in their list context, and no access method is provided for that).
+</para>
+
+<para>
+Finally, if the configuration directive watched was a hash (type HASH), 
+the subroutine would be called in pattern 
+<code>&amp;{$subref}(<replaceable>SELF</replaceable>, 
+<replaceable>KEY</replaceable>,
+<replaceable>PREVIOUS_VALUE</replaceable>)</code>.
+("<replaceable>KEY</replaceable>" would be a name of the
+hash value accessed).
+In the following example, we tie the &conf-Variable; configuration directive.
+This is not recommended for performance reasons &mdash; &conf-Variable;
+directive is called very often and should not bear any extra overhead). But
+it illustrates the power of this operation:
+<programlisting>
+Variable TESTIT Unwatch worked.
+
+Variable &lt;&amp;EOV
+sub {
+  my ($self, $key, $orig) = @_;
+
+  if($key eq 'TESTIT') {
+    # only the first time
+    if($Scratch->{$key}++) {
+      $self->Unwatch();
+      return $orig->{TESTIT};
+    }
+    else {
+      return "Tie::Watch works! -- name=$Values->{fname}";
+    }
+  }
+  else {
+    return $orig->{$key};
+  }
+}
+EOV
+</programlisting>
+The first time <code>__TESTIT__</code> is called for an individual user,
+it would return the string "<literal>Tie::Watch works! -- name=<replaceable>NAME</replaceable></literal>"
+along with their first name (if they provided one at some point).
+On a second access (again, for an individual user),
+the watch would be dynamically dropped and the default value of the
+variable <varname>TESTIT</varname> returned.
+All other variables would operate as usual.
+</para>
+</section>
+
+<!--
+	TODO WATCH example doesn't work. Eats memory like crazy halts the machine
+	-->
+
 <para>
 

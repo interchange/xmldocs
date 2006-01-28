@@ -14,10 +14,11 @@ __END__
 __NAME__ description
 The directive determines whether &IC; will send &glos-cookie; to the client and
 read it back to keep track of &glos-session; ID.
+</para><para>
+For a complete discussion, see &glos-cookie; glossary entry.
 __END__
 Caching, timed builds, and static page building will never be in effect unless
 this directive is enabled.
-
 
 __NAME__ see also
 CookieLogin,SaveExpire

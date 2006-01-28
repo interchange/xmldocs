@@ -8,8 +8,8 @@ __END__
 
 __NAME__ synopsis
 	<arg choice='plain'><replaceable>name</replaceable></arg>
-	<arg choice='plain'><replaceable>&glos-CATROOT;</replaceable></arg>
-	<arg choice='plain' rep='repeat'><replaceable>&glos-link-program;</replaceable></arg>
+	<arg choice='plain'><replaceable>catalog_directory</replaceable></arg>
+	<arg choice='plain' rep='repeat'><replaceable>link_program_path</replaceable></arg>
 __END__
 
 

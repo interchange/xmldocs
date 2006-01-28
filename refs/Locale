@@ -1,18 +1,59 @@
 __NAME__ purpose
-specify global locale for use in error messages
+specify locale definitions
 __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>locale definition</arg>
-</group>
+<arg choice='opt'><replaceable>locale<replaceable></arg><sbr/>
+<arg choice='plain' rep='repeat'><replaceable>locale_key<replaceable> <replaceable>locale_value</replaceable></arg><sbr/>
+<arg choice='plain' rep='repeat'><replaceable>locale<replaceable></arg> <replaceable>locale_key<replaceable> <replaceable>locale_value</replaceable></arg><sbr/>
 __END__
 
 
 __NAME__ description
-The directive specifies the global &glos-locale; for error messages.
-The content is usually loaded from a file.
+The directive specifies the default &glos-locale; definitions for
+a number of items:
+<itemizedlist>
+<listitem><para>
+<literal>currency_symbol</literal> - default currency symbol. Can be a simple value like "<literal>$</literal>" or " <literal>E</literal>", or a more flexible setting such as '<literal>&lt;img src="euro.png" /&gt;</literal>'.
+</para></listitem>
+<listitem><para>
+<literal>frac_digits</literal> - 
+</para></listitem>
+<listitem><para>
+<literal>int_curr_symbol</literal> -
+</para></listitem>
+<listitem><para>
+<literal>int_frac_digits</literal> -
+</para></listitem>
+<listitem><para>
+<literal>mon_decimal_point</literal> -
+</para></listitem>
+<listitem><para>
+<literal>mon_grouping</literal> -
+</para></listitem>
+<listitem><para>
+<literal>price_picture</literal> -
+</para></listitem>
+<listitem><para>
+<literal>mon_thousands_sep</literal> -
+</para></listitem>
+<listitem><para>
+<literal>n_cs_precedes</literal> -
+</para></listitem>
+<listitem><para>
+<literal>negative_sign</literal> -
+</para></listitem>
+<listitem><para>
+<literal>p_cs_precedes</literal> -
+</para></listitem>
+<listitem><para>
+<literal>p_sep_by_space</literal> -
+</para></listitem>
+<listitem><para>
+<literal>positive_sign</literal> -
+</para></listitem>
+</itemizedlist>
 __END__
 
 __NAME__ notes
@@ -21,11 +62,19 @@ If two locales are set "default" using &conf-Locale;, and no
 "default" found will be set as the actual default.
 __END__
 
-__NAME__ example: Defining Locale
+__NAME__ example: Defining general Locale
+<programlisting>
+Locale fr
+</programlisting>
+__END__
+
+__NAME__ example: Defining Locale by individual keys
 Put the following in &gcf;:
 <programlisting>
-Locale &lt;locale.error
+Locale &lt;localedata
 </programlisting>
+The actual file <filename>localedata<filename> could be composed
+of the keys listed in <xref linkend="Locale_description"/>.
 __END__
 
 __NAME__ missing

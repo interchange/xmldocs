@@ -1,5 +1,5 @@
 __NAME__ purpose
-instruct Interchange to log to system's syslog
+instruct Interchange to log to Unix system's log (syslog)
 __END__
 
 __NAME__ see also

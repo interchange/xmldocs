@@ -52,8 +52,9 @@ without leading or trailing white space. Do not even append a semicolon to the
 marker (as you would in &PERL;).
 </para><para>
 Global subroutines are not subject to <classname>Safe</classname> security 
-checks. Therefore, &glos-scratch; or catalog subroutines (&conf-Sub;s) are
-preferred in most cases.
+checks. They can do most anything!
+Therefore, &glos-scratch; or catalog subroutines (&conf-Sub;s) are
+preferred in most cases to protect the innocent.
 __END__
 
 
