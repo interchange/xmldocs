@@ -1,0 +1,33 @@
+__NAME__ purpose
+specify default shipping method
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>ship_mode</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies the default &glos-shipping; method by
+initializing the <mv>mv_shipmode</mv> variable.
+</para><para>
+It defaults to a value "<literal>default</literal>".
+__END__
+
+__NAME__ example: Specifying DefaultShipping
+<programlisting>
+DefaultShipping UPS
+</programlisting>
+__END__
+
+__NAME__ notes
+This directive is somewhat obsolete, because the behavior from the example
+is simply obtained by a different approach in &ccf;:
+<programlisting>
+ValuesDefault mv_shipmode UPS
+</programlisting>
+__END__
+
