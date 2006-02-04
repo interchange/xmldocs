@@ -63,7 +63,7 @@
 				</document>
 			</dir>
 			
-			<dir name='glossary'>
+			<dir name=''>
 				<document targetdoc="glossary">
 				&glossary;
 				</document>

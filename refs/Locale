@@ -4,9 +4,9 @@ __END__
 
 
 __NAME__ synopsis
-<arg choice='opt'><replaceable>locale<replaceable></arg><sbr/>
-<arg choice='plain' rep='repeat'><replaceable>locale_key<replaceable> <replaceable>locale_value</replaceable></arg><sbr/>
-<arg choice='plain' rep='repeat'><replaceable>locale<replaceable></arg> <replaceable>locale_key<replaceable> <replaceable>locale_value</replaceable></arg><sbr/>
+<arg choice='opt'><replaceable>locale</replaceable></arg><sbr/>
+<arg choice='plain' rep='repeat'><replaceable>locale_key</replaceable> <replaceable>locale_value</replaceable></arg><sbr/>
+<arg choice='plain' rep='repeat'><replaceable>locale</replaceable></arg> <replaceable>locale_key</replaceable> <replaceable>locale_value</replaceable></arg><sbr/>
 __END__
 
 

@@ -9,18 +9,25 @@
 <title>XMLDOCS - Interchange Documentation Set</title>
 <titleabbrev>index</titleabbrev>
 
+<!--
 <copyright>
 	<year>2005</year>
 	<holder>Davor Ocelic</holder>
 </copyright>
+-->
 <copyright>
 	<year>2005</year>
-	<holder>Interchange Development Group</holder>
+	<year>2006</year>
+	<holder>
+	<ulink url='http://www.icdevgroup.org/'>Interchange Development Group</ulink>
+	<ulink url='http://www.icdevgroup.org/'>(http://www.icdevgroup.org/)</ulink>
+	</holder>
 </copyright>
 
 <authorgroup>
 	<author>
-		<firstname>Davor</firstname><surname>Ocelic</surname>
+		<firstname>Davor</firstname>
+		<surname>Ocelic</surname>
 		<email>docelic@icdevgroup.org</email>
 	</author>
 </authorgroup>
