@@ -50,8 +50,9 @@ unless (@archive = file_list($archive_dir)) {
 
 # Read all messages and expand template for each
 for $_ (@archive) {
-	my ($user,$date,$log) = read_log($_);
-
+	my ($user,$date, $log, $affected) = read_log($_);
+	next if !$date and $user == 0;
+	
 	my $sect = eval "\"$template\"";
 	$final_content .= $sect;
 	#print "Here's a cookie:\n$sect\n";
@@ -97,7 +98,7 @@ sub file_list {
 		closedir (DIR);
 	}
 
-	return @files;
+	return reverse @files;
 }
 
 sub read_log {
@@ -105,28 +106,42 @@ sub read_log {
 	my @file = <IN>;
 	close IN;
 	#chomp for @file;
-	my (@log, $user, $date);
+	my (@log, $user, $date, @affected, $log, $affected);
 
 	my $run = 0;
 	for $_ (@file) {
-		/^User:\s+(\S+)$/ and $user = $1;
+		/^(<PRE>)?User:\s+(\S+)$/ and $user = $2 ? $2 : $1;
 		/^Date:\s+(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} GMT)$/ and $date = $1;
+		/^((Modified|Added|Removed):\s.*)$/ and push @affected, $1;
 		/^Log:$/ and do { $run++; next };
 		/^Revision\s+Changes\s+Path$/ and $run=0;
 		$run and push @log, $_;
 	}
 
-	@log = grep {!/^\s*$/} @log;
-	( $user, $date, [ @log ])
+	# We're interested in HEAD commits only
+	return 0 if grep {/-branch/} @affected;
+
+	s/^\s+// for @affected;
+	s/\s+$// for @affected, @log;
+	s/\t/  /g for @log;
+
+	$affected = join "\n", @affected;
+	$log = join "\n", @log;
+
+	$affected =~ s/^\n+//; $affected =~ s/\n+$//;
+	$log =~ s/^\n+//; $log =~ s/\n+$//;
+
+	( $user, $date, $log, $affected )
 }
 
 
 __DATA__
-<literallayout>
-<emphasis>
+<para><literallayout>
+<emphasis role='bold'>
 Developer: $user
 Date: $date
-</emphasis>
-@$log
-</literallayout>
+$affected</emphasis>
+$log
+</literallayout></para>
+
 

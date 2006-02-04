@@ -10,7 +10,8 @@
 <!ENTITY DEB "<ulink url='http://www.debian.org'>Debian</ulink>">
 <!ENTITY DEBGNU "<ulink url='http://www.debian.org'>Debian GNU</ulink>">
 <!ENTITY ICDL "<ulink url='http://www.icdevgroup.org/i/dev/download.html'>download</ulink>">
-<!ENTITY ICCVS "<ulink url='http://www.icdevgroup.org/i/dev/cvs.html'>CVS</ulink>">
+<!ENTITY ICCVS "<ulink url='http://www.icdevgroup.org/cgi-bin/cvsweb/interchange/'>CVS</ulink>">
+<!ENTITY PUBLIC_MLS "<ulink url='http://www.icdevgroup.org/mailman/listinfo/'>Public Interchange Mailing Lists</ulink>">
 <!ENTITY APACHE "<ulink url='http://www.apache.org/'>Apache</ulink>">
 <!ENTITY MATHOPD "<ulink url='http://www.mathopd.org/'>Mathopd</ulink>">
 <!ENTITY W3 "<ulink url='http://www.w3c.org/'>W3C</ulink>">
