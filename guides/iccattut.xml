@@ -368,6 +368,7 @@ ErrorFile /var/log/interchange/error.log
 		<title>Organization</title>
 		<para>
 		Since most sites have certain aspects of the site that remain the same as the content of the pages changes, we are going to create a template that we can use for all pages. We'll divide the page into four sections:
+		<literallayout>
 		<screen>
 	 _____________________
 	|                     |
@@ -384,6 +385,7 @@ ErrorFile /var/log/interchange/error.log
 	|        bottom       |
 	|_____________________|
 		</screen>
+		</literallayout>
 		</para> <para>
 		The <emphasis>main</emphasis> section will hold the content different for each page. The <emphasis>top</emphasis> section will be used for headers, banners, menus, and so on. The <emphasis>left</emphasis> section can be used as a sidebar or navigation bar, and the <emphasis>bottom</emphasis> section can contain the copyright and contact info. The top, left, and bottom sections will remain constant throughout the site. Making a change to information in one of these sections will make that change to all pages in your site.
 		</para> <para>

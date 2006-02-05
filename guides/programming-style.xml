@@ -103,6 +103,7 @@
 		and white space around operators increases readability.
 		Lining up <literal>=</literal>s in a series of assignments can be
 		used to emphasize the parallel structure.
+<literallayout>
 <programlisting><![CDATA[
     reset_calc() unless $Vend::Calc_reset;
     $CGI_array  = \%CGI::values_array;
@@ -110,6 +111,7 @@
     $Carts      = $::Carts;
     $Items      = $Vend::Items;
 ]]></programlisting>
+</literallayout>
 	</para></listitem>
 
 	<listitem><para>
@@ -145,6 +147,11 @@ return if $::Pragma->{download};
 				containing changes and fixes to multiple areas) it is best to create
 		file-specific comments addressing individual fixes. Using blank
 		comments is not encouraged.
+	</para><para>
+		Also, the CVS commit messages you write will be used to construct
+    <olink targetdoc='WHATSNEW' /> entries, so make sure your text is both
+		user- and developer-friendly, not longer than necessary, clear,
+		and concise.
 	</para></listitem>
 
 	<listitem><para>
@@ -169,7 +176,7 @@ return if $::Pragma->{download};
 		particularly unsuitable. &PERL; gives us the nice <literal>qq{}</literal>
 		operator that eliminates the problem of quotes clashing with Perl syntax:
 <programlisting><![CDATA[
-my $buf = qq{<a href="http://google.com/">Visit Google!</a>};
+my $buf = qq{<a href="http://www.av.com/">Visit AltaVista!</a>};
 ]]></programlisting>
 		</para>
 		<para>
@@ -234,16 +241,13 @@ my $test = 12; # Only used for test
 		(Impact: might confuse function tracking code)
 <programlisting><![CDATA[
 sub test1 {
-
-sub test2
-{
 ]]></programlisting>
 		</para></listitem>
 		<listitem><para>
 		Do not break obviously "solid" blocks of code to multiple lines. To give
 		you an idea of what I am talking about, let's say you should not break
 		typical xmldocs regexps, such as <literal>/\$::Pragma->{(\w+?)}/</literal>
-		or <literal>/\$Vend::Cfg->{Pragma}{(\w+?)}/</literal>.
+		or <literal>/\$Vend::Cfg->{Pragma}{(\w+?)}/</literal>. (Impact: critical. Might prevent the <filename>bin/stattree</filename> script from detecting symbols)
 <programlisting><![CDATA[
 return if $::Pragma->{download};
 
@@ -256,18 +260,20 @@ if (
 		Do not break blocks of code that obviously follow a lexical pattern.
 		For example, do not introduce double quotes or structural changes 
 		to the below:
+		<literallayout>
 <programlisting><![CDATA[
-  ['FormAction',		 'action',			 ''],
-  ['MaxServers',       'integer',          10],
-  ['GlobalSub',		 'subroutine',       ''],
-  ['Database',		 'database',         ''],
-  ['FullUrl',			 'yesno',            'No'],
-  ['Locale',			 'locale',            ''],
-  ['HitCount',		 'yesno',            'No'],
-  ['IpHead',			 'yesno',            'No'],
-  ['IpQuad',			 'integer',          '1'],
-  ['TagDir',      	 'root_dir_array', 	 'code'],
+  ['FormAction',    'action',           ''],
+  ['MaxServers',    'integer',          10],
+  ['GlobalSub',     'subroutine',       ''],
+  ['Database',      'database',         ''],
+  ['FullUrl',       'yesno',            'No'],
+  ['Locale',        'locale',           ''],
+  ['HitCount',      'yesno',            'No'],
+  ['IpHead',        'yesno',            'No'],
+  ['IpQuad',        'integer',          '1'],
+  ['TagDir',        'root_dir_array',   'code'],
 ]]></programlisting>
+</literallayout>
 		</para></listitem>
 	</itemizedlist>
 </sect1>
