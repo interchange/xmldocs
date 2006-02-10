@@ -1,9 +1,9 @@
 __NAME__ purpose
-Interchange Unix socket permissions
+Interchange SOAP-RPC Unix socket permissions
 __END__
 
 __NAME__ see also
-SocketFile
+SOAP
 __END__
 
 
@@ -15,11 +15,10 @@ __END__
 
 
 __NAME__ description
-Specify permissions (&glos-mode;) for the Interchange UNIX-domain socket.
+Specify permissions (&glos-mode;) for the Interchange 
+&glos-SOAP-RPC; UNIX-domain socket.
 </para><para>
-Prepend a starting <literal>0</literal> to indicate an octal value. The
-directive can be overridden from the command line using <literal>interchange
--r SocketPerms=<replaceable>value</replaceable></literal>.
+Prepend a starting <literal>0</literal> to indicate an octal value.
 </para><para>
 The default value is <literal>0660</literal>, which allows only programs
 running under your &IC; server UID or GID to access the socket.
@@ -32,9 +31,9 @@ debug problems easier.
 __END__
 
 
-__NAME__ example: Setting SocketPerms
+__NAME__ example: Setting SOAP_Perms
 <programlisting>
-SocketPerms 0666
+SOAP_Perms 0666
 </programlisting>
 __END__
 

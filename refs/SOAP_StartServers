@@ -1,0 +1,32 @@
+__NAME__ purpose
+specify number of servers which should be started to handle SOAP RPC requests
+__END__
+
+__NAME__ see also
+SOAP_Host, SOAP_Socket, SOAP_Perms, Soap_MaxRequests, SOAP_StartServers, StartServers
+__END__
+
+__NAME__ notes
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>count_less_than_51</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies the number of servers which should be started
+and handling &glos-SOAP-RPC; requests.
+</para><para>
+The default is <literal>1</literal>. Setting the directive to more than
+<literal>50</literal> is unreasonable and produces an error.
+__END__
+
+__NAME__ example: Specifying SOAP_StartServers
+<programlisting>
+SOAP_StartServers 10
+</programlisting>
+__END__
+

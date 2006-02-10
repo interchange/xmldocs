@@ -1,0 +1,27 @@
+__NAME__ purpose
+enable handling of SOAP RPC requests
+__END__
+
+__NAME__ see also
+SOAP_Host, SOAP_Socket, SOAP_Perms, Soap_MaxRequests, SOAP_StartServers
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Enable handling of &glos-SOAP-RPC; requests.
+</para><para>
+__END__
+
+__NAME__ example: Enabling SOAP RPC protocol
+<programlisting>
+SOAP Yes
+</programlisting>
+__END__
+

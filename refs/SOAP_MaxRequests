@@ -1,0 +1,39 @@
+__NAME__ purpose
+define maximum number of per-server SOAP RPC response deliveries before respawn
+__END__
+
+
+__NAME__ see also
+SOAP, SOAP_StartServers, SOAP_Socket, MaxRequestsPerChild
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>count</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive defines the maximum number
+of &glos-SOAP-RPC; responses each server instance will carry out before 
+closing down and respawning.
+</para><para>
+The whole point of a periodic respawn is to prevent accumulation of 
+eventual memory leaks.
+</para><para>
+The default value is <literal>50</literal>. In case the default value is
+somehow cleared, the hard-coded default is <literal>10</literal>.
+__END__
+
+__NAME__ notes
+__END__
+
+
+__NAME__ example: Setting SOAP_MaxRequests
+<programlisting>
+SOAP_MaxRequests 200
+</programlisting>
+__END__
+

@@ -1,0 +1,45 @@
+__NAME__ purpose
+name of SOAP RPC socket files
+__END__
+
+__NAME__ see also
+SOAP, SocketFile
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'>filename_or_host:port</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies the Inet and Unix sockets &IC; should listen on
+for &glos-SOAP-RPC; requests.
+</para><para>
+The list should be space-separated. Each entry is considered to be
+an Unix socket if it contains "<literal>/</literal>" somewhere in its
+path. Any other specification is considered an Inet socket, and can be 
+in form of <literal><replaceable>NNN</replaceable>.<replaceable>NNN</replaceable>.<replaceable>NNN</replaceable>.<replaceable>NNN</replaceable>:<replaceable>PPPP</replaceable></literal>, where the IP address and the colon are optional.
+</para><para>
+The default value is Inet socket on port <literal>7780</literal>, if
+&conf-SOAP; is enabled.
+__END__
+
+__NAME__ notes
+__END__
+
+
+__NAME__ example: Setting SOAP_Socket
+<programlisting>
+SOAP_Socket /var/run/interchange/interchange.soap
+</programlisting>
+__END__
+
+__NAME__ example: Setting SOAP_Socket
+<programlisting>
+SOAP_Socket 12.23.13.31:7770 1.2.3.4:7770 /var/run/interchange/soap
+</programlisting>
+__END__
+

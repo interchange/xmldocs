@@ -1,0 +1,34 @@
+__NAME__ purpose
+specify list of hosts that are allowed to connect and issue SOAP RPC requests
+__END__
+
+__NAME__ see also
+SOAP_Host, SOAP_Socket, SOAP_Perms, Soap_MaxRequests, SOAP_StartServers
+__END__
+
+__NAME__ notes
+This directive exists, but is currently unused in &IC; code and
+therefore has no effect on execution of SOAP RPC requests.
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>hostname_or_IP</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies the list of hosts allowed to connect
+and issue &glos-SOAP-RPC; requests.
+</para><para>
+Multiple entries should be space-separated, and the default value is
+"<literal>localhost 127.0.0.1</literal>".
+__END__
+
+__NAME__ example: Specifying SOAP_Host
+<programlisting>
+SOAP_Host localhost 127.0.0.1 &def-hostname;
+</programlisting>
+__END__
+
