@@ -1,0 +1,44 @@
+__NAME__ purpose
+specify primary Unix group to switch to, after catalog to invoke is determined
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>group</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+By default, the &IC; server and the individual catalogs it serves
+run under the same Unix user ID and user group (UID and GID).
+</para><para>
+This directive allows you to switch group at the catalog level.
+However, this approach has its drawbacks. First of all, the &IC; user
+must already be a member of the target group, that is &mdash; have the
+target group in its list of secondary groups. Verify that using the
+<command>id <replaceable>USERNAME</replaceable></command> command.
+Another, related problem is of a more technical nature. Namely, most
+operating systems limit the number of secondary groups per user;
+on Linux, this limit is <literal>32</literal> groups (run 
+<command>grep -r NGROUPS_MAX /usr/include/</command> to verify).
+This means that you cannot develop a generic site scheme based on
+&conf-SetGroup; if you plan to serve more than 30 catalogs, or
+switch between more than 30 groups.
+</para><para>
+One viable solution is to either run separate &IC; daemons (each 
+serving 30 catalogs), or give each catalog user it's own &IC;
+server. The latter is beneficial in terms of tighter access control and
+greater user freedom, and is a generally acceptable approach.
+__END__
+
+__NAME__ example: Defining SetGroup
+<programlisting>
+SetGroup catuser1
+</programlisting>
+__END__
+
+__NAME__ see also
+ReadPermission,WritePermission
+__END__

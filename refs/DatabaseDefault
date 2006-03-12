@@ -3,7 +3,57 @@ specify default settings for Database directives
 __END__
 
 __NAME__ see also
-Database
+Database, Replace
+__END__
+
+__NAME__ description
+The directive defines default parameters for a database.
+</para><para>
+For a list of possible parameters (keys), see the &conf-Database; directive.
+</para><para>
+&conf-DatabaseDefault; accepts any scalar setting, which means all
+<emphasis role='bold'>except</emphasis>:
+
+<itemizedlist>
+<listitem><para>
+        ALTERNATE_*
+</para></listitem>
+<listitem><para>
+        BINARY
+</para></listitem>
+<listitem><para>
+        COLUMN_DEF
+</para></listitem>
+<listitem><para>
+        DEFAULT
+</para></listitem>
+<listitem><para>
+        FIELD_ALIAS
+</para></listitem>
+<listitem><para>
+        FILTER_*
+</para></listitem>
+<listitem><para>
+        NAME
+</para></listitem>
+<listitem><para>
+        NUMERIC
+</para></listitem>
+<listitem><para>
+        POSTCREATE
+</para></listitem>
+<listitem><para>
+        WRITE_CATALOG
+</para></listitem>
+</itemizedlist>
+__END__
+
+__NAME__ notes
+Those defaults settings are made when the table is initially defined, so explicit
+settings for the database itself override the defaults, of course.
+</para><para>
+The setting must be made <emphasis role='bold'>before</emphasis> the database is defined using the
+&conf-Database; directive. For a way to clear definitions, use the &conf-Replace; directive.
 __END__
 
 __NAME__ example: Specify default SQL connection username and password
@@ -16,3 +66,15 @@ DatabaseDefault USER interchange
 DatabaseDefault PASS nevairbe
 </programlisting>
 __END__ 
+
+
+__NAME__ example: Specifying WRITE_CONTROL and WRITE_TAGGED defaults
+<programlisting>
+DatabaseDefault      WRITE_CONTROL   1
+DatabaseDefault      WRITE_TAGGED    1
+</programlisting>
+__END__
+
+__NAME__ example: Clearing default values
+Replace DatabaseDefault
+__END__

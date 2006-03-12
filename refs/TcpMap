@@ -1,0 +1,94 @@
+__NAME__ purpose
+specify which ports should Interchange server running in Inet mode listen on
+__END__
+
+
+__NAME__ see also
+TcpHost, &glos-configuration;, Catalog
+__END__
+
+__NAME__ synopsis
+<arg choice='plain' rep='repeat'>
+<replaceable>host_and_port_specification</replaceable>
+<replaceable>catalog_specification</replaceable>
+</arg>
+__END__
+
+
+__NAME__ description
+The &conf-TcpMap; directive defines a list of host addresses and ports that
+the &IC; server should listen on (when running in Inet mode using 
+<literal>tlink</literal> &glos-link-program;, of course).
+</para><para>
+In the past, &IC; had its own built-in Web server which also allowed 
+for binding of specific catalogs to specific ports. Since this built-in
+server is long gone now, its behavior was replaced by a combination of
+aliases on the real Web server and &IC; catalog definitions.
+See <xref linkend="TcpMap_examples"/> for clarification.
+</para><para>
+By default, &IC; listens on all IP addresses, on port <literal>7786</literal>. 
+The port number comes from the ASCII values of letters <literal>M</literal> and
+<literal>V</literal>, which stood for "<literal>MiniVend</literal>"
+(see <ulink url="http://www.icdevgroup.org/i/dev/about">Interchange
+About and History page</ulink> for more background information).
+</para><para>
+<literal>host_and_port_specification</literal> defines hostnames and
+ports to bind to. Self-explanatory examples include <literal>7786</literal>,
+<literal>*:7786</literal>, <literal>127.0.0.1:7786</literal> or
+<literal>&def-hostname;:7786</literal>.
+</para><para>
+<literal>catalog_specification</literal> is the name of the catalog to 
+offer on selected hostname and port. Since there is no more built-in
+Web server in &IC;, the only sensible definition is "<literal>-</literal>".
+__END__
+
+__NAME__ example: Defining TcpMap
+The following makes &IC; listen on three ports.
+<programlisting><![CDATA[
+TcpMap 7786 - 7787 - 7788 -
+]]></programlisting>
+__END__
+
+__NAME__ example: Mass-defining TcpMap
+To define a large number of ports, the "here document"
+capability of Interchange &glos-configuration; engine can be used:
+<programlisting>
+TcpMap &lt;&lt;EOD
+  *:7786   -
+  127.0.0.1:7787   -
+  &def-hostname;:7788   -
+  *:7789   -
+EOD
+</programlisting>
+__END__
+
+
+__NAME__ example: Offerning specific catalogs on specific ports
+Even though the internal Web server in &IC; is gone, 
+<literal>tlink</literal> (Inet &glos-link-program;) still relies only on
+the <envar>SCRIPT_PATH</envar> environment variable to determine which
+catalog was requested. This means that the
+functional equivalent of catalogs bound to ports can still be achieved,
+by use of Web server location aliases and &IC; script path aliases. Actually, 
+you'd probably want to do this just to reduce the length of
+&glos-HTML; links.
+</para><para>
+Here's an example of needed &APACHE; Web server configuration:
+<programlisting><![CDATA[
+ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+ScriptAlias /CATALOG_NAME /usr/lib/cgi-bin/ic/CATALOG_NAME
+<Directory "/usr/lib/cgi-bin">
+  AllowOverride None
+  Options ExecCGI -MultiViews +SymLinksIfOwnerMatch
+  Order allow,deny
+  Allow from all
+</Directory>
+]]></programlisting>
+</para><para>
+And here's the appropriate catalog definition in &gcf;:
+<programlisting><![CDATA[
+Catalog CATALOG_NAME /PATH/TO/CATALOG/CATALOG_NAME /cgi-bin/ic/CATALOG_NAME /CATALOG_NAME
+]]></programlisting>
+__END__
+
+

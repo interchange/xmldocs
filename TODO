@@ -1,4 +1,8 @@
-in iccattut, s/item-field/item-param/ at least on some places. 
+- in iccattut, s/item-field/item-param/ at least on some places. 
+- Make xmldocs tarball in ftp autoupdated
+- Fix file README, directly at the top it talks about prefixes, OUTPUT dir
+  etc without introducing it first.
+- Change -latest to version number in tarball download
 
 Outstanding:
 =======

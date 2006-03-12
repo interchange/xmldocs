@@ -1,0 +1,27 @@
+__NAME__ purpose
+contains the current locale for currency display
+__END__
+
+__NAME__ synopsis
+<literal>@@MV_CURRENCY@@</literal><sbr/>
+<literal>@@CURRENCY@@</literal>
+__END__
+
+__NAME__ see also
+MV_LANG
+__END__
+
+__NAME__ description
+This variable contains the current &glos-locale; for currency and price
+display.
+The variable is not set in the configuration files, but is
+manipulated by the Interchange daemon while it is runnning.
+__END__
+
+
+__NAME__ example: Reading value of MV_CURRENCY
+Add the following to a test Interchange page:
+<programlisting><![CDATA[
+Currency: @@MV_CURRENCY@@
+]]></programlisting>
+__END__

@@ -83,6 +83,15 @@ The description doesn't seem to match the description of the same variable when 
 __END__
 
 
+Example of POSIX setlocale for France, if properly aliased:
+
+!block example
+Locale     fr
+!endblock
+
+ee C<setlocale(3)> for more information. If embedded Perl code is used to sort search returns, the C<setlocale()> will carry through to string collation.
+
+
 
 
 LI1: price_picture
