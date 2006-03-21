@@ -41,7 +41,7 @@ if ( -d ($_ = "sources/$rev") ) { # Source is here, only update
 else { # Need to perform checkout
 	chdir "sources";
 	print STDERR "CO    $rev\n";
-	DEBUG and print "DBG $ENV{PWD}: cvs -z9 -d:pserver:cvs\@cvs.icdevgroup.org:/var/cvs checkout -d $rev $cvs_r interchange >& ../tmp/co.$rev";
-	system("cvs -z9 -d:pserver:cvs\@cvs.icdevgroup.org:/var/cvs checkout -d $rev $cvs_r interchange >& ../tmp/co.$rev");
+	DEBUG and print "DBG $ENV{PWD}: cvs -z9 -d:pserver:cvs\@cvs.icdevgroup.org:/var/cvs checkout -d $rev $cvs_r interchange > ../tmp/co.$rev 2>&1";
+	system("cvs -z9 -d:pserver:cvs\@cvs.icdevgroup.org:/var/cvs checkout -d $rev $cvs_r interchange > ../tmp/co.$rev 2>&1");
 }
 

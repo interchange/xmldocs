@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ see also
-date2time
+date2time, date_change_null
 __END__
 
 
@@ -17,7 +17,9 @@ or
 </para><para>
 <literal><replaceable>YYYY</replaceable>[/-]<replaceable>MM</replaceable>[/-]<replaceable>DD</replaceable>(:<replaceable>hh</replaceable>(<replaceable>mm</replaceable>)?)?</literal>
 </para><para>
-to <literal><replaceable>YYYYMMDD</replaceable>((<replaceable>hh</replaceable>)?(<replaceable>mm</replaceable>)?)?</literal>.
+to
+</para><para>
+<literal><replaceable>YYYYMMDD</replaceable>((<replaceable>hh</replaceable>)?(<replaceable>mm</replaceable>)?)?</literal>.
 </para><para>
 If the year specification contains 2 digits only and is less than 
 <literal>50</literal>, as is say, <literal>02</literal>, 
@@ -44,6 +46,9 @@ and not hours!
 When the input data starts with year specification, the year must have
 4-digit format (i.e. <literal>2005</literal> and
 <emphasis role='bold'>not</emphasis> just <literal>05</literal>)!
+</para><para>
+If the date is empty, the filter defaults to current date. To 
+force an absence of a date, use &filter-date-change-null; filter.
 __END__
 
 __NAME__ online: Using date_change
@@ -56,6 +61,9 @@ __NAME__ online: Using date_change
 <br/>
 [filter date_change]05-29-2005:1536[/filter]    <br/>
 [filter date_change]05-29-05:1536[/filter]    <br/>
+<br/>
+[filter date_change]0000-00-00[/filter]    <br/>
+[filter date_change][/filter]    <br/>
 ]]></programlisting>
 __END__
 
