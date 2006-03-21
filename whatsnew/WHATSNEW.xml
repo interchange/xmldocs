@@ -54,6 +54,236 @@
 <!-- AUTO UPDATER -->
 <para><literallayout>
 <emphasis role='bold'>
+Developer: heins
+Date: 2006-03-14 19:17:21 GMT
+Modified:  lib/Vend Menu.pm</emphasis>
+* Make timeout for menu blank settable (Greg Hanson change).
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-03-09 10:23:47 GMT
+Modified:  lib/Vend Dispatch.pm</emphasis>
+log message about empty job at catalog level
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: jon
+Date: 2006-03-02 23:19:19 GMT
+Modified:  lib/Vend Form.pm</emphasis>
+In the date widget, if the date is blank (0000-00-00), treat a time of
+00:00 as blank, not midnight, in the HTML option selection.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: jon
+Date: 2006-03-02 15:55:43 GMT
+Modified:  lib/Vend Config.pm</emphasis>
+Correct the default behavior of the new catalog RunDir directive. By the
+time this code runs, it's already been expanded into an absolute path so
+the checks for whether a user set it or not were not meaningful.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: heins
+Date: 2006-03-02 12:27:31 GMT
+Modified:  lib/Vend Config.pm</emphasis>
+* Prevent Interchange crash when SocketFile not in interchange.cfg.
+
+* Add ConfigParseComments as a &quot;warn&quot;, prevents killing virtually every
+  catalog in the world when you upgrade. Allow some grace period in
+  updating catalog.cfg.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: jon
+Date: 2006-03-02 07:12:28 GMT
+Modified:  lib/Vend Config.pm</emphasis>
+Improve support for relocating various Interchange-generated files to
+relative paths and add catalog-level RunDir directive.
+
+For example, to move all such files into a var/ hierarchy in traditional
+Unix fashion:
+
+In interchange.cfg:
+RunDir     var/run
+ErrorFile  var/log/error.log
+PIDFile    var/run/interchange.pid
+SocketFile var/run/socket
+IPCsocket  var/run/socket.ipc
+
+In catalog.cfg:
+RunDir     var/run
+LogFile    var/log/misc.log
+ErrorFile  var/log/error.log
+SessionDatabase var/session
+ScratchDir var/tmp
+
+Still to be dealt with is a chicken-and-egg problem with the global RunDir,
+where the interchange.cfg RunDir setting isn't early enough to cover all
+settings.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: jon
+Date: 2006-03-01 22:09:41 GMT
+Modified:  .        MANIFEST
+Added:     code/Filter date_change_null.filter</emphasis>
+Add new date_change_null filter.
+
+This is meant for use with databases such as PostgreSQL that do not accept
+invalid dates (the '0000-00-00' used in the date_change filter), but
+require a NULL to indicate the absence of a date.
+
+To use, set metadata to use widget &quot;date_blank&quot;, filter &quot;date_change_null&quot;,
+and optionally set the default value to &quot;0000-00-00&quot; if you want the
+default to be no date, rather than today's date.
+
+Provided by Mark Johnson &lt;mark at endpoint.com&gt; with help from Stefan Hornburg.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: danb
+Date: 2006-02-27 20:26:28 GMT
+Modified:  lib/Vend Options.pm</emphasis>
+* [Fixed] Error type unspecified in one logOnce() call in Options
+  - This resulted in the actual error message being dropped and only the &quot;sku&quot;
+    argument making it through to the log file.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: jon
+Date: 2006-02-23 03:34:53 GMT
+Modified:  lib/Vend Config.pm</emphasis>
+Allow using an arbitrary subroutine in any package as a GlobalSub,
+like this:
+
+GlobalSub my_subname My::Package::some_subname
+
+Also works for a catalog-level Sub, if AllowGlobal is on for the catalog:
+
+Sub my_subname My::Package::some_subname
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: ton
+Date: 2006-02-21 12:18:38 GMT
+Modified:  lib/Vend Util.pm</emphasis>
+  Apply Mike's patch:
+  Add display option to [item-price] and [item subtotal]
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: kwalsh
+Date: 2006-02-16 21:44:10 GMT
+Modified:  lib/Vend Util.pm</emphasis>
+    * When display=&quot;text&quot;, make sure that the currency text is always
+      displayed before the price value.  The p_cs_precedes value doesn't
+      apply to the int_currency_symbol.
+
+    * Make sure that the currency text is separated from the price value,
+      just in case the administrator uses something like &quot;GBP&quot;, instead
+      of &quot;GBP &quot;, in the int_currency_symbol.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: heins
+Date: 2006-02-16 16:25:18 GMT
+Modified:  lib/Vend Interpolate.pm</emphasis>
+* Incompatible change, but unavoidable. Change variable setting determining
+  country for tax basis.
+
+  Problem was that MV_COUNTRY_FIELD was determining the country for
+  the multistate order check. Since some installations were changing that
+  to &quot;tax_country&quot; and manipulating that variable for taxing purposes,
+  there was interactin.
+
+  Change MV_COUNTRY_FIELD in Interpolate.pm to MV_COUNTRY_TAX_VAR.
+
+* TODO: make change in UPGRADE.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: ton
+Date: 2006-02-15 09:27:54 GMT
+Modified:  lib/Vend Util.pm</emphasis>
+  Added a feature to the currency tag in order to display
+  textual representation of the currency symbol. The so
+  called international currency symbol according to the
+  ISO 4217 standard.
+
+  Usage:
+  1. Add int_currency_symbol entry to the locale table.
+  2. Add the display option to tags, like:
+
+     [total-cost display=text]
+
+    Valid values for the display option:
+    - text    Displays 'EUR ', 'GBP ', 'USD '  (EUR 125.40)
+    - none    No symbol, displays formatted number only. (125.40)
+    - symbol  Default behavior (same as calling the tag
+          without display option)
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: kwalsh
+Date: 2006-02-15 05:39:53 GMT
+Modified:  lib/Vend Dispatch.pm</emphasis>
+    * If cookies are switched off in the user's browser and the user
+      is just switching from a HTTP page to a HTTPS page then there's
+      no reason to re-initialise the session.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: heins
+Date: 2006-02-12 22:25:11 GMT
+Modified:  lib/Vend Config.pm</emphasis>
+* Add the missing int_currency_symbol key.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: jon
+Date: 2006-02-10 15:02:40 GMT
+Modified:  lib/Vend Dispatch.pm</emphasis>
+Fix bug that allowed code called by DispatchRoutines or CleanupRoutines
+to overwrite the routines arrays themselves.
+
+Found and fixed by Frederic Steinfels &lt;fredo at dvdupgrades.ch&gt;.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
 Developer: kwalsh
 Date: 2006-02-03 22:40:58 GMT
 Modified:  dist/standard/etc log_transaction</emphasis>
