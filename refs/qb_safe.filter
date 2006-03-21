@@ -1,0 +1,22 @@
+__NAME__ purpose
+make input safe for QuickBooks by removing unfriendly characters
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter makes data safe for &QBOOKS;, because 
+QB will crash at the drop of a hat.
+__END__
+
+
+__NAME__ example: Filter example
+&filter-qb_safe; the input and limit it to 25 characters.
+<programlisting>
+[filter op="qb_safe 25" interpolate=1][ol-param sku][/filter]
+</programlisting>
+__END__
+

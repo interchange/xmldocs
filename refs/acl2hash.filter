@@ -1,0 +1,27 @@
+__NAME__ purpose
+convert Interchange ACL string to a Perl hash representation
+__END__
+
+
+__NAME__ see also
+acl, hash2acl
+__END__
+
+
+__NAME__ description
+The filter is specific to the ACL widget and
+probably should not be used otherwise.
+</para><para>
+The filter doesn't need to be selected for the widget to
+operate in the &tag-table-editor;.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+</programlisting>
+__END__
+
+__NAME__ missing
+Better description
+__END__

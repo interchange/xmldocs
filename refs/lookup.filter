@@ -1,0 +1,38 @@
+__NAME__ purpose
+perform lookup in another database
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+The filter performs a lookup in another database.
+</para><para>
+See <xref linkend='lookup_examples'/> for clarification.
+__END__
+
+
+__NAME__ example: Filter example
+Suppose we have two databases, <database>products</database> and
+<database>support</database>, as follows:
+<screen>
+code	price	description
+144	12	Item 144
+145	84	Item 145
+146	314	Item 146
+</screen>
+and
+<screen>
+code	product_supported
+144	0
+145	1
+146	-1
+</screen>
+</para><para>
+Then, performing
+<code>[filter lookup.support.product_supported]144[/filter]</code> would
+yield <literal>0</literal>.
+__END__
+

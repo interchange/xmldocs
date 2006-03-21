@@ -1,0 +1,50 @@
+__NAME__ purpose
+perform lookup in another database
+__END__
+
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+__END__
+
+
+__NAME__ example: Filter example
+__END__
+
+
+* Add new filter, "next_sequential". Allows selection of a next-sequential
+value based on a field (and qualified by a field).
+
+[filter op=3D"next_sequential.survey_q.sort"][cgi sort][/filter]
+
+will:
+
+1. Return the existing value if present.
+2. If existing value is blank, return max + 1 in the sort field,
+	i.e. equivalent to:
+
+	SELECT sort FROM survey_q
+	ORDER BY sort DESC
+	LIMIT 1
+
+	If another argument of a field name is passed, i.e.
+
+	filter =3D> 'next_sequential.survey_q.sort.sel',
+
+	then you get:
+
+	SELECT sort FROM survey_q
+	WHERE sel =3D '[cgi sel]'
+	ORDER BY sort DESC
+	LIMIT 1
+
+	This allows a next-sequential numbering for things that need it.
+
+	Developed to support general-purpose survey UI for Ton's excellent
+	product rating system.
+
+
+
