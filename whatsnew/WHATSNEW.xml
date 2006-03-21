@@ -54,6 +54,26 @@
 <!-- AUTO UPDATER -->
 <para><literallayout>
 <emphasis role='bold'>
+Developer: racke
+Date: 2006-03-21 21:20:07 GMT
+Modified:  dist/standard/dbconf/mysql country.mysql</emphasis>
+increase size of name field so that all country names fit, patch from Gert van der Spoel
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: kwalsh
+Date: 2006-03-21 14:50:45 GMT
+Modified:  scripts  expire.PL</emphasis>
+    * Added the missing &quot;use Vend::Dispatch&quot; directive to prevent the
+      &quot;Undefined subroutine &amp;Vend::Dispatch::update_global_actions&quot;
+      error reported by Andreas Grau.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
 Developer: heins
 Date: 2006-03-14 19:17:21 GMT
 Modified:  lib/Vend Menu.pm</emphasis>
