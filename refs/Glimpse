@@ -1,0 +1,37 @@
+__NAME__ purpose
+specify program path and options for the Glimpse search engine
+__END__
+
+
+__NAME__ see also
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>program_path</replaceable></arg>
+	<arg choice='opt' rep='repeat'><replaceable>option</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies pathname for the <command>glimpse</command> command, used if glimpse
+searches are to be enabled.
+To use <command>glimpseserver</command>, the
+<literal>-C</literal>, <literal>-J</literal> and <literal>-K</literal> options must be
+specified.
+__END__
+
+
+__NAME__ notes
+Glimpse was once-popular search engine in the Linux world, but its non-free status and other
+things called for its replacement. We suggest you use Swish-e which is supported by 
+&IC; as well.
+__END__
+
+__NAME__ example: Defining Glimpse
+<programlisting>
+Glimpse  /usr/local/bin/glimpse -C -J srch_engine -K2345
+</programlisting>
+__END__
+

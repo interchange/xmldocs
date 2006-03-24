@@ -17,10 +17,12 @@ To build the complete documentation set, just run:
   make cvs
   make
 
-It's also possible to change OUTPUT/ directory to something else, named
-OUTPUT<yourstring>. However, places where I couldn't have inserted variables
-have OUTPUT/ hardcoded, so OUTPUT is made a symbolic link to the output dir
-of your choice. 
+Sometimes you want to build multiple versions of documentation at once
+(for example, one online, one offline, one profiled for Debian GNU etc.).
+It is possible to change OUTPUT/ directory to something else (named
+OUTPUT<yourstring>) to achieve this effect. However, places where I
+couldn't have inserted variables have OUTPUT/ hardcoded, so OUTPUT is still
+made a symbolic link to the output dir of your choice. 
 
 Here's an example:
 

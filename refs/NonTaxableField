@@ -1,0 +1,37 @@
+__NAME__ purpose
+specify name of the non-taxable field in the products database
+__END__
+
+
+__NAME__ missing
+__END__
+
+
+__NAME__ see also
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>field_name</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive specifies
+name of the field in the <database>products</database> &glos-database; that,
+set to <literal>1</literal> or <literal>Yes</literal>, sets an item as 
+non-&glos-tax;able.
+</para><para>
+Interchange will log an error and tax it anyway if the field doesn't exist
+in the database.
+</para><para>
+An empty definition (the default) disables this feature.
+__END__
+
+__NAME__ example: Defining NonTaxableField
+<programlisting>
+NonTaxableField wholesale
+</programlisting>
+__END__
+

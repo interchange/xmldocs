@@ -1,0 +1,75 @@
+__NAME__ purpose
+define parameters for an Interchange variant of the Unix crontab facility
+__END__
+
+__NAME__ synopsis
+	<arg choice='plain' rep='repeat'>
+		<replaceable>key</replaceable>
+		<replaceable>value</replaceable>
+	</arg>
+__END__
+
+__NAME__ see also
+__END__
+
+__NAME__ description
+</para><para>
+The directive configures Interchange periodic &glos-job;s facility. It accepts a list of key/value
+pairs, where the available keys and their descriptions are:
+<itemizedlist>
+	<listitem><para>base_directory -
+	directory to search for cron jobs. The default is
+	<filename class='directory'>CATROOT/etc/cron/</filename>
+	</para></listitem>
+	<listitem><para>use_global -
+	search for <literal>base_directory</literal> in &glos-ICROOT;
+	and include jobs from the global installation as well
+	</para></listitem>
+	<listitem><para>initialize -
+	a macro to execute once before each job
+	</para></listitem>
+	<listitem><para>autoload -
+	a macro to execute once before each job
+	</para></listitem>
+	<listitem><para>email -
+	e-mail for session reports, if any result from running jobs
+	</para></listitem>
+	<listitem><para>log -
+	logfile for session reports, if any result from running jobs
+	</para></listitem>
+	<listitem><para>add_session -
+	include the current session in the output
+	</para></listitem>
+	<listitem><para>from -
+	self-explanatory e-mail-related option
+	</para></listitem>
+	<listitem><para>subject -
+	self-explanatory e-mail-related option
+	</para></listitem>
+	<listitem><para>reply_to -
+	self-explanatory e-mail-related option
+	</para></listitem>
+	<listitem><para>extra_headers -
+	any additional headers for an e-mail message
+	</para></listitem>
+</itemizedlist>
+__END__
+
+__NAME__ notes
+__END__
+
+__NAME__ example:
+<programlisting>
+</programlisting>
+__END__
+
+__NAME__ example:
+<programlisting>
+</programlisting>
+__END__
+
+__NAME__ missing
+Diff between initialize and autoload
+Log specifies filename or just 1/0 ?
+Exactly what does add_session do
+__END__
