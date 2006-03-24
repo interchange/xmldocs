@@ -1,0 +1,58 @@
+
+__NAME__ purpose
+enable on-fly additions to client shopping cart
+__END__
+
+__NAME__ see also
+__END__
+
+__NAME__ synopsis
+<group choice='plain'>
+	<group choice='opt'>
+		<arg choice='plain'>0</arg>
+		<arg choice='plain'>1</arg>
+	</group>
+	<arg choice='plain'><replaceable>ITL_tag_name</replaceable></arg>
+</group>
+__END__
+
+__NAME__ description
+If the directive is enabled, it enables on-the-fly item additions to the
+client shopping cart. If set to a name of an existing &glos-ITL; tag,
+the tag definition will be used to parse and format the item with the
+following call:
+</para><para>
+<programlisting>
+$item = Vend::Parse::do_tag($Vend::Cfg->{OnFly},
+  $code,
+  $quantity,
+  $fly[$j],
+);
+</programlisting>
+In other words, your custom tag will be invoked with four arguments, 
+of which the first three are the tag name, item code and item quantity
+respectively, 
+and the last argument is the value of <mv>mv_order_fly</mv> &glos-mv;
+variable for the item.
+</para><para>
+The default &tag-onfly; tag is already provided in &IC;.
+__END__
+
+__NAME__ notes
+See &glos-onfly; glossary entry for a complete discussion.
+__END__
+
+__NAME__ example: Enabling OnFly
+<programlisting>
+OnFly 1
+</programlisting>
+__END__
+
+__NAME__ example: Configuring OnFly with a custom ITL tag
+<programlisting>
+OnFly my_onfly_tag
+</programlisting>
+For your custom tag, use the existing &tag-onfly; tag, whose 
+CVS source is available online in &cvsfile-code_SystemTag_onfly.coretag;.
+__END__
+

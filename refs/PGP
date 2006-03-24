@@ -1,0 +1,41 @@
+__NAME__ purpose
+automatically encrypted full order report
+__END__
+
+
+__NAME__ see also
+EncryptProgram, PGP, CreditCardAuto
+__END__
+
+__NAME__ synopsis
+<arg choice='plain'><replaceable>filename</replaceable></arg>
+<arg choice='opt'><replaceable>arguments</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive enables automatic encryption of complete order 
+reports sent to the store owner or an e-mail processing system.
+</para><para>
+The PGP key ring must be in the &IC; daemon user's home directory,
+or defined in the environment variable <envar>PGPPATH</envar>.
+The target user's public key must be present in the keyring, of course.
+__END__
+
+__NAME__ notes
+If this directive is non-null, the PGP command string will be used as-given
+to encrypt the entire order, in addition to any encryption done as a result
+of the &conf-CreditCardAuto; directive. If, for some reason, an error comes
+from PGP, the customer will see &glos-special; page
+"<literal>failed</literal>".
+</para><para>
+If the &conf-Route; directive is set up to "<literal>supplant</literal>",
+the &conf-PGP;  directive is ignored.
+__END__
+
+__NAME__ example: Defining PGP
+<programlisting>
+PGP /usr/local/bin/pgp -feat orders@company.com
+</programlisting>
+__END__
+
