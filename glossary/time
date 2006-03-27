@@ -1,0 +1,126 @@
+
+Time specification follows:
+
+<table>
+<title>Recognized format strings for time functions</title>
+<tgroup cols="4">
+<thead>
+<row>
+<entry>Format String</entry>
+<entry>Description</entry>
+<entry>Range</entry>
+<entry>Example</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><literal>%c</literal></entry>
+<entry>date and time</entry>
+<entry></entry>
+<entry><literal>Mon Apr 12 14:17:46 2004</literal></entry>
+</row>
+<row>
+<entry><literal>%x</literal></entry>
+<entry>date</entry>
+<entry></entry>
+<entry><literal>01/18/2004</literal></entry>
+</row>
+<row>
+<entry><literal>%X</literal></entry>
+<entry>time</entry>
+<entry></entry>
+<entry><literal>14:17:46</literal></entry>
+</row>
+<row>
+<entry><literallayout>%Y
+%y</literallayout></entry>
+<entry>year</entry>
+<entry></entry>
+<entry><literallayout>2004
+04</literallayout></entry>
+</row>
+<row>
+<entry><literal>%j</literal></entry>
+<entry>day of the year</entry>
+<entry>0-366</entry>
+<entry><literal>112</literal></entry>
+</row>
+<row>
+<entry><literal>%m</literal></entry>
+<entry>month</entry>
+<entry>01-12</entry>
+<entry><literal>01</literal></entry>
+</row>
+<row>
+<entry><literallayout>%B
+%b</literallayout></entry>
+<entry>month name</entry>
+<entry></entry>
+<entry><literallayout>January
+Jan</literallayout></entry>
+</row>
+<row>
+<entry><literal>%d</literal></entry>
+<entry>day of the month</entry>
+<entry>01-31</entry>
+<entry><literal>08</literal></entry>
+</row>
+<row>
+<entry><literallayout>%U
+%W</literallayout></entry>
+<entry>week number (Sunday/Monday)</entry>
+<entry><literallayout>00-53
+00-53</literallayout></entry>
+<entry><literallayout>23
+23</literallayout></entry>
+</row>
+<row>
+<entry><literal>%d</literal></entry>
+<entry>weekday</entry>
+<entry>0-6</entry>
+<entry><literal>08</literal></entry>
+</row>
+<row>
+<entry><literallayout>%A
+%a</literallayout></entry>
+<entry>weekday name</entry>
+<entry></entry>
+<entry><literallayout>Sunday
+Sun</literallayout></entry>
+</row>
+<row>
+<entry><literallayout>%H
+%I</literallayout></entry>
+<entry>hour</entry>
+<entry><literallayout>00-23
+00-12</literallayout></entry>
+<entry><literallayout>23
+11</literallayout></entry>
+</row>
+<row>
+<entry><literal>%p</literal></entry>
+<entry>AM/PM</entry>
+<entry></entry>
+<entry><literal>PM</literal></entry>
+</row>
+<row>
+<entry><literal>%M</literal></entry>
+<entry>minute</entry>
+<entry>00-59</entry>
+<entry><literal>57</literal></entry>
+</row>
+<row>
+<entry><literal>%S</literal></entry>
+<entry>second</entry>
+<entry>00-59</entry>
+<entry><literal>57</literal></entry>
+</row>
+<row>
+<entry><literal>%Z</literal></entry>
+<entry>time zone name</entry>
+<entry></entry>
+<entry><literal>CEST</literal></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
