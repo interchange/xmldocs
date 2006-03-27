@@ -86,7 +86,7 @@ option) any later version.</para>">
 
 
 <!-- ENTITIES FOR CORE DEVELOPERS, FOR AUTHOR LINES-->
-<!ENTITY racke "Stefan Hornburg">
+<!ENTITY racke "<ulink url='mailto:racke@linuxia.de'>Stefan Hornburg (Racke)</ulink>">
 <!ENTITY docelic "<ulink url='mailto:docelic@icdevgroup.org'>Davor Ocelic</ulink>">
 <!ENTITY mheins "Mike Heins">
 <!ENTITY jon "Jon Jensen">
@@ -216,6 +216,14 @@ option) any later version.</para>">
   <entry></entry><entry></entry>
   <entry></entry>
   <entry>The usual &glos-HTML; attributes.</entry>
+</row>
+">
+<!ENTITY ROW_CURRENCYDISPLAY "
+<row>
+  <entry>display</entry>	
+  <entry></entry><entry></entry>
+  <entry>text</entry>
+  <entry>Whether to display currency as symbol, text or not at all.</entry>
 </row>
 ">
 <!ENTITY ROW_CSS_std "
