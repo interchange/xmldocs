@@ -96,5 +96,13 @@
 		<xsl:copy-of select="$link"/>
 	</xsl:template>
 
+	<xsl:template match="refclass[1]">
+		<xsl:variable name="area">
+			<xsl:value-of select="." />
+		</xsl:variable>
+		<meta name="AREA" content="$area" />
+	</xsl:template>
+
+
 </xsl:stylesheet>
 

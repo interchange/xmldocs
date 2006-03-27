@@ -363,7 +363,7 @@ sub wanted {
 
 			# Skip this simple sanity check for 4.6.0 - those files do not
 			# have .(core)?tag ending.
-			if ( $hash{version} ne '4.6.0') {
+			if ( $hash{version} and $hash{version} ne '4.6.0') {
 			$c{file} =~ m#(\w+?)\.(core)?tag$# or
 				warn "I know $c{file} is a tag but regex doesn't match it\n";
 			}
