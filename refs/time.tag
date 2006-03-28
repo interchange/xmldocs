@@ -152,7 +152,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	POSIX strftime format specifier, see &glos-time; glosssary entry.
+	POSIX strftime format specifier; see &glos-time; glossary entry.
 	</entry>
 
 </row> 
