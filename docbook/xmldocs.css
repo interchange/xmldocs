@@ -320,16 +320,9 @@ thead {
 	color: white; 
 } 
 
-.informaltable table,
-.informaltable tbody,
-.informaltable thead,
-.informaltable tfoot,
 .informaltable td {
-	border-color: #8F8F8F;
-	border: none;
 	border: 0.5pt solid black;
-	border: 0.5pt solid black;
-	padding: 0;
+	padding: 2px;
 	margin: 0
 }
 
