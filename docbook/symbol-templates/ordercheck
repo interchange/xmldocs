@@ -9,7 +9,7 @@
 <refnamediv>
 <refname>$ag{"name"}</refname>
 <refpurpose>$ag{"purpose"}</refpurpose>
-<refclass>$ag{"directive type"}</refclass>
+<refclass>$ag{"finegrained name"}</refclass>
 </refnamediv>
 
 <refsect1 id='$ag{"name"}_description'>
