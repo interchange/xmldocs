@@ -971,7 +971,8 @@ sub process_symbol {
 		name => $name,
 		id => $name,
 		"_symbol type" => $group,
-		"compound name" => $compounds ? $compounds{ substr($group,-3,3) } : $group,
+		"compound name" => $compounds ?
+			$compounds{ substr($group,-3,3) } || $group : $group,
 		#"symbol type" => "&SYMBOL_" . uc($group) . ";",
 	};
 
