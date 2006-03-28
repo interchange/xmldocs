@@ -1,3 +1,7 @@
+__NAME__ purpose
+display shipping cost of electronic cart
+__END__
+
 __NAME__ synopsis 
 <row>
 
@@ -265,6 +269,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
+&ROW_CURRENCYDISPLAY;
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
 __END__
