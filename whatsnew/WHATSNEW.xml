@@ -55,6 +55,61 @@
 <para><literallayout>
 <emphasis role='bold'>
 Developer: racke
+Date: 2006-03-27 14:14:41 GMT
+Modified:  dist/standard/products locale.txt</emphasis>
+get rid of price_picture, introduced int_currency_symbol and use HTML euro symbol
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-03-27 14:16:39 GMT
+Modified:  dist/standard/etc report</emphasis>
+use new display option for report
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-03-21 22:05:03 GMT
+Modified:  dist/standard/dbconf/mysql mysql.cfg</emphasis>
+varchar(255) makes much more sense as default type than char(128), columns
+subject to indexing can be specified explicitly in individual *.mysql files
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-03-23 15:17:09 GMT
+Modified:  dist/lib/UI/pages/admin content.html</emphasis>
+improved spacing, new page is longer sticking directly below title bar
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: jon
+Date: 2006-03-27 18:42:50 GMT
+Modified:  lib/Vend Interpolate.pm</emphasis>
+Remove legacy [/page] and [/order] macros.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-03-26 20:43:37 GMT
+Modified:  dist/standard/products locale.txt</emphasis>
+added German translation for front page info
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
 Date: 2006-03-21 21:20:07 GMT
 Modified:  dist/standard/dbconf/mysql country.mysql</emphasis>
 increase size of name field so that all country names fit, patch from Gert van der Spoel
