@@ -98,9 +98,12 @@
 
 	<xsl:template match="refclass[1]">
 		<xsl:variable name="area">
-			<xsl:value-of select="." />
+		<xsl:value-of select="." />
 		</xsl:variable>
-		<meta name="AREA" content="$area" />
+
+		<xsl:text disable-output-escaping="yes">&lt;meta name="AREA" content="</xsl:text>
+		<xsl:value-of select="$area" />
+		<xsl:text disable-output-escaping="yes">" /&gt;</xsl:text>
 	</xsl:template>
 
 
