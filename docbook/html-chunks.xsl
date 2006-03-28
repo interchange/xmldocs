@@ -101,7 +101,7 @@
 		<xsl:value-of select="." />
 		</xsl:variable>
 
-		<xsl:text disable-output-escaping="yes">&lt;meta name="AREA" content="</xsl:text>
+		<xsl:text disable-output-escaping="yes">&lt;meta name="area" content="</xsl:text>
 		<xsl:value-of select="$area" />
 		<xsl:text disable-output-escaping="yes">" /&gt;</xsl:text>
 	</xsl:template>
