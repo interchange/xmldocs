@@ -218,5 +218,25 @@
 	</xsl:template>
 
 
+
+	<!-- This chunk inserts <meta name="purpose" content="PURPOSE_LINE" />,
+	     to help Swish index documentation properly. -->
+	<xsl:template match="refpurpose[1]">
+		<xsl:text> </xsl:text>
+		<xsl:call-template name="dingbat">
+			<xsl:with-param name="dingbat">em-dash</xsl:with-param>
+		</xsl:call-template> 
+		<xsl:text> </xsl:text>
+		<xsl:apply-templates/>
+
+		<xsl:variable name="purpose">
+		<xsl:value-of select="." />
+		</xsl:variable>
+
+		<xsl:text disable-output-escaping="yes">&lt;meta name="purpose" content="</xsl:text>
+		<xsl:value-of select="$purpose" />
+		<xsl:text disable-output-escaping="yes">" /&gt;</xsl:text>
+	</xsl:template>
+
 </xsl:stylesheet>
 

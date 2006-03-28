@@ -1,5 +1,5 @@
 __NAME__ purpose
-display shipping cost of electronic cart
+display shipping cost for items in electronic cart
 __END__
 
 __NAME__ synopsis 
