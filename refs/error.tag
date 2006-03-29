@@ -6,6 +6,25 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	name
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	name of error variable, usually corresponds to an input field
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	overwrite
 	</entry>
 	<entry>
@@ -18,7 +37,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	overwrite existing error messages instead of appending
 	</entry>
 
 </row> 
@@ -113,7 +132,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	display errors
 	</entry>
 
 </row> 
@@ -309,4 +328,11 @@ __NAME__ synopsis
 </row> 
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
+__END__
+
+__NAME__ example
+Set an error:
+<programlisting>
+[error name="email" set="Invalid email address"]
+</programlisting>
 __END__
