@@ -17,6 +17,8 @@
 <!ENTITY W3 "<ulink url='http://www.w3c.org/'>W3C</ulink>">
 <!ENTITY W3C "<ulink url='http://www.w3c.org/'>W3C</ulink>">
 <!ENTITY PERL "<ulink url='http://www.perl.org/'>Perl</ulink>">
+<!ENTITY CPAN "<ulink url='http://www.cpan.org/'>CPAN</ulink>">
+<!ENTITY GCC "<ulink url='http://gcc.gnu.org/'>GCC</ulink>">
 <!ENTITY MYSQL "<ulink url='http://www.mysql.com/'>MySQL</ulink>">
 <!ENTITY PGSQL "<ulink url='http://www.postgresql.org/'>PostgreSQL</ulink>">
 <!ENTITY ORACLE "<ulink url='http://www.oracle.com/'>Oracle</ulink>">
@@ -30,6 +32,7 @@
 <!ENTITY EBAY "<ulink url='http://www.ebay.de/'>ebay.de</ulink>">
 <!ENTITY SVG "<ulink url='http://www.w3.org/TR/SVG/'>SVG</ulink>">
 <!ENTITY QBOOKS "<ulink url='http://quickbooks.intuit.com/'>Intuit QuickBooks</ulink>">
+<!ENTITY SOAP "<ulink url='http://www.w3.org/TR/soap/'>SOAP</ulink>">
 
 
 

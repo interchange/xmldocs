@@ -168,3 +168,39 @@ In IC source:
 
 
 Check CartTrigger[Quantity]
+
+
+
+Community-contributed usertags (was usertag.pod before 4.7.0; too messy)
+icstart - Getting Started Guide
+* FAQ for each demo catalog (foundation, construct, barry, artstore)
+* FAQ for each database (DBM, MySQL, PostgreSQL, Oracle)
+* FAQ for each payment processor (CCVS, Cybercash, Signio, Authorize.net, etc.)
+
+
+
+$Session->{source} bzw. [data session source] comes from:
+
+http://host/cgi-bin/cat?;;thesource      (old MV 3 way, still works)
+http://host/cgi-bin/cat?mv_pc=thesource  (current way)
+http://host/cgi-bin/cat?mv_pc=RESET      (clears it, for debugging)
+
+Otherwise mv_pc does double duty as a cache foiler, and is a meaningless,
+incrementing integer.
+
+-----------------------------------------------------------------------------
+
+iccattut:
+Switch to new payment settings instead of mv_cyber_mode etc.
+To add
+Discuss profile.order verification options like 'zip=zip' and then explain why we don't actually use that one much unless it's for a U.S.-only store
+Problems?
+[on-match] gets used if search returned no results on an empty search string. Why?
+Doubled-up CC verification errors:
+No error message is given in [error] if required form variables weren't passed at all (vs. being simply empty)
+No error message if profiles.order can't be found
+
+Discuss using images (from old mvdocs):
+A public Web directory for inline image graphic files is needed. Interchange does not serve the images, only the HTML tags calling them. A useful convention is to place all buttonbars, backgrounds, and icons in the /images directory, with the catalog items located in the /images/catalog directory. Regardless of the directory structure, an I<absolute path> must be used. Relative paths are unacceptable. Use the I<ImageDir> directive, which places that as the absolute path in front of all relative IMG and INPUT SRC, and BODY, TABLE, TR, TH, and TD BACKGROUND specifications.
+
+
