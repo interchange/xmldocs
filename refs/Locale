@@ -24,6 +24,9 @@ a number of items:
 <literal>int_curr_symbol</literal> -
 </para></listitem>
 <listitem><para>
+<literal>int_currency_symbol</literal> -
+</para></listitem>
+<listitem><para>
 <literal>int_frac_digits</literal> -
 </para></listitem>
 <listitem><para>
