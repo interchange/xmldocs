@@ -7,6 +7,9 @@
 
 	<xsl:import
 		href="/usr/share/xml/docbook/stylesheet/nwalsh/manpages/docbook.xsl"/>
+
+	<xsl:param name="man.output.quietly">1</xsl:param>
+	<xsl:param name="man.charmap.enabled">0</xsl:param>
 	
 	<xsl:include href="common.xsl"/>
 	

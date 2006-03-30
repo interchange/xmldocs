@@ -18,7 +18,7 @@
 	<xsl:param name="root.filename">index</xsl:param>
 	<xsl:param name="chunk.fast">0</xsl:param>
 	<xsl:param name="chunk.section.depth">1</xsl:param>
-	<xsl:param name="chunker.output.encoding">ISO8859-1</xsl:param>
+	<xsl:param name="chunker.output.encoding" select="'ISO-8859-1'" />
 	<xsl:param name="chunker.output.indent">no</xsl:param>
 
   <xsl:template name="user.footer.content" >
@@ -50,8 +50,6 @@
   </p>
   </xsl:template>
 
-	<xsl:include href="common.xsl"/>
-	<xsl:include href="html-common.xsl"/>
 
 	<!-- Norman Walsh gave me a nice idea and code. Since chunked documents
 		need ../ prefix in relative links, add it with XSL. And boy, here's 
@@ -237,6 +235,9 @@
 		<xsl:value-of select="$purpose" />
 		<xsl:text disable-output-escaping="yes">" /&gt;</xsl:text>
 	</xsl:template>
+
+	<xsl:include href="common.xsl"/>
+	<xsl:include href="html-common.xsl"/>
 
 </xsl:stylesheet>
 

@@ -6,6 +6,8 @@
 	xmlns:xi="http://www.w3.org/2003/XInclude"
 	version="1.0">
 
+	<xsl:output encoding="ISO-8859-1"/>
+
 	<xsl:param name="section.autolabel">0</xsl:param>
 
 	<xsl:param name="admon.graphics">1</xsl:param>

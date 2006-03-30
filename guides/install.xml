@@ -1,0 +1,581 @@
+<?xml version="1.0" standalone="no"?>
+
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+	"../docbook/docbookxi.dtd">
+
+<article id='install'>
+
+<articleinfo>
+	<title>Interchange Guides: the Installation</title>
+	<titleabbrev>install</titleabbrev>
+
+	<copyright>
+		<year>2006</year>
+		<holder>Interchange Development Group</holder>
+	</copyright>
+	<copyright>
+		<year>2006</year>
+		<holder>
+			<firstname>Davor</firstname><surname>Ocelic</surname>
+			<email>docelic@icdevgroup.org</email>
+		</holder>
+	</copyright>
+
+	<authorgroup>
+		<author>
+			<firstname>Davor</firstname><surname>Ocelic</surname>
+			<email>docelic@icdevgroup.org</email>
+		</author>
+	</authorgroup>
+
+	<legalnotice>
+		<para>
+		This documentation is free; you can redistribute it and/or modify
+		it under the terms of the &GNU; General Public License as published by
+		the Free Software Foundation; either version 2 of the License, or
+		(at your option) any later version.
+		</para>
+		<para>
+		It is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+		</para>
+	</legalnotice>
+
+	<abstract>
+		<para>
+		The purpose of this document is to guide you through the complete
+		Interchange installation routine.
+		</para><para>
+		While the concepts will be properly explained and elaborated on,
+		the intention is to make this document a collection of pointers
+		to other documentation that is, among other times, relevant
+		during installation.
+		</para><para>
+		The Guide is intended for people who want to install &IC; from 
+		generic tarballs. People installing from distribution-specific
+		packages (Debian GNU, Red Hat-based platforms, Gentoo, ...) do
+		not need a guide this comprehensive &mdash; the package maintainers
+		have taken care of most of the decisions themselves.
+		</para><para>
+		Those impatient or familiar with Unix administration and software
+		installations, might want to directly go unpacking the tarball and
+		running <command>perl Makefile.PL; make; make test &amp;&amp;
+		make install</command> in there.
+		</para>
+	</abstract>
+
+</articleinfo>
+
+
+<sect1 id='Prerequisites'>
+	<title>Pre-requisites</title>
+
+	<sect2 id='platform'>
+		<title>Hardware platform and operating system</title>
+		<para>
+		&IC; is written in &PERL;, so theoretically it should run on any
+		platform to which the Perl interpreter was ported and compiled.
+		</para>
+		<para>
+		See the list of systems known to run &IC; on our
+		<ulink url="http://www.icdevgroup.org/i/dev/platforms">Supported
+		platforms</ulink> page.
+		</para>
+		<para>
+		The most common platform is probably an x86-compatible running
+		Linux or FreeBSD.  Microsoft Windows is not (and will not be)
+		supported.
+		</para>
+	</sect2>
+
+
+	<sect2 id='perl'>
+		<title>Perl</title>
+		<para>
+		Since the Perl installation is crucial for Interchange setup
+		(and run-time performance), special attention must be given to it.
+		Interchange requires &PERL; 5.6 or newer, and will soon require
+		5.8. Run <command>perl -v</command> to check your version.
+		</para>
+		<para>
+		Perl installations, especially from non-standard distributions or
+		custom, may differ in both the core functionality and modules
+		installed.
+		By far the best bet is to simply use pre-packaged Perl for your
+		platform. Chances are that the additional, non-standard modules required
+		by &IC; will also be available in your distribution.
+		</para>
+		<para>
+		You should run &IC; with a non-threaded Perl. Unfortunately, almost
+		all distributions compile a threaded version. This problem has caused,
+		and is causing, endless problems for &IC; users. Run 
+		<command>perl -V:usethreads</command> to quickly test your mileage.
+		An answer of '<literal>UNKNOWN</literal>' is good, and the answer of
+		'<literal>define</literal>' is not good.
+		</para>
+		<para>
+		There should be no
+		problems with threaded Perl versions 5.8.5 or newer, although it means
+		an up-to-30% performance drop. For home installations and testing, both
+		the performance impact and even an older Perl version are acceptable.
+		For production sites, consider compiling a special version of Perl
+		that will be used to run &IC;.
+		<!-- TODO find on the mailing list written docs on how to compile -->
+		</para>
+		<para>
+		Interchange relies on a number of non-standard Perl modules.
+		Installing &IC; from the generic tarball will test for the required
+		modules and offer an elegant way to install them.
+		</para><para>
+		If you want to install the modules manually, you can take
+		advantage of the excellent &CPAN; functionality and perform the work
+		by simply typing:
+<programlisting>
+$ perl -MCPAN -e 'install "Bundle::Interchange"'
+</programlisting>
+		</para>
+	</sect2>
+
+
+	<sect2 id='compiler'>
+		<title>C compiler</title>
+		<para>
+		&IC; uses the so-called "link program" to provide a link between
+		the web and Interchange servers. It is, in fact, a very simple C
+		program that is installed as a CGI script and that passes parameters
+		back and forth.
+		</para><para>
+		To compile the link program, you will need a C compiler. Most of the
+		time it will be &GCC;, but the link program is trivial and well
+		written so it should work with any compiler.
+		</para><para>
+		There also exists a variant of the link program written in &PERL;,
+		so the C compiler is not exactly mandatory (even though it is strongly
+		suggested). Since the link program does not contain anything specific
+		to the &IC; catalog it is used by, you can get someone to compile it
+		for you, and then keep copying it around to new names for each of the
+		catalogs.
+		</para>
+	</sect2>
+
+	<sect2 id='webserver'>
+		<title>Web server</title>
+		<para>
+		&IC; is focused around the HTTP (Web) protocol.
+		Unless you want to run &IC; in &SOAP; mode exclusively (or write a 
+		completely new interface for it), you will need a web server to
+		enable clients to visit your website.
+		</para>
+		<para>
+		&APACHE; is probably the most commonly used web server, but you might
+		be interested in lighter and more efficient alternatives such as
+		&MATHOPD;.
+		</para>
+		<para>
+		In any case, we assume you have set-up (or are able to set-up) a 
+		working web server, and know the basic configuration procedures for it.
+		</para>
+		<para>
+		In case of Apache, it is good to know where the Apache configuration
+		file is located. The catalog creation script recognized the file format
+		and can help the installer answer some of the questions automatically.
+		</para>
+		<para>
+		Know where the document root directory for your site (or virtual host)
+		is located. Also make sure to have write access to it.
+		Each catalog's
+		files that live in the web server space will find their place somewhere
+		beneath it.
+		</para>
+		<para>
+		Know where the <filename class='directory'>cgi-bin/</filename> directory
+		is located. Also make sure to have write access to it.
+		Each catalog's link program will find its place somewhere beneath it.
+		</para>
+	</sect2>
+
+	<sect2 id='db'>
+		<title>Database</title>
+		<para>
+		It is not required, but is suggested to put your tables in some kind of
+		an &glos-SQL; database. &IC; works with many database types, but the 
+		mainstream ones, such as &MYSQL;, &PGSQL; or &ORACLE; will probably
+		cause no suspicious problems on first run.
+		</para>
+		<para>
+		Know the DSN (Data source name) string, which is what tells the Perl DBI
+		how to connect to the database.
+		</para>
+		<para>
+		Know the database administrator user name and password.
+		</para>
+		<para>
+		If you do not employ an SQL database, &IC; will use &GDBM; or 
+		&BDBM;, depending on what it finds on the system. Yet another option
+		is SDBM, but it is severely handicapped &mdash; it does not support
+		values bigger than 2048 bytes, and at least two of our demo catalog
+		databases have problems with it out-of-the-box. Since early 2006, 
+		&IC; no longer considers SDBM an option, unless it is explicitly told so.
+		</para>
+	</sect2>
+
+	<sect2 id='account'>
+		<title>UNIX account</title>
+		<para>
+		As a system daemon, &IC; requires Unix username to own the files
+		and server processes.
+		</para>
+		<para>
+		&IC; can not run as root (under obvious administrator privleges, that is),
+		so a separate account should be created for it. UID or GID numbers are 
+		not important, but the common usernames are <literal>interchange</literal>
+		or <literal>interch</literal>. Since modern Unix systems are not limited
+		to 8-letter usernames, there's no reason to use abbreviated forms.
+		</para>
+		<para>
+		</para>
+	</sect2>
+
+	<sect2 id='location'>
+		<title>Installation location</title>
+		<para>
+		Decide where to install the &IC; software. The directory will hold the
+		usual program files.
+		</para><para>
+		Also decide on the top-level directory under which you will place catalogs
+		you create. It is not necessary to keep them all in a common parent
+		directory, but it is a common setup.
+		</para>
+	</sect2>
+
+	<sect2 id='catname'>
+		<title>Catalog name</title>
+		<para>
+		Decide how will you call the first catalog you will create
+		after installation. <literal>test</literal> or 
+		<literal>&std-catalog;</literal> are common choices.
+		</para>
+	</sect2>
+</sect1>
+
+<sect1 id='installation'>
+	<title>Installing Interchange</title>
+
+	<para>
+	We offer generic &IC; tarballs for manual installations. 
+	Visit our &ICDL; page, and download tar/gz or tar/bz2 package.
+	</para><para>
+	Compare the MD5 and/or SHA1 sums of the file downloaded with the
+	signatures on the download page (the signatures should match):
+<programlisting>
+$ md5sum interchange-latest.tar.gz
+$ sha1sum interchange-latest.tar.gz
+</programlisting>
+	</para><para>
+	Unpack the tarball by one of the two ways shown:
+<programlisting>
+$ tar zvxf interchange-latest.tar.gz
+$ gzip -dc interchange-latest.tar.gz | tar xvf -
+</programlisting>
+	</para><para>
+	Run <command>./configure</command>, which no longer performs an 
+	installation as it used to, but simply prints proper installation
+	instructions.
+	</para><para>
+	Basically, the installation routine comes down to running
+	<command>perl Makefile.pl; make; make test &amp;&amp;
+	make install</command>.
+	</para>
+	<para>
+	The <command>make test</command> is probably the most important.
+	If you do not get an <literal>OK</literal> on all the tests ran,
+	you have a problem that you need to fix before moving any further.
+	</para><para>
+	For help, look under <!-- TODO appendix troubleshooting -->.
+	If your problem is not listed, or you think it's not, 
+	your best bet is to visit our
+<ulink url="http://www.icdevgroup.org/i/dev/users/community">community</ulink>
+	page and drop by on IRC, or post your problem to
+	the users mailing list.
+	</para>
+</sect1>
+
+<sect1 id='catalog'>
+	<title>Setting up a catalog</title>
+
+	<para>
+	Interchange is based on &glos-catalog;s. You need to create at least one
+	to start getting any results with &IC;.
+	</para><para>
+	&IC; catalogs are structurally very simple and can even be created manually,
+	by editing just a few files. Our document <olink targetdoc='iccattut'/>
+	is exactly an example of a small, hand-made catalog.
+	</para><para>
+	You may wish to start with a custom catalog if you have very custom needs
+	or want to keep everything under your own control. However, there is the
+	so-called "&std-catalog;" demo that ships with &IC; &mdash; it is extremely
+	elaborate and feature-rich for someone looking to build an Internet store,
+	and it still allows custom modifications to be performed on it.
+	</para><para>
+	Regardless of whether you want to base your own catalogs on our demo or not,
+	it is strongly suggested to install the demo. It will let you
+	see whether your Interchange installation is correct, and it will also be
+	a nice presentation of Interchange features.
+	</para><para>
+	There is a catalog creation script named <command>makecat</command> available,
+	that you will use to create catalogs based on catalog templates (and our
+	demo is, of course, organized as a template).
+	</para><para>
+	On the first run, <literal>makecat</literal> will ask a series of questions
+	to configure site-wide parameters. It will then proceed with the practical
+	catalog creation phase, so the first <command>makecat</command> session will
+	seem very long, and some of the questions will seem as if they were
+	duplicated.
+	</para><para>
+	The <command>makecat</command> is self-documented. Each question is
+	accompanyed with an introduction, examples, and a reasonable Unix default.
+	</para><para>
+	Each catalog can be completely independent, with different settings and
+	databases, or catalogs can share pages, databases, and session files.
+	This means that several catalogs can share the same information, allowing
+	"virtual malls" (although not directly out-of-the box with makecat or our
+	demo).
+	</para>
+
+</sect1>
+
+<sect1 id='starting'>
+	<title>Starting Interchange</title>
+	<para>
+	For all information on starting, stopping, restarting and otherwise
+	controlling the &IC; server, see &howto-daemon-control;.
+	</para>
+</sect1>
+
+<!--
+
+TODO appendix - making a demo
+
+If working with an ISP where all of the files are in HTML document space, disable all access to the Interchange catalog directory with the proper HTTP access restrictions. Normally that is done by creating a .htaccess file like this:
+
+!block example
+	<Limit GET POST>
+	order allow,deny
+	deny from all
+	</Limit>
+!endblock
+
+If unable to do this, do not run Interchange unless file permissions can be set such that files will not be served. However, security will be a problem and customers' personal information could be placed at risk.
+
+
+H2: makecat - Setup a Catalog from a Template
+
+The supplied C<makecat> script, which is in the Interchange program directory C<bin>, is designed to set up a catalog based on the user's server configuration. It interrogates the user for parameters like which directories to use, a URL to base the catalog in, HTTP server definitions, and file ownership.
+
+The C<makecat> script requires a template catalog to operate properly. The "construct" demo template is distributed with Interchange. Other demo catalogs are available at C<http://developer.akopia.com/>.
+
+Note: A catalog can only be created once. All further configuration is done by editing the files within the catalog directory.
+
+A catalog template contains an image of a configured catalog. The best way to see what the makecat program does is to configure the simple demo and then run a recursive C<diff> on the template and configured catalog directories:
+
+!block example
+	cd /usr/local/interchange
+	diff -r construct catalogs/construct
+!endblock
+
+The files are mostly identical, except that certain macro strings have been replaced with the answers given to the script. For example, if C<www.mydomain.com> was answered at the prompt for a server name, this difference would appear in the catalog.cfg file:
+
+!block example
+       # template
+       Variable SERVER_NAME  __MVC_SERVERNAME__
+
+       # configured catalog
+       Variable SERVER_NAME  www.mydomain.com
+!endblock
+
+The macro string __MVC_SERVERNAME__ was substituted with the answer to the question about server name. In the same way, other variables are substituted, and include:
+
+!block example
+MVC_BASEDIR      MVC_IMAGEDIR
+MVC_CATROOT      MVC_IMAGEURL
+MVC_CATUSER      MVC_MAILORDERTO
+MVC_CGIBASE      MVC_MINIVENDGROUP
+MVC_CGIDIR       MVC_MINIVENDUSER
+MVC_CGIURL       MVC_SAMPLEHTML
+MVC_DEMOTYPE     MVC_SAMPLEURL
+MVC_DOCUMENTROOT MVC_VENDROOT
+MVC_ENCRYPTOR
+!endblock
+
+Note: Not all of these variables are present in the "construct" template, and more may be defined. In fact, any environment variable that is set and begins with MVC_ will be substituted for by the C<makecat> script. For example, to set up a configurable parameter to customize the COMPANY variable in catalog.cfg, run a pre-qualifying script that set the environment variable MVC_COMPANY and then place in the catalog.cfg file:
+
+Variable   COMPANY   __MVC_COMPANY__
+
+All files within a template directory are substituted for macros, not just the catalog.cfg file. There are two special directories named C<html> and C<images>. These will be recursively copied to the directories defined as SampleHTML and ImageDir.
+
+Note: The template directory is located in the Interchange software directory,
+i.e., where C<interchange.cfg> resides. Avoid editing files in the template
+directory. To create a new template, it is recommended that it should be named
+something besides 'construct' and a copy of the C<construct> demo directory be
+used as a starting point. Templates are normally placed in the Interchange base
+directory, but can be located anywhere. The script will prompt for the location
+if it cannot find a template.
+
+In addition to the standard parameters prompted for by Interchange, and the standard catalog creation procedure, four other files in the C<config> directory of the template may be defined:
+
+!block example
+additional_fields- file with more parameters for macro substitution
+additional_help   - extended description for the additional_fields
+precopy_commands  - commands passed to the system prior to catalog copy
+postcopy_commands - commands passed to the system after catalog copy
+!endblock
+
+All files are paragraph-based. In other words, a blank line (with no spaces) terminates the individual setting.
+
+The additional_fields file contains:
+
+!block example
+PARAM
+The prompt. Set PARAM to?
+The default value of PARAM
+!endblock
+
+This would cause a question during makecat:
+
+!block example
+The prompt. Set PARAM to?.....[The default value of PARAM]
+!endblock
+
+If the additional_help file is present, additional instructions for PARAM may be provided.
+
+!block example
+PARAM
+
+These are additional instructions for PARAM, and they
+may span multiple lines up to the first blank line.
+!endblock
+
+The prompt would now be:
+
+!block example
+These are additional instructions for PARAM, and they
+may span multiple lines up to the first blank line.
+
+The prompt. Set PARAM to?.....[The default value of PARAM]
+!endblock
+
+If the file config/precopy_commands exists, it will be read as a command followed by the prompt/help value.
+
+!block example
+mysqladmin create __MVC_CATALOGNAME__
+We need to create an SQL database for your Interchange
+database tables.
+!endblock
+
+This will cause the prompt:
+
+!block example
+We need to create an SQL database for your Interchange
+database tables.
+
+Run command "mysqladmin create simple"?
+!endblock
+
+If the response is "y" or "yes," the command will be run by passing it through the Perl system() function. As with any of the additional configuration files, MVC_PARAM macro substitution is performed on the command and help. Proper permissions for the command are required.
+
+The file config/postcopy_commands is exactly the same as <precopy_commands>, except the prompt occurs after the catalog files are copied and macro substitution is performed on all files.
+
+There may also be SubCatalog directives:
+
+!block example
+SubCatalog easy simple /home/catalogs/simple /cgi-bin/easy
+!endblock
+
+easy
+.The name of the subcatalog, which also controls the name of the subcatalog configuration file. In this case, it is C<easy.cfg>.
+
+simple
+.The name of the base configuration that will be the basis for the catalog. Parameters in the easy.cfg file that are different will override those in the catalog.cfg file for the base configuration.
+
+The remaining parameters are similar to the Catalog directive.
+
+Additional interchange.cfg parameters set up administrative parameters that are catalog wide. See the server configuration file for details on each of these.
+
+
+
+
+H2: Installation Troubleshooting
+
+Interchange uses the services of other complex programs, such as Web servers and relational databases, to work. Therefore, when there is a problem, check these programs before checking Interchange. It may have to do with Perl or the HTTP server setup. In fact, over the past four years, many more basic installation problems have to do with those than with Interchange itself.
+
+If an error message is received about not being able to find libraries, or a core dump has occurred, or a segment fault message, it is always improperly built or configured Perl. Contact the system administrator or install a new Perl.
+
+The C<makecat> program is intended to be used to create the starting point for the catalog. If the demo does not work the first time, keep trying. If it still does not work, try running in INET mode.
+
+Check the two error log files: C<error.log> in the Interchange home directory (where interchange.cfg resides) and C<error.log> in the catalog directory (where catalog.cfg resides; there can be many of these). Many problems can be diagnosed quickly if these error logs are consulted.
+
+Check the README file, the FAQ, and mail list archive at the official Interchange web site for information:
+
+!block example
+       http://developer.akopia.com/
+!endblock
+
+Double check the following items:
+
+^Using UNIX sockets?
+
+-Check that the C<vlink> program is SUID, or the appropriate changes have been made in the SocketPerms directive. Unless the files are world-writable, the vlink program and the Interchange server must run as the same user ID! If running CGI-WRAP or SUEXEC, the C<vlink> program must not be SUID.
+
+-If having trouble with the vlink program (named C<construct> in the demo configuration), try re-running C<makecat> and using INET mode instead. (Or copy the C<tlink> INET mode link program over C<vlink>). This should work unchanged for many systems.
+
+-If using an ISP or have a non-standard network configuration, some changes to interchange.cfg are necessary. For C<tlink> to work, the proper host name(s) must be configured into the TcpHost directive in interchange.cfg. The program selects port 7786 by default (the ASCII codes for "M" and "V"). If another port is used, it must be set to the same number in both the tlink program (by running C<compile_link>) and the C<minivend.cfg> file. The C<tlink> program does not need to be SUID.
+
++Proper file permissions?
+
+-The Interchange server should not run as the user C<nobody>! The program files can be owned by anyone, but any databases, ASCII database source files, error logs, and the directory that holds them must be writable by the proper user ID, that is the one that is executing the MiniVend program.
+
+-The best way to operate in multi-user, multiple catalog setups is to create a special C<interch> user, then put that user in the group that contains each catalog user. If a group is defined for each individual user, this provides the best security. All associated files can be in 660 or 770 mode. There should be no problems with permissions and no problems with security.
+
++Is the C<vlink> program being executed on a machine that has the socket file C<etc/socket> on a directly attached disk?
+
+-UNIX-domain sockets will not work on NFS-mounted file systems! This means that the server C<minivend> and the CGI program C<vlink> must be executing on the same machine.
+
+-The C<tlink> program does not have this problem, but it must have the proper host name(s) and TCP ports set in the TcpHost and TcpPort directives in C<interchange.cfg>. Also, be careful of security if sensitive information, like customer credit card numbers, is being placed on a network wire.
+
+H1: Installing Perl Modules without Root Access
+
+Installing Interchange without root access is no problem. However, installing Perl modules without root access is a little trickier.
+
+You must build your makefile to work in your home dir. Something like:
+ 
+!block example
+PREFIX=~/usr/local \
+INSTALLPRIVLIB=~/usr/local/lib/perl5 \
+INSTALLSCRIPT=~/usr/local/bin \
+INSTALLSITELIB=~/usr/local/lib/perl5/site_perl \
+INSTALLBIN=~/usr/local/bin \
+INSTALLMAN1DIR=~/usr/local/lib/perl5/man \
+INSTALLMAN3DIR=~/usr/local/lib/perl5/man/man3
+!endblock
+ 
+Put this in a file, say 'installopts', and use it for the Makefile.PL.
+ 
+E:perl Makefile.PL `cat installopts`
+ 
+Then, forget ./config. Just do:
+ 
+!block example
+make
+make test
+make install
+!endblock
+ 
+Some of the tests may fail, but that's probably ok.
+
+Also make sure to install Bundle::Interchange, which will need the same config data as you put into 'installopts'.
+
+-->
+
+</article>
