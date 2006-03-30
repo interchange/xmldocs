@@ -21,6 +21,15 @@
 	<xsl:param name="chunker.output.encoding" select="'ISO-8859-1'" />
 	<xsl:param name="chunker.output.indent">no</xsl:param>
 
+	
+	<!-- a parameter added to docbook after my inquiry. Will have no
+	  effect on xsl 1.68.1, but for 1.69.1 and newer will keep the
+	  old behavior - suppress <refclass> elements from output.
+		http://sourceforge.net/tracker/index.php?func=detail&aid=1461065&group_id=21935&atid=373750
+		-->
+	<xsl:param name="refclass.suppress">1</xsl:param>
+
+
   <xsl:template name="user.footer.content" >
   <p class='w3c'>
     <a href="http://www.docbook.org/">
