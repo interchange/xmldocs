@@ -1,5 +1,5 @@
 __NAME__ purpose
-treat config meta-directives as plain comments
+(obsolete) treat config meta-directives as plain comments
 __END__
 
 
@@ -8,6 +8,11 @@ __NAME__ synopsis
 	<arg choice='plain'>Yes</arg>
 	<arg choice='plain'>No</arg>
 </group>
+__END__
+
+__NAME__ notes
+This directive is obsolete as of &IC; 5.5.0, and the behavior is
+as if <code>ConfigParseComments Yes</code> was specified.
 __END__
 
 

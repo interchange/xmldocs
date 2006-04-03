@@ -1,0 +1,28 @@
+__NAME__ purpose
+enable Interchange debugging
+__END__
+
+
+__NAME__ see also
+DebugFile
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><literal>0</literal></arg>
+	<arg choice='plain'><literal>1</literal></arg>
+</group>
+__END__
+
+
+__NAME__ description
+Enable &IC; debug messages. Always used in combination with &conf-DebugFile;.
+__END__
+
+__NAME__ example: Defining DEBUG
+<programlisting>
+Variable  DEBUG 1
+DebugFile /tmp/icdebug
+</programlisting>
+__END__
+

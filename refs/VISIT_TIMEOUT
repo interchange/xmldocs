@@ -1,0 +1,27 @@
+
+__NAME__ purpose
+time after which user request is treated as new visit
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>seconds</replaceable></arg>
+</group>
+__END__
+
+__NAME__ description
+This &glos-variable; specifies the minimal time required between
+two user requests, for the next request to be treated as the beginning
+of a new user visit (and not as part of the current series of requests).
+__END__
+
+
+__NAME__ see also
+__END__
+
+__NAME__ example: Setting VISIT_TIMEOUT
+<programlisting>
+Variable VISIT_TIMEOUT 600
+</programlisting>
+__END__

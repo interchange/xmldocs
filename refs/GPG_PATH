@@ -1,0 +1,34 @@
+
+__NAME__ purpose
+location of the gpg program
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>path</replaceable></arg>
+</group>
+__END__
+
+
+
+
+__NAME__ description
+This &glos-variable; specifies the location of the 
+<command>gpg</command> program.
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ see also
+EncryptProgram, PGP
+__END__
+
+__NAME__ example: Setting GPG_PATH
+<programlisting>
+Variable GPG_PATH /opt/gnupg/bin/gpg
+</programlisting>
+__END__

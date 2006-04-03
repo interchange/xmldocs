@@ -1,0 +1,33 @@
+
+__NAME__ purpose
+filesystem path to catalog's document root
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>path</replaceable></arg>
+</group>
+__END__
+
+
+
+
+__NAME__ description
+This &glos-variable; specifies filesystem path to the 
+corresponding catalog's &glos-DOCROOT;.
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ see also
+__END__
+
+__NAME__ example: Setting DOCROOT
+<programlisting>
+Variable DOCROOT /var/www/CATALOG/htdocs/
+</programlisting>
+__END__

@@ -1,0 +1,35 @@
+
+__NAME__ purpose
+regular expression matching HTTP user agents with DHTML support
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>regexp</replaceable></arg>
+</group>
+__END__
+
+
+
+
+__NAME__ description
+This &glos-variable; specifies &glos-regexp; to use in matching
+DHTML-capable client browsers (HTTP user agents).
+program binary.
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ see also
+XHTML, MV_HTML4_COMPLIANT
+__END__
+
+__NAME__ example: Setting MV_DHTML_BROWSER
+<programlisting>
+Variable MV_DHTML_BROWSER  MSIE [5-9].*Windows|Mozilla.*Gecko
+</programlisting>
+__END__

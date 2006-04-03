@@ -1,0 +1,25 @@
+
+__NAME__ purpose
+directory to store survey results
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>path</replaceable></arg>
+</group>
+__END__
+
+__NAME__ description
+This &glos-variable; specifies the directory to store survey results.
+__END__
+
+
+__NAME__ see also
+__END__
+
+__NAME__ example: Setting SURVEY_LOG_DIR
+<programlisting>
+Variable SURVEY_LOG_DIR logs/survey
+</programlisting>
+__END__

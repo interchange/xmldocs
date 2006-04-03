@@ -1,0 +1,33 @@
+
+__NAME__ purpose
+location of the Unix fortune program
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>path</replaceable></arg>
+</group>
+__END__
+
+
+
+
+__NAME__ description
+This &glos-variable; specifies the location of the infamous Unix fortune
+program binary.
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ see also
+__END__
+
+__NAME__ example: Setting MV_FORTUNE_COMMAND
+<programlisting>
+Variable MV_FORTUNE_COMMAND /usr/local/bin/fortune
+</programlisting>
+__END__

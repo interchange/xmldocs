@@ -247,6 +247,9 @@ sub wanted {
 	# statistic.
 	return if $file =~ m#^(eg|extra|SPECS|debian|scripts|extensions)/#;
 
+	# This one makes a hell of a lot noise for nothing...
+	return if $file =~ m#xfer_catalog#;
+
 
 	# Here, we know it's a file, and a text file in fact
 	# So open the file and parse contents
@@ -673,7 +676,8 @@ sub line_findCatVars {
 	if (
 		($c{line} =~ /(()|\$())\$(::)?Variable(->\2|\3){(\w+?)}/ and $name=$6)
 		or ($c{line}=~/\$Tag->var\s*\(\s*(["'])(\S+?)\1(\s*,\s*(2))?/ and $name=$5)
-		or ($c{line} =~ /[^_\/]__([^_]\w+?)__[^_\/]/ and
+		# The (#!) prevents finding #!__PERL__ in code/UI_Tag/xfer_catalog.coretag
+		or ($c{line} =~ /[^_\/(#!)]__([^_]\w+?)__[^_\/]/ and
 			( $1 !~ /^(END|DIE|MYVAR|PACKAGE|NAME|none|WARN)$/) and $name=$1)
 		or ($c{line} =~ /\[var (\S+?)\]/i and $name=$1)
 		or ($c{line} =~ /\[var (\S+?)\s+2\s*\]/i and $name=$1)

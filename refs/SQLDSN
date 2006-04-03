@@ -1,0 +1,31 @@
+
+__NAME__ purpose
+default DSN string used for SQL database connections
+__END__
+
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>DSN</replaceable></arg>
+</group>
+__END__
+
+__NAME__ description
+This &glos-variable; specifies the default &glos-DSN; to be used in
+&glos-SQL; database connections.
+__END__
+
+__NAME__ notes
+No magic is happening here, mind you. Your "template", the demo catalog,
+or some piece of code must &mdash; at some point &mdash; refer to the
+&var-SQLDSN; variable explicitly. &IC; does not somehow do this by itself.
+__END__
+
+__NAME__ see also
+__END__
+
+__NAME__ example: Setting SQLDSN
+<programlisting>
+Variable SQLDSN dbi:Pg:dbname=MYDBNAME
+</programlisting>
+__END__

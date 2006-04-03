@@ -1,0 +1,25 @@
+__NAME__ purpose
+__END__
+
+
+__NAME__ see also
+DiscountSpaceVar
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+__END__
+
+__NAME__ example: Defining DiscountSpacesOn
+<programlisting>
+DiscountSpacesOn Yes
+</programlisting>
+__END__
+
