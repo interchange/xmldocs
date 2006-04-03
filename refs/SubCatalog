@@ -40,7 +40,7 @@ __END__
 __NAME__ example: Registering a sub catalog
 <programlisting>
 Catalog simple /home/catalogs/simple /cgi-bin/ic/simple
-Catalog subsimple simple /home/catalogs/simple /cgi-bin/ic/subsimple
+SubCatalog subsimple simple /home/catalogs/simple /cgi-bin/ic/subsimple
 </programlisting>
 __END__
 
