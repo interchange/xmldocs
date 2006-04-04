@@ -1,0 +1,9 @@
+__NAME__ purpose
+specifies the number of search results per page
+__END__
+
+__NAME__ example
+<programlisting>
+Variable MV_DEFAULT_MATCHLIMIT 20
+</programlisting>
+__END__
