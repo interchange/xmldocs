@@ -24,7 +24,7 @@ directive is disregarded.
 __END__
 
 
-__NAME__ example: Setting ErrorFile
+__NAME__ example: Setting AsciiTrack
 <programlisting>
 AsciiTrack etc/tracking.asc
 </programlisting>
