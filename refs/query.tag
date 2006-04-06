@@ -1,3 +1,7 @@
+__NAME__ purpose
+perform SQL-like query
+__END__
+
 __NAME__ synopsis 
 <row>
 
