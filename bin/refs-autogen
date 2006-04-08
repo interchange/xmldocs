@@ -1252,8 +1252,8 @@ sub compress_availability {
 	# add "(cvs-head)" to the version number. Makes it easier to see
 	# the item is current.
 	$end and $end eq $ENV{XMLDOCS_CUR_DEVEL} and $end .= " (cvs-head)";
-	@orig == 1 and $orig[0] eq $ENV{XMLDOCS_CUR_DEVEL} and
-		$orig[0] .= " (cvs-head)";
+	$orig[$#orig] eq $ENV{XMLDOCS_CUR_DEVEL} and
+		$orig[$#orig] .= " (cvs-head)";
 	
 	local $" = ", ";
 	if ( $cl > 1 ) {

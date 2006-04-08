@@ -1,0 +1,34 @@
+__NAME__ purpose
+enable enhanced user database functions
+__END__
+
+__NAME__ see also
+UserDB
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive enables enhanced user database functions.
+</para><para>
+The default &glos-UserDB; functions are programmed in the
+<classname>Vend::UserDB</classname> module. When this directive is
+enabled, functions from <classname>Vend::UserControl</classname> are used
+instead.
+__END__
+
+__NAME__ example: Defining UserControl
+<programlisting>
+UserControl yes
+</programlisting>
+__END__
+
+__NAME__ missing
+what do you get by enabling enhanced userdb functions?
+__END__

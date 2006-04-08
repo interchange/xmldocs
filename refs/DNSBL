@@ -1,0 +1,37 @@
+__NAME__ purpose
+specify real-time DNS blocklist servers
+__END__
+
+
+__NAME__ missing
+__END__
+
+
+__NAME__ see also
+LockoutCommand
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain' rep='repeat'><replaceable>hostname</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive allows definition of realtime blocklist servers (special-purpose
+DNS servers) that should be contacted in order to verify client IP address
+"validity". This way, you can deny access to known-bad clients (such
+as ones coming in from open proxy servers).
+</para><para>
+Many fraudulent credit card orders are placed from open proxy machines
+to hide the actual identity of the criminal, so denying access to 
+open-proxy visitors might be a good idea.
+__END__
+
+__NAME__ example: Defining DNSBL
+<programlisting>
+DNSBL opm.blitzed.org cbl.abuseat.org sbl-xbl.spamhaus.org
+</programlisting>
+__END__
+

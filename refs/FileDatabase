@@ -1,0 +1,52 @@
+__NAME__ purpose
+specify table and column to look up in search for file contents
+__END__
+
+
+__NAME__ synopsis
+<arg choice='plain'><replaceable>table_name</replaceable></arg>
+<arg choice='opt'>:<replaceable>column_name</replaceable></arg>
+__END__
+
+
+__NAME__ description
+Besides retrieving file contents from files on the filesystem (as usual),
+&IC; has the ability to retrieve file contents from the &glos-database;.
+</para><para>
+The standard &conf-FileDatabase; setting includes the appropriate
+table and column names.
+</para><para>
+In case the column is unspecified, it defaults
+to the current value of global variable <varname>LANG</varname>. In case
+the column named after <varname>LANG</varname> value does not exist, &IC;
+finally tries with the column <database class='field'>default</database>.
+__END__
+
+__NAME__ notes
+The file database must, as always, be registered first with the 
+&conf-Database; directive.
+</para><para>
+Files in the filesystem, if they exist, always take precedence over file
+contents in the database.
+</para><para>
+As you see, this directive allows you to create catalogs that live in the
+database space, without a single file stored on disk. Don't, however,
+be fooled by this option &mdash; in general, filesystem is the only
+right place for your files.
+__END__
+
+__NAME__ see also
+DirectiveDatabase
+__END__
+
+__NAME__ example: Defining FileDatabase
+<programlisting>
+FileDatabase files:data
+</programlisting>
+__END__
+
+__NAME__ example: Defining FileDatabase, defaulting to LANG or 'default' column
+<programlisting>
+FileDatabase files
+</programlisting>
+__END__
