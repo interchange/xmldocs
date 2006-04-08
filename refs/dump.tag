@@ -1,5 +1,5 @@
 __NAME__ purpose
-dump all relevant information about a users' session
+perform dump of user session
 __END__
 
 
@@ -14,9 +14,10 @@ __NAME__ synopsis
 	<entry>
 	</entry>
 	<entry>
+	None (all keys)
 	</entry>
 	<entry>
-	User &glos-session; ID.
+	Dump just one named variable from the user session.
 	</entry>
 
 </row> 
@@ -33,6 +34,14 @@ __NAME__ synopsis
 	<entry></entry>
 	<entry>0</entry>
 	<entry>Do not output &glos-CGI; structure?</entry>
+</row> 
+<row>
+	<entry>show_all</entry>
+	<entry></entry>
+	<entry></entry>
+	<entry>0</entry>
+	<entry>Show all &glos-CGI; variables, including the "hidden"
+	ones defined in <varname>@Global::HideCGI</varname>?</entry>
 </row> 
 <row>
 	<entry>no_session</entry>
@@ -57,9 +66,9 @@ __NAME__ see also
 dump_session
 __END__
 
-__NAME__ example: Displaying current user's session dump
+__NAME__ example: Displaying current user's full session dump
 <programlisting><![CDATA[
-<pre> [dump] </pre>
+<pre>[dump]</pre>
 ]]></programlisting>
 __END__
 
