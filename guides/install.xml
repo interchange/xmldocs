@@ -15,10 +15,7 @@
 	</copyright>
 	<copyright>
 		<year>2006</year>
-		<holder>
-			<firstname>Davor</firstname><surname>Ocelic</surname>
-			<email>docelic@icdevgroup.org</email>
-		</holder>
+		<holder>Davor Ocelic</holder>
 	</copyright>
 
 	<authorgroup>
@@ -46,7 +43,7 @@
 	<abstract>
 		<para>
 		The purpose of this document is to guide you through the complete
-		Interchange installation routine.
+		&IC; installation routine.
 		</para><para>
 		While the concepts will be properly explained and elaborated on,
 		the intention is to make this document a collection of pointers
@@ -96,8 +93,8 @@
 		<para>
 		Since the Perl installation is crucial for Interchange setup
 		(and run-time performance), special attention must be given to it.
-		Interchange requires &PERL; 5.6 or newer, and will soon require
-		5.8. Run <command>perl -v</command> to check your version.
+		Interchange requires &PERL; &PERL_VER_REQUIRED; or newer.
+		Run <command>perl -v</command> to check your version.
 		</para>
 		<para>
 		Perl installations, especially from non-standard distributions or
@@ -120,9 +117,8 @@
 		problems with threaded Perl versions 5.8.5 or newer, although it means
 		an up-to-30% performance drop. For home installations and testing, both
 		the performance impact and even an older Perl version are acceptable.
-		For production sites, consider compiling a special version of Perl
-		that will be used to run &IC;.
-		<!-- TODO find on the mailing list written docs on how to compile -->
+		For production sites, consider compiling a special, non-threaded version
+		of Perl that will be used to run &IC;.
 		</para>
 		<para>
 		Interchange relies on a number of non-standard Perl modules.
@@ -133,7 +129,11 @@
 		advantage of the excellent &CPAN; functionality and perform the work
 		by simply typing:
 <programlisting>
-$ perl -MCPAN -e 'install "Bundle::Interchange"'
+$ /path/to/perl -MCPAN -e 'install "Bundle::Interchange"'
+</programlisting>
+		For the complete set of modules (the required and optional ones), run
+<programlisting>
+$ /path/to/perl -MCPAN -e 'install "Bundle::InterchangeKitchenSink"'
 </programlisting>
 		</para>
 	</sect2>
@@ -154,9 +154,10 @@ $ perl -MCPAN -e 'install "Bundle::Interchange"'
 		There also exists a variant of the link program written in &PERL;,
 		so the C compiler is not exactly mandatory (even though it is strongly
 		suggested). Since the link program does not contain anything specific
-		to the &IC; catalog it is used by, you can get someone to compile it
-		for you, and then keep copying it around to new names for each of the
-		catalogs.
+		to the &IC; catalog it is used by, you can probably get someone to compile
+		it for you, and then keep copying it around to new names for each of the
+		catalogs (unless, of course, you want to modify link program settings
+		such as socket file location or timeout value).
 		</para>
 	</sect2>
 
@@ -179,8 +180,9 @@ $ perl -MCPAN -e 'install "Bundle::Interchange"'
 		</para>
 		<para>
 		In case of Apache, it is good to know where the Apache configuration
-		file is located. The catalog creation script recognized the file format
-		and can help the installer answer some of the questions automatically.
+		file is located. The catalog creation script (<command>makecat</command>)
+		recognizes the file format and can help the configurator answer some of the
+		questions automatically.
 		</para>
 		<para>
 		Know where the document root directory for your site (or virtual host)
@@ -205,8 +207,12 @@ $ perl -MCPAN -e 'install "Bundle::Interchange"'
 		cause no suspicious problems on first run.
 		</para>
 		<para>
-		Know the DSN (Data source name) string, which is what tells the Perl DBI
-		how to connect to the database.
+		In fact, our demo catalog '&std-catalog;' requires use of an &glos-SQL;
+		database.
+		</para>
+		<para>
+		Know the &glos-DSN; (Data source name) string, which is what tells
+		the Perl DBI how to connect to the database.
 		</para>
 		<para>
 		Know the database administrator user name and password.
@@ -235,6 +241,8 @@ $ perl -MCPAN -e 'install "Bundle::Interchange"'
 		to 8-letter usernames, there's no reason to use abbreviated forms.
 		</para>
 		<para>
+		For ultimate flexibility, it is a quite common approach to let every
+		catalog user have its own instance of the &IC; server.
 		</para>
 	</sect2>
 
@@ -282,14 +290,12 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	</para><para>
 	Run <command>./configure</command>, which no longer performs an 
 	installation as it used to, but simply prints proper installation
-	instructions.
-	</para><para>
-	Basically, the installation routine comes down to running
+	instructions (Basically, the installation routine comes down to running
 	<command>perl Makefile.pl; make; make test &amp;&amp;
-	make install</command>.
+	make install</command>).
 	</para>
 	<para>
-	The <command>make test</command> is probably the most important.
+	<command>make test</command> is probably the most important.
 	If you do not get an <literal>OK</literal> on all the tests ran,
 	you have a problem that you need to fix before moving any further.
 	</para><para>
@@ -317,7 +323,7 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	or want to keep everything under your own control. However, there is the
 	so-called "&std-catalog;" demo that ships with &IC; &mdash; it is extremely
 	elaborate and feature-rich for someone looking to build an Internet store,
-	and it still allows custom modifications to be performed on it.
+	and it allows custom modifications to be performed on it.
 	</para><para>
 	Regardless of whether you want to base your own catalogs on our demo or not,
 	it is strongly suggested to install the demo. It will let you
@@ -331,13 +337,12 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	On the first run, <literal>makecat</literal> will ask a series of questions
 	to configure site-wide parameters. It will then proceed with the practical
 	catalog creation phase, so the first <command>makecat</command> session will
-	seem very long, and some of the questions will seem as if they were
-	duplicated.
+	seem very long, and some of the questions will seem duplicated.
 	</para><para>
 	The <command>makecat</command> is self-documented. Each question is
 	accompanyed with an introduction, examples, and a reasonable Unix default.
 	</para><para>
-	Each catalog can be completely independent, with different settings and
+	Each catalog can be completely independent with different settings and
 	databases, or catalogs can share pages, databases, and session files.
 	This means that several catalogs can share the same information, allowing
 	"virtual malls" (although not directly out-of-the box with makecat or our

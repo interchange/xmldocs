@@ -1,8 +1,7 @@
 &IC; functions can be accessed via the Interchange Tag Language (&glos-ITL;).
 The pages in a catalog may be mostly &glos-HTML;, but they will use ITL tags
 to provide dynamic content and access Interchange functions in general.
-ITL is a superset of MML, or Minivend Markup Language.
-Minivend was the predecessor to Interchange.  
+ITL is a superset of MML, or &glos-Minivend; Markup Language.
 </para><para>
 These ITL tags perform various display and modification operations for
 the user session. There's more than 200 standard predefined tags, and the
