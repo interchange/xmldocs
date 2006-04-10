@@ -9,11 +9,6 @@ but you can change the actual <emphasis>names</emphasis> of the price and
 description columns using &conf-PriceField; and &conf-DescriptionField; 
 directives.
 </para>
-<para>
-To optimize for speed, &IC; precomputes some pricing information at
-startup (or catalog configuration time actually), so you need to reconfigure
-the catalog if you change any of the pricing-related config directives.
-</para>
 
 
 <section id="SimplePricing">
@@ -48,16 +43,17 @@ having the default value of <literal>price</literal>.
 <itemizedlist>
 
 <listitem><para>
+<emphasis role='bold'>
 If &conf-CommonAdjust; is set to <emphasis>any</emphasis> value (so, be it a
 valid &CAs; or not), extended price
-adjustments are enabled
+adjustments are enabled</emphasis>
 <!-- TODO clarify: It may also hold the default pricing scheme. -->
 </para></listitem>
 
 <listitem><para>
 If the <database class='field'>price</database> field in the
 <database>products</database> database contains a 
-&CAs;, it takes
+&CAs; (or a non-empty, non-zero value), it takes
 precedence over the default set with &conf-CommonAdjust;
 </para></listitem>
 
@@ -65,7 +61,10 @@ precedence over the default set with &conf-CommonAdjust;
 If the value of the &conf-CommonAdjust; directive is set to a valid &CAs;,
 and the <database class='field'>price</database> field is empty or
 specifically <literal>0</literal>, then the &CAs;
-will be used to set the price of the item
+will be used to set the price of the item. An effective way to make 
+the <database class='field'>price</database> field empty is to use
+the &conf-PriceField; directive to set field name to an invalid value, such as
+<literal>0</literal>, <literal>none</literal> or <literal>noprice</literal>.
 </para></listitem>
 
 <listitem><para>
@@ -117,11 +116,19 @@ Price atoms can be of type <emphasis>final</emphasis>,
 
 <para>
 Atom types are recognizable from the syntax used to define them.
-A chained atom ends with a comma. A fallback atom has a
-leading semi-colon. Final atoms have no comma appended or semi-colon prepended.
-Atoms themselves are separated by whitespace and may be quoted, although there
-should normally be no whitespace in a setting and therefore no quotes
-necessary.
+<itemizedlist>
+<listitem><para>
+Chained atom ends with a comma
+</para></listitem>
+<listitem><para>
+Fallback atom has a leading semi-colon
+</para></listitem>
+<listitem><para>
+Final atoms have no comma appended or semi-colon prepended
+</para></listitem>
+</itemizedlist>
+Atoms themselves are separated by whitespace and must be quoted if they
+themselves contain whitespace.
 </para>
 <para>
 A <emphasis>settor</emphasis> is a mean by which the price is set. In other
@@ -173,11 +180,12 @@ I - integer
 <!-- TODO are settors able to yield new atoms, or only settors? -->
 
 	<listitem><para>
-	<!-- TODO is 2-decimal places fixed here or can be any? -->
 	<literal>-</literal><emphasis role='bold'><replaceable>decimal</replaceable></emphasis>
 	</para><para>
-	A number which is applied directly. For instance, a value of 
-	<literal>10</literal> will yield a price of <literal>10</literal>.
+	A number which is applied to the <emphasis>current</emphasis>
+	price value. For instance,
+	a price of <literal>10</literal> and settor of <literal>2</literal> result
+	in new current price of <literal>12</literal>.
 	May be a positive or negative decimal.
 	</para></listitem>
 
@@ -196,13 +204,14 @@ I - integer
 	Causes a direct lookup in a database table. Table defaults to the
 	<database>products</database> database entry for the item (subject,
 	of course, to multiple <database>products</database> databases). Column
-	argument must always be present, but you'd set it to
-	<literal>price</literal> unless you changed &conf-PriceField; or have 
-	some interesting ideas in mind.
-	<!-- TODO what means "key is item code except in attribute-based lookup?-->
-	Key, of course, defaults to the item code (except in a special
-	case of attribute-based lookup). The database value returned is treated
-	as settor again, and is re-parsed accordingly.
+	argument must always be present, but you'd usually set it to
+	<literal>price</literal>. (That scheme is often used in combination with
+	setting &conf-PriceField; to something different of
+	<database class='field'>price</database>, because the
+	<database class='field'>price</database> field would take precedence
+	over the &CAs;).
+	The key defaults to the item &glos-SKU; (except in a special
+	case of attribute-based lookup).
 	</para></listitem>
 
 	<listitem><para>
@@ -261,12 +270,11 @@ pricing:p1..p5,p10:
 	block is passed to the equivalent of a &tag-calc; tag. However, no &IC; tags
 	<!-- TODO tag_data : elaborate how to set it -->
 	can be used in there. Even so, your <function>tag_data</function> routine
-	<emphasis>is</emphasis> available, the current price and quantity are
-	available inside the <varname>$s</varname> hash reference, and 
+	<emphasis>is</emphasis> available, the <emphasis>current</emphasis> price is
+	available in variable <varname>$s</varname>, and 
 	the current item details (code, quantity, price, and any attributes) are
 	available inside the <varname>$item</varname> hashref. All are found
 	in package <classname>Vend::Interpolate</classname>.
-	<!-- TODO see this for myself and show Dumper output of the hash -->
 	</para>
 	<para>
 	That said,

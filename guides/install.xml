@@ -6,7 +6,7 @@
 <article id='install'>
 
 <articleinfo>
-	<title>Interchange Guides: the Installation</title>
+	<title>Interchange Guides: Installation</title>
 	<titleabbrev>install</titleabbrev>
 
 	<copyright>
@@ -156,8 +156,8 @@ $ /path/to/perl -MCPAN -e 'install "Bundle::InterchangeKitchenSink"'
 		suggested). Since the link program does not contain anything specific
 		to the &IC; catalog it is used by, you can probably get someone to compile
 		it for you, and then keep copying it around to new names for each of the
-		catalogs (unless, of course, you want to modify link program settings
-		such as socket file location or timeout value).
+		catalogs (unless, of course, you want to modify compile-time link 
+		program setttings such as socket file location or timeout values).
 		</para>
 	</sect2>
 
@@ -242,7 +242,9 @@ $ /path/to/perl -MCPAN -e 'install "Bundle::InterchangeKitchenSink"'
 		</para>
 		<para>
 		For ultimate flexibility, it is a quite common approach to let every
-		catalog user have its own instance of the &IC; server.
+		catalog user have its own instance of the &IC; server. In that case,
+		make sure you don't mix up different link programs, as they become 
+		instance-specific at compile time.
 		</para>
 	</sect2>
 

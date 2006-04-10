@@ -1117,10 +1117,11 @@ Now add the following to the left template piece:
   <td align="center">
 -    __DISPLAYDATE__
 + <form action="[area search]" method="post">
++ [form-session-id]
 + Search:<br>
 + [set testname]
 + su=yes
-+ fi=product
++ fi=products
 + sf=sk
 + sf=description
 + [/set]
