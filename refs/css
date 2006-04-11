@@ -3,7 +3,6 @@ generate CSS file and create a link to it
 __END__
 
 __NAME__ missing
-Link "Interchange interval" to glossary entry.
 no_imagedir option
 __END__
 
@@ -125,6 +124,13 @@ rebuild, you must explicitly delete the generated
 <filename>.css</filename> file.
 __END__
 
+__NAME__ notes
+When &IC; is ran in RPC &glos-ic-run-mode;, the
+&pragma-dynamic_variables_file_only; pragma must be enabled to activate
+the standard <varname>THEME_CSS</varname> update mechanism. Namely, that
+will force &IC; to always read the latest copy of <varname>THEME_CSS</varname>,
+instead of using cached data.
+__END__
 
 __NAME__ example: Simplest tag example
 <programlisting>
