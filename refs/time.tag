@@ -1,5 +1,5 @@
 __NAME__ purpose
-display current date and time according to POSIX strftime format specifier
+display formatted date similar to strftime POSIX function
 __END__
 
 __NAME__ synopsis 
@@ -200,8 +200,11 @@ __END__
 
 
 __NAME__ description
-The tag displays the current date and time, in a format specified using
-POSIX strftime notation.
+The tag displays date and time values formatted similar to the strftime
+function, see &glos-time; glossary entry for format specifiers. The date can
+be specified with the <literal>time=</literal> parameter and manipulated
+with the <literal>adjust=</literal> parameter. The current date is used as
+default.
 __END__
 
 
