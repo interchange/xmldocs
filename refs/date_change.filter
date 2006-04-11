@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ see also
-date2time, date_change_null
+date2time
 __END__
 
 
@@ -29,6 +29,20 @@ as year <literal>2005</literal>, <literal>80</literal> is understood as year
 <literal>1980</literal>.
 </para><para>
 Time specification unspecified in input get omitted from output as well.
+</para><para>
+The filter optionally accepts three arguments: 
+<itemizedlist>
+<listitem><para>
+<literal>iso</literal> - output date in ISO format
+</para></listitem>
+<listitem><para>
+<literal>undef</literal> - don't default to current date if no date is specified
+<!-- TODO is this OK description -->
+</para></listitem>
+<listitem><para>
+<literal>no_time</literal> - output only date, without time portion
+</para></listitem>
+</itemizedlist>
 __END__
 
 
@@ -48,7 +62,8 @@ When the input data starts with year specification, the year must have
 <emphasis role='bold'>not</emphasis> just <literal>05</literal>)!
 </para><para>
 If the date is empty, the filter defaults to current date. To 
-force an absence of a date, use &filter-date-change-null; filter.
+force an absence of a date (as required by some &glos-SQL; databases),
+use the <literal>undef</literal> filter option.
 __END__
 
 __NAME__ online: Using date_change

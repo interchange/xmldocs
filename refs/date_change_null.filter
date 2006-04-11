@@ -1,10 +1,15 @@
 __NAME__ purpose
-convert MMDDYYYY date (possibly with specified time) to YYYYMMDDhhmm, with NULL for missing dates
+(obsolete) convert MMDDYYYY date (possibly with specified time) to YYYYMMDDhhmm, with NULL for missing dates
 __END__
 
 
 __NAME__ see also
-date2time
+__END__
+
+__NAME__ notes
+This filter was merged into the standard &filter-date_change; filter.
+Invoke &filter-date_change; with the <literal>undef</literal> option
+for the desired behavior.
 __END__
 
 

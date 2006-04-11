@@ -1,6 +1,6 @@
 
 __NAME__ purpose
-export selected Interchange session information as XML data
+(obsolete) export selected Interchange session information as XML data
 __END__
 
 __NAME__ notes
@@ -26,7 +26,7 @@ If set to <literal>delimited</literal>, then
 <arg choice='plain'>field_names</arg> specifies the list of values to extract
 from the session.
 If <emphasis role='bold'>not</emphasis>
-<literal>delimited</literal>, acts as a hash reference into the
+<literal>delimited</literal>, acts as a hash reference key into the
 user's session.
 Examples are good known session elements, such as &glos-value;s or
 &glos-scratch; variables, <literal>errors</literal>, or any other session
