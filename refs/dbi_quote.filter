@@ -34,7 +34,7 @@ and the DBD documentation for your database.
 __END__
 
 
-_NAME__ example: Filter example
+__NAME__ example: Filter example
 <programlisting><![CDATA[
 [cgi name=code set="That's all" hide=1]
 
