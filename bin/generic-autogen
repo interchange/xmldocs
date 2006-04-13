@@ -111,7 +111,8 @@ if ( $cat eq 'glossary' ) {
 		next unless $alphabet{$letter}; # Next if no entries on that letter
 		print "Passed on $letter\n" if $verbose;
 
-		$document .= '<glossdiv><title>' . uc($letter) . '</title>' . "\n";
+		$document .= '<glossdiv id="' . uc($letter) . '"><title>' .
+			uc($letter) . '</title>' . "\n";
 
 		my @keys = sort grep {/^$letter/i} keys %items;
 		for my $key ( @keys ) {

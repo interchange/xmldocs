@@ -151,7 +151,7 @@ my @mandatory = (qw/synopsis example description purpose/);
 # The header is inserted
 # *after* <title>, if title was specified in section definition.
 my %item_header = (
-	example => "<example>\n%s<para>",
+	example => "<example id='%s'>\n%s<para>",
 	online => "<example>\n%s<para>",
 );
 my %item_footer = (
@@ -526,10 +526,11 @@ while ( $path = shift @paths) { # Now, for each IC version specified
 
 					{ no warnings; # XXX If someone can figure out which of the used vars here is undefined...
 #<screen linenumbering='numbered' startinglinenumber='$ls'>
+					my $id = make_ok_for_id('context', "$loc $revinfo$ctxmeta", 1);
 					$$ag{source} .= <<ENDD;
 <para>
 </para>
-<figure>
+<figure id="$id">
 <title>$loc $revinfo$ctxmeta</title>
 
 <screen>
@@ -1100,8 +1101,11 @@ sub populate {
 					# XXX in the next line we don't treat ** example"2": title **
 					# properly!
 					$section = $sec;
-					$title = $title ? "<title>$title</title>" : "";
-					$pre_content =  sprintf($item_header{$section}||"", $title);
+
+					my $id = make_ok_for_id('', $title||"", 1);
+					$title = $title ?  "<title id='title_$id'>$title</title>" : '';
+					$pre_content =  sprintf($item_header{$section}||"",
+							"example_$id", $title);
 					$post_content = sprintf($item_footer{$section}||"", $title);
 					next
 
@@ -1325,5 +1329,21 @@ sub load_templates {
 		next if /CVS|svn/;
 		$templates{$_} = readfile("docbook/symbol-templates/$_");
 	}
+}
+
+# Turn any text into text suitable to put as ID. Needed at least for 
+# 1.69.1 xsl stylesheets to satisfy warnings.
+# First argument is prefix, such as 'context', 'example', etc.. Should
+# be meaningful but anything is OK. Second is the text to "IDize", and 
+# third optional field is a yes/no for unique number appended (that's 
+# good when you want to forcibly avoid the call to return already 
+# defined IO).
+my $uniq = 0;
+sub make_ok_for_id {
+	my ($pref, $text, $unq) = @_;
+	$pref and $pref .= '_';
+	$text =~ s/\W/_/g;
+	$unq and $unq = '_' . $uniq++ or $unq = '';
+	"${pref}${text}$unq"
 }
 
