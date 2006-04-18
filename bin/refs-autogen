@@ -152,7 +152,7 @@ my @mandatory = (qw/synopsis example description purpose/);
 # *after* <title>, if title was specified in section definition.
 my %item_header = (
 	example => "<example id='%s'>\n%s<para>",
-	online => "<example>\n%s<para>",
+	online => "<example id='%s'>\n%s<para>",
 );
 my %item_footer = (
 	example => "</para>\n</example>",
