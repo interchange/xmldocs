@@ -158,25 +158,6 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	noframes
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
 	period
 	</entry>
 	<entry>
