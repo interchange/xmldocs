@@ -1,4 +1,27 @@
+__NAME__ purpose
+caches result of ITL parsing in file
+__END__
+
 __NAME__ synopsis 
+<row>
+
+	<entry>
+	file
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	name of cache file
+	</entry>
+
+</row> 
 <row>
 
 	<entry>
@@ -125,10 +148,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	60
 	</entry>
 	<entry>
-	<!-- DSC -->
+	number of minutes the cache file is kept, 0 means infinitely 
 	</entry>
 
 </row> 
