@@ -6,14 +6,16 @@ __NAME__ see also
 CodeDef,UserTag,Filter,ActionMap,FormAction,GlobalSub,ItemAction,CoreTag
 __END__
 
-__NAME__ synopsis
+
+Fix the entry, then insert the missing _ at the beginning of line
+_NAME__ synopsis
 <group choice='req'>
 	<arg choice='plain'>
 		<literal>Sub</literal>
 		<replaceable>perl_code</replaceable>
 	</arg>
 </group>
-__END__
+_END__
 
 __NAME__ description
 A generic &PERL; subroutine mapper which allows mapping of subroutines to

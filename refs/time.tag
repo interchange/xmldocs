@@ -1,5 +1,5 @@
 __NAME__ purpose
-display formatted date similar to strftime POSIX function
+display formatted date, similar to strftime POSIX function
 __END__
 
 __NAME__ synopsis 
@@ -200,11 +200,14 @@ __END__
 
 
 __NAME__ description
-The tag displays date and time values formatted similar to the strftime
-function, see &glos-time; glossary entry for format specifiers. The date can
-be specified with the <literal>time=</literal> parameter and manipulated
-with the <literal>adjust=</literal> parameter. The current date is used as
-default.
+The tag displays date and time values, formatted similar to the 
+<function>strftime(3)</function> function.
+The date can
+be specified with the <literal>time=</literal> parameter and adjusted
+with the <literal>adjust=</literal> parameter.
+The current date and time is the assumed default.
+</para><para>
+See &glos-time; glossary entry for a list and description of format specifiers.
 __END__
 
 
@@ -213,7 +216,7 @@ In all <literal>adjust=</literal> manipulations, the offset will just be
 applied at the end (the timezone will not be changed for the invocation
 of time function). This means you shouldn't use any format that uses
 timezone information. For the timezone to enter calculations, either use 
-<literal>tz=</literal>, or manage the system yourself.
+<literal>tz=</literal>, or manage the calculation yourself.
 </para><para>
 The timezone can be set globally for the &IC; installation by defining
 the <envar>TZ</envar> environment variable and restarting Interchange.

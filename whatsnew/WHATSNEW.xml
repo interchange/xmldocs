@@ -54,6 +54,170 @@
 <!-- AUTO UPDATER -->
 <para><literallayout>
 <emphasis role='bold'>
+Developer: jon
+Date: 2006-04-27 21:00:09 GMT
+Modified:  dist/lib/UI/pages/admin ship_data.html</emphasis>
+Remove admin FedEx support, since fedex-query tag is now gone.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-04-18 09:17:39 GMT
+Modified:  lib/Vend Swish.pm</emphasis>
+don't consider missing matches as search error
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-04-11 14:43:57 GMT
+Modified:  .        MANIFEST
+Modified:  code/Filter date_change.filter
+Removed:   code/Filter date_change_null.filter</emphasis>
+merge date_change/date_change_null filters, code supplied by Jon Jensen
+with one modification: second shift() removed
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-04-11 07:55:52 GMT
+Modified:  dist/standard catalog.cfg</emphasis>
+use email ordercheck in common order profile for email address
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-04-07 13:53:23 GMT
+Modified:  lib/Vend Swish.pm</emphasis>
+complete mapping of Swish-e auto properties
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: jon
+Date: 2006-04-05 17:40:39 GMT
+Modified:  lib/Vend/Table Editor.pm</emphasis>
+Correct display of "Are you sure you want to delete $SKU" dialog when
+multi-part primary keys are used.
+
+Problem found and fixed by Jeff Boes (jeff at endpoint.com). Thanks!
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: heins
+Date: 2006-04-05 15:31:38 GMT
+Modified:  lib/Vend Util.pm</emphasis>
+* Allow limiting of size of logData error message.
+
+  Limit  logdata_error_length  80
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: heins
+Date: 2006-04-05 14:42:20 GMT
+Modified:  lib/Vend Cart.pm Data.pm Dispatch.pm Error.pm File.pm
+Modified:           Interpolate.pm Session.pm Ship.pm
+Modified:  lib/Vend/Table DB_File.pm GDBM.pm SDBM.pm</emphasis>
+* Add lockout to list of SpecialSub routines allowed.
+
+* If user-configured lockout routine returns true, it replaces the
+  current routine completely. If it returns false, the normal one
+  is run as well.
+
+* Move the logging out of Vend::Dispatch to the do_lockout routine, so
+  that you can avoid the log entry if your user-configured routine handles
+  the lockout.
+
+* Make the number of seconds for robot reset adjustable from its
+  current hardcoded 30:
+
+    Limit   lockout_reset_seconds
+
+  Maybe that should be robot_reset_seconds, I don't know.
+
+* Change use of $Vend::Cfg-&gt;{Limit}{member} to $::Limit-&gt;{member}. As
+  Limit is used in iterative routines like chain_cost, this should
+  improve performance.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-04-04 19:07:48 GMT
+Modified:  lib/Vend Config.pm</emphasis>
+ensure that TrackFile is a relative path to catalog root
+parse_relative_dir now issues a meaningful error message
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-04-03 21:23:40 GMT
+Modified:  .        MANIFEST
+Modified:  lib/Vend Order.pm
+Added:     code/OrderCheck always_pass.oc</emphasis>
+breakout always_pass order check
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: kwalsh
+Date: 2006-04-01 10:39:27 GMT
+Modified:  dist/lib/UI ui.cfg
+Modified:  dist/lib/UI/locales en_US.cfg
+Added:     dist/lib/UI/locales en_GB.cfg</emphasis>
+    * Added en_GB "translation": English (British)
+
+    * Modified en_US to change the name from "English" to "English (US)"
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-03-30 15:51:50 GMT
+Modified:  lib/Vend Util.pm</emphasis>
+fix weird error with missing frac digits in UI typically caused by missing
+locale in Debian installations, reported by Michael Hess on IRC (among
+others)
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: heins
+Date: 2006-03-28 17:02:47 GMT
+Modified:  dist/src/mod_perl2 README
+Modified:  dist/src/mod_perl2/Interchange Link.pm
+Added:     dist/src/mod_perl2/Interchange
+Added:              Link.pm.mod_perl-1.999_21_and_before</emphasis>
+* Make Interchange::Link compatibile with mod_perl2 greater than
+  1.999_22. Thanks to Ryan Perry &lt;<a href="http://www.icdevgroup.org/mailman/listinfo/interchange-cvs">rperry at madisonip.com</a>&gt;.
+
+* Add version of the Link.pm module for earlier mod_perl 1.999_21 and
+  before.
+
+* Adjust docs.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
 Developer: racke
 Date: 2006-03-27 14:14:41 GMT
 Modified:  dist/standard/products locale.txt</emphasis>

@@ -1,5 +1,5 @@
 __NAME__ purpose
-caches result of ITL parsing in file
+save output of Interchange interpolation to named file (cache pages)
 __END__
 
 __NAME__ synopsis 
@@ -18,7 +18,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	name of cache file
+	Cache filename.
 	</entry>
 
 </row> 
@@ -151,8 +151,11 @@ __NAME__ synopsis
 	60
 	</entry>
 	<entry>
-	number of minutes the cache file is kept, 0 means infinitely 
+	Number of minutes the cache file is kept. A value of
+	<literal>0</literal> means infinitely.
 	</entry>
+	<!-- TODO how about making this a interchange interval so '60 minutes' or
+	'7 days' is possible to be specified? -->
 
 </row> 
 <row>

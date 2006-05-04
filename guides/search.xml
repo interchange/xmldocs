@@ -6,11 +6,12 @@
 <article id='search'>
 
 <articleinfo>
-	<title>Interchange Guides: Search</title>
+	<title>Interchange Guides: Search Tutorial</title>
 	<titleabbrev>search</titleabbrev>
 
 	<copyright>
-		<year>2005, 2006</year>
+		<year>2005</year>
+		<year>2006</year>
 		<holder>Interchange Development Group</holder>
 	</copyright>
 
@@ -39,592 +40,219 @@
 
 	<abstract>
 		<para>
+		The purpose of this document is to describe the search "subsystem" in
+		&IC; and link together all search-related topics.
 		</para>
 	</abstract>
 
 </articleinfo>
 
 
-<sect1>
-	<title>Search</title>
-	
-	<sect2>
-	  <title>Search Reference</title>
-	  <table><title>Search Parameters</title>
-		<tgroup cols="5">
-		  <thead>
-			<row>
-			  <entry>Parameter</entry>
-			  <entry>Shorthand</entry>
-			  <entry>Type</entry>
-			  <entry>Default</entry>
-			  <entry>Description</entry>
-			</row>
-		  </thead>
-		  <tbody>
-			<row>
-			  <entry>mv_all_chars</entry>
-			  <entry>ac</entry>
-			</row>
-			<row>
-			  <entry>mv_base_directory</entry>
-			  <entry>bd</entry>
-			</row>
-			<row>
-			  <entry>mv_begin_string</entry>
-			  <entry>bs</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_cache_key</entry>
-			  <entry>ck</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_coordinate</entry>
-			  <entry>co</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_case</entry>
-			  <entry>cs</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_verbatim_columns</entry>
-			  <entry>cv</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_dict_end</entry>
-			  <entry>de</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_dict_fold</entry>
-			  <entry>df</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_dict_limit</entry>
-			  <entry>di</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_dict_look</entry>
-			  <entry>dl</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_raw_dict_look</entry>
-			  <entry>DL</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_dict_order</entry>
-			  <entry>do</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_record_delim</entry>
-			  <entry>dr</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_exact_match</entry>
-			  <entry>em</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_spelling_errors</entry>
-			  <entry>er</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_field_file</entry>
-			  <entry>ff</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_search_file</entry>
-			  <entry>fi</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_field_title</entry>
-			  <entry>ft</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_first_match</entry>
-			  <entry>fm</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_field_names</entry>
-			  <entry>fn</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_head_skip</entry>
-			  <entry>hs</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_index_delim</entry>
-			  <entry>ix</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_search_label</entry>
-			  <entry>lb</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_like_field</entry>
-			  <entry>lf</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_list_only</entry>
-			  <entry>lo</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_search_line_return</entry>
-			  <entry>lr</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_like_spec</entry>
-			  <entry>ls</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_more_alpha</entry>
-			  <entry>ma</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_more_alpha_chars</entry>
-			  <entry>mc</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_more_decade</entry>
-			  <entry>md</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_more_id</entry>
-			  <entry>mi</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_matchlimit</entry>
-			  <entry>ml</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_max_matches</entry>
-			  <entry>mm</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_more_matches</entry>
-			  <entry>MM</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_profile</entry>
-			  <entry>mp</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_min_string</entry>
-			  <entry>ms</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_negate</entry>
-			  <entry>ne</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_negate</entry>
-			  <entry>ng</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_no_hide</entry>
-			  <entry>nh</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_no_more</entry>
-			  <entry>nm</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_nextpage</entry>
-			  <entry>np</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_next_search</entry>
-			  <entry>ns</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_numeric</entry>
-			  <entry>nu</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_column_op</entry>
-			  <entry>op</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_orsearch</entry>
-			  <entry>os</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>prefix</entry>
-			  <entry>pf</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_more_permanent</entry>
-			  <entry>pm</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_return_all</entry>
-			  <entry>ra</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_return_delim</entry>
-			  <entry>rd</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_search_reference</entry>
-			  <entry>re</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_return_fields</entry>
-			  <entry>rf</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_range_alpha</entry>
-			  <entry>rg</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_range_look</entry>
-			  <entry>rl</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_range_min</entry>
-			  <entry>rm</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_return_file_name</entry>
-			  <entry>rn</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_return_reference</entry>
-			  <entry>rr</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_return_spec</entry>
-			  <entry>rs</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_range_max</entry>
-			  <entry>rx</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_small_data</entry>
-			  <entry>sd</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_searchspec</entry>
-			  <entry>se</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_search_field</entry>
-			  <entry>sf</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_search_group</entry>
-			  <entry>sg</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_search_immediate</entry>
-			  <entry>si</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_start_match</entry>
-			  <entry>sm</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_search_page</entry>
-			  <entry>sp</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_sql_query</entry>
-			  <entry>sq</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_search_relate</entry>
-			  <entry>sr</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_searchtype</entry>
-			  <entry>st</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_substring_match</entry>
-			  <entry>su</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_sort_field</entry>
-			  <entry>tf</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_sort_option</entry>
-			  <entry>to</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_unique</entry>
-			  <entry>un</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
-			<row>
-			  <entry>mv_value</entry>
-			  <entry>va</entry>
-			  <entry></entry>
-			  <entry></entry>
-			  <entry></entry>
-			</row>
+<section>
+	<title>Searching using Swish-e</title>
+	<!-- TODO : move to HOWTO -->
+	<para>
+	The Swish search module allows you to search index files generated
+	by &SWISH-E;.
+	</para>
 
-		  </tbody>
-		</tgroup>
-	  </table>
-	</sect2>
-
-	<sect2>
-		<title>Swish</title>
-<para>
-The Swish search module allows you to search index files generated
-by Swish-e <ulink url="http://www.swish-e.org/"/>.
-</para>
-<para>
-
-First of all, enable Swish search in your interchange.cfg:
+	<para>
+	To enable any Swish searching, modify your &gcf; to add:
 <programlisting>
 Require module Vend::Swish
 AddDirective Swish hash
 Variable swish Vend::Swish
 </programlisting>
-</para>
+	</para>
 
-<para>
-Now you can configure Swish search in your catalog.cfg:
+	<para>
+	To configure your catalog to use Swish, modify the appropriate &ccf; and add:
 <programlisting>
 Swish command /usr/bin/swish-e
 Swish index products/swish-e.db
 </programlisting>
-</para>
+	</para>
 
-<para>
-  The search is called with st=swish (or mv_searchtype=swish).
+	<para>
+	Finally, in search parameters, use <literal>mv_searchtype=swish</literal> or
+	the shorthand notation <literal>st=swish</literal>.
+	</para>
 
-</para>
-<para>
- The fields to return are configurable, and default to;
+
+	<para>
+	The fields to be returned from Swish to &IC; are configurable, and default to:
+
 <programlisting>
-	rf=code score title url mod_date filesize
-	fn=code score title url mod_date filesize
+mv_return_fields=code score title url mod_date filesize
+mv_field_names==code score title url mod_date filesize
 </programlisting>
-  These correspond to:
+
+	These correspond to:
 <programlisting>
-			code		swishreccount
-			score		swishrank
-			url			swishdocpath
-			title		swishtitle
-			filesize	swishdocsize
-			mod_date	swishlastmodified
+  code      swishreccount
+  score     swishrank
+  url       swishdocpath
+  title     swishtitle
+  filesize  swishdocsize
+  mod_date  swishlastmodified
 </programlisting>
-</para>
-	</sect2>
-</sect1>
+	</para>
+</section>
+
+
+<section>
+	<title>Search Reference</title>
+
+	<itemizedlist>
+		<listitem><para>mv_all_chars</para>
+		</listitem>
+		<listitem><para>mv_base_directory</para>
+		</listitem>
+		<listitem><para>mv_begin_string</para>
+		</listitem>
+		<listitem><para>mv_cache_key</para>
+		</listitem>
+		<listitem><para>mv_coordinate</para>
+		</listitem>
+		<listitem><para>mv_case</para>
+		</listitem>
+		<listitem><para>mv_verbatim_columns</para>
+		</listitem>
+		<listitem><para>mv_dict_end</para>
+		</listitem>
+		<listitem><para>mv_dict_fold</para>
+		</listitem>
+		<listitem><para>mv_dict_limit</para>
+		</listitem>
+		<listitem><para>mv_dict_look</para>
+		</listitem>
+		<listitem><para>mv_raw_dict_look</para>
+		</listitem>
+		<listitem><para>mv_dict_order</para>
+		</listitem>
+		<listitem><para>mv_record_delim</para>
+		</listitem>
+		<listitem><para>mv_exact_match</para>
+		</listitem>
+		<listitem><para>mv_spelling_errors</para>
+		</listitem>
+		<listitem><para>mv_field_file</para>
+		</listitem>
+		<listitem><para>mv_search_file</para>
+		</listitem>
+		<listitem><para>mv_field_title</para>
+		</listitem>
+		<listitem><para>mv_first_match</para>
+		</listitem>
+		<listitem><para>mv_field_names</para>
+		</listitem>
+		<listitem><para>mv_head_skip</para>
+		</listitem>
+		<listitem><para>mv_index_delim</para>
+		</listitem>
+		<listitem><para>mv_search_label</para>
+		</listitem>
+		<listitem><para>mv_like_field</para>
+		</listitem>
+		<listitem><para>mv_list_only</para>
+		</listitem>
+		<listitem><para>mv_search_line_return</para>
+		</listitem>
+		<listitem><para>mv_like_spec</para>
+		</listitem>
+		<listitem><para>mv_more_alpha</para>
+		</listitem>
+		<listitem><para>mv_more_alpha_chars</para>
+		</listitem>
+		<listitem><para>mv_more_decade</para>
+		</listitem>
+		<listitem><para>mv_more_id</para>
+		</listitem>
+		<listitem><para>mv_matchlimit</para>
+		</listitem>
+		<listitem><para>mv_max_matches</para>
+		</listitem>
+		<listitem><para>mv_more_matches</para>
+		</listitem>
+		<listitem><para>mv_profile</para>
+		</listitem>
+		<listitem><para>mv_min_string</para>
+		</listitem>
+		<listitem><para>mv_negate</para>
+		</listitem>
+		<listitem><para>mv_negate</para>
+		</listitem>
+		<listitem><para>mv_no_hide</para>
+		</listitem>
+		<listitem><para>mv_no_more</para>
+		</listitem>
+		<listitem><para>mv_nextpage</para>
+		</listitem>
+		<listitem><para>mv_next_search</para>
+		</listitem>
+		<listitem><para>mv_numeric</para>
+		</listitem>
+		<listitem><para>mv_column_op</para>
+		</listitem>
+		<listitem><para>mv_orsearch</para>
+		</listitem>
+		<listitem><para>prefix</para>
+		</listitem>
+		<listitem><para>mv_more_permanent</para>
+		</listitem>
+		<listitem><para>mv_return_all</para>
+		</listitem>
+		<listitem><para>mv_return_delim</para>
+		</listitem>
+		<listitem><para>mv_search_reference</para>
+		</listitem>
+		<listitem><para>mv_return_fields</para>
+		</listitem>
+		<listitem><para>mv_range_alpha</para>
+		</listitem>
+		<listitem><para>mv_range_look</para>
+		</listitem>
+		<listitem><para>mv_range_min</para>
+		</listitem>
+		<listitem><para>mv_return_file_name</para>
+		</listitem>
+		<listitem><para>mv_return_reference</para>
+		</listitem>
+		<listitem><para>mv_return_spec</para>
+		</listitem>
+		<listitem><para>mv_range_max</para>
+		</listitem>
+		<listitem><para>mv_small_data</para>
+		</listitem>
+		<listitem><para>mv_searchspec</para>
+		</listitem>
+		<listitem><para>mv_search_field</para>
+		</listitem>
+		<listitem><para>mv_search_group</para>
+		</listitem>
+		<listitem><para>mv_search_immediate</para>
+		</listitem>
+		<listitem><para>mv_start_match</para>
+		</listitem>
+		<listitem><para>mv_search_page</para>
+		</listitem>
+		<listitem><para>mv_sql_query</para>
+		</listitem>
+		<listitem><para>mv_search_relate</para>
+		</listitem>
+		<listitem><para>mv_searchtype</para>
+		</listitem>
+		<listitem><para>mv_substring_match</para>
+		</listitem>
+		<listitem><para>mv_sort_field</para>
+		</listitem>
+		<listitem><para>mv_sort_option</para>
+		</listitem>
+		<listitem><para>mv_unique</para>
+		</listitem>
+		<listitem><para>mv_value</para>
+		</listitem>
+	</itemizedlist>
+</section>
 
 </article>

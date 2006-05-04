@@ -114,10 +114,10 @@
 
 				<entry>
 					<emphasis role='bold'>
-						Programming Style
+						Search Tutorial
 					</emphasis><sbr/>
-					<ulink url="programming-style/index.html">Multi-HTML</ulink> |
-					<ulink url="programming-style.html">HTML</ulink>
+					<ulink url="search/index.html">Multi-HTML</ulink> |
+					<ulink url="search.html">HTML</ulink>
 				</entry>
 			</row>
 
@@ -142,10 +142,10 @@
 
 				<entry>
 					<emphasis role='bold'>
-						Upgrade Guide
+						Programming Style
 					</emphasis><sbr/>
-					<ulink url="upgrade/index.html">Multi-HTML</ulink> |
-					<ulink url="upgrade.html">HTML</ulink>
+					<ulink url="programming-style/index.html">Multi-HTML</ulink> |
+					<ulink url="programming-style.html">HTML</ulink>
 				</entry>
 			</row>
 
@@ -168,12 +168,11 @@
 				</entry>
 
 				<entry>
-				<!--
 					<emphasis role='bold'>
+						Upgrade Guide
 					</emphasis><sbr/>
-					<ulink url=".html">HTML</ulink> |
-					<ulink url="/">Multi-HTML</ulink>
-				-->
+					<ulink url="upgrade/index.html">Multi-HTML</ulink> |
+					<ulink url="upgrade.html">HTML</ulink>
 				</entry>
 			</row>
 

@@ -1,6 +1,18 @@
 - in iccattut, s/item-field/item-param/ at least on some places. 
 - Make xmldocs tarball in ftp autoupdated
 - Change -latest to version number in tarball download
+- In iccattut examples (files/*), replace catalog setting of ErrorFile,
+  TrackFile and similar directives with relative filenames. Also see how
+  Jon's file layout restructuring affects the examples
+- In reference pages, make special string, such as __FNAME__, that expands
+  to name of the filename. Will speed up writing and eliminate errors such
+  as copying "Setting ErrorFile" and forgetting to replace ErrorFile with
+  another name. (With this option, both files would just have
+  "Setting __FNAME__", and would magically work).
+- Parse default value for config directives (at least in cases where the
+  value is a simple oneliner), and display it as a special field in the
+  reference page.
+- bin/whatsnew-update didn't pick up User: from messages
 
 Outstanding:
 =======

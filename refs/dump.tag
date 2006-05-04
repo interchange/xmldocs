@@ -1,5 +1,5 @@
 __NAME__ purpose
-perform dump of user session
+perform dump (display) of user session
 __END__
 
 
@@ -17,7 +17,7 @@ __NAME__ synopsis
 	None (all keys)
 	</entry>
 	<entry>
-	Dump just one named variable from the user session.
+	Dump just one named variable from the user &glos-session.
 	</entry>
 
 </row> 
