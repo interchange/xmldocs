@@ -17,7 +17,7 @@ __NAME__ synopsis
 	None (all keys)
 	</entry>
 	<entry>
-	Dump just one named variable from the user &glos-session.
+	Dump just one named variable from the user &glos-session;.
 	</entry>
 
 </row> 
