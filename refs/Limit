@@ -1,0 +1,13 @@
+__NAME__ purpose
+imposes or modifies miscellaneous limits
+__END__
+
+__NAME__ example
+<programlisting>
+Limit robot_expire 0.01
+</programlisting>
+__END__
+
+__NAME__ see also
+RobotLimit
+__END__
