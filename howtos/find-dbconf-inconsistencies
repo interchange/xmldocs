@@ -1,0 +1,74 @@
+Find database definition inconsistencies for various database types defined under dbconf/ directory
+</para></question>
+
+<answer><para>
+Here's a script that can help you find inconsistencies in database definition
+files. (All files should essentially have the same definition, even if they
+differ in database-specific syntax).
+<programlisting><![CDATA[
+#!/usr/bin/perl
+
+#
+# This scrip needs to be run from the dbconf/ directory in order to
+# find the relative filenames
+#
+
+@dbtypes = qw{mysql pgsql oracle sqlite};
+
+%dbsuff = ( mysql => mysql,
+            pgsql => pgsql,
+            oracle => ora,
+            sqlite => lite, );
+$txt = '.txt';
+foreach $gtable  (@gtables = grep { s/\.txt//g } `(cd ../products/; ls *.txt)`) {
+   $gtable =~ s/\n//smg;
+   $all_tables{$gtable} = 1;
+   $fn = $gtable . '.txt';
+
+   $flds = `(cd ../products/; head -1 $fn)`;
+   my @flds =  split /\t/, $flds;
+   foreach $fld (@flds) {
+      $seen{$gtable}{$fld} =1; 
+   }
+}
+
+
+foreach $dbtype (@dbtypes) {
+  # print "\n\ndbtype: $dbtype dbsuff: $dbsuff{$dbtype}\n";
+  @tables = grep { s/\.$dbsuff{$dbtype}//g } `(cd $dbtype; ls *.$dbsuff{$dbtype})`;
+  @tables = grep { s/\n//smg } @tables;
+  foreach $table ( @tables) {
+     my $M = qq{$dbtype/$table.$dbsuff{$dbtype}};
+     $all_tables{$table}=1;
+     # print "$M\n";
+     @fields = `/bin/grep -i COLUMN_DEF $M | /bin/cut -d'"' -f2 `;
+     # here I need to build a hash for each db type 
+     
+     foreach $field (@fields) { 
+         my ($k, $v) = split (/=/, $field);
+         $v =~ s/\n//smg;
+         $table{$dbtype}->{$table}->{$k}= $v;
+     }
+  }
+}
+print "<html><body bgcolor=\"#ffffff\">\n";
+foreach my $table (sort keys %all_tables) {
+   print "<table border=\"1\" width=\"100%\">\n";
+   print "<tr><td colspan=\"5\" align=\"center\"1>$table</td></tr>\n";
+   print "<tr><td>&nbsp;</td>";
+   foreach (@dbtypes) {
+       print "<td>$_</td>";
+   }
+   print "</tr>";
+   foreach my $field (sort keys %{$seen{$table}}) {
+       print "<tr><td>$field</td>";
+       foreach $dbtype  ( @dbtypes) {
+          print "<td>$table{$dbtype}->{$table}->{$field}</td>";
+       }
+       print "</tr>\n";
+   }
+   print "</table>\n<br><br>\n";
+}
+print "</body></html>\n";
+]]></programlisting>
+Thanks Paul Vinciguerra for providing this tip in October 2003.
