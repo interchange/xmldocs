@@ -190,6 +190,8 @@ pairs,  just as with HTML:
 The positional-style tag that accomplishes the same thing but is more 
 compact:
 
+<!-- TODO: [tag pos1  ] makes pos1 in fact "pos1  " -->
+
 <programlisting>
 [value <replaceable>variable_name</replaceable>]
 </programlisting>

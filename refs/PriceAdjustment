@@ -1,10 +1,14 @@
+__NAME__ purpose
+(obsolete) 
+__END__
 
-LI1: PriceAdjustment
+__NAME__ description
+The directive overrides the field (defined by &conf-UseModifier;) that will
+be used to adjust pricing. It is commonly used in &glos-locale;-dependent
+settings for an automatic conversion factor based on locale.
+__END__
 
-.Changes the fields set by C<UseModifier> that will be used to adjust pricing for an automatic conversion factor based on locale. For example:
-
-!block example; listitem=2
-    # Default at startup
-    PriceAdjustment  format
-    Locale fr_FR  PriceAdjustment  formats
-!endblock
+__NAME__ example: Setting PriceAdjustment
+PriceAdjustment format
+Locale fr_FR    PriceAdjustment format_fr
+__END__

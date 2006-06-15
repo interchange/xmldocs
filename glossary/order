@@ -43,7 +43,7 @@ results page, you can get a canned select box from the
 
 <para>
 Just as in many other &IC; demo catalogs, order-related files are kept in the
-<filename class='directory'>&glos-CATROOT;/pages/ord</filename> directory.
+<filename class='directory'>&glos-CATROOT;/pages/ord/</filename> directory.
 The most important file would probably be 
 <filename>&glos-CATROOT;/pages/ord/basket.html</filename> which shows
 order basket contents, and is displayed to the user every time an item is
@@ -54,7 +54,7 @@ added to it, or the user explicitly requests it.
 <para>
 It is not strictly necessary to display the basket page every time an
 item is ordered, but most customers will be confused if you don't give them
-a clear visual consequence of their action.
+a clear visual consequence of their ordering action.
 </para>
 <para>
 An alternative to a separate basket page could be a side-bar menu that would

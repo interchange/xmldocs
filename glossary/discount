@@ -1,6 +1,9 @@
 
 Product discounts in &IC; can be set at any time. The discounts
-apply only to the customer receiving them, and are of following types:
+apply only to the customer receiving them, so you can gate the          
+discounts based on membership in a club or other arbitrary means.
+</para><para>
+Discounts are are of the following types:
 
 <itemizedlist>
 
