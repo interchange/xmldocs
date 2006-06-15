@@ -97,6 +97,15 @@ mv_field_names==code score title url mod_date filesize
   mod_date  swishlastmodified
 </programlisting>
 	</para>
+<section>
+<title>Commandline Examples</title>
+<para>
+Simple search for the term Interchange:
+<programlisting>
+swish-e -w Interchange
+</programlisting>
+</para>
+</section>
 </section>
 
 
