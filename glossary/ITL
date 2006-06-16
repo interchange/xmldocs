@@ -333,6 +333,94 @@ disassembling named parameters takes some more CPU cycles.
 
 
 <section>
+<title>Accessing Perl from ITL</title>
+
+<para>
+Among ITL tags, &tag-perl;, &tag-calc;, &tag-calcn; and &tag-mvasp;
+are used obtain direct access to the &PERL; language in &IC; pages.
+In fact, all the ITL tags are only extensions (and convenience features)
+built on top of &IC;'s Perl core, so all ITL tags boil down to Perl
+code anyway. Using Perl directly could have the benefits of:
+<itemizedlist>
+<listitem><para>
+Increasing page parsing speed (Perl blocks are evaluated directly)
+</para></listitem>
+<listitem><para>
+Making complicated ITL constructs much easier, or even trivial
+</para></listitem>
+<listitem><para>
+Enabling direct access to Interchange data structures (and code, and 
+everything), thus achieving unparalleled flexibility
+</para></listitem>
+<listitem><para>
+Unify coding style, if you decide to write everything in Perl directly
+</para></listitem>
+</itemizedlist>
+</para>
+
+<para>
+Let's sy we wanted to display user's real name in a page.
+Here are three pieces of code, all achieving this effect, but using
+different approaches to produce the result:
+</para>
+
+<para>
+<emphasis role='bold'>Displaying user's real name using an ITL layer</emphasis>:
+<programlisting>
+[if value name]
+  Your name is [value name], in case you forgot.
+
+[else]
+  I don't know your name.
+
+[/else]
+[/if]
+</programlisting>
+</para>
+
+<para>
+<emphasis role='bold'>Displaying user's real name by calling ITL tags from Perl</emphasis>:
+<programlisting>
+[calc]
+  my $out;
+  my $name = $Tag->value('name');
+
+  if ($name) {
+    $out = "Your name is $name, in case you forgot.";
+
+  } else {
+    $out = "I don't know your name.";
+
+  }
+
+  return $out;                                              
+[/calc]                 
+</programlisting>
+</para>
+
+<para>
+<emphasis role='bold'>Displaying user's real name by accessing Interchange's data structures</emphasis>:
+<programlisting>
+[calc]
+  my $out;
+  my $name = $Values->{name};
+
+  if ($name) {
+    $out = "Your name is $name, in case you forgot.";
+
+  } else {
+    $out = "I don't know your name.";
+
+  }
+
+  return $out;                                              
+[/calc]                 
+</programlisting>
+</para>
+
+</section>
+
+<section>
 <title>Universal Attributes</title>
 
 
@@ -521,54 +609,46 @@ search.1="se=plutonium
           sf=comment"
 </programlisting>
 
-</para><para>
-The &tag-page; tag, for example, treats a search specification array as
-a joined search. <!-- TODO link to something on joined searches or
-searching in general; we can't leave the reader dry -->
 
 </para><para>
-Note that it is up to the tag to handle an array or hash value
+It is up to each individual tag to handle an array or hash value
 properly. See the documentation for the specific tag before passing
 it an attribute array or hash value.
+The &tag-page; tag, for example, would treat a search specification array
+(the structure we've shown above) as a joined search (one of different
+search types we support).
+<!-- TODO link to something on joined searches or
+searching in general; we can't leave the reader dry -->
 </para>
-</section>
-
-
-<section>
-<title>Perl Calls</title>
 
 <para>
-You can simply ignore this section if you don't know the &PERL; 
-programming language and this looks all too messy for you.
-
+On the &PERL; level, before passing attributes to a tag, &IC; parser would
+convert attributes to an anonymous array reference.
 </para><para>
-Before passing attributes to a tag, the &IC; parser would
-convert the above example to an anonymous array reference. It would
-use the resulting arrayref as the value for the 
-<arg choice='plain'>search</arg> attribute in this example.
-
-</para><para>
-If you were passing the above example directly to a tag routine
+If you were passing the above example directly to a tag named
+<literal>ROUTINE</literal>
 within a &tag-perl; block or your custom tag, you would actually pass an
 anonymous array as the value of the attribute:
-
 
 <programlisting><![CDATA[
 my $arrayref = [ "se=hammer/fi=products/sf=description",
                  "se=plutonium/fi=products/sf=description", ];
 
-$Tag->routine( { search => $arrayref, } );
+$Tag->ROUTINE( { search => $arrayref } );
 ]]></programlisting>
 
-Similarly, to use a hash reference for the same attribute:
+Similarly, to use a hash reference in some other occasion:
 
 <programlisting><![CDATA[
 my $hashref = { name   => "required",
                 date   => 'default="%B %d, %Y"', };
 
-$Tag->routine( { entry => $hashref } );
+$Tag->ROUTINE( { entry => $hashref } );
 ]]></programlisting>
 </para>
+
+
+<!-- TODO backticks -->
 </section>
 
 
@@ -766,11 +846,10 @@ However, you can explicitly request hash lists to be returned from
 queries:
 
 <programlisting>
-[query sql="select foo, bar from products" type=hashref]
-[/query]
+[query sql="select foo, bar from products" type=hashref /]
 </programlisting>
 
-The data structure would then be:
+The data structure returned would then be:
 
 <programlisting>
 [
@@ -786,6 +865,9 @@ PREFIX-field"]PREFIX-field (Optimization note- one query per field if you use th
 -->
 </para>
 </section>
+
+
+
 
 <para>
 
