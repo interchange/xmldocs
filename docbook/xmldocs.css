@@ -383,3 +383,52 @@ thead {
 	color: #000;
 	font-weight: bold;
 }
+
+
+/* AUGMENTING DEFINITIONS FOR PRINTING AND PROJECTION */
+
+@media print, projection {
+
+	.titlepage h1 {
+		color: #000;
+	}
+
+	.refentry .refnamediv h2 {
+		color: #000;
+	}
+
+	.refentry .refnamediv p {
+		color: #000;
+	}
+
+	.abstract p.title {
+		color: #000;
+	}
+
+	.titlepage h2.title {
+		color: #000;
+	}
+
+	.filename {
+		border: dashed 1px #000;
+	}
+
+	.varname {
+		color: #000;
+	}
+
+	.pragma {
+		color: #000;
+	}
+
+	.function {
+		border: dashed 1px #000;
+	}
+
+	thead {
+		color: #000; 
+		background-color: gray;
+	} 
+
+}
+
