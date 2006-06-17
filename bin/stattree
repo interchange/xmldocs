@@ -573,6 +573,12 @@ sub wanted {
 	if ( $c{file} eq 'lib/Vend/Config.pm' ) {
 		file_parseVendConfig(\%c, \@filedata);
 	}
+
+	####################################################################
+	# lib/Vend/Interpolate.pm
+	if ( $c{file} eq 'lib/Vend/Interpolate.pm' ) {
+		file_parseVendInterpolate(\%c, \@filedata);
+	}
 }
 
 # Format the context lines before saving to the db.
@@ -819,8 +825,8 @@ sub file_parseVendConfig {
 
 		# Count braces
 		# If this code gets non-working for a particular case,
-		# add support for escapes (negative lookbehind): (?<!\\)
-		# Or even more, the code below in file_extractSub has support for
+		# add support for escapes (using negative lookbehind): (?<!\\)
+		# Or even, the code below in file_extractSub does have support for
 		# correcty parsing {\\} . Bleh ;-)
 		$opens += ( $line =~ s/([\(\[\{])/$1/g );
 		$opens -= ( $line =~ s/([\)\]\}])/$1/g );
@@ -829,17 +835,10 @@ sub file_parseVendConfig {
 		if (! $opens) { # Have read the whole thing
 			$multiline = 0;
 
-			# Discover parse function for a directive
-			$directive =~ m/^\s*\['(.*?)',\s*'(.*?)',/s and
-				file_extractSub($1, "Vend::Config::parse_$2",
-						\%c, {group => $context,name=>$1});
-
 			# Register the directive and do some statistics
 			if ( $context eq 'globconf' ) {
-				push @globconf, [ $directive, $startline ] ;
 				$hash{total}{globconfs}++;
 			} elsif ( $context eq 'catconf' ){
-				push @catconf, [ $directive, $startline ];
 				$hash{total}{catconfs}++;
 			}
 			$hash{total}{confs}++;
@@ -863,7 +862,7 @@ sub file_parseVendConfig {
 	# Well, let's congratulate ourselves.
 
 	for my $itm (@globconf) {
-		my ($ln, $lnum) = @$itm;
+		my ($ln, $lnum, $default) = @$itm;
 		$ln =~ /^\s*\['(\S+?)'/ or die "Can't match global directive name in '$ln'?\n";
 		push @{ $hash{symbols}{globconf}{$1} }, {
 			%c,
@@ -888,7 +887,7 @@ sub file_parseVendConfig {
 		}
 	}
 	for my $itm (@catconf) {
-		my ($ln, $lnum) = @$itm;
+		my ($ln, $lnum, $default) = @$itm;
 		$ln =~ /^\s*\['(\S+?)'/ or die "Can't match catalog directive name in '$ln'?\n";
 		push @{ $hash{symbols}{catconf}{$1} }, {
 			%c,
@@ -905,6 +904,64 @@ sub file_parseVendConfig {
 					ctx_n => 0,
 					%$spath,
 				};
+			}
+		}
+	}
+}
+
+# Parse Interpolate.pm and take out some great stuff ;-)
+sub file_parseVendInterpolate {
+	my %c = %{ (shift) };
+	my $content = shift; # Complete lib/Vend/Interpolate.pm file
+
+	my $linenr = -1;     # Increases as we parse Config.pm (search "MINUS" above)
+#	my $startline;       # Remember first line nr. of context, not last
+#	my $context = "";    # Globconf (global) or catconf (catalog) config array
+	my $run = 1;         # Engine turned on?
+#	my $multiline;       # Directive definition spans multiple lines?
+#	my $opens;           # Open brackets. When 0, complete directive is read
+	my $chunk;           # Chunk of whatever is multilined
+	my $tagname;         # Name of tag being processed
+
+	for my $line (@$content) {
+		$linenr++;
+
+		if ( $line =~ /^sub tag_(\w+) / and !$line =~ /^sub tag_(\w+) \{$/ ) {
+			warn "Tag $1 in Interpolate.pm doesn't have clean beginning.\n";
+		}
+
+		if ( $line =~ /^sub tag_(\w+) \{$/ ) {
+			$tagname = $1;
+			$c{fsubtype} = 'systemtag';
+
+			# Update source statistics
+			$hash{total}{$c{fsubtype} . "s"}++;
+			$hash{total}{tags}++;
+
+			file_extractSub($tagname, "Vend::Interpolate::tag_$tagname",
+					\%c, {group => $c{fsubtype},name=>$1});
+
+			push @{ $hash{symbols}{$c{fsubtype}}{$tagname} }, {
+				%c,
+				file => "$i{ver}/$c{file}",
+				lnum => scalar @{ $c{filedata}},
+				fsubtype => "systemtag",
+				ctx_p => $ctx_p,
+				ctx_n => $ctx_n,
+				ctxs => 1,
+				ctxe => scalar @{ $c{filedata}},
+				ctx => [ format_ctx(@{ $c{filedata}}) ]
+			};
+
+			# Push whole resolved chain; last item is actual function
+			if ( $resolver_path{$c{fsubtype}}{$tagname} ) {
+				while (my $spath=shift @{ $resolver_path{$c{fsubtype}}{$tagname}}){
+					push @{ $hash{symbols}{$c{fsubtype}}{$tagname} }, {
+						ctx_p => 0,
+						ctx_n => 0,
+						%$spath,
+					};
+				}
 			}
 		}
 	}
