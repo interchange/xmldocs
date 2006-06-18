@@ -359,7 +359,7 @@ Unify coding style, if you decide to write everything in Perl directly
 </para>
 
 <para>
-Let's sy we wanted to display user's real name in a page.
+Let's say we wanted to display user's real name in a page.
 Here are three pieces of code, all achieving this effect, but using
 different approaches to produce the result:
 </para>
@@ -624,6 +624,7 @@ searching in general; we can't leave the reader dry -->
 <para>
 On the &PERL; level, before passing attributes to a tag, &IC; parser would
 convert attributes to an anonymous array reference.
+
 </para><para>
 If you were passing the above example directly to a tag named
 <literal>ROUTINE</literal>
