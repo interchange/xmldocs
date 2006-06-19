@@ -1,4 +1,4 @@
-This pragma strips whitespace from the top of &glos-HTML; pages output by &IC.
+This pragma strips whitespace from the top of &glos-HTML; pages output by &IC;.
 Such whitespace usually comes from Interchange tags which get processed and
 leave empty space behind them. The purpose of this pragma is to make
 <emphasis>View source</emphasis> option in your web browser a more
