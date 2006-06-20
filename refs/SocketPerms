@@ -21,8 +21,8 @@ Prepend a starting <literal>0</literal> to indicate an octal value. The
 directive can be overridden from the command line using <literal>interchange
 -r SocketPerms=<replaceable>value</replaceable></literal>.
 </para><para>
-The default value is <literal>0660</literal>, which allows only programs
-running under your &IC; server UID or GID to access the socket.
+The default value is <literal>0600</literal>, which allows only programs
+running under your &IC; server UID to access the socket.
 __END__
 
 __NAME__ notes
