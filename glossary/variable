@@ -1,3 +1,204 @@
+
+In general terms, a <emphasis>variable</emphasis> is "that which is variable; that
+which varies, or is subject to change".
+</para><para>
+In computer terms, variables have a name most of the time, so that you can
+refer to them. For example, variable <literal>$amount</literal> might have
+a value of <literal>10</literal>, and that value may change over time.
+</para><para>
+Basically, all programs work with (a lot of) variables, be it to define
+their behavior or store intermediate results.
+</para><para>
+In &IC;, there are many kinds of variables. We have:
+
+<itemizedlist>
+<listitem><para>
+Global variables
+</para></listitem>
+<listitem><para>
+Catalog variables
+</para></listitem>
+<listitem><para>
+&glos-session; variables
+</para></listitem>
+<listitem><para>
+&glos-scratch; variables
+</para></listitem>
+<listitem><para>
+&glos-CGI; variables
+</para></listitem>
+<listitem><para>
+&glos-value; variables
+</para></listitem>
+</itemizedlist>
+
+Read the respective glossary entries.
+<emphasis role='bold'>This entry only deals with global and catalog
+variables.</emphasis>
+
+</para><para>
+Global and catalog variables are basic ways of storing variable information
+in &IC;.
+They are basically the same, but some of the definitions only make sense
+at global (&IC; server) level, and some only make sense at "local"
+(individual catalog) level. There's also a fallback mechanism available that
+can query the global setting if its instance at catalog level is not set.
+</para><para>
+Of those variables, we further (informally) distinguish between
+"core", "distribution"
+and "&std-catalog;" variables. Core variables are being honored by common,
+underlying &IC; code; distribution variables are honored in our
+<emphasis>out of the box</emphasis> configurations, and &std-catalog;
+variables are being honored in our &std-catalog; demo catalog that we 
+ship along with &IC;.
+
+
+</para><para>
+Look up the &conf-Variable; configuration directive for instructions on
+<emphasis>setting</emphasis> variable values. Look up the &tag-var;
+tag for basic instructions on <emphasis>getting</emphasis> variable values.
+</para><para>
+Global and catalog variables are not normally modified dynamically (they 
+keep their value as set in &gcf; or &ccf;). However, they can be
+manipulated at runtime, in which case you most probably want to do it before
+&IC; puts a requested page into processing. This is best done in an
+&conf-Autoload; routine.
+</para>
+
+<note><para>
+By the way, an &conf-Autoload; routine is what gives your catalog unlimited
+flexibility.
+It made my head spin in disbelief when I first saw some of the &conf-Autoload;
+tricks, and it continues to amuse me to this day.
+If you want to take a quick break from problem at hand, see &glos-configuration;
+glossary entry for an explanation of what happens with configuration directives
+on each page request, and &conf-Autoload; reference page for Autoload-specific
+discussion and examples.
+</para></note>
+
+
+<para>
+When accessing variables, we distinguish between three access types:
+from &glos-ITL; code, from embedded &PERL; code, and from &conf-GlobalSub;s or
+tags.
+</para><para>
+Here's a complete list of ways to access global or catalog variables:
+</para><para>
+
+
+<emphasis role='bold'>In ITL:</emphasis><sbr/>
+<informaltable pgwide='1' frame='none'>
+
+	<tgroup cols='2' align='left'>
+	<colspec colname='how'/><colspec colname='from'/>
+
+	<thead>                                                       
+	<row><entry>Access syntax</entry><entry>Place of definition</entry></row>
+	</thead>
+
+	<tbody>
+		<row>
+			<entry>__<replaceable>VARNAME</replaceable>__</entry>
+			<entry>&ccf;</entry>
+		</row>
+		<row>
+			<entry>@_<replaceable>VARNAME</replaceable>_@</entry>
+			<entry>&ccf;, with fallback to &gcf;</entry>
+		</row>
+		<row>
+			<entry>@@<replaceable>VARNAME</replaceable>@@</entry>
+			<entry>&gcf;</entry>
+		</row>
+		<row>
+			<entry>[var <replaceable>VARNAME</replaceable>]</entry>
+			<entry>&ccf;</entry>
+		</row>
+		<row>
+			<entry>[var <replaceable>VARNAME</replaceable> 1]</entry>
+			<entry>&gcf;</entry>
+		</row>
+		<row>
+			<entry>[var <replaceable>VARNAME</replaceable> 2]</entry>
+			<entry>&ccf;, with fallback to &gcf;</entry>
+		</row>
+	</tbody>
+
+	</tgroup>
+</informaltable>
+
+
+
+<emphasis role='bold'>In embedded Perl:</emphasis><sbr/>
+<informaltable pgwide='1' frame='none'>
+
+	<tgroup cols='2' align='left'>
+	<colspec colname='how'/><colspec colname='from'/>
+
+	<thead>                                                       
+	<row><entry>Access syntax</entry><entry>Place of definition</entry></row>
+	</thead>
+
+	<tbody>
+		<row>
+			<entry>$Variable-&gt;<replaceable>VARNAME</replaceable>}</entry>
+			<entry>&ccf;</entry>
+		</row>
+		<row>
+			<entry>$Tag-&gt;var('<replaceable>VARNAME</replaceable>')</entry>
+			<entry>&ccf;</entry>
+		</row>
+		<row>
+			<entry>$Tag-&gt;var('<replaceable>VARNAME</replaceable>', 1)</entry>
+			<entry>&gcf;</entry>
+		</row>
+		<row>
+			<entry>$Tag-&gt;var('<replaceable>VARNAME</replaceable>', 2)</entry>
+			<entry>&ccf;, with fallback to &gcf;</entry>
+		</row>
+	</tbody>
+
+	</tgroup>
+</informaltable>
+
+
+
+<emphasis role='bold'>In GlobalSub code or usertags:</emphasis><sbr/>
+<informaltable pgwide='1' frame='none'>
+
+	<tgroup cols='2' align='left'>
+	<colspec colname='how'/><colspec colname='from'/>
+
+	<thead>                                                       
+	<row><entry>Access syntax</entry><entry>Place of definition</entry></row>
+	</thead>
+
+	<tbody>
+		<row>
+			<entry>$::Variable-&gt;<replaceable>VARNAME</replaceable>}</entry>
+			<entry>&ccf;</entry>
+		</row>
+		<row>
+			<entry>$Tag-&gt;var('<replaceable>VARNAME</replaceable>')</entry>
+			<entry>&ccf;</entry>
+		</row>
+		<row>
+			<entry>$Tag-&gt;var('<replaceable>VARNAME</replaceable>', 1)</entry>
+			<entry>&gcf;</entry>
+		</row>
+		<row>
+			<entry>$Tag-&gt;var('<replaceable>VARNAME</replaceable>', 2)</entry>
+			<entry>&ccf;, with fallback to &gcf;</entry>
+		</row>
+		<row>
+			<entry>$Global::Variable-&gt;<replaceable>VARNAME</replaceable>}</entry>
+			<entry>&gcf;, and only within &conf-GlobalSub; code</entry>
+		</row>
+	</tbody>
+
+	</tgroup>
+
+</informaltable>
+
 <!-- 
 TODO
 LI1: Global program variables

@@ -1,27 +1,200 @@
-To each new visitor, Interchange assigns an unique
-<firstterm>session ID</firstterm> and (among other things) creates a
+
+When &IC; creates a user &glos-session;, it also initializes the
 <firstterm>scratch space</firstterm> (also referred to as 
 the <emphasis>scratchpad</emphasis>) to hold various variables
 which are valid throughout the session.
-</para>
-<para>
+</para><para>
+By default, the scratch space is created empty. You can define default 
+scratch variables and their values using &conf-ScratchDefault;.
+</para><para>
 Once defined, a scratch variable will exist either until it is explicitly
-deleted, or the session terminates.
-</para>
-<para>
+deleted (most probably using &tag-scratchd; tag) or the session ends.
+The exception are so-called "temp" variables, which are normal scratch
+variables (they live in the scratch space), but are automatically deleted
+when page processing ends. You can use them for saving intermediate results
+that you calculate and display, and then want &IC; to automatically forget.
+</para><para>
 The catalog programmer has complete control over the scratch variables.
 The following tags manipulate the scratch space:
 <tag>set</tag>,
 <tag>seti</tag>,
 <tag>tmp</tag>,
 <tag>tmpn</tag>,
-<tag>scratch</tag>,
-<tag>scratchd</tag>,
-</para>
-<para>
-Scratch variables are also used in form processing. See the 
-<tag>button</tag> tag for examples.
+<tag>scratch</tag> and
+<tag>scratchd</tag>.
+</para><para>
 
 
-<!--
-howto define/call scratch sub -->
+
+Here's a complete list of ways to set scratch variables.
+</para><para>
+
+<emphasis role='bold'>In ITL:</emphasis><sbr/>
+<informaltable pgwide='1' frame='none'>
+
+	<tgroup cols='2' align='left'>
+	<colspec colname='how'/><colspec colname='from'/>
+
+	<thead>                                                       
+	<row><entry>Set syntax</entry><entry>Attributes</entry></row>
+	</thead>
+
+	<tbody>
+		<row>
+			<entry>[set <replaceable>VARNAME</replaceable>]<replaceable>VALUE</replaceable>[/set]</entry>
+			<entry>&glos-ITL; code in value body is not &glos-interpolate;d</entry>
+		</row>
+		<row>
+			<entry>[seti <replaceable>VARNAME</replaceable>]<replaceable>VALUE</replaceable>[/seti]</entry>
+			<entry>&glos-ITL; code in value body is &glos-interpolate;d</entry>
+		</row>
+		<row>
+			<entry>[tmp <replaceable>VARNAME</replaceable>]<replaceable>VALUE</replaceable>[/tmp]</entry>
+			<entry>&glos-ITL; code in value body is &glos-interpolate;d, variable is temporary</entry>
+		</row>
+		<row>
+			<entry>[tmpn <replaceable>VARNAME</replaceable>]<replaceable>VALUE</replaceable>[/tmpn]</entry>
+			<entry>&glos-ITL; code in value body is not &glos-interpolate;d, variable is temporary</entry>
+		</row>
+	</tbody>
+
+	</tgroup>
+</informaltable>
+
+
+
+<emphasis role='bold'>In embedded Perl:</emphasis><sbr/>
+<informaltable pgwide='1' frame='none'>
+
+	<tgroup cols='2' align='left'>
+	<colspec colname='how'/><colspec colname='from'/>
+
+	<thead>                                                       
+	<row><entry>Set syntax</entry><entry>Attributes</entry></row>
+	</thead>
+
+	<tbody>
+		<row>
+			<entry>$Scratch-&gt;{<replaceable>VARNAME</replaceable>} = '<replaceable>VALUE</replaceable>';</entry>
+			<entry>Set value</entry>
+		</row>
+		<row>
+			<entry>$Tag-&gt;tmp('<replaceable>VARNAME</replaceable>');</entry>
+			<entry>Mark scratch variable as temporary, must set a value afterwards</entry>
+		</row>
+	</tbody>
+
+	</tgroup>
+</informaltable>
+
+
+
+<emphasis role='bold'>In GlobalSub code or usertags:</emphasis><sbr/>
+<informaltable pgwide='1' frame='none'>
+
+	<tgroup cols='2' align='left'>
+	<colspec colname='how'/><colspec colname='from'/>
+
+	<thead>                                                       
+	<row><entry>Set syntax</entry><entry>Attributes</entry></row>
+	</thead>
+
+	<tbody>
+		<row>
+			<entry>$::Scratch-&gt;{<replaceable>VARNAME</replaceable>} = '<replaceable>VALUE</replaceable>';</entry>
+			<entry>Set value</entry>
+		</row>
+	</tbody>
+
+	</tgroup>
+</informaltable>
+
+
+</para><para>
+
+
+Here's a complete list of ways to get scratch variables.
+</para><para>
+
+<emphasis role='bold'>In ITL:</emphasis><sbr/>
+<informaltable pgwide='1' frame='none'>
+
+	<tgroup cols='2' align='left'>
+	<colspec colname='how'/><colspec colname='from'/>
+
+	<thead>                                                       
+	<row><entry>Get syntax</entry><entry>Attributes</entry></row>
+	</thead>
+
+	<tbody>
+		<row>
+			<entry>[scratch <replaceable>VARNAME</replaceable>]</entry>
+			<entry>Display value</entry>
+		</row>
+		<row>
+			<entry>[scratchd <replaceable>VARNAME</replaceable>]</entry>
+			<entry>Display value, delete scratch variable</entry>
+		</row>
+	</tbody>
+
+	</tgroup>
+</informaltable>
+
+
+
+<emphasis role='bold'>In embedded Perl:</emphasis><sbr/>
+<informaltable pgwide='1' frame='none'>
+
+	<tgroup cols='2' align='left'>
+	<colspec colname='how'/><colspec colname='from'/>
+
+	<thead>                                                       
+	<row><entry>Get syntax</entry><entry>Attributes</entry></row>
+	</thead>
+
+	<tbody>
+		<row>
+			<entry>$Scratch-&gt;{<replaceable>VARNAME</replaceable>};</entry>
+			<entry>Get value</entry>
+		</row>
+		<row>
+			<entry>$Session->{scratch}{<replaceable>VARNAME</replaceable>};</entry>
+			<entry>Equivalent</entry>
+		</row>
+	</tbody>
+
+	</tgroup>
+</informaltable>
+
+
+
+<emphasis role='bold'>In GlobalSub code or usertags:</emphasis><sbr/>
+<informaltable pgwide='1' frame='none'>
+
+	<tgroup cols='2' align='left'>
+	<colspec colname='how'/><colspec colname='from'/>
+
+	<thead>                                                       
+	<row><entry>Get syntax</entry><entry>Attributes</entry></row>
+	</thead>
+
+	<tbody>
+		<row>
+			<entry>$::Scratch-&gt;{<replaceable>VARNAME</replaceable>};</entry>
+			<entry>Get value</entry>
+		</row>
+		<row>
+			<entry>$::Session->{scratch}{<replaceable>VARNAME</replaceable>};</entry>
+			<entry>Equivalent</entry>
+		</row>
+	</tbody>
+
+	</tgroup>
+</informaltable>
+
+
+</para><para>
+One other predefined use for scratch variables is to hold form processing
+code (code that is executed on users' form submission).
+See the <tag>button</tag> tag for examples.
+
