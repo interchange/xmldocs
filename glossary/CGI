@@ -1,40 +1,186 @@
-Interchange server runs as a daemon on an Unix system, and is typically
-accessed over a communication socket by a web server daemon. In turn,
-the web server is accessed by a client using a web browser.
-</para>
-<para>
-Users can send data back to the web server (and thus, indirectly,
-to the Interchange process it contacts) by submitting HTML forms.
-</para>
-<para>
-For the form submission to be meaningful, it must carry some data, which
-is organized in <literal>
-<replaceable>key</replaceable>=<replaceable>value</replaceable>
-</literal> pairs. The submission happens according to the CGI
-(Common Gateway Interface) specification.
+The HTTP (Web) protocol does not use the same mechanism to send data from 
+server to client, and from client to server. Client to server communication
+must usually happen over CGI (Common Gateway Interface), by having users submit
+&glos-HTML; forms.
 </para><para>
-Those submitted keys (and their associated values) are, now obviously, called
-"CGI variables".
-</para>
-<para>
-CGI variables in &IC; are accessible using the &tag-cgi; tag, but
-<emphasis role='bold'>only</emphasis>
-on a page directly following the form submission. In other words, you can't
-use &tag-cgi; to retrieve a variable submitted at arbitrary past time during
-an user session - that is possible only using &tag-value;.
-</para>
-<para>
-As CGI variables contain user-supplied data, they are obviously of
-great concern from a security standpoint.
-<!-- TODO what to read on the topic -->
-<!-- TODO: IC functionality to deal with CGI data security .. filters etc. -->
-<!--
+Form data submitted usually consists of
+<literal><replaceable>key</replaceable>=<replaceable>value</replaceable></literal>
+pairs. One other option are just values following one another
+(<literal><replaceable>value1</replaceable>+<replaceable>value2</replaceable>+<replaceable>value3</replaceable>...</literal>); those are called 
+"ISINDEX" queries, and are not generally used with &IC;.
+</para><para>
+Form submission can happen in two ways.
+</para><para>
+The "GET" method is very basic, as it
+just embeds form values in the URL being sent to the server. One example of
+a GET query is
+<literal>http://&def-hostname;/cgi-bin/ic/test?mv_arg=1&amp;mv_pc=14</literal>.
+I think it's simple enough to notice variables <literal>mv_arg</literal> and
+<literal>mv_pc</literal> being submitted. The GET method is very convenient
+because all data is embedded in the URL, making it very easy to copy and
+share links with other people.
+</para><para>
+The other method is called POST. This way, the information is sent in a way
+not visible to the user. POST forms have this disadvantage of not being suitable
+for copy-pasting &glos-HTML; links directly, but they do offer greater
+flexibility, especially if a lot of form data is being sent.
+</para><para>
+When forms are submitted using the POST method, they can also embed data
+in the URL, effectively passing both POST and GET data at once. &IC; ignores
+GET data on POST forms, but can be instructed to parse both using the
+&conf-TolerateGet; directive.
+</para><para>
+In the end, it turns out you can just use GET in most situations. It's simpler,
+more convenient, and gets the job done just as well.
+</para><para>
+
+CGI variables in &IC; are accessible using the &tag-cgi; tag, and
+<emphasis role='bold'>only</emphasis> on a page directly following the form
+submission. This is logical, of course. A page request reaches the &IC; daemon,
+and it either has or doesn't have the accompanying form data; there's no 
+"history" mechanism included. (However, &IC; does allow you to save values
+for future reference, usually in the &glos-value; or &glos-scratch; space).
 &IC; is, by default, eager to collect user information, at least for the 
-duration of the session (so they don't have to retype it again).
-When a form is submitted, form values from the <emphasis>directly</emphasis>
-submitted form (and only values from the directly submitted form)
-are accessible by the &tag-cgi; tag. During processing, those variables
-are also propagated to the &glos-value;s space, so they are available 
-to the &tag-value; tag on subsequent requests.
-FormIgnore stops propagation.
--->
+duration of the session (so the users don't have to retype it again).
+During processing, CGI variables are therefore propagated to the &glos-value;s
+space, for subsequent requests. The &conf-FormIgnore; directive specifies
+which CGI variables should not be propagated.
+</para><para>
+
+Users have complete control over CGI data they will send. Therefore, this
+input should never be trusted. It's raw data, and it is a security risk to
+save it in a database or display in a page before sanitization.
+The most common security risk is displaying &glos-HTML; code which allows
+remote scripting exploits like cookie-stealing.
+
+</para><para>
+
+<emphasis role='bold'>Never do something like the following:</emphasis>
+<programlisting>
+[cgi <replaceable>VARNAME</replaceable>]
+</programlisting>
+
+<emphasis role='bold'>or</emphasis>
+
+<programlisting>
+[calc]
+  my $out = $CGI-&gt;{<replaceable>VARNAME</replaceable>};
+  return $out;
+[/calc]
+</programlisting>
+
+Fortunately, &IC; offers a number of ways to take care of the data, usually
+by &glos-filter;ing it.  For more discussion and
+help on filtering, see the &glos-filter; glossary entry.
+A safe no-brainer approach is to just use the
+&filter-encode_entities; filter on the input.
+
+</para><para>
+<emphasis role='bold'>So, to obtain a "safe" value while keeping
+the original intact, use:</emphasis>
+<programlisting>
+[cgi name=<replaceable>VARNAME</replaceable> filter=entities]
+</programlisting>
+
+<emphasis role='bold'>or</emphasis>:
+
+<programlisting>
+[filter entities][cgi <replaceable>VARNAME</replaceable>][/filter]
+</programlisting>
+
+<emphasis role='bold'>or</emphasis>:
+
+<programlisting>
+[calc]
+  my $out = $Tag-&gt;cgi({ name => '<replaceable>VARNAME</replaceable>', filter => 'entities' });
+  return $out;
+[/calc]
+</programlisting>
+
+<emphasis role='bold'>or</emphasis>:
+
+<programlisting>
+[calc]
+  my $out = $Tag-&gt;filter($CGI-&gt;<replaceable>VARNAME</replaceable>, 'entities');
+  return $out;
+[/calc]
+</programlisting>
+
+</para><para>
+One interesting feature in &IC; is that you can set CGI values yourself.
+This has two common uses. You can set a value and pretend as
+if it was sent by the user (so the rest of your code doesn't need to split
+in two execution paths, depending on whether the variable was set or not).
+Another thing you can do, is set special CGI variables (the
+<literal>mv_*</literal> ones that affect how &IC; processes the page) and let
+&IC; do its magic. Heck, not only you can set them once, but you can change
+their value <emphasis>during</emphasis> processing, achieving different
+behavior in different parts of the page.
+
+</para><para>
+You can set values by providing
+<literal>set=<replaceable>VALUE</replaceable> hide=1</literal> attributes
+to the &tag-cgi; tag, or by simple assignment in Perl
+(<code>$CGI->{<replaceable>VARNAME</replaceable>} = '<replaceable>VALUE</replaceable>'</code>).
+
+
+</para><para>
+Here's a complete list of ways to access CGI variables:
+</para><para>
+
+<emphasis role='bold'>In ITL:</emphasis><sbr/>
+<informaltable pgwide='1' frame='none'>
+
+	<tgroup cols='2' align='left'>
+	<colspec colname='how'/><colspec colname='from'/>
+
+	<thead>                                                       
+	<row><entry>Access syntax</entry><entry>Notes</entry></row>
+	</thead>
+
+	<tbody>
+		<row>
+			<entry>[cgi <replaceable>VARNAME</replaceable>]</entry>
+			<entry>Doesn't prevent users from injecting &glos-ITL; code; 
+			<emphasis role='bold'>don't use it!</emphasis></entry>
+		</row>
+		<row>
+			<entry>[cgi name=<replaceable>VARNAME</replaceable> filter=entities]</entry>
+			<entry>A safe and correct way to go</entry>
+		</row>
+	</tbody>
+
+	</tgroup>
+</informaltable>
+
+
+
+<emphasis role='bold'>In embedded Perl:</emphasis><sbr/>
+<informaltable pgwide='1' frame='none'>
+
+	<tgroup cols='2' align='left'>
+	<colspec colname='how'/><colspec colname='from'/>
+
+	<thead>                                                       
+	<row><entry>Access syntax</entry><entry>Notes</entry></row>
+	</thead>
+
+	<tbody>
+		<row>
+			<entry>$CGI-&gt;{<replaceable>VARNAME</replaceable>}</entry>
+			<entry>Retrieves raw CGI value; <emphasis role='bold'>don't use
+			before &glos-filter;ing</emphasis></entry>
+		</row>
+		<row>
+			<entry>$Tag-&gt;cgi({ name =&gt; '<replaceable>VARNAME</replaceable>', filter =&gt; 'entities' });</entry>
+			<entry>A safe and correct way to go</entry>
+		</row>
+		<row>
+			<entry>$Tag-&gt;filter($CGI-&gt;{<replaceable>VARNAME</replaceable>}, 'entities');</entry>
+			<entry>A safe and correct way to go</entry>
+		</row>
+	</tbody>
+
+	</tgroup>
+</informaltable>
+
