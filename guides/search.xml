@@ -56,7 +56,9 @@
 	by &SWISH-E;.
 	</para>
 
-	<para>
+	<section>
+	  <title>Swish-e Integration</title>
+	  <para>
 	To enable any Swish searching, modify your &gcf; to add:
 <programlisting>
 Require module Vend::Swish
@@ -72,7 +74,12 @@ Swish command /usr/bin/swish-e
 Swish index products/swish-e.db
 </programlisting>
 	</para>
+	</section>
 
+	<section>
+	  <title>Setup Searches</title>
+	  </section>
+	
 	<para>
 	Finally, in search parameters, use <literal>mv_searchtype=swish</literal> or
 	the shorthand notation <literal>st=swish</literal>.
