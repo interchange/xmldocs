@@ -107,9 +107,13 @@ mv_field_names==code score title url mod_date filesize
 <section>
 <title>Commandline Examples</title>
 <para>
-Simple search for the term Interchange:
+Simple search for the term Swish:
 <programlisting>
-swish-e -w Interchange
+swish-e -w Swish
+</programlisting>
+Same search with specifying the index file:
+<programlisting>
+swish-e -w Swish -f db/mailinglists
 </programlisting>
 </para>
 </section>
