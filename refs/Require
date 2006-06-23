@@ -21,8 +21,8 @@ a feature or capability. When the tested feature is missing, a
 catalog is <emphasis role='bold'>not</emphasis> configured and included
 in global configuration.
 </para><para>
-This is useful when transporting catalogs to different locations, to make
-sure they will have all the needed facilities available.
+This is useful to ensure that needed facilities are present, especially if 
+you run the catalog on different locations.
 </para><para>
 "Capabilities" you can check for are
 <literal>globalsub</literal>,
@@ -30,6 +30,10 @@ sure they will have all the needed facilities available.
 <literal>taggroup</literal>,
 <literal>usertag</literal> and
 <literal>module</literal> .
+</para>
+<para>
+This directive can also used to explicitly load modules. If you append
+a directory name, this will added to the Perl module search path.
 __END__
 
 __NAME__ example: Requiring features
@@ -40,3 +44,8 @@ Require globalsub file_info
 </programlisting>
 __END__
 
+__NAME__ example: Loading module with expanded search path
+<programlisting>
+Require module Vend::Swish /usr/lib/swish-e/perl
+</programlisting>
+__END__
