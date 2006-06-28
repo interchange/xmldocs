@@ -91,7 +91,7 @@ Swish index products/swish-e.db
 
 <programlisting>
 mv_return_fields=code score title url mod_date filesize
-mv_field_names==code score title url mod_date filesize
+mv_field_names=code score title url mod_date filesize
 </programlisting>
 
 	These correspond to:
@@ -104,6 +104,15 @@ mv_field_names==code score title url mod_date filesize
   mod_date  swishlastmodified
 </programlisting>
 	</para>
+<para>The date in the <literal>mod_date</literal> field is returned in the
+format <literal>%Y-%m-%d %H:%M:%S</literal>.
+<para>You can change that with the <literal>date_format</literal> option:
+</para>
+<programlisting>
+Swish date_format "%d %b %Y"
+</programlisting>
+See &glos-time; for possible format strings.
+</para>
 <section>
 <title>Commandline Examples</title>
 <para>
