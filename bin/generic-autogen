@@ -29,7 +29,7 @@ my %ln = ( # long name
 
 my %header = ( # item head
 	glossary => "<glossentry id=\"\$file\">
-<glossterm>\$file</glossterm>
+<glossterm>\$visible_name</glossterm>
 
 <glossdef><para>
 ",
@@ -80,12 +80,13 @@ readdir DIR; readdir DIR;
 while ( my $file = readdir DIR ) {
 	next if $file =~ /^\.|^CVS|\.xml$/;
 	open IN, "< $cat/$file" or die "Can't read-open $cat/$file ($!)\n";
+
+	( my $visible_name = $file ) =~ s/-/ /g;
 	$items{$file} = [ prefix($cat, $file), <IN>, suffix($cat, $file) ];
 	$alphabet{ lc(substr($file, 0, 1)) }++;
 	push @loaded, $file;
 
-	my $lcfile = lc $file;
-	my $link = "<olink targetdoc='$cat' targetptr='$file'/>";
+	my $link = "<olink targetdoc='$cat' targetptr='$file'>$visible_name</olink>";
 	my $more = $cat eq 'howtos' ? " $ln{$cat}" : "";
 
 	print ENT <<ENDO;
@@ -141,7 +142,7 @@ print OUT $document;
 close OUT or warn "Cant close $cat/$cat.xml ($!)\n";
 
 # Print out missing list
-print "GEN: tmp/mising2\n";
+print "GEN: tmp/missing2\n";
 open OUT, "> tmp/missing2" or
 die "Can't wropen tmp/missing2 ($!)\n";
 print OUT Dumper \%invalid;
@@ -155,6 +156,7 @@ exit 0;
 
 sub prefix {
 	my ($cat, $file) = @_;
+	( my $visible_name = $file ) =~ s/-/ /g;
 	if ( $header{$cat} ) {
 		my $tmp = $header{$cat};
 		$tmp =~ s/(\$\w+)/$1/gee;
@@ -165,6 +167,7 @@ sub prefix {
 
 sub suffix {
 	my ($cat, $file) = @_;
+	( my $visible_name = $file ) =~ s/-/ /g;
 	if ( $footer{$cat} ) {
 		my $tmp = $footer{$cat};
 		$tmp =~ s/(\$\w+)/$1/gee;

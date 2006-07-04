@@ -14,7 +14,8 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Ordered list of particular product files to search. If unspecified, all
+	tables defined as &conf-ProductFiles; will be searched.
 	</entry>
 
 </row> 

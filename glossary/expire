@@ -1,0 +1,77 @@
+User &glos-session;s in Interchange are usually kept as files in the 
+<filename class='directory'>session/</filename> directory (or inside
+a DBM database) for each &glos-catalog;. Since session
+data is not deleted after sessions end (or timeout), periodic expiring
+needs to be set up to keep the session database or session files from growing
+too large and wasting disk space.
+</para><para>
+There's no worry that expiring will do any harm, because all our scripts
+only clean up unused sessions. Active users will not notice any change.
+</para><para>
+The simplest way to expire catalog's session files is to run
+<command>expire -c <replaceable>CATALOG_NAME</replaceable></command>.
+</para><para>
+For convenience, there is also <command>expireall</command> script which
+reads all catalog entries in &gcf; and runs <command>expire</command> on them.
+</para><para>
+The <command>expire</command> script accepts a <literal>-r</literal> option
+which tells it to reorganize database files and recover lost disk space.
+</para><para>
+On a UNIX server, it's most useful to run <command>expireall</command>
+from <literal>crontab</literal>. As the &IC; user, run
+<command>crontab -e</command> to edit crontab data, and enter something like:
+<programlisting>
+# once a day at 4:40 am
+40 4 * * *    /PATH/TO/perl /PATH/TO/INTERCHANGE/bin/expireall -r
+</programlisting>
+</para>
+<note>
+<para>
+If a session saved search paging files in &conf-ScratchDir;, they would 
+be deleted too.
+</para>
+</note>
+
+<para>
+When file-based sessions are used (no DBM), then you can use a custom
+script like this:
+
+<programlisting><![CDATA[
+#!perl
+# expire_sessions.pl -- delete files 2 days old or older
+# invoke as: /PATH/TO/perl expire_sessions.pl /PATH/TO/CATALOG/session/ ...
+
+my @files;
+my $dir;
+foreach $dir (@ARGV) {
+	 # just push files on the list
+	 if (-f $dir) { push @files, $_; next; }
+
+	 next unless -d $dir;
+
+	 # get all the file names in the directory
+	 opendir DIR, $dir or die "opendir $dir: $!\n";
+	 push @files, ( map { "$dir/$_" } grep(! /^\.\.?$/, readdir DIR));
+}
+
+for (@files) {
+	 unless (-f $_) {
+			 warn "skipping $_, not a file.\n";
+			 next;
+	 }
+	 next unless -M $_ >= 2;
+	 unlink $_ or die "unlink $_: $!\n";
+}
+]]></programlisting>
+This script can be adjusted as necessary. Refinements might include reading
+the file to "eval" the session reference and expire only customers who are not 
+registered members.
+</para><para>
+If your files get chown-ed to root every day, then you probably used root's
+instead of &IC; user's crontab file. Either move the crontab to the 
+&IC; user, or use <command>su</command> to swith users from the root
+account:
+<programlisting>
+44 4 * * * su -c "/PATH/TO/INTERCHANGE/bin/expireall -r" IC_USERNAME
+</programlisting>
+

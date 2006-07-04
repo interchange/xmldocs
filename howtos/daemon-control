@@ -5,6 +5,14 @@ Control Interchange Daemon Process
 Knowing how to manage the Interchange daemon is one of the very basic
 administration tasks.
 </para><para>
+You can test the configuration without interrupting the running processes
+bu invoking:
+<itemizedlist>
+	<listitem><para>
+		<userinput>/usr/sbin/interchange -test</userinput>
+	</para></listitem>
+</itemizedlist>
+</para><para>
 Interchange is (re)started by invoking:
 </para>
 <itemizedlist>

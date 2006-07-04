@@ -47,16 +47,22 @@
 		</para><para>
 		While the concepts will be properly explained and elaborated on,
 		the intention is to make this document a collection of pointers
-		to other documentation that is, among other times, relevant
-		during installation.
+		to other parts of &IC; documentation.
 		</para><para>
-		The Guide is intended for people who want to install &IC; from 
-		generic tarballs. People installing from distribution-specific
+		People installing from distribution-specific
 		packages (Debian GNU, Red Hat-based platforms, Gentoo, ...) do
 		not need a guide this comprehensive &mdash; the package maintainers
-		have taken care of most of the decisions themselves.
+		have already taken care of most of the issues.
 		</para><para>
-		Those impatient or familiar with Unix administration and software
+		The Guide is intended for people who want to install &IC; from 
+		generic tarballs. You might want to prefer tarballs over 
+		distribution-specific packages if you are either using a non-standard
+		platform, or want to always access the latest releases (when 
+		distribution-specific packages are laggign behind).
+		<emphasis role='bold'>So far, it seems the tarballs are the 
+		cleanest and most preferred installation method.</emphasis>
+		</para><para>
+		Those impatient or already familiar with Unix administration and software
 		installations, might want to directly go unpacking the tarball and
 		running <command>perl Makefile.PL; make; make test &amp;&amp;
 		make install</command> in there.
@@ -142,7 +148,7 @@ $ /path/to/perl -MCPAN -e 'install "Bundle::InterchangeKitchenSink"'
 	<sect2 id='compiler'>
 		<title>C compiler</title>
 		<para>
-		&IC; uses the so-called "link program" to provide a link between
+		&IC; uses the so-called "&glos-link-program;" to provide a link between
 		the web and Interchange servers. It is, in fact, a very simple C
 		program that is installed as a CGI script and that passes parameters
 		back and forth.
@@ -219,11 +225,10 @@ $ /path/to/perl -MCPAN -e 'install "Bundle::InterchangeKitchenSink"'
 		</para>
 		<para>
 		If you do not employ an SQL database, &IC; will use &GDBM; or 
-		&BDBM;, depending on what it finds on the system. Yet another option
-		is SDBM, but it is severely handicapped &mdash; it does not support
-		values bigger than 2048 bytes, and at least two of our demo catalog
-		databases have problems with it out-of-the-box. Since early 2006, 
-		&IC; no longer considers SDBM an option, unless it is explicitly told so.
+		&BDBM;, depending on what it finds on the system.
+		Yet another option is &glos-SDBM;, but it is severely limited in
+		functionality and is not selected unless explicitly specified by the
+		user.
 		</para>
 	</sect2>
 
@@ -306,7 +311,7 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	your best bet is to visit our
 <ulink url="http://www.icdevgroup.org/i/dev/users/community">community</ulink>
 	page and drop by on IRC, or post your problem to
-	the users mailing list.
+	the users mailing list (see &PUBLIC_MLS; page).
 	</para>
 </sect1>
 

@@ -1,0 +1,147 @@
+<?xml version="1.0" standalone="no"?>
+
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+	"../docbook/docbookxi.dtd">
+
+<article id='release'>
+
+<articleinfo>
+	<title>Interchange Guides: Installation</title>
+	<titleabbrev>release</titleabbrev>
+
+	<copyright>
+		<year>2006</year>
+		<holder>Interchange Development Group</holder>
+	</copyright>
+	<copyright>
+		<year>2006</year>
+		<holder>Davor Ocelic</holder>
+	</copyright>
+
+	<authorgroup>
+		<author>
+			<firstname>Davor</firstname><surname>Ocelic</surname>
+			<email>docelic@icdevgroup.org</email>
+		</author>
+	</authorgroup>
+
+	<legalnotice>
+		<para>
+		This documentation is free; you can redistribute it and/or modify
+		it under the terms of the &GNU; General Public License as published by
+		the Free Software Foundation; either version 2 of the License, or
+		(at your option) any later version.
+		</para>
+		<para>
+		It is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+		</para>
+	</legalnotice>
+
+	<abstract>
+		<para>
+		The purpose of this document is to provide a complete list of 
+		tasks to perform in preparation of &IC; release.
+		</para>
+	</abstract>
+
+</articleinfo>
+
+
+<sect1 id='pre'>
+	<title>Pre</title>
+
+	<para>
+	</para>
+</sect1>
+
+<sect1 id='interchange'>
+	<title>Interchange</title>
+
+	<para>
+	</para>
+</sect1>
+
+<sect1 id='docs'>
+	<title>Documentation</title>
+
+	<para>
+	</para>
+</sect1>
+
+<sect1 id='website'>
+	<title>Website</title>
+
+	<para>
+	</para>
+</sect1>
+
+<!--
+
+RELEASING A NEW VERSION OF INTERCHANGE
+$Id: release.xml,v 1.1 2006-07-04 22:24:42 docelic Exp $
+
+
+Pre-release:
+
+Check WHATSNEW against CVS logs, add release date
+Update copyright dates as appropriate if new year since last release
+Make sure version numbers are correct in all files:
+	README
+	README.rpm-dist
+	configure
+	Makefile.PL
+	scripts/interchange.PL
+	dist/foundation/products/mv_metadata.asc (ui-version)
+	SPECS/interchange.spec
+Double-check MANIFEST (create using LC_ALL=C)
+Do a clean checkout from CVS to make sure no sticky tags exist in local checkout
+Tag or re-tag CVS repository with REL_4_6_3 (or whatever)
+Run regression test catalog
+Build tarball and note MD5 sum
+Build RPMs
+Test clean install of Foundation demo, place order, use admin
+Build docs tarball & RPMs (for stable releases)
+Sign RPMs with personal GnuPG key
+Have Racke build and sign Debian packages (using same tarball so MD5 sum is identical)
+Have people test the packages
+Make md5sums to mention in release notes, and in files on FTP server
+
+
+Upload tarball, RPMs, README, WHATSNEW to:
+
+root@ftp.icdevgroup.org:/var/ftp/pub/interchange...
+Update interchange-latest.tar.gz symlinks for stable releases
+Rename README to README.txt so Apache will display it
+Rename README.rpm-dist to README.txt in rpm directory
+Update WHATSNEW file to latest (no need to keep old ones in same branch, as their contents are still included in the latest file)
+
+
+Update developer website:
+
+http://www.icdevgroup.org/i/dev/index.html
+http://www.icdevgroup.org/i/dev/download.html
+
+
+Make announcements at:
+
+interchange-users@icdevgroup.org
+interchange-announce@icdevgroup.org
+Freshmeat.net
+
+
+Update demo stores, one editable, one static:
+
+http://demo.icdevgroup.org/
+
+
+Post-release:
+
+Fork off stable branch if second version component is even, e.g. 4.8.0:
+tag STABLE_4_8-root, branch STABLE_4_8-branch.
+-->
+
+</article>
+

@@ -25,7 +25,7 @@ $ag{"synopsis"}
 </refsect1>
 
 <refsect1 id='$ag{"name"}_type'>
-<title>DIRECTIVE TYPE</title>
+<title>DIRECTIVE TYPE AND DEFAULT VALUE</title>
 <para>$ag{"directive type"}</para>
 </refsect1>
 

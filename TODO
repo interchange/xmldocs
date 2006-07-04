@@ -1,17 +1,6 @@
 - in iccattut, s/item-field/item-param/ at least on some places. 
 - Make xmldocs tarball in ftp autoupdated
 - Change -latest to version number in tarball download
-- In iccattut examples (files/*), replace catalog setting of ErrorFile,
-  TrackFile and similar directives with relative filenames. Also see how
-  Jon's file layout restructuring affects the examples
-- In reference pages, make special string, such as __FNAME__, that expands
-  to name of the filename. Will speed up writing and eliminate errors such
-  as copying "Setting ErrorFile" and forgetting to replace ErrorFile with
-  another name. (With this option, both files would just have
-  "Setting __FNAME__", and would magically work).
-- Parse default value for config directives (at least in cases where the
-  value is a simple oneliner), and display it as a special field in the
-  reference page.
 - bin/whatsnew-update didn't pick up User: from messages
 
 Outstanding:
@@ -33,9 +22,6 @@ Outstanding:
 - Under AUTHORS, include cvs line where appropriate (guides, howtos, gloss... )
 - In vars.html, include line if it appears in variable.txt
 - why email, email-raw, SendMailProgram produce errors about usertags olink ID
-- Add docbook element to reference mailing list posts. Something like
-  <ml list='users'>2004-December/041539</ml>, it expands to:
-	<ulink url="http://www.icdevgroup.org/pipermail/interchange-users/2004-December/041539.html">2004-December/041539</ulink>.
 - match style (no starting verb or all starting verbs) in all Example titles
 - check if all Default fields are properly formated (<literal> or none)
 - make regexp matching better, to properly scan parse_subroutine(); (gets
@@ -49,31 +35,13 @@ Coding:
 - script to [un]comment debug lines!!
 - use Interchange.pm to make an Interchange shell (External.pm!)
 - finish ML stats <-- MAILPOND on ocelic2! 
-
-DOCUMENTATION SYSTEM:
-- Add support to document tags which are NOT found in separate files
-  (like [restrict] or [subject]).
-
-TODO: Create a pre-processor for the "docbook/docbookxi.dtd" and
-"docbook/olinkdb*xml" files that would automatically discover the path to
-the "docbookx.dtd" and "targetdatabase.dtd" files.  Running a find(1) in
-"/usr/share" should do the trick on most GNU/Linux OSs, and will remove
-the need for distro-specific patches that will quickly grow stale due
-to package version number changes.
+- script to manipulate file headers
 
  Mid-term:
-- Ask ndw about including [NEW!] and [TODO!] in titles in TOC. --> This is a 
-  bug and it will work when they fix it.
-- &glos-hello-world needs to give "hello world", not "hello-world" as text
 - List of mv_s, descriptions and shortcuts
 - for "online" docs, also provide a form where users can add comments or
   ask for clarification. (this could be done with either pure IC (forum?), or 
   XML forms capability, or wiki?)..
-- in html, make source contexts "rollable" by either using some css
-  properties or javascript. this is not really needed when you only have
-  say, 15 lines of context, but it'll come great when you have a copy
-  of a 300-lines usertag. Example for this could be taken directly out of
-  mwforum demo on mwforum.org
 - Generate leaf nodes (put bin/mkreport back in action)
 - If filter returns Vend::xxx::something(), include that function in context
   reports, and try to determine the "Uses" field (which also needs to be

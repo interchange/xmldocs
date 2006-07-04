@@ -1,0 +1,18 @@
+SDBM is an of in-file, non-&glos-SQL; database (similar to GDBM).
+</para><para>
+&IC; must work with some kind of a database. When no SQL database is 
+specified, database source files (text) are still stored in a database,
+even though it's a file-based one (GDBM or similar) and requires no
+special setup from the user.
+</para><para>
+For in-file database backend, &IC; will either use &GDBM; or &BDBM;, depending
+on what it finds on the system.
+</para><para>
+Yet another option was SDBM, but it is severely handicapped &mdash; it does
+not support values bigger than 2048 bytes and at least two of our demo
+catalog databases fail to load for that reason.
+</para><para>
+Since early 2006, Interchange no longer considers SDBM an option, unless it is
+explicitly told so. You can explicitly instruct &IC; to use SDBM backend
+for particular databases, but that is not encouraged and SBDM should not
+be used.

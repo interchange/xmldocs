@@ -409,20 +409,12 @@ thead {
 		color: #000;
 	}
 
-	.filename {
-		border: dashed 1px #000;
-	}
-
 	.varname {
 		color: #000;
 	}
 
 	.pragma {
 		color: #000;
-	}
-
-	.function {
-		border: dashed 1px #000;
 	}
 
 	thead {
