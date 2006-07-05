@@ -30,6 +30,7 @@ Outstanding:
 - import my hand-made test from /var/lib/.../pages/* to appropriate
   ref pages as online examples
 - At least in filters, <<EOR messes up the thing, only < is printed and stops
+- &conf-RobotLimit; doesn't link to RobotLimit configuration page
 
 Coding:
 - script to [un]comment debug lines!!
