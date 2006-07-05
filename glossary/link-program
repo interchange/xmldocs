@@ -153,8 +153,8 @@ $ gcc tlink.c -o ../bin/tlink
 </para><para>
 The problem with the above approach, however, is that you might be missing
 critical compiler options, or that the compiler isn't <command>gcc</command>
-at all. To ensure that the C compiler will be invoked properly, help yourself
-with this little ditty:
+at all. To ensure that the C compiler will be invoked properly, use the
+following little ditty instead of the two <command>gcc</command> lines:
 <programlisting><![CDATA[
 perl -e 'do "syscfg"; system("$CC $LIBS $CFLAGS $DEFS vlink.c -o ../bin/vlink");'
 perl -e 'do "syscfg"; system("$CC $LIBS $CFLAGS $DEFS tlink.c -o ../bin/tlink");'
@@ -256,7 +256,7 @@ written in &PERL; and should work on a really broad range of systems.
 In any case, unless you are using <filename>tlink.pl</filename> for a 
 specific reason, and you do have a working compiler, tuning the C source
 files to overcome compilation problems is preferred over using
-Perl implementation of <literal>tlink</literal>.
+Perl implementation of the link program.
 </para>
 </section>
 

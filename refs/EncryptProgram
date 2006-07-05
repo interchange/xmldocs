@@ -55,6 +55,12 @@ EncryptProgram /usr/local/bin/gpg -feat orders@&def-domain;
 </programlisting>
 __END__
 
+__NAME__ example: Specifying EncryptProgram with full path and arguments
+<programlisting>
+EncryptProgram /usr/bin/pgpe -fat -r orders@&def-domain;
+</programlisting>
+__END__
+
 __NAME__ missing
 PORT_OLD
 __END__

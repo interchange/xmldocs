@@ -15,7 +15,8 @@ For convenience, there is also <command>expireall</command> script which
 reads all catalog entries in &gcf; and runs <command>expire</command> on them.
 </para><para>
 The <command>expire</command> script accepts a <literal>-r</literal> option
-which tells it to reorganize database files and recover lost disk space.
+which, when DBM sessions are used, tells the script to reorganize database
+files and recover lost disk space.
 </para><para>
 On a UNIX server, it's most useful to run <command>expireall</command>
 from <literal>crontab</literal>. As the &IC; user, run
@@ -35,6 +36,10 @@ be deleted too.
 <para>
 When file-based sessions are used (no DBM), then you can use a custom
 script like this:
+
+<!-- TODO how come we call -f and then -d. As far as I know, both can't
+succeed for the same file. Also include a note on cleaning tmp/ and 
+the find | xargs lines -->
 
 <programlisting><![CDATA[
 #!perl

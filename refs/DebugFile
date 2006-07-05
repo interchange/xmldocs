@@ -36,7 +36,9 @@ defined.
 Also, as the <function>::logDebug()</function> statements are disabled
 (commented) 
 by default in Interchange sources, you'll probably want to use a special
-script for managing debug statements.
+script for managing debug statements, or manually uncomment parts of 
+debugging code in question (and restart Interchange, of course &mdash;
+see &howto-daemon-control;).
 __END__
 
 __NAME__ example: Setting DebugFile

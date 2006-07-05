@@ -119,9 +119,9 @@ it's not found go to the usual <filename>pages/index.html</filename>.
 	We've said &conf-HTMLsuffix; is locale-sensitive, but the story gets 
 	much better. In reality, any &conf-Locale; key that matches the name of a
 	config directive, causes the directive to be re-set on locale change &mdash;
-	in other words, all config directives are locale-sensitive! (And now I
-	know you know I am no fan of exclamation marks, but can you say this feature
-	isn't just ingenious?!).
+	in other words, all config directives are locale-sensitive!
+	<!-- TODO not all are locale-sensitive. Come up with a list of those
+	that are -->
 	</para>
 </note>
 </section>

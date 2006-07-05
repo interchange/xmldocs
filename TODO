@@ -2,6 +2,7 @@
 - Make xmldocs tarball in ftp autoupdated
 - Change -latest to version number in tarball download
 - bin/whatsnew-update didn't pick up User: from messages
+- some <am> is visible in feature glossary entry
 
 Outstanding:
 =======

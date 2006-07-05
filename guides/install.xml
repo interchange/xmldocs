@@ -202,6 +202,8 @@ $ /path/to/perl -MCPAN -e 'install "Bundle::InterchangeKitchenSink"'
 		is located. Also make sure to have write access to it.
 		Each catalog's link program will find its place somewhere beneath it.
 		</para>
+		<!-- TODO mention https and give apache example that would work if
+		paths are adjusted -->
 	</sect2>
 
 	<sect2 id='db'>
