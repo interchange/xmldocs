@@ -110,14 +110,13 @@ If you want to display the discount amount to the user, simply use the
 __END__
 
 
-__NAME__ example: Displaying the discounted subtotal
-<!-- TODO verify this and clarify description -->
-When you want to display the discounted subtotal, you need to
+__NAME__ example: Displaying the total discount
+When you want to display the total discount for an item, you need to
 use &tag-calc;:
 
 <programlisting>
 [item-list]
-Discounted subtotal for [item-code]: [currency][calc]
+Total discount applied to [item-code] is: [currency][calc]
                                        [item-discount noformat=1] * [item-quantity]
                                      [/calc][/currency]
 [/item-list]
