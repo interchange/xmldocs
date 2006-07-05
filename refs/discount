@@ -118,7 +118,7 @@ use &tag-calc;:
 <programlisting>
 [item-list]
 Discounted subtotal for [item-code]: [currency][calc]
-                                       [item-discount] * [item-quantity]
+                                       [item-discount noformat=1] * [item-quantity]
                                      [/calc][/currency]
 [/item-list]
 </programlisting>
