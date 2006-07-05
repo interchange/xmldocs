@@ -16,6 +16,12 @@ to handle certain events or conditions.
 Supported events are
 <itemizedlist>
 <listitem><para>
+  <literal>init_session</literal> &mdash; event triggered at the
+  &glos-session; creation time.
+  The subroutine is called with the pointer to the newly created
+  &glos-session; variables space. Subroutine return value is not used.
+</para></listitem>
+<listitem><para>
   <literal>missing</literal> &mdash; event triggered on a requested &IC;
   page missing event.
   The subroutine is called with the name of the page missing.
@@ -26,12 +32,6 @@ Supported events are
   will not be executed.
   Optionally, the function can return a list consisting of the true value
   and the page name that is to be displayed to the user.
-</para></listitem>
-<listitem><para>
-  <literal>init_session</literal> &mdash; event triggered at the
-  &glos-session; creation time.
-  The subroutine is called with the pointer to the newly created
-  &glos-session; variables space. Subroutine return value is not used.
 </para></listitem>
 <listitem><para>
   <literal>guess_cc_type</literal> &mdash; event triggered at the time
