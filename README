@@ -36,8 +36,7 @@ release, such as 5.0.0 or 5.2.0. To do so, use TARGET_RELEASE env variable:
 
   TARGET_RELEASE="--last 5.2.0" make refxmls
 
-As shown above, this is only needed in the 'make refxmls' step, but if
-you're just calling 'make', it's fine as well.
+Just make sure to have TARGET_RELEASE defined on each 'make' invocation.
 
 **  -- -- --   -- -- -- --   -- -- -- --   -- -- -- --   -- -- -- --  **
 

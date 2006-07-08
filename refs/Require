@@ -32,8 +32,9 @@ you run the catalog on different locations.
 <literal>module</literal> .
 </para>
 <para>
-This directive can also used to explicitly load modules. If you append
-a directory name, this will added to the Perl module search path.
+This directive can also used to implicitly load &PERL; modules. If you add
+a directory name as a fourth argument, the directory will included in Perl's
+module search path.
 __END__
 
 __NAME__ example: Requiring features

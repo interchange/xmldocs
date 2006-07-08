@@ -24,8 +24,9 @@ Supported events are
 <listitem><para>
   <literal>lockout</literal> &mdash; event triggered for locking out a
   bad robot (see &conf-RobotLimit;). The subroutine is called without
-  parameters. The return value indicates whether the standard lockout
-  procedure should be skipped (true value) or not (false value).
+  parameters. A &glos-true; subroutine return value indicates that the
+  default, built-in lockout action should be skipped. A &glos-false; value 
+  resumes with the default action, by calling &conf-LockoutCommand;.
 </para></listitem>
 <listitem><para>
   <literal>missing</literal> &mdash; event triggered on a requested &IC;

@@ -1,1 +1,2 @@
-No debugging options are enabled by default in &IC;.
+No debugging options are enabled by default in &IC;. See &conf-DebugFile; for
+a quick introduction to enabling debug messages.
