@@ -1088,6 +1088,15 @@ sub populate {
 			my ( $section, $title, $pre_content, $content, $post_content );
 			# XXX check if it's empty, then don't update
 			for my $line (@c) {
+
+				# GLOBAL REPLACE. To ease writing reference pages, __FNAME__ 
+				# will expand to name of file. So, if file is refs/CommonAdjust,
+				# __FNAME__ will expand to CommonAdjust. XXX this only works
+				# in one-file method. Not multi-file method, but as said a few
+				# times above, multi-file is not to be used any more.
+				( my $_fname = $refpath ) =~ s#.*/##;
+				$line =~ s/__FNAME__/$_fname/;
+
 				# Here we support format of this kind:
 				# __NAME__ section name: section title
 				# The 'title' part will be automatically wrapped in a 
