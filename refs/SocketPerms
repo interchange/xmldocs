@@ -23,6 +23,11 @@ directive can be overridden from the command line using <literal>interchange
 </para><para>
 The default value is <literal>0600</literal>, which allows only programs
 running under your &IC; server UID to access the socket.
+</para><para>
+Another possible setting is <literal>0666</literal> if other programs needs
+to access the socket file, e.g. Apache2 via mod_perl and Interchange::Link.
+Please note that this setting is insecure, it allows every user on the system
+to communicate through the socket.
 __END__
 
 __NAME__ notes
