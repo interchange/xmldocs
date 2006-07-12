@@ -31,4 +31,18 @@ SafeUntrap
 </programlisting>
 __END__
 
+__NAME__ example: Allowing -s function to determine file size
+The following code fails to work with the default SafeUntrap setting.
+
+<programlisting>
+[calcn]-s $Scratch->{upload_repository};[/calcn]
+</programlisting>
+
+Adding ftsize to SafeUntrap solves this problem:
+
+<programlisting>
+SafeUntrap ftsize
+</programlisting>
+__END__
+
 TODO: enabling all
