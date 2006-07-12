@@ -9,7 +9,7 @@ __NAME__ synopsis
 	file
 	</entry>
 	<entry>
-	<!-- POS -->
+	Yes
 	</entry>
 	<entry>
 	<!-- REQ -->
