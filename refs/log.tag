@@ -1,3 +1,7 @@
+__NAME__ purpose
+write custom message to log file
+__END__
+
 __NAME__ synopsis 
 <row>
 
@@ -134,4 +138,8 @@ __NAME__ synopsis
 </row> 
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
+__END__
+
+__NAME__ see also
+LogFile
 __END__
