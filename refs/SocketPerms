@@ -15,7 +15,7 @@ __END__
 
 
 __NAME__ description
-Specify permissions (&glos-mode;) for the Interchange UNIX-domain socket.
+Specify permissions (&glos-mode;) for the Interchange UNIX-domain socket file.
 </para><para>
 Prepend a starting <literal>0</literal> to indicate an octal value. The
 directive can be overridden from the command line using <literal>interchange
@@ -24,16 +24,17 @@ directive can be overridden from the command line using <literal>interchange
 The default value is <literal>0600</literal>, which allows only programs
 running under your &IC; server UID to access the socket.
 </para><para>
-Another possible setting is <literal>0666</literal> if other programs needs
-to access the socket file, e.g. Apache2 via mod_perl and Interchange::Link.
-Please note that this setting is insecure, it allows every user on the system
-to communicate through the socket.
+Another possible value is <literal>0666</literal>. This is a bit
+insecure setting, as it allows anyone on the system to access the socket.
+It may come handy, however, if programs such as &APACHE; need to access
+the socket via &MOD_PERL; or our <classname>Interchange::Link</classname>
+module.
 __END__
 
 __NAME__ notes
-Although not recommended in practice, it sometimes makes sense to
-set the permissions to <literal>0666</literal> (world-writable) to 
-debug problems easier.
+You might want to try the discussed mode, <literal>0666</literal>,
+when your &IC; installation isn't working and you quickly want to find out
+whether it's just socket file permissions problem or something deeper.
 __END__
 
 

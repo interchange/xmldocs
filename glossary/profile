@@ -196,5 +196,30 @@ The C<__NAME__> is the value to be specified in the C<mv_profile> variable on th
   [page scan se=Renaissance/mp=dict_search]Renaissance Art</a>
 	!endblock
 
+
+  [set checkout]
+  name=required Please enter your name.
+  address=required No address entered.
+  [/set]                                                      21,1           0%
+  <INPUT TYPE=hidden NAME=mv_order_profile VALUE="checkout">
+
+
+
+.A search profile would be set with:
+
+!block example; listitem=2
+  [set substring_case]
+  mv_substring_match=yes
+  mv_case=yes
+  [/set]
+  <INPUT TYPE=hidden NAME=mv_profile VALUE="substring_case">
+!endblock
+
+.To do the same as C<[set foo]bar[/set]> in embedded Perl:
+
+!block example; listitem=2
+    [calc]$Scratch->{foo} = 'bar'; return;[/calc]
+!endblock                                                     21,1       
+
 -->
 

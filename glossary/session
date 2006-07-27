@@ -139,5 +139,27 @@ Some thought should be given to where the databases, error logs, and session fil
 
 
 Interchange will wait until the current transaction is finished before expiring, so this can be done at any time without disabling web access. Any search paging files for the affected session (kept in C<ScratchDir>) will be removed as well.
+In addition, the C<[data ...]> tag can access a number of elements in the Interchange session database:
+
+!block example; listitem=2
+    accesses      Accesses within the last 30 seconds
+    arg           The argument passed in a [page ...] or [area ...] tag
+    browser       The user browser string
+    host          Interchange's idea of the host (modified by DomainTail)
+    last_error    The last error from the error logging
+    last_url      The current Interchange path_info
+    logged_in     Whether the user is logged in via UserDB
+    pageCount     Number of unique URLs generated
+    prev_url      The previous path_info
+    referer       HTTP_REFERER string
+    ship_message  The last error messages from shipping
+    source        Source of original entry to Interchange
+    time          Time (seconds since Jan 1, 1970) of last access
+    user          The REMOTE_USER string
+    username      User name logged in as (UserDB)
+!endblock
+
+
+
 
 -->

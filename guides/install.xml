@@ -332,13 +332,25 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	or want to keep everything under your own control. However, there is the
 	so-called "&std-catalog;" demo that ships with &IC; &mdash; it is extremely
 	elaborate and feature-rich for someone looking to build an Internet store,
-	and it allows custom modifications to be performed on it.
+	and it allows custom modifications to be performed on it. The most common
+	way to create a catalog based on our demo is to run our
+	<command>makecat</command> script.
+	</para><para>
+	Each catalog can be completely independent with different settings and
+	databases, or catalogs can share pages, databases, and session files.
+	This means that several catalogs can share the same information, allowing
+	"virtual malls" (although not directly out-of-the box with makecat or our
+	demo).
 	</para><para>
 	Regardless of whether you want to base your own catalogs on our demo or not,
 	it is strongly suggested to install the demo. It will let you
 	see whether your Interchange installation is correct, and it will also be
 	a nice presentation of Interchange features.
-	</para><para>
+	</para>
+
+	<section>
+		<title>Setting up a catalog using the makecat script</title>
+		<para>
 	There is a catalog creation script named <command>makecat</command> available,
 	that you will use to create catalogs based on catalog templates (and our
 	demo is, of course, organized as a template).
@@ -351,12 +363,44 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	The <command>makecat</command> is self-documented. Each question is
 	accompanyed with an introduction, examples, and a reasonable Unix default.
 	</para><para>
-	Each catalog can be completely independent with different settings and
-	databases, or catalogs can share pages, databases, and session files.
-	This means that several catalogs can share the same information, allowing
-	"virtual malls" (although not directly out-of-the box with makecat or our
-	demo).
+	By far the most common problem on the way to installing a working demo,
+	is wrong information given to the <command>makecat</command> program.
+	</para><para>
+	Among the questions that <command>makecat</command> will ask you, there are
+	four quite important ones; the script will need to know:
+	<itemizedlist>
+	<listitem><para>
+	The web server's (or virtual host's) filesystem path to &glos-DocumentRoot;
+	</para></listitem>
+	<listitem><para>
+	The web server's (or virtual host's) web path to your
+	<filename class='directory'>cgi-bin/</filename> directory
+	</para></listitem>
+	<listitem><para>
+	TODO
+	</para></listitem>
+	<listitem><para>
+	TODO
+	</para></listitem>
+	</itemizedlist>
+
+	<para>
+	If you don't get it right the first time, re-run the configuration again,
+	and <emphasis role='bold'>pay close attention to the prompts given</emphasis>.
 	</para>
+	</section>
+
+	<section>
+		<title>Setting up a catalog manually</title>
+		<para>
+		Setting up a catalog manually involves creating the necessary files and
+		directories, compiling the link program, and inserting a &conf-Catalog;
+		line to the global &gcf; configuration file.
+		</para><para>
+		For a complete introduction and even ready-made files to set up a
+		catalog from scratch, see <olink targetdoc='iccattut'/>.
+	</para>
+	</section>
 
 </sect1>
 

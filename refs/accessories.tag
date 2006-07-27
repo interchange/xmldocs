@@ -116,3 +116,19 @@ __NAME__ synopsis
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
 __END__
+
+__NAME__ description
+The &tag-__FILENAME__; tag is the "swiss army-knife" tool for choosing or
+displaying &IC;'s product <emphasis>options</emphasis> (also called
+<emphasis>attributes</emphasis>, of which typical examples are size or color).
+</para><para>
+__END__
+
+__NAME__ notes
+The default item options can be set via &conf-UseModifier;.
+</para><para>
+See the &glos-attribute; glossary entry for a complete introduction to item
+options.
+__END__
+
+

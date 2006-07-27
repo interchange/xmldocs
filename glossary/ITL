@@ -335,6 +335,8 @@ disassembling named parameters takes some more CPU cycles.
 <section>
 <title>Accessing Perl from ITL</title>
 
+<section>
+	<title>Perl-related ITL tags</title>
 <para>
 Among ITL tags, &tag-perl;, &tag-calc;, &tag-calcn; and &tag-mvasp;
 are used obtain direct access to the &PERL; language in &IC; pages.
@@ -417,6 +419,44 @@ different approaches to produce the result:
 [/calc]                 
 </programlisting>
 </para>
+
+</section>
+<section>
+<title>Perl-related ITL syntax</title>
+<para>
+ITL also supports a special type of quoting, using backticks
+(<literal>`</literal>), where the content is evaluated by &PERL;
+and then passed as the usual argument value.
+</para><para>
+Using this backtick notation, you can conveniently perform quick, in-place
+&PERL; evaluation of an argument, or pass complex data structures as 
+attribute values.
+</para>
+<para>
+<emphasis role='bold'>Performing quick, in-place argument interpolation</emphasis>:
+<programlisting>
+[cgi name=Magic_Number hide=1 set=`2 + 3 + $CGI->{magic}`]
+
+The magic number is: [cgi Magic_Number]
+</programlisting>
+</para>
+<para>
+<emphasis role='bold'>Passing complex data structures as argument values</emphasis>:
+<programlisting>
+[cgi name=Magic_Structure hide=1 set=`{ key1 => 'val1', key2 => 'val2' }`]
+</programlisting>
+As you see, this notation (and implied functionality) is completely valid
+and possible. It is then just up to the called tag to handle attribute value
+appropriately.
+</para>
+<note>
+<para>
+<emphasis role='bold'>It is only possible to use the backticks notation with
+named parameters!</emphasis>
+</para>
+</note>
+<!-- TODO what happens with ITL code inside backticks ? -->
+</section>
 
 </section>
 
@@ -648,8 +688,6 @@ $Tag->ROUTINE( { entry => $hashref } );
 ]]></programlisting>
 </para>
 
-
-<!-- TODO backticks -->
 </section>
 
 

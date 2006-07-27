@@ -38,6 +38,7 @@
 <!ENTITY SWISH-E "<ulink url='http://www.swish-e.org/'>Swish-e</ulink>">
 <!ENTITY GPG "<ulink url='http://www.gnupg.org/'>GPG</ulink>">
 <!ENTITY WIKIPEDIA "<ulink url='http://www.wikipedia.org/'>Wikipedia</ulink>">
+<!ENTITY MOD_PERL "<ulink url='http://perl.apache.org/'>mod_perl</ulink>">
 
 
 

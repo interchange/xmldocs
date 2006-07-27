@@ -192,3 +192,11 @@ __NAME__ synopsis
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
 __END__
+
+# Resolve name clash with index.html (this will become index2.html)
+# Not too nice, but :)
+__NAME__ id
+2
+__END__
+
+
