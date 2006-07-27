@@ -54,6 +54,401 @@
 <!-- AUTO UPDATER -->
 <para><literallayout>
 <emphasis role='bold'>
+Developer: racke
+Date: 2006-07-27 10:34:26 GMT
+Modified:  lib/Vend Dispatch.pm</emphasis>
+enclose job(s) execution in an eval to catch any fatal errors
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: kwalsh
+Date: 2006-07-26 20:29:15 GMT
+Modified:  dist/lib/UI/pages/admin preferences.html</emphasis>
+    * Commented out the "Register (optional)" link for now.  It can be
+      re-enabled when the link points somewhere useful, or simply removed
+      altogether.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-07-26 07:51:35 GMT
+Modified:  lib/Vend Session.pm</emphasis>
+removed redundant mkdir in count_ip(), get_filename() takes care of that
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: heins
+Date: 2006-07-24 17:06:59 GMT
+Modified:  lib/Vend UserDB.pm</emphasis>
+* Add username_email option so that one can easily user the username
+  as an email address. It is as simple as:
+
+       UserDB  default  username_email  1
+
+  Suggested also is:
+
+       UserDB  default  ignore_case     1
+
+  This simply makes the value of username be set in the email field. The
+  name of the field defaults to "email", but can be set:
+
+       UserDB  default  username_email_field  other_email_field
+
+  It doesn't gang the email field to username. We could set a
+  way of changing username -- I will look at that.
+
+* Add a "constant" feature. This is similar to the "scratch" feature,
+  but allows you to set immutable session values in $Session-&gt;{constant}.
+
+  If the database field "foo" had the value of "bar" in it, then
+  this:
+
+      UserDB  default  constant  foo
+
+  would result in this in upon login:
+
+      $Vend::Session-&gt;{constant} = { foo =&gt; 'bar' }
+
+* Add a "session_hash" feature. This is similar to the "scratch" feature,
+  but allows you to set hashes of session values in $Session-&gt;{$foo}.
+
+  If the database field "key_phrase" had the value of "{ foo =&gt; 'bar'}"
+  in it, then this:
+
+      UserDB  default  session_hash  key_phrase
+
+  would result in this in upon login:
+$Vend::Session-&gt;{key_phrase} = { foo =&gt; 'bar' }
+
+* Add the ability to redirect scratch, constant, and session_hash
+  variables to different DB fields, i.e.:
+
+    UserDB  default scratch  database_field=scratch_field
+
+  if the database field "bar" had the value of "baz" in it, then this:
+
+    UserDB  default scratch  foo=bar
+
+  would result in:
+
+    $Scratch-&gt;{foo} eq 'baz'
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: heins
+Date: 2006-07-22 17:04:28 GMT
+Modified:  lib/Vend Dispatch.pm</emphasis>
+* Add hook for catalog_init subroutine that gives you access before the
+  session assignment is done. In this case, it was used to modify the
+  name of session files so you can assign a session number based on the
+  HTTP_SERVER_HOST coming in -- but it could be used for a number of
+  purposes.
+
+  Uses the usual SpecialSub method:
+
+    Sub my_init sub { $CGI::user = $CGI::server_host }
+  SpecialSub catalog_init my_init
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-07-12 10:28:29 GMT
+Modified:  lib/Vend Server.pm</emphasis>
+map_inet_socket is used by SOAP server as well, so we need to include the
+actual mode in the error message
+also add IP address we try to bind on, which might be causing the failure
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-07-07 13:14:20 GMT
+Modified:  lib/Vend DbSearch.pm</emphasis>
+terminate search if mv_min_string condition isn't met
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: kwalsh
+Date: 2006-07-05 13:19:54 GMT
+Modified:  lib/Vend Search.pm</emphasis>
+    * Fixed a SearchOp bug reported by Tim Good in the interchange-users
+      mail list.
+
+    * Also, while I was in there, if "op=foo" is specified and "foo" is
+      not found then report an error and fall back to "op=eq", as before.
+      Well, the error message is new and the fallback operator appears to
+      be "eq". :-)
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: kwalsh
+Date: 2006-06-28 14:39:41 GMT
+Modified:  dist/src/mod_perl2/Interchange Link.pm</emphasis>
+  * Pass "%ENV" to Interchange, along with the other HTTP environment
+    variables.  "%ENV" contains the "HTTPS" variable, along with a
+    few others.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-06-27 09:24:35 GMT
+Modified:  .        WHATSNEW-5.5
+Modified:  lib/Vend Dispatch.pm</emphasis>
+Added process ID to "Run jobs" and "Finished jobs" log messages for better
+troubleshooting.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-06-23 20:17:59 GMT
+Modified:  lib/Vend Config.pm</emphasis>
+allow specification of one additional include directory for modules like
+that:
+
+Require module Vend::Swish /usr/lib/swish-e/perl
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-06-23 12:41:50 GMT
+Modified:  lib/Vend Scan.pm</emphasis>
+log errors for custom search module initialization errors,
+standard message for users
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-06-23 12:20:47 GMT
+Modified:  lib/Vend Swish2.pm</emphasis>
+apply mv_base_directory change from Swish.pm
+ensure that mv_base_directory value is used
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-06-23 08:43:57 GMT
+Modified:  lib/Vend/Table DBI.pm</emphasis>
+avoid unwanted expansion of array in the case we have PREFER_NULL fields and
+number of fields passed is one (thanks to Peter Ajamian for the patch and
+investigations)
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-06-19 20:21:33 GMT
+Modified:  code/Filter date_change.filter</emphasis>
+avoid ambiguity between two time formats
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: jon
+Date: 2006-06-14 00:36:53 GMT
+Modified:  dist/standard/special_pages missing.html</emphasis>
+* Fix broken admin 404 error page.
+* Remove duplicate, sometimes-bogus MV_PREV_PAGE display.
+* Eliminate double-interpolation of page comparison.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: heins
+Date: 2006-06-12 22:11:09 GMT
+Added:     code/Filter round.filter</emphasis>
+* Add filter to round in floating-point-safe way, using the Vend::Util
+  routine.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: racke
+Date: 2006-06-07 03:47:26 GMT
+Modified:  dist/standard/images smalldisc.png</emphasis>
+new DiscoverCard logo provided by Steve Graham
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: kwalsh
+Date: 2006-06-06 18:03:56 GMT
+Modified:  lib/Vend Server.pm</emphasis>
+    * Patch for a DoS exploit, pointed out by Donald Alexander.  Thanks
+      Donald.
+
+      A carefully crafted HTTP POST request could cause an Interchange
+      page processor to hang until it's killed by Interchange's periodic
+      housekeeping routine.
+
+      If several of these requests are received in quick succession
+      then it could be possible to disable all of the page processors,
+      rendering Interchange unresponsive for a while.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: docelic
+Date: 2006-05-24 13:43:48 GMT
+Modified:  dist/etc varnames</emphasis>
+* Add mv_like_field and mv_like_spec to 'varnames' file.
+
+  Among other things, the lack of the fields in the file caused
+  lf= and ls= params not to be saved in last_search session variable,
+  and breaking code that relied on it.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: heins
+Date: 2006-05-19 14:05:13 GMT
+Modified:  lib/Vend/Payment Linkpoint.pm</emphasis>
+* Change variables sent in POST_AUTH transaction so that partial
+  captures can be done, and so that AVS will not be attempted.
+  Changes supplied by Josh Lavin.
+
+* Add documentation adapted by Josh Lavin.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: heins
+Date: 2006-05-17 16:36:47 GMT
+Modified:  lib/Vend Data.pm</emphasis>
+* Refine error message to possibly point to problem.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: jon
+Date: 2006-05-16 19:29:38 GMT
+Modified:  dist/standard/pages/member returns.html</emphasis>
+Fix non-interpolating [process] and [form-session-id] tags, remove stray
+" from HTML tag, correct nonexistent cellmargin table attribute, and
+XHTMLize HTML (except for self-closing tags).
+
+Thanks to Steve Graham for reporting problem.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: heins
+Date: 2006-05-15 16:46:20 GMT
+Modified:  lib/Vend/Payment Linkpoint.pm</emphasis>
+* Improve Linkpoint module based on work provided by Josh Lavin.
+
+  -- Add ability to do POSTAUTH (settle_prior) in Interchange Admin.
+  -- Add check_sub capability ala Vend::Payment::Signio.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: heins
+Date: 2006-05-15 04:27:08 GMT
+Modified:  code/UI_Tag backup_database.coretag</emphasis>
+* Incorporate things suggested by Carl Bailey.
+
+* Use Spreadsheet::WriteExcel::Big to allow XLS files &gt; 7MB.
+
+* Only set cells with a length, which makes the sheets "sparse" and
+  reduces storage requirements.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: heins
+Date: 2006-05-13 13:48:34 GMT
+Modified:  lib/Vend/Payment Signio.pm</emphasis>
+* Fix bug introduced in previous change to cert_path logic attempting
+  to allow relative paths. If the certs/ directory was not directly
+  in VENDROOT and no cert_path was defined, no search for a certs/
+  directory would happen.
+
+* We should try to release IC as soon as possible on this one, as an
+  upgrade will break catalogs using Verisign PayFlow Pro (which is
+  how I discovered this one).
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: heins
+Date: 2006-05-11 12:31:22 GMT
+Modified:  lib/Vend Page.pm</emphasis>
+* Allow numerals in all but first position in unpack output areas.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: jon
+Date: 2006-05-10 22:47:31 GMT
+Modified:  lib/Vend Parser.pm</emphasis>
+Fix bug in parser that can cause an infinite loop when malformed ITL
+opening tags are encountered.
+
+Bug found and original patch supplied by Dan Collis-Puro.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: heins
+Date: 2006-05-09 12:30:11 GMT
+Modified:  dist/standard/etc mail_receipt</emphasis>
+* Fix minor security hole of exposing admin's session ID when they
+  enter an order for a user.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
+Developer: heins
+Date: 2006-05-04 20:07:32 GMT
+Modified:  dist/lib/UI ContentEditor.pm</emphasis>
+* Add special not_editable control to prevent editing pages that will
+  be killed by the content editor.
+</literallayout></para>
+
+
+<para><literallayout>
+<emphasis role='bold'>
 Developer: jon
 Date: 2006-04-27 21:00:09 GMT
 Modified:  dist/lib/UI/pages/admin ship_data.html</emphasis>
@@ -207,7 +602,7 @@ Modified:  dist/src/mod_perl2/Interchange Link.pm
 Added:     dist/src/mod_perl2/Interchange
 Added:              Link.pm.mod_perl-1.999_21_and_before</emphasis>
 * Make Interchange::Link compatibile with mod_perl2 greater than
-  1.999_22. Thanks to Ryan Perry &lt;<a href="http://www.icdevgroup.org/mailman/listinfo/interchange-cvs">rperry at madisonip.com</a>&gt;.
+  1.999_22. Thanks to Ryan Perry.
 
 * Add version of the Link.pm module for earlier mod_perl 1.999_21 and
   before.
