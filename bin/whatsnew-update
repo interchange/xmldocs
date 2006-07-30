@@ -110,7 +110,7 @@ sub read_log {
 
 	my $run = 0;
 	for $_ (@file) {
-		/^(<PRE>)?User:\s+(\S+)$/ and $user = $2 ? $2 : $1;
+		/^(<pre>)?User:\s+(\S+)$/ and $user = $2 ? $2 : $1;
 		/^Date:\s+(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} GMT)$/ and $date = $1;
 		/^((Modified|Added|Removed):\s.*)$/ and push @affected, $1;
 		/^Log:$/ and do { $run++; next };

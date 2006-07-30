@@ -348,7 +348,7 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	a nice presentation of Interchange features.
 	</para>
 
-	<section>
+	<sect2>
 		<title>Setting up a catalog using the makecat script</title>
 		<para>
 	There is a catalog creation script named <command>makecat</command> available,
@@ -368,6 +368,8 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	</para><para>
 	Among the questions that <command>makecat</command> will ask you, there are
 	four quite important ones; the script will need to know:
+	</para>
+
 	<itemizedlist>
 	<listitem><para>
 	The web server's (or virtual host's) filesystem path to &glos-DocumentRoot;
@@ -388,9 +390,9 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	If you don't get it right the first time, re-run the configuration again,
 	and <emphasis role='bold'>pay close attention to the prompts given</emphasis>.
 	</para>
-	</section>
+	</sect2>
 
-	<section>
+	<sect2>
 		<title>Setting up a catalog manually</title>
 		<para>
 		Setting up a catalog manually involves creating the necessary files and
@@ -400,9 +402,9 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 		For a complete introduction and even ready-made files to set up a
 		catalog from scratch, see <olink targetdoc='iccattut'/>.
 	</para>
-	</section>
-
+	</sect2>
 </sect1>
+
 
 <sect1 id='starting'>
 	<title>Starting Interchange</title>
