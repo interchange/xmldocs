@@ -1,5 +1,5 @@
 __NAME__ purpose
-replace \0 (null) characters with coma ","
+replace \0 (null) characters with comma ","
 __END__
 
 
