@@ -1,0 +1,11 @@
+Override page from Admin UI with catalog's custom version
+</para></question>
+
+<answer><para>
+At any time, you can copy pages from
+the <filename class='directory'>lib/UI/pages/admin/</filename> directory
+into the <filename class='directory'>pages/admin/</filename> directory
+under your catalog tree, to make custom versions that override the distribution
+ones.
+You only need copy the pages you want to override; the rest are automatically
+picked up from the usual, default location.

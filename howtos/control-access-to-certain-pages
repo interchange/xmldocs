@@ -1,0 +1,78 @@
+Control Access to Certain Pages
+</para></question>
+
+<answer><para>
+There's a built-in &IC; way to control user access to pages served
+from the &conf-PageDir; directories.
+</para><para>
+Namely, if the directory containing the requested page contains file
+named <filename>.access</filename> &mdash; and that file's size is zero bytes
+&mdash; then access can be "gated" in one of the following ways:
+
+<itemizedlist>
+
+<listitem><para>
+If the file <filename>.access_gate</filename> is also present, it will be
+read and scanned to perform page-based access decision.
+</para></listitem>
+<listitem><para>
+</para></listitem>
+<listitem><para>
+</para></listitem>
+
+</itemizedlist>
+</para>
+
+<section>
+	<title>.access_gate format</title>
+	<para>
+	The <filename>.access_gate</filename> file has the general format of:
+<programlisting>
+<replaceable>PAGE_NAME</replaceable>: <replaceable>CONDITION</replaceable>
+</programlisting>
+<replaceable>PAGE_NAME</replaceable> is the name of page to be controlled,
+and the page suffix (such as <literal>.html</literal>) is optional.
+Page name of <literal>*</literal> can be used to set a default permission.
+The implicit default permission is <literal>No</literal>, so leaving the default
+entry unspecified results in all non-matching users being denied access.
+</para><para>
+The <replaceable>CONDITION</replaceable> is a simple &glos-true; (or 
+<literal>Yes</literal>) or &glos-false; (or <literal>No</literal>) value
+which may come, and in fact often comes, from
+&glos-interpolate;d &glos-ITL; code.
+	</para>
+	<para>
+Here's a very simple example:
+<programlisting>
+pubview: Yes
+*: No
+</programlisting>
+	</para>
+	<para>
+Here's an example that includes &glos-ITL; interpolation and is
+verbose enough not to require additional explanation.
+<programlisting>
+foo.html: [if session username eq 'flycat']                202,1         32%
+          Yes
+          [/if]
+
+bar:      [if session username eq 'flycat'][or scratch allow_bar]                           202,1         32%
+          Yes
+          [/or][/if]
+
+baz:      yes
+
+*:        [data session logged_in]
+</programlisting>
+	</para>
+</section>
+<para>
+
+<!-- TODO is it first match wins, and can you say page*: ... ? 
+
++If the Variable C<MV_USERDB_REMOTE_USER> is set (non-zero and non-blank), any user logged in via the UserDB feature will receive access to all pages in the directory. NOTE: If there is a C<.access_gate> file, it overrides this.
+
++If the variables C<MV_USERDB_ACL_TABLE> is set to a valid database identifier, the UserDB module can control access with simple ACL logic. See USER DATABASE. NOTE: If there is a C<.access_gate> file, it overrides this. Also, if C<MV_USERDB_REMOTE_USER> is set, this capability is not available.
+
+-->
+

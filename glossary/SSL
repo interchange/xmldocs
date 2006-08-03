@@ -1,0 +1,56 @@
+<ulink url="http://en.wikipedia.org/wiki/Secure_Sockets_Layer">Secure
+Sockets Layer</ulink> resource at &WIKIPEDIA;.
+</para><para>
+&IC; has several features that enable secure ordering via SSL.
+Despite their mystique, SSL web servers are actually
+quite easy to operate. The difference between the standard &HTTP; server
+and the SSL HTTPS server, from the standpoint of the user, is only in
+the encryption that happens kind-of transparently, and the specification
+of the URL -- <literal>https:</literal> is used for the
+&URL; protocol specification instead of the usual <literal>http:</literal>
+designation.
+</para>
+
+<note><para>
+&IC; attempts to perform operations securely,
+but no guarantees or warranties of any kind are made! Since Interchange
+comes with &PERL; source, it is possible to modify the program to create
+bad security problems. One way to minimize this possibility is to record
+digital signatures, using MD5 or PGP, of
+<filename>bin/interchange</filename>, <filename>interchange.cfg</filename>,
+and all modules included in Interchange. Then verify them on a regular basis to
+ensure they have not been changed.
+</para></note>
+
+<para>
+Interchange uses the &conf-SecureURL; directive to set the base URL for secure
+transactions, and the &conf-VendURL; directive for normal non-secure
+transactions.
+Secure URLs can be enabled for individual forms through a form action of 
+<code>[process secure=1]</code>. An individual page can be displayed
+via SSL with <code>[page href=<replaceable>PAGE_URL</replaceable> secure=1]<replaceable>PAGE_NAME</replaceable>&lt;/a&gt;</code>.
+A certain page
+can be set to always be secure with the &conf-AlwaysSecure; directive.
+</para><para>
+
+Interchange incorporates additional security for credit card numbers. The
+field <mv>mv_credit_card_number</mv> will not ever be written to disk.
+</para><para>
+
+To enable automated encryption of the credit card information, you need
+to enable &conf-CreditCardAuto;. &conf-EncryptProgram;
+also needs to be set to a command which will, with hope, encrypt the number
+when invoked. PGP is now recommended above all other encryption
+program. The entries should look something like:
+
+<programlisting>
+  CreditCardAuto Yes
+  EncryptProgram /usr/bin/pgpe -fat -r <replaceable>sales@company.com</replaceable>
+</programlisting>
+
+See &conf-CreditCardAuto;, &conf-PGP;, &conf-GPG_PATH;, 
+&conf-EncryptKey;  and &conf-EncryptProgram; configuration directives
+for more information and examples.
+
+
+<!-- TODO move credit card info to credit card glossentry -->

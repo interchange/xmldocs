@@ -1,0 +1,23 @@
+Write and read a session
+</para></question>
+
+<answer><para>
+If you are going to save a &glos-session; and
+do something specific with it, do it explicitly by saving to 
+a separate, named file:
+</para><para>
+<programlisting><![CDATA[
+my $sess_string = $Tag->uneval( { ref => $Session } );
+$Tag->writefile("tmp/$Session->{id}.save", $sess_string);
+]]></programlisting>
+
+Then, in your retrieve route (which must be a global &glos-usertag;),
+do something like:
+
+<programlisting><![CDATA[
+my $safe = new Safe;
+my $sess_string = $Tag->file("tmp/$id_to_retrieve.save");
+my $session_ref = $safe->reval($sess_string);
+]]></programlisting>
+
+<!-- PORT_OLD -->
