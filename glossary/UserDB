@@ -75,7 +75,8 @@
 </entry><entry></entry></row>
 <row><entry>username_mask</entry><entry>Regular expression usernames must not match.
 </entry><entry></entry></row>
-<row><entry>validchars</entry><entry>Set valid characters for usernames.</entry><entry></entry></row>
+<row><entry>validchars</entry><entry>Set valid characters for usernames.</entry>
+<entry><literal>-A-Za-z0-9_@.</literal></entry></row>
 </tbody>
 </tgroup>
 </table>
