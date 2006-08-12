@@ -283,6 +283,16 @@ directive.
 
 
 <section>
+	<title>Interchange Database Design</title>
+<para>
+We are trying not to impose any database structure that would require
+our own tools to maintain the data. We always want to keep
+it such that &IC; data can be maintained via a spreadsheet processor or
+foreign database tools.
+</para>
+</section>
+
+<section>
 	<title>Interchange Database Conventions</title>
 <para>
 This section describes naming and file usage conventions used with

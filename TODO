@@ -7,6 +7,7 @@
 - aliases like DataDir/DefaultTables are not documented
 - that howto entries get automatic title if start with < in first line
 - unit testing
+- remove NEW from <meta>
 
 Outstanding:
 =======

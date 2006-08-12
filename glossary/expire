@@ -3,7 +3,7 @@ User &glos-session;s in Interchange are usually kept as files in the
 a DBM database) for each &glos-catalog;. Since session
 data is not deleted after sessions end (or timeout), periodic expiring
 needs to be set up to keep the session database or session files from growing
-too large and wasting disk space.
+too large, wasting disk space and slowing down directory lookups.
 </para><para>
 There's no worry that expiring will do any harm, because all our scripts
 only clean up unused sessions. Active users will not notice any change.
@@ -29,7 +29,7 @@ from <literal>crontab</literal>. As the &IC; user, run
 <note>
 <para>
 If a session saved search paging files in &conf-ScratchDir;, they would 
-be deleted too.
+not be deleted (see below for a solution).
 </para>
 </note>
 
@@ -78,5 +78,27 @@ instead of &IC; user's crontab file. Either move the crontab to the
 account:
 <programlisting>
 44 4 * * * su -c "/PATH/TO/INTERCHANGE/bin/expireall -r" IC_USERNAME
+</programlisting>
+
+The above does not, however, clean temporary files from the &conf-ScratchDir; 
+directory. We don't often use the expire scripts any more. We just use
+a small standalone script <filename>clean_session_tmp</filename>:
+<programlisting><![CDATA[
+#!/bin/sh
+
+for DIR in $*; do
+  for i in session tmp; do
+    if test -d "$DIR/$i"; then
+      find $DIR/$i -type f -mmin +480 | xargs --no-run-if-empty rm
+      find $DIR/$i -type d -empty -mtime +2 -depth | xargs --no-run-if-empty rmdir
+    else
+      echo "$0: $DIR/$i doesn't exist.";
+    fi
+  done
+done
+]]></programlisting>
+using a cron entry similar to:
+<programlisting>
+44 0,4,8,12,16,20 * * * <replaceable>DIR/bin/</replaceable>clean_session_tmp <replaceable>/path/to/catdir1</replaceable> <replaceable>/path/to/catdir2</replaceable>
 </programlisting>
 

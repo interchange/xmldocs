@@ -48,6 +48,9 @@ Supported events are
   The return value should either be a type name, or a &glos-false; value
   (in which case &IC; proceeds with built-in detection algorithm).
 </para></listitem>
+<listitem><para>
+  <literal>flypage</literal> &mdash; 
+</para></listitem>
 </itemizedlist>
 </para><para>
 __END__

@@ -36,4 +36,6 @@ Pragma dynamic_variables 0
 </programlisting>
 __END__
 
-
+__NAME__ see also
+pragma
+__END__

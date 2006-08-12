@@ -4,6 +4,11 @@ __NAME__ purpose
 __END__
 
 __NAME__ notes
+<emphasis role='bold'>
+Pay special attention to whitespace! The &tag-__FILENAME__; tag is very
+particular about white space.
+</emphasis>
+</para><para>
 It appears that the <literal>type=delimited</literal> and
 <literal>field_names=</literal> do not function properly. This is,
 however, not a problem because &tag-xml-generator; is obsolete. If you
@@ -300,10 +305,17 @@ would, depending on the exact values in the users' session, generate:
 __END__
 
 
+__NAME__ example: Exporting products SKU, title and price to XML
+<programlisting>
+[xml-generator type="delimited" toplevel_tag="products" field_names="sku title price"][query list=1 sql="select sku, title, price from products" prefix=xml][xml-param sku]     [xml-param title]       [xml-param price]
+[/query][/xml-generator]
+</programlisting>
+__END__
+
 
 **** Notice the missing _ at the beginning, this is effectively a comment.
 _NAME__ example: Display an individual field
-We rely on the default setting of <literal>type=delimitea</literal>d here:
+We rely on the default setting of <literal>type=delimited</literal> here:
 <programlisting>
 [comment]
 	The following field is set manually only to complete the example,

@@ -3,6 +3,19 @@ routine.
 </para><para>
 Pragma values can be defined at any level; catalog-wide, page-wide or
 &glos-ITL;-block wide.
+</para>
+
+<note><para>
+Catalog-wide pragmas are equivalent to inserting <code>[pragma ...]</code>
+on every page. However, setting the &conf-Pragma; catalog directive (instead of
+using &tag-pragma; tag all the time) has the benefit of initializing at 
+catalog startup time (so, only once),  which avoids extra hash key lookups.
+Namely, there is some crossover point at about 4 &PERL; references where it
+saves processor power to assign a scalar instead of looking it up every time.
+</para>
+</note>
+
+<para>
 To define a pragma catalog-wide, use the <option>Pragma</option> directive:
 <programlisting>
 Pragma <replaceable>NAME</replaceable> <group choice='req'><arg choice='plain'>0</arg><arg choice='plain'>1</arg><arg choice='plain'>=<replaceable>pragma-specific value</replaceable></arg></group>
@@ -30,4 +43,5 @@ block in <code>[tag pragma ...]</code>:
 Starting with Interchange 5.0, the <code>$::Pragma->{name}</code> syntax
 is used in the &IC; source, instead of the old
 <code>$Vend::Cfg->{Pragma}{name}</code>.
-
+</para><para>
+See the list of available pragmas in <olink targetdoc='pragmas'/>.
