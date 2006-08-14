@@ -126,6 +126,21 @@ swish-e -w Swish -f db/mailinglists
 </programlisting>
 </para>
 </section>
+<section>
+<title>Configuration File Examples</title>
+<para>
+Indexing web sites is pretty easy. Swish provides a spider script, which is
+simply called with the parameters <literal>default</literal> and the starting
+URL. Create a configuration file similar to the following:
+<programlisting>
+IndexFile db/icdevgroup
+IndexDir /usr/local/lib/swish-e/spider.pl
+SwishProgParameters default http://www.icdevgroup.org/docs/
+</programlisting>
+Now you can start indexing with <literal>swish-e -S prog -c
+icdevgroup.conf</literal>. 
+</para>
+</section>
 </section>
 
 
