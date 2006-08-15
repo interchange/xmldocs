@@ -1,0 +1,57 @@
+Use Category-dependent Tax Rates
+</para></question>
+
+<answer><para>
+Many european countries use product category-dependent tax rates.
+The question is, how to implement this in &IC;.
+</para><para>
+A quick and dirty way is to write a &glos-usertag; for calculation
+and include it in <database>salestax</database> database.
+<programlisting><![CDATA[
+UserTag  vat-calc  Order  table field
+UserTag  vat-calc  addAttr
+UserTag  vat-calc  Routine <<EOR
+sub {
+  my ($table, $field, $opt) = @_;
+  
+  my $error = sub {
+    my $msg = shift;
+    Log($msg);
+    return undef;
+  };
+
+  my $tax = 0;
+  foreach my $item (@$Vend::Items) {
+    my $taxrate = tag_data($table, $field, $item->{code});
+    $tax += ($taxrate * $item->{quantity});
+  }
+  return $tax;
+}
+EOR
+]]></programlisting>
+(If you add the above in &ccf; instead of &gcf;, you will have to 
+make sure you reference the <database>products</database> database
+before this code runs). <!-- exactly how to do this? -->
+</para><para>
+Create <filename>salestax.asc</filename>:
+<programlisting>
+default [vat-calc products tax]
+UK  [vat-calc products tax]
+FR  [vat-calc products tax]
+US  0
+</programlisting>
+Modify &ccf;:
+<programlisting>
+SalesTax country
+</programlisting>
+At this point, tax rates would be taken from the
+<database class='field'>tax</database> field in the
+<database>products</database> database.
+</para><para>
+Finally, to retrieve category-dependent tax rate, you can specify:
+<programlisting>
+AutoModifier products:category
+</programlisting>
+in &ccf; and use <code>$item->{category}</code> (in &conf-CommonAdjust; 
+for example) as the key to lookup tax value rate.
+<!-- Full working example todo -->

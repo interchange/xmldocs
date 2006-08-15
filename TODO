@@ -8,6 +8,9 @@
 - that howto entries get automatic title if start with < in first line
 - unit testing
 - remove NEW from <meta>
+- In tags, make XSLT code print position number besides "Yes" word in 
+  positional parameters for tags
+- add search box to guides/index.xml
 
 Outstanding:
 =======

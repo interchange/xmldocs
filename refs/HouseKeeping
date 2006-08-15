@@ -11,9 +11,9 @@ __END__
 
 
 __NAME__ description
-Specify time &glos-interval;s at which should the Interchange server 
+Specify periodic time &glos-interval; at which the Interchange server should
 <emphasis>wake up</emphasis> and
-look for user reconfiguration requests and hung search processes. On some
+look for user reconfiguration requests and hung processes. On some
 systems, this wakeup is the only time the server will terminate in response
 to a stop command.
 __END__

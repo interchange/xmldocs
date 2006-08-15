@@ -1,0 +1,49 @@
+Make Perl Hash Seemingly Modifiable
+</para></question>
+
+<answer><para>
+Sometimes you want to make a data structure modifiable, without having the
+changes permanently override original values. To do so, we can use &PERL;'s
+<classname>Tie::ShadowHash</classname> module.
+</para><para>
+This is an old trick, generally not needed any more since &glos-configuration;
+directives already are modifiable per-page (usually through an 
+&conf-Autoload; routine). However, you might find it useful. Here's the
+usertag:
+<programlisting><![CDATA[
+UserTag modifiable Order thing
+UserTag modifiable Routine <<EOR
+require Tie::ShadowHash;
+sub {
+  my $thing = shift || 'Variable';
+  my $ref = $Vend::Cfg->{$thing};
+  return undef if ref($ref) ne 'HASH';
+
+  my %hash;
+  tie %hash, 'Tie::ShadowHash', $ref;
+
+  my $new = \%hash;
+  $Vend::Cfg->{$thing} = $new;
+
+  if($thing eq 'Variable') {
+    $::Variable = $Vend::Interpolate::Variable = $new;
+  }
+
+  return "$thing set to modifiable";
+}
+EOR
+]]></programlisting>
+Establish initial value in &ccf:
+<programlisting>
+Variable FOO bar
+</programlisting>
+And test with the following code:
+<programlisting>
+FOO=__FOO__<br>
+FOO=[var FOO]<br>
+[modifiable]<br>
+Set...[calc] $Variable->{FOO} = 'hosed'; [/calc]<br>
+FOO=[var FOO]
+</programlisting>
+The output should be the same on every page reload.
+

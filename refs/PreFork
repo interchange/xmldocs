@@ -18,7 +18,7 @@ __END__
 __NAME__ description
 For each new client connection, &IC; must spawn a new process that will 
 handle communication with the client.
-By using &conf-PreFork; it is possible to <emphasis>pre-fork</emphasis>
+By using &conf-PreFork;, it is possible to <emphasis>pre-fork</emphasis>
 (or in other words, "start ahead of time") some number of &IC; servers
 that will be ready to serve client requests immediately as they come in.
 </para><para>

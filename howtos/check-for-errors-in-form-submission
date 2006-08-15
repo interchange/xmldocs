@@ -1,0 +1,21 @@
+Check for Errors in Form Submission
+</para></question>
+
+<answer><para>
+<!-- 
+
+(Below is as of 4.03, the equivalent in 4.02 is
+\[if type=explicit compare="[error all=1 keep=1]"] ... [/if].)
+
+To check errors without clearing them, you can use the idiom:
+
+>    [if errors]
+>    <FONT SIZE="+1" COLOR=RED>
+>        There were errors in your form submission.
+>    </FONT>
+>    <BLOCKQUOTE>
+>        [error all=1 show_error=1 joiner="<BR>"]
+>    </BLOCKQUOTE>
+>    [/if]
+
+-->

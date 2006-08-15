@@ -25,13 +25,6 @@ server's "usage count" drops.
 __END__
 
 __NAME__ notes
-The directive is only used when &IC; is in <literal>PreFork</literal>
-&glos-ic-run-mode;.
-__END__
-
-
-__NAME__ missing
-Is this only in PreFork? if not, fix Notes section.
 __END__
 
 
