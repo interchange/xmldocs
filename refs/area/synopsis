@@ -19,8 +19,8 @@
 <row>
 	<entry>href</entry>
 	<entry>Yes</entry><entry>Yes</entry>
-	<entry></entry>
-	<entry>page targetted by the link</entry>
+	<entry>process</entry>
+	<entry>name of page or action</entry>
 </row>
 
 <row>
