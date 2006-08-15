@@ -114,7 +114,7 @@ Swish date_format "%d %b %Y"
 See &glos-time; for possible format strings.
 </para>
 <section>
-<title>Commandline Examples</title>
+<title>Search Examples</title>
 <para>
 Simple search for the term Swish:
 <programlisting>
@@ -122,7 +122,15 @@ swish-e -w Swish
 </programlisting>
 Same search with specifying the index file:
 <programlisting>
-swish-e -w Swish -f db/mailinglists
+swish-e -w Swish -f db/xmldocs
+</programlisting>
+You can include properties in the output:
+<programlisting>
+swish-e -w Swish -f db/xmldocs -p purpose
+</programlisting>
+Or search within a property:
+<programlisting>
+swish-e -w purpose=LWP -f db/xmldocs
 </programlisting>
 </para>
 </section>
