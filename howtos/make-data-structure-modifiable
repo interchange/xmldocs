@@ -33,7 +33,7 @@ sub {
 }
 EOR
 ]]></programlisting>
-Establish initial value in &ccf:
+Establish initial value in &ccf;:
 <programlisting>
 Variable FOO bar
 </programlisting>
