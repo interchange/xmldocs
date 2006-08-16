@@ -2,6 +2,26 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	list
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	list of items to iterate through
+	</entry>
+
+</row> 
+
+<row>
+
+	<entry>
 	prefix
 	</entry>
 	<entry>
@@ -356,6 +376,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
+	list consists of ranges like 1..4
 	<!-- DSC -->
 	</entry>
 
