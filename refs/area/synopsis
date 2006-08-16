@@ -106,15 +106,17 @@
 	</entry>
 	<entry>
 	<!-- POS -->
+	No
 	</entry>
 	<entry>
 	<!-- REQ -->
+	No
 	</entry>
 	<entry>
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	whether .html extension should be added or not
 	</entry>
 
 </row> 
