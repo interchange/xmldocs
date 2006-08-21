@@ -24,7 +24,7 @@ Valid types are:
 	<listitem><para>
 	<literal>canceled</literal> &mdash; 
 
-	Defaults to <literal></literal>.
+	default page for the <literal>cancel</literal> &glos-form-action;.
 	</para></listitem>
 	<listitem><para>
 	<literal>catalog</literal> &mdash; 
@@ -64,7 +64,7 @@ Valid types are:
 	<listitem><para>
 	<literal>put_handler</literal> &mdash; 
 
-	Defaults to <literal></literal>.
+	standard handler for <literal>PUT</literal> operations.
 	</para></listitem>
 	<listitem><para>
 	<literal>receipt</literal> &mdash; 
