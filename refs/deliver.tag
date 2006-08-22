@@ -1,4 +1,27 @@
+__NAME__ purpose
+delivers arbritary content like binary files without page processing
+__END__
+
 __NAME__ synopsis 
+<row>
+
+	<entry>
+	type
+	</entry>
+	<entry>
+	yes
+	</entry>
+	<entry>
+	no
+	</entry>
+	<entry>
+	<literal>application/octet-stream</literal>
+	</entry>
+	<entry>
+	MIME type of content
+	</entry>
+
+</row> 
 <row>
 
 	<entry>
@@ -52,7 +75,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	HTTP status code and message
 	</entry>
 
 </row> 
@@ -90,7 +113,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	additional HTTP headers
 	</entry>
 
 </row> 
