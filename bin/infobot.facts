@@ -1,0 +1,62 @@
+#!/usr/bin/perl
+
+# This script reads tmp/*.list files (lists of symbols) and
+# creates interchange.fact file which you can load into an
+# infobot (www.infobot.org) to provide factoids on IRC channels.
+
+my @files = <tmp/*.list>;
+s/tmp\/// for @files;
+s/\..*// for @files;
+#print "Got @files\n";
+
+my $output = 'files/infobot/interchange.fact';
+
+my $prefix = 'http://www.icdevgroup.org/xmldocs/';
+
+# Some items may be both say, filter and a tag, so we can't
+# print directly to file, we need internal stack to sort those out.
+my %output;
+
+# Translation to compound names
+my %tr = ( 
+catconfs     => 'confs',
+catvars      => 'vars',
+filters      => 'filters',
+globconfs    => 'confs',
+globvars     => 'vars',
+orderchecks  => 'orderchecks',
+pragmas      => 'pragmas',
+systemtags   => 'tags',
+uitags       => 'tags',
+usertags     => 'tags',
+);
+
+# Translation from compound to "English"
+my %trEn = ( 
+'confs'        => 'Config directive: ',
+'vars'         => 'Variable: ',
+'filters'      => 'Filter: ',
+'orderchecks'  => 'Ordercheck: ',
+'pragmas'      => 'Pragma: ',
+'tags'         => 'Tag: ',
+);
+
+
+for my $file ( @ files ) {
+	open IN, "< tmp/$file.list" or die "Can't rdopen 'tmp/$file.list' ($!)\n";
+	while ($_ = <IN>) {
+		chomp;
+		my $data = $trEn{$tr{$file}} . $prefix . $tr{$file} . '/' . $_ . '.html';
+		push(@{$output{$_}}, $data) unless grep {/^$data$/} @{$output{$_}};
+	}
+	close IN or die "Can't rdclose 'tmp/$file.list' ($!)\n";
+}
+
+
+open OUT, "> $output" or die "Can't wropen '$output' ($!)\n";
+while (my($k,$v) = each %output) {
+	$v = join ", ", @$v;
+	print OUT "$k => $v\n";
+}
+close OUT or die "Can't wrclose '$output' ($!)\n";
+
