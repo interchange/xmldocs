@@ -6,24 +6,13 @@
 <article id='release'>
 
 <articleinfo>
-	<title>Interchange Guides: Installation</title>
+	<title>Interchange Guides: Performing an Official Release<ftitle>
 	<titleabbrev>release</titleabbrev>
 
 	<copyright>
 		<year>2006</year>
 		<holder>Interchange Development Group</holder>
 	</copyright>
-	<copyright>
-		<year>2006</year>
-		<holder>Davor Ocelic</holder>
-	</copyright>
-
-	<authorgroup>
-		<author>
-			<firstname>Davor</firstname><surname>Ocelic</surname>
-			<email>docelic@icdevgroup.org</email>
-		</author>
-	</authorgroup>
 
 	<legalnotice>
 		<para>
@@ -43,7 +32,7 @@
 	<abstract>
 		<para>
 		The purpose of this document is to provide a complete list of 
-		tasks to perform in preparation of &IC; release.
+		tasks to perform in preparation of an official &IC; release.
 		</para>
 	</abstract>
 
@@ -81,7 +70,7 @@
 <!--
 
 RELEASING A NEW VERSION OF INTERCHANGE
-$Id: release.xml,v 1.1 2006-07-04 22:24:42 docelic Exp $
+$Id: release.xml,v 1.2 2006-09-02 22:21:47 docelic Exp $
 
 
 Pre-release:

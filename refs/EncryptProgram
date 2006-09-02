@@ -64,3 +64,9 @@ __END__
 __NAME__ missing
 PORT_OLD
 __END__
+
+
+Try add --homedir option to GnuPG: 
+ENCRYPTOR       /usr/local/bin/gpg -e -a -q --batch --homedir
+<path_where_your_keys_ring_is> ...
+

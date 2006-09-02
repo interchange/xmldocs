@@ -20,7 +20,7 @@
 	<entry>href</entry>
 	<entry>Yes</entry><entry>Yes</entry>
 	<entry></entry>
-	<entry>name of page or action</entry>
+	<entry>Name of page or action to link to</entry>
 </row>
 
 <row>
@@ -113,10 +113,10 @@
 	No
 	</entry>
 	<entry>
-	<!-- DFL -->
+	No
 	</entry>
 	<entry>
-	whether .html extension should be added or not
+	Add &glos-HTML; page suffix to page name?
 	</entry>
 
 </row> 

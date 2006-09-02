@@ -9,7 +9,9 @@
 	<!ENTITY howtos SYSTEM "../tmp/howtos-c.db"> 
 	<!ENTITY glossary SYSTEM "../tmp/glossary-c.db"> 
 	<!ENTITY pragmas SYSTEM "../tmp/pragmas-c.db"> 
-	<!-- COMPOUNDS -->
+	<!ENTITY install SYSTEM "../tmp/install-c.db"> 
+	<!ENTITY search SYSTEM "../tmp/search-c.db"> 
+
 	<!ENTITY tags SYSTEM "../tmp/tags-c.db"> 
 	<!ENTITY vars SYSTEM "../tmp/vars-c.db"> 
 	<!ENTITY confs SYSTEM "../tmp/confs-c.db"> 
@@ -114,6 +116,18 @@
 			<dir name='optimization'>
 				<document targetdoc="optimization">
 				&optimization;
+				</document>
+			</dir>
+
+			<dir name='install'>
+				<document targetdoc="install">
+				&install;
+				</document>
+			</dir>
+
+			<dir name='search'>
+				<document targetdoc="search">
+				&search;
 				</document>
 			</dir>
 

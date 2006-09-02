@@ -11,6 +11,7 @@
 - In tags, make XSLT code print position number besides "Yes" word in 
   positional parameters for tags
 - add search box to guides/index.xml
+- split glossary to individual pages, add TOC to howtos
 
 Outstanding:
 =======

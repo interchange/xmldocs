@@ -1,10 +1,9 @@
 __NAME__ purpose
-delivers arbritary content like binary files without page processing
+deliver arbritary content verbatim, without Interchange processing
 __END__
 
 __NAME__ synopsis 
 <row>
-
 	<entry>
 	type
 	</entry>
@@ -18,7 +17,7 @@ __NAME__ synopsis
 	<literal>application/octet-stream</literal>
 	</entry>
 	<entry>
-	MIME type of content
+	Content &glos-MIME; type
 	</entry>
 
 </row> 
@@ -113,7 +112,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	additional HTTP headers
+	Any additional HTTP headers
 	</entry>
 
 </row> 

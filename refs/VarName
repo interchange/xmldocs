@@ -23,13 +23,24 @@ __END__
 
 __NAME__ notes
 &IC; already ships with some remapping definitions (to shorten URLs, not
-obfuscate code or anything); see <filename>/etc/varnames</filename> for the
+obfuscate code or anything); see <filename>etc/varnames</filename> for a
 list.
+</para><para>
+When remapping <literal>mv_</literal> variable names, make sure you avoid
+two-letter abbreviations &mdash; most are reserved for the
+<olink targetdoc='search'>search</olink> parameters. Names consisting of
+1, 3 or more characters would be fine, though.
 __END__
 
 __NAME__ example: Remapping mv_session_id to session
 <programlisting>
 VarName mv_session_id session
+</programlisting>
+__END__
+
+__NAME__ example: Remapping mv_session_id to id
+<programlisting>
+VarName mv_session_id id
 </programlisting>
 __END__
 

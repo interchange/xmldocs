@@ -267,6 +267,11 @@ docbook/autorefs.ent: refxmls
 docbook/autofiles.ent: refxmls
 
 
+#############################################################
+# Infobot IRC bot factoids
+files/infobot/interchange.fact facts: refxmls bin/infobot.facts
+	bin/infobot.facts
+
 ## Helper target, only used by docelic
 #colt-preview:
 #	tar jcf OUTPUT.tar.bz2 OUTPUT
