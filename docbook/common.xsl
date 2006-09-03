@@ -45,6 +45,7 @@
 	<xsl:template match="tag">[<xsl:call-template name="inline.monoseq"/>]</xsl:template>
 	<xsl:template match="pragma"><xsl:call-template name="inline.monoseq"/></xsl:template>
 	<xsl:template match="mv"><xsl:call-template name="inline.monoseq"/></xsl:template>
+	<xsl:template match="am"><xsl:call-template name="inline.monoseq"/></xsl:template>
 	<xsl:template match="filter"><xsl:call-template name="inline.monoseq"/></xsl:template>
 
   <xsl:param name="local.l10n.xml" select="document('')"/>

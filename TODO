@@ -1,17 +1,13 @@
 - in iccattut, s/item-field/item-param/ at least on some places. 
 - Make xmldocs tarball in ftp autoupdated
 - Change -latest to version number in tarball download
-- bin/whatsnew-update didn't pick up User: from messages
-- some <am> is visible in feature glossary entry
 - fix/update AdminUser docs
 - aliases like DataDir/DefaultTables are not documented
-- that howto entries get automatic title if start with < in first line
 - unit testing
 - remove NEW from <meta>
 - In tags, make XSLT code print position number besides "Yes" word in 
   positional parameters for tags
 - add search box to guides/index.xml
-- split glossary to individual pages, add TOC to howtos
 
 Outstanding:
 =======
