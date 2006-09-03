@@ -1,8 +1,5 @@
 Provide Item Quantity Fields in the Basket Page
-</para></question>
 
-<answer>
-	<para>
 	On your &IC; pages, you should provide some kind of an &glos-HTML; form
 	if you want to receive any data from the client. We will use the 
 	<filename>pages/ord/basket.html</filename> page from the

@@ -1,7 +1,5 @@
 Define Custom Sendmail Routine
-</para></question>
 
-<answer><para>
 Someone <ulink url="http://www.icdevgroup.org/pipermail/interchange-users/2004-July/039811.html">
 was wondering</ulink> how to optimize the order processing on a busy site.
 It was observed that about once in every ten times, the

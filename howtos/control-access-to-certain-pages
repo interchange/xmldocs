@@ -1,7 +1,5 @@
 Control Access to Certain Pages
-</para></question>
 
-<answer><para>
 There's a built-in &IC; way to control user access to pages served
 from the &conf-PageDir; directories.
 </para><para>

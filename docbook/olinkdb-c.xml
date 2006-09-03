@@ -65,7 +65,7 @@
 				</document>
 			</dir>
 			
-			<dir name=''>
+			<dir name='glossary'>
 				<document targetdoc="glossary">
 				&glossary;
 				</document>

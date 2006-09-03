@@ -1,7 +1,5 @@
 Avoid search strings in a href specification
-</para></question>
 
-<answer><para>
 Basically, you should never embed searches in a &glos-HTML; href specification.
 In other words, you should never do something like:
 <programlisting>

@@ -1,7 +1,5 @@
 Implement MySQL-based sessions
-</para></question>
 
-<answer><para>
 As you might know, &IC; can use databases to store users' &glos-session;
 data (instead of the usual files). Corresponding &ccf; definition might
 look like this:

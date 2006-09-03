@@ -1,7 +1,5 @@
 Setup and monitor log files
-</para></question>
 
-<answer><para>
 	To monitor all relevant log files at once, first adjust the
 	neccessary config files, restart the daemons, and issue<sbr/>
 	<userinput>tail -f /var/log/{apache,interchange}/*log</userinput>.

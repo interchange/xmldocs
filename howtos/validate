@@ -1,7 +1,5 @@
 Validate Interchange-produced Markup
-</para></question>
 
-<answer><para>
 	Validate pages at W3C using &css-validator; or &markup-validator;.
 </para><para>
 	&IC; does not output any &glos-CSS; on its own, so the CSS validation outcome

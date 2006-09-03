@@ -1,7 +1,5 @@
 Override page from Admin UI with catalog's custom version
-</para></question>
 
-<answer><para>
 At any time, you can copy pages from
 the <filename class='directory'>lib/UI/pages/admin/</filename> directory
 into the <filename class='directory'>pages/admin/</filename> directory

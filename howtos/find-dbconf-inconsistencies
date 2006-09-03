@@ -1,7 +1,5 @@
 Find database definition inconsistencies for various database types defined under dbconf/ directory
-</para></question>
 
-<answer><para>
 Here's a script that can help you find inconsistencies in database definition
 files. (All files should essentially have the same definition, even if they
 differ in database-specific syntax).

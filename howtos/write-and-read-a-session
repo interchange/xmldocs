@@ -1,7 +1,5 @@
 Write and read a session
-</para></question>
 
-<answer><para>
 If you are going to save a &glos-session; and
 do something specific with it, do it explicitly by saving to 
 a separate, named file:

@@ -61,7 +61,8 @@ howtos:   $(foreach doc,$(HOWTOS),OUTPUT/$(doc).html  )            \
 symbols:  $(foreach doc,$(SYMBOL_TYPES),OUTPUT/$(doc).html  )      \
           $(foreach doc,$(SYMBOL_TYPES),OUTPUT/$(doc))
 
-glossary: $(foreach doc,$(GLOSSARY),OUTPUT/$(doc).html  )
+glossary: $(foreach doc,$(GLOSSARY),OUTPUT/$(doc).html  )          \
+          $(foreach doc,$(GLOSSARY),OUTPUT/$(doc))
 
 #############################################################
 # Skel
@@ -206,7 +207,7 @@ clean-refs:
 distclean: clean clean-cache
 	-rm -rf $T
 	-rm -rf {refs,glossary,howtos}/*.xml
-	-rm -rf docbook/auto{refs,glossary,howtos}.ent
+	-rm -rf docbook/auto{refs,glossary,howtos,files}.ent
 look-clean:
 	-mv $T $T.temporary 2>/dev/null
 commit:

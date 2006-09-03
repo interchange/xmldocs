@@ -1,7 +1,5 @@
 Use Category-dependent Tax Rates
-</para></question>
 
-<answer><para>
 Many european countries use product category-dependent tax rates.
 The question is, how to implement this in &IC;.
 </para><para>

@@ -39,6 +39,7 @@
   </xsl:template>
 	
 	<xsl:param name="html.stylesheet">xmldocs.css</xsl:param>
+	<xsl:param name="refclass.suppress">1</xsl:param>
 	
 	<xsl:include href="common.xsl"/>
 	<xsl:include href="html-common.xsl"/>

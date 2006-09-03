@@ -1,7 +1,5 @@
 Write Apache RewriteRule and RewriteCond directives to avoid cgi-bin/ in HTML links
-</para></question>
 
-<answer><para>
 The &APACHE; config file (or a corresponding vhost file) needs something
 like the following:
 </para><para>

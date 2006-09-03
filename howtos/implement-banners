@@ -1,7 +1,5 @@
 Implement Banner Ads
-</para></question>
 
-<answer><para>
 	Banner display in &IC; is implemented using the <tag>banner</tag> tag.
 	There are two terms which need to be understood first:
 </para>

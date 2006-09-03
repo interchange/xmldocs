@@ -1,7 +1,5 @@
 Make Perl Hash Seemingly Modifiable
-</para></question>
 
-<answer><para>
 Sometimes you want to make a data structure modifiable, without having the
 changes permanently override original values. To do so, we can use &PERL;'s
 <classname>Tie::ShadowHash</classname> module.

@@ -18,6 +18,7 @@ my %invalid;
 my $invalid_file = "tmp/missing2";
 my @loaded;
 my $document;
+my $visible_name;
 my %sn = ( # short name
 	glossary => "glos",
 	howtos => "howto",
@@ -28,28 +29,29 @@ my %ln = ( # long name
 );
 
 my %header = ( # item head
-	glossary => "<glossentry id=\"\$file\">
-<glossterm>\$visible_name</glossterm>
+	glossary => "<section id=\"\$file\">
+<title>\$visible_name</title>
 
-<glossdef><para>
+<para>
 ",
-	howtos => "<qandaentry>
-<question><para>
-",
+	howtos => "<section>
+<title>\$visible_name</title>
+
+<para>",
 );
 my %footer = ( # item tail
-	glossary => "\n</para>\n</glossdef>\n</glossentry>\n\n",
-	howtos => "\n</para>\n</answer>\n</qandaentry>\n\n",
+	glossary => "\n</para>\n</section>\n\n",
+	howtos => "\n</para>\n</section>\n\n",
 );
 
 # HEAD
 my $glossary = <<__ENDP__;
 <?xml version="1.0" standalone="no"?>
 
-<!DOCTYPE glossary PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
   "../docbook/docbookxi.dtd">
 
-<glossary>
+<article>
 	<title>Interchange Documentation: Glossary</title>
 
 __ENDP__
@@ -61,9 +63,6 @@ my $howtos = <<__ENDP__;
 
 <article id="howtos">
 	<title>Interchange Documentation: HOW-TO Collection</title>
-
-<qandadiv>
-	<title>HOW-TO Collection</title>
 
 __ENDP__
 
@@ -81,7 +80,12 @@ while ( my $file = readdir DIR ) {
 	next if $file =~ /^\.|^CVS|\.xml$/;
 	open IN, "< $cat/$file" or die "Can't read-open $cat/$file ($!)\n";
 
-	( my $visible_name = $file ) =~ s/-/ /g;
+	if ( $cat eq 'howtos' ) {
+		$visible_name = <IN>;
+	} else {
+ 		( $visible_name = $file ) =~ s/-/ /g;
+	}
+	
 	$items{$file} = [ prefix($cat, $file), <IN>, suffix($cat, $file) ];
 	$alphabet{ lc(substr($file, 0, 1)) }++;
 	push @loaded, $file;
@@ -112,17 +116,20 @@ if ( $cat eq 'glossary' ) {
 		next unless $alphabet{$letter}; # Next if no entries on that letter
 		print "Passed on $letter\n" if $verbose;
 
-		$document .= '<glossdiv id="' . uc($letter) . '"><title>' .
-			uc($letter) . '</title>' . "\n";
+		# Code that was doing separations by letter. (like A.. B..).
+		# This isn't applicable any more since we've switched to 
+		# doctype 'article' instead of 'glossary'.
+		#$document .= '<glossdiv id="' . uc($letter) . '"><title>' .
+		#	uc($letter) . '</title>' . "\n";
 
 		my @keys = sort grep {/^$letter/i} keys %items;
 		for my $key ( @keys ) {
 			print "FOUND KEY $key\n" if $verbose;
 			$document .= join "", @{ $items{$key} };
 		}
-		$document .= '</glossdiv>' . "\n";
+		#$document .= '</glossdiv>' . "\n";
 	}
-	$document .= '</glossary>';
+	$document .= '</article>';
 
 } elsif ( $cat eq 'howtos' ) {
 	$document = $howtos;
@@ -130,7 +137,7 @@ if ( $cat eq 'glossary' ) {
 		print "Processing $howto\n" if $verbose;
 		$document .= join "", @{ $items{$howto} };
 	}
-	$document .= '</qandadiv></article>';
+	$document .= '</article>';
 }
 
 
@@ -156,7 +163,6 @@ exit 0;
 
 sub prefix {
 	my ($cat, $file) = @_;
-	( my $visible_name = $file ) =~ s/-/ /g;
 	if ( $header{$cat} ) {
 		my $tmp = $header{$cat};
 		$tmp =~ s/(\$\w+)/$1/gee;
@@ -167,7 +173,6 @@ sub prefix {
 
 sub suffix {
 	my ($cat, $file) = @_;
-	( my $visible_name = $file ) =~ s/-/ /g;
 	if ( $footer{$cat} ) {
 		my $tmp = $footer{$cat};
 		$tmp =~ s/(\$\w+)/$1/gee;

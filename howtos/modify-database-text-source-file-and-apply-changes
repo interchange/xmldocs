@@ -1,7 +1,5 @@
 Modify Database Text Source File and Apply Changes
-</para></question>
 
-<answer><para>
 With some kind of a DBM &glos-database;, this should be automatic. Changes
 to the text source file will be detected on first client access to the
 specific database; &IC; will then re-read the text source file and override
