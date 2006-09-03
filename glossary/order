@@ -31,12 +31,13 @@ mail_receipt     The customer's email copy (if requested)
 ]]></programlisting>
 
 <programlisting><![CDATA[
-<input  type="hidden"  name="mv_order_size" value="L">
+    <input type=hidden name=mv_item_option value="size">
+    <input type=hidden name=mv_order_size value="L">
 ]]></programlisting>
 
 If the order is coming from a generated flypage, loop list, or search
 results page, you can get a canned select box from the 
-<code>[item-accessories size]</code> or <code>[item-accessories size]</code> tag. See
+<code>[item-size]</code> or <code>[item-accessories size]</code> tag. See
 <emphasis>Item Attributes</emphasis>.
 </para>
 -->
@@ -114,7 +115,7 @@ the basket page. The <arg choice='plain'>code</arg> parameter should be a
 valid product SKU (listed in one of the <database>products</database> tables),
 and is the only required parameter. <arg choice='plain'>href</arg> allows
 some page other than the default basket to be displayed once the item has
-been added to the cart. <arg choice='plain'>cart</arg> selects the shopping
+been added to the cart. <literal>cart</literal> selects the shopping
 cart the item will be placed in (you see, the default cart is called 
 <literal>main</literal>, but &IC; is always a step ahead).
 </para>
@@ -126,7 +127,11 @@ or &tag-area; tags as well. Here are a few lines, all equal in effect:
 <programlisting><![CDATA[
 Order a [order TK112]Toaster</a> today!
 Order a [page order TK112]Toaster</a> today!
+
 Order a <a href="[area order TK112]">Toaster</a> today!
+Order a <a href="[area href=order arg=TK112]">Toaster</a> today!
+
+Order a <a href="[area href=order form='mv_order_item=TK112']">Toaster</a> today!
 ]]></programlisting>
 </para>
 <para>
@@ -151,9 +156,13 @@ Form-based ordering comes handy when you want to implement more complex
 ordering schemes. Consider the same ordering example as above (a toaster of
 product SKU <literal>TK112</literal>) implemented using forms:
 
+<!-- 
+	This line is taken out in Mike's update docs
+	<input name="mv_todo"           type="hidden" value="refresh"    />
+-->
 <programlisting><![CDATA[
-<form action="[process]" method="post">
-  <input name="mv_todo"           type="hidden" value="refresh"    />
+<form action="[process href=order]" method="post">
+  [form-session-id]
   <input name="mv_order_item"     type="hidden" value="TK112"      />
   <input name="mv_order_quantity" type="text"   value="1" size="3" /> toasters 
   <input value="Order!"           type="submit"                    />
@@ -188,8 +197,8 @@ or a complex set of &glos-HTML; widgets!
 items ("batches") at once:
 
 <programlisting><![CDATA[
-<form action="[process]" method="post">
-  <input name="mv_todo"           type="hidden" value="refresh"          />
+<form action="[process href=order]" method="post">
+  [form-session-id]
   <input name="mv_order_item"     type="hidden" value="TK112"            />
   <input name="mv_order_quantity" type="text"   value="1"       size="3" /> Standard Toaster <br/>
   <input name="mv_order_item"     type="hidden" value="TK200"            />
@@ -210,7 +219,7 @@ items with a positive quantity will be placed in the basket.
 	<title>Items created "on fly"</title>
 
 <para>
-Note that "on fly" items are those that do not exist in any of the 
+Note that "on the fly" items are those that do not exist in any of the 
 <database>products</database> databases, and are literally "put together"
 on the fly. This is unrelated to &IC; &glos-flypage; functionality.
 </para>
@@ -224,13 +233,24 @@ A basic on-fly item can then be generated like this:
 
 <programlisting><![CDATA[
 <a href="[area form="
-  mv_todo=refresh
   mv_order_item=000101
+  mv_order_quantity=1
   mv_order_fly=description=An on-the-fly item|price=100.01
 "]">Order item 000101</a>
 ]]></programlisting>
-<!-- TODO is SKU an existing SKU, for which you modify values, or we "invent"
-a new item from scratch? -->
+
+Or, through a proper Submit button:
+
+<programlisting><![CDATA[
+<form action="[process href=order]" method="post">
+  [form-session-id]
+  <input type="hidden" name="mv_order_item" value="000101">
+  Qty: <input size="2" name="mv_order_quantity" value="1">
+  <input type="hidden" name="mv_order_fly" value="description=An on-the-fly item|price=100.01">
+  <input type="submit" value="Order button">
+</form>
+]]></programlisting>
+
 
 A lot of things might look weird in the above example, but it is all valid
 &glos-ITL; code.
@@ -328,8 +348,8 @@ defining <mv>mv_order_group</mv>. The first item in the list is then
 treated as the master item, and all other are sub-items.
 
 <programlisting><![CDATA[
-<form action="[process]"  method="post">
-  <input name="mv_todo"        type="hidden" value="refresh"   />
+<form action="[process href=order]"  method="post">
+  [form-session-id]
   <input name="mv_order_group" type="hidden" value="1"         />
   <input name="mv_order_item"  type="hidden" value="00-0011"   />
   <input name="mv_order_item"  type="hidden" value="00-0011a"  />
@@ -343,8 +363,8 @@ Master item "owns" all subsequent sub-items until the next master
 is defined.
 
 <programlisting><![CDATA[
-<form action="[process]"  method="post">
-  <input name="mv_todo"        type="hidden" value="refresh"   />
+<form action="[process href=order]"  method="post">
+  [form-session-id]
   <input name="mv_order_group" type="hidden" value="1"         />
   <input name="mv_order_item"  type="hidden" value="00-0011"   />
   <input name="mv_order_group" type="hidden" value="0"         />
@@ -483,11 +503,11 @@ And for the sake of completeness, here's the above example using form-based
 ordering:
 
 <programlisting><![CDATA[
-<form action="[process]" method="post">
+<form action="[process href=order]" method="post">
+  [form-session-id]
   <input name="mv_order_item"     type="checkbox" value="M1212"   /> Item M1212
   <input name="mv_order_quantity" type="text"     value="1"       /> Quantity
   <input name="mv_cartname"       type="hidden"   value="layaway" />
-  <input name="mv_doit"           type="hidden"   value="refresh" />
   <input value="order this item!" type="submit">
 </form>
 ]]></programlisting>

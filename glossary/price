@@ -194,8 +194,8 @@ I - integer
 	</para><para>
 	A number which is applied as a percentage of the <emphasis>current</emphasis>
 	price value. May be a positive or negative number. For instance,
-	a price of <literal>10</literal> and settor of <literal>-8%</literal> result
-	in new current price of <literal>9.20</literal>.
+	a price of <literal>10.00</literal> and settor of <literal>-8%</literal>
+	result in new current price of <literal>9.20</literal>.
 	</para></listitem>
 
 	<listitem><para>
@@ -253,6 +253,13 @@ pricing:p1..p5,p10:
 	</para>
 	</warning>
 
+	<para>
+	One excellent extra effect you can achive with this is "mix-and-match".
+	It allows you to order <emphasis>different</emphasis> items which you
+	put into the same "product group" to have their quantities added together
+	to determine the appropriate price range.
+	</para>
+
 	</listitem>
 
 	<listitem><para>
@@ -265,22 +272,22 @@ pricing:p1..p5,p10:
 	</para></listitem>
 
 	<listitem><para>
-	<emphasis role='bold'>&amp;<replaceable>PERL_CODE</replaceable></emphasis>
+	<emphasis role='bold'>&amp; <replaceable>PERL_CODE</replaceable></emphasis>
 	The leading <literal>&amp;</literal> character is stripped and the PERL_CODE
-	block is passed to the equivalent of a &tag-calc; tag. However, no &IC; tags
-	<!-- TODO tag_data : elaborate how to set it -->
-	can be used in there. Even so, your <function>tag_data</function> routine
+	block is passed to the equivalent of a &tag-calc; tag. No &IC; tags
+	can be used in there, but the  <function>tag_data()</function> function
+	(&tag-data; tag, basically)
 	<emphasis>is</emphasis> available, the <emphasis>current</emphasis> price is
 	available in variable <varname>$s</varname>, and 
 	the current item details (code, quantity, price, and any attributes) are
-	available inside the <varname>$item</varname> hashref. All are found
-	in package <classname>Vend::Interpolate</classname>.
+	available inside the <varname>$item</varname> &glos-hash; reference.
+	All are found in &PERL; package <classname>Vend::Interpolate</classname>.
 	</para>
 	<para>
 	That said,
 
 <programlisting><![CDATA[
-$Vend::Interpolate::item          is the current item
+$Vend::Interpolate::item          is the current item hash reference
 $Vend::Interpolate::item->{code}  gives key for current item
 $Vend::Interpolate::item->{mv_ib} gives database ordered from
 $Vend::Interpolate::item->{...}   gives specified attribute's value

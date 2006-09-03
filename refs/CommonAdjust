@@ -178,6 +178,25 @@ __END__
 
 
 
+__NAME__ example: Using the "mix-and-match" feature
+As mentioned in the &glos-price; glossary entry, you can have quantities
+of different items (but which belong to the same product group) added
+together to determine the appropriate price class.  With a
+<database>pricing</database> table of:
+<programlisting><![CDATA[
+sku      price_group   q5   q10   q25
+os28004  group_a       10     9     8
+os28008  group_a       20    18    17
+]]></programlisting>
+and a &conf-CommonAdjust; setting of:
+<programlisting><![CDATA[
+pricing:price_group,q5,q10,q25
+]]></programlisting>
+the price for six items os28004 would be <literal>9.00</literal> each, and
+the price for three items os28008 would be <literal>18.00</literal> each.
+(No, this is not a mistake in the text, take another look at the description).
+__END__
+
 CommonAdjust    pricing:q2,q5,q10,q25, ;products:price, ==size:pricing
 
 
