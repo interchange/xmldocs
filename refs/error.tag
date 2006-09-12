@@ -371,11 +371,18 @@ __END__
 
 __NAME__ description
 The &tag-__FILENAME__; tag was designed to report meaningful error
-messages to the users, should an error ocurr in the &glos-form; processing
+messages to the users, should an error occur in the &glos-form; processing
 action (such as missing or invalid field values entered).
 </para><para>
 It can work in conjunction with the definitions set in a &glos-profile;,
 and can generate error messages in any format you desire.
+</para><para>
+Error conditions can also be tested with the [if] conditional:
+<programlisting>
+[if errors fname]
+Please enter your first name!
+[/if]
+</programlisting>
 <!--
 </para><para>
 Generally, if the variable in question passes order profile checking, 
@@ -390,9 +397,16 @@ $Vend::Session-gt;{errors};
 -->
 __END__
 
-__NAME__ example
-Set an error:
+__NAME__ example 
+Trigger an error:
 <programlisting>
 [error name="email" set="Invalid email address"]
+</programlisting>
+__END__
+
+__NAME__ example
+Show all errors:
+<programlisting>
+[error all=1 show_error=1]
 </programlisting>
 __END__
