@@ -1,0 +1,294 @@
+
+<emphasis>Tag</emphasis> is a basic functional unit in &glos-ITL; &mdash; 
+Interchange Tag Language.
+It is to &IC; what HTML tags are to a &glos-HTML; page, or binary executables
+to an Unix shell.
+</para><para>
+As tags and their usage are explained under the &glos-ITL; glossary entry, 
+we are going to explain usertag inclusion in the Interchange server and
+usertag programming here.
+
+<section>
+	<title>Usertag inclusion</title>
+	<para>
+	</para>
+</section>
+
+
+
+
+
+
+
+<section>
+	<title>Usertag programming</title>
+
+
+
+<section>
+	<title>Place of definition</title>
+	<para>
+	Tags have traditionally been defined in 
+	<filename>lib/Vend/Interpolate.pm</filename> file in the &IC; source tree.
+	While some of the crucial tags are still defined there (search for
+	<literal>^sub tag_</literal> in the file) to solve the chicken-or-egg
+	problem, new tags should be created as standalone files within the
+	<filename class='directory'>code/</filename> directory in the Interchange
+	source. This makes them more manageable and allows you to easily
+	"deactivate" unused tags and decrease IC;'s memory footprint (as
+	explained above).
+	</para>
+</section>
+
+<section>
+	<title>Tag types</title>
+	<para>
+	Even though all &IC; tags are generally called <emphasis>tags</emphasis> or
+	<emphasis>usertags</emphasis>, there are actually three types of tags:
+	system tags, user tags and UI tags. There's no functional difference between
+	them, but we've decided to introduce a rough distinction.
+	</para>
+	<para>
+	<itemizedlist>
+		<listitem><para>
+		System tags (or <emphasis>core</emphasis> tags) are defined in
+		<filename>lib/Vend/Interpolate.pm</filename> and 
+		<filename class='directory'>code/SystemTag/</filename> in 
+		&IC; source. They are used by core Interchange modules
+		(<filename>lib/Vend/*.pm</filename> files) and are required for a 
+		functional installation.
+		Some files have the extension <literal>.coretag</literal>, and some
+		have the usual <literal>.tag</literal>, but there's no difference.
+		(<literal>.tag</literal> is preferred for your custom tags).
+		</para></listitem>
+		<listitem><para>
+		User tags are defined in
+		<filename class='directory'>code/UserTag/</filename> directory and
+		form a collection of commonly used Interchange tags. This is the most
+		common type and directly intended for custom catalog programming.
+		</para></listitem>
+		<listitem><para>
+		&glos-UI; (User Interface) tags are defined in
+		<filename class='directory'>code/UI_Tag/</filename> directory and
+		form a collection of extra tags used by our Admin UI interface.
+		</para></listitem>
+	</itemizedlist>
+	</para>
+	<para>
+	A catalog that is not running the Admin UI should, theoretically, be able
+	to do without the whole <filename class='directory'>code/UI_Tag/</filename>
+	directory. However, as very useful tags are found within all three types,
+	the &conf-AccumulateCode; approach is preferred over this crude
+	directory-based selection.
+	</para>
+</section>
+
+
+<section>
+	<title>Tag restrictions and global code</title>
+	<para>
+	Global usertags (defined at the &IC; server level) run directly under
+	&IC; server permissions, without restrictions.
+	</para><para>
+	Catalog usertags (defined at the &glos-catalog; level), however, run
+	under &glos-safe; restrictions to maximize security.
+	</para><para>
+	You should run all your custom tags at catalog-level and eventually
+	let some of the restrictions loose using &conf-SafeUntrap; configuration
+	directive. Run global usertags only when there is no other option, and 
+	make sure your code is as resilient to arbitrary user input as possible.
+	</para>
+</section>
+
+<section>
+	<title>Location for custom usertags</title>
+	<para>
+	Usertags are defined using the &conf-UserTag; config directive so,
+	obviously, they have to be defined in &gcf; or &ccf;, or some separate
+	files read by those basic &glos-configuration; files.
+	</para>
+	<para>
+	While you could add your own tags to the default &IC; directories
+	(within the <filename class='directory'>code/</filename> directory, as
+	explained) or even define them in &gcf; or &ccf; directly, it's generally
+	best if you create a
+	<filename class='directory'>usertag/</filename> directory (at a catalog 
+	or global level), put your custom tags there, and include them in the
+	running configuration with the <code>include usertag/*.tag</code>
+	configuration directive.
+	</para>
+</section>
+
+<section>
+	<title>Basic usertag file</title>
+	<para>
+	Here's a classic &glos-hello-world; usertag example,
+	containing all the relevant structural elements:
+<programlisting><![CDATA[
+# Copyright 2006 COPYRIGHT-HOLDER-NAME
+# Licensed under the GNU GPL v2. See file LICENSE for details.
+# $Id: usertag,v 1.2 2006-09-26 19:14:45 docelic Exp $
+
+UserTag hello-world Order     name
+UserTag hello-world addAttr
+UserTag hello-world Version   $Revision: 1.2 $
+UserTag hello-world Routine   <<EOR
+sub {
+  my ($name) = @_;
+  my $ret;
+
+  $name ||= "world";
+  $name = uc $name;
+
+  $ret = "Hello, $name!";
+
+  return $ret;
+}
+EOR
+]]></programlisting>
+	</para><para>
+	After you install the usertag (as explained above), you can test it
+	by using this sample HTML code:
+<programlisting><![CDATA[
+<pre>
+  The default name: [hello-world]
+
+  Name "John: [hello-world john]
+</pre>
+]]></programlisting>
+	</para><para>
+	As you can see, each usertag is defined through a series of
+	&conf-UserTag; lines. All possible &glos-UserTag; options are
+	explained in the following section.
+	</para>
+</section>
+
+<section>
+	<title>Usertag options</title>
+	<para>
+	Recognized usertag options are defined as a &PERL; hash named
+	<literal>%tagCanon</literal> in file <filename>lib/Vend/Config.pm</filename>:
+<itemizedlist>
+<listitem><para>
+ Group
+</para></listitem>
+<listitem><para>
+ ActionMap
+</para></listitem>
+<listitem><para>
+ ArrayCode
+</para></listitem>
+<listitem><para>
+ HashCode
+</para></listitem>
+<listitem><para>
+ CoreTag
+</para></listitem>
+<listitem><para>
+ SearchOp
+</para></listitem>
+<listitem><para>
+ Filter
+</para></listitem>
+<listitem><para>
+ FormAction
+</para></listitem>
+<listitem><para>
+ OrderCheck
+</para></listitem>
+<listitem><para>
+ UserTag
+</para></listitem>
+<listitem><para>
+ SystemTag
+</para></listitem>
+<listitem><para>
+ Widget
+</para></listitem>
+<listitem><para>
+ Alias
+</para></listitem>
+<listitem><para>
+ addAttr
+</para></listitem>
+<listitem><para>
+ attrAlias
+</para></listitem>
+<listitem><para>
+ attrDefault
+</para></listitem>
+<listitem><para>
+ canNest
+</para></listitem>
+<listitem><para>
+ Description
+</para></listitem>
+<listitem><para>
+ Override
+</para></listitem>
+<listitem><para>
+ Visibility
+</para></listitem>
+<listitem><para>
+ Help
+</para></listitem>
+<listitem><para>
+ Documentation
+</para></listitem>
+<listitem><para>
+ ExtraMeta
+</para></listitem>
+<listitem><para>
+ Gobble
+</para></listitem>
+<listitem><para>
+ hasEndTag
+</para></listitem>
+<listitem><para>
+ Implicit
+</para></listitem>
+<listitem><para>
+ Interpolate
+</para></listitem>
+<listitem><para>
+ InvalidateCache
+</para></listitem>
+<listitem><para>
+ isEndAnchor
+</para></listitem>
+<listitem><para>
+ noRearrange
+</para></listitem>
+<listitem><para>
+ Order
+</para></listitem>
+<listitem><para>
+ PosNumber
+</para></listitem>
+<listitem><para>
+ PosRoutine
+</para></listitem>
+<listitem><para>
+ MapRoutine
+</para></listitem>
+<listitem><para>
+ NoReparse
+</para></listitem>
+<listitem><para>
+ JavaScriptCheck
+</para></listitem>
+<listitem><para>
+ Required
+</para></listitem>
+<listitem><para>
+ Routine
+</para></listitem>
+<listitem><para>
+ Version
+</para></listitem>
+</itemizedlist>
+	</para>
+</section>
+
+</section>
+
