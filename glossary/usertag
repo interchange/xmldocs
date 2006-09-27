@@ -125,20 +125,25 @@ usertag programming here.
 	Here's a classic &glos-hello-world; usertag example,
 	containing all the relevant structural elements:
 <programlisting><![CDATA[
-# Copyright 2006 COPYRIGHT-HOLDER-NAME
+# Copyright YEAR COPYRIGHT-HOLDER-NAME EMAIL-OR-WEB-ADDRESS
 # Licensed under the GNU GPL v2. See file LICENSE for details.
-# $Id: usertag,v 1.2 2006-09-26 19:14:45 docelic Exp $
+# $Id: usertag,v 1.3 2006-09-27 09:11:01 docelic Exp $
 
 UserTag hello-world Order     name
 UserTag hello-world addAttr
-UserTag hello-world Version   $Revision: 1.2 $
+UserTag hello-world Version   $Revision: 1.3 $
 UserTag hello-world Routine   <<EOR
 sub {
-  my ($name) = @_;
+  my ($name, $opt) = @_;
   my $ret;
 
   $name ||= "world";
-  $name = uc $name;
+  $name = ucfirst $name;
+
+  if ( $_ = $opt->{surname} ) {
+    $_ = ucfirst;
+    $name .= " $_";
+  }
 
   $ret = "Hello, $name!";
 
@@ -153,7 +158,9 @@ EOR
 <pre>
   The default name: [hello-world]
 
-  Name "John: [hello-world john]
+  Name "John": [hello-world john]
+
+  Name "John", surname "Doe": [hello-world name=john surname=doe]
 </pre>
 ]]></programlisting>
 	</para><para>
@@ -206,13 +213,35 @@ EOR
  Widget
 </para></listitem>
 <listitem><para>
- Alias
+ Alias &mdash; another name, an alias, for the tag.
+<programlisting>
+UserTag <replaceable>ALIASED-NAME</replaceable> Alias <replaceable>NAME</replaceable>
+
+UserTag time Version $Revision: 1.3 $
+UserTag date Alias   time
+</programlisting>
 </para></listitem>
 <listitem><para>
- addAttr
+ addAttr &mdash; pass a hash reference with all user-supplied tag attributes
+ as last argument to the tag handling subroutine.
+<programlisting>
+UserTag <replaceable>NAME</replaceable> addAttr <replaceable>[VALUE]</replaceable>
+
+UserTag benchmark addAttr     <emphasis>(implies Yes)</emphasis>
+
+UserTag benchmark addAttr 1
+
+UserTag benchmark addAttr 0
+</programlisting>
 </para></listitem>
 <listitem><para>
- attrAlias
+ attrAlias &mdash; another name, an alias, for a tag's attribute.
+<programlisting>
+UserTag <replaceable>NAME</replaceable> attrAlias <replaceable>ALIASED-ATTR-NAME</replaceable> <replaceable>REAL-ATTR-NAME</replaceable>
+
+UserTag meta-info Order     table column key
+UserTag meta-info attrAlias col column
+</programlisting>
 </para></listitem>
 <listitem><para>
  attrDefault
@@ -221,7 +250,17 @@ EOR
  canNest
 </para></listitem>
 <listitem><para>
- Description
+ Description &mdash; embedded, one-line tag description.
+<programlisting>
+UserTag <replaceable>NAME</replaceable> Description <replaceable>TEXT</replaceable>
+
+UserTag uninstall_feature Description Uninstall feature installed with 'Feature' config directive.
+
+UserTag uninstall_feature Description &lt;&lt;EOD
+Uninstall feature installed with
+'Feature' config directive.
+EOD
+</programlisting>
 </para></listitem>
 <listitem><para>
  Override
@@ -233,7 +272,18 @@ EOR
  Help
 </para></listitem>
 <listitem><para>
- Documentation
+ Documentation &mdash; embedded tag documentation. This can be any free-form
+ text, but sometimes it's handy to write the documentation in &PERL; POD 
+ syntax, as it allows the use of convenient <command>pod2text</command>
+ and related commands to read the documentation.
+<programlisting>
+UserTag <replaceable>NAME</replaceable> Documentation <replaceable>TEXT</replaceable>
+
+UserTag tabbed-display Documentation &lt;&lt;EOD
+tabbed-display -- DHTML tabbed display
+  ......
+EOD
+</programlisting>
 </para></listitem>
 <listitem><para>
  ExtraMeta
@@ -242,13 +292,45 @@ EOR
  Gobble
 </para></listitem>
 <listitem><para>
- hasEndTag
+ hasEndTag &mdash; the tag has an end tag. In other words, 
+ <emphasis role='bold'>the tag is a container</emphasis>.
+<programlisting>
+UserTag <replaceable>NAME</replaceable> hasEndTag <replaceable>[VALUE]</replaceable>
+
+UserTag widget hasEndTag     <emphasis>(implies Yes)</emphasis>
+
+UserTag widget hasEndTag 1
+
+UserTag widget hasEndTag 0
+</programlisting>
 </para></listitem>
 <listitem><para>
  Implicit
 </para></listitem>
 <listitem><para>
- Interpolate
+ Interpolate &mdash; &glos-interpolate; tag data. Due to a poor naming choice,
+ <emphasis role='bold'>this option behaves differently for non-container
+ and container tags</emphasis>.
+ </para><para>
+ For non-container tags, it specifies whether <emphasis role='bold'>tag 
+ output</emphasis> should be &glos-reparse;d for more &IC; tags.
+ </para><para>
+ For container tags, it specifies whether <emphasis role='bold'>tag 
+ body</emphasis> should be &glos-interpolate;d before being passed
+ to the tag. Another option, <literal>NoReparse</literal> then controls
+ whether final <emphasis role='bold'>tag output</emphasis> should
+ be &glos-reparse;d for more &IC; tags.
+ </para><para>
+ Interpolation is turned off by default.
+<programlisting>
+UserTag <replaceable>NAME</replaceable> Interpolate <replaceable>[VALUE]</replaceable>
+
+UserTag table-organize Interpolate     <emphasis>(implies Yes)</emphasis>
+
+UserTag table-organize Interpolate 1
+
+UserTag table-organize Interpolate 0
+</programlisting>
 </para></listitem>
 <listitem><para>
  InvalidateCache
@@ -263,7 +345,14 @@ EOR
  Order
 </para></listitem>
 <listitem><para>
- PosNumber
+ PosNumber &mdash; number of positional tag parameters. This option is not required as the number is automatically calculated from the <literal>Order</literal>
+ option.
+<programlisting>
+UserTag <replaceable>NAME</replaceable> PosNumber <replaceable>COUNT</replaceable>
+
+UserTag test Order     opt1 opt2 opt3
+UserTag test PosNumber 3
+</programlisting>
 </para></listitem>
 <listitem><para>
  PosRoutine
@@ -272,7 +361,20 @@ EOR
  MapRoutine
 </para></listitem>
 <listitem><para>
- NoReparse
+ NoReparse &mdash; do not reparse <emphasis role='bold'>output from
+ container tags</emphasis> for more &IC; tags. This option has no effect
+ on non-container tags.
+ </para><para>
+ Reparsing is turned on by default (<literal>NoReparse 0</literal>).
+<programlisting>
+UserTag <replaceable>NAME</replaceable> NoReparse <replaceable>[VALUE]</replaceable>
+
+UserTag either NoReparse     <emphasis>(implies Yes)</emphasis>
+
+UserTag either NoReparse 1
+
+UserTag either NoReparse 0
+</programlisting>
 </para></listitem>
 <listitem><para>
  JavaScriptCheck
