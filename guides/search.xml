@@ -180,16 +180,50 @@ icdevgroup.conf</literal>.
 		</listitem>
 		<listitem><para>
 		<literal>mv_cache_key</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
-
+		(ck, <replaceable>search_reference_pointer</replaceable>,
+		default none) &mdash;
+		not intended for common use. When &tag-more; tag is used,
+		this option automatically provides a pointer to the search
+		reference.
 		</para>
 		</listitem>
 		<listitem><para>
 		<literal>mv_coordinate</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
-
+		(co, <literal>0</literal>/<literal>1</literal>,
+		default <literal>0</literal>) &mdash;
+		the so-called "coordinated" search allows for multiple search options
+		to be stacked on top of each other.
+		</para><para>
+		If the number of search fields (<literal>sf</literal> options) equals the
+		number of search specs (<literal>se</literal> options), the search will
+		return only items that match all field-specification pairs.
+		</para><para>
+		When coordinated searching is used, case sensitivity, substring matching,
+		negation and other options can be specified multiple times and work on a
+		field-by field basis, according to the following rules:
+		<itemizedlist>
+			<listitem><para>
+			If only one instance of the option is set, it will affect all fields
+			(search specifications).
+			</para></listitem>
+			<listitem><para>
+			If the number of instances of the option is greater than, or equal to,
+			the number of search specifications, all will be used independently.
+			(Eventual trailing, excess instances will be ignored).
+			</para></listitem>
+			<listitem><para>
+			If more than one instance of the option is set, but fewer than the
+			total number of search specifications, the default, documented setting
+			will be used for trailing search specifications.
+			</para></listitem>
+			<listitem><para>
+			If a search specification is blank, it will be removed and all
+			case-sensitivity, negation, substring and other options will be
+			adjusted accordingly. If you need to match on a blank string,
+			use quotes (<literal>""</literal>).
+			<!-- TODO adjusted how?? unclear -->
+			</para></listitem>
+		</itemizedlist>
 		</para>
 		</listitem>
 		<listitem><para>
@@ -250,16 +284,19 @@ icdevgroup.conf</literal>.
 		</listitem>
 		<listitem><para>
 		<literal>mv_record_delim</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
-
+		(dr, <replaceable>record_delimiter</replaceable>,
+		default <literal>\n</literal>) &mdash;
+		delimiter for counting records in search index files.
+		The default, a newline, works well for most line-based index files.
 		</para>
 		</listitem>
 		<listitem><para>
 		<literal>mv_exact_match</literal>
-		(em, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
-
+		(em, <literal>0</literal>/<literal>1</literal>,
+		default <literal>0</literal>) &mdash;
+		require that search field matches the search specification exactly
+		(as opposed to the default word-based matching, or substring matching
+		with <literal>su</literal>).
 		</para>
 		</listitem>
 		<listitem><para>
@@ -271,9 +308,13 @@ icdevgroup.conf</literal>.
 		</listitem>
 		<listitem><para>
 		<literal>mv_field_file</literal>
-		(ff, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
-
+		(ff, <replaceable>header_filename</replaceable>,
+		default none) &mdash;
+		specify filename containing a single line with the list of
+		database fields, separated by TABs.
+		This is used when you are searching databases without the "field
+		header" on the first line, but you would still want to refer to fields
+		by their names.
 		</para>
 		</listitem>
 		<listitem><para>
@@ -292,9 +333,14 @@ icdevgroup.conf</literal>.
 		</listitem>
 		<listitem><para>
 		<literal>mv_first_match</literal>
-		(fm, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
-
+		(fm, <replaceable>search_result_number</replaceable>,
+		default 1) &mdash;
+		<!-- TODO one or zero -->
+		return search results from the specified result number onwards. When this
+		option is set, &IC; will return search results starting from the match
+		number specified even if there is only one page of results.
+		If set to a value greater than the total number of matches, it will act
+		as if no matches were found. 
 		</para>
 		</listitem>
 		<listitem><para>
