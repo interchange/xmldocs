@@ -239,7 +239,8 @@ __NAME__ synopsis
   <!-- DFL -->
   </entry>
   <entry>
-  Literal value to set counter to
+  Only show the counter value, without incrementing or decrementing it?
+	(This option is not applicable to SQL counters).
   </entry>
 
 </row> 

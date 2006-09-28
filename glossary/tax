@@ -9,23 +9,27 @@ without and with tax included, for each product and total? -->
 <section>
 	<title>Simple "salestax.asc" Method</title>
 <para>
-In this simple taxing method, &conf-SalesTax; directive is
-set to form fields whose values will be used as keys to look up
-the tax rate in <filename>CATROOT/products/salestax.asc</filename>.
-</para>
-<para>
 Sales tax calculation in this simple scheme is performed on a straight
 percentage basis,
 with certain items allowed to be tax-exempt. Simply initialize the
 &conf-SalesTax; directive to the name of lookup fields. Those lookup fields
 are the ones that are available on the final order form and indicate
-geographical locality. Usually, the fields are zip and state codes:
+geographical locality.
+</para><para>
+&conf-SalesTax; configuration directive is
+set to form fields whose values will be used as keys to look up
+the tax rate in <filename>products/salestax.asc</filename>, based on localities.
+<database>salestax</database> is a fixed-format database, and consists
+of identifiers that match localities defined using &conf-SalesTax;.
+</para><para>
+Locality names are always forced to UPPER CASE, and 
+are usually identified by zip or state codes:
 
 <programlisting><![CDATA[
 SalesTax    zip,state
 ]]></programlisting>
 
-Each line of the mentioned <filename>CATROOT/products/salestax.asc</filename>
+Each line of the mentioned <filename>products/salestax.asc</filename>
 file should contain a code (again, usually 5-digit zip or 2-letter state
 ID), followed by a TAB character and a desired percentage.
 

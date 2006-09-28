@@ -194,8 +194,8 @@ my $buf = qq{<a href="http://www.av.com/">Visit AltaVista!</a>};
 		<varname>$Vend::Xtrailer</varname>.
 <programlisting><![CDATA[
 <form action="[process]">
-  <input type="text"   name="city" value="[value city]" >
-  <input type="submit"             value=" Submit "     >
+  <input type="text"   name="city" value="[value city]" />
+  <input type="submit"             value=" Submit "     />
 </form>
 ]]></programlisting>
 	</para></listitem>
@@ -212,13 +212,36 @@ Entering and tracking all bugs, even those you find and then fix yourself,
 </sect1>
 
 
+<sect1 id="Usertags">
+	<title>Writing usertags</title>
+	<para>
+	See &glos-usertag; and &glos-ITL; glossary entries and the
+	&conf-UserTag; configuration directive for technical information.
+	</para><para>
+	If you use <literal>addAttr</literal> option, then name the
+	hash-receiving variable "<literal>$opt</literal>":
+<programlisting><![CDATA[
+UserTag test Order one two three
+UserTag test addAttr
+UserTag test Routine <<EOR
+sub {
+	my ($one, $two, $three, $opt) = @_;
+
+	....
+}
+EOR
+]]></programlisting>
+	</para>
+</sect1>
+
+
 <sect1 id='XMLDOCS'>
 	<title>XMLDOCS notes</title>
 
 	<para>
 	As you might know, XMLDOCS documentation system contains 
 	<filename>bin/stattree</filename> script which parses complete &IC;
-	source tree. Although I really tried to make it recognize code regardless
+	source tree. Even though it really tries to recognize code regardless
 	of formatting (much like &PERL; interpreter does), there are still some
 	little suggestions on the programming style to make it easier for XMLDOCS.
 	</para>
@@ -238,6 +261,8 @@ my $test = 12; # Only used for test
 		Do not break word <literal>sub</literal> and subroutine name to separate
 		lines.
 		<code>sub test....</code> is OK, <code>sub \n test</code> is NOT.
+		It's best to use the cleanest variant that matches regular expression
+		<code>^sub \w+ {$</code>.
 		(Impact: might confuse function tracking code)
 <programlisting><![CDATA[
 sub test1 {
@@ -278,6 +303,8 @@ if (
 	</itemizedlist>
 </sect1>
 
-
 </article>
 
+
+
+<!-- TODO add note that in usertags addAttr goes to $opt -->

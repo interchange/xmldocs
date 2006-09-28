@@ -7,3 +7,6 @@ integer value.
 </para><para>
 The available banners are displayed <emphasis>in sequential order</emphasis>,
 with an independent pointer for each client.
+</para><para>
+See the &tag-banner; tag and &howto-implement-banners; for further
+discussion and examples.

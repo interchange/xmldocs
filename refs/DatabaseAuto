@@ -165,13 +165,13 @@ The following setting for &PGSQL; would make &IC; only see the tables
 in the <literal>public</literal> schema of a database, and not in
 any other schemas.
 <programlisting>
-DatabaseAuto dbi:Pg:DBNAME USERNAME PASSWORD '' public
+DatabaseAuto dbi:Pg:dbname=DBNAME USERNAME PASSWORD '' public
 </programlisting>
 __END__
 
 __NAME__ example: Making Interchange recognize views
 <programlisting>
-DatabaseAuto dbi:Pg:DBNAME USERNAME PASSWORD  ''  public  ''  VIEW
+DatabaseAuto dbi:Pg:dbname=DBNAME USERNAME PASSWORD  ''  public  ''  VIEW
 </programlisting>
 (The <literal>VIEW</literal> argument should be passed as shown
 &mdash; literally and in uppercase).

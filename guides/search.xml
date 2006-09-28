@@ -111,7 +111,7 @@ format <literal>%Y-%m-%d %H:%M:%S</literal>.
 <programlisting>
 Swish date_format "%d %b %Y"
 </programlisting>
-See &glos-time; for possible format strings.
+See &glos-time; glossary entry for supported format strings.
 </para>
 <section>
 <title>Search Examples</title>
@@ -152,157 +152,617 @@ icdevgroup.conf</literal>.
 </section>
 
 
-<section>
+<section id='search_reference'>
 	<title>Search Reference</title>
 
 	<itemizedlist>
-		<listitem><para>mv_all_chars</para>
-		</listitem>
-		<listitem><para>mv_base_directory</para>
-		</listitem>
-		<listitem><para>mv_begin_string</para>
-		</listitem>
-		<listitem><para>mv_cache_key</para>
-		</listitem>
-		<listitem><para>mv_coordinate</para>
-		</listitem>
-		<listitem><para>mv_case</para>
-		</listitem>
-		<listitem><para>mv_verbatim_columns</para>
-		</listitem>
-		<listitem><para>mv_dict_end</para>
-		</listitem>
-		<listitem><para>mv_dict_fold</para>
-		</listitem>
-		<listitem><para>mv_dict_limit</para>
-		</listitem>
-		<listitem><para>mv_dict_look</para>
-		</listitem>
-		<listitem><para>mv_raw_dict_look</para>
-		</listitem>
-		<listitem><para>mv_dict_order</para>
-		</listitem>
-		<listitem><para>mv_record_delim</para>
-		</listitem>
-		<listitem><para>mv_exact_match</para>
-		</listitem>
-		<listitem><para>mv_spelling_errors</para>
-		</listitem>
-		<listitem><para>mv_field_file</para>
-		</listitem>
-		<listitem><para>mv_search_file</para>
-		</listitem>
-		<listitem><para>mv_field_title</para>
-		</listitem>
-		<listitem><para>mv_first_match</para>
-		</listitem>
-		<listitem><para>mv_field_names</para>
-		</listitem>
-		<listitem><para>mv_head_skip</para>
-		</listitem>
-		<listitem><para>mv_index_delim</para>
-		</listitem>
-		<listitem><para>mv_search_label</para>
-		</listitem>
-		<listitem><para>mv_like_field</para>
-		</listitem>
-		<listitem><para>mv_list_only</para>
-		</listitem>
-		<listitem><para>mv_search_line_return</para>
-		</listitem>
-		<listitem><para>mv_like_spec</para>
-		</listitem>
-		<listitem><para>mv_more_alpha</para>
-		</listitem>
-		<listitem><para>mv_more_alpha_chars</para>
-		</listitem>
-		<listitem><para>mv_more_decade</para>
-		</listitem>
-		<listitem><para>mv_more_id</para>
-		</listitem>
-		<listitem><para>mv_matchlimit</para>
-		</listitem>
-		<listitem><para>mv_max_matches</para>
-		</listitem>
-		<listitem><para>mv_more_matches</para>
-		</listitem>
-		<listitem><para>mv_profile</para>
-		</listitem>
-		<listitem><para>mv_min_string</para>
-		</listitem>
-		<listitem><para>mv_negate</para>
-		</listitem>
-		<listitem><para>mv_negate</para>
-		</listitem>
-		<listitem><para>mv_no_hide</para>
-		</listitem>
-		<listitem><para>mv_no_more</para>
-		</listitem>
-		<listitem><para>mv_nextpage</para>
-		</listitem>
-		<listitem><para>mv_next_search</para>
-		</listitem>
-		<listitem><para>mv_numeric</para>
-		</listitem>
-		<listitem><para>mv_column_op</para>
-		</listitem>
-		<listitem><para>mv_orsearch</para>
-		</listitem>
-		<listitem><para>prefix</para>
-		</listitem>
-		<listitem><para>mv_more_permanent</para>
-		</listitem>
-		<listitem><para>mv_return_all</para>
-		</listitem>
-		<listitem><para>mv_return_delim</para>
-		</listitem>
-		<listitem><para>mv_search_reference</para>
-		</listitem>
-		<listitem><para>mv_return_fields</para>
-		</listitem>
-		<listitem><para>mv_range_alpha</para>
-		</listitem>
-		<listitem><para>mv_range_look</para>
-		</listitem>
-		<listitem><para>mv_range_min</para>
-		</listitem>
-		<listitem><para>mv_return_file_name</para>
-		</listitem>
-		<listitem><para>mv_return_reference</para>
-		</listitem>
-		<listitem><para>mv_return_spec</para>
-		</listitem>
-		<listitem><para>mv_range_max</para>
-		</listitem>
-		<listitem><para>mv_small_data</para>
-		</listitem>
-		<listitem><para>mv_searchspec</para>
-		</listitem>
-		<listitem><para>mv_search_field</para>
-		</listitem>
-		<listitem><para>mv_search_group</para>
-		</listitem>
-		<listitem><para>mv_search_immediate</para>
-		</listitem>
-		<listitem><para>mv_start_match</para>
-		</listitem>
-		<listitem><para>mv_search_page</para>
-		</listitem>
-		<listitem><para>mv_sql_query</para>
-		</listitem>
-		<listitem><para>mv_search_relate</para>
-		</listitem>
-		<listitem><para>mv_searchtype</para>
-		</listitem>
-		<listitem><para>mv_substring_match</para>
-		</listitem>
-		<listitem><para>mv_sort_field</para>
-		</listitem>
-		<listitem><para>mv_sort_option</para>
-		</listitem>
-		<listitem><para>mv_unique</para>
-		</listitem>
-		<listitem><para>mv_value</para>
+		<listitem><para>
+		<literal>mv_all_chars</literal>
+		(ac, <literal>0</literal>/<literal>1</literal>,
+		default <literal>1</literal>) &mdash;
+		escape non-alphanumeric characters in search specification.
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_base_directory</literal>
+		(bd, <replaceable>directory_name</replaceable>,
+		default Interchange installation directory) &mdash;
+		base directory in which to look up text files to search
+		(related option <literal>fi</literal>).
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_begin_string</literal>
+		(bs, <replaceable>regular_expression</replaceable>,
+		default none) &mdash;
+		&glos-regexp; that the beginning of the searched field value must match.
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_cache_key</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_coordinate</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_case</literal>
+		(cs, <literal>0</literal>/<literal>1</literal>,
+		default <literal>0</literal>) &mdash;
+		case sensitive search.
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_verbatim_columns</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_dict_end</literal>
+		(de, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_dict_fold</literal>
+		(df, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_dict_limit</literal>
+		(di, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_dict_look</literal>
+		(dl, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_raw_dict_look</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_dict_order</literal>
+		(do, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_record_delim</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_exact_match</literal>
+		(em, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_spelling_errors</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_field_file</literal>
+		(ff, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_search_file</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_field_title</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_first_match</literal>
+		(fm, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_field_names</literal>
+		(fn, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_head_skip</literal>
+		(hs, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_index_delim</literal>
+		(id, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_search_label</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_like_field</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_list_only</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_search_line_return</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_like_spec</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_more_alpha</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_more_alpha_chars</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_more_decade</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_more_id</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_matchlimit</literal>
+		(ml, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_max_matches</literal>
+		(mm, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_more_matches</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_profile</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_min_string</literal>
+		(ms, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_negate</literal>
+		(ne, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_negate</literal>
+		(ng, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_no_hide</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_no_more</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_nextpage</literal>
+		(np, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_next_search</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_numeric</literal>
+		(nu, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_column_op</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_orsearch</literal>
+		(os, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_more_permanent</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_return_all</literal>
+		(ra, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_return_delim</literal>
+		(dr, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_search_reference</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_return_fields</literal>
+		(rf, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_range_alpha</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_range_look</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_range_min</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_return_file_name</literal>
+		(rn, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_return_reference</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_return_spec</literal>
+		(rs, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_range_max</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_small_data</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_searchspec</literal>
+		(se, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_search_field</literal>
+		(sf, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_search_group</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_search_immediate</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_start_match</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_search_page</literal>
+		(sp, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_sql_query</literal>
+		(sq, <replaceable>SQL_Query</replaceable>,
+		default none) &mdash;
+		for text-based searches (<literal>st=text</literal> only), this option
+		specifies the SQL query to run over the lines in the file.
+		This is not the same as an external &glos-SQL; database search.
+		</para><para>
+		Furthermore, the <replaceable>SQL_Query</replaceable> undergoes a 
+		little modification before it is used. Here's a practical
+		example:
+<programlisting><![CDATA[
+Artist: <input name="artist" />
+Title:  <input name="title"  />
+<input type="hidden" name="mv_sql_query" value="
+  SELECT  code FROM products
+  WHERE artist LIKE artist
+  AND    title LIKE title
+" />
+]]></programlisting>
+</para>
+<para>
+If the right-hand side of every part of expression is an alphanumeric,
+unquoted word, then it is replaced with the 
+appropriate form variable value. (Or if it's a one-click search, &glos-scratch;
+variables are used instead). Quoted right-hand side values are taken literally.
+<!-- it reads from value or cgi space? -->
+</para><para>
+If the left-hand side of every part of expression is a quoted word, the behavior
+is reversed.  That part is replaced with the appropriate form variable value.
+(Or if it's a one-click search, &glos-scratch; variables are used instead).
+Unquoted left-hand side values are taken literally.
+</para>
+<para>
+Here's an example that allows users to select
+whether they want to search in <database class='field'>title</database>
+or <database class='field'>artist</database> fields:
+<programlisting><![CDATA[
+Search for: <input name="searchstring" /><br />
+Search in   <input type="radio" name="column" value="title"  /> title
+            <input type="radio" name="column" value="artist" /> artist
+
+<input type=hidden name="mv_sql_query" value="
+  SELECT code    FROM products
+  WHERE 'column' LIKE searchstring
+" />
+]]></programlisting>
+Just for a reference, here's what the two above examples
+would look like when coded "manually":
+<programlisting><![CDATA[
+[page search="
+  co=yes
+  sf=artist
+  op=rm
+  se=[value artist]
+  sf=title
+  op=rm
+  se=[value title]
+"]
+Search for [value artist], [value title]
+</a>
+
+
+[page search="
+  co=yes
+  sf=[value column]
+  op=rm
+  se=[value searchstring]
+"]
+Search for [value searchstring] in [value column]
+</a>
+]]></programlisting>
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_search_relate</literal>
+		(, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_searchtype</literal>
+		(st, [ <literal>glimpse</literal> | <literal>db</literal> |
+		<literal>sql</literal> | <literal>text</literal> | 
+		<literal>ref</literal> ],
+		<!-- is default none or glimpse? Looking at Scan.pm, there's no default -->
+		default none) &mdash;
+		select search type. <literal>glimpse</literal> uses the Glimpse search
+		engine (see &conf-Glimpse;), <literal>db</literal> (or the
+		equivalent <literal>sql</literal>) iterate over every row in the
+		&glos-SQL; database, <literal>text</literal> searches
+		corresponding &glos-database; text source files, and 
+		<literal>ref</literal> iterates over the results from some
+		previous, already-performed search (related option <literal>lb</literal>).
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_substring_match</literal>
+		(su, <literal>0</literal>/<literal>1</literal>,
+		default <literal>0</literal>) &mdash;
+		match on substrings as well as whole words. This is typically set in
+		dictionary-based searches.
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_sort_field</literal>
+		(tf, <replaceable>field_name_or_index [,field_name2_or_index2...]</replaceable>, 
+		default none) &mdash;
+		determine sort order of the returned data. It is possible to refer
+		to columns by both using their names (if the search is such that column
+		names are known) and their indices, starting from <literal>0</literal>.
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_sort_option</literal>
+		(to, <literal></literal>/<literal></literal>,
+		default <literal></literal>) &mdash;
+
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_unique</literal>
+		(un, <literal>0</literal>/<literal>1</literal>,
+		default <literal>0</literal>) &mdash;
+		return only unique fields. The option works on whatever the search
+		return fields (set with <literal>rf</literal>) are.
+		<!-- TODO returns only unique items, or compressed duplicates into one?
+		Also, does it looks for uniques in one field, or an entry is consudered
+		duplicate only if all fields are the same? -->
+		</para>
+		</listitem>
+		<listitem><para>
+		<literal>mv_value</literal>
+		(va, <replaceable>value_variable_name</replaceable>=<replaceable>value</replaceable>,
+		default none) &mdash;
+		assign <replaceable>value</replaceable> to a &glos-value; variable. This
+		is exactly what happens with normal variables in search &glos-profile;s
+		when you use the <code><replaceable>variable_name</replaceable>=<replaceable>value</replaceable></code> syntax,
+		so you should use this option only where variables cannot be set
+		directly (i.e. in one-click searches):
+<programlisting>
+[page
+  href=scan
+  arg="se=Renaissance
+       se=Impressionists
+       va=category_name=Renaissance and Impressionist Paintings
+       os=yes"
+]Renaissance and Impressionist Paintings&lt;a&gt;
+</programlisting>
+		</para>
 		</listitem>
 	</itemizedlist>
 </section>

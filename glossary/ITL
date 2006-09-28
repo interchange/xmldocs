@@ -6,7 +6,8 @@ ITL is a superset of MML, or &glos-Minivend; Markup Language.
 These ITL tags perform various display and modification operations for
 the user session. There's more than 200 standard predefined tags, and the
 &conf-UserTag; facility allows you to create custom tags that perform your own
-functions and can be just as powerful as the built-in tags.
+functions and can be just as powerful as the built-in tags. To get started
+with custom tags, see &glos-usertag; glossary entry.
 </para>
 
 <section>

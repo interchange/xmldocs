@@ -21,9 +21,9 @@ _END__
 
 
 __NAME__ notes
-Catalog-based usertag will run under <classname>Safe</classname> restrictions
-and will only be accessible from the corresponding catalog.
-For many purposes, a global &conf-UserTag;s are better. They're not restricted
+Catalog-based usertag will run under &glos-safe; restrictions,
+and will only be accessible only from the corresponding catalog.
+Global &conf-UserTag;s are not restricted
 by <classname>Safe</classname> and are available to all catalogs running on
 the server.
 __END__

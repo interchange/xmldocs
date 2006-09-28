@@ -30,6 +30,9 @@ Catalog variables
 <listitem><para>
 &glos-value; variables
 </para></listitem>
+<listitem><para>
+&PERL; variables
+</para></listitem>
 </itemizedlist>
 
 Read the respective glossary entries.

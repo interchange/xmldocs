@@ -72,3 +72,9 @@ __NAME__ example: Displaying current user's full session dump
 ]]></programlisting>
 __END__
 
+__NAME__ example: Displaying current user's cart structure
+<programlisting><![CDATA[
+<pre>[dump key=carts]</pre>
+]]></programlisting>
+__END__
+

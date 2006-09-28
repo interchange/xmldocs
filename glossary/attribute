@@ -1,9 +1,11 @@
 
-Attributes are various "sub-features" of a product. If you are selling
-t-shirts in different colors and sizes, you are an ideal candidate for
-item attributes.
-&IC; allows item <emphasis>attributes</emphasis> (also called
-<emphasis>modifiers</emphasis> or <emphasis>options</emphasis>)
+Attributes (sometimes also called
+<emphasis>modifiers</emphasis>, <emphasis>options</emphasis> or
+<emphasis>params</emphasis>)
+are various "sub-features" of a product. If you are selling
+t-shirts in different colors and sizes, color and size are ideal candidates
+for item attributes.
+&IC; allows attributes
 to be set for each ordered item. This allows a varying size, color, or
 any other modifier to be attached to an otherwise common part number.
 </para>
@@ -20,7 +22,8 @@ can be "stacked" on top of each other.
 
 
 <para>
-Besides setting modifier names in the config files, you can also set them as
+Besides setting modifier names in the config files (via the above
+&conf-UseModifier;), you can also set them as
 &glos-scratch; variables with <mv>mv_UseModifier</mv>. For example,
 the above modifiers would be set with
 <code>[set mv_UseModifier]size color[/set]</code>.
@@ -28,7 +31,22 @@ This effectively allows you to have different product options for different
 or even same product &glos-SKU;s. Those specified in <mv>mv_UseModifier</mv> at
 the time of order will be used (just be careful, because you cannot set it
 more than once on the same page).
+</para>
+
+<note><para>
+When choosing modifier names, do not use anything that begins with
+<literal>mv_</literal> nor words like <literal>code</literal>,
+<literal>quantity</literal> or <literal>group</literal>; those variables
+have already been used up by &IC; itself.
 </para><para>
+You also need to make sure that no fields in your &glos-HTML;
+forms have digits appended to their names, if their non-digit name part
+is equal to any used attribute. (This is because &IC; treats 
+say, <literal>size0</literal> and <literal>size1</literal> as multiple
+<literal>size</literal> modifier values.)
+</para></note>
+
+<para>
 In addition, setting &conf-SeparateItems; or <mv>mv_separate_items</mv>
 places each ordered item on a separate line even if they have the same
 &glos-SKU;, simplifying attribute handling.
@@ -67,7 +85,7 @@ can only work within the &tag-item-list; tag.
 
 <para>
 It could just as easily be done with a radio button group as well
-(when you combine them with the &lt;checked&gt; &glos-HTML; tag.
+(when you combine them with the &lt;checked&gt; &glos-HTML; tag).
 </para><para>
 In addition, &IC; would automatically generate the above select box
 if you called <code>[accessories <replaceable>code</replaceable> size]</code>

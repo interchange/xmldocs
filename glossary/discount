@@ -3,7 +3,8 @@ Product discounts in &IC; can be set at any time. The discounts
 apply only to the customer receiving them, so you can gate the          
 discounts based on membership in a club or other arbitrary means.
 </para><para>
-Discounts are are of the following types:
+Discounts are defined using the &tag-discount; tag, 
+and are of the following types:
 
 <itemizedlist>
 
@@ -21,8 +22,8 @@ Discounts are are of the following types:
 	attribute is set (usually with embedded &PERL;)
 	</para></listitem>
 	<listitem><para>
-	Order discount - a discount applied not on individual products, but on a
-	total order.
+	Order discount - a discount applied not to individual products, but to the
+	total order amount.
 	Key to use with the &tag-discount; tag is <literal>ENTIRE_ORDER</literal>
 	</para></listitem>
 

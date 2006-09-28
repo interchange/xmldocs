@@ -1,4 +1,7 @@
-SDBM is an of in-file, non-&glos-SQL; database (similar to GDBM).
+SDBM is an in-file, non-&glos-SQL; database (similar to GDBM). Interchange will,
+however, add an SQL layer on top of every supported non-SQL database
+so SQL calls <emphasis role='bold'>can</emphasis> be used, as long as they are
+made through &IC;.
 </para><para>
 &IC; must work with some kind of a database. When no SQL database is 
 specified, database source files (text) are still stored in a database,
