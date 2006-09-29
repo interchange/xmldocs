@@ -1,0 +1,61 @@
+__NAME__ purpose
+specify database to read configuration directives from
+__END__
+
+__NAME__ synopsis
+<group choice='plain'>
+  <arg choice='plain'>
+		<replaceable>table_name</replaceable>
+		<arg choice='opt'>
+			<replaceable>table_source_filename</replaceable>
+			<arg choice='opt'>
+			<replaceable>table_source_type</replaceable>
+			</arg>
+		</arg>
+	</arg>
+</group>
+__END__
+
+__NAME__ description
+The &conf-__FILENAME__; configuration directive makes it possible to
+read all configuration directives from a &glos-database;, instead of
+from the usual &ccf; configuration file.
+</para><para>
+The database can (but does not have to) be previously defined with
+the &conf-Database; directive. When it is, then just the table name
+is required and honored. When it is not, then the &conf-Database; directive 
+will be automatically invoked first to register the new table, possibly with
+custom text source file and table type.  
+</para><para>
+<literal>table_source_filename</literal> defaults to 
+<literal><replaceable>table_name</replaceable>.txt</literal>, and
+<literal>table_source_type</literal> defaults to <literal>TAB</literal>.
+(The arguments are the same as for the &conf-Database; directive itself,
+they are passed to it directly.)
+__END__
+
+__NAME__ notes
+<!-- 
+Using this directive, it's possible to configure catalogs that have no
+&ccf; at all. How ?
+-->
+</para><para>
+<!-- What's tha directive to load pages from DB ? -->
+__END__
+
+__NAME__ see also
+Database
+__END__
+
+__NAME__ example: Defining __FILENAME__, single-step
+<programlisting>
+DirectiveDatabase catalog catalog.txt TAB
+</programlisting>
+__END__
+
+__NAME__ example: Defining __FILENAME__, two-step
+<programlisting>
+Database catalog catalog.txt TAB
+DirectiveDatabase catalog
+</programlisting>
+__END__

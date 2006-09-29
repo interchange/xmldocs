@@ -352,16 +352,20 @@ icdevgroup.conf</literal>.
 		</listitem>
 		<listitem><para>
 		<literal>mv_head_skip</literal>
-		(hs, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
-
+		(hs, <replaceable>row_count</replaceable>,
+		default <literal>1</literal> for text files, <literal>0</literal>
+		otherwise) &mdash;
+		number of lines to skip at the beginning of a search index or text
+		file. &IC; normally skips one line for text-based searches
+		(<literal>st=text</literal>) to exclude the header line.
 		</para>
 		</listitem>
 		<listitem><para>
 		<literal>mv_index_delim</literal>
-		(id, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
-
+		(id, <replaceable>field_delimiter</replaceable>,
+		default <literal>\t</literal>) &mdash;
+		delimiter for counting fields in search index files.
+		The default, a TAB character, works well for most line-based index files.
 		</para>
 		</listitem>
 		<listitem><para>
@@ -429,16 +433,24 @@ icdevgroup.conf</literal>.
 		</listitem>
 		<listitem><para>
 		<literal>mv_matchlimit</literal>
-		(ml, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
-
+		(ml, <replaceable>record_count</replaceable>,
+		default <literal>50</literal>) &mdash;
+		maximum number of records (search results) to return from a search.
+		When all the results are
+		displayed on a single page, this option is equivalent to
+		<literal>mm</literal>.  When the &tag-more; tag is used
+		to display results multi-page, then this option 
+		determines the number of results <emphasis>per page</emphasis>.
+		To specify unlimited, use <literal>none</literal> or
+		<literal>all</literal>, not <literal>0</literal>.
 		</para>
 		</listitem>
 		<listitem><para>
 		<literal>mv_max_matches</literal>
-		(mm, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
-
+		(mm, <replaceable>record_count</replaceable>,
+		default unlimited) &mdash;
+		final, maximum number of records (search results) to return from a search
+		(related option <literal>ml</literal>).
 		</para>
 		</listitem>
 		<listitem><para>

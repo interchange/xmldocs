@@ -12,7 +12,10 @@ __END__
 
 __NAME__ description
 Specify directory containing &IC; "feature" modules.
-</para><para>
+__END__
+
+
+__NAME__ notes
 For an introduction to &IC; "features", please see the 
 &glos-feature; glossary entry.
 __END__
