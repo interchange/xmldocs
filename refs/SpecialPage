@@ -34,7 +34,7 @@ Valid types are:
 	<listitem><para>
 	<literal>failed</literal> &mdash; 
 
-	Defaults to <literal></literal>.
+	standard handler for failed orders.
 	</para></listitem>
 	<listitem><para>
 	<literal>flypage</literal> &mdash; 
