@@ -14,7 +14,8 @@ __END__
 
 
 __NAME__ description
-Specify location of the file keeping and incrementing order numbers.
+Specify filename where the order number is kept (and, of course,
+incremented with every new order).
 </para><para>
 If not set, the order will be
 assigned a string based on the time of the order and the user's session number.
@@ -26,9 +27,10 @@ Bear in mind that &IC; provides this order number counter only as a convenience
 for display, and that no internal functions depend on it. Custom order number
 routines may be defined and used without fear of consequences.
 </para><para>
+<!-- IS This demo-specific note?
 If &conf-Route; is set to <literal>supplant</literal> and the
 <literal>counter</literal> attribute is set there, this directive is ignored.
-</para><para>
+</para><para> -->
 See &glos-order; glossary entry for complete discussion of &IC;'s
 ordering process.
 __END__

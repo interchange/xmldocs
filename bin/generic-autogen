@@ -34,7 +34,7 @@ my %header = ( # item head
 
 <para>
 ",
-	howtos => "<section>
+	howtos => "<section id=\"\$file\">
 <title>\$visible_name</title>
 
 <para>",

@@ -13,7 +13,7 @@ __END__
 
 __NAME__ description
 Enabling the option makes &IC; parse both GET data and POST data when a POST
-form is been submitted. 
+form is submitted. 
 Unfortunately this has to be a global setting because at URL
 parse time, the &IC; daemon doesn't yet know which catalog it is dealing
 with (due to catalog aliases, etc.).
