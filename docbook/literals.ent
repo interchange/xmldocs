@@ -104,6 +104,10 @@ option) any later version.</para>">
 <!ENTITY edl "Ed LaFrance">
 
 
+<!ENTITY TAB_DELIMITED_NOTICE "You might notice that the fields names and
+values above are not properly aligned. This is an unfortunate nature of
+&glos-tab-delimited; files.">
+
 <!-- GLOSSARY LINKS ARE AUTOMATIC -->
 
 
