@@ -7,9 +7,7 @@ __NAME__ see also
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'><replaceable>page</replaceable></arg>
-</group>
+<arg choice='plain' rep='repeat'><replaceable>page_path</replaceable></arg>
 __END__
 
 

@@ -14,11 +14,14 @@ __END__
 
 
 __NAME__ description
-Specify filename where the order number is kept (and, of course,
-incremented with every new order).
+Specify filename where the simple order number template is kept
+(and, of course, incremented with every new order). Within the template,
+the right-most number is found and incremented, preserving zero
+padding, if any.
 </para><para>
-If not set, the order will be
-assigned a string based on the time of the order and the user's session number.
+If the counter file is unset, then the order number will be
+assigned a string in form of
+<literal><replaceable>session_id</replaceable>.<replaceable>unix_time</replaceable></literal>.
 __END__
 
 
@@ -33,6 +36,13 @@ If &conf-Route; is set to <literal>supplant</literal> and the
 </para><para> -->
 See &glos-order; glossary entry for complete discussion of &IC;'s
 ordering process.
+__END__
+
+__NAME__ example: Creating file etc/order.number
+<programlisting>
+#COUNTER-1.0
+W-TEST-0000
+</programlisting>
 __END__
 
 __NAME__ example: Setting OrderCounter

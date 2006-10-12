@@ -3,14 +3,14 @@ require existence of a capability
 __END__
 
 __NAME__ see also
-Require,Suggest
+Require,Suggest,Capability
 __END__
 
 __NAME__ synopsis
 <group choice='req'>
 	<arg choice='plain' rep='repeat'>
 		<replaceable>type</replaceable>
-		<replaceable>type-specific value</replaceable>
+		<replaceable>type-specific-value</replaceable>
 	</arg>
 </group>
 __END__

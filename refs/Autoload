@@ -8,9 +8,7 @@ AutoEnd
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'><replaceable>subroutine_name_or_ITL_code</replaceable></arg>
-</group>
+<arg choice='plain' rep='repeat'><replaceable>subroutine_name_or_ITL_code</replaceable></arg>
 __END__
 
 

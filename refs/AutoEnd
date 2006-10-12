@@ -8,16 +8,14 @@ AutoEnd,Autoload
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'><replaceable>subroutine_name_or_ITL_code</replaceable></arg>
-</group>
+<arg choice='plain' rep='repeat'><replaceable>subroutine_name_or_ITL_code</replaceable></arg>
 __END__
 
 
 __NAME__ description
 Specify actions (in form of &PERL; subroutines or &glos-ITL; tags)
-that are to be invoked automatically, on the end of every 
-page access. This step is performed after any page parsing occurs,
+that are to be invoked automatically, at the end of every 
+page access. This step is performed after all page parsing occurs,
 just before the whole transaction ends.
 </para><para>
 In other respects, it behaves the same as its closely related

@@ -1,0 +1,53 @@
+__NAME__ purpose
+specify accounting software and accounting options
+__END__
+
+
+__NAME__ synopsis
+<arg choice='plain'>Class <replaceable>MODULE_NAME</replaceable></arg><sbr />
+assign_username
+	<group choice='plain'>
+		<arg choice='plain'><replaceable>1</replaceable></arg>
+		<arg choice='plain'><replaceable>0</replaceable></arg>
+	</group>
+__END__
+
+
+__NAME__ description
+The directive specifies the accounting software and accounting options
+to use.
+<itemizedlist>
+	<listitem><para>
+	<literal>Class</literal> - name of the accounting software. Accounting
+	programs are supported through the appropriate &PERL; module interfaces
+	which must exist in the
+	<filename class='directory'>&glos-ICROOT;/lib/Vend/Accounting/</filename>
+	directory. An appropriate setting for this option is the class name;
+	for instance, class name of the &PERL; module
+	<filename>&glos-ICROOT;/lib/Vend/Accounting/SQL_Ledger.pm</filename> 
+	is <classname>Vend::Accounting::SQL_Ledger</classname>.
+	</para></listitem>
+	<listitem><para>
+	<literal>assign_username</literal> - default 1 <!-- TODO -->
+	</para></listitem>
+</itemizedlist>
+__END__
+
+__NAME__ missing
+description for assign_username
+__END__
+
+__NAME__ example: Defining __FILENAME__
+<programlisting>
+Accounting Class Vend::Accounting::SQL_Ledger
+Accounting assign_username 0
+</programlisting>
+__END__
+
+
+__NAME__ notes
+To check out which accounting modules (and therefore accounting software)
+can be used with your version of &IC;, simply invoke
+<command>ls -al <replaceable>ICROOT</replaceable>/lib/Vend/Accounting/</command>.
+__END__
+

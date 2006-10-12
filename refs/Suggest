@@ -10,13 +10,13 @@ __NAME__ synopsis
 <group choice='req'>
 	<arg choice='plain' rep='repeat'>
 		<replaceable>type</replaceable>
-		<replaceable>type-specific value</replaceable>
+		<replaceable>type-specific-value</replaceable>
 	</arg>
 </group>
 __END__
 
 __NAME__ description
-Just like &conf-Require; or &conf-Suggest;, this directive checks for
+Just like &conf-Require; or &conf-Capability;, this directive checks for
 a feature or capability. When the tested feature is missing, a 
 warning message is shown.
 </para><para>

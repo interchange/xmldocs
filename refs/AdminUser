@@ -1,3 +1,17 @@
 __NAME__ purpose
-username that is given full access to all catalogs, regardless of any permissions
+usernames that are given full access to all catalogs, regardless of any permissions
 __END__
+
+
+__NAME__ synopsis
+<arg choice='plain' rep='repeat'>
+<replaceable>username</replaceable>:<replaceable>password</replaceable>
+</arg>
+__END__
+
+__NAME__ missing
+everything
+__END__
+
+
+See Util.pm 

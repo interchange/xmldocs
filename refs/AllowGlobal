@@ -3,23 +3,16 @@ specify catalogs that may define subroutines and tags which operate with full In
 __END__
 
 
-__NAME__ missing
-Fix value type in directive definition?
-__END__
-
-
 __NAME__ see also
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'><replaceable>catalog</replaceable></arg>
-</group>
+<arg choice='plain' rep='repeat'><replaceable>catalog</replaceable></arg>
 __END__
 
 
 __NAME__ description
-Specify catalogs that may define subroutines and tags that can operate with the full permissions of the &IC; server.
+Specify catalogs that can operate with the full permissions of the &IC; server.
 </para><para>
 Don't use this directive unless the catalog user is completely trusted.
 __END__
@@ -30,3 +23,6 @@ AllowGlobal tutorial1 tutorial2
 </programlisting>
 __END__
 
+__NAME__ missing
+how does SafeTrap/Untrap play with AllowGlobal?
+__END__

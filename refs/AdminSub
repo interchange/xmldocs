@@ -13,14 +13,14 @@ AllowGlobal
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
+<group choice='plain'>
 	<arg choice='plain' rep='repeat'><replaceable>subroutine_name</replaceable></arg>
 </group>
 __END__
 
 
 __NAME__ description
-Specify global subroutines that may only be used by catalogs which are listed under
+Specify global subroutines that may only be used by &glos-catalogs; which are listed under
 the &conf-AllowGlobal; directive.
 </para><para>
 Otherwise, in a normal course of action, global subroutines can be used

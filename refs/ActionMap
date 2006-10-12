@@ -43,4 +43,6 @@ __END__
 
 __NAME__ missing
 In the example, I provided some erroneous comment.
+Also fix description and add synopsis
 __END__
+

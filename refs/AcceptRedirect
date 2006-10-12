@@ -3,7 +3,7 @@ accept Web server redirects
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
+<group choice='plain'>
 	<arg choice='plain'>No</arg>
 	<arg choice='plain'>Yes</arg>
 </group>
@@ -13,7 +13,7 @@ __END__
 __NAME__ description
 The directive
 enables processing of HTTP server redirects, i.e. when handling ErrorDocument
-for a Web server such as &APACHE;. For instance, if your
+for a Web server such as &APACHE;. For instance, if your Apache
 <filename>httpd.conf</filename> contains
 
 <programlisting>
@@ -22,27 +22,35 @@ for a Web server such as &APACHE;. For instance, if your
 
 then a request for <literal>/somedir/index.html</literal> that is not found
 on the Web server would be resent to
-<filename>/cgi-bin/ic/foundation/somedir/index.html</filename>, and
-would be 
-indistinguishable from the Web server-served page by the client.
+<literal>/cgi-bin/ic/foundation/somedir/index.html</literal>, and
+would be indistinguishable from the static Web server-served page.
 __END__
 
 
 __NAME__ notes
+Combined with the &conf-RedirectCache; directive, you can automatically
+create missing &glos-HTML; pages in your web server's static HTML space,
+so that they <emphasis role='bold'>are</emphasis> found on next access.
+Just beware; that turns them into static pages!
+</para><para>
 Although the idea seems attractive at first sight,
 caution should be taken not to allow Web server's ErrorDocument redirection
 to &IC; globally &mdash; it would render you subject to a
 denial-of-service attack at random URLs (i.e. a flood of MS Windows
 "Code Red" attacks). It is recommended that you enable it only for
-specific directories, as &APACHE; or another HTTP server will stand up
-much better under such a flood.
+specific directories, as &APACHE; or another HTTP server would stand
+much better up to such a "limited-scale" flood.
 __END__
 
 
-__NAME__ example: Enabling AcceptRedirect
-Put any of the following lines in &ccf;:
+__NAME__ example: Enabling __FILENAME__
 <programlisting>
 AcceptRedirect Yes
 </programlisting>
+__END__
+
+
+__NAME__ see also
+RedirectCache
 __END__
 

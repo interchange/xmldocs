@@ -11,12 +11,14 @@ __END__
 
 
 __NAME__ description
-There is a huge base of &IC; code included in the default installation.
+There is a huge base of &IC; code (collection of &conf-UserTag;s and 
+&conf-CodeDef;s) included in the default installation.
 Much of it is not needed in even the '&std-catalog;' catalog with full 
 user interface (UI).  This causes a larger memory profile than necessary.
 </para><para>
 Furthermore, it is difficult to determine from the &IC; pages what code is
-needed (especially when an &glos-ITL; tag calls <code>$Tag-&gt;<replaceable>TAGNAME</replaceable>()</code>
+needed (especially when an &glos-ITL; tag calls
+<code>$Tag-&gt;<replaceable>TAGNAME</replaceable>()</code>
 which calls a filter which calls some sort of action &mdash; 
 you get the picture).
 </para><para>
@@ -26,25 +28,29 @@ set of code than just "everything". And as we'll see in a second,
 </para><para>
 &conf-CodeRepository; depends on a related directive, &conf-AccumulateCode;.
 If &conf-AccumulateCode; is disabled, operation is traditional and everything
-gets loaded. (There have
+gets loaded at &IC; startup time. (There have
 been some code initialization changes and routine calling changes,
 but the data structures are identical and no difference in operation
 should be seen).
 </para><para>
-It's when you enable &conf-AccumulateCode; that things get interesting.
-&IC; starts looking into &conf-CodeRepository; for pieces it is
+It's when you remove the 
+<filename class='directory'>&glos-ICROOT;/code/</filename> directory and
+enable &conf-AccumulateCode; that things get interesting.
+&IC; starts looking into &conf-CodeRepository; for pieces it finds
 missing (&glos-ITL; tags, &glos-ActionMap;s, &glos-filter;s, widgets, etc.)
 and compiles these as needed, in runtime!
 The code is sent to the master process for compilation and
-incorporation, so that the next iteration of a page (after
-&conf-HouseKeeping; seconds expire) will find the code already compiled
+incorporation, so that on the next page access (or in the worst case,
+after &conf-HouseKeeping; seconds), &IC; will find the code already compiled
 and ready to go.
 </para><para>
-It also copies the code file to the <literal>code/</literal>
-(<varname>$Global::TagDir</varname> actually) directory, in the
-<filename class='directory'>Accumulated/</filename> subdirectory tree.
+Fetched code blocks are copied to 
+<filename class='directory'>&glos-ICROOT;/code/Accumulated/</filename>
+directory
+(<filename class='directory'>
+<varname>$Global::TagDir</varname>/Accumulated/</filename>, to be exact)
 When you restart &IC; the next time, these code blocks will be found,
-read normally and need not be recompiled on the fly again.
+read normally and need not be recompiled and loaded on the fly again.
 </para><para>
 Over time, as you access pages and routines, a full set of tags
 will be developed and you can then disable &conf-AccumulateCode;.
@@ -64,20 +70,24 @@ master.
 The &tag-area;, &tag-tmp;, &tag-tmpn;, and &tag-image; tags are known to
 fail in this manner in the '&std-catalog;' catalog.
 Tags that are frequently called
-in this fashion should probably be placed in directory
-<filename class='directory'>code/Vital/</filename> directory and not
-be accumulated.
-This "failure" could be avoided if the catalog is listed under the 
+in this fashion should probably be manually placed in directory
+<filename class='directory'>code/Vital/</filename> and not
+be accumulated "by chance".
+This temporary failure could be avoided by listing &glos-catalog; in the
 &conf-AllowGlobal; directive, and it
-might be possible to make a directive that turns on &conf-AllowGlobal; for
-the catalog only when in &conf-AccumulateCode; mode.
+might be possible to make a directive that allows &conf-AllowGlobal; for
+a catalog automatically, when in &conf-AccumulateCode; mode.
+(If you don't want to trade immediate code loading for the lack of
+&conf-AllowGlobal; protection, then just set &conf-HouseKeeping; to 
+something like <literal>20 seconds</literal> &mdash; and
+only do it on your development system!)
 </para><para>
-Another nice feature is that you can easily add a tag simply
-by adding its code to the &conf-CodeRepository; directory and having it
-compiled.
-It might also
-be possible to remove code from the master and recompile it on next access
-on-the-fly, but this has yet to be looked at.
+One convenient side-effect is that you can easily load new code 
+"on the fly" by simply adding files to the &conf-CodeRepository;
+directory. This alleviates the need for &IC; server restart.
+It might also be possible to dynamically <emphasis role='bold'>remove and
+load</emphasis> code from the server in this manner, but this has yet
+to be looked at.
 </para>
 
 <warning>
@@ -85,15 +95,14 @@ on-the-fly, but this has yet to be looked at.
 Nice features are often dangerous! Don't run this in
 production &mdash; you have been warned!
 </para><para>
-&conf-OrderCheck; is not yet implemented, and a full audit has
+"OrderCheck" &conf-CodeDef; is not yet implemented, and a full audit has
 not been done on all compiled code directives.
 </para><para>
 Not fully tested in &conf-PreFork; mode, and really not intended for
 that mode.
 </para><para>
-Including multiple tags in a code definition file may have unpredictable
-behavior. You should try to keep related Alias and tag things in
-the same file.
+Defining multiple tags or code blocks (&conf-UserTag;s or &conf-CodeDef;s)
+within a single file may result in an unpredictable behavior.
 </para><para>
 This feature only applies to global code &mdash; catalog-based code
 is not affected and behaves as usual.

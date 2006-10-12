@@ -2,10 +2,6 @@ __NAME__ purpose
 specify operation codes to untrap in Safe.pm compartments
 __END__
 
-__NAME__ see also
-Require,Suggest
-__END__
-
 __NAME__ synopsis
 <group choice='req'>
 	<arg choice='plain' rep='repeat'>opcode</arg>
@@ -18,6 +14,10 @@ The directive defines the opcodes that will be untrapped in the
 <classname>Safe</classname> compartments, for use in
 embedded &PERL; and conditional operations. 
 Define it as blank to prevent any operators but the default restrictive ones.
+</para><para>
+For a complete discussion and the opcodes list, see
+<citerefentry><refentrytitle>Opcode</refentrytitle>
+<manvolnum>3perl</manvolnum></citerefentry> manual page.
 __END__
 
 __NAME__ notes

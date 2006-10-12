@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
+<group choice='plain'>
 	<arg choice='plain'>No</arg>
 	<arg choice='plain'>Yes</arg>
 </group>
@@ -13,17 +13,21 @@ __END__
 
 __NAME__ description
 The directive instructs &IC; to fetch code blocks "on-demand" from the
-&conf-CodeRepository;, instead of starting up with everything.
+&conf-CodeRepository; instead of starting up with everything.
 </para><para>
 So, at runtime, when particular functionality is needed but is not
 yet present in the running &IC; installation, it is copied from 
 &conf-CodeRepository; to 
-<filename class='directory'>$Global::TagDir/Accumulated/</filename>.
-When you restart &IC; the next time, these code blocks will be found,
-read normally and need not be recompiled on the fly again.
+<filename class='directory'>$Global::TagDir/Accumulated/</filename>
+<emphasis role='bold'>and automatically activated</emphasis>.
+Later, when you restart &IC; the next time, these code blocks will be
+found in the accumulated directory and loaded normally
+(there will be no need to fetch them from &conf-CodeRepository;
+again).
 </para><para>
 Over time, as you access pages and routines, a full set of tags
-will be developed and you can then disable &conf-AccumulateCode;.
+will be copied to the accumulated directory, and you will then be
+able to turn &conf-AccumulateCode; off.
 (In fact, &conf-AccumulateCode; is recommended for development and should 
 really be turned off in production systems).
 __END__

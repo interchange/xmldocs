@@ -4,6 +4,9 @@ __END__
 
 
 __NAME__ missing
+fix examples (split to three)
+improve description based on syntax seen in examples
+in the examples, explain mv_sku lookup, not clear now
 __END__
 
 
@@ -12,9 +15,11 @@ UseModifier
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'><replaceable>column</replaceable></arg>
-</group>
+<arg choice='plain' rep='repeat'>
+	<arg choice='opt'>table</arg>
+	<replaceable>column</replaceable>
+	<arg choice='opt'>key</arg>
+</arg>
 __END__
 
 
@@ -27,10 +32,11 @@ when an item is added to the shopping cart using &IC;'s routines, the
 attributes declared in &conf-AutoModifier; will be set to the values of the
 fields in the <database>products</database> database.
 </para><para>
-This facility will often be used in determining pricing, shipping,
-or other custom product attributes. These attributes will probably
-be used in a custom &PERL; code which will scan the items in the electronic
-&glos-cart; and make decisions.
+This facility will often be employed in determining product
+&glos-price;, &glos-discount;, &glos-tax;, &glos-shipping; amd 
+other custom attributes. In other words, these attributes will probably
+be used in custom &PERL; code that will scan the electronic
+&glos-cart; contents and perform some decisions.
 <!--
 </para><para>
 There are several forms of the specification. The simplest is

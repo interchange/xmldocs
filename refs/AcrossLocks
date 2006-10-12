@@ -1,10 +1,10 @@
 __NAME__ purpose
-
+open real databases instead of fast dummy pointers
 __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
+<group choice='plain'>
 	<arg choice='plain'>No</arg>
 	<arg choice='plain'>Yes</arg>
 </group>
@@ -12,6 +12,13 @@ __END__
 
 
 __NAME__ description
+All configured &glos-database;s are opened every time an &IC; page is
+visited and enters processing. Opening a new database connection takes
+time, so &IC; provides fast dummy pointer to each database until that
+database is actually used within the page.
+</para><para>
+Enabling this directive has the effect of disabling fast pointers
+and always opening real &glos-database;s.
 __END__
 
 __NAME__ notes
@@ -24,7 +31,7 @@ __NAME__ author
 __END__
 
 
-__NAME__ example: Enabling AcrossLocks
+__NAME__ example: Enabling __FILENAME__
 <programlisting>
 AcrossLocks yes
 </programlisting>
