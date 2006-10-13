@@ -1,3 +1,7 @@
+__NAME__ purpose
+container for search results
+__END__
+
 __NAME__ synopsis 
 <row>
 
@@ -14,7 +18,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	search specification
 	</entry>
 
 </row> 
@@ -30,7 +34,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	item
 	</entry>
 	<entry>
 	<!-- DSC -->
@@ -49,7 +53,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	search-list
 	</entry>
 	<entry>
 	<!-- DSC -->
