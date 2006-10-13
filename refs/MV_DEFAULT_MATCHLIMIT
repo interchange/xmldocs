@@ -3,9 +3,7 @@ specifies the number of search results per page
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable>number</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>number</replaceable></arg>
 __END__
 
 __NAME__ description
