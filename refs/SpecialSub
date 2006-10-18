@@ -13,24 +13,35 @@ __NAME__ description
 The directive specifies subroutines that should be called in an effort
 to handle certain events or conditions.
 </para><para>
-Supported events are
-<itemizedlist>
-<listitem><para>
-  <literal>init_session</literal> &mdash; event triggered at the
-  &glos-session; creation time.
+Supported events are:
+<refsect2>
+<title>catalog_init</title>
+<para>
+  Event triggered before &glos-session; assignment.
+</para>
+</refsect2>
+<refsect2>
+<title>init_session</title>
+<para>
+  Event triggered &glos-session; creation time.
   The subroutine is called with the pointer to the newly created
   &glos-session; variables space. Subroutine return value is not used.
-</para></listitem>
-<listitem><para>
-  <literal>lockout</literal> &mdash; event triggered for locking out a
+</para>
+</refsect2>
+<refsect2>
+<title>lockout</title>
+<para>
+  Event triggered for locking out a
   bad robot (see &conf-RobotLimit;). The subroutine is called without
   parameters. A &glos-true; subroutine return value indicates that the
   default, built-in lockout action should be skipped. A &glos-false; value 
   resumes with the default action, by calling &conf-LockoutCommand;.
-</para></listitem>
-<listitem><para>
-  <literal>missing</literal> &mdash; event triggered on a requested &IC;
-  page missing event.
+</para>
+</refsect2>
+<refsect2>
+<title>missing</title>
+<para>
+  Event triggered on a requested &IC; page missing event.
   The subroutine is called with the name of the page missing.
   A &glos-false; return value from the subroutine will instruct &IC;
   to continue executing the default, built-in action. A &glos-true; return
@@ -39,20 +50,25 @@ Supported events are
   will not be executed.
   Optionally, the function can return a list consisting of the true value
   and the page name that is to be displayed to the user.
-</para></listitem>
-<listitem><para>
-  <literal>guess_cc_type</literal> &mdash; event triggered at the time
+</para>
+</refsect2>
+<refsect2>
+<title>guess_cc_type</title>
+<para>
+  Event triggered at the time
   of deriving <varname>MV_CREDIT_CARD_TYPE</varname>. &IC; recognizes
   major types but local areas might need more.
   The subroutine is called with the credit card number.
   The return value should either be a type name, or a &glos-false; value
   (in which case &IC; proceeds with built-in detection algorithm).
-</para></listitem>
-<listitem><para>
-  <literal>flypage</literal> &mdash; 
-</para></listitem>
-</itemizedlist>
-</para><para>
+</para>
+</refsect2>
+<refsect2>
+<title>flypage</title>
+<para> 
+  Event triggered for determining the result set for the flypage.
+</para>
+</refsect2>
 __END__
 
 __NAME__ notes
