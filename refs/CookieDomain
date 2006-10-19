@@ -4,9 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'><replaceable>domain_name</replaceable></arg>
-</group>
+<arg choice='plain' rep='repeat'><replaceable>domain_name</replaceable></arg>
 __END__
 
 
@@ -37,6 +35,13 @@ in our example), and add it as the
 <literal>domain=</literal> parameter to the
 <literal>Set-Cookie</literal> directive that we send off to users'
 browsers. That's what the &conf-CookieDomain; does.
+</para><para>
+&conf-CookieDomain; accepts a space-separated list of domains to set
+cookies for, in which case the <literal>Set-Cookie: ...</literal> 
+is sent to the client for each of the specified domains. Due to the cookie
+restrictions described in <xref linkend="CookieDomain_notes"/>,
+specifying multiple domains is only rarely (if ever?) needed and
+possible to implement.
 __END__
 
 
@@ -59,12 +64,6 @@ At least in Mozilla-like browsers, the domain is prefixed with a
 dot even if you omit it in the &conf-CookieDomain; specification
 (<literal>&def-domain;</literal> ends up being the same as
 <literal>.&def-domain;</literal>).
-</para><para>
-&conf-CookieDomain; accepts a space-separated list of domains to set
-cookies for, in which case the <literal>Set-Cookie: ...</literal> 
-is sent to the client for each of the specified domains. Due to the
-restrictions described above, specifying multiple domains is needed and
-possible to implement only rarely, if ever.
 __END__
 
 __NAME__ example: Specifying CookieDomain

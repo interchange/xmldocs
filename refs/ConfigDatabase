@@ -61,5 +61,6 @@ ConfigDatabase config LOAD 1
 __END__
 
 __NAME__ author
-__mheins__
+&__mheins__;
 __END__
+

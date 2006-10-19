@@ -4,9 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>directory</arg>
-</group>
+<arg choice='plain'>directory</arg>
 __END__
 
 
@@ -26,8 +24,4 @@ ConfDir etc2
 </programlisting>
 __END__
 
-__NAME__ notes
-Make sure you don't get confused by the existence of all
-&conf-DirConfig;, &conf-ConfDir; and &conf-ConfigDir;.
-__END__
 

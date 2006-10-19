@@ -4,10 +4,8 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>Yes</arg>
-	<arg choice='plain'>No</arg>
-</group>
+<arg choice='plain'>Yes</arg>
+<arg choice='plain'>No</arg>
 __END__
 
 __NAME__ notes

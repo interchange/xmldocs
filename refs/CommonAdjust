@@ -13,9 +13,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><literal><replaceable>&CAs;</replaceable></literal></arg>
-</group>
+<arg choice='plain'><literal><replaceable>CommonAdjust_string</replaceable></literal></arg>
 __END__
 
 
@@ -24,7 +22,7 @@ __NAME__ description
 chained item pricing scheme.
 </para><para>
 The whole pricing idea and the explanation of &CAs;s can be found under the
-&glos-price; entry in the glossary. Make sure you read it, or you'll have only
+&glos-price; &GE;. Make sure you read it, or you'll have only
 a limited success with <xref linkend="CommonAdjust_examples"/>.
 __END__
 

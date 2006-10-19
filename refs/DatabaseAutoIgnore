@@ -21,8 +21,8 @@ specify <literal>schema</literal> argument to the &conf-DatabaseAuto; directive.
 __END__
 
 __NAME__ notes
-This directive <emphasis role='bold'>must</emphasis> be set before
-&conf-DatabaseAuto;.
+This directive must be set before &conf-DatabaseAuto; to have meaningful
+effect.
 </para><para>
 For more about &IC; and databases, and supported formats, see &glos-database;
 glossary entry.

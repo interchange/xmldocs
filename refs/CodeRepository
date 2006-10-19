@@ -4,9 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable>directory_name</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>directory_name</replaceable></arg>
 __END__
 
 
@@ -48,7 +46,7 @@ Fetched code blocks are copied to
 <filename class='directory'>&glos-ICROOT;/code/Accumulated/</filename>
 directory
 (<filename class='directory'>
-<varname>$Global::TagDir</varname>/Accumulated/</filename>, to be exact)
+<varname>$Global::TagDir</varname>/Accumulated/</filename>, to be exact).
 When you restart &IC; the next time, these code blocks will be found,
 read normally and need not be recompiled and loaded on the fly again.
 </para><para>

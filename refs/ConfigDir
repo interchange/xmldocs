@@ -4,9 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable>directory_name</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>directory_name</replaceable></arg>
 __END__
 
 
@@ -33,7 +31,7 @@ TODO: show conditionals in config:
 
 __NAME__ notes
 See the &glos-configuration; glossary entry for complete information 
-on &IC; config files.
+on &IC; config file syntax.
 </para><para>
 Make sure you don't get confused by the existence of all
 &conf-DirConfig;, &conf-ConfDir; and &conf-ConfigDir;.

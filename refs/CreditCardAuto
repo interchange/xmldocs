@@ -8,10 +8,8 @@ EncryptProgram, PGP
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>No</arg>
-	<arg choice='plain'>Yes</arg>
-</group>
+<arg choice='plain'>No</arg>
+<arg choice='plain'>Yes</arg>
 __END__
 
 
@@ -22,7 +20,7 @@ information.
 The &conf-EncryptProgram; directive must be configured and working first.
 __END__
 
-__NAME__ example: Defining AllowGlobal
+__NAME__ example: Defining __FILENAME__
 <programlisting>
 CreditCardAuto Yes
 </programlisting>

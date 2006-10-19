@@ -3,10 +3,8 @@ __NAME__ purpose
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>No</arg>
-	<arg choice='plain'>Yes</arg>
-</group>
+<arg choice='plain'>No</arg>
+<arg choice='plain'>Yes</arg>
 __END__
 
 __NAME__ see also

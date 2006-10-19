@@ -14,6 +14,7 @@
   until the "chain" ends, which results in having many unrelated options
   listed under See Also.
 - in search.xml replace mv_ listitems with sections so they're listed in TOC
+- note in configuration glossentry to use '' to skip values 
 
 Outstanding:
 =======

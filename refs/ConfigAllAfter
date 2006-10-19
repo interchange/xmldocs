@@ -3,9 +3,7 @@ config files to read as part of every catalog's configuration, after all its fil
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'><replaceable>config file</replaceable></arg>
-</group>
+<arg choice='plain' rep='repeat'><replaceable>config_file</replaceable></arg>
 __END__
 
 

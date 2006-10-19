@@ -49,11 +49,13 @@ For a list of possible parameters (keys), see the &conf-Database; directive.
 __END__
 
 __NAME__ notes
-Those defaults settings are made when the table is initially defined, so explicit
+Those default settings are made when the table is initially defined, so explicit
 settings for the database itself override the defaults, of course.
 </para><para>
-The setting must be made <emphasis role='bold'>before</emphasis> the database is defined using the
-&conf-Database; directive. For a way to clear definitions, use the &conf-Replace; directive.
+To have the intended effect, this directive must be set before the appropriate
+databases are defined with the &conf-Database; directive.
+</para><para>
+For a way to clear definitions, use the &conf-Replace; directive.
 __END__
 
 __NAME__ example: Specify default SQL connection username and password

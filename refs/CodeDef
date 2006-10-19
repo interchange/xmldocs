@@ -17,6 +17,11 @@ _NAME__ synopsis
 </group>
 _END__
 
+__NAME__ missing
+synopsis
+replace plain words with entities in description
+__END__
+
 __NAME__ description
 A generic &PERL; subroutine mapper which allows mapping of subroutines to
 &glos-ActionMap;s,

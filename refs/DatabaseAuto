@@ -143,16 +143,8 @@ Creation sequence:
 ]]></programlisting>
 
 Alternatively, to dump the complete <varname>$Vend::Cfg</varname> structure,
-you could create a "<literal>cfgdump</literal>" usertag by saving the 
-following contents as <filename>code/UserTag/cfgdump.tag</filename>:
-<programlisting><![CDATA[
-UserTag cfgdump  Routine   <<EOR
-sub {
-        use Data::Dumper;
-        Dumper $Vend::Cfg;
-}
-EOR
-]]></programlisting>
+you could create a "<literal>cfgdump</literal>" usertag (see
+&howto-dump-vend-structure;).
 Then you could simply restart &IC; and call 
 <code><![CDATA[<pre>[cfgdump]</pre>]]></code> in any &IC; page, and search
 for <database>table1</database> in the output.
@@ -182,3 +174,7 @@ __NAME__ author
 &mheins;
 __END__
 
+
+__NAME__ missing
+Description of extra params, catalog, schema, name, type
+__END__
