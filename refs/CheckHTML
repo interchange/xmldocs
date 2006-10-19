@@ -4,14 +4,12 @@ __END__
 
 
 __NAME__ missing
-Doesn't work, fix the code?
+Doesn't work, fix the code, remove this line :)
 __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable>program name and arguments</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>program_name_and_arguments</replaceable></arg>
 __END__
 
 

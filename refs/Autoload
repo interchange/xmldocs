@@ -53,7 +53,7 @@ Let's say that a new page visit is "triggered" as a result of users
 submitting a &glos-HTML; form. At that point, <mv>mv_nextpage</mv>
 contains the name of the page to display next, of course.
 </para><para>
-The following would redirect accesses from
+The following would redirect all accesses from
 directory <filename class='directory'>public/</filename> to
 directory <filename class='directory'>private/</filename>:
 <programlisting><![CDATA[
@@ -66,7 +66,8 @@ As you might know, on each page access, all catalog
 &glos-configuration; directives (global and catalog) are "re-instantiated",
 and valid for the current page. This particularly convenient feature
 allows us to change (modify, add or delete) configuration directives
-as we see fit, without worrying about them being persistent, and consequently,
+as we see fit on a per-page basis,
+without worrying about them being persistent, and consequently,
 even without the need to re-set them back to original values.
 </para><para>
 The following example (put in &ccf;) displays a different flypage for

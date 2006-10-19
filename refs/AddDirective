@@ -14,11 +14,10 @@ __END__
 __NAME__ description
 This directive allows you to extend the set of regular
 &glos-configuration;
-directives accepted in each &ccf; with your custom ones. The added 
+directives accepted in each &ccf;. The added 
 directives are then treated the same as the existing "built-ins".
 </para><para>
-Three standard arguments can be specified, just as you can see in 
-<filename>lib/Vend/Config.pm</filename>: the 
+Three standard arguments can be specified: the 
 <literal>directive_name</literal>, 
 <literal>parse_function_name</literal> and
 <literal>default_value</literal>.
@@ -36,7 +35,7 @@ function from <filename>lib/Vend/Config.pm</filename>.
 The file <filename>lib/Vend/Config.pm</filename> contains all the default 
 parser functions, which are recognized by the mandatory prefix
 <literal>parse_</literal>. (You do not, however, include
-<literal>parse_</literal> in the <literal>parse_function_name</literal>.
+<literal>parse_</literal> in the <literal>parse_function_name</literal>.)
 </para><para>
 The <literal>default_value</literal> does not have to be specified.
 </para><para>

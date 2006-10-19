@@ -14,7 +14,7 @@ __END__
 __NAME__ description
 Specify list of &glos-configuration; directives that are to be automatically
 created as variable/value pairs. This allows you to conveniently
-write say, <code>__<replaceable>DIRECTIVENAME</replaceable>__</code> and 
+write say, <code>__<replaceable>DIRECTIVENAME</replaceable>__</code>, and 
 retrieve the corresponding configuration directive's value.
 </para><para>
 The above example, however, only works for scalar values. Since &IC; 
@@ -31,25 +31,27 @@ characters or whitespace. Also, only the first-level of array and hash
 indices/keys is translated properly.
 __END__
 
-__NAME__ example: Enabling AutoVariable
+__NAME__ example: Enabling configuration directives through Variable space
 Put the following in &ccf;:
 <programlisting>
-# The following two are present to form a standalone example
-SafeUntrap sort
-SysLog command /usr/bin/logger
+VendURL     http://&def-hostname;/cgi-bin/ic/catalog
+SecureURL   https://&def-hostname;/cgi-bin/ic/catalog
+MailOrderTo root@&def-domain;
+SafeUntrap  sort
+SysLog      command  /usr/bin/logger
 
 AutoVariable VendURL SecureURL MailOrderTo SafeUnutrap SysLog
 </programlisting>
 __END__
 
-__NAME__ example: Display a scalar value
+__NAME__ example: Displaying a scalar value
 Put the following on a page:
 <programlisting>
 Orders are e-mailed to: __MailOrderTo__
 </programlisting>
 __END__
 
-__NAME__ example: Display an array value
+__NAME__ example: Displaying an array value
 Put the following on a page:
 <programlisting>
 First SafeUntrap value is: __SafeUntrap_0__

@@ -43,7 +43,7 @@ In our example database, page <literal>4595</literal>.html redirects
 back to the index page.
 </para><para>
 To minimize the chance of confusion, you can download properly composed
-<ulink url="files/various/alias.txt">alias.txt</ulink>.
+example file <ulink url="files/various/alias.txt">alias.txt</ulink>.
 __END__
 
 

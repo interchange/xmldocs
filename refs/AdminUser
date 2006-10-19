@@ -10,8 +10,6 @@ __NAME__ synopsis
 __END__
 
 __NAME__ missing
-everything
+everything, see Util.pm
 __END__
 
-
-See Util.pm 

@@ -4,9 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req' rep='repeat'>
-	<arg choice='plain'><replaceable>catalog_name username</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>catalog_name username</replaceable></arg>
 __END__
 
 

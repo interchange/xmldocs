@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<arg choice='plain'>filename</arg>
+<arg choice='plain'><replaceable>filename</replaceable></arg>
 __END__
 
 
@@ -23,6 +23,7 @@ __END__
 
 __NAME__ missing
 Route is not set to supplant, route IS supplant, right?!
+Link to route discussion
 __END__
 
 __NAME__ example: Setting AsciiTrack

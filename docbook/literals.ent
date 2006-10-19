@@ -107,6 +107,7 @@ option) any later version.</para>">
 <!ENTITY TAB_DELIMITED_NOTICE "You might notice that the fields names and
 values above are not properly aligned. This is an unfortunate nature of
 &glos-tab-delimited; files.">
+<!ENTITY GE "glossary entry">
 
 <!-- GLOSSARY LINKS ARE AUTOMATIC -->
 

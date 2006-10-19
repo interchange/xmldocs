@@ -17,12 +17,8 @@ __END__
 
 
 __NAME__ description
-The directive allows the definition of Interchange &glos-ActionMap;s, whose
+The directive allows definition of Interchange &glos-ActionMap;s, whose
 contents are usually &PERL; subroutines.
-</para><para>
-The leading part of the incoming page path is taken and checked if it represents
-a valid action. If it does, the action name itself will be stripped from the
-path, and the appropriate action will be called with the rest of the argument.
 __END__
 
 __NAME__ notes
@@ -42,7 +38,7 @@ would be equivalent to <code><![CDATA[[page order/nextpage]Go to the next page</
 __END__
 
 __NAME__ missing
-In the example, I provided some erroneous comment.
+In the example, I provided some erroneous comment (the part about [area].. equal to [page]...
 Also fix description and add synopsis
 __END__
 

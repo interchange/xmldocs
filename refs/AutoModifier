@@ -4,9 +4,9 @@ __END__
 
 
 __NAME__ missing
-fix examples (split to three)
 improve description based on syntax seen in examples
 in the examples, explain mv_sku lookup, not clear now
+incorporate NAME=table:column syntax in synopsis
 __END__
 
 
@@ -16,16 +16,19 @@ __END__
 
 __NAME__ synopsis
 <arg choice='plain' rep='repeat'>
-	<arg choice='opt'>table</arg>
+	<arg choice='opt'><replaceable>table</replaceable>:</arg>
 	<replaceable>column</replaceable>
-	<arg choice='opt'>key</arg>
+	<arg choice='opt'>:<replaceable>key</replaceable></arg>
 </arg>
 __END__
 
 
 __NAME__ description
 The directive specifies names of the product &glos-attribute;s 
-which should be automatically loaded from a database column.
+which should be automatically loaded from database columns.
+Table, column and key identifiers belonging to a single specification
+are separated by a colon (<literal>:</literal>), while multiple specifications
+are separated by whitespace.
 </para><para>
 In other words, 
 when an item is added to the shopping cart using &IC;'s routines, the
@@ -34,54 +37,23 @@ fields in the <database>products</database> database.
 </para><para>
 This facility will often be employed in determining product
 &glos-price;, &glos-discount;, &glos-tax;, &glos-shipping; amd 
-other custom attributes. In other words, these attributes will probably
+other custom attributes; these attributes will probably
 be used in custom &PERL; code that will scan the electronic
-&glos-cart; contents and perform some decisions.
+&glos-cart; contents and perform some decisions. For example, by defining
+database columns <database class='field'>heavy</database> and
+<database class='field'>downloadable</database>, you will be
+able to perform decisions
+based on <code>$item-&gt;{heavy}</code> and
+<code>$item-&gt;{downloadable}</code> (but there are more access methods,
+see the &gloss-attribute; &GE;.
+__END__
+
+
 <!--
-</para><para>
-There are several forms of the specification. The simplest is
-a field with no table specification:
-</para>
-<programlisting>
-AutoModifier heavy
-</programlisting>
-<para>
 This one has a bit of "magic" associated. To account for matrix-option
 products, the various product tables are searched, for both the item
 code and the base SKU associated with the item.
-</para><para>
-You can also rename the attribute to something different than the
-field:
-</para>
-<programlisting>
-	AutoModifier heavy=heavy_item
-</programlisting>
-<para>
-This would place the contents of the "heavy_item" field in the
-"heavy" attribute.
-</para><para>
-If you want to use a non-products table to load the modifier, you
-specify it in the usual Interchange colon-separated syntax:
-</para>
-<programlisting>
-	AutoModifier extra:heavy
-</programlisting>
-<para>
-This would look in the <database>extra</database> table for the
-"heavy" field.
-</para><para>
-You can also specify that another attribute holds the key for
-the modifier:
-</para>
-<programlisting>
-	AutoModifier extra:heavy:category
-</programlisting>
-<para>
-This would look in the <database>extra</database> table for the
-"heavy" field, using the "category" attribute in the item as
-the key.
 -->
-__END__
 
 __NAME__ notes
 This can useful when doing shipping calculations or in embedded
@@ -100,38 +72,23 @@ Also make sure to have the
 <database class='field'>heavy</database> and 
 <database class='field'>downloadable</database> columns defined in your 
 <database>products</database> database.
-</para><para>
-Example: to set the heavy attribute from the 
-<database class='table'>inventory</database> table with the same
-key as the product code, do:
+__END__
+
+__NAME__ example: set attribute 'heavy' from inventory table
 <programlisting>
 AutoModifier inventory:heavy
 </programlisting>
-</para><para>
-Example: to set the heavy attribute from the <database
-class='field'>heavy</database> field in the <database
-class='table'>inventory</database> table with the same key as the product
-code, do:
-<programlisting>
-AutoModifier inventory:heavy
-</programlisting>
-</para><para>
-Example: to set the "weighty" attribute from the <database
-class='field'>heavy</database> field in the <database
-class='table'>inventory</database> table with the same key as the product
-code, do:
+__END__
+
+__NAME__ example: set attribute 'weighty' from inventory table, column 'heavy'
 <programlisting>
 AutoModifier weighty=inventory:heavy
 </programlisting>
-</para><para>
-Example: to set the heavy attribute from the <database
-class='field'>heavy</database> field in the <database
-class='table'>inventory</database> table with the the 
-base SKU for a variant, do:
+__END__
+
+__NAME__ example: set attribute 'heavy' from inventory table, with a different SKU
 <programlisting>
 AutoModifier inventory:heavy:mv_sku
 </programlisting>
-
 __END__
 
-TODO Fix example section

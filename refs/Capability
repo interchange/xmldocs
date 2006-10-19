@@ -7,12 +7,10 @@ Require,Suggest
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'>
-		<replaceable>type</replaceable>
-		<replaceable>type-specific value</replaceable>
-	</arg>
-</group>
+<arg choice='plain' rep='repeat'>
+	<replaceable>type</replaceable>
+	<replaceable>type-specific-value</replaceable>
+</arg>
 __END__
 
 
@@ -31,9 +29,16 @@ configuration.
 <literal>module</literal> .
 __END__
 
-__NAME__ example: Testing for existence of Archive::Zip Perl module
+__NAME__ example: Testing for existence of two Perl modules
 <programlisting>
-Capability module Archive::Zip
+Capability module Archive::Zip module Set::Crontab
+</programlisting>
+__END__
+
+__NAME__ example: Testing for existence of two Perl modules
+<programlisting>
+Capability module LWP
+Capability module Safe
 </programlisting>
 __END__
 

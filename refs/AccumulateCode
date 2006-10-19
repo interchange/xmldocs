@@ -14,6 +14,7 @@ __END__
 __NAME__ description
 The directive instructs &IC; to fetch code blocks "on-demand" from the
 &conf-CodeRepository; instead of starting up with everything.
+It helps speed up &IC; startup time and reduce memory footprint.
 </para><para>
 So, at runtime, when particular functionality is needed but is not
 yet present in the running &IC; installation, it is copied from 
@@ -26,6 +27,7 @@ found in the accumulated directory and loaded normally
 again).
 </para><para>
 Over time, as you access pages and routines, a full set of tags
+used by a &glos-catalog;
 will be copied to the accumulated directory, and you will then be
 able to turn &conf-AccumulateCode; off.
 (In fact, &conf-AccumulateCode; is recommended for development and should 
