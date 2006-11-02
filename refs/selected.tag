@@ -1,4 +1,47 @@
+__NAME__ purpose
+identicate selected status of HTML options
+__END__
+
 __NAME__ synopsis 
+<row>
+
+	<entry>
+	name
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	variable name
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	value
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+
 <row>
 
 	<entry>
