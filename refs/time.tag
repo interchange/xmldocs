@@ -9,7 +9,7 @@ __NAME__ synopsis
 	locale
 	</entry>
 	<entry>
-	<!-- POS -->
+	Yes
 	</entry>
 	<entry>
 	<!-- REQ -->
