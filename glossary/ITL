@@ -128,7 +128,7 @@ which is not what you'd expect).
 <literal>]--&gt;</literal> as an alternative to plain square
 brackets. In other words, 
 <code>[<replaceable>tagname</replaceable> <replaceable>...</replaceable>]</code>
-and <code>&lt;--[<replaceable>tagname</replaceable>
+and <code>&lt;!--[<replaceable>tagname</replaceable>
  <replaceable>...</replaceable>]--&gt;</code> are equivalent.
 </para><para>
 This allows you to make your raw ITL tags appear as comments in &glos-HTML;
