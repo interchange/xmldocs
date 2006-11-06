@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
+<group choice='plain'>
 	<arg choice='plain'>0</arg>
 	<arg choice='plain'>1</arg>
 </group>
@@ -42,8 +42,8 @@ The time is now <!--[time]-->.
 Setting the <pragma>no_html_comment_embed</pragma> &glos-pragma; instructs
 Interchange
 <emphasis role='bold'>not</emphasis> to parse and interpolate any HTML
-comments. With this pragma enabled, the above example would not display
-the current time.
+comments. With this pragma <emphasis role='bold'>enabled</emphasis>,
+the above example would not display the current time.
 __END__
 
 
@@ -58,6 +58,6 @@ __END__
 __NAME__ notes
 Although this feature existed in Interchange for a very long time, the
 pragma to control its behavior was added in September 2004, after someone
-stumbled on it by accident and wanted to remove it.
+stumbled on it by accident.
 __END__
 

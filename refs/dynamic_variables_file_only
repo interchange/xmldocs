@@ -1,10 +1,10 @@
 __NAME__ purpose
-dynamically update the directives from files only
+dynamically update the configuration directives from files only
 __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
+<group choice='plain'>
 	<arg choice='plain'>0</arg>
 	<arg choice='plain'>1</arg>
 </group>

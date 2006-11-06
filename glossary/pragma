@@ -8,7 +8,7 @@ Pragma values can be defined at any level; catalog-wide, page-wide or
 <note><para>
 Catalog-wide pragmas are equivalent to inserting <code>[pragma ...]</code>
 on every page. However, setting the &conf-Pragma; catalog directive (instead of
-using &tag-pragma; tag all the time) has the benefit of initializing at 
+using the &tag-pragma; tag all the time) has the benefit of initializing at 
 catalog startup time (so, only once),  which avoids extra hash key lookups.
 Namely, there is some crossover point at about 4 &PERL; references where it
 saves processor power to assign a scalar instead of looking it up every time.
@@ -24,7 +24,6 @@ Pragma <replaceable>NAME</replaceable> <group choice='req'><arg choice='plain'>0
 To define a pragma for a particular page, use the &tag-pragma;
 tag anywhere on a page. For readability, however, we suggest to always 
 define pragmas at the top.
-</para><para>
 The following two lines, of which you would 
 usually use only one at a time, present pragma activation and deactivation:
 <programlisting>
@@ -32,7 +31,7 @@ usually use only one at a time, present pragma activation and deactivation:
 [pragma <replaceable>NAME</replaceable> 0]
 </programlisting>
 </para><para>
-To define a pragma for a &glos-ITL; block inside the page, enclose the
+To define a pragma for an &glos-ITL; block inside the page, enclose the
 block in <code>[tag pragma ...]</code>:
 <programlisting>
 [tag pragma <replaceable>NAME</replaceable>]1[/tag]
@@ -40,8 +39,8 @@ block in <code>[tag pragma ...]</code>:
 [tag pragma <replaceable>NAME</replaceable>]0[/tag]
 </programlisting>
 </para><para>
-Starting with Interchange 5.0, the <code>$::Pragma->{name}</code> syntax
+Starting with Interchange 5.0, the <code>$::Pragma->{<replaceable>NAME</replaceable>}</code> syntax
 is used in the &IC; source, instead of the old
-<code>$Vend::Cfg->{Pragma}{name}</code>.
+<code>$Vend::Cfg->{Pragma}{<replaceable>NAME</replaceable>}</code>.
 </para><para>
 See the list of available pragmas in <olink targetdoc='pragmas'/>.

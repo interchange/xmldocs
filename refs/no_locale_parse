@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
+<group choice='plain'>
 	<arg choice='plain'>0</arg>
 	<arg choice='plain'>1</arg>
 </group>
@@ -20,7 +20,7 @@ __NAME__ description
 This &glos-pragma; disables parsing of <tag>L</tag> and <tag>LC</tag> tags.
 </para><para>
 This is only used in the Admin UI and is not of interest to the general public.
-It could also have some side effects in Interchange &glos-ic-run-mode;
+It could also have some side effects in PreFork &glos-ic-run-mode;
 If you have enough traffic that you want to run in PreFork mode, you will
 be wanting to move the Admin UI away from the customer-facing side anyway,
 so this will not be a problem.
