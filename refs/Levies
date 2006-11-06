@@ -1,0 +1,39 @@
+__NAME__ purpose
+specify Levy sections to apply
+__END__
+
+
+__NAME__ description
+Specify &conf-Levy; sections that are to be applied.
+__END__
+
+__NAME__ notes
+See the &glos-levy; glossary entry for a complete discussion.
+__END__
+
+
+__NAME__ see also
+Levy
+__END__
+
+__NAME__ synopsis
+<arg choice='plain' rep='repeat'><replaceable>levy_name</replaceable></arg>
+__END__
+
+
+__NAME__ example: Defining __FILENAME__
+<programlisting>
+Levy    salestax    description    "Sales Tax (%s)"
+Levy    salestax    keep_if_zero   1
+Levy    salestax    type           salestax
+Levy    salestax    sort           002
+
+Levy    shipping    keep_if_zero   0
+Levy    shipping    type           shipping
+Levy    shipping    mode_variable  mv_shipmode
+Levy    shipping    mode           USPS
+
+Levies  salestax shipping
+</programlisting>
+__END__
+

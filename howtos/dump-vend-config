@@ -1,0 +1,15 @@
+Dump complete Vend::Cfg structure
+
+Create usertag named <literal>cfgdump</literal> as shown below and
+save it as <filename>code/UserTag/cfgdump.tag</filename> in your
+&glos-ICROOT; directory:
+<programlisting><![CDATA[
+UserTag cfgdump  Routine   <<EOR
+sub {
+  use Data::Dumper; 
+  Dumper $Vend::Cfg;
+}
+EOR
+]]></programlisting>
+
+Restart &IC; (see &howto-daemon-control;) to load the tag.

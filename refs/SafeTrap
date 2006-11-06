@@ -1,0 +1,38 @@
+__NAME__ purpose
+specify operation codes to trap in Safe.pm compartments
+__END__
+
+__NAME__ see also
+SafeUntrap
+__END__
+
+__NAME__ synopsis
+<arg choice='plain' rep='repeat'><replaceable>opcode</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive defines the opcodes that will be trapped in the
+<classname>Safe</classname> compartments, for use in
+embedded &PERL; and conditional operations. 
+</para><para>
+For a complete discussion and the opcodes list, see
+<citerefentry><refentrytitle>Opcode</refentrytitle>
+<manvolnum>3perl</manvolnum></citerefentry> manual page.
+__END__
+
+__NAME__ notes
+Please see the &glos-safe; glossary entry for the introduction and guidelines
+to programming under <classname>Safe.pm</classname> restrictions.
+</para><para>
+The &conf-SafeUntrap; directive runs <emphasis role='bold'>after</emphasis> 
+&conf-SafeTrap; (so, it takes priority). Make sure the opcodes you want
+to trap are not later untrapped with &conf-SafeUntrap;.
+__END__
+
+__NAME__ example: Disabling rand function
+<programlisting>
+SafeTrap rand
+</programlisting>
+__END__
+

@@ -1,0 +1,12 @@
+<A HREF="[area
+	    href=admin/flex_editor
+	    form=|
+		item_id=[loop-data userdb username]
+		mv_data_table=userdb
+		page_title=Customer: [loop-data userdb fname] [loop-data userdb lname]
+		ui_data_fields=username company fname lname address1 address2 city state zip country email phone_day phone_night
+		ui_hide_key=1
+		ui_return_to=admin/customer_view
+		ui_return_to=mv_arg=[cgi customer]
+	    |
+	]"><u>[loop-data userdb fname] [loop-data userdb lname]</u></A>

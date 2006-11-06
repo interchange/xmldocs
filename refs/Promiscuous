@@ -1,0 +1,35 @@
+__NAME__ purpose
+allow output of HTML code in value variables
+__END__
+
+
+__NAME__ see also
+value
+__END__
+
+__NAME__ synopsis
+<group choice='plain'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+Allow output of &glos-HTML; code from &glos-value; variables.
+__END__
+
+__NAME__ notes
+By default, when this directive is disabled, the characteristic HTML characters
+(&lt; and &gt;), are encoded to &amp;lt; and &amp;gt;.
+</para><para>
+This catalog-wide directive is equivalent in effect to passing
+<code>enable_html=1</code> attribute to the individual &tag-value; tags.
+__END__
+
+__NAME__ example: Defining __FILENAME__
+<programlisting>
+Promiscuous yes
+</programlisting>
+__END__
+

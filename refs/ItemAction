@@ -1,0 +1,12 @@
+* Add ItemAction to map a subroutine to alter items every time toss_cart
+  is run, i.e. after an add or refresh.
+
+	  Calling syntax is $sub->($item_reference), return value is not used.
+
+
+Defines a routine which runs every time the Interchange shopping
+cart is recalculated. It is passed the item hash as its only parameter.
+
+__NAME__ missing
+All
+__END__

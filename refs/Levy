@@ -1,0 +1,80 @@
+__NAME__ purpose
+define levy section (levy key)
+__END__
+
+
+__NAME__ synopsis
+__END__
+
+
+__NAME__ description
+<itemizedlist>
+<listitem><para>
+<literal>add_to</literal> - 
+</para></listitem>
+<listitem><para>
+<literal>check_status</literal> - 
+</para></listitem>
+<listitem><para>
+<literal>description</literal> - 
+</para></listitem>
+<listitem><para>
+<literal>exclude_if</literal> - 
+</para></listitem>
+<listitem><para>
+<literal>include_if</literal> - 
+</para></listitem>
+<listitem><para>
+<literal>free_message</literal> - 
+</para></listitem>
+<listitem><para>
+<literal>keep_if_zero</literal> - 
+</para></listitem>
+<listitem><para>
+<literal>label_value</literal> - 
+</para></listitem>
+<listitem><para>
+<literal>mode</literal> - 
+</para></listitem>
+<listitem><para>
+<literal>mode_from_scratch</literal> - 
+</para></listitem>
+<listitem><para>
+<literal>mode_from_values</literal> - 
+</para></listitem>
+<listitem><para>
+<literal>multi</literal> - 
+</para></listitem>
+<listitem><para>
+<literal>part_number</literal> - 
+</para></listitem>
+<listitem><para>
+<literal>sort</literal> - 
+</para></listitem>
+<listitem><para>
+<literal>tax_fields</literal> - 
+</para></listitem>
+<listitem><para>
+<literal>tax_type</literal> - 
+</para></listitem>
+<listitem><para>
+<literal>type</literal> - 
+</para></listitem>
+</itemizedlist>
+__END__
+
+__NAME__ notes
+See the &glos-levy; glossary entry for a complete discussion.
+__END__
+
+__NAME__ example: Defining a Levy
+<programlisting>
+</programlisting>
+__END__
+
+__NAME__ missing
+synopsis
+descriptions
+turn list into NAME (SYNOPSIS, default DEF) - DESC
+add examples
+__END__

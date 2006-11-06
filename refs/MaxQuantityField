@@ -1,0 +1,54 @@
+__NAME__ purpose
+specify table and/or column containing maximum allowed quantity for an item
+__END__
+
+
+__NAME__ see also
+
+__END__
+
+
+__NAME__ synopsis
+<group choice='plain'>
+	<arg choice='plain'>
+		<replaceable>table</replaceable>:<replaceable>column</replaceable>
+	</arg>
+	<arg choice='plain'>
+		<replaceable>column</replaceable>
+	</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The &conf-__FILENAME__; directive specifies the &glos-database;
+and database column containing the maximum allowed order quantity
+for an item.
+</para><para>
+When two arguments are supplied (concatenated by a colon, <literal>:</literal>),
+they indicate the appropriate &glos-database; table and column name.
+When only one argument is supplied, it indicates the name of the column;
+table defaults to the <database>products</database> database.
+</para><para>
+The code of the item in question must be present in the 
+database (<database class='field'>code</database> column),
+or the quantity will be unlimited.
+__END__
+
+__NAME__ notes
+__END__
+
+
+__NAME__ example: Setting __FILENAME__
+<programlisting>
+MaxQuantityField max_quantity
+</programlisting>
+__END__
+
+
+__NAME__ example: Setting __FILENAME__
+<programlisting>
+MaxQuantityField inventory:quantity
+</programlisting>
+__END__
+

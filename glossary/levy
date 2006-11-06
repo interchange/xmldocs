@@ -1,0 +1,29 @@
+</para>
+
+<note><para>
+	<literal>Levy, [1913 Webster]</literal>:<sbr/>
+	3. To raise or collect by assessment; to exact by authority;
+	as, to levy taxes, toll, tribute, or contributions.
+</para></note>
+
+<para>
+Levies in &IC; are a way of defining multiple additional product
+charging such as taxes, handling, fees, and shipping.
+If you use &conf-Levies;, the normal
+salestax, shipping, and handling tags are ignored
+(even when you use &tag-assign;).
+</para><para>
+The &conf-Levy; configuration directive defines individual levy
+sections (levy keys). The &conf-Levies; configuration directive
+defines which levy sections will actually be honored.
+</para><para>
+Levy sections (key names) are unlimited and arbitrary; we use
+<literal>salestax</literal>, <literal>shipping</literal> etc. to
+cover most common cases, but you can put anything in there and have
+it work as long as the key names in &conf-Levies; have a corresponding
+&conf-Levy; definition.
+</para><para>
+Levies are a bit processor-intensive, and as such are not recalculated     
+every time they are accessed. They can, however, be manually recalculated
+by using the <option>check_status</option> &conf-Levy; parameter, 
+as described in the &conf-Levy; reference page.

@@ -1,0 +1,78 @@
+__NAME__ purpose
+specify page names and Perl subroutines that implement access control
+__END__
+
+
+__NAME__ synopsis
+<arg choice='plain'><replaceable>page_path</replaceable></arg>
+<arg choice='plain'><replaceable>perl_routine</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The &conf-__FILENAME__; directive allows you to control access
+to &IC; pages by using an arbitrary decision method, implemented
+as a &PERL; function. Perl functions may be provided in-place,
+as &conf-Sub;s, or as &conf-GlobalSub;s.
+</para><para>
+The function is called with three parameters: 
+the filename, write flag, and &PERL; caller information.
+The return value should be a &glos-boolean;, specifying whether
+access is allowed (a &glos-true; value) or not (a &glos-false; 
+value).
+</para><para>
+See <xref linkend='FileControl_examples'/>.
+__END__
+
+__NAME__ notes
+__END__
+
+__NAME__ see also
+__END__
+
+__NAME__ example: Specifying __FILENAME__ routine in-place
+<programlisting>
+FileControl test_page  &lt;&lt;EOR
+sub {
+  my ($fn, $write, @caller) = @_;
+
+  # Allow write to files containing "foo" in filename
+  if( $write ) { 
+    return $fn =~ /foo/;
+  }
+
+  # Allow read for files NOT containing "bar" in filename
+  return $fn !~ /bar/;
+}   
+EOR   
+</programlisting>
+__END__
+
+
+__NAME__ example: Specifying __FILENAME__ routine as a Sub or GlobalSub
+<programlisting>
+Sub &lt;&lt;EOF
+sub filecontrol_access {
+  my ($fn, $write, @caller) = @_;
+
+  # Allow write to files containing "foo" in filename
+  if( $write ) {
+    return $fn =~ /foo/;
+  }
+
+  # Allow read for files NOT containing "bar" in filename
+  return $fn !~ /bar/;
+}
+EOF
+
+FileControl test_directory/test_page filecontrol_access
+</programlisting>
+__END__
+
+__NAME__ example: Specifying __FILENAME__ as a mapped routine name
+In &gcf;, you can use mapped routine names:
+<programlisting>
+FileControl test_page Vend::YourModule::file_control
+</programlisting>
+__END__
+

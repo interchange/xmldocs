@@ -1,0 +1,30 @@
+__NAME__ purpose
+IPC socket filename
+__END__
+
+__NAME__ see also
+SocketFile
+__END__
+
+
+__NAME__ synopsis
+<arg choice='plain'><replaceable>filename</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive specifies the filename which &IC; should create to enable
+IPC socket communication. The filename must, of course, be writable
+by the Interchange daemon.
+__END__
+
+__NAME__ notes
+__END__
+
+
+__NAME__ example: Setting __FILENAME__
+<programlisting>
+IPCsocket /var/run/interchange/interchange.sock.ipc
+</programlisting>
+__END__
+

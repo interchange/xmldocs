@@ -1,0 +1,42 @@
+__NAME__ purpose
+specify log granularity treshold
+__END__
+
+__NAME__ see also
+SysLog
+__END__
+
+__NAME__ synopsis
+<arg choice='plain'><replaceable>integer_treshold</replaceable></arg>
+__END__
+
+
+__NAME__ description
+This directive specifies the desired log granularity treshold.
+__END__
+
+__NAME__ notes
+This directive is currently largely unused in the code. The only two 
+<option>priority_integer</option>s used are <literal>4</literal> and
+<literal>5</literal>.
+</para><para>
+When &conf-Logging; is set to a value greater than
+<literal>4</literal>, HTTP headers are logged.
+When &conf-Logging; is set to a value greater than
+<literal>5</literal>, contents of the POST &glos-HTML; form submission
+are logged as well.
+__END__
+
+__NAME__ example: Logging HTTP headers and POST data
+<programlisting>
+Logging 6
+</programlisting>
+__END__
+
+
+__NAME__ example: Disabling __FILENAME__
+<programlisting>
+Logging 0
+</programlisting>
+__END__
+
