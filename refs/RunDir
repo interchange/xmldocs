@@ -1,9 +1,26 @@
 __NAME__ purpose
-specify directory for runtime files
+specify directory containing runtime files
 __END__
 
+
 __NAME__ synopsis
-<arg choice='plain'><replaceable>directory</replaceable></arg>
+<arg choice='plain'><replaceable>directory_name</replaceable></arg>
+__END__
+
+
+__NAME__ description
+Specify the directory containing "runtime" information.
+</para><para>
+This directory is similar to <filename class='directory'>/var/run/</filename>
+in the Unix filesystem. Examples of files that you will encounter in there
+are the global <filename>.structure</filename> file (see
+&conf-DumpStructure;), <filename>.pid</filename> and
+<filename>mode.</filename> files and &IC; cronjob files (see &conf-Jobs;).
+__END__
+
+
+__NAME__ missing
+Where to document /reconfig, /restart, /jobsqueue, /flag.* ...
 __END__
 
 __NAME__ example: Creating directory structure similar to a Linux filesystem
@@ -13,5 +30,5 @@ RunDir var/run
 __END__
 
 __NAME__ see also
-PageDir, ProductDir, ScratchDir
+PageDir,ProductDir,ScratchDir,TagDir
 __END__

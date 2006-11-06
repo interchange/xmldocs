@@ -34,3 +34,12 @@ NoSearch userdb  .*  *.secret
 </programlisting>
 __END__
 
+__NAME__ example: Overriding __FILENAME__ setting on a specific page
+<programlisting><![CDATA[
+[calc] $Config->{NoSearch} = '' [/calc]
+]]></programlisting>
+For a discussion on why this example works (and works per-page), see
+&glos-configuration; glossary entry.
+__END__
+
+
