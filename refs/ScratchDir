@@ -19,12 +19,11 @@ __NAME__ notes
 The specified location is always treated relative to &glos-CATROOT;.
 __END__
 
-__NAME__ example: Setting __FILENAME__
+__NAME__ example: Creating directory structure similar to a Linux filesystem
 <programlisting>
-__FILENAME__ temp
+ScratchDir var/tmp
 </programlisting>
 __END__
-
 
 
 __NAME__ see also

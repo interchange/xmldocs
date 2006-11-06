@@ -1,0 +1,17 @@
+__NAME__ purpose
+specify directory for runtime files
+__END__
+
+__NAME__ synopsis
+<arg choice='plain'><replaceable>directory</replaceable></arg>
+__END__
+
+__NAME__ example: Creating directory structure similar to a Linux filesystem
+<programlisting>
+RunDir var/run
+</programlisting>
+__END__
+
+__NAME__ see also
+PageDir, ProductDir, ScratchDir
+__END__
