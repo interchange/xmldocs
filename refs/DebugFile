@@ -14,11 +14,11 @@ __END__
 
 
 __NAME__ description
-Specify the Interchange debug output file. If the filename is not absolute,
-it is treated relative to the Interchange root directory (ICROOT).
+Specify the &IC; debug output file. If the filename is not absolute,
+it is treated relative to the Interchange root directory (&glos-ICROOT;).
 </para><para>
 When enabled, the debug file will gather output of the
-<function>::logDebug()</function> Interchange statements and Perl warnings
+<function>::logDebug()</function> Interchange statements and &PERL; warnings
 (if they are enabled).
 __END__
 

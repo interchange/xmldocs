@@ -4,13 +4,15 @@ __END__
 
 
 __NAME__ synopsis
-<arg choice='plain'>Yes</arg>
-<arg choice='plain'>No</arg>
+<group choice='plain'>
+	<arg choice='plain'>Yes</arg>
+	<arg choice='plain'>No</arg>
+</group>
 __END__
 
 __NAME__ notes
 This directive is obsolete as of &IC; 5.5.0, and the behavior is
-as if <code>ConfigParseComments Yes</code> was specified.
+as if <code>ConfigParseComments No</code> was specified.
 __END__
 
 
@@ -23,15 +25,13 @@ configuration meta-directives such as
 are treated as pure comments with no specific meaning.
 </para><para>
 However, since those were originally borrowed from the C preprocessor,
-and true to their C heritage - they started with an '#' (hash) character
-in &IC; versions up to and including 4.6.
+and, true to their C heritage, they started with an '<literal>#</literal>'
+(hash) character in &IC; versions up to and including 4.6.
 </para><para>
 This was inconvenient for newcomers who were easily misguided by thinking
-those were just comments, so Interchange versions 4.7 and up support
-meta-directives without the hash prefix.
-</para><para>
-To preserve compatibility, the default is still <literal>Yes</literal>,
-but you should omit the '#' (hash) in new configuration files.
+those were just comments, so Interchange versions 4.7 and up were changed
+to use the meta-directives <emphasis role='bold'>without the hash
+prefix</emphasis>.
 __END__
 
 

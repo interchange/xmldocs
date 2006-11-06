@@ -8,9 +8,9 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>0</arg>
-	<arg choice='plain'>interval</arg>
+<group choice='plain'>
+	<arg choice='plain'><literal>0</literal></arg>
+	<arg choice='plain'><replaceable>interval</replaceable></arg>
 </group>
 __END__
 

@@ -15,6 +15,8 @@
   listed under See Also.
 - in search.xml replace mv_ listitems with sections so they're listed in TOC
 - note in configuration glossentry to use '' to skip values 
+- Check ConfigDatabase and DirectiveDatabase. Is description correct? One seems to be wrong
+- preprocessor directives in configuration ?
 
 Outstanding:
 =======

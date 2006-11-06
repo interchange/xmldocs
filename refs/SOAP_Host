@@ -12,9 +12,7 @@ therefore has no effect on execution of SOAP RPC requests.
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'><replaceable>hostname_or_IP</replaceable></arg>
-</group>
+<arg choice='plain' rep='repeat'><replaceable>hostname_or_IP</replaceable></arg>
 __END__
 
 

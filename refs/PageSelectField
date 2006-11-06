@@ -4,14 +4,13 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable>column_name</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>column_name</replaceable></arg>
 __END__
 
 
 __NAME__ description
-Sets a <database>products</database> database column which can be used to
+The directive sets a <database>products</database> database column
+which can be used to
 select the on-the-fly template page (the &glos-flypage;). This allows
 multiple flypages to be defined and selected automatically. If the field
 is empty (no spaces!), the default, <literal>flypage</literal>, will be used.

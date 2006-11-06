@@ -4,15 +4,14 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable>field_name</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>field_name</replaceable></arg>
 __END__
 
 
 __NAME__ description
-By default, &IC; expects the item description to be in the 
-<database class='field'>description</database> field in the database.
+By default, &IC; expects the product description to be in the 
+<database class='field'>description</database> field in the
+<database>products</database> database.
 This directive allows modification of the default name.
 </para><para>
 The field is accessed implicitly when you call say, 
@@ -24,7 +23,8 @@ __NAME__ notes
 The existence of the field is not exactly crucial, but it's important
 for say, &glos-flypage;s.
 </para><para>
-It's also useful to set the directive value based on &glos-locale;.
+It's also useful to set the directive value based on &glos-locale;,
+allowing for locale-specific product descriptions.
 __END__
 
 TODO: Clarify this? "If there is an

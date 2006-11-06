@@ -4,15 +4,13 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'><replaceable>directory</replaceable></arg>
-</group>
+<arg choice='plain' rep='repeat'><replaceable>directory_name</replaceable></arg>
 __END__
 
 
 __NAME__ description
 Specify directories containing default pages. This effectively allows you to 
-keep pages common for all catalogs in common directories, or &mdash; in case
+keep pages common for all &glos-catalog;s in common directories, or &mdash; in case
 of a catalog directive &mdash; extend the page
 search outside the catalog's <filename class='directory'>pages/</filename>
 directory.

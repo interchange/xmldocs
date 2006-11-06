@@ -4,8 +4,10 @@ __END__
 
 
 __NAME__ synopsis
-<arg choice='plain'>No</arg>
-<arg choice='plain'>Yes</arg>
+<group choice='plain'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
 __END__
 
 
@@ -26,10 +28,12 @@ __END__
 
 __NAME__ notes
 To cause the cookie to be generated originally,
-<mv>mv_cookie_password</mv> and/or <mv>mv_cookie_username</mv> must be set.
+<mv>mv_cookie_password</mv> and/or <mv>mv_cookie_username</mv> must be set
+to a &glos-true; value.
 The former causes both username and password to be saved; the latter just
-the username. This, however, is done automatically so you don't have to worry
-about it explicitly.
+the username.
+</para><para>
+For a complete discussion on cookies, see &glos-cookie; glossary entry.
 __END__
 TODO: Does the above really happen automatically - when you turn on
 CookieLogin, or you need ScratchDefault mv_cookie_password 1 or some thing like 

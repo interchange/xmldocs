@@ -11,14 +11,14 @@ __END__
 __NAME__ description
 There is a huge base of &IC; code (collection of &conf-UserTag;s and 
 &conf-CodeDef;s) included in the default installation.
-Much of it is not needed in even the '&std-catalog;' catalog with full 
-user interface (UI).  This causes a larger memory profile than necessary.
+Much of it is not needed for the usual installations, 
+causing a larger process memory profile than necessary.
 </para><para>
-Furthermore, it is difficult to determine from the &IC; pages what code is
-needed (especially when an &glos-ITL; tag calls
+Furthermore, it is hard to manually determine what subset of code is required,
+especially when an &glos-ITL; tag calls
 <code>$Tag-&gt;<replaceable>TAGNAME</replaceable>()</code>
-which calls a filter which calls some sort of action &mdash; 
-you get the picture).
+which calls some filter which calls some sort of an action &mdash; 
+you get the picture.
 </para><para>
 A feature was needed to allow building catalogs with a more optimal
 set of code than just "everything". And as we'll see in a second,
@@ -65,23 +65,23 @@ calls another <code>$Tag-&gt;<replaceable>TAGNAME</replaceable>()</code> within.
 not much to be done about it. The good news is that the error should
 go away after &conf-HouseKeeping; seconds, when the tag gets compiled by the
 master.
-The &tag-area;, &tag-tmp;, &tag-tmpn;, and &tag-image; tags are known to
-fail in this manner in the '&std-catalog;' catalog.
+&tag-area;, &tag-tmp;, &tag-tmpn;, and &tag-image; are examples of tags known
+to fail in this manner.
 Tags that are frequently called
 in this fashion should probably be manually placed in directory
 <filename class='directory'>code/Vital/</filename> and not
 be accumulated "by chance".
-This temporary failure could be avoided by listing &glos-catalog; in the
+Anyway, this temporary failure could be avoided by listing &glos-catalog; in the
 &conf-AllowGlobal; directive, and it
-might be possible to make a directive that allows &conf-AllowGlobal; for
+might also be possible to make a directive that allows &conf-AllowGlobal; for
 a catalog automatically, when in &conf-AccumulateCode; mode.
 (If you don't want to trade immediate code loading for the lack of
 &conf-AllowGlobal; protection, then just set &conf-HouseKeeping; to 
 something like <literal>20 seconds</literal> &mdash; and
 only do it on your development system!)
 </para><para>
-One convenient side-effect is that you can easily load new code 
-"on the fly" by simply adding files to the &conf-CodeRepository;
+One convenient side-effect is that you can easily load new code (such as new
+&IC; tags) "on the fly" by simply adding files to the &conf-CodeRepository;
 directory. This alleviates the need for &IC; server restart.
 It might also be possible to dynamically <emphasis role='bold'>remove and
 load</emphasis> code from the server in this manner, but this has yet
@@ -132,3 +132,8 @@ $ mv /usr/interchange/code/* /usr/interchange/code.pool/
 </programlisting>
 __END__
 
+
+__NAME__ missing
+Hot-link MapRoutine word
+provide link to example pricing.txt
+__END__

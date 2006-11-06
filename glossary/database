@@ -460,3 +460,22 @@ Term definitions:
 </section>
 
 <para>
+
+
+
+<!-- 
+
+For &GDBM; &glos-database;s, the import would ordinarily happen when the
+gdbm file is deleted, a change in appropriate text source file is detected,
+&IC; is (re)started, or the catalog is reconfigured. &glos-SQL; databases
+are imported only once, at first configuration.
+
+
+<emphasis>External</emphasis> database types are DBI (&MYSQL;, &PGSQL;,
+&ORACLE; etc.) and LDAP (&OPENLDAP; etc.). In contrast,
+<emphasis>internal</emphasis> database types are DBM variants
+(&GDBM;, &BDBM;, SDBM) and in-memory.
+
+
+table= and sql parser
+-->

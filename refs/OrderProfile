@@ -7,9 +7,7 @@ __NAME__ see also
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'><replaceable>filename</replaceable></arg>
-</group>
+<arg choice='plain' rep='repeat'><replaceable>filename</replaceable></arg>
 __END__
 
 
@@ -19,7 +17,7 @@ __END__
 
 
 __NAME__ notes
-The actions defined in order profiles can also used for
+The actions defined in order profiles can also be used for
 <literal>mv_click</literal> actions
 if the actions are not defined in &glos-scratch; space. They are accessed by
 setting the <mv>mv_order_profile</mv> variable to the name of the order
@@ -36,4 +34,5 @@ __END__
 
 __NAME__ missing
 Diff between Profiles and OrderProfile ?
+Confusing note in NOTES about scratch space and mv_click actions
 __END__

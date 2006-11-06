@@ -9,9 +9,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable>count</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>count</replaceable></arg>
 __END__
 
 
@@ -31,9 +29,9 @@ __NAME__ notes
 __END__
 
 
-__NAME__ example: Setting SOAP_MaxRequests
+__NAME__ example: Setting __FILENAME__
 <programlisting>
-SOAP_MaxRequests 200
+__FILENAME__ 200
 </programlisting>
 __END__
 

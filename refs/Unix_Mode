@@ -8,7 +8,7 @@ Unix_Mode,Inet_Mode
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
+<group choice='plain'>
 	<arg choice='plain'>Yes</arg>
 	<arg choice='plain'>No</arg>
 </group>

@@ -35,3 +35,7 @@ MailOrderTo orders@&def-domain;
 __END__
 
 
+__NAME__ missing
+Remove note on funny errmsg if catalog.cfg not readable if it was fixed in the code
+__END__
+

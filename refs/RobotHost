@@ -8,9 +8,7 @@ RobotUA, RobotIP
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'><replaceable>hostname</replaceable></arg>
-</group>
+<arg choice='plain' rep='repeat'><replaceable>hostname</replaceable></arg>
 __END__
 
 
@@ -29,13 +27,13 @@ Using this to "tune" the actual page content depending on a crawler
 visiting does not earn you extra points, and may in fact be
 detected by the robot and punished.
 </para><para>
-It's important to note that the directive accepts a wildcard list -
+It's important to note that the directive accepts a wildcard list &mdash;
 <literal>*</literal> represents any number of characters, while
 <literal>?</literal> represents a single character.
 __END__
 
 __NAME__ notes
-For more details regarding web spiders/bots and &IC; see
+For more details regarding web spiders/bots and &IC;, see
 &glos-robot; glossary entry.
 __END__
 

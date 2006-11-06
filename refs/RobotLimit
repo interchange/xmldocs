@@ -8,9 +8,7 @@ LockoutCommand,OrderLineLimit
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable>count</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>count</replaceable></arg>
 __END__
 
 
@@ -36,3 +34,8 @@ RobotLimit 200
 </programlisting>
 __END__
 
+
+
+__NAME__ missing
+Didn't we change this from 127.0.0.1 to something else ?
+__END__

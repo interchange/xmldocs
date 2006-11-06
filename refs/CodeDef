@@ -20,6 +20,7 @@ _END__
 __NAME__ missing
 synopsis
 replace plain words with entities in description
+more description
 __END__
 
 __NAME__ description

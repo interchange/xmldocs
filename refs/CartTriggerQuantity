@@ -8,8 +8,10 @@ CartTrigger
 __END__
 
 __NAME__ synopsis
-<arg choice='plain'>No</arg>
-<arg choice='plain'>Yes</arg>
+<group choice='plain'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
 __END__
 
 

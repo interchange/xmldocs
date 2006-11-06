@@ -3,7 +3,5 @@ specify directory containing temporary files for permanent searches
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>directory</arg>
-</group>
+<arg choice='plain'><replaceable>directory_name</replaceable></arg>
 __END__

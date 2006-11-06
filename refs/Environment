@@ -4,9 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'>environment variable</arg>
-</group>
+<arg choice='plain' rep='repeat'>environment_variable_name</arg>
 __END__
 
 

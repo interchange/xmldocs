@@ -63,7 +63,7 @@ EOD
 __END__
 
 
-__NAME__ example: Offerning specific catalogs on specific ports
+__NAME__ example: Offering specific catalogs on specific ports
 Even though the internal Web server in &IC; is gone, 
 <literal>tlink</literal> (Inet &glos-link-program;) still relies only on
 the <envar>SCRIPT_PATH</envar> environment variable to determine which

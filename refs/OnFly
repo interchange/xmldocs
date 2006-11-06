@@ -8,10 +8,8 @@ __END__
 
 __NAME__ synopsis
 <group choice='plain'>
-	<group choice='opt'>
-		<arg choice='plain'>0</arg>
-		<arg choice='plain'>1</arg>
-	</group>
+		<arg choice='plain'><literal>0</literal></arg>
+		<arg choice='plain'><literal>1</literal></arg>
 	<arg choice='plain'><replaceable>ITL_tag_name</replaceable></arg>
 </group>
 __END__
@@ -35,7 +33,8 @@ respectively,
 and the last argument is the value of <mv>mv_order_fly</mv> &glos-mv;
 variable for the item.
 </para><para>
-The default &tag-onfly; tag is already provided in &IC;.
+The default &tag-onfly; tag that you can use in place of 
+<option>ITL_tag_name</option> is already provided in &IC;.
 __END__
 
 __NAME__ notes
@@ -52,7 +51,8 @@ __NAME__ example: Configuring OnFly with a custom ITL tag
 <programlisting>
 OnFly my_onfly_tag
 </programlisting>
-For your custom tag, use the existing &tag-onfly; tag, whose 
+For your custom tag, use the existing &tag-onfly; tag as a starting
+point, whose 
 CVS source is available online in &cvsfile-code_SystemTag_onfly.coretag;.
 __END__
 

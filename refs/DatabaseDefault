@@ -11,8 +11,8 @@ The directive defines default parameters for a database.
 </para><para>
 For a list of possible parameters (keys), see the &conf-Database; directive.
 </para><para>
-&conf-DatabaseDefault; accepts any scalar setting, which means all
-<emphasis role='bold'>except</emphasis>:
+&conf-DatabaseDefault; accepts scalar keys, which actually
+means all from the list above <emphasis role='bold'>except</emphasis>:
 
 <itemizedlist>
 <listitem><para>

@@ -11,9 +11,7 @@ __NAME__ see also
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable>field_name</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>field_name</replaceable></arg>
 __END__
 
 

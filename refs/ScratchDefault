@@ -15,7 +15,8 @@ __END__
 
 
 __NAME__ description
-The directive sets default &glos-scratch; variable values.
+The directive sets default &glos-scratch; variable values. These are
+initialized and assigned every time a new uses &glos-session; is created.
 __END__
 
 __NAME__ example: Defining default scratch values

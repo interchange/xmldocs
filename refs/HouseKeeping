@@ -4,9 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>interval</arg>
-</group>
+<arg choice='plain'><replaceable>interval</replaceable></arg>
 __END__
 
 
@@ -15,7 +13,7 @@ Specify periodic time &glos-interval; at which the Interchange server should
 <emphasis>wake up</emphasis> and
 look for user reconfiguration requests and hung processes. On some
 systems, this wakeup is the only time the server will terminate in response
-to a stop command.
+to a <literal>-stop</literal> command.
 __END__
 
 

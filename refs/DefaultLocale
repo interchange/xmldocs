@@ -4,9 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>locale definition</arg>
-</group>
+<arg choice='plain'><replaceable>locale_definition</replaceable></arg>
 __END__
 
 

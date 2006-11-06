@@ -8,7 +8,7 @@ StartServers
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
+<group choice='plain'>
 	<arg choice='plain'>No</arg>
 	<arg choice='plain'>Yes</arg>
 </group>

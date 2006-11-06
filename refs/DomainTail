@@ -9,9 +9,9 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>yes</arg>
-	<arg choice='plain'>no</arg>
+<group choice='plain'>
+	<arg choice='plain'>Yes</arg>
+	<arg choice='plain'>No</arg>
 </group>
 __END__
 
@@ -31,9 +31,10 @@ do not accept cookies to use multiple proxy servers in the same domain.
 Note that this directive is <emphasis role='bold'>enabled</emphasis>
 by default.
 </para><para>
-If you are encrypting credit cards with PGP/GPG or using payment services
-(such as CyberCash), then look at the &conf-WideOpen; directive, which
-enables more browser compatibility, again at the cost of some more security.
+If you are encrypting credit cards with PGP/GPG or using payment services,
+then look at the &conf-WideOpen; directive, which
+enables even more browser compatibility, again at the cost of even more
+security.
 __END__
 
 __NAME__ example: Disabling DomainTail

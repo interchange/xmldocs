@@ -18,12 +18,6 @@ For each &glos-database; search, additional "filtering" will be performed
 and only rows satisfying given condition will be returned. Commonly,
 you will want to use something like <literal>owner=username</literal>, to
 restrict searches to just rows that the corresponding users "own".
-</para><para>
-As you can see from the ad-hoc example above, <literal>owner</literal> is a 
-&glos-database; column name, and <literal>username</literal> is the key
-from the session database. (The user's <code>[data session username]</code>
-must match the value of the <database class='field'>owner</database> field
-if record is to be returned in a search operation).
 __END__
 
 __NAME__ notes
@@ -41,6 +35,11 @@ contains the current value of <code>[data session username]</code>.
 <programlisting>
 TableRestrict  products  owner=username
 </programlisting>
+As you can see from the ad-hoc example above, <literal>owner</literal> is a 
+&glos-database; column name, and <literal>username</literal> is the key
+from the session database. (The user's <code>[data session username]</code>
+must match the value of the <database class='field'>owner</database> field
+if a record is to be returned in a search operation).
 __END__
 
 
@@ -61,8 +60,8 @@ __END__
 
 
 __NAME__ example: Searching using SQL
-When using SQL-based database searches, the above directive examples in effect
-turn the base search query of say,
+When using SQL-based database searches, this directive in effect
+turns the base search query of say,
 <programlisting>
 SELECT * FROM products
 </programlisting>

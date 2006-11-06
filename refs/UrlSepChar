@@ -4,16 +4,14 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>non_word_character</arg>
-</group>
+<arg choice='plain'><replaceable>non_word_character</replaceable></arg>
 __END__
 
 
 __NAME__ description
 Specify URL separator character for &IC;-generated &glos-HTML; links.
 Only one character is allowed, and the only recommended ones are
-the default <literal>&amp;</literal>, <literal>;</literal> and
+the default <literal>&amp;</literal>, <literal>;</literal> or
 <literal>:</literal>.
 __END__
 

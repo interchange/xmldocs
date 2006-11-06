@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
+<group choice='plain'>
 	<arg choice='plain'>No</arg>
 	<arg choice='plain'>Yes</arg>
 </group>
@@ -15,7 +15,7 @@ __NAME__ description
 The &conf-SeparateItems; directive changes the default behavior when ordering
 item in quantity greater of 1. Instead of only increasing quantity information,
 the items are treated as being separate and are listed just as different 
-products would (one per line).
+products would be (one per line).
 </para><para>
 The directive is of little global use, but it allows item attributes to be
 easily set for different instances of the same part number (&glos-SKU;),

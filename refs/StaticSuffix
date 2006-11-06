@@ -4,9 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>extension</arg>
-</group>
+<arg choice='plain'><replaceable>file_extension</replaceable></arg>
 __END__
 
 __NAME__ notes

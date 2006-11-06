@@ -569,6 +569,7 @@ icdevgroup.conf</literal>.
 		<literal>mv_return_fields</literal>
 		(rf, <literal></literal>/<literal></literal>,
 		default <literal></literal>) &mdash;
+		(specification of <literal>:*</literal> indicates "all fields").
 
 		</para>
 		</listitem>

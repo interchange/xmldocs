@@ -9,7 +9,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
+<group choice='plain'>
 	<arg choice='plain'>No</arg>
 	<arg choice='plain'>Yes</arg>
 </group>
@@ -17,18 +17,19 @@ __END__
 
 
 __NAME__ description
-The &conf-WideOpen; directive disables IP-based qualification user sessions,
-which usually results in reduced catalog security.
+The &conf-WideOpen; directive disables IP-based qualification of user
+&glos-session;s.
+This increases compatibility, but reduces &glos-catalog; security.
 </para><para>
-When &conf-WideOpen; is enabled, no IP-based checking is done, so 
+When this directive is enabled, no IP-based checking is done, so 
 anyone guessing and supplying a valid session ID can hijack other client's
 session.
 </para><para>
 The option was introduced to achieve more compatibility with old browsers, at
 cost of some security. Do not enable it unless you first experience problems.
 Also do not use it unless you are using some encryption
-(PGP/&conf-CreditCardAuto;) or a real-time payment gateway, such as
-&glos-CyberCash;.
+(PGP/&conf-CreditCardAuto;) or a real-time payment gateway, or the risk may
+be too high.
 __END__
 
 

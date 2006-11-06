@@ -14,9 +14,7 @@ OrderProfile,SearchProfile
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'><replaceable>filename</replaceable></arg>
-</group>
+<arg choice='plain' rep='repeat'><replaceable>filename</replaceable></arg>
 __END__
 
 

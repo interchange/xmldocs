@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
+<group choice='plain'>
 	<arg choice='plain'>No</arg>
 	<arg choice='plain'>Yes</arg>
 </group>
@@ -15,16 +15,16 @@ __NAME__ description
 &IC; determines the appropriate catalog to invoke by the 
 <literal>SCRIPT_NAME</literal> from the CGI call. This means that different
 (possibly virtual) hosts cannot use the same <literal>SCRIPT_NAME</literal>, as
-the catalogs would become indistinguishable. Set this directive to enable
-differentiation performed on the hostname as well.
+the catalogs would become indistinguishable. Setting this directive includes
+the hostname in the catalog selection method.
 </para><para>
 See the &conf-Catalog; directive for more on the subject and concrete
 examples.
 __END__
 
 __NAME__ notes
-If &conf-FullUrl; is defined, <emphasis role='bold'>all> catalogs must be
-defined with hostnames included</emphasis>. Per-catalog setting will not work,
+If &conf-FullUrl; is defined, <emphasis role='bold'>all catalogs must be
+defined with hostnames included</emphasis>. Per-catalog setting can not work,
 as this is used before the catalog name is known.
 __END__
 

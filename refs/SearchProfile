@@ -8,9 +8,7 @@ OrderProfile,Profiles
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'><replaceable>filename</replaceable></arg>
-</group>
+<arg choice='plain' rep='repeat'><replaceable>filename</replaceable></arg>
 __END__
 
 
@@ -18,7 +16,7 @@ __NAME__ description
 The directive specifies filenames that contain search
 &glos-profile; definitions.
 </para><para>
-An unlimited number of search profiles
+An unlimited number of search &glos-profile;s
 can be set up, performing complex searches on a
 single user click. At the same time, separately-defined search profiles
 keep your &glos-HTML; pages cleaner.
@@ -34,6 +32,11 @@ __END__
 
 __NAME__ notes
 For a complete discussion, see &glos-profile; glossary entry.
+__END__
+
+
+__NAME__ missing
+Difference between SearchProfile and OrderProfile ??
 __END__
 
 __NAME__ example: Defining SearchProfile

@@ -1,16 +1,14 @@
 __NAME__ purpose
-specify variables that should not be propagated from the CGI to Values space
+specify variables that should not be propagated from CGI to Values space
 __END__
 
 __NAME__ see also
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'>
-		<replaceable>variable_name</replaceable>
-	</arg>
-</group>
+<arg choice='plain' rep='repeat'>
+	<replaceable>variable_name</replaceable>
+</arg>
 __END__
 
 __NAME__ description
@@ -26,7 +24,8 @@ __END__
 
 
 __NAME__ notes
-See &glos-CGI; glossary entry for introduction and discussion.
+See &glos-CGI; and &glos-value; glossary entries for an
+introduction and discussion.
 __END__
 
 

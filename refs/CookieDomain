@@ -64,6 +64,8 @@ At least in Mozilla-like browsers, the domain is prefixed with a
 dot even if you omit it in the &conf-CookieDomain; specification
 (<literal>&def-domain;</literal> ends up being the same as
 <literal>.&def-domain;</literal>).
+</para><para>
+For a complete discussion on cookies, see &glos-cookie; glossary entry.
 __END__
 
 __NAME__ example: Specifying CookieDomain

@@ -9,7 +9,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
+<group choice='plain'>
 	<arg choice='plain'>No</arg>
 	<arg choice='plain'>Yes</arg>
 </group>
@@ -36,6 +36,7 @@ Put the following in &gcf;:
 <programlisting>
 DomainTail No
 IpHead     Yes
+IpQuad     3
 </programlisting>
 __END__
 

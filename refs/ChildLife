@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ see also
-PreFork,MaxServers,PIDcheck,PIDfile,HouseKeeping
+MaxRequestsPerChild,PreFork,MaxServers,PIDcheck,PIDfile
 __END__
 
 
@@ -14,28 +14,31 @@ __END__
 
 
 __NAME__ description
-Occasionally, in &conf-PreFork; mode, you will find child processes that get
-"starved", in other words they never seem to win the battle and receive a
-page request so they just sit there forever.
+&IC; page servers are, by default, periodically restarted to make sure
+there are no problems arising from long-running processes
+(such as memory leaks).
 </para><para>
-The &conf-ChildLife; directive times out a page server after a period
-of time.
+In general, periodic &IC; page server re-starting is handled by the
+&conf-MaxRequestsPerChild; configuration directive which re-starts
+each server after a specified number of served client requests.
 </para><para>
-If &conf-ChildLife; is not set, the default, the server will act just
-like it did before, stuck in that internal loop forever until
-<command>kill -9</command> happens.
+However, when &conf-PreFork; &glos-ic-run-mode; is used, some page servers
+never win the page server "selection battle"; they never get to serve a page
+request and consequently they are never restarted by &conf-MaxRequestsPerChild;.
+This is why the &conf-ChildLife; directive restarts
+a page server on an unconditional, periodic basis to make sure all servers
+are re-started from time to time.
 </para><para>
-All the directive does is set the start_time of the server, and then when
-&conf-HouseKeeping; gets triggered, it checks the current time and terminates
-the server (just like &conf-MaxRequestsPerChild;, basically) if it
-has expired.
+If &conf-ChildLife; is not set, the "starved" page servers will act just
+like they did before; get stuck in an internal loop forever until
+<command>kill -9</command> on the process happens.
 </para><para>
 This should clear up the problem where people see with a growing number of
 servers over time.
 __END__
 
 __NAME__ notes
-The directive is only used when &IC; is in <literal>PreFork</literal>
+The directive should only be used when &IC; is in <literal>PreFork</literal>
 &glos-ic-run-mode;.
 </para><para>
 The directive value can be any Interchange &glos-interval;.

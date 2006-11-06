@@ -4,15 +4,16 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>0</arg>
-	<arg choice='plain'>1</arg>
+<group choice='plain'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
 </group>
 __END__
 
 
 __NAME__ description
-Instruct &IC; to dump the complete server configuration (with &conf-Include;s expanded) to <filename>allconfigs.cfg</filename> in the &IC; run 
+Instruct &IC; to dump the complete server configuration (with "includes"
+expanded) to <filename>allconfigs.cfg</filename> in the &IC; run 
 directory.
 </para><para>
 The dump file does not contain catalog configurations.

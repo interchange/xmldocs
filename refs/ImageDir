@@ -4,14 +4,12 @@ __END__
 
 
 __NAME__ see also
-ImageDir, ImageDirSecure, VendURL, SecureURL,no_image_rewrite
+ImageDir, ImageDirSecure, VendURL, SecureURL,no_image_rewrite, ImageAlias
 __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable>location</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>location</replaceable></arg>
 __END__
 
 
@@ -31,7 +29,7 @@ your catalog's &glos-CATROOT;). That directory can be readable only by the
 &IC; user, and contents in it cannot be accessed by the web server without
 &IC; mediating the connection. This directory is generally supposed to 
 only contain directories and Interchange-enabled &glos-HTML; pages,
-and nothing else.
+nothing else.
 </para><para>
 It is therefore obvious that an alternative way has to be provided
 to serve images. When you define &conf-ImageDir;, &IC; will appropriately
@@ -43,7 +41,7 @@ server, and images are found in your web server's document root,
 in the <filename class='directory'>images/</filename> subdirectory, then
 you would set &conf-ImageDir; to <literal>/images/</literal>.
 With this setting in effect, a link such as &lt;img src="order.png"&gt;
-would be changed to &lt;img src="/images/order.png"&gt;.
+would automatically be translated to &lt;img src="/images/order.png"&gt;.
 __END__
 
 __NAME_ notes

@@ -72,4 +72,8 @@ __NAME__ missing
 Diff between initialize and autoload
 Log specifies filename or just 1/0 ?
 Exactly what does add_session do
+Turn list of keys into format NAME (SYNTAX, default DEF) - DESCRIPTION
+Add examples
+Check if there are more keys than listed
 __END__
+

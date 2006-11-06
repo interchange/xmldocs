@@ -4,9 +4,9 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>0</arg>
-	<arg choice='plain'>1</arg>
+<group choice='plain'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
 </group>
 __END__
 
@@ -14,11 +14,6 @@ __END__
 __NAME__ description
 The directive specifies that all external &glos-database; tables 
 should not be re-imported.
-</para><para>
-<emphasis>External</emphasis> database types are DBI (&MYSQL;, &PGSQL;,
-&ORACLE; etc.) and LDAP (&OPENLDAP; etc.). In contrast,
-<emphasis>internal</emphasis> database types are DBM variants
-(&GDBM;, &BDBM;, SDBM) and in-memory.
 __END__
 
 __NAME__ notes

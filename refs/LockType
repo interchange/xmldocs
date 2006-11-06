@@ -4,10 +4,10 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>flock</arg>
-	<arg choice='plain'>fcntl</arg>
-	<arg choice='plain'>none</arg>
+<group choice='plain'>
+	<arg choice='plain'><literal>flock</literal></arg>
+	<arg choice='plain'><literal>fcntl</literal></arg>
+	<arg choice='plain'><literal>none</literal></arg>
 </group>
 __END__
 

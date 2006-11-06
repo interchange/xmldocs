@@ -97,6 +97,7 @@ option) any later version.</para>">
 <!-- ENTITIES FOR CORE DEVELOPERS, FOR AUTHOR LINES-->
 <!ENTITY racke "<ulink url='mailto:racke@linuxia.de'>Stefan Hornburg (Racke)</ulink>">
 <!ENTITY docelic "<ulink url='mailto:docelic@icdevgroup.org'>Davor Ocelic</ulink>">
+<!ENTITY yure "<ulink url='mailto:jure.kodzoman@spinstorm.com'>Jure Kodzoman</ulink>">
 <!ENTITY mheins "Mike Heins">
 <!ENTITY jon "Jon Jensen">
 <!ENTITY jonc "Jonathan Clark">

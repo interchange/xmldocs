@@ -8,9 +8,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>mode</arg>
-</group>
+<arg choice='plain'><replaceable>mode</replaceable></arg>
 __END__
 
 

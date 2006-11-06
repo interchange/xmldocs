@@ -50,7 +50,6 @@ Database reviews reviews.txt CVS
 __END__
 
 __NAME__ missing
-Database on global level doesn't work!!
 Examples for each DB type supported (Oracle, Pg, Mys,... )
 List of all keys that can occur in a specification
 __END__

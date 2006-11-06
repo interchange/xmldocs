@@ -8,7 +8,7 @@ Unix_Mode
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
+<group choice='plain'>
 	<arg choice='plain'>No</arg>
 	<arg choice='plain'>Yes</arg>
 </group>
@@ -17,7 +17,7 @@ __END__
 
 __NAME__ description
 Specify whether the &IC; server should open an INET-domain socket and
-listen on some port.
+listen on some port (<literal>7786</literal> by default).
 </para><para>
 This &glos-configuration; directive can be overridden using 
 <literal>interchange -i</literal> switch on the command line.
@@ -27,6 +27,10 @@ __END__
 __NAME__ notes
 You will need &IC; INET mode in only rare circumstances (that is, only if your
 Web and &IC; server are not the same machine).
+</para><para>
+The default port number, <literal>7786</literal>, was chosen since it
+represents the ASCII numbers of letters <literal>M</literal> and
+<literal>V</literal>. (&IC; was once called MiniVend).
 __END__
 
 __NAME__ example: Enabling Inet_Mode

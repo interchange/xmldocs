@@ -7,12 +7,10 @@ Require,Suggest,Capability
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'>
-		<replaceable>type</replaceable>
-		<replaceable>type-specific-value</replaceable>
-	</arg>
-</group>
+<arg choice='plain' rep='repeat'>
+	<replaceable>type</replaceable>
+	<replaceable>type-specific_value</replaceable>
+</arg>
 __END__
 
 __NAME__ description
@@ -29,7 +27,7 @@ you run the catalog on different locations.
 <literal>sub</literal>,  
 <literal>taggroup</literal>,
 <literal>usertag</literal> and
-<literal>module</literal> .
+<literal>module</literal>.
 </para>
 <para>
 This directive can also used to implicitly load &PERL; modules. If you add

@@ -9,9 +9,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable>count</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>count</replaceable></arg>
 __END__
 
 
@@ -25,8 +23,6 @@ eventual memory leaks.
 __END__
 
 __NAME__ notes
-The directive is only used when &IC; is in <literal>PreFork</literal>
-&glos-ic-run-mode;.
 __END__
 
 

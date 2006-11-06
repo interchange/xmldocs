@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-	<arg choice='req'><replaceable>key_or_user_identifier</replaceable></arg>
+<arg choice='plain'><replaceable>key_or_user_identifier</replaceable></arg>
 __END__
 
 

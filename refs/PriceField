@@ -4,9 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable>field_name</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>field_name</replaceable></arg>
 __END__
 
 
@@ -21,10 +19,7 @@ __END__
 
 
 __NAME__ notes
-The existence of the field is not exactly crucial, but it's important
-for say, &glos-flypage;s.
-</para><para>
-It's also useful to set the directive based on current &glos-locale;.
+It is useful to set the directive based on current &glos-locale;.
 __END__
 
 __NAME__ example: Redefining PriceField

@@ -26,7 +26,7 @@ Then the contents of the found files are used to set the variables (or other
 values) named after file names.
 </para><para>
 The source file name is kept in
-<varname>$Vend::Cfg->{DirConfig}{Variable}{VARNAME}</varname>,
+<varname>$Vend::Cfg->{DirConfig}{Variable}{<replaceable>VARNAME</replaceable>}</varname>
 if <pragma>dynamic_variables</pragma> &glos-pragma; is set.
 <pragma>dynamic_variables</pragma> enables <emphasis>dynamic</emphasis>
 updating of variables from files.

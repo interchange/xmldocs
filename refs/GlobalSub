@@ -7,12 +7,10 @@ CodeDef,Sub,AllowGlobal
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>
-		<literal>Sub</literal>
-		<replaceable>perl_code</replaceable>
-	</arg>
-</group>
+<arg choice='plain'>
+	<literal>Sub</literal>
+	<replaceable>perl_code</replaceable>
+</arg>
 __END__
 
 __NAME__ description
@@ -27,7 +25,7 @@ __NAME__ example: Defining a global subroutine
 <programlisting><![CDATA[
 GlobalSub <<EOF
 sub count_orders {
-  my $counter = new File::CounterFile "/tmp/count_orders", '1';
+  my $counter = new File::CounterFile "tmp/count_orders", '1';
   my $number = $counter->inc();
   return "There have been $number orders placed.\n";
 }
@@ -36,10 +34,8 @@ EOF
 
 The above code would be called from an &IC; page in the following way:
 <programlisting><![CDATA[
-Items, sorted by quantity:
-[perl tables=products subs='sort_cart_by_quantity']
-  my $cart = $Carts->{main};
-  return sort_cart_by_quantity($cart);
+[perl tables=products subs='count_orders']
+  return count_orders();
 [/perl]
 ]]></programlisting>
 __END__
@@ -48,8 +44,8 @@ __END__
 __NAME__ notes
 As with &PERL; "here documents," the "<literal>EOF</literal>" (or arbitrarily
 named end marker) must be the <emphasis>only</emphasis> thing on the line,
-without leading or trailing white space. Do not even append a semicolon to the
-marker (as you would in &PERL;).
+without leading or trailing white space. Also, do not append a semicolon to the
+opening marker (as you would in &PERL;).
 </para><para>
 Global subroutines are not subject to <classname>Safe</classname> security 
 checks. They can do most anything!

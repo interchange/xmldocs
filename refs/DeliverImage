@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
+<group choice='plain'>
 	<arg choice='plain'>No</arg>
 	<arg choice='plain'>Yes</arg>
 </group>
@@ -47,3 +47,6 @@ Now to request an image, instead of the usual page (such as
 &conf-ImageDir; or &conf-ImageDirSecure;, of course).
 __END__
 
+__NAME__ missing
+Better description
+__END__

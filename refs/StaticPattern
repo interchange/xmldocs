@@ -4,9 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable>regexp</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>regexp</replaceable></arg>
 __END__
 
 __NAME__ description

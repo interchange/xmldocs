@@ -4,9 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable>ship_mode</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>ship_mode</replaceable></arg>
 __END__
 
 
@@ -17,7 +15,7 @@ initializing the <mv>mv_shipmode</mv> variable.
 It defaults to a value "<literal>default</literal>".
 __END__
 
-__NAME__ example: Specifying DefaultShipping
+__NAME__ example: Specifying __FILENAME__
 <programlisting>
 DefaultShipping UPS
 </programlisting>

@@ -3,7 +3,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
+<group choice='plain'>
 	<arg choice='plain'>No</arg>
 	<arg choice='plain'>Yes</arg>
 </group>
@@ -17,15 +17,12 @@ __NAME__ notes
 The global &conf-External; must be enabled to allow individual catalog setting.
 __END__
 
-__NAME__ example: Defining External as a global configuration directive
+__NAME__ example: Defining External
 <programlisting>
 External yes
 </programlisting>
 __END__
 
-__NAME__ example: Defining External for a specific catalog
-<programlisting>
-External yes
-</programlisting>
+__NAME__ missing
+What is it
 __END__
-

@@ -3,9 +3,7 @@ specify operation codes to untrap in Safe.pm compartments
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'>opcode</arg>
-</group>
+<arg choice='plain' rep='repeat'><replaceable>opcode</replaceable></arg>
 __END__
 
 
@@ -35,10 +33,11 @@ __NAME__ example: Allowing -s function to determine file size
 The following code fails to work with the default SafeUntrap setting.
 
 <programlisting>
+[set upload_repository]upload/[/set]
 [calcn]-s $Scratch->{upload_repository};[/calcn]
 </programlisting>
 
-Adding ftsize to SafeUntrap solves this problem:
+Adding <literal>ftsize</literal> to SafeUntrap solves this problem:
 
 <programlisting>
 SafeUntrap ftsize

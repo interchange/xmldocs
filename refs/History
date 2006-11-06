@@ -4,15 +4,14 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable>count</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>count</replaceable></arg>
 __END__
 
 
 __NAME__ description
 The directive specifies
-how many of the most recent user clicks should be stored in the session history.
+how many of the most recent user clicks should be stored in the &glos-session;
+history.
 __END__
 
 __NAME__ see also

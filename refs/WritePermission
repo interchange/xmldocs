@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
+<group choice='plain'>
 	<arg choice='plain'><literal>user</literal></arg>
 	<arg choice='plain'><literal>group</literal></arg>
 	<arg choice='plain'><literal>world</literal></arg>

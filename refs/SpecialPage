@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<arg choice='req'>
+<arg choice='plain' rep='repeat'>
 	<replaceable>type</replaceable>
 	<replaceable>filename</replaceable>
 </arg>
@@ -120,4 +120,9 @@ __END__
 
 __NAME__ see also
 DirectoryIndex
+__END__
+
+
+__NAME__ missing
+Descriptions for possible keys, and default values
 __END__

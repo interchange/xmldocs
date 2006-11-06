@@ -7,10 +7,8 @@ __NAME__ see also
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable>program_path</replaceable></arg>
-	<arg choice='opt' rep='repeat'><replaceable>option</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>program_path</replaceable></arg>
+<arg choice='opt' rep='repeat'><replaceable>option</replaceable></arg>
 __END__
 
 

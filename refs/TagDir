@@ -4,9 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'>directory</arg>
-</group>
+<arg choice='plain' rep='repeat'><replaceable>directory_name</replaceable></arg>
 __END__
 
 
@@ -16,13 +14,15 @@ code declarations.
 __END__
 
 __NAME__ notes
-The specified location is treated relative to the &glos-ICROOT;.
+For more information on possible code declarations, see
+&glos-ITL; and &glos-filter; glossary entries and the &conf-CodeDef;
+configuration directive.
 __END__
 
 
-__NAME__ example: Setting TagDir
+__NAME__ example: Setting __FILENAME__
 <programlisting>
-TagDir code etc/other_code
+__FILENAME__ code etc/other_code
 </programlisting>
 __END__
 

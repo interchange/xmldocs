@@ -9,10 +9,8 @@ __END__
 
 
 __NAME__ synopsis
-	<arg choice='req'>
-		<replaceable>alias_location</replaceable>
-		<replaceable>real_location</replaceable>
-	</arg>
+<arg choice='plain'><replaceable>alias_location</replaceable></arg>
+<arg choice='plain'><replaceable>real_location</replaceable></arg>
 __END__
 
 

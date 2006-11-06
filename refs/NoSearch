@@ -4,9 +4,9 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'><replaceable>database_name_glob</replaceable></arg>
-</group>
+<arg choice='plain' rep='repeat'>
+	<replaceable>database_name_glob</replaceable>
+</arg>
 __END__
 
 

@@ -37,6 +37,9 @@ the <literal>encrypt_program</literal> attribute.
 </para><para>
 Since &IC; 4.7.7, specifying program filename only is enough &mdash;
 no arguments are needed, although they will still work as expected.
+</para><para>
+If the encrypt program is in your path, avoid using full pathname to 
+ease the eventual switch to a platform with different binary file locations.
 __END__
 
 __NAME__ see also

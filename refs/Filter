@@ -7,16 +7,14 @@ filter
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>
-		<replaceable>variable_name</replaceable>
-		<replaceable>filter_name</replaceable>
-	</arg>
-</group>
+<arg choice='plain' rep='repeat'>
+	<replaceable>variable_name</replaceable>
+	<replaceable>filter_name</replaceable>
+</arg>
 __END__
 
 __NAME__ description
-The directive assigns one or more (space separated) &glos-filter;s
+The directive assigns one or more (comma separated) &glos-filter;s
 that should be automatically applied to a variable.
 __END__
 
@@ -36,5 +34,10 @@ __NAME__ notes
 You could also use the &tag-filter; tag to help yourself, but in the long
 run the &conf-Filter; approach reduces typing and minimizes the chance
 of omission.
+__END__
+
+__NAME__ missing
+Comma-separated list when multiple filters, right? Can't be space, it'd split into directive=value pair.
+More examples
 __END__
 

@@ -45,7 +45,8 @@ __END__
 
 __NAME__ example: Setting directive value from a file
 In combination with the above example, the following would read the 
-directive value from file <filename>variables/mailorderto</filename>.
+directive value from file <filename>variables/mailorderto</filename>
+(relative to the &glos-CATROOT;, of course).
 <programlisting>
 MailOrderTo &lt;mailorderto
 </programlisting>

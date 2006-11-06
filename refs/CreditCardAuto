@@ -8,8 +8,10 @@ EncryptProgram, PGP
 __END__
 
 __NAME__ synopsis
-<arg choice='plain'>No</arg>
-<arg choice='plain'>Yes</arg>
+<group choice='plain'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
 __END__
 
 
@@ -26,3 +28,6 @@ CreditCardAuto Yes
 </programlisting>
 __END__
 
+__NAME__ missing
+Saving CC info where ?
+__END__

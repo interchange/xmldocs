@@ -31,7 +31,8 @@ __NAME__ example: The pricing database
 Most of the practical setups will use a separate (<emphasis>outboard</emphasis>)
 database to define pricing-related options. This <emphasis>could</emphasis>
 be all done in the <database>products</database> database as well, but let's
-stick to a visually cleaner implementation.
+stick to a visually cleaner implementation. (<emphasis role='bold'>This
+database is used by other examples above!)</emphasis>
 </para><para>
 An example <database>pricing</database> database looks like this:
 

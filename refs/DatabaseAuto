@@ -56,8 +56,10 @@ to skip values.
 </para><para>
 Currently, the <literal>catalog</literal> argument is not used by any
 database driver, but it
-may be in the future. See the DBI manual and your DBD module's manual
-for details on these arguments.
+may be in the future. The other options (<literal>schema</literal>, 
+<literal>name</literal> and <literal>type</literal>) are database-specific;
+see the DBI manual, appropriate DBD manual and 
+<xref linkend='DatabaseAuto_examples'/> for details and examples.
 </para><para>
 
 If the &PERL; module <classname>DBIx::DBSchema</classname> was found,
@@ -80,9 +82,9 @@ __NAME__ notes
 For more about &IC; and databases, and supported formats, see &glos-database;
 glossary entry.
 </para><para>
-The <literal>schema</literal> argument to this directive can be specified to
-avoid using the &conf-DatabaseAutoIgnore; directive, which can easily ignore
-more tables than you really intended.
+The <literal>schema</literal> argument to this directive can be specified when
+you want to avoid using the &conf-DatabaseAutoIgnore; directive (it's drawback
+is that it could easily ignore more tables than you really intended).
 </para><para>
 Also be aware that it is possible to make some confusing configuration mistakes
 here, if the schema you specify is not in the database user's

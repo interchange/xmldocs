@@ -4,9 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>database</arg>
-</group>
+<arg choice='plain'><replaceable>database_name</replaceable></arg>
 __END__
 
 
@@ -21,7 +19,7 @@ DBI-based user &glos-session;s.
 __END__
 
 __NAME__ notes
-Using this directive (and DBI sessions in general) is not recommended.
+Using this directive (DBI sessions in general) is not recommended.
 __END__
 
 __NAME__ example: Setting SessionDB
@@ -31,3 +29,8 @@ SessionDB sessions
 </programlisting>
 __END__
 
+
+
+__NAME__ missing
+Why DBI sessions are not encouraged?
+__END__

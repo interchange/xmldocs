@@ -8,9 +8,8 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'>filename_or_host:port</arg>
-</group>
+<arg choice='plain' rep='repeat'><replaceable>filename</replaceable></arg><sbr/>
+<arg choice='plain' rep='repeat'><replaceable>host</replaceable>:<replaceable>port</replaceable></arg>
 __END__
 
 

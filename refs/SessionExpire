@@ -4,9 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>minimum interval</arg>
-</group>
+<arg choice='plain'><replaceable>minimum_interval</replaceable></arg>
 __END__
 
 
@@ -23,11 +21,12 @@ the lack of further requests from the client (clients are identified by
 session IDs).
 </para><para>
 Old session information needs to be periodically expired. &conf-SessionExpire;
-specifies the minimum of time to keep track of session information.
+specifies the minimum of time for which the session information should be
+preserved.
 __END__
 
 __NAME__ notes
-If &conf-CookieLogin; is enabled, &conf-SessionExpire; can be a small value.
+If &conf-CookieLogin; is enabled, &conf-SessionExpire; can be a small value
 If the customer's browser has the &IC; session cookie stored, he or she will
 be automatically logged back in with the next request. Note, however, that
 the customer's cart and session values will be reset.

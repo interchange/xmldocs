@@ -1,5 +1,5 @@
 __NAME__ purpose
-automatically encrypted full order report
+automatically encrypt complete order reports
 __END__
 
 
@@ -39,3 +39,7 @@ PGP /usr/local/bin/pgp -feat orders@company.com
 </programlisting>
 __END__
 
+
+__NAME__ missing
+Can route "be set to supplant"?
+__END__

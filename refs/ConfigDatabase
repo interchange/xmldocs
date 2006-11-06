@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify database which should hold definitions usually found in catalog.cfg
+specify database holding definitions usually found in catalog.cfg
 __END__
 
 

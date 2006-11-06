@@ -11,9 +11,7 @@ For a complete introduction to item attributes, please see the
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'><replaceable>modifier_name</replaceable></arg>
-</group>
+<arg choice='plain' rep='repeat'><replaceable>modifier_name</replaceable></arg>
 __END__
 
 

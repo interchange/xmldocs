@@ -4,12 +4,12 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>DB_File</arg>
-	<arg choice='plain'>DBI</arg>
-	<arg choice='plain'>File</arg>
-	<arg choice='plain'>NFS</arg>
-	<arg choice='plain'>GDBM</arg>
+<group choice='plain'>
+	<arg choice='plain'><literal>DB_File</literal></arg>
+	<arg choice='plain'><literal>DBI</literal></arg>
+	<arg choice='plain'><literal>File</literal></arg>
+	<arg choice='plain'><literal>NFS</literal></arg>
+	<arg choice='plain'><literal>GDBM</literal></arg>
 </group>
 __END__
 
@@ -32,8 +32,8 @@ a lock daemon running on &IC; server.
 __END__
 
 __NAME__ notes
-<literal>File</literal>-based sessions provide best performance and
-reliability in most environments.
+The default <literal>File</literal>-based sessions provide best performance
+and reliability in most environments.
 __END__
 
 __NAME__ example: Setting SessionType

@@ -4,9 +4,10 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'>page_name cgi_var1,cgi_var2</arg>
-</group>
+<arg choice='plain' rep='repeat'>
+	<replaceable>page_name</replaceable>
+	<replaceable>cgi_var1</replaceable>,<replaceable>cgi_var2</replaceable>
+</arg>
 __END__
 
 __NAME__ see also
@@ -18,16 +19,16 @@ Specify &IC; pages and &glos-CGI; variables whose values should be
 inserted into user tracking file along with the visited page information.
 </para><para>
 Variable names and values are only printed if they are selected for
-output using this directive, and they have really been passed onto the
-target page.
+output using this directive, and if they have really been directly
+passed onto the target page as &glos-CGI; variables.
 __END__
 
 __NAME__ notes
 __END__
 
 __NAME__ example: Setting TrackPageParam
-First enable &conf-TrackFile; and then insert the following in &ccf;:
 <programlisting>
+TrackFile logs/trackfile
 TrackPageParam  index  var1,var2      index2 var3,var4
 </programlisting>
 The example will monitor values of the <literal>var1</literal>

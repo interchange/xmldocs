@@ -4,15 +4,13 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>HTML file extension (suffix)</arg>
-</group>
+<arg choice='plain'><replaceable>file_extension</replaceable></arg>
 __END__
 
 
 __NAME__ description
-Specify extension to append to the filename when looking for the source 
-file in the <filename class='directory'>pages/</filename> directory.
+Specify extension to append to the filenames when looking for the source
+files in the <filename class='directory'>pages/</filename> directory.
 __END__
 
 

@@ -1,23 +1,23 @@
 __NAME__ purpose
-parse (interpolate ITL and variables) variable values before storing them
+parse (interpolate) variable values before storing them
 __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>0</arg>
-	<arg choice='plain'>1</arg>
+<group choice='plain'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
 </group>
 __END__
 
 
 __NAME__ description
-Specify that global and catalog variables should be parsed in catalog
-configuration directives (not including the &conf-Variable; directives
-themselves, which never have their contents parsed).
+Specify that the &glos-configuration; directives should have their 
+values parsed (&glos-interpolate;d).
 </para><para>
-Applies only to variables with names in ALL CAPS. Our catalogs enable
-&conf-ParseVariables; and usually rely on that behavior.
+This applies to all configuration directives except &conf-Variable;.
+</para><para>
+Of variables, only those in ALL CAPS are interpolated.
 __END__
 
 __NAME__ example: Enabling ParseVariables globally

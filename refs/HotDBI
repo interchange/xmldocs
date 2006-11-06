@@ -3,14 +3,12 @@ specify catalogs that should use persistent database connections
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain' rep='repeat'><replaceable>catalog</replaceable></arg>
-</group>
+<arg choice='plain' rep='repeat'><replaceable>catalog</replaceable></arg>
 __END__
 
 
 __NAME__ description
-Specify catalogs that should use persistent database connections.
+Specify &glos-catalog;s that should use persistent database connections.
 When a connection is persistent, it will be maintained and cached without
 reconnecting for every page request.
 __END__

@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ see also
-VariableDatabase
+VariableDatabase, var
 __END__
 
 
@@ -37,6 +37,9 @@ syntax:
 	- to first look for a catalog variable, falling back to global
 	unless found
 	</para></listitem>
+	<listitem><para>
+	Using the &tag-var; tag
+	</para></listitem>
 </itemizedlist>
 __END__
 
@@ -44,7 +47,8 @@ __END__
 __NAME__ notes
 Variable names <emphasis role='bold'>do not</emphasis> need to begin
 with a capital letter (unlike the documentation prior to
-&IC; &first-xmldocs-release; release stated).
+&IC; &first-xmldocs-release; release stated), even though specifying
+them in all-uppercase is a widely accepted practice.
 __END__
 
 

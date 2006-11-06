@@ -1,5 +1,5 @@
 __NAME__ purpose
-prevent DatabaseAuto from bringing in tables whose names match this regex pattern
+prevent DatabaseAuto from configuring tables whose names match regex pattern
 __END__
 
 __NAME__ synopsis
@@ -11,9 +11,10 @@ DatabaseAuto,Database
 __END__
 
 __NAME__ description
-The directive prevents &conf-DatabaseAuto;
-from automatically configuring tables that match specified
-regular expression.
+The directive allows &glos-regexp; specification of an "ignore list" that
+prevents &conf-DatabaseAuto; from automatically configuring
+<emphasis>all</emphasis> tables found. (For example, you will want
+to exclude tables in non-default schemas.)
 </para><para>
 Note that instead of using this directive, you may prefer to directly
 specify <literal>schema</literal> argument to the &conf-DatabaseAuto; directive.
@@ -30,7 +31,7 @@ __END__
 
 __NAME__ example: Specifying DatabaseAutoIgnore
 This prevents &IC; from bringing in tables in non-default schemas
-in PostgreSQL 7.4 and newer, which cause errors.
+in &PGSQL; 7.4 and newer.
 <programlisting>
 DatabaseAutoIgnore  ^sql_
 </programlisting>

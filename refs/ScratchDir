@@ -4,9 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>directory</arg>
-</group>
+<arg choice='plain'><replaceable>directory</replaceable></arg>
 __END__
 
 
@@ -18,12 +16,17 @@ cached searches and retired &glos-session; IDs.
 __END__
 
 __NAME__ notes
-The specified location is, unless absolute, treated relative to &glos-CATROOT;.
+The specified location is always treated relative to &glos-CATROOT;.
 __END__
 
-__NAME__ example: Setting ScratchDir
+__NAME__ example: Setting __FILENAME__
 <programlisting>
-ScratchDir temp
+__FILENAME__ temp
 </programlisting>
 __END__
 
+
+
+__NAME__ see also
+PageDir, RunDir, ProductDir
+__END__
