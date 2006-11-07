@@ -14,8 +14,22 @@ __END__
 
 __NAME__ description
 </para><para>
-The directive configures Interchange periodic &glos-job;s facility. It accepts a list of key/value
-pairs, where the available keys and their descriptions are:
+The directive configures Interchange periodic &glos-jobs; facility. It accepts a list of key/value
+pairs.
+</para>
+<para>
+The available keys for the global directive are:
+<itemizedlist>
+<listitem><para>MaxLifetime - maximum life time for a &glos-jobs; in seconds.
+The default is 600 (10 seconds).
+</para></listitem>
+<listitem><para>MaxServers - maximum number of concurrently running Job servers.
+The default is 1.
+</para></listitem>
+</itemizedlist>
+</para>
+<para>
+The available keys and their descriptions for the catalog directive are:
 <itemizedlist>
 	<listitem><para>base_directory -
 	directory to search for cron jobs. The default is
@@ -53,6 +67,7 @@ pairs, where the available keys and their descriptions are:
 	any additional headers for an e-mail message
 	</para></listitem>
 </itemizedlist>
+</para><para>
 __END__
 
 __NAME__ notes
