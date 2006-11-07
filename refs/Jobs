@@ -21,7 +21,7 @@ pairs.
 The available keys for the global directive are:
 <itemizedlist>
 <listitem><para>MaxLifetime - maximum life time for a &glos-jobs; in seconds.
-The default is 600 (10 seconds).
+The default is 600 (10 minutes).
 </para></listitem>
 <listitem><para>MaxServers - maximum number of concurrently running Job servers.
 The default is 1.
@@ -29,7 +29,7 @@ The default is 1.
 </itemizedlist>
 </para>
 <para>
-The available keys and their descriptions for the catalog directive are:
+The available keys for the catalog directive are:
 <itemizedlist>
 	<listitem><para>base_directory -
 	directory to search for cron jobs. The default is
