@@ -95,14 +95,24 @@ option) any later version.</para>">
 
 
 <!-- ENTITIES FOR CORE DEVELOPERS, FOR AUTHOR LINES-->
-<!ENTITY racke "<ulink url='mailto:racke@linuxia.de'>Stefan Hornburg (Racke)</ulink>">
+<!ENTITY brevp "Brev Patterson">
+<!ENTITY danb "Dan Browning">
 <!ENTITY docelic "<ulink url='mailto:docelic@icdevgroup.org'>Davor Ocelic</ulink>">
-<!ENTITY yure "<ulink url='mailto:jure.kodzoman@spinstorm.com'>Jure Kodzoman</ulink>">
-<!ENTITY mheins "Mike Heins">
+<!ENTITY ethan "Ethan Rowe">
+<!ENTITY greg "Greg Hanson">
 <!ENTITY jon "Jon Jensen">
 <!ENTITY jonc "Jonathan Clark">
-<!ENTITY danb "Dan Browning">
-<!ENTITY edl "Ed LaFrance">
+<!ENTITY kwalsh "<ulink url='mailto:kevin@cursor.biz'>Kevin Walsh</ulink>">
+<!ENTITY markj "Mark Johnson">
+<!ENTITY mheins "Mike Heins">
+<!ENTITY pajamian "<ulink url='mailto:peter@pajamian.dhs.org'>Peter Ajamian</ulink>">
+<!ENTITY pvinci "Paul Vinciguerra">
+<!ENTITY racke "<ulink url='mailto:racke@linuxia.de'>Stefan Hornburg (Racke)</ulink>">
+<!ENTITY ramoore "Randy Moore">
+<!ENTITY thunder "<ulink url='mailto:ic@3edge.com'>Gert van der Spoel</ulink>">
+<!ENTITY ton "Ton Verhagen">
+<!ENTITY yure "<ulink url='mailto:jure.kodzoman@spinstorm.com'>Jure Kodzoman</ulink>">
+<!ENTITY zeald "David Kelly">
 
 
 <!ENTITY TAB_DELIMITED_NOTICE "You might notice that the fields names and
