@@ -26,7 +26,7 @@ preserved.
 __END__
 
 __NAME__ notes
-If &conf-CookieLogin; is enabled, &conf-SessionExpire; can be a small value
+If &conf-CookieLogin; is enabled, &conf-SessionExpire; can be a small value.
 If the customer's browser has the &IC; session cookie stored, he or she will
 be automatically logged back in with the next request. Note, however, that
 the customer's cart and session values will be reset.
