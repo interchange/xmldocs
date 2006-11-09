@@ -50,6 +50,21 @@ __NAME__ example: Simple Menubar
 ]]></programlisting>
 __END__
 
+__NAME__ example: Simple Menubar with Different Links
+<programlisting><![CDATA[
+[menu name="links"]
+<span class="links">
+{HREF?}<a href="{HREF}" class="links">{NAME}</a>{/HREF?}
+{URL?}<a href="{URL}" class="links">{NAME}</a>{/URL?}
+</span>
+[/menu]
+]]></programlisting>
+<para>
+This menu contains links to external sites (<literal>href</literal>) and 
+internal pages (<literal>url</literal>).
+</para>
+__END__
+
 __NAME__ see also
 MV_MENU_DIRECTORY
 __END__
