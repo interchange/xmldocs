@@ -247,7 +247,7 @@ values above are not properly aligned. This is an unfortunate nature of
 <row>
   <entry>display</entry>	
   <entry></entry><entry></entry>
-  <entry>text</entry>
+  <entry>symbol</entry>
   <entry>Whether to display currency as symbol, text or not at all.</entry>
 </row>
 ">
