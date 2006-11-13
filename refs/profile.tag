@@ -1,4 +1,27 @@
+__NAME__ purpose
+set UserDB profile
+__END__
+
 __NAME__ synopsis 
+<row>
+
+	<entry>
+	name
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	profile name
+	</entry>
+
+</row> 
 <row>
 
 	<entry>
@@ -11,7 +34,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>default</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
@@ -109,7 +132,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	return value in case of failure
 	</entry>
 
 </row> 
@@ -128,10 +151,20 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	return value in case of success
 	</entry>
 
 </row> 
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
+__END__
+
+__NAME__ example: Set profile
+<programlisting>
+[profile dealer]
+</programlisting>
+__END__
+
+__NAME__ see also
+Profile
 __END__
