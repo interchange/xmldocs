@@ -51,6 +51,7 @@ __NAME__ synopsis
 	<entry></entry>
 	<entry>Format price according to the specified locale.</entry>
 </row>
+&ROW_CURRENCYDISPLAY;
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
 __END__
