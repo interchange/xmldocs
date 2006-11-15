@@ -35,6 +35,10 @@ __END__
 
 __NAME__ description
 The tag returns the price for a specified product.
+</para>
+<para>
+The currency tag is automatically invoked by the following tags:
+&tag-subtotal;, &tag-total-cost;.
 __END__
 
 
@@ -53,3 +57,6 @@ to <literal>0.167</literal>, the following example would display
 </programlisting>
 __END__
 
+__NAME__ see also
+subtotal, total-cost
+__END__
