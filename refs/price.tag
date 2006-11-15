@@ -1,7 +1,6 @@
 __NAME__ purpose
-return price for a specific product from the products database
+calculate product price
 __END__
-
 
 __NAME__ see also
 PriceField,description
@@ -18,6 +17,7 @@ __NAME__ synopsis
 	<entry></entry>
 	<entry>Product &glos-SKU;.</entry>
 </row>
+&ROW_CURRENCYDISPLAY;
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
 __END__
