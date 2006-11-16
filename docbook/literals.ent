@@ -251,6 +251,14 @@ values above are not properly aligned. This is an unfortunate nature of
   <entry>Whether to display currency as symbol, text or not at all.</entry>
 </row>
 ">
+<!ENTITY ROW_CURRENCYNOFORMAT "
+<row>
+  <entry>noformat</entry>	
+  <entry>Yes</entry><entry>No</entry>
+  <entry>No</entry>
+  <entry>Whether to refrain from formatting the output or not.</entry>
+</row>
+">
 <!ENTITY ROW_CSS_std "
 <row>
   <entry>
