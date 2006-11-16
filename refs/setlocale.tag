@@ -79,7 +79,17 @@ __NAME__ synopsis
 &ROW_REPARSE_1;
 __END__
 
+__NAME__ example Use German locale for current page
+<programlisting>
+[setlocale de_DE]
+</programlisting>
+__END__
 
+__NAME__ example Use Croatian locale for complete session
+<programlisting>
+[setlocale locale=hr_HR persist=1]
+</programlisting>
+__END__
 
 LI1: [setlocale locale=locale* currency=locale* persist=1*]
 Immediately sets the locale to C<locale>, and will cause it to persist in future user pages if the C<persist> is set to a non-zero, non-blank value. If the C<currency> attribute is set, the pricing and currency-specific locale keys and Interchange configuration directives are modified to that locale. If there are no arguments, it sets it back to the user's default locale as defined in the scratch variables C<mv_locale> and C<mv_currency>.
