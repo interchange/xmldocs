@@ -1,0 +1,22 @@
+__NAME__ purpose
+e-mail address is syntactically correct
+__END__
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+Verification of the form field value succeeds if it
+contains a syntactically valid e-mail address.
+__END__
+
+__NAME__ notes
+__END__
+
+__NAME__ example: __FILENAME__
+<programlisting>
+FORM_FIELD_NAME=__FILENAME__
+</programlisting>
+__END__
+

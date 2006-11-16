@@ -1,0 +1,32 @@
+__NAME__ purpose
+value passes through specified filter unmodified
+__END__
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+Verification of the form field value succeeds if it
+passes the specified filter unaltered.
+__END__
+
+__NAME__ notes
+For a list of all possible filters, see <olink targetdoc='filters'/>.
+Filters that unconditionally modify input data are generally not suitable
+for use with this &glos-order-check;; the data is always changed so it
+always fails the validation.
+__END__
+
+__NAME__ example: __FILENAME__
+<programlisting>
+FORM_FIELD_NAME=__FILENAME__ alpha "The value contains non-alpha characters"
+</programlisting>
+__END__
+
+__NAME__ example: __FILENAME__
+<programlisting>
+FORM_FIELD_NAME=__FILENAME__ name "Name entered is not in format 'First Last'"
+</programlisting>
+__END__
+

@@ -1,0 +1,36 @@
+__NAME__ purpose
+record exists in a database table
+__END__
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+Verification of the form field value succeeds if
+it contains code that exists in the specified &glos-database; table.
+</para><para>
+Foreign lookups are possible; see <xref linkend="exists_examples" />.
+__END__
+
+__NAME__ notes
+__END__
+
+__NAME__ example: Check for value in database table "products"
+<programlisting>
+FORM_FIELD_NAME=__FILENAME__ products
+</programlisting>
+__END__
+
+__NAME__ example: Check for value in database table "products", with custom error message
+<programlisting>
+FORM_FIELD_NAME=__FILENAME__ products Product not found in database
+</programlisting>
+__END__
+
+__NAME__ example: Check for value in database table "products", in foreign column "price"
+<programlisting>
+FORM_FIELD_NAME=__FILENAME__ products:price
+</programlisting>
+__END__
+
