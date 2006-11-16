@@ -31,7 +31,7 @@ my %ln = ( # long name
 my %header = ( # item head
 	glossary => "<section id=\"\$file\">
 <title>\$visible_name</title>
-
+<refclass>Glossary</refclass>
 <para>
 ",
 	howtos => "<section id=\"\$file\">
