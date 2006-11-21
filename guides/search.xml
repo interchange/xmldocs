@@ -155,42 +155,41 @@ icdevgroup.conf</literal>.
 <section id='search_reference'>
 	<title>Search Reference</title>
 
-	<itemizedlist>
-		<listitem><para>
-		<literal>mv_all_chars</literal>
-		(ac, <literal>0</literal>/<literal>1</literal>,
-		default <literal>1</literal>) &mdash;
+		<section id="mv_all_chars"><title>
+		<literal>ac &mdash; mv_all_chars</literal></title><cmdsynopsis>
+		(<literal>0</literal>/<literal>1</literal>,
+		default <literal>1</literal>)</cmdsynopsis><para>
 		escape non-alphanumeric characters in search specification.
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_base_directory</literal>
-		(bd, <replaceable>directory_name</replaceable>,
-		default Interchange installation directory) &mdash;
+		</section>
+		<section id="mv_base_directory"><title>
+		<literal>bd &mdash; mv_base_directory</literal></title><cmdsynopsis>
+		(<replaceable>directory_name</replaceable>,
+		default Interchange installation directory)</cmdsynopsis><para>
 		base directory in which to look up text files to search
 		(related option <literal>fi</literal>).
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_begin_string</literal>
-		(bs, <replaceable>regular_expression</replaceable>,
-		default none) &mdash;
+		</section>
+		<section id="mv_begin_string"><title>
+		<literal>bs &mdash; mv_begin_string</literal></title><cmdsynopsis>
+		(<replaceable>regular_expression</replaceable>,
+		default none)</cmdsynopsis><para>
 		&glos-regexp; that the beginning of the searched field value must match.
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_cache_key</literal>
-		(ck, <replaceable>search_reference_pointer</replaceable>,
-		default none) &mdash;
+		</section>
+		<section id="mv_cache_key"><title>
+		<literal>ck &mdash; mv_cache_key</literal></title><cmdsynopsis>
+		(<replaceable>search_reference_pointer</replaceable>,
+		default none)</cmdsynopsis><para>
 		not intended for common use. When &tag-more; tag is used,
 		this option automatically provides a pointer to the search
 		reference.
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_coordinate</literal>
-		(co, <literal>0</literal>/<literal>1</literal>,
-		default <literal>0</literal>) &mdash;
+		</section>
+		<section id="mv_coordinate"><title>
+		<literal>co &mdash; mv_coordinate</literal></title><cmdsynopsis>
+		(<literal>0</literal>/<literal>1</literal>,
+		default <literal>0</literal>)</cmdsynopsis><para>
 		the so-called "coordinated" search allows for multiple search options
 		to be stacked on top of each other.
 		</para><para>
@@ -225,116 +224,116 @@ icdevgroup.conf</literal>.
 			</para></listitem>
 		</itemizedlist>
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_case</literal>
-		(cs, <literal>0</literal>/<literal>1</literal>,
-		default <literal>0</literal>) &mdash;
+		</section>
+		<section id="mv_case"><title>
+		<literal>cs &mdash; mv_case</literal></title><cmdsynopsis>
+		(<literal>0</literal>/<literal>1</literal>,
+		default <literal>0</literal>)</cmdsynopsis><para>
 		case sensitive search.
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_verbatim_columns</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_verbatim_columns"><title>
+		<literal>cv  &mdash; mv_verbatim_columns</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_dict_end</literal>
-		(de, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_dict_end"><title>
+		<literal>de &mdash; mv_dict_end</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_dict_fold</literal>
-		(df, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_dict_fold"><title>
+		<literal>df &mdash; mv_dict_fold</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_dict_limit</literal>
-		(di, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_dict_limit"><title>
+		<literal>di &mdash; mv_dict_limit</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_dict_look</literal>
-		(dl, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_dict_look"><title>
+		<literal>dl &mdash; mv_dict_look</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_raw_dict_look</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_raw_dict_look"><title>
+		<literal>DL &mdash; mv_raw_dict_look</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_dict_order</literal>
-		(do, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_dict_order"><title>
+		<literal>do &mdash; mv_dict_order</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_record_delim</literal>
-		(dr, <replaceable>record_delimiter</replaceable>,
-		default <literal>\n</literal>) &mdash;
+		</section>
+		<section id="mv_record_delim"><title>
+		<literal>dr &mdash; mv_record_delim</literal></title><cmdsynopsis>
+		(<replaceable>record_delimiter</replaceable>,
+		default <literal>\n</literal>)</cmdsynopsis><para>
 		delimiter for counting records in search index files.
 		The default, a newline, works well for most line-based index files.
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_exact_match</literal>
-		(em, <literal>0</literal>/<literal>1</literal>,
-		default <literal>0</literal>) &mdash;
+		</section>
+		<section id="mv_exact_match"><title>
+		<literal>em &mdash; mv_exact_match</literal></title><cmdsynopsis>
+		(<literal>0</literal>/<literal>1</literal>,
+		default <literal>0</literal>)</cmdsynopsis><para>
 		require that search field matches the search specification exactly
 		(as opposed to the default word-based matching, or substring matching
 		with <literal>su</literal>).
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_spelling_errors</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_spelling_errors"><title>
+		<literal>er &mdash; mv_spelling_errors</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_field_file</literal>
-		(ff, <replaceable>header_filename</replaceable>,
-		default none) &mdash;
+		</section>
+		<section id="mv_field_file"><title>
+		<literal>ff &mdash; mv_field_file</literal></title><cmdsynopsis>
+		(<replaceable>header_filename</replaceable>,
+		default none)</cmdsynopsis><para>
 		specify filename containing a single line with the list of
 		database fields, separated by TABs.
 		This is used when you are searching databases without the "field
 		header" on the first line, but you would still want to refer to fields
 		by their names.
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_search_file</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_search_file"><title>
+		<literal>fi &mdash; mv_search_file</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_field_title</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_field_title"><title>
+		<literal>ft &mdash; mv_field_title</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_first_match</literal>
-		(fm, <replaceable>search_result_number</replaceable>,
-		default 1) &mdash;
+		</section>
+		<section id="mv_first_match"><title>
+		<literal>fm &mdash; mv_first_match</literal></title><cmdsynopsis>
+		(<replaceable>search_result_number</replaceable>,
+		default 1)</cmdsynopsis><para>
 		<!-- TODO one or zero -->
 		return search results from the specified result number onwards. When this
 		option is set, &IC; will return search results starting from the match
@@ -342,99 +341,99 @@ icdevgroup.conf</literal>.
 		If set to a value greater than the total number of matches, it will act
 		as if no matches were found. 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_field_names</literal>
-		(fn, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_field_names"><title>
+		<literal>fn &mdash; mv_field_names</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_head_skip</literal>
-		(hs, <replaceable>row_count</replaceable>,
+		</section>
+		<section id="mv_head_skip"><title>
+		<literal>hs &mdash; mv_head_skip</literal></title><cmdsynopsis>
+		(<replaceable>row_count</replaceable>,
 		default <literal>1</literal> for text files, <literal>0</literal>
-		otherwise) &mdash;
+		otherwise)</cmdsynopsis><para>
 		number of lines to skip at the beginning of a search index or text
 		file. &IC; normally skips one line for text-based searches
 		(<literal>st=text</literal>) to exclude the header line.
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_index_delim</literal>
-		(id, <replaceable>field_delimiter</replaceable>,
-		default <literal>\t</literal>) &mdash;
+		</section>
+		<section id="mv_index_delim"><title>
+		<literal>id &mdash; mv_index_delim</literal></title><cmdsynopsis>
+		(<replaceable>field_delimiter</replaceable>,
+		default <literal>\t</literal>)</cmdsynopsis><para>
 		delimiter for counting fields in search index files.
 		The default, a TAB character, works well for most line-based index files.
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_search_label</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_search_label"><title>
+		<literal>lb &mdash; mv_search_label</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_like_field</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_like_field"><title>
+		<literal>lf &mdash; mv_like_field</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_list_only</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_list_only"><title>
+		<literal>lo &mdash; mv_list_only</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_search_line_return</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_search_line_return"><title>
+		<literal>lr &mdash; mv_search_line_return</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_like_spec</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_like_spec"><title>
+		<literal>ls  &mdash; mv_like_spec</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_more_alpha</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_more_alpha"><title>
+		<literal>ma &mdash; mv_more_alpha</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_more_alpha_chars</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_more_alpha_chars"><title>
+		<literal>mc &mdash; mv_more_alpha_chars</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_more_decade</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_more_decade"><title>
+		<literal>md &mdash; mv_more_decade</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_more_id</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_more_id"><title>
+		<literal>mi &mdash; mv_more_id</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_matchlimit</literal>
-		(ml, <replaceable>record_count</replaceable>,
-		default <literal>50</literal>) &mdash;
+		</section>
+		<section id="mv_matchlimit"><title>
+		<literal>ml &mdash; mv_matchlimit</literal></title><cmdsynopsis>
+		(<replaceable>record_count</replaceable>,
+		default <literal>50</literal>)</cmdsynopsis><para>
 		maximum number of records (search results) to return from a search.
 		When all the results are
 		displayed on a single page, this option is equivalent to
@@ -444,237 +443,237 @@ icdevgroup.conf</literal>.
 		To specify unlimited, use <literal>none</literal> or
 		<literal>all</literal>, not <literal>0</literal>.
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_max_matches</literal>
-		(mm, <replaceable>record_count</replaceable>,
-		default unlimited) &mdash;
+		</section>
+		<section id="mv_max_matches"><title>
+		<literal>mm &mdash; mv_max_matches</literal></title><cmdsynopsis>
+		(<replaceable>record_count</replaceable>,
+		default unlimited)</cmdsynopsis><para>
 		final, maximum number of records (search results) to return from a search
 		(related option <literal>ml</literal>).
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_more_matches</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_more_matches"><title>
+		<literal>MM &mdash; mv_more_matches</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_profile</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_profile"><title>
+		<literal>mp &mdash; mv_profile</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_min_string</literal>
-		(ms, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_min_string"><title>
+		<literal>ms &mdash; mv_min_string</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_negate</literal>
-		(ne, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_negate"><title>
+		<literal>ne &mdash; mv_negate</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_negate</literal>
-		(ng, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_negate_"><title>
+		<literal>ng &mdash; mv_negate</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_no_hide</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_no_hide"><title>
+		<literal>nh &mdash; mv_no_hide</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_no_more</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_no_more"><title>
+		<literal>nm &mdash; mv_no_more</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_nextpage</literal>
-		(np, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_nextpage"><title>
+		<literal>np &mdash; mv_nextpage</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_next_search</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_next_search"><title>
+		<literal>ns &mdash; mv_next_search</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_numeric</literal>
-		(nu, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_numeric"><title>
+		<literal>nu &mdash; mv_numeric</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_column_op</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_column_op"><title>
+		<literal>op &mdash; mv_column_op</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_orsearch</literal>
-		(os, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_orsearch"><title>
+		<literal>os &mdash; mv_orsearch</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_more_permanent</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_more_permanent"><title>
+		<literal>pm &mdash; mv_more_permanent</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_return_all</literal>
-		(ra, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_return_all"><title>
+		<literal>ra &mdash; mv_return_all</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_return_delim</literal>
-		(dr, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_return_delim"><title>
+		<literal>dr &mdash; mv_return_delim</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_search_reference</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_search_reference"><title>
+		<literal>re &mdash; mv_search_reference</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_return_fields</literal>
-		(rf, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_return_fields"><title>
+		<literal>rf &mdash; mv_return_fields</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 		(specification of <literal>:*</literal> indicates "all fields").
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_range_alpha</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_range_alpha"><title>
+		<literal>rg &mdash; mv_range_alpha</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_range_look</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_range_look"><title>
+		<literal>rl &mdash; mv_range_look</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_range_min</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_range_min"><title>
+		<literal>rm &mdash; mv_range_min</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_return_file_name</literal>
-		(rn, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_return_file_name"><title>
+		<literal>rn &mdash; mv_return_file_name</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_return_reference</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_return_reference"><title>
+		<literal>rr &mdash; mv_return_reference</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_return_spec</literal>
-		(rs, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_return_spec"><title>
+		<literal>rs &mdash; mv_return_spec</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_range_max</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_range_max"><title>
+		<literal>rx &mdash; mv_range_max</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_small_data</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_small_data"><title>
+		<literal>sd &mdash; mv_small_data</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_searchspec</literal>
-		(se, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_searchspec"><title>
+		<literal>se &mdash; mv_searchspec</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_search_field</literal>
-		(sf, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_search_field"><title>
+		<literal>sf &mdash; mv_search_field</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_search_group</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_search_group"><title>
+		<literal>sg &mdash; mv_search_group</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_search_immediate</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_search_immediate"><title>
+		<literal>si &mdash; mv_search_immediate</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_start_match</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_start_match"><title>
+		<literal>sm &mdash; mv_start_match</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_search_page</literal>
-		(sp, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_search_page"><title>
+		<literal>sp &mdash; mv_search_page</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_sql_query</literal>
-		(sq, <replaceable>SQL_Query</replaceable>,
-		default none) &mdash;
+		</section>
+		<section id="mv_sql_query"><title>
+		<literal>sq &mdash; mv_sql_query</literal></title><cmdsynopsis>
+		(<replaceable>SQL_Query</replaceable>,
+		default none)</cmdsynopsis><para>
 		for text-based searches (<literal>st=text</literal> only), this option
 		specifies the SQL query to run over the lines in the file.
 		This is not the same as an external &glos-SQL; database search.
@@ -744,21 +743,21 @@ Search for [value searchstring] in [value column]
 </a>
 ]]></programlisting>
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_search_relate</literal>
-		(, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_search_relate"><title>
+		<literal>sr &mdash; mv_search_relate</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_searchtype</literal>
-		(st, [ <literal>glimpse</literal> | <literal>db</literal> |
+		</section>
+		<section id="mv_searchtype"><title>
+		<literal>st &mdash; mv_searchtype</literal></title><cmdsynopsis>
+		( [ <literal>glimpse</literal> | <literal>db</literal> |
 		<literal>sql</literal> | <literal>text</literal> | 
 		<literal>ref</literal> ],
 		<!-- is default none or glimpse? Looking at Scan.pm, there's no default -->
-		default none) &mdash;
+		default none)</cmdsynopsis><para>
 		select search type. <literal>glimpse</literal> uses the Glimpse search
 		engine (see &conf-Glimpse;), <literal>db</literal> (or the
 		equivalent <literal>sql</literal>) iterate over every row in the
@@ -767,46 +766,46 @@ Search for [value searchstring] in [value column]
 		<literal>ref</literal> iterates over the results from some
 		previous, already-performed search (related option <literal>lb</literal>).
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_substring_match</literal>
-		(su, <literal>0</literal>/<literal>1</literal>,
-		default <literal>0</literal>) &mdash;
+		</section>
+		<section id="mv_substring_match"><title>
+		<literal>su &mdash; mv_substring_match</literal></title><cmdsynopsis>
+		(<literal>0</literal>/<literal>1</literal>,
+		default <literal>0</literal>)</cmdsynopsis><para>
 		match on substrings as well as whole words. This is typically set in
 		dictionary-based searches.
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_sort_field</literal>
-		(tf, <replaceable>field_name_or_index [,field_name2_or_index2...]</replaceable>, 
-		default none) &mdash;
+		</section>
+		<section id="mv_sort_field"><title>
+		<literal>tf &mdash; mv_sort_field</literal></title><cmdsynopsis>
+		(<replaceable>field_name_or_index [,field_name2_or_index2...]</replaceable>, 
+		default none)</cmdsynopsis><para>
 		determine sort order of the returned data. It is possible to refer
 		to columns by both using their names (if the search is such that column
 		names are known) and their indices, starting from <literal>0</literal>.
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_sort_option</literal>
-		(to, <literal></literal>/<literal></literal>,
-		default <literal></literal>) &mdash;
+		</section>
+		<section id="mv_sort_option"><title>
+		<literal>to &mdash; mv_sort_option</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
 
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_unique</literal>
-		(un, <literal>0</literal>/<literal>1</literal>,
-		default <literal>0</literal>) &mdash;
+		</section>
+		<section id="mv_unique"><title>
+		<literal>un &mdash; mv_unique</literal></title><cmdsynopsis>
+		(<literal>0</literal>/<literal>1</literal>,
+		default <literal>0</literal>)</cmdsynopsis><para>
 		return only unique fields. The option works on whatever the search
 		return fields (set with <literal>rf</literal>) are.
 		<!-- TODO returns only unique items, or compressed duplicates into one?
 		Also, does it looks for uniques in one field, or an entry is consudered
 		duplicate only if all fields are the same? -->
 		</para>
-		</listitem>
-		<listitem><para>
-		<literal>mv_value</literal>
-		(va, <replaceable>value_variable_name</replaceable>=<replaceable>value</replaceable>,
-		default none) &mdash;
+		</section>
+		<section id="mv_value"><title>
+		<literal>va &mdash; mv_value</literal></title><cmdsynopsis>
+		(<replaceable>value_variable_name</replaceable>=<replaceable>value</replaceable>,
+		default none)</cmdsynopsis><para>
 		assign <replaceable>value</replaceable> to a &glos-value; variable. This
 		is exactly what happens with normal variables in search &glos-profile;s
 		when you use the <code><replaceable>variable_name</replaceable>=<replaceable>value</replaceable></code> syntax,
@@ -822,8 +821,7 @@ Search for [value searchstring] in [value column]
 ]Renaissance and Impressionist Paintings&lt;a&gt;
 </programlisting>
 		</para>
-		</listitem>
-	</itemizedlist>
+		</section>
 </section>
 
 </article>
