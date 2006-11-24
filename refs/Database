@@ -3,9 +3,16 @@ register existing database table for use with Interchange
 __END__
 
 __NAME__ synopsis
+<group choice='plain'>
 	<arg choice='plain'><replaceable>table_name</replaceable></arg>
 	<arg choice='plain'><replaceable>table_source_file</replaceable></arg>
 	<arg choice='plain'><replaceable>table_type</replaceable></arg>
+</group>
+<group choice='plain'>
+	<arg choice='plain'><replaceable>table_name</replaceable></arg>
+	<arg choice='plain'><replaceable>attribute</replaceable></arg>
+	<arg choice='plain'><replaceable>value</replaceable></arg>
+</group>
 __END__
 
 __NAME__ see also
@@ -45,7 +52,7 @@ __END__
 
 __NAME__ example: Simple definition of a CSV-style database source format
 <programlisting>
-Database reviews reviews.txt CVS
+Database reviews reviews.txt CSV
 </programlisting>
 __END__
 
