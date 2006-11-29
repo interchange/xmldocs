@@ -1,4 +1,27 @@
+__NAME__ purpose
+tabular overview for a database table
+__END__
+
 __NAME__ synopsis 
+<row>
+
+	<entry>
+	table
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	table name
+	</entry>
+
+</row> 
 <row>
 
 	<entry>
