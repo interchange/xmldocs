@@ -1,0 +1,144 @@
+<?xml version="1.0" standalone="no"?>
+
+<!-- catalog not working ? -->
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+	"../docbook/docbookxi.dtd">
+
+<article id='icdb'>
+
+<articleinfo>
+	<title>Interchange Guides: Database and Field Descriptions</title>
+	<titleabbrev>icdb</titleabbrev>
+
+	<copyright>
+		<year>2006</year>
+		<holder>Interchange Development Group</holder>
+	</copyright>
+
+	<authorgroup>
+		<author>
+			<firstname>Davor</firstname><surname>Ocelic</surname>
+			<email>docelic@icdevgroup.org</email>
+		</author>
+		<author><firstname>Stefan</firstname><surname>Hornburg</surname>
+			<email>racke@icdevgroup.org</email>
+		</author>
+	</authorgroup>
+
+	<legalnotice>
+		<para>
+		This documentation is free; you can redistribute it and/or modify
+		it under the terms of the &GNU; General Public License as published by
+		the Free Software Foundation; either version 2 of the License, or
+		(at your option) any later version.
+		</para>
+		<para>
+		It is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+		</para>
+	</legalnotice>
+
+	<abstract>
+		<para>
+		The purpose of this document is to list all pre-defined
+		&glos-database;s used by &IC;, describe their purpose and describe
+		all their fields.
+		</para>
+	</abstract>
+
+</articleinfo>
+
+
+<section id="products">
+<title>The "Products" Database</title>
+<para>
+	The <database>products</database> databases contain items that
+	you are offering in your web shop or web catalog.
+</para><para>
+	The initial database text source file, <filename>products.txt</filename>,
+	is usually in an ASCII, &glos-tab-delimited; format.
+	Each product listed there should be given a product code, usually
+	referred to as &glos-SKU; &mdash; a short code that identifies the
+	product on the ordering page and in the &glos-catalog;.
+	So the <database>products</database> database must contain
+	at least the product SKU (<database class='field'>code</database>),
+	<database class='field'>description</database> and 
+	<database class='field'>price</database> fileds (or however the
+	&conf-PriceField; and &conf-DescriptionField;
+	directives have been set). All other information needed in the
+	catalog can be placed in additional, arbitrary fields within the same
+	table.
+</para>
+<para>
+	The field names must be declared on the first line of the
+	<filename>products.txt</filename> file. Accesses from your &IC; pages
+	to any other fields within the table will, of course, not execute
+	properly.  Field names can
+	contain the characters <literal>A-Za-z0-9</literal> and an underscore
+	(<literal>_</literal>).
+</para>
+<para>
+	It is important to adjust the &conf-PriceField; and &conf-DescriptionField;
+	directives if you change the default field names, or 
+	&IC; tags such as &tag-price;, &tag-description;, <tag>item-price</tag> or
+	<tag>item-description</tag> will not work.
+</para>
+<para>
+	For each product entry in the text source file, the product code must
+	be the first field in the line, and
+	must be unique. Product codes can contain the characters
+	<literal>A-Za-z0-9</literal>,
+	along with hyphens (<literal>-</literal>), underscores
+	(<literal>_</literal>), pound signs/hash marks
+	(<literal>#</literal>), slashes (<literal>/</literal>) and periods
+	(<literal>.</literal>). Note that slashes will
+	interfere with &glos-flypage;s; avoid them where ever possible.
+</para>
+<para>
+	The columns in the text source files should be separated by one of the
+	approved delimiting
+	schemes (TAB, PIPE, or CSV). They are case-sensitive according to the
+	underlying database &mdash; be consistent with field names to avoid
+	trouble.
+	If only the case of the <database>description</database> or
+	<database class='field'>price</database> fields have been changed,
+	&conf-PriceField; and &conf-DescriptionField; still have to be 
+	adjusted appropriately.
+</para>
+<note>
+	<para>
+	CSV format is not recommended for the <database>products</database>
+	database. It is much slower than TAB- or PIPE-delimited files, and
+	dramatically reduces search engine functionality. No field-specific
+	searches are possible. Using CSV for any small database that will not
+	be searched is fine.
+	</para>
+</note>
+<para>
+	More than one database may be used as a products database. If the
+	&conf-ProductFiles; directive is set to a space-separated list of
+	valid &IC; database identifiers, all listed databases will be
+	searched (in the order specified) for any items that are ordered, or
+	for product information (such as in
+	<code>[price <replaceable>code</replaceable></code> or
+	<code>[field <replaceable>code</replaceable>]</code>).
+</para>
+<para>
+	If you are manually modifying databases on-the-fly, it is recommended that
+	you lock the files while they are modified. Interchange-supplied import
+	routines do this properly on their own.
+</para>
+</section>
+
+
+
+
+
+<section id='userdb'>
+	<title>User Database</title>
+<para>
+</para>
+</section>
+</article>

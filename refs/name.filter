@@ -15,13 +15,13 @@ __END__
 
 __NAME__ online: Filter example
 <programlisting>
-[filter name]Ocelic, Davor[/filter]
+[filter name]Doe, John[/filter]
 </programlisting>
 __END__
 
 __NAME__ online: Filter example for name and namecase correction
 <programlisting>
-[filter op="name namecase"]OCELIC, Davor[/filter]
+[filter op="name namecase"]DOE, John[/filter]
 </programlisting>
 __END__
 

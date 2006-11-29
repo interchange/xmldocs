@@ -18,6 +18,7 @@
 	<!ENTITY filters SYSTEM "../tmp/filters-c.db"> 
 	<!ENTITY orderchecks SYSTEM "../tmp/orderchecks-c.db"> 
 	<!ENTITY whatsnew SYSTEM "../tmp/WHATSNEW-c.db"> 
+	<!ENTITY databases SYSTEM "../tmp/databases-c.db"> 
 	<!ENTITY optimization SYSTEM "../tmp/optimization-c.db"> 
 ]>
 
@@ -107,9 +108,9 @@
 				</document>
 			</dir>
 
-			<dir name='WHATSNEW'>
-				<document targetdoc="WHATSNEW">
-				&WHATSNEW;
+			<dir name='databases'>
+				<document targetdoc="databases">
+				&databases;
 				</document>
 			</dir>
 

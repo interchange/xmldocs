@@ -29,15 +29,13 @@ parlance - a <literal>database table</literal>.
 </para><para>
 &IC; works with &GDBM;, DB_File, SQL, LDAP and in-memory types of databases. 
 Regardless of type or other characteristics, each database must be registered
-with &IC; before it's
-ready to be used, and this is achieved using the &conf-Database; configuration
-directive. Pay special attention to the fact that &conf-Database; is both
-catalog and global directive, indicating that you can share databases 
-between catalogs.
+on a &glos-catalog; level before it's ready to be used, and this is achieved
+using the &conf-Database; configuration directive. It's useful to remember
+at this point that multiple catalogs can share the same database.
 </para><para>
-Three parameters needed to complete the &conf-Database; specification are
+Three parameters need to be present in a basic &conf-Database; definition:
 an arbitrary database name, text source file with initial content, and the
-type of database.
+type of the database.
 </para>
 
 <section>
@@ -66,10 +64,14 @@ look messy and unaligned when viewed in a text editor. Do not try to fix these;
 better use the <command>te</command> utility that comes as part of the 
 &IC; distribution to edit such files more conveniently.
 </para>
-Format examples:
+
+Interchange can manage an unlimited number of arbitrary database tables and
+database table types. Several flexible delimiter schemes are available 
+"out of the box":
+
 <itemizedlist>
 	<listitem>
-	<para>TAB-delimited file:
+	<para>TAB-delimited file (Type 1, the default):
 Fields are separated by TAB characters. No whitespace is allowable
 at the beginning of the line.
 </para>
@@ -78,12 +80,74 @@ code	description	price image
 SH543	Men's fine cotton shirt	14.95	shirts.jpg
 </screen>
 <para>
+(&TAB_DELIMITED_NOTICE;)
+</para><para>
 Using the default TAB delimiter is recommended if you plan on
 searching the ASCII source file of the database.
 	</para></listitem>
 
 	<listitem>
-	<para>PIPE-delimited file:
+	<para>LINE (Type 2):
+Fields are specified each on its own line, separated by the newline
+(<literal>\n</literal>) character. One blank line separates a record
+from another record. <!-- CONTINUE NOTES NOTE -->
+
+<screen>
+code
+description
+price
+image
+
+SH543
+Men's fine cotton shirt
+14.95
+shirts.jpg
+</screen>
+	</para></listitem>
+
+	<listitem>
+	<para>%% (Type 3):
+Fields are separated by the literal combination of
+"<literal>\n%%\n</literal>", while the records are separated
+by "<literal>\n%%%\n</literal>". Users fond of the Unix "fortune"
+program may find this format familiar.
+
+<screen>
+code
+%%
+description
+%%
+price
+%%
+image
+%%%
+SH543
+%%
+Men's fine cotton shirt
+%%
+14.95
+%%
+shirts.jpg
+</screen>
+	</para></listitem>
+
+
+	<listitem>
+	<para>CSV-delimited file (Type 4):
+Fields are enclosed in quotes and separated by commas. Again, no whitespace
+should be at the beginning of the line.
+</para>
+<screen>
+"code","description","price","image"
+"SH543","Men's fine cotton shirt","14.95","shirts.jpg"
+</screen>
+<para>
+CSV-delimiter schemes might cause problems with ASCII text searching routines.
+	</para></listitem>
+
+
+	<listitem>
+	<para>PIPE-delimited file (Type 5):
 Fields are separated by the pipe ("<literal>|</literal>") characters which 
 resemble vertical lines. No whitespace is allowable at the beginning of the
 line.
@@ -95,18 +159,27 @@ SH543|Men's fine cotton shirt|14.95|shirts.jpg
 <para>
 PIPE-delimited files perform fairly well with ASCII text searching routines.
 	</para></listitem>
+
+
 	<listitem>
-	<para>CSV-delimited file:
-Fields are enclosed in quotes and separated by commas. Again, no whitespace
-should be at the beginning of the line.
-</para>
-<screen>
-"code","description","price","image"
-"SH543","Men's fine cotton shirt","14.95","shirts.jpg"
-</screen>
-<para>
-CSV-delimiter schemes might cause problems with ASCII text searching routines.
+	<para>TAB-delimited file (Type 6):
 	</para></listitem>
+
+
+	<listitem>
+	<para>&lt;reserved&gt; (Type 7):
+	</para></listitem>
+
+
+	<listitem>
+	<para>&glos-SQL; (Type 8):
+	</para></listitem>
+
+
+	<listitem>
+	<para>LDAP (Type 9):
+	</para></listitem>
+
 	</itemizedlist>
 
 <note>
@@ -118,6 +191,65 @@ all upper case names are recommended.
 </para>
 </note>
 
+<para>
+If a database is specified to be one of the first six types, then the database
+will automatically be converted to a more efficient internal structure.
+Those include DB_FILE, GDBM, or MEMORY. The order of preference and the selection is:
+
+<!--
+LI1: GDBM
+
+.This uses the Perl C<GDBM_File> module to build a GDBM database. The following command will indicate if GDBM is in Perl:
+
+!block example; listitem=2
+    perl -e 'require GDBM_File and print "I have GDBM.\n"'
+!endblock
+
+.Installing GDBM_File requires rebuilding Perl after obtaining the GNU GDBM package, and is beyond the scope of this document. LINUX will typically have this by default; most other operating systems will need to specifically build in this capability.
+
+LI1: DB_File (Berkeley DB)
+
+.This uses the C<DB_File> module to build a Berkeley DB (hash) database. The following command will indicate if DB_File is in Perl:
+
+!block example; listitem=2
+    perl -e 'require DB_File and print "I have Berkeley DB.\n"'
+!endblock
+
+.Installing C<DB_File> requires rebuilding Perl after obtaining the Berkeley DB package, and is beyond the scope of this document. BSDI, FreeBSD, and LINUX will typically have it by default; most other operating systems will need to specifically build this in.
+
+.If using C<DB_File>, even though C<GDBM_File> is in Perl, set the environment variable MINIVEND_DBFILE to a true (non-zero, non-blank) value:
+
+!block example; listitem=2
+    # csh or tcsh
+    setenv MINIVEND_DBFILE 1
+
+    # sh, bash, or ksh
+    MINIVEND_DBFILE=1 ; export MINIVEND_DBFILE
+!endblock
+
+.Then, re-start the server.
+
+.Or, to set a particular table to use Berkeley DB, the DB_FILE class in C<catalog.cfg> can be specified:
+
+!block example; listitem=2
+    Database arbitrary  DB_FILE  1
+!endblock
+
+LI1: In-memory
+
+.This uses Perl hashes to store the data directly in memory. Every time the Interchange server is restarted, it will re-import all in-memory databases for every catalog.
+
+.If this is used, despite the presence of C<GDBM_File> or C<DB_File>, set the environment variable MINIVEND_NODBM as above or specify the memory type in the Database directive:
+
+!block example; listitem=2
+    Database arbitrary  MEMORY  1
+!endblock
+
+Note: The use of memory databases is not recommended.
+-->
+
+</para>
+
 </section>
 
 <section>
@@ -126,7 +258,7 @@ all upper case names are recommended.
 As hinted above, you do not need to use an external &glos-SQL; database.
 If you only
 have a small data set, you could use Interchange's internal databases.
-This is a tremendous gain for small and quick setups, or &IC; evaluation.
+This is a tremendous gain for small and quick setups, or ad-hoc &IC; evaluation.
 However, some functions (order management, for example) will be slower
 and not as robust without an SQL database. SQL is strongly recommended for
 at least the <database>state</database>,
@@ -147,30 +279,34 @@ Do not fall in the jaws of <ulink url="http://c2.com/cgi/wiki?PrematureOptimizat
 </note>
 
 <para>
-If you plan on using Interchange Admin UI, you <emphasis>should</emphasis>
+Generally, you <emphasis>should</emphasis>
 make an additional 
-effort of configuring and using SQL databases to achieve its full potential.
+effort of configuring and using SQL databases to achieve &IC;'s full potential.
 Using SQL also makes your data sets easily available for integration with
 other applications.
 </para><para>
-In any case, Admin UI provides easy import routines for text files that should
-replace traditional FTP text-file uploads.
+In any case, database import and conversion routines are already
+available in &IC; and you can use them at any point.
 </para><para>
 Speaking of the source files' behavior, if a file named
 <filename><replaceable>table</replaceable>.sql</filename> is present
 in the same directory as
 <filename><replaceable>table</replaceable>.txt</filename>, then database
-table will not be imported from the ASCII text source file.
+table will never be imported from the ASCII text source file.
 If there is no <filename><replaceable>table</replaceable>.sql</filename>,
-the DBI/SQL import will happen once at
-&IC; startup or catalog reconfiguration time;
+the DBI/SQL import will happen once, at
+&IC; startup or catalog reconfiguration time (and the 
+<filename><replaceable>table</replaceable>.sql</filename> file will be
+created);
 Interchange will connect to the SQL database using the specified DSN
 (DSN is a standard DBI parameter meaning "Database Source Name").
-The table, if it already exists, will be dropped using a line similar to
+The table will be dropped (if it already exists in the database) using a
+line similar to
 <literal>DROP TABLE <replaceable>table</replaceable></literal>.
 This will occur without warning, but &conf-NoImport; can be used to 
 prevent it or otherwise change the default behavior.
-The table will then be created again.
+The table will then be created again and populated with text source
+file data.
 </para><para>
 If there are any
 <literal>COLUMN_DEF</literal> specifications present in &gcf;, &ccf; or
@@ -182,12 +318,14 @@ file, by default) will be created with the type <literal>char(16)</literal>,
 and all other fields will be created as <literal>char(128)</literal>. This is 
 very unfortunate, but the best &IC; can do without your help.
 Table creation statements will be written to the <filename>error.log</filename>
-along with, of course, any errors. From my experience, the most common
-mistake at this step is picking column names which happen to be reserved
-keywords in &MYSQL;.
+along with, of course, any errors. From our experience, the most common
+mistake at this point is choosing column names that sound perfectly reasonable, 
+but also happen to be reserved keywords in &MYSQL;. (The error messages
+appear to be misleading here, so you better take a look at the
+<ulink url="http://dev.mysql.com/doc/refman/5.0/en/reserved-words.html">list
+of reserved MySQL keywords</ulink> before losing patience with the problem).
 </para><para>
-Once the &glos-database; (database table actually, remember we said 
-"database" and "table" simply mean a "table" in &IC; parlance)
+Once the &glos-database; (database table actually, remember?)
 is created, the text source file will be imported into it.
 For this step to succeed, data typing must be user-configured. In other words,
 if say, word "<literal>none</literal>" is placed in a field while the field
@@ -204,29 +342,32 @@ directive.
 <section>
 	<title>File-based Databases</title>
 <para>
-By file-based databases we primarily assume Berkeley (DB_File) and GNU DBM.
+By file-based databases we primarily assume &GDBM; and DB_File. We also
+call those database types "internal", since in the absence of say, an
+SQL definition,
+all inferior formats (such as text source files) are automatically converted to
+some kind of a file-based database.
+</para><para>
 Those database types usually work in a way that, on every client access, the
 appropriate database text source file is checked for being newer than the
 actual DB file itself.
 When it happens that it is, the database table is re-imported
 from the text source file <emphasis>on the fly</emphasis>, and the routine
-proceeds as usual.
+then proceeds as usual.
 </para>
 <note>
 <title>Database updates</title>
 <para>
-It is important to note that, when using &IC; internal database methods 
-(which are some variant of DB_File or DBM, depending on what's available
-on your system), changes to text files cause databases to be resynchronized
-with plaintext file contents.
+It is important to note that, when using &IC; internal database methods, 
+all changes in the text source files cause the databases to be re-created.
+This can have unwanted effects if the database was modified from within
+&IC; and the contents have not been written back to the text source files.
+Another common problem are larger data sets that take noticeable time to get
+imported to (or exported from) the internal database.
 </para><para>
-This behavior can be controlled via the &conf-NoImport; config directive,
-but by default, changes in text files will trigger a 
-rewrite of DBM or DB_File databases. This might lead to unexpected problems
-if you edit databases from &IC; and don't sync <emphasis>files</emphasis>
-to databases first, or have a larger data sets
-(say, over a few thousand records) which take noticeable time to get
-re-imported.
+The exact behavior can be controlled via the &conf-NoImport; config directive,
+but by default, changes in text files will trigger a complete
+rewrite of DBM or DB_File databases.
 </para>
 </note>
 <para>
@@ -260,7 +401,7 @@ databases for every catalog.
 </para>
 <para>
 Memory databases are used by default only if no database type is
-explicitly specified, and there is no DB_File or gdbm found on
+explicitly specified, and there is no DB_File or &GDBM; found on
 the system. Otherwise they can be used for small but high-traffic
 tables. Keep in mind, however, that since their contents are not saved back
 to the text files, you'll want to either take care of the data export yourself,
@@ -269,7 +410,7 @@ or keep the tables stuffed with read-only data.
 <para>
 if you want to force memory databases despite of GDBM_File or DB_File
 being present, set the <envar>MINIVEND_NODBM</envar> environment variable
-to a true value (look above for hints).
+to a true value (look previous chapter for hints on setting it).
 It is also possible to use memory type for just specific databases.
 </para>
 <para>
@@ -343,15 +484,16 @@ Term definitions:
 	<database>products</database> database. In the supplied demo catalog
 	(and in the most of real-world solutions as well), the primary
 	database is directly called <literal>products</literal> 
-	and the ASCII source is kept in the file <filename>products.txt</filename>
+	and the ASCII source is kept in the <filename>products/products.txt</filename>
+	file.
 	This is also the default file for searching contents with
-	the search engine, such as Glimpse or HTDig.
+	the search engine, such as Glimpse, HTDig or Swish.
 </para>
 
 <note>
 <para>
-	Interchange also has two but optional databases that
-	are given <emphasis role='bold'>in special, fixed formats</emphasis>:
+	Interchange also has two optional databases that
+	are specified <emphasis role='bold'>in special, fixed formats</emphasis>:
 	</para>
 	<itemizedlist>
 <listitem>
@@ -374,89 +516,10 @@ Term definitions:
 </listitem>
 </itemizedlist>
 <para>
-	The two above tables are never stored in SQL or DBM.
+	The two above tables cannot be stored in any user-specified format.
 </para>
 </note>
 
-	<section>
-	<title>"Products" Database</title>
-	<para>
-		The <database>products</database> databases contain items that
-		you're selling.
-		Each product listed should be given a product code, usually
-		referred to as &glos-SKU; &mdash; a short code that identifies the
-		product on the
-		ordering page and in the catalog. The <filename>products.txt</filename>
-		file is an ASCII-delimited text source file. It should contain
-		product SKUs, along with an arbitrary
-		number of fields which must contain at least the fields
-		<database class='field'>description</database> and 
-		<database class='field'>price</database> (or however the
-		&conf-PriceField; and &conf-DescriptionField;
-		directives have been set). Any additional information needed in the
-		catalog can be placed in any arbitrary field.
-	</para>
-	<para>
-		The field names must be defined on the first line of the
-		<filename>products.txt</filename> file. These field names must match
-		exactly the field
-		names of the <tag>item-field</tag> tags in the catalog pages, or the
-		&IC; server will not access them properly. Field names can
-		contain the characters <literal>A-Za-z0-9</literal> and underscore
-		(<literal>_</literal>).
-	</para>
-	<para>
-		It is important to adjust the &conf-PriceField; and &conf-DescriptionField;
-		directives appropriately if you change the default field names, or 
-		&IC; tags such as &tag-price;, &tag-description;, <tag>item-price</tag> or
-		<tag>item-description</tag> won't work.
-	</para>
-	<para>
-		For each product entry in the text source file, the product code must
-		be the first field in the line, and
-		must be unique. Product codes can contain the characters
-		<literal>A-Za-z0-9</literal>,
-		along with hyphens (<literal>-</literal>), underscores
-		(<literal>_</literal>), pound signs/hash marks
-		(<literal>#</literal>), slashes (<literal>/</literal>) and periods
-		(<literal>.</literal>). Note that slashes will
-		interfere with on-the-fly page references; avoid them if at all possible.
-	</para>
-	<para>
-		The columns in text source files should be separated by one of the
-		approved delimiting
-		schemes (TAB, PIPE, or CSV), and are case-sensitive according to the
-		underlying database &mdash; be consistent in field names to avoid
-		trouble. If
-		the case of the "description" or "price" fields have been modified,
-		the &conf-PriceField; and &conf-DescriptionField; directives must be
-		adjusted appropriately.
-	</para>
-	<note>
-		<para>
-		CSV format is not recommended for the <database>products</database>
-		database. It is much slower than TAB- or PIPE-delimited files, and
-		dramatically reduces search engine functionality. No field-specific
-		searches are possible. Using CSV for any small database that will not
-		be searched is fine.
-		</para>
-	</note>
-	<para>
-		More than one database may be used as a products database. If the
-		&conf-ProductFiles; directive is set to a space-separated list of
-		valid &IC; database identifiers, all listed databases will be
-		searched (in the order specified) for any items that are ordered, or
-		for product information (such as with <code>price code</code> or
-		<code>field code</code>
-		tags).
-	</para>
-	<para>
-		If you are modifying the database on-the-fly, it is recommended that
-		the file
-		be locked while it is being modified. Interchange's supplied import
-		routines do this.
-	</para>
-	</section>
 </section>
 
 <para>
@@ -466,7 +529,7 @@ Term definitions:
 <!-- 
 
 For &GDBM; &glos-database;s, the import would ordinarily happen when the
-gdbm file is deleted, a change in appropriate text source file is detected,
+gdbm/db file is deleted, a change in appropriate text source file is detected,
 &IC; is (re)started, or the catalog is reconfigured. &glos-SQL; databases
 are imported only once, at first configuration.
 

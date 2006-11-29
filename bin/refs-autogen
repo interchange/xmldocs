@@ -176,7 +176,8 @@ my %preamble = (
 	"please see the &glos-filter; glossary entry.",
 	var => "For a complete introduction to &IC; variables, " .
 	"please see the &glos-variable; glossary entry.",
-	ordercheck => "",
+	ordercheck => "For a complete introduction to &IC; form field checks, " .
+	"please see the &glos-order-check; glossary entry.",
 );
 
 my @paths = @ARGV; # Versions for which documentation build is requested
@@ -821,7 +822,7 @@ for my $group ( keys %symbols ) {
 <reference id="${group}s">
 	<title>Interchange Reference Pages: $longname{$group}s</title>
 
-  <partintro>
+  <partintro id="partintro">
   <para>
 	<phrase condition='online'>[restrict log='none']</phrase>
   $preamble{$group}

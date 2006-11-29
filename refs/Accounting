@@ -1,9 +1,17 @@
-__NAME__ purpose
+
+
+*** This whole page is disabled. To re-enable, remove this
+comment and add starting "_" to all _NAME__ blocks     ***
+
+
+
+
+_NAME__ purpose
 specify accounting software and accounting options
 __END__
 
 
-__NAME__ synopsis
+_NAME__ synopsis
 <arg choice='plain'>Class <replaceable>MODULE_NAME</replaceable></arg><sbr />
 assign_username
 	<group choice='plain'>
@@ -13,7 +21,7 @@ assign_username
 __END__
 
 
-__NAME__ description
+_NAME__ description
 The directive specifies the accounting software and accounting options
 to use.
 <itemizedlist>
@@ -33,11 +41,11 @@ to use.
 </itemizedlist>
 __END__
 
-__NAME__ missing
+_NAME__ missing
 description for assign_username
 __END__
 
-__NAME__ example: Defining __FILENAME__
+_NAME__ example: Defining __FILENAME__
 <programlisting>
 Accounting Class Vend::Accounting::SQL_Ledger
 Accounting assign_username 0
@@ -45,7 +53,7 @@ Accounting assign_username 0
 __END__
 
 
-__NAME__ notes
+_NAME__ notes
 To check out which accounting modules (and therefore accounting software)
 can be used with your version of &IC;, simply invoke
 <command>ls -al <replaceable>ICROOT</replaceable>/lib/Vend/Accounting/</command>.

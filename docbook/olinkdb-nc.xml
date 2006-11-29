@@ -20,6 +20,7 @@
 	<!ENTITY filters SYSTEM "../tmp/filters-nc.db"> 
 	<!ENTITY orderchecks SYSTEM "../tmp/orderchecks-nc.db"> 
 	<!ENTITY whatsnew SYSTEM "../tmp/WHATSNEW-nc.db"> 
+	<!ENTITY databases SYSTEM "../tmp/databases-nc.db"> 
 ]>
 
 <targetset>
@@ -44,6 +45,7 @@
 			<document targetdoc="filters" baseuri="filters.html"> &filters; </document>
 			<document targetdoc="orderchecks" baseuri="orderchecks.html"> &orderchecks; </document>
 			<document targetdoc="WHATSNEW" baseuri="WHATSNEW.html"> &whatsnew; </document>
+			<document targetdoc="databases" baseuri="databases.html"> &databases; </document>
 			<document targetdoc="optimization" baseuri="optimization.html"> &optimization; </document>
 			<document targetdoc="xmldocs" baseuri="xmldocs.html"> &xmldocs; </document>
 			<document targetdoc="install" baseuri="install.html"> &install; </document>

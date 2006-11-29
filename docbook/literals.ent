@@ -248,7 +248,7 @@ values above are not properly aligned. This is an unfortunate nature of
   <entry>display</entry>	
   <entry></entry><entry></entry>
   <entry>symbol</entry>
-  <entry>Whether to display currency as symbol, text or not at all.</entry>
+  <entry>Display currency as symbol, text or not at all?</entry>
 </row>
 ">
 <!ENTITY ROW_CURRENCYNOFORMAT "
@@ -256,7 +256,7 @@ values above are not properly aligned. This is an unfortunate nature of
   <entry>noformat</entry>	
   <entry>Yes</entry><entry>No</entry>
   <entry>No</entry>
-  <entry>Whether to refrain from formatting the output or not.</entry>
+  <entry>Output plain number instead of formatting it according to the currency &glos-locale;?</entry>
 </row>
 ">
 <!ENTITY ROW_CSS_std "
@@ -293,6 +293,15 @@ values above are not properly aligned. This is an unfortunate nature of
   <entry>
   File creation &glos-mode;.
   </entry>
+</row>
+">
+<!ENTITY ROW_LOCALE_1 "
+<row>
+  <entry>locale</entry>
+  <entry></entry>
+  <entry></entry>
+  <entry>1</entry>
+  <entry>Honor &glos-locale;s?</entry>
 </row>
 ">
 

@@ -28,6 +28,6 @@ __END__
 
 __NAME__ example: Setting DOCROOT
 <programlisting>
-Variable DOCROOT /var/www/CATALOG/htdocs/
+Variable DOCROOT /var/www/CATALOG_NAME/htdocs/
 </programlisting>
 __END__

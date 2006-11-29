@@ -119,7 +119,7 @@
 		</para> <para>
 		We recommend that you create the files used in this tutorial yourself. You will learn more by creating the directory structure and using your favorite text editor to create files in the proper places on your own system as they are discussed.
 		</para> <para>
-		Writing a complete tutorial without the feedback from the audience is hard. Please jot down your notes and remarks as you digest this tutorial and e-mail <ulink url="mailto:docelic@icdevgroup.org">docelic@icdevgroup.org</ulink> with your thoughts; which sections need clarification or examples, which parts were useful to you, or what was the weather like over there yesterday afternoon :).
+		Writing a complete tutorial without the feedback from the audience is hard. Please jot down your notes and remarks as you digest this tutorial and e-mail <ulink url="mailto:docelic@icdevgroup.org">docelic@icdevgroup.org</ulink> with your comments.
 		</para>
 	</sect2>
 
@@ -127,7 +127,7 @@
 		<title>Interchange and the Standard Demo Catalog Installation</title>
 		<para>
 		For installation instructions, see
-		<olink targetdoc='faq' targetptr='install-howto'/> FAQ entry.
+		<olink targetdoc='install'/>.
 		</para>
 	</sect2>
 		
@@ -229,8 +229,7 @@
 	<sect2 id='InterchangeDaemonandCatalogs'>
 		<title>Interchange Daemon and Catalogs</title>
 		<para>
-		To control the Interchange daemon, use the <filename class='directory'>init.d</filename> script supplied with the RPM and DEB packages. For example, to start Interchange, run <userinput>/etc/init.d/interchange start</userinput> or <userinput>/etc/rc.d/init.d/interchange start</userinput>. To stop or restart Interchange, simply use <userinput>stop</userinput> or <userinput>restart</userinput> as arguments. (For more information, see HOW-TO "Control Interchange Daemon").
-		<!-- TODO link na HOWTO -->
+		To control the Interchange daemon, use the <filename class='directory'>init.d</filename> script supplied with the RPM and DEB packages. For example, to start Interchange, run <userinput>/etc/init.d/interchange start</userinput> or <userinput>/etc/rc.d/init.d/interchange start</userinput>. To stop or restart Interchange, simply use <userinput>stop</userinput> or <userinput>restart</userinput> as arguments. (For more information, see &howto-daemon-control; HOW-TO).
 		</para> <para>
 		To reconfigure a catalog (re-read the appropriate <filename>catalog.cfg</filename>), either restart Interchange altogether or run <userinput>/usr/sbin/interchange -reconfig CATNAME</userinput>.
 		</para>
@@ -253,7 +252,10 @@
 	<sect2 id='LinkProgram'>
 		<title>Link Program</title>
 		<para>
-		You need to locate the existing link program (found in the <filename class='directory'>cgi-bin</filename> directory) and copy it to a new name, making sure the permissions stay intact. Run
+		First of all, you need a &glos-link-program;. Read the &glos-link-program; glossary entry for an introduction and compilation instructions.
+		</para><para>
+		If you already have one (used by some other catalog from the same &IC;
+		server), you only need to find it (found in the <filename class='directory'>cgi-bin</filename> directory) and copy it to a new name, making sure the permissions stay intact. Run
 		<itemizedlist>
 			<listitem><para>
 			<userinput>cd /usr/lib/cgi-bin/ic; cp -p vlink tutorial</userinput>

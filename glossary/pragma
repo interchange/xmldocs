@@ -1,7 +1,7 @@
 Pragmas are used to control various aspects of page and data parsing and display. They are processed before an &IC; page goes to the normal processing
 routine.
 </para><para>
-Pragma values can be defined at any level; catalog-wide, page-wide or
+Pragma values can be defined at any level; &glos-catalog;-wide, page-wide or
 &glos-ITL;-block wide.
 </para>
 
@@ -18,7 +18,7 @@ saves processor power to assign a scalar instead of looking it up every time.
 <para>
 To define a pragma catalog-wide, use the <option>Pragma</option> directive:
 <programlisting>
-Pragma <replaceable>NAME</replaceable> <group choice='req'><arg choice='plain'>0</arg><arg choice='plain'>1</arg><arg choice='plain'>=<replaceable>pragma-specific value</replaceable></arg></group>
+Pragma <replaceable>NAME</replaceable> <group choice='opt'><arg choice='plain'>0</arg><arg choice='plain'>1</arg><arg choice='plain'>=<replaceable>pragma-specific value</replaceable></arg></group>
 </programlisting>
 </para><para>
 To define a pragma for a particular page, use the &tag-pragma;
