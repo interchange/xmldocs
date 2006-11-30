@@ -8,6 +8,7 @@ __NAME__ synopsis
 	<arg choice='plain'><replaceable>table_source_file</replaceable></arg>
 	<arg choice='plain'><replaceable>table_type</replaceable></arg>
 </group>
+<sbr/>
 <group choice='plain'>
 	<arg choice='plain'><replaceable>table_name</replaceable></arg>
 	<arg choice='plain'><replaceable>attribute</replaceable></arg>
