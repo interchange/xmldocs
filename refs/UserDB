@@ -9,10 +9,9 @@ __END__
 
 
 __NAME__ synopsis
-<!--
-	<arg choice='plain'><replaceable>NAME</replaceable></arg>
+	<arg choice='plain'><replaceable>profile</replaceable></arg>
+	<arg choice='plain'><replaceable>parameter</replaceable></arg>
 	<arg choice='plain'><replaceable>value</replaceable></arg>
-	-->
 __END__
 
 
@@ -111,7 +110,13 @@ __NAME__ notes
 See &glos-UserDB; glossary entry for more information.
 __END__
 
-
+__NAME__ example: Minimum lengths
+Set minimum lengths in characters for username and password.
+<programlisting>
+UserDB    default    userminlen    8
+UserDB    default    passminlen    6
+</programlisting>
+__END__
 
 !block table
 Parameter|Default|Explanation
