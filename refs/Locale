@@ -78,6 +78,17 @@ The actual file <filename>localedata</filename> could be composed
 of the keys listed in <xref linkend="Locale_description"/>.
 __END__
 
+__NAME__ example: Price displayed as 1.000,00 EUR
+<programlisting>
+Locale de_DE currency_symbol EUR
+Locale de_DE p_cs_precedes 0
+Locale de_DE mon_decimal_point ,
+Locale de_DE mon_thousands_sep .
+
+[currency]1000[/currency]
+</programlisting>
+__END__
+
 __NAME__ missing
 purpose and description is wrong completely
 The description doesn't seem to match the description of the same variable when set in catalog.cfg
