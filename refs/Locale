@@ -46,10 +46,10 @@ a number of items:
 <literal>negative_sign</literal> -
 </para></listitem>
 <listitem><para>
-<literal>p_cs_precedes</literal> -
+<literal>p_cs_precedes</literal> - where currency symbol precedes price or vice versa
 </para></listitem>
 <listitem><para>
-<literal>p_sep_by_space</literal> -
+<literal>p_sep_by_space</literal> - number of spaces between currency symbol and price
 </para></listitem>
 <listitem><para>
 <literal>positive_sign</literal> -
