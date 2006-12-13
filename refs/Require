@@ -30,8 +30,8 @@ you run the catalog on different locations.
 <literal>module</literal>.
 </para>
 <para>
-This directive can also used to implicitly load &PERL; modules. If you add
-a directory name as a fourth argument, the directory will included in Perl's
+This directive can also be used to implicitly load &PERL; modules. If you add
+a directory name as a fourth argument, the directory will be included in Perl's
 module search path.
 __END__
 

@@ -1,5 +1,5 @@
 __NAME__ purpose
-get or set current value of the specified CGI input variable
+get or set value of CGI input variables
 __END__
 
 

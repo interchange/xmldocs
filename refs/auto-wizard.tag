@@ -2,6 +2,24 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	name
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	<literal>default</literal>
+	</entry>
+	<entry>
+	Survey name.
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	already_title
 	</entry>
 	<entry>
@@ -11,7 +29,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>You already did that survey!</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
@@ -30,7 +48,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>Thanks for completing the survey!</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
@@ -49,7 +67,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>We only want to collect information once from each person. Thank you.</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
@@ -68,7 +86,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>Your survey is complete. Thank you.</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
@@ -97,7 +115,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	survey_counter
+	survey_file
 	</entry>
 	<entry>
 	<!-- POS -->
@@ -106,7 +124,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>logs/survey/<option>name</option>.txt</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
@@ -116,7 +134,26 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	survey_file
+	survey_counter
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<literal>logs/survey/<option>name</option>.cnt</literal>
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	survey_counter_sql
 	</entry>
 	<entry>
 	<!-- POS -->
@@ -144,7 +181,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>Response to <option>name</option></literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
@@ -448,7 +485,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>page_title</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
@@ -467,7 +504,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>page_banner</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->

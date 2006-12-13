@@ -1,5 +1,5 @@
 __NAME__ purpose
-assign direct values for certain steps of the checkout procedure instead of performing calculations
+assign direct values for certain steps of checkout instead of performing calculations
 __END__
 
 __NAME__ synopsis 
@@ -134,7 +134,8 @@ The <option>clear</option> option will cancel <emphasis>all</emphasis>
 active assignments. To clear an individual assignment, set its value
 <emphasis>to an empty string</emphasis>.
 (Beware, a specification such as <literal>handling=0</literal> actually sets
-handling costs to zero, it does not clear the assignment).
+handling costs to zero, it does not clear the assignment. To clear the
+assignment, you must use <literal>handling=""</literal>).
 __END__
 
 
@@ -145,6 +146,7 @@ Other behavior (such as currency formatting) is, of course, not affected.
 Assigning any value other than a number (or an empty string, when clearing
 assignments), will result in an error being reported and the 
 assignment for the "subsystem" in question cleared.
+</para><para>
 <emphasis role='bold'>An assignment is allowed to be a
 negative number</emphasis>.
 </para><para>

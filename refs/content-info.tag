@@ -53,10 +53,26 @@ __NAME__ synopsis
 </row>
 
 <row>
-<entry>
-	no-none
-</entry>
-<entry>
-</entry>
+<entry>no_none</entry>
+<entry></entry>
+<entry></entry>
+<entry></entry>
+<entry></entry>
+</row>
+
+<row>
+<entry>structure-none</entry>
+<entry></entry>
+<entry></entry>
+<entry></entry>
+<entry></entry>
+</row>
+
+<row>
+<entry>show_class</entry>
+<entry></entry>
+<entry></entry>
+<entry></entry>
+<entry></entry>
 </row>
 __END__

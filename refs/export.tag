@@ -6,7 +6,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	<group choice='opt'>
+	<group>
 	<arg choice='plain'>table</arg>
 	<arg choice='plain'>database</arg>
 	<arg choice='plain'>base</arg>

@@ -138,7 +138,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	<group choice='opt'>
+	<group>
 	<arg choice='plain'>format</arg><arg choice='plain'>fmt</arg>
 	</group>
 	</entry>

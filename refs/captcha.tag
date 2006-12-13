@@ -1,5 +1,5 @@
 __NAME__ purpose
-Handles captcha images used for authentication
+handle captcha images used for authentication
 __END__
 
 __NAME__ synopsis

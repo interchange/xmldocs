@@ -16,25 +16,11 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	Filename to include. Can't be arbitrary file
+	Filename to include. Can only be a relative filename
 	if &conf-NoAbsolute; is set.
 	</entry>
 </row> 
-<row>
-	<entry>
-	locale
-	</entry>
-	<entry>
-	</entry>
-	<entry>
-	</entry>
-	<entry>
-	1
-	</entry>
-	<entry>
-	Honor locales?
-	</entry>
-</row> 
+&ROW_LOCALE_1;
 &ROW_INTERPOLATE_1;
 &ROW_REPARSE_1;
 __END__
@@ -47,7 +33,8 @@ File names beginning with <literal>/</literal> or <literal>..</literal>
 are not allowed if the &IC; server administrator
 has enabled &conf-NoAbsolute;.
 </para><para>
-File contents are inserted and reparsed for tags.
+File contents are inserted and then, by default, reparsed for &glos-ITL;
+tags.
 </para><para>
 The maximum number of circular inclusions is controlled by the 
 &conf-Limit; directive, using key <literal>include_depth</literal>.

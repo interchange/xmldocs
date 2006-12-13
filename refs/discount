@@ -3,6 +3,44 @@ __NAME__ purpose
 implement per-customer item or order discounts
 __END__
 
+__NAME__ synopsis
+<row>
+	<entry>code</entry>
+	<entry>Yes</entry>
+	<entry></entry>
+	<entry></entry>
+	<entry></entry>
+</row>
+<row>
+	<entry>
+		<group choice='opt'>
+			<arg>discount_space</arg>
+			<arg>space</arg>
+		</group>
+	</entry>
+	<entry></entry>
+	<entry></entry>
+	<entry></entry>
+	<entry></entry>
+</row>
+<row>
+	<entry>subtract</entry>
+	<entry></entry>
+	<entry></entry>
+	<entry></entry>
+	<entry></entry>
+</row>
+<row>
+	<entry>level</entry>
+	<entry></entry>
+	<entry></entry>
+	<entry></entry>
+	<entry></entry>
+</row>
+ROW_INTERPOLATE_0;
+ROW_REPARSE_1;
+__END__
+
 __NAME__ description
 The tag is used to implement per-customer discounts. Discounts can 
 be applied to individual items, groups of items, or total orders.

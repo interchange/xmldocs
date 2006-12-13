@@ -1,0 +1,24 @@
+__NAME__ purpose
+specify subdirectory containing "captcha" images
+__END__
+
+__NAME__ synopsis
+<replaceable>subdirectory_name</replaceable>
+__END__
+
+__NAME__ description
+The variable specifies just a subdirectory name where the generated
+&glos-captcha; image are to be saved, and from where they can
+be requested by clients.
+__END__
+
+__NAME__ example
+<programlisting>
+Variable __FILENAME__ captcha/
+</programlisting>
+__END__
+
+__NAME__ see also
+DOCROOT, CAPTCHA_IMAGE_LOCATION, CAPTCHA_IMAGE_PATH
+__END__
+

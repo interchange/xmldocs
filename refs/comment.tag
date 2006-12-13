@@ -1,5 +1,5 @@
 __NAME__ purpose
-comment parts of code or HTML pages
+comment (disable) parts of Interchange or HTML code
 __END__
 
 __NAME__ see also
@@ -12,7 +12,8 @@ __END__
 __NAME__ description
 The tag comments parts of &glos-ITL; or &glos-HTML; code.
 Content enclosed in the &tag-comment; block will not be processed
-in any way, and will be stripped out of the pages.
+in any way, and will be stripped out of the final data sent to 
+the clients.
 </para><para>
 You can use comment sections to provide code commentary, or
 effectively disable parts of code.
@@ -28,10 +29,19 @@ __NAME__ notes
 &tag-comment; blocks can be nested.
 __END__
 
-__NAME__ example: Sending a message to debug log
+__NAME__ example: Using comment
 <programlisting>
 [comment]
-  Have no fear, for this is the one comment area!
+  Have no fear, for this is just one comment area!
+[/comment]
+</programlisting>
+__END__
+
+__NAME__ example: Disabling ITL code
+This &tag-nitems; tag below will never execute:
+<programlisting>
+[comment]
+  You have [nitems] items in your cart.
 [/comment]
 </programlisting>
 __END__

@@ -6,7 +6,7 @@ __NAME__ synopsis
 <row>
 
   <entry>
-  <group choice='opt'>
+  <group>
   <arg choice='plain'>name</arg>
   <arg choice='plain'>file</arg>
   </group>

@@ -1,0 +1,24 @@
+__NAME__ purpose
+specify web server path containing "captcha" images
+__END__
+
+__NAME__ synopsis
+<replaceable>location</replaceable>
+__END__
+
+__NAME__ description
+The variable specifies a web server location where the generated
+&glos-captcha; image files are found, and from where they can
+be requested by clients.
+__END__
+
+__NAME__ example
+<programlisting>
+Variable __FILENAME__ /images/captcha/
+</programlisting>
+__END__
+
+__NAME__ see also
+DOCROOT, CAPTCHA_IMAGE_LOCATION
+__END__
+

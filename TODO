@@ -17,6 +17,15 @@
 - note in configuration glossentry to use '' to skip values 
 - Check ConfigDatabase and DirectiveDatabase. Is description correct? One seems to be wrong
 - preprocessor directives in configuration ?
+- FAQ should be desintegrated to other places
+- what doesn't racke like with WHATSNEW
+- replace itemlists with sections or tables
+- component tag has wrong source context
+Entities to create:
+- \0 null char
+- table/column/key should be defined in docbook/literals.ent as ROW_TABLE...
+- DEFAULT_JOINER_N for \n
+- SAFE_DATA
 
 Outstanding:
 =======

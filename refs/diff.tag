@@ -2,6 +2,50 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+		<group choice='opt'>
+			<arg>current</arg>
+			<arg>curr</arg>
+		</group>
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+		<group choice='opt'>
+			<arg>previous</arg>
+			<arg>prev</arg>
+		</group>
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	flags
 	</entry>
 	<entry>

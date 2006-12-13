@@ -98,5 +98,5 @@ __END__
 
 
 __NAME__ see also
-component
+control-set, component
 __END__

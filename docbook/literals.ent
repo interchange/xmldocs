@@ -316,3 +316,7 @@ If you need commercial support, and want the authoritative people take a look at
 <!ENTITY CAs "<emphasis>CommonAdjust string</emphasis>">
 <!ENTITY P "<replaceable>PREFIX</replaceable>">
 
+
+<!ENTITY NEWLINE "A newline (<literal>\n</literal>)">
+<!ENTITY TAB "A TAB (<literal>\t</literal>)">
+

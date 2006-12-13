@@ -49,7 +49,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>on</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
@@ -60,6 +60,25 @@ __NAME__ synopsis
 
 	<entry>
 	case
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	No
+	</entry>
+	<entry>
+	Preserve case for field names and values?
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	multiple
 	</entry>
 	<entry>
 	<!-- POS -->
@@ -87,29 +106,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>\0</literal>
 	</entry>
 	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	multiple
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
+	This option implies <literal>multiple=1</literal>.
 	</entry>
 
 </row> 

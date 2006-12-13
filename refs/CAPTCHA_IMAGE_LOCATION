@@ -1,0 +1,25 @@
+__NAME__ purpose
+specify directory containing generated "captcha" images
+__END__
+
+__NAME__ synopsis
+<replaceable>directory_name</replaceable>
+__END__
+
+__NAME__ description
+The variable specifies a directory where the generated &glos-captcha; 
+image files should be saved to.
+</para><para>
+This directory must also be available as a web server location.
+__END__
+
+__NAME__ example
+<programlisting>
+Variable __FILENAME__ __DOCROOT__/images/captcha/
+</programlisting>
+__END__
+
+__NAME__ see also
+DOCROOT
+__END__
+

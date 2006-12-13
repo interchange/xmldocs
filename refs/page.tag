@@ -57,7 +57,8 @@ part), the only thing left is to close it using "<literal>&lt;/a&gt;</literal>"
 after typing in the link text. There is a <code>[/page]</code> macro 
 in existence, but it translates directly to <literal>&lt;/a&gt;</literal>
 &mdash; which means typing <literal>&lt;/a&gt;</literal> directly
-saves parser a little work. In any case, the use of this macro is discouraged.
+saves parser a little work. The use of this macro is discouraged
+and you should always insert "<literal>&lt;/a&gt;</literal>" directly.
 __END__
 
 

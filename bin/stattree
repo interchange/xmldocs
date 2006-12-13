@@ -353,6 +353,8 @@ sub wanted {
 				line_findPragmas(\%c); # See if there's a pragma on the line
 				line_findGlobVars(\%c); # See if there's a global var on the line
 				line_findCatVars(\%c); # You get the point ....
+				#line_findGlobConfs(\%c); # Read info above the function definition
+				line_findCatConfs(\%c);
 
 			} else {
 				die "IMPOSSIBLE case in $file:$c{file}:$c{lnum} -- $c{line}\n";
@@ -424,6 +426,8 @@ sub wanted {
 						# For example, this should find PGP_HOME
 						line_findGlobVars(\%c, {group => $c{fsubtype}, name=>$tn});
 						line_findCatVars(\%c, {group => $c{fsubtype}, name=>$tn});
+						#line_findGlobConfs(\%c); # Read above function definition
+						line_findCatConfs(\%c);
 						line_findFunctionName(\%c, {group => $c{fsubtype}, name=>$tn});
 					}
 					next;
@@ -751,6 +755,56 @@ sub line_findGlobVars {
 		}
 
 		$hash{total}{globvars}++;
+	}
+}
+
+#
+# XXX For CatConfs and GlobConfs, the following two functions don't actually
+# discover them in the code. (We don't need discovery routines since all
+# the catalog & global config directives are listed in Config.pm, which we
+# parse with a special routine). So the code here is named that way only
+# for the same look & feel as the rest, but it does only a subset of what
+# the similarly-named routines for other symbol types do. Namely, it only
+# discovers that conf vars are used as part of some perl code, and lists
+# them in reference pages for the respective items that use them.
+#
+
+sub line_findCatConfs {
+	######################################################
+	# Diskover catalog directives
+	my %c = %{ (shift) };
+	my $context_data = shift;
+
+	my $name;
+
+	if (
+		($c{line} =~ /(()|\$())\$(::)?Cfg(->\2|\3){(\w+?)}/ and $name=$6)
+		or ($c{line} =~ /(()|\$())\$(::)?Config(->\2|\3){(\w+?)}/ and $name=$6)
+		) {
+
+		push(
+				@{$hash{uses}{$$context_data{group}}{$$context_data{name}}{catconf}},
+				$name) unless grep {/^$name$/}
+		@{$hash{uses}{$$context_data{group}}{$$context_data{name}}{catconf}}
+	}
+}
+
+sub line_findGlobConfs {
+	######################################################
+	# Diskover global config directives
+	my %c = %{ (shift) };
+	my $context_data = shift;
+
+	my $name;
+
+	if (
+			($c{line} =~ /(()|\$())\$(::)?Vend::Cfg(->\2|\3){(\w+?)}/ and $name=$6)
+		 ) {
+
+		push(
+				@{$hash{uses}{$$context_data{group}}{$$context_data{name}}{globconf}},
+				$name) unless grep {/^$name$/}
+		@{$hash{uses}{$$context_data{group}}{$$context_data{name}}{globconf}}
 	}
 }
 
