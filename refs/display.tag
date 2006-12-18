@@ -1,3 +1,7 @@
+__NAME__ purpose
+display HTML form element
+__END__
+
 __NAME__ synopsis 
 <row>
 
@@ -71,7 +75,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	widget
 	</entry>
 
 </row> 
@@ -356,7 +360,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	name of form element
 	</entry>
 
 </row> 
