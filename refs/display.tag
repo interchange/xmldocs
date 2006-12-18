@@ -2,6 +2,63 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	table
+	</entry>
+	<entry>
+	yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row>
+<row>
+
+	<entry>
+	column
+	</entry>
+	<entry>
+	yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row>
+<row>
+
+	<entry>
+	key
+	</entry>
+	<entry>
+	yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row>
+<row>
+
+	<entry>
 	type
 	</entry>
 	<entry>
