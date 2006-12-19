@@ -1,4 +1,7 @@
+Bugs:
 - swish breaks description if it contains "
+- documentation for bounce and restrict is ignored
+
 - order counter, Session->{mv_order_number}, cronjob -0001, or file da-te.counter, or session_id.time
 - in iccattut, s/item-field/item-param/ at least on some places. 
 - Make xmldocs tarball in ftp autoupdated
