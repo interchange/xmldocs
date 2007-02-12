@@ -36,7 +36,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	File to be delivered
 	</entry>
 
 </row> 
@@ -118,6 +118,12 @@ __NAME__ synopsis
 </row> 
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
+__END__
+
+__NAME__ Example
+<programlisting>
+[deliver type="application/csv" file="tmp/stats.csv"]
+</programlisting>
 __END__
 
 __NAME__ see also
