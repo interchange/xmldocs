@@ -513,6 +513,25 @@ sub wanted {
 
 			$hash{total}{$fsubtype . "s"}++;
 			last;
+		##########################################################
+		# Found a widget
+		} elsif ( $c{fsubtype} =~ /^widget$/ )  {
+			( my $fn = $file ) =~ s#.+/##;
+			$fn =~ s/\.widget$//;
+
+			push @{ $hash{symbols}{$c{fsubtype}}{$fn} }, {
+				%c,
+				file => "$i{ver}/$c{file}",
+				lnum => scalar @filedata,
+				ctx_p => $ctx_p,
+				ctx_n => $ctx_n,
+				ctxs => 1,
+				ctxe => scalar @filedata,
+				ctx => [ format_ctx(@filedata) ]
+			};
+
+			$hash{total}{$fsubtype . "s"}++;
+			last;
 
 		##########################################################
 		# Found an ordercheck 

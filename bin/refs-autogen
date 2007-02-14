@@ -94,6 +94,7 @@ my %longname = (
 	catconf => "Catalog Configuration Directive",
 	filter => "Filter",
 	ordercheck => "Check",
+	widget => "Widget",
 	# Summarized / compounds:
 	tag => "Tag",
 	conf => "Configuration directive",
@@ -112,6 +113,7 @@ my %tagname = (
 	globconf => "option",
 	catconf => "option",
 	filter => "filter",
+	widget => "widget",
 	# Summarized:
 	tag => "tag",
 	conf => "option",
@@ -910,6 +912,8 @@ unless ( $no_autorefs ) {
 				$tag = 'option';
 			} elsif ( $g =~ /filter$/ ) {
 				$tag = 'filter';
+			} elsif ( $g =~ /widget$/ ) {
+				$tag = 'widget';
 			} elsif ( $g =~ /ordercheck$/ ) {
 				$tag = 'check';
 			} else {
