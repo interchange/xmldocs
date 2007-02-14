@@ -235,6 +235,35 @@
 				</entry>
 			</row>
 
+			<row>
+				<entry>
+					<emphasis role='bold'>
+						(<olink targetdoc='glossary' targetptr='widget'>?</olink>)
+						Pragmas
+					</emphasis><sbr/>
+					<ulink url="widgets/index.html">Multi-HTML</ulink> |
+					<ulink url="widgets.html">HTML</ulink>
+				</entry>
+
+				<entry>
+				<!--
+					<emphasis role='bold'>
+					</emphasis><sbr/>
+					<ulink url=".html">HTML</ulink> |
+					<ulink url="/">Multi-HTML</ulink>
+				-->
+				</entry>
+
+				<entry>
+				<!--
+					<emphasis role='bold'>
+					</emphasis><sbr/>
+					<ulink url=".html">HTML</ulink> |
+					<ulink url="/">Multi-HTML</ulink>
+				-->
+				</entry>
+			</row>
+
 
 		</tbody>
 

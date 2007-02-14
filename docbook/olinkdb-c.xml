@@ -17,6 +17,7 @@
 	<!ENTITY confs SYSTEM "../tmp/confs-c.db"> 
 	<!ENTITY filters SYSTEM "../tmp/filters-c.db"> 
 	<!ENTITY orderchecks SYSTEM "../tmp/orderchecks-c.db"> 
+	<!ENTITY widgets SYSTEM "../tmp/widgets-c.db"> 
 	<!ENTITY whatsnew SYSTEM "../tmp/WHATSNEW-c.db"> 
 	<!ENTITY databases SYSTEM "../tmp/databases-c.db"> 
 	<!ENTITY optimization SYSTEM "../tmp/optimization-c.db"> 
@@ -105,6 +106,12 @@
 			<dir name='orderchecks'>
 				<document targetdoc="orderchecks">
 				&orderchecks;
+				</document>
+			</dir>
+
+			<dir name='widgets'>
+				<document targetdoc="widgets">
+				&widgets;
 				</document>
 			</dir>
 

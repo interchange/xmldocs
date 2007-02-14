@@ -180,6 +180,8 @@ my %preamble = (
 	"please see the &glos-variable; glossary entry.",
 	ordercheck => "For a complete introduction to &IC; form field checks, " .
 	"please see the &glos-order-check; glossary entry.",
+	widget => "For a complete introduction to &IC; widgets, " .
+	"please see the &glos-widget; glossary entry.",
 );
 
 my @paths = @ARGV; # Versions for which documentation build is requested

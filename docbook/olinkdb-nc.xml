@@ -19,6 +19,7 @@
 	<!ENTITY confs SYSTEM "../tmp/confs-nc.db"> 
 	<!ENTITY filters SYSTEM "../tmp/filters-nc.db"> 
 	<!ENTITY orderchecks SYSTEM "../tmp/orderchecks-nc.db"> 
+	<!ENTITY widgets SYSTEM "../tmp/widgets-nc.db"> 
 	<!ENTITY whatsnew SYSTEM "../tmp/WHATSNEW-nc.db"> 
 	<!ENTITY databases SYSTEM "../tmp/databases-nc.db"> 
 ]>
@@ -44,6 +45,7 @@
 			<document targetdoc="confs" baseuri="confs.html"> &confs; </document>
 			<document targetdoc="filters" baseuri="filters.html"> &filters; </document>
 			<document targetdoc="orderchecks" baseuri="orderchecks.html"> &orderchecks; </document>
+			<document targetdoc="widgets" baseuri="widgets.html"> &widgets; </document>
 			<document targetdoc="WHATSNEW" baseuri="WHATSNEW.html"> &whatsnew; </document>
 			<document targetdoc="databases" baseuri="databases.html"> &databases; </document>
 			<document targetdoc="optimization" baseuri="optimization.html"> &optimization; </document>
