@@ -32,7 +32,7 @@ __NAME__ synopsis
 	name
 	</entry>
 	<entry>
-	<!-- POS -->
+	yes
 	</entry>
 	<entry>
 	<!-- REQ -->
