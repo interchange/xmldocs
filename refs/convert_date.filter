@@ -8,6 +8,8 @@ specified format string.
 </para><para>
 For the accepted formats in which the input date needs to be specified,
 see &tag-convert-date;.
+</para><para>
+See &glos-time; glossary entry for a list and description of format specifiers.
 __END__
 
 
@@ -27,15 +29,8 @@ then the current time will <emphasis role='bold'>not</emphasis> be assumed
 and empty string will stay an empty string.
 __END__
 
-
-__NAME__ missing
-I am being stupid and I can't remember where to see a list of accepted time format strings (%Y, %m, etc...)
-__END__
-
-
 __NAME__ online: Filter example
 <programlisting>
 Year is [filter convert_date.%Y][time][/filter].
 </programlisting>
 __END__
-
