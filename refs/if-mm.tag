@@ -97,7 +97,19 @@ This tag performs various checks on behalf of the UI:
 Checks whether the current user is logged into the UI.
 <programlisting>
 [if-mm !logged_in]
-[calc]$Session->{ui_error} = 'Not authorized!'; return;[/calc]
+[set ui_error]Not authorized[/set]
+[bounce page="admin/error"]
+[/if-mm]
+</programlisting>
+</para>
+</refsect2>
+<refsect2>
+<title>tables</title>
+<para>
+Checks for access to database tables.
+<programlisting>
+[if-mm !tables content]
+[set ui_error]Not authorized for content editor.[/set]
 [bounce page="admin/error"]
 [/if-mm]
 </programlisting>
