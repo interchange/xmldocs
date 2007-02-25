@@ -15,13 +15,12 @@ with custom tags, see &glos-usertag; glossary entry.
 
 <para>
 &glos-ITL; tags are similar to HTML, in that they accept
-parameters or attributes and that there are both
-<emphasis>standalone</emphasis> and <emphasis>container</emphasis> tags.
-</para><para>
-We will call an attribute a <emphasis>parameter</emphasis> if it may be
-called <emphasis>positionally</emphasis> or if it is required.
-</para><para>
-A standalone tag has no ending element, such as
+attributes and that there are both
+<emphasis>standalone</emphasis> (non-container) and
+<emphasis>container</emphasis> tags.
+</para>
+<para>
+A standalone tag has no ending element, such as &tag-value;:
 
 <programlisting>
 [value name]
@@ -30,7 +29,7 @@ A standalone tag has no ending element, such as
 The tag, as seen in the above example, will insert the user's name (provided
 they supplied one in the first place).
 </para><para>
-A container tag has both beginning and ending elements, such as
+A container tag has both beginning and ending elements, such as &tag-if;:
 
 <programlisting>
 [if value name]
@@ -41,8 +40,8 @@ A container tag has both beginning and ending elements, such as
 In the above example, you can implicitly see that container tags are mostly
 useful only if some content is provided in their <emphasis>body</emphasis>
 (the place between the opening and corresponding ending tag).
-</para>
-<para>
+</para><para>
+
 Additionally, container tags for which you do not provide any
 <emphasis>body</emphasis> can be closed using "XML-style" syntax.
 The following two lines are identical in effect:
@@ -53,9 +52,10 @@ The following two lines are identical in effect:
 </para>
 <para>
 Note, however, that <emphasis role='bold'>you can use "<literal>/]</literal>"
-only with tags for which you provide no parameters, or the parameters are named
-and quoted</emphasis>. Positional parameters "eat" everything (including 
-the "<literal>/</literal>") up to the closing bracket.
+only with tags for which you provide no attributes, or the attributes are named
+and quoted</emphasis>. Positional attributes (<emphasis>parameters</emphasis>)
+"absorb" everything (including the "<literal>/</literal>") up to the closing
+bracket.
 </para>
 <para>
 It's probably also useful to mention that there must be no whitespace
@@ -69,9 +69,8 @@ valid, <code>[ forum]</code> is not!
 <title>Standard Syntax</title>
 
 <para>
-We've covered the most basic syntax above. If you need to pass parameters
-or attributes (let's call them <emphasis>arguments</emphasis> when their 
-nature is irrelevant) to the tag, you do that in the opening section.
+We've covered the most basic syntax above. If you need to pass
+attributes to the tag, you do that in the opening section.
 If the tag is a container, then body text can additionally be specified
 between the opening and closing marker:
 
@@ -177,10 +176,11 @@ trouble as you're supposed to be consistent in your syntax anyway.
 
 
 <para>
-There are two styles of supplying parameters to a tag:
+There are two styles of supplying attributes to a tag:
 <emphasis>named</emphasis> and <emphasis>positional</emphasis>.
+
 </para><para>
-In the named style, you supply parameters using
+In the <emphasis>named</emphasis> style, you supply attributes using
 <literal><replaceable>key</replaceable>=<replaceable>value</replaceable></literal>
 pairs,  just as with HTML:
 
@@ -188,7 +188,7 @@ pairs,  just as with HTML:
 [value name=<replaceable>variable_name</replaceable>]
 </programlisting>
 
-The positional-style tag that accomplishes the same thing but is more 
+The positional-style tag that accomplishes the same thing, but is more 
 compact:
 
 <!-- TODO: [tag pos1  ] makes pos1 in fact "pos1  " -->
@@ -204,10 +204,10 @@ see a list of accepted positional arguments (and their implicit order) in
 each tag's SYNOPSIS reference section; try &tag-value; for example.
 </para><para>
 Additionally, <emphasis role='bold'>you cannot mix named and positional
-parameters in the same tag</emphasis>; use either all named, or all positional.
+attributes in the same tag</emphasis>; use either all named, or all positional.
 <emphasis role='bold'>It seems I cannot stress this enough, this is a common
-beginners' mistake, especially when you copy/paste foreign code and combine
-with your own!</emphasis>
+beginners' mistake, especially when you copy/paste other people's code and
+combine with your own.</emphasis>
 </para><para>
 In any case, positional syntax is appropriate for simpler tags and 
 &IC; interprets positional arguments somewhat faster (but don't let your
@@ -215,13 +215,14 @@ In any case, positional syntax is appropriate for simpler tags and
 <ulink url="http://www.thocp.net/biographies/dijkstra_edsger.htm">Edsger W. Dykstra</ulink>
 once said, "Premature optimization is the root of all programming evil").
 </para><para>
-In most cases, tag parameters specified in the positional fashion work
-the same as named parameters. However, <emphasis role='bold'>there are a few
-situations where you must use named parameters</emphasis>:
+In most cases, tag attributes specified in the positional fashion
+(<emphasis>parameters</emphasis>) work
+the same as named attributes. However, <emphasis role='bold'>there are a few
+situations where you must use named attributes</emphasis>:
 
 <itemizedlist>
   <listitem><para>
-  When you want to specify a parameter that comes positionally after a
+  When you want to specify a parameter that, positionally, comes after a
   parameter that you want to omit, e.g. omit the first parameter but specify
   the second. The parser would have no way of knowing which is which, so
   you must revert to named syntax. This rarely happens, though, because the
@@ -239,6 +240,10 @@ situations where you must use named parameters</emphasis>:
   <listitem><para>
   When you need to use the output of a tag as <emphasis>argument</emphasis> for
   another tag.
+  </para></listitem>
+  
+  <listitem><para>
+  When you are using looping subtags (Loop tags and subtags are explained below).
   </para></listitem>
 </itemizedlist>
 </para>
@@ -326,8 +331,8 @@ subtags and their availability in a minute.
 <para>
 You might wonder why unquoted tags are even allowed. The answer is
 <emphasis>performance</emphasis>. If you have large lists of tags you can
-achieve significant speed-ups by using positional parameters. Parsing and
-disassembling named parameters takes some more CPU cycles.
+achieve significant speed-ups by using positional attributes. Parsing and
+disassembling named attributes takes some more CPU cycles.
 </para>
 
 </section>

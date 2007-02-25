@@ -115,10 +115,10 @@
 		all distributions compile a threaded version. This problem has caused,
 		and is causing, endless problems for &IC; users. Run 
 		<command>perl -V:usethreads</command> to quickly test your mileage.
-		An answer of '<literal>UNKNOWN</literal>' is good, and the answer of
-		'<literal>define</literal>' is not good.
+		The answer '<literal>define</literal>' is not good.
 		</para>
 		<para>
+		<emphasis role='bold'>However</emphasis>,
 		There should be no
 		problems with threaded Perl versions 5.8.5 or newer, although it means
 		an up-to-30% performance drop. For home installations and testing, both

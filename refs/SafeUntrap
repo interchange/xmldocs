@@ -13,7 +13,7 @@ The directive defines the opcodes that will be untrapped in the
 embedded &PERL; and conditional operations. 
 Define it as blank to prevent any operators but the default restrictive ones.
 </para><para>
-For a complete discussion and the opcodes list, see
+For a complete discussion and the complete list of opcodes, see
 <citerefentry><refentrytitle>Opcode</refentrytitle>
 <manvolnum>3perl</manvolnum></citerefentry> manual page.
 __END__
@@ -44,4 +44,22 @@ SafeUntrap ftsize
 </programlisting>
 __END__
 
-TODO: enabling all
+__NAME__ example: Allowing a group of file-related operations
+
+<programlisting>
+[set data_file]products/biglist.txt[/set]
+[calcn]-r $Scratch->{data_file};[/calcn]
+</programlisting>
+
+Adding <literal>:filesys_read</literal> to SafeUntrap solves this problem:
+
+<programlisting>
+SafeUntrap :filesys_read
+</programlisting>
+
+As said, see the 
+<citerefentry><refentrytitle>Opcode</refentrytitle>
+<manvolnum>3perl</manvolnum></citerefentry> manual page for
+more information and the complete list of operation codes and groups.
+__END__
+
