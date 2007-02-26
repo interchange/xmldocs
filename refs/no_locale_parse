@@ -15,22 +15,19 @@ __NAME__ default
 0
 __END__
 
+__NAME__ example: enable pragma catalog wide
+Pragma no_locale_parse
+__END__
 
 __NAME__ description
-This &glos-pragma; disables parsing of <tag>L</tag> and <tag>LC</tag> tags.
-</para><para>
-This is only used in the Admin UI and is not of interest to the general public.
-It could also have some side effects in PreFork &glos-ic-run-mode;
-If you have enough traffic that you want to run in PreFork mode, you will
-be wanting to move the Admin UI away from the customer-facing side anyway,
-so this will not be a problem.
+This &glos-pragma; disables parsing of <tag>L</tag> and <tag>LC</tag> pseudo tags.
 __END__
 
-
-__NAME__ example: Enable no_locale_parse pragma page-wide
-Put the following anywhere on your page:
-<programlisting>
-[pragma no_locale_parse]
-</programlisting>
+__NAME__ notes
+Applying this pragma on the page level isn't really helpful, as pseudo tags contained
+in the page are parsed before the pragma directive.
 __END__
 
+__NAME__ see also
+L, LC
+__END__
