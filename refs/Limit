@@ -2,6 +2,88 @@ __NAME__ purpose
 imposes or modifies miscellaneous limits
 __END__
 
+__NAME__ description
+<table>
+<tgroup cols="3">
+<thead><row>
+<entry>Name</entry>
+<entry>Default</entry>
+<entry>Overview</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry>cart_quantity_per_line</entry>
+<entry>-</entry>
+<entry>maximum quantity per item in cart</entry>
+</row>
+<row>
+<entry>chained_cost_levels</entry>
+<entry>32</entry>
+<entry></entry>
+</row>
+<row>
+<entry>dbm_open_retries</entry>
+<entry>10</entry>
+<entry>number of retries opening DBM file</entry>
+</row>
+<row>
+<entry>file_lock_retries</entry>
+<entry>5</entry>
+<entry>number of retries on file locking</entry>
+</row>
+<row>
+<entry>no_ship_message</entry>
+<entry></entry>
+<entry></entry>
+</row>
+<row>
+<entry>list_text_overflow</entry>
+<entry></entry>
+<entry></entry>
+</row>
+<row>
+<entry>list_text_size</entry>
+<entry>-</entry>
+<entry>maximum length of text in lists</entry>
+</row>
+
+<row>
+<entry>lockout_reset_seconds</entry>
+<entry>32</entry>
+<entry>see &conf-RobotLimit;</entry>
+</row>
+
+<row>
+<entry>logdata_error_length</entry>
+<entry>-</entry>
+<entry></entry>
+</row>
+<row>
+<entry>option_list</entry>
+<entry>5000</entry>
+<entry></entry>
+</row>
+<row>
+<entry>override_tag</entry>
+<entry></entry>
+<entry></entry>
+</row>
+<row>
+<entry>robot_expire</entry>
+<entry>1</entry>
+<entry></entry>
+</row>
+<row>
+<entry>session_id_length</entry>
+<entry>8</entry>
+<entry>length of session identifier, see &glos-session;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+__END__
+
 __NAME__ example
 <programlisting>
 Limit robot_expire 0.01
