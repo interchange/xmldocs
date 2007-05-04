@@ -154,6 +154,11 @@ Check types, however, can take on one of the following values:
 		- form field content must satisfy the allowed length range
 	</para></listitem>
 	<listitem><para>
+		<literal>match <replaceable>VARNAME</replaceable></literal>
+		<!-- TODO can it be 4,8? -->
+		- form field content must match CGI variable <replaceable>VARNAME</replaceable>
+	</para></listitem>
+	<listitem><para>
 		<literal>unique <replaceable>DATABASE</replaceable></literal>
 		- form field content must not exist in a given DATABASE
 	</para></listitem>
