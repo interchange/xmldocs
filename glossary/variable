@@ -143,7 +143,7 @@ Here's a complete list of ways to access global or catalog variables:
 
 	<tbody>
 		<row>
-			<entry>$Variable-&gt;<replaceable>VARNAME</replaceable>}</entry>
+			<entry>$Variable-&gt;{<replaceable>VARNAME</replaceable>}</entry>
 			<entry>&ccf;</entry>
 		</row>
 		<row>
@@ -177,7 +177,7 @@ Here's a complete list of ways to access global or catalog variables:
 
 	<tbody>
 		<row>
-			<entry>$::Variable-&gt;<replaceable>VARNAME</replaceable>}</entry>
+			<entry>$::Variable-&gt;{<replaceable>VARNAME</replaceable>}</entry>
 			<entry>&ccf;</entry>
 		</row>
 		<row>
@@ -193,7 +193,7 @@ Here's a complete list of ways to access global or catalog variables:
 			<entry>&ccf;, with fallback to &gcf;</entry>
 		</row>
 		<row>
-			<entry>$Global::Variable-&gt;<replaceable>VARNAME</replaceable>}</entry>
+			<entry>$Global::Variable-&gt;{<replaceable>VARNAME</replaceable>}</entry>
 			<entry>&gcf;, and only within &conf-GlobalSub; code</entry>
 		</row>
 	</tbody>
