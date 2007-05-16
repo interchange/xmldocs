@@ -34,3 +34,10 @@ __NAME__ online: Filter example
 Year is [filter convert_date.%Y][time][/filter].
 </programlisting>
 __END__
+
+__NAME__ online: Filter example
+To get a pretty formatted date, such as "May 16, 2007", use 
+<programlisting>
+[filter convert_date."%B %e, %Y"][time][/filter].
+</programlisting>
+__END__

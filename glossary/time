@@ -17,23 +17,22 @@ Time specification follows:
 <entry><literal>%c</literal></entry>
 <entry>date and time</entry>
 <entry></entry>
-<entry><literal>Mon Apr 12 14:17:46 2004</literal></entry>
+<entry>Mon Apr 12 14:17:46 2004</entry>
 </row>
 <row>
 <entry><literal>%x</literal></entry>
 <entry>date</entry>
 <entry></entry>
-<entry><literal>01/18/2004</literal></entry>
+<entry>01/18/2004</entry>
 </row>
 <row>
 <entry><literal>%X</literal></entry>
 <entry>time</entry>
 <entry></entry>
-<entry><literal>14:17:46</literal></entry>
+<entry>14:17:46</entry>
 </row>
 <row>
-<entry>%Y
-%y</entry>
+<entry><literal>%Y %y</literal></entry>
 <entry>year</entry>
 <entry></entry>
 <entry>2004
@@ -43,54 +42,50 @@ Time specification follows:
 <entry><literal>%j</literal></entry>
 <entry>day of the year</entry>
 <entry>0-366</entry>
-<entry><literal>112</literal></entry>
+<entry>112</entry>
 </row>
 <row>
 <entry><literal>%m</literal></entry>
 <entry>month</entry>
 <entry>01-12</entry>
-<entry><literal>01</literal></entry>
+<entry>01</entry>
 </row>
 <row>
-<entry>%B
-%b</entry>
+<entry><literal>%B %b</literal></entry>
 <entry>month name</entry>
 <entry></entry>
 <entry>January
 Jan</entry>
 </row>
 <row>
-<entry><literal>%d</literal></entry>
+<entry><literal>%d %e</literal></entry>
 <entry>day of the month</entry>
 <entry>01-31</entry>
-<entry><literal>08</literal></entry>
+<entry>08
+8</entry>
 </row>
 <row>
-<entry>%U
-%W</entry>
-<entry>week number (Sunday/Monday)</entry>
-<entry>00-53
-00-53</entry>
-<entry>23
-23</entry>
+<entry><literal>%U %W</literal></entry>
+<entry>week number, week starts Sunday (%U) or Monday (%W)</entry>
+<entry>00-53</entry>
+<entry>48
+47</entry>
 </row>
 <row>
-<entry><literal>%d</literal></entry>
+<entry><literal>%w %u</literal></entry>
 <entry>weekday</entry>
 <entry>0-6</entry>
-<entry><literal>08</literal></entry>
+<entry>03 3</entry>
 </row>
 <row>
-<entry>%A
-%a</entry>
+<entry><literal>%A %a</literal></entry>
 <entry>weekday name</entry>
 <entry></entry>
 <entry>Sunday
 Sun</entry>
 </row>
 <row>
-<entry>%H
-%I</entry>
+<entry><literal>%H %I</literal></entry>
 <entry>hour</entry>
 <entry>00-23
 00-12</entry>
@@ -101,25 +96,25 @@ Sun</entry>
 <entry><literal>%p</literal></entry>
 <entry>AM/PM</entry>
 <entry></entry>
-<entry><literal>PM</literal></entry>
+<entry>PM</entry>
 </row>
 <row>
 <entry><literal>%M</literal></entry>
 <entry>minute</entry>
 <entry>00-59</entry>
-<entry><literal>57</literal></entry>
+<entry>57</entry>
 </row>
 <row>
 <entry><literal>%S</literal></entry>
 <entry>second</entry>
 <entry>00-59</entry>
-<entry><literal>57</literal></entry>
+<entry>57</entry>
 </row>
 <row>
 <entry><literal>%Z</literal></entry>
 <entry>time zone name</entry>
 <entry></entry>
-<entry><literal>CEST</literal></entry>
+<entry>CEST</entry>
 </row>
 </tbody>
 </tgroup>
