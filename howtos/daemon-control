@@ -2,9 +2,20 @@ Control Interchange Daemon Process
 
 Knowing how to manage the Interchange daemon is one of the very basic
 administration tasks.
-</para><para>
+</para>
+
+<note><para>
+Since Interchange does not generally like being run with admin privileges
+(user root), you will most probably have to invoke the commands listed
+below under the Interchange username. To do so, you will either log in as
+Interchange user, or as sufficiently-privileged user invoke
+<userinput>su -c '<replaceable>COMMAND</replaceable>' <replaceable>INTERCHANGE_USER</replaceable></userinput>, or 
+<userinput>sudo -u <replaceable>INTERCHANGE_USER</replaceable> <replaceable>COMMAND</replaceable></userinput>.
+</para></note>
+
+<para>
 You can test the configuration without interrupting the running processes
-bu invoking:
+by invoking:
 <itemizedlist>
 	<listitem><para>
 		<userinput>/usr/sbin/interchange -test</userinput>
@@ -47,20 +58,6 @@ Specific catalogs are reconfigured by invoking:
 		&glos-ICROOT;.
 	</para></listitem>
 </itemizedlist>
-<para>
-Why would you want to reconfigure a catalog?
-Most of the time, the changes you make to the HTML files or databases
-are directly visible on the next access to your site. However, that is not
-the case with more "serious" files such as catalog
-configurations (<filename>catalog.cfg</filename>) or profiles
-(<filename>etc/profiles*</filename>).
-</para><para>
-To take changes from those files "on air", you must reconfigure a catalog.
-</para>
-<para>
-Changes to global <filename>interchange.cfg</filename> can only be updated
-by restarting Interchange completely.
-</para>
 <para>
 &IC; is stopped by running:
 </para>

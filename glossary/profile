@@ -1,12 +1,11 @@
 
 &IC; form <emphasis>profiles</emphasis> are used to validate form inputs and
-eventually trigger additional actions. Input fields validation usually contains
-of requiring some of the fields to be non-empty or match a specific regular
-expression pattern at time of submit.
+eventually trigger additional actions. The validation usually consists
+in requireing that some of the fields are non-empty or match a specific regular
+expression pattern.
 </para>
 <para>
-Actions, for example, can be used to signalize the completion of an order
-process. Profiles are not specific to order checkout or something; they are
+Profiles are not specific to order checkout or any specific step; they are
 an integral part of all form processing in &IC;. You will also see actions
 such as &IC; account creation, login, logout or password change being at least
 partly handled using profiles.
@@ -39,7 +38,8 @@ entered.
 <para>
 The <literal>__NAME__</literal> and <literal>__END__</literal> markers
 must start at the beginning of line, not even whitespace is allowed. This
-is very important because the profile would be ignored otherwise.
+is very important because the profile would otherwise be silently
+ignored.
 </para>
 </note>
 
@@ -154,9 +154,9 @@ Check types, however, can take on one of the following values:
 		- form field content must satisfy the allowed length range
 	</para></listitem>
 	<listitem><para>
-		<literal>match <replaceable>VARNAME</replaceable></literal>
-		<!-- TODO can it be 4,8? -->
-		- form field content must match CGI variable <replaceable>VARNAME</replaceable>
+		<literal>match <replaceable>CGI_VARNAME</replaceable></literal>
+		- form field content must be equal to the content of another field,
+		<replaceable>CGI_VARNAME</replaceable>
 	</para></listitem>
 	<listitem><para>
 		<literal>unique <replaceable>DATABASE</replaceable></literal>

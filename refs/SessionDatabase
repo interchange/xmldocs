@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify location of the user sessions database
+specify location of the file-based user sessions database
 __END__
 
 
@@ -15,7 +15,7 @@ __END__
 
 __NAME__ description
 The &conf-SessionDatabase; directive defines the location
-of the user &glos-session;s database, and the path may be absolute.
+of the file-based user &glos-session;s database, and the path may be absolute.
 </para><para>
 For DBM sessions, an appropriate <literal>.db</literal> or 
 <literal>.gdbm</literal> suffix will be appended. For the default

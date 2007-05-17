@@ -1,1 +1,13 @@
-See &howto-daemon-control;.
+Most of the time, the changes you make to the &glos-HTML; files or
+&glos-database;s are directly visible on the next access to your site.
+However, that is not the case with more "serious" files such as configuration
+files (&ccf;) or &glos-profile;s (<filename>etc/profiles*</filename>).
+</para><para>
+To apply changes from all those "non-instant" files, you must restart 
+&IC; server or &mdash; quicker and more elegant &mdash; reconfigure just
+the specific catalog.
+</para><para>
+Changes to global configuration file (&gcf;) can only be applied
+by restarting Interchange completely.
+</para>
+For practical instructions, see &howto-daemon-control;.

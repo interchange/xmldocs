@@ -9,12 +9,6 @@
 <title>XMLDOCS - Interchange Documentation Set</title>
 <titleabbrev>index</titleabbrev>
 
-<!--
-<copyright>
-	<year>2005</year>
-	<holder>Davor Ocelic</holder>
-</copyright>
--->
 <copyright>
 	<year>2005</year>
 	<year>2006</year>
@@ -24,13 +18,29 @@
 	<ulink url='http://www.icdevgroup.org/'>(http://www.icdevgroup.org/)</ulink>
 	</holder>
 </copyright>
+<copyright>
+	<year>2005</year>
+	<year>2006</year>
+	<year>2007</year>
+	<holder>
+	Davor Ocelic
+	<ulink url='mailto:docelic+icdevgroup.org'>(docelic+icdevgroup.org)</ulink>
+	</holder>
+</copyright>
 
+<!--
 <authorgroup>
 	<author>
 		<firstname>Davor</firstname>
 		<surname>Ocelic</surname>
 		<email>docelic@icdevgroup.org</email>
 	</author>
+</authorgroup>
+<authorgroup condition='online'>
+-->
+<authorgroup>
+	<emphasis role='bold'>Search documentation:</emphasis>
+	<xi:include parse='text' href='../search/html-search-box' />
 </authorgroup>
 
 <legalnotice>
@@ -48,6 +58,29 @@
 	</para>
 </legalnotice>
 </bookinfo>
+
+
+<!--
+<informaltable
+	align='center' pgwide='1' orient='port' title='' label='' frame='vsides'
+	summary='' cellspacing='2' cellpadding='2' border='0' rowheader='firstcol'>
+	<tgroup cols='1'>
+		<colspec colname="search" />
+		<thead>
+			<row>
+				<entry>Search</entry>
+			</row>
+		</thead>
+		<tbody>
+			<row>
+				<entry>
+				</entry>
+			</row>
+		</tbody>
+	</tgroup>
+</informaltable>
+-->
+
 
 <informaltable
 	align='center' pgwide='1' orient='port' title='' label='' frame='vsides'

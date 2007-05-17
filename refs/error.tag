@@ -397,6 +397,17 @@ $Vend::Session-gt;{errors};
 -->
 __END__
 
+__NAME__ example: the most simple error display
+The following will simply display all accumulated session errors.
+(Note that after display, session errors will be cleared and will
+not show up on subsequent page accesses).
+<programlisting><![CDATA[
+<ul>
+[error auto=1]
+</ul>
+]]></programlisting>
+__END__
+
 __NAME__ example 
 Trigger an error:
 <programlisting>

@@ -1,6 +1,9 @@
 #!/usr/bin/perl
 # Davor Ocelic, docelic@mail.inet.hr
-# Simple perl script that creates text database files.
+# Simple perl script that creates random text database files.
+# (This should be used just for test, to create random-content
+# databases of desired characteristics - such as value lengths or
+# total number of records).
 
 #
 # PURPOSE:
@@ -8,12 +11,15 @@
 #	or Interchange databases. It should come handy during the
 #	test phase.
 #
-#	It currently creates text, TAB delimited files.
+#	It creates text, TAB delimited files.
 #
 #	The generated data will, of course, be meaningless, but the
 #	user can specify column names and types, which should allow
 #	him to test the engine on arbitrary number of random-generated
 #	records.
+#
+# QUICKSTART:
+# perl dbgen -c 10 -r /usr/share/dict/words > products/products.txt
 #
 # COMMAND LINE OPTIONS:
 #	-f --fields          : Set column names

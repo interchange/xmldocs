@@ -9,7 +9,7 @@ __END__
 
 
 __NAME__ see also
-SessionDatabase,SessionDB, SessionExpire,SessionLockFile,SessionType
+SessionType,SessionDatabase,SessionDB, SessionExpire,SessionLockFile
 __END__
 
 
