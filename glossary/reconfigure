@@ -9,5 +9,5 @@ the specific catalog.
 </para><para>
 Changes to global configuration file (&gcf;) can only be applied
 by restarting Interchange completely.
-</para>
+</para><para>
 For practical instructions, see &howto-daemon-control;.
