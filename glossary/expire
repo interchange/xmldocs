@@ -90,7 +90,7 @@ for DIR in $*; do
   for i in session tmp; do
     if test -d "$DIR/$i"; then
       find $DIR/$i -type f -mmin +480 | xargs --no-run-if-empty rm
-      find $DIR/$i -type d -empty -mtime +2 -depth | xargs --no-run-if-empty rmdir
+      find $DIR/$i -depth -type d -empty -mtime +2 | xargs --no-run-if-empty rmdir
     else
       echo "$0: $DIR/$i doesn't exist.";
     fi
