@@ -261,15 +261,15 @@ are &glos-interpolate;d.
 </para><para>
 If you want to use one tag's output as another tag's input, you
 cannot use positional syntax and you must double-quote the
-argument. For example, this will not work:
+argument. For example, this <emphasis role='bold'>WILL NOT</emphasis> work:
 
 <programlisting>
 [page scan se=[scratch <replaceable>variable_name</replaceable>]]
 </programlisting>
 
-Actually, the above example is in a really bad shape. To make it work, we
-need to switch to named syntax and properly quote arguments containing
-whitespace.
+Actually, the above code is in a really bad shape. To make it work, we
+need to do two things: switch to named syntax, and properly quote arguments
+containing whitespace:
 
 <programlisting>
 [page href=scan arg="se=[scratch <replaceable>variable_name</replaceable>]"]
@@ -279,6 +279,23 @@ Note that the <arg choice='plain'>href</arg> argument did not need to be
 quoted; only <arg choice='plain'>arg</arg> did because it
 contained a whitespace.
 </para>
+
+<note><para>
+As you can implicitly see from the above example, attribute values
+are normally interpolated (in other words,
+<literal>se=[scratch variable_name]</literal> was expanded to
+<literal>se=<replaceable>VARIABLE_VALUE</replaceable></literal>
+before being passed as value to <literal>arg=</literal>.
+</para>
+<para>
+However, when the attributes are of complex types (array or hash
+references), their values <emphasis role='bold'>are not</emphasis>
+&glos-interpolate;d. The interpolation is controlled by the
+&pragma-interpolate_itl_references; pragma, and more about this whole
+concept can be learned below in <xref linkend="itl_arrays_and_hashes"/>.
+</para>
+</note>
+
 </section>
 
 
@@ -620,7 +637,7 @@ documentation.
 
 
 
-<section>
+<section id="itl_arrays_and_hashes">
 <title>Attribute Arrays and Hashes</title>
 
 
@@ -643,7 +660,7 @@ attribute of the same name (even though that would be possible in pure
 &PERL;).
 
 </para><para>
-Here is an example of an attribute array:
+Here is an example of an array-based attribute:
 
 <programlisting>
 search.0="se=hammer
@@ -657,8 +674,9 @@ search.1="se=plutonium
 
 
 </para><para>
-It is up to each individual tag to handle an array or hash value
-properly. See the documentation for the specific tag before passing
+<emphasis role='bold'>It is up to each individual tag to handle an
+array or hash value properly</emphasis>.
+See the documentation for the specific tag before passing
 it an attribute array or hash value.
 The &tag-page; tag, for example, would treat a search specification array
 (the structure we've shown above) as a joined search (one of different
@@ -692,6 +710,20 @@ my $hashref = { name   => "required",
 
 $Tag->ROUTINE( { entry => $hashref } );
 ]]></programlisting>
+</para>
+
+
+<para>
+Pay attention to the fact that with array- or hash-based attributes,
+their values <emphasis role='bold'>are not interpolated</emphasis>.
+It means that, at places where scalar options
+<emphasis role='bold'>are</emphasis> interpolated (such as
+<code>[tag option='[time]']</code>, resulting in &tag-time; expanding to
+the current time), reference-based attributes are not (such as
+<code>[tag my.option='[time]']</code>, which would result in literal
+"<literal>[time]</literal>" being passed to the attribute "my.option".
+Interpolation of reference-based attributes can be enabled by
+setting the &pragma-interpolate_itl_references; pragma.
 </para>
 
 </section>
