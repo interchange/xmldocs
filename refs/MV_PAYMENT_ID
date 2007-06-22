@@ -1,5 +1,6 @@
 
 __NAME__ purpose
+specifies merchant identifier
 __END__
 
 
@@ -16,7 +17,7 @@ __END__
 
 
 __NAME__ description
-Specifies your merchant ID for your payment gateway.
+Specifies merchant identifier for the selected payment gateway.
 __END__
 
 
