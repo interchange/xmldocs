@@ -1,0 +1,32 @@
+__NAME__ purpose
+restrict debug mode to requests comming from specific hosts
+__END__
+
+__NAME__ synopsis
+<arg choice='plain' rep='repeat'><replaceable>IP_address_glob</replaceable></arg>
+__END__
+
+__NAME__ description
+The &conf-DebugHost; configuration directive restricts
+&glos-debug; mode to only selected list of client hosts.
+</para><para>
+DebugHost accepts a list of IP addresses and IP address ranges.
+__END__
+
+__NAME__ notes
+See &glos-debug; glossary entry for complete discussion on using debug
+mode.
+__END__
+
+__NAME__ example: enabling DebugHost
+<programlisting>
+DebugFile /tmp/debug
+
+DebugHost 10.1.1.0/24 12.176.97.0/25 127.0.0.1
+</programlisting>
+__END__
+
+__NAME__ see also
+DebugFile, debug_qualify, DebugTemplate
+__END__
+
