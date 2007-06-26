@@ -2,3 +2,13 @@ __NAME__ purpose
 value matches regular expression
 __END__
 
+__NAME__ description
+Allows you to specify a regular expression to match against the supplied value.
+Useful for many cases where no existing &glos-order-check; is available.
+__END__
+
+__NAME__ example: Fiscal data
+<programlisting>
+fiscal_data=regex ^\d\d-[A-Z\d]{9}-\d{4}-[A-Z\d]{10}-\d{4}-\d{4}$ "Invalid format"
+</programlisting>
+__END__
