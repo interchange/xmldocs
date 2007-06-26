@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify subroutines that handle certain events or conditions
+specify Perl subroutines to handle certain events or conditions
 __END__
 
 
@@ -10,74 +10,105 @@ __END__
 
 
 __NAME__ description
-The directive specifies subroutines that should be called in an effort
-to handle certain events or conditions.
+The directive specifies &PERL; subroutines that should be called to
+handle certain events.
 </para><para>
-Supported events are:
-<refsect2>
-<title>catalog_init</title>
-<para>
-  Event triggered before &glos-session; assignment.
-</para>
-</refsect2>
-<refsect2>
-<title>init_session</title>
-<para>
-  Event triggered &glos-session; creation time.
+The available events are:
+
+<itemizedlist>
+<listitem><para>
+	<literal>catalog_init</literal> &mdash;
+	event triggered after catalog 
+  selection and before &glos-session; assignment.
+</para></listitem>
+<listitem><para>
+	<literal>debug_qualify</literal> &mdash; 
+	event triggered to determine whether &glos-debug; mode should be
+	enabled for the incoming client connection. Have in mind that simple,
+	host-based decision can be made by using the &conf-DebugHost; 
+	configuration directive. The <literal>debug_qualify</literal>
+	specialSub is invoked only if &conf-DebugHost; is either undefined,
+	or the client host is found in the &conf-DebugHost; list.
+	See &glos-debug; glossary entry for a complete discussion.
+</para></listitem>
+<listitem><para>
+	<literal>flypage</literal> &mdash; 
+  event triggered for determining the result set for the flypage.
+	<!-- TODO more info -->
+</para></listitem>
+<listitem><para>
+	<literal>guess_cc_type</literal> &mdash; 
+  event triggered at the time
+  of deriving credit card type, &var-MV_CREDIT_CARD_TYPE;.
+	&IC; already recognizes
+  major credit card types but local areas might require you to
+	write custom recognition code.
+  The subroutine is called with the credit card number.
+  A &glos-true; return value should contain the recognized credit card
+	type name.
+	A &glos-false; value indicates that the number recognition did not
+	suceed, and that &IC; should proceed with its built-in detection
+	algorithm.
+</para></listitem>
+<listitem><para>
+	<literal>init_session</literal> &mdash; 
+  event triggered at new &glos-session; creation time.
   The subroutine is called with the pointer to the newly created
   &glos-session; variables space. Subroutine return value is not used.
-</para>
-</refsect2>
-<refsect2>
-<title>lockout</title>
-<para>
-  Event triggered for locking out a
-  bad robot (see &conf-RobotLimit;). The subroutine is called without
-  parameters. A &glos-true; subroutine return value indicates that the
-  default, built-in lockout action should be skipped. A &glos-false; value 
-  resumes with the default action, by calling &conf-LockoutCommand;.
-</para>
-</refsect2>
-<refsect2>
-<title>missing</title>
-<para>
-  Event triggered on a requested &IC; page missing event.
-  The subroutine is called with the name of the page missing.
-  A &glos-false; return value from the subroutine will instruct &IC;
-  to continue executing the default, built-in action. A &glos-true; return
-  value will indicate all actions (including the response to the client)
-  have been performed by your function, and the default, built-in action
-  will not be executed.
-  Optionally, the function can return a list consisting of the true value
-  and the page name that is to be displayed to the user.
-</para>
-</refsect2>
-<refsect2>
-<title>guess_cc_type</title>
-<para>
-  Event triggered at the time
-  of deriving <varname>MV_CREDIT_CARD_TYPE</varname>. &IC; recognizes
-  major types but local areas might need more.
-  The subroutine is called with the credit card number.
-  The return value should either be a type name, or a &glos-false; value
-  (in which case &IC; proceeds with built-in detection algorithm).
-</para>
-</refsect2>
-<refsect2>
-<title>flypage</title>
-<para> 
-  Event triggered for determining the result set for the flypage.
-</para>
-</refsect2>
+</para></listitem>
+<listitem><para>
+	<literal>lockout</literal> &mdash; 
+  event triggered for locking out a bad web spider or misbehaving
+	client (see &conf-RobotLimit;). The subroutine is called without 
+	parameters and is expected to perform all the necessary custom
+	steps. It should exit with an appropriate return value to signal
+	how the rest of the process should be handled.
+  A &glos-true; return value indicates that no more handling is 
+	needed. A &glos-false; value indicates that &IC; should continue
+	and execute the default, built-in action lockout action, which
+	is specified by the &conf-LockoutCommand; config directive.
+	<!-- TODO : Where do you read IP or something from ? -->
+</para></listitem>
+<listitem><para>
+	<literal>missing</literal> &mdash; 
+  event triggered when a requested &IC; page is missing.
+  The subroutine is called with the name of the missing page
+	and is expected to perform all the necessary custom handling.
+	It should exit with an appropriate return value to signal
+	how the rest of the process should be handled.
+	A &glos-true; return
+  value will indicates that all actions (including the response to the client)
+  have been performed by your function and no more handling is needed.
+  You can also return an array, (1, <replaceable>PAGENAME</replaceable>), where
+	<replaceable>PAGENAME</replaceable> is the page to be displayed to the user.
+	A &glos-false; return value indicates that &IC; should continue
+	and execute the default, built-in action, which
+	is displaying a page specified by "&conf-SpecialPage; 
+	<literal>missing</literal>".
+</para></listitem>
+
+</itemizedlist>
 __END__
 
 __NAME__ notes
-If the actions you want to take are disallowed to &glos-catalog; 
-subroutines (to &conf-Sub;s, due to &glos-safe; restrictions), you may
-define a &conf-GlobalSub; and use it instead.
+If the examples above, the &PERL; subroutines have been defined on a
+&glos-catalog; level, using &conf-Sub; configuration directive. 
+&IC; catalogs (and everything configured within them) are subject to
+&glos-safe; restrictions, so your &conf-Sub; blocks might have
+insufficient permissions to execute all of your commands. To solve that
+problem, either relax the restrictions by using &conf-SafeUntrap;,
+or define the subroutines at the global level (in &gcf;) using
+unrestricted &conf-GlobalSub;s.
 __END__
 
-__NAME__ example: Defining SpecialSub missing
+__NAME__ example: Defining "SpecialSub missing"
+In the event of a missing page, see if the "page name" could be understood as
+"<literal><replaceable>product group</replaceable>/<replaceable>category</replaceable></literal>". If it could, use the provided information to construct
+the search specification and invoke the search results page.
+(More about &IC; search facilities can be read in <olink targetdoc='search'/>).
+If it couldn't, return a &glos-false; value and proceed to display
+"&conf-SpecialPage; <literal>missing</literal>".
+</para><para>
 Put the following in &ccf;:
 <programlisting><![CDATA[
 SpecialSub  missing  check_category
@@ -106,7 +137,13 @@ EOS
 __END__
 
 __NAME__ example: Defining SpecialSub init_session
-Put the following in &ccf;:
+If a client is coming from a "blacklisted" IP address, define
+variable "blacklist" in its session.
+</para><para>
+At a later stage, "blacklisted" sessions could be prevented from
+checking out and finalizing the order, as they are 
+likely to be fraudulent.
+</para><para>
 <programlisting><![CDATA[
 SpecialSub  init_session  check_blacklist
 
@@ -122,14 +159,14 @@ Sub check_blacklist <<EOS
   }
 EOS
 ]]></programlisting>
-In the event of a client coming from a "blacklisted" IP address,
-the <literal>blacklist</literal> entry in the user's &glos-session; would be
-created. At a later stage, "blacklisted" sessions could be prevented from
-checking out with the &glos-cart; contents as the order is markedly more
-likely to be fraudulent.
 __END__
 
 __NAME__ example: Defining SpecialSub guess_cc_type
+If the credit card number starts with "<literal>41</literal>", 
+recognize it as type "<literal>LOCAL_TYPE</literal>". Otherwise,
+return a false value and implicitly instruct &IC; to continue with
+the built-in credit card type detection mechanism.
+</para><para>
 Put the following in &ccf;:
 <programlisting><![CDATA[
 SpecialSub  guess_cc_type  check_cc
@@ -147,6 +184,4 @@ __END__
 __NAME__ author
 &mheins;
 __END__
-
-TODO clarify examples, optionally make them testable
 
