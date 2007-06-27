@@ -21,7 +21,11 @@ Interchange processes during the <option>HouseKeeping</option> routine.
 </para><para>
 If a process has been running (or is hung) for longer than the
 specified &glos-interval;, then <userinput>kill -9</userinput> will
-be issued and the server count decremented.
+be issued and the server count decremented. Interchange logs this incident
+in the global error log file:
+<programlisting>
+hammered PID 21429 running 312 seconds
+</programlisting>
 __END__
 
 __NAME__ notes
