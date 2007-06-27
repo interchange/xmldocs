@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify user-agents that will be classified as crawler bots (search engines) visiting the site
+specify user-agents that will be classified as crawler bots (search engines)
 __END__
 
 

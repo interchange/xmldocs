@@ -53,7 +53,7 @@ actually
 a boolean list, and not a true boolean value. The list achieves the effect
 of being boolean by logically returning &glos-true; or &glos-false;,
 depending on whether the searched item is present in the list or not.
-True boolean values are called <literal>yesno</literal>s in &IC; parlance.
+True boolean values are called "<literal>yesno</literal>"s in &IC; parlance.
 </para><para>
 Please see the &glos-configuration; glossary entry for a discussion
 on config directives.

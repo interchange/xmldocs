@@ -11,7 +11,7 @@ __END__
 __NAME__ description
 The directive specifies Interchange &glos-database; that 
 contains page aliases (default database name is 
-<literal>alias</literal>).
+<database>alias</database>).
 </para><para>
 This way, flypages can be aliased and redirected to different locations
 without performing file lookup cycles.
@@ -37,10 +37,10 @@ __NAME__ example: Creating AliasTable database
 <xi:include parse='text' href='../files/various/alias.txt'/>
 </programlisting>
 </para><para>
-&TAB_DELIMITED_NOTICE;
-</para><para>
-In our example database, page <literal>4595</literal>.html redirects
+In our example, page <literal>4595</literal>.html redirects
 back to the index page.
+</para><para>
+&TAB_DELIMITED_NOTICE;
 </para><para>
 To minimize the chance of confusion, you can download properly composed
 example file <ulink url="files/various/alias.txt">alias.txt</ulink>.

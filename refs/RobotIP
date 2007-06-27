@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify IP numbers or ranges that will be classified as crawler bots (search engines) visiting the site
+specify IP numbers or ranges that will be classified as crawler bots (search engines)
 __END__
 
 
@@ -8,7 +8,7 @@ RobotUA, RobotIP, RobotHost
 __END__
 
 __NAME__ synopsis
-<arg choice='plain' rep='repeat'><replaceable>IP_address</replaceable></arg>
+<arg choice='plain' rep='repeat'><replaceable>IP_address_glob</replaceable></arg>
 __END__
 
 
@@ -44,7 +44,7 @@ RobotIP <<EOR
   202.9.155.123,      204.152.191.41,         208.146.26.19,
   208.146.26.233,     209.185.141.209,        209.185.141.211,
   209.202.148.36,     209.202.148.41,         216.200.130.207,
-  216.35.103.6?,      216.35.103.70,
+  216.35.103.6?,      216.35.103.*,
 EOR
 ]]></programlisting>
 __END__

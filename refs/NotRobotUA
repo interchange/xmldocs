@@ -1,0 +1,41 @@
+__NAME__ purpose
+specify user-agents that will NOT be classified as crawler bots (search engines)
+__END__
+
+
+__NAME__ see also
+RobotUA, RobotIP
+__END__
+
+__NAME__ synopsis
+<arg choice='plain' rep='repeat'><replaceable>useragent_string</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The &conf-NotRobotUA; directive defines a list of useragent strings which will
+<emphasis role='bold'>never</emphasis> be classified as crawler robots
+(search engines) visiting the site.
+</para><para>
+This directive has priority over &conf-RobotUA;.
+If the user agent matches &conf-NotRobotUA;, then the check for 
+&conf-RobotUA; is not performed and the client is not treated 
+as an unattended &glos-robot;.
+__END__
+
+__NAME__ notes
+For more details regarding web spiders/bots and &IC;, see
+&glos-robot; glossary entry.
+</para><para>
+For more details regarding user sessions, see &glos-session; glossary
+entry.
+__END__
+
+__NAME__ example: Defining __FILENAME__
+<programlisting><![CDATA[
+__FILENAME__ <<EOR
+  *wget*
+EOR
+]]></programlisting>
+__END__
+

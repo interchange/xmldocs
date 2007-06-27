@@ -17,7 +17,7 @@ SendMailProgram
 __END__
 
 __NAME__ notes
-If the &conf-Route; directive is set to <literal>supplant</literal>, this
+If the &conf-Route; directive is set to "<literal>supplant</literal>", this
 directive is ignored.
 __END__
 

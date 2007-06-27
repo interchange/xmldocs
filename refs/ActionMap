@@ -26,7 +26,7 @@ For an introduction to Action Maps, see &glos-ActionMap; glossary entry.
 __END__
 
 
-__NAME__ example: Ignoring the Order action
+__NAME__ example: Replacing the Order action with a no-op
 Put the following in &ccf;:
 <programlisting>
 ActionMap order sub { 1 }

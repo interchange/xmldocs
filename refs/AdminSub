@@ -20,10 +20,10 @@ __END__
 
 
 __NAME__ description
-Specify global subroutines that may only be used by &glos-catalogs; which are listed under
-the &conf-AllowGlobal; directive.
+Specify global subroutines that may only be used by &glos-catalog;s
+which are listed under the &conf-AllowGlobal; directive.
 </para><para>
-Otherwise, in a normal course of action, global subroutines can be used
+Otherwise, in the default course of action, global subroutines can be used
 by all catalogs.
 __END__
 

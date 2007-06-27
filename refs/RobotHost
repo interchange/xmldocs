@@ -8,7 +8,7 @@ RobotUA, RobotIP
 __END__
 
 __NAME__ synopsis
-<arg choice='plain' rep='repeat'><replaceable>hostname</replaceable></arg>
+<arg choice='plain' rep='repeat'><replaceable>hostname_glob</replaceable></arg>
 __END__
 
 

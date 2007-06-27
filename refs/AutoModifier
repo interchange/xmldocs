@@ -36,7 +36,7 @@ attributes declared in &conf-AutoModifier; will be set to the values of the
 fields in the <database>products</database> database.
 </para><para>
 This facility will often be employed in determining product
-&glos-price;, &glos-discount;, &glos-tax;, &glos-shipping; amd 
+&glos-price;, &glos-discount;, &glos-tax; and &glos-shipping;, and 
 other custom attributes; these attributes will probably
 be used in custom &PERL; code that will scan the electronic
 &glos-cart; contents and perform some decisions. For example, by defining
@@ -49,7 +49,7 @@ see the &gloss-attribute; &GE;.
 __END__
 
 
-<!--
+<!-- TODO
 This one has a bit of "magic" associated. To account for matrix-option
 products, the various product tables are searched, for both the item
 code and the base SKU associated with the item.

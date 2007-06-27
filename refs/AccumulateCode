@@ -52,6 +52,5 @@ Put the following in &gcf;:
 <programlisting>
 AccumulateCode Yes
 </programlisting>
-See &conf-CodeRepository; for a complete example.
 __END__
 

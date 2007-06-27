@@ -1,9 +1,5 @@
 __NAME__ purpose
-__END__
-
-
-__NAME__ see also
-DiscountSpaceVar
+enable "discount spaces" feature
 __END__
 
 __NAME__ synopsis
@@ -15,11 +11,37 @@ __END__
 
 
 __NAME__ description
+This directive enables the "discount spaces" feature.
+</para><para>
+When &conf-DiscountSpacesOn; is enabled, then on a per-page
+before-&glos-autoload; basis, this routine initializes the
+current discount space to '<literal>main</literal>', and then checks
+all &glos-CGI; variables defined with the &conf-DiscountSpaceVar;
+configuration directive to see if an alternate discount space has
+been specified.
+</para><para>
+When &conf-DiscountSpacesOn; is not enabled, then the behavior is
+compatible to how it was before the feature was added to &IC; &mdash;
+all "discount space" functions become a no-operation; any attempts
+to specify an alternate discount space will have no effect, and will
+result in an error message in the &glos-catalog;'s error log.
+</para><para>
+See glossary entry &glos-discount; for a complete discussion.
 __END__
 
-__NAME__ example: Defining DiscountSpacesOn
+__NAME__ example: Enabling DiscountSpacesOn
 <programlisting>
 DiscountSpacesOn Yes
 </programlisting>
 __END__
 
+__NAME__ notes
+__END__
+
+__NAME__ see also
+DiscountSpaceVar, discount
+__END__
+
+__NAME__ author
+&ethan;
+__END__

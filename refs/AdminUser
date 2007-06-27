@@ -2,14 +2,18 @@ __NAME__ purpose
 usernames that are given full access to all catalogs, regardless of any permissions
 __END__
 
-
 __NAME__ synopsis
 <arg choice='plain' rep='repeat'>
 <replaceable>username</replaceable>:<replaceable>password</replaceable>
 </arg>
 __END__
 
-__NAME__ missing
-everything, see Util.pm
+__NAME__ description
+Username and password pairs for users which are given administrator
+privileges to all catalogs.
+</para><para>
+This functionality is standalone &mdash;
+you do not need to have the access &glos-database; since
+usernames and passwords here are specified directly.
 __END__
 
