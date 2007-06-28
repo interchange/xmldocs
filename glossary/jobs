@@ -1,0 +1,8 @@
+Dispatch a job from the commandline:
+
+<programlisting>
+interchange --runjobs=training=db
+</programlisting>
+
+Jobs are run asynchronously. The command will return before the job is
+completed or even started.
