@@ -73,6 +73,13 @@ __END__
 __NAME__ notes
 __END__
 
+__NAME__ example: periodically save database contents to text files
+The following crontab triggers the <literal>db</literal> job every day at 2:12 am.
+<programlisting>
+12 2 * * * /usr/sbin/interchange --runjobs=standard=db
+</programlisting>
+__END__
+
 __NAME__ missing
 Diff between initialize and autoload
 Log specifies filename or just 1/0 ?
