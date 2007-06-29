@@ -73,16 +73,6 @@ __END__
 __NAME__ notes
 __END__
 
-__NAME__ example:
-<programlisting>
-</programlisting>
-__END__
-
-__NAME__ example:
-<programlisting>
-</programlisting>
-__END__
-
 __NAME__ missing
 Diff between initialize and autoload
 Log specifies filename or just 1/0 ?
