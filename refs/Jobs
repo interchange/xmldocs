@@ -1,5 +1,5 @@
 __NAME__ purpose
-define parameters for an Interchange variant of the Unix crontab facility
+define parameters for batch jobs
 __END__
 
 __NAME__ synopsis
@@ -14,7 +14,7 @@ __END__
 
 __NAME__ description
 </para><para>
-The directive configures Interchange periodic &glos-jobs; facility. It accepts a list of key/value
+The directive configures Interchange batch &glos-jobs; facility. It accepts a list of key/value
 pairs.
 </para>
 <para>
