@@ -1,0 +1,41 @@
+__NAME__ purpose
+specify names of CGI variables to check for discount space definition
+__END__
+
+__NAME__ synopsis
+<arg choice='plain' rep='repeat'><replaceable>cgi_variable_name</replaceable></arg>
+__END__
+
+__NAME__ description
+&conf-DiscountSpaceVar; is a configuration directive with the 
+default value of '<literal>mv_discount_space</literal>'. It is a list of
+names of &glos-CGI; variables to check per page process, such that a &glos-CGI;
+variable can be used to specify the discount space.
+</para><para>
+For this directive to have any effect, the &conf-DiscountSpacesOn; directive
+must be enabled.
+</para><para>
+The default value, <mv>mv_discount_space</mv>, 
+is likely to suffice for most purposes, but people could want to tie the
+discount space
+to other things, such as the &glos-cart; name, by including other variable
+names in
+this array (for instance, <literal>mv_cartname</literal> would tie the
+discount space to the cart name, which could be convenient in some situations).
+__END__
+
+__NAME__ author
+&ethan;
+__END__
+
+__NAME__ see also
+DiscountSpacesOn, discount-space
+__END__
+
+__NAME__ example: Defining __FILENAME__
+<programlisting>
+DiscountSpacesOn Yes
+__FILENAME__ mv_cartname
+</programlisting>
+__END__
+

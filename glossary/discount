@@ -1,6 +1,6 @@
 
 Product discounts in &IC; can be set at any time. The discounts
-apply only to the customer receiving them, so you can gate the          
+apply only to the customer receiving them, so you can set
 discounts based on membership in a club or other arbitrary means.
 </para><para>
 Discounts are defined using the &tag-discount; tag, 
@@ -31,13 +31,16 @@ and are of the following types:
 
 The discounts are specified using a formula. The formula is scanned for
 the <varname>$q</varname> and <varname>$s</varname> variables which are
-first substituted for with the item quantity and subtotal respectively.
+substituted for the item quantity and subtotal respectively.
 The variable <varname>$s</varname> is saved between
 iterations, so that the discounts can be cumulative.
 </para><para>
 In case of individual item discounts, the formula must be defined in a way 
 that it produces a subtotal which includes <emphasis>all items</emphasis> of
-the same SKU that are found in the user's basket.
+the same &glos-SKU; that are found in the user's basket. There are many ways
+and reasons why the same &glos-SKU; might be present multiple times in the
+user's basket &mdash; one is the &conf-SeparateItems; configuration directive.
+</para><para>
 In case of an entire order discount, the formula is usually simpler
 and defines a flat discount amount or percentage.
 </para><para>
@@ -49,4 +52,63 @@ adjustments.
 </emphasis>
 </para><para>
 For examples, see the &tag-discount; reference page.
+</para><para>
+In April 2005, &IC; added support for "discount spaces" (using &glos-CGI;
+variable <literal>mv_discount_space</literal>), 
+in a manner akin to &glos-value;s space (<mv>mv_values_space</mv>) or
+named shopping &glos-cart; (<mv>mv_cartname</mv>). See &conf-DiscountSpacesOn;
+and &conf-DiscountSpaceVar; for usage examples.
 
+<!--
+Put the below text somewhere in programming manual.
+
+On a &PERL; programming level,
+A new global object has been introduced: $::Discounts. This will always
+point to the current discount hash; changing the discount space via
+CGI variables or the [discount-space] tag will update $::Discounts.
+Furthermore, a new Safe object has been introduced for accessing the
+current discount space in [perl] and [calc] blocks: $Discounts.
+
+Any code that works directly with the $Vend::Session->{discount} hash
+should be updated to work with the $::Discounts variable (in global
+space) and the $Discounts variable (in Safe space such as [perl] and
+[calc]). Care has been taken to maintain backwards compatibility,
+and working directly with the {discount} session member will generally
+not cause problems (changing the discount space will in fact change the
+hash to which $Vend::Session->{discount} points), except in the case of
+reassigning the hash (i.e., $Session->{discount} = { 'SOMEITEM' => ' %s *
+0.80 ' }); reassigning the hash will break the $::Discounts reference and
+result in unpredictable behavior for the remainder of the page process.
+Therefore, it is strongly advised that all such code be updated at some
+point to use the new objects. Furthermore, any actions such as clearing
+the discounts should be done by dereferencing rather than assigning a
+new hashref.
+
+Thus:
+%$Discounts = ();
+and not:
+$Discounts = {};
+
+Furthermore, you can clear the discount space via:
+[discount-space name=some_spacename clear=1]
+
+The current discount space name can be checked via:
+[discount-space current=1]
+
+Sessions: to maintain backwards compatibility, sessions continue to use a
+{discount} member. However, at session initialization, all sessions will
+receive a {discount_space}{main} member, and {discount} will point to it.
+The session read process is essentially unchanged, with the exception of
+a minor assignment in which $::Discounts is initialized to point to the
+{discount} member. The modification to discount-spaces was driven in
+part to reduce the number of assignments necessary at session read time,
+and this new implementation is a reflection of that.
+
+For the future, it may be worthwhile to revise the logic to eliminate
+the {discount} session member entirely, and simply expect all code to
+work directly through the $::Discounts/$Discounts variables. This would
+allow some slight adjustments to the implementation of the discount space
+initialization and switching logic, making it slightly more efficient
+and certainly cleaner.
+
+-->
