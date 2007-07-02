@@ -1,12 +1,58 @@
-* Add ItemAction to map a subroutine to alter items every time toss_cart
-  is run, i.e. after an add or refresh.
+__NAME__ purpose
+specify subroutine to invoke when users' electronic cart contents change
+__END__
 
-	  Calling syntax is $sub->($item_reference), return value is not used.
-
-
-Defines a routine which runs every time the Interchange shopping
-cart is recalculated. It is passed the item hash as its only parameter.
 
 __NAME__ missing
-All
 __END__
+
+
+__NAME__ see also
+CartTrigger, CartTriggerQuantity
+__END__
+
+__NAME__ synopsis
+<arg choice='plain'><replaceable>subroutine_name</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive specifies name of the &PERL; subroutine to be invoked
+when users' electronic &glos-cart; contents change. The subroutine can 
+be defined on both global and catalog level.
+</para><para>
+The subroutine executes whenever the contents of users' cart are changed via
+the standard means available through the &glos-CGI; variable space.
+</para><para>
+The subroutine will be executed per-change, such that any page process
+resulting in multiple alterations to the cart will potentially call this
+function multiple times.
+</para><para>
+The specified function is invoked with the reference to the cart item
+in question. The function's return value is not used.
+__END__
+
+__NAME__ notes
+It must be noted that the &IC; cart subsystem is based on arrayrefs of hashrefs
+(all &PERL; programming terms) &mdash; there is no object encapsulation for
+limiting or monitoring program access to the contents of any cart.
+Consequently, direct manipulation of the &glos-cart; from within &PERL;
+<emphasis role='bold'>will not</emphasis> cause this function to be invoked. The
+triggers only fire when the cart contents are modified through the standard
+Interchange &glos-CGI;-based variable processing. Therefore, it is assumed
+(for the moment, at least) that any programmer sufficiently comfortable or
+confident to manipulate cart contents directly can also be given the
+responsibility of deciding whether or not it is appropriate to manually invoke
+this function.
+</para><para>
+This &glos-configuration; directive is very similar to &conf-CartTrigger;
+and &conf-CartTriggerQuantity;, the two directives that could be percieved
+as more recent and flexible options.
+__END__
+
+__NAME__ example: Specifying __FILENAME__
+<programlisting>
+__FILENAME__ cart_item_update
+</programlisting>
+__END__
+

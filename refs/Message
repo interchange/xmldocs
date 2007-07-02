@@ -1,0 +1,28 @@
+__NAME__ purpose
+write custom message to console and Interchange log
+__END__
+
+__NAME__ synopsis 
+<arg choice='opt'><literal>-n</literal></arg>
+<arg choice='opt'><literal>-i</literal></arg>
+<arg choice='plain'><replaceable>message</replaceable></arg>
+__END__
+
+__NAME__ see also
+log
+__END__
+
+__NAME__ description
+This configuration directive displays a specified message on the console
+and in the &IC; log.
+</para><para>
+If the "option" <literal>-n</literal> is present, &IC; strips leading and
+trailing whitespace before display. If <literal>-i</literal> is present 
+and &IC; is running in the foreground (that is, without detaching from the
+controlling terminal), then the message is only output to the console,
+avoiding the log.
+__END__
+
+__NAME__ example: Specifying __FILENAME__
+__FILENAME__ -n  Test message     
+__END__
