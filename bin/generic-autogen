@@ -19,6 +19,7 @@ my $invalid_file = "tmp/missing2";
 my @loaded;
 my $document;
 my $visible_name;
+my (@glossentries, @howtoentries); # To produce tmp/{glossary,howto}.list
 my %sn = ( # short name
 	glossary => "glos",
 	howtos => "howto",
@@ -83,6 +84,7 @@ while ( my $file = readdir DIR ) {
 	if ( $cat eq 'howtos' ) {
 		$visible_name = <IN>;
 	} else {
+		push @glossentries, $file;
  		( $visible_name = $file ) =~ s/-/ /g;
 	}
 	
@@ -146,14 +148,22 @@ print "GEN: $cat/$cat.xml\n";
 open OUT, "> $cat/$cat.xml" or
 die "Can't wropen $cat/$cat.xml ($!)\n";
 print OUT $document;
-close OUT or warn "Cant close $cat/$cat.xml ($!)\n";
+close OUT or warn "Can't wrclose $cat/$cat.xml ($!)\n";
 
 # Print out missing list
 print "GEN: tmp/missing2\n";
 open OUT, "> tmp/missing2" or
 die "Can't wropen tmp/missing2 ($!)\n";
 print OUT Dumper \%invalid;
-close OUT or warn "Cant close tmp/missing2 ($!)\n";
+close OUT or warn "Can't wrclose tmp/missing2 ($!)\n";
+
+
+my $file = "tmp/glossary.list";
+print "GEN: $file\n";
+open OUT, "> $file" or die "Can't wropen $file ($!)\n";
+for (@glossentries) { print OUT "$_\n" }
+close OUT or warn "Can't wrclose $file ($!)\n";
+
 
 
 exit 0;

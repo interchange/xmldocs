@@ -29,6 +29,8 @@ pragmas      => 'pragmas',
 systemtags   => 'tags',
 uitags       => 'tags',
 usertags     => 'tags',
+glossary     => 'glossary',
+widget       => 'widget',
 );
 
 # Translation from compound to "English"
@@ -39,6 +41,8 @@ my %trEn = (
 'orderchecks'  => 'Ordercheck: ',
 'pragmas'      => 'Pragma: ',
 'tags'         => 'Tag: ',
+'glossary'     => 'Glossary: ',
+'widget'       => 'Widget: ',
 );
 
 
@@ -47,7 +51,10 @@ for my $file ( @ files ) {
 	while ($_ = <IN>) {
 		chomp;
 		my $data = $trEn{$tr{$file}} . $prefix . $tr{$file} . '/' . $_ . '.html';
-		push(@{$output{$_}}, $data) unless grep {/^$data$/} @{$output{$_}};
+
+		unless ( grep {/^$data$/} @{$output{$_}} ) {
+			push(@{$output{$_}}, $data)
+		}
 	}
 	close IN or die "Can't rdclose 'tmp/$file.list' ($!)\n";
 }
@@ -55,7 +62,8 @@ for my $file ( @ files ) {
 
 open OUT, "> $output" or die "Can't wropen '$output' ($!)\n";
 while (my($k,$v) = each %output) {
-	$v = join ", ", @$v;
+	@$v = grep {!/^\s*$/} @$v;
+	$v = join " , ", @$v;
 	print OUT "$k => $v\n";
 }
 close OUT or die "Can't wrclose '$output' ($!)\n";
