@@ -113,7 +113,6 @@ The remote IP address will be set to <literal>none</literal> and the
 user agent string will be set to <literal>commandline</literal>.
 __END__
 
-<<<<<<< Jobs
 __NAME__ example: Define catalog-level Jobs directive
 Specify directory that will hold the job files, and set up a log file to
 for job runs. Also specify an email address to which any output jobs
@@ -129,12 +128,7 @@ __END__
 
 __NAME__ example: Run jobs manually
 Invoke from the command line:
-=======
-__NAME__ example: periodically save database contents to text files
-The following crontab triggers the <literal>db</literal> job every day at 2:12 am.
->>>>>>> 1.7
 <programlisting>
-<<<<<<< Jobs
 su -c '/PATH/TO/interchange --quiet --runjobs=CATALOG_NAME=DIRECTORY_NAME' USERNAME
 </programlisting>
 __END__
@@ -142,9 +136,6 @@ __END__
 __NAME__ example: Run jobs automatically from Unix crontab
 <programlisting>
 12 2 * * * su -c '/PATH/TO/interchange --quiet --runjobs=CATALOG_NAME=DIRECTORY_NAME' USERNAME
-=======
-12 2 * * * /usr/sbin/interchange --runjobs=standard=db
->>>>>>> 1.7
 </programlisting>
 __END__
 
