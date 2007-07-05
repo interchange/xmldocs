@@ -14,78 +14,140 @@ __END__
 
 __NAME__ description
 </para><para>
-The directive configures Interchange batch &glos-jobs; facility. It accepts a list of key/value
-pairs.
-</para>
-<para>
-The available keys for the global directive are:
+The directive configures Interchange periodic &glos-jobs; facility.
+It accepts a list of key/value pairs.
+</para><para>
+It can be specified at both the global and &glos-catalog; level.
+</para><para>
+The available keys for the <emphasis role='bold'>global directive</emphasis>
+are:
 <itemizedlist>
-<listitem><para>MaxLifetime - maximum life time for a &glos-jobs; in seconds.
-The default is 600 (10 minutes).
+<listitem><para><literal>MaxLifetime</literal> (<replaceable>seconds</replaceable>, default 600) - maximum life time for a &glos-jobs;
 </para></listitem>
-<listitem><para>MaxServers - maximum number of concurrently running Job servers.
-The default is 1.
+<listitem><para><literal>MaxServers</literal> (<replaceable>number_of_processes</replaceable>, default 1) - maximum number of concurrently running Job servers
 </para></listitem>
 </itemizedlist>
 </para>
 <para>
-The available keys for the catalog directive are:
+The available keys for the <emphasis role='bold'>catalog directive</emphasis> are:
 <itemizedlist>
-	<listitem><para>base_directory -
-	directory to search for cron jobs. The default is
-	<filename class='directory'>CATROOT/etc/cron/</filename>
+	<listitem><para><literal>add_session</literal> (<replaceable>true/false</replaceable>, default
+	false) -
+	include the current &glos-session; in the jobs output. The output is saved
+	to log files or e-mailed to specified user
 	</para></listitem>
-	<listitem><para>use_global -
-	search for <literal>base_directory</literal> in &glos-ICROOT;
-	and include jobs from the global installation as well
+	<listitem><para><literal>autoend</literal> (&conf-Sub; or &conf-GlobalSub;, default none) -
+	a subroutine to run at the end of each jobs file
 	</para></listitem>
-	<listitem><para>initialize -
-	a macro to execute once before each job
+	<listitem><para><literal>autoload</literal> (&conf-Sub; or &conf-GlobalSub;, default none) -
+	a subroutine to run at the beginning of each jobs file
 	</para></listitem>
-	<listitem><para>autoload -
-	a macro to execute once before each job
+	<listitem><para><literal>base_directory</literal> (<replaceable>DIRECTORY_NAME</replaceable>,
+	default <literal><replaceable>CATROOT</replaceable>/etc/jobs/</literal>) -
+	directory to search for cron jobs.
+	The <literal><replaceable>DIRECTORY_NAME</replaceable></literal>
+	placeholder seen in the examples below is treated relative to this
+	base directory.
 	</para></listitem>
-	<listitem><para>email -
+	<listitem><para><literal>email</literal> (<replaceable>email_address</replaceable>, default
+	none) -
 	e-mail for session reports, if any result from running jobs
 	</para></listitem>
-	<listitem><para>log -
+	<listitem><para><literal>extra_headers</literal> (<replaceable>e-mail_headers</replaceable>,
+	default none) -
+	any additional headers for an e-mail message. The input should be already
+	formatted in the e-mail headers style
+	</para></listitem>
+	<listitem><para><literal>filter</literal> (<replaceable>filter_name</replaceable>, default
+	&filter-strip;) -
+	run the job output through specified &glos-filter; before saving it to 
+	a log file or e-mailing
+	</para></listitem>
+	<listitem><para><literal>from</literal> (<replaceable>email_sender</replaceable>, default
+	none) -
+	value for the "From: " field in the outgoing emails
+	</para></listitem>
+	<listitem><para><literal>initialize</literal> (&conf-Sub; or &conf-GlobalSub;, default none) -
+	a macro to execute once before each job
+	</para></listitem>
+	<listitem><para><literal>log</literal> (<replaceable>log_filename</replaceable>, default none) -
 	logfile for session reports, if any result from running jobs
 	</para></listitem>
-	<listitem><para>add_session -
-	include the current session in the output
+	<listitem><para><literal>reply_to</literal> (<replaceable>email_address</replaceable>, 
+	default: system default) -
+	value for the "Reply-To: " field in the outgoing emails
 	</para></listitem>
-	<listitem><para>from -
-	self-explanatory e-mail-related option
+	<listitem><para><literal>subject</literal> (<replaceable>email_subject</replaceable>, default <literal>Interchange results for job: <replaceable>JOB_NAME</replaceable></literal>) -
+	value for the "Subject: " field in the outgoing emails
 	</para></listitem>
-	<listitem><para>subject -
-	self-explanatory e-mail-related option
+	<listitem><para><literal>trackdb</literal> (<replaceable>table_name</replaceable>, default
+	none) -
+	write job run information to specified &glos-table;. The 
+	table must have the necessary fields
+	<database class='field'>code</database>,
+	<database class='field'>name</database>,
+	<database class='field'>begin_run</database> and
+	<database class='field'>pid</database>.
 	</para></listitem>
-	<listitem><para>reply_to -
-	self-explanatory e-mail-related option
-	</para></listitem>
-	<listitem><para>extra_headers -
-	any additional headers for an e-mail message
+	<listitem><para><literal>use_global</literal> (<replaceable>true/false</replaceable>,
+	default false) -
+	search for jobs defined in directory
+	<filename class='directory'>&conf-ConfDir;/jobs/</filename>
+	and add them to the queue for execution
 	</para></listitem>
 </itemizedlist>
 </para><para>
 __END__
 
 __NAME__ notes
+Files in the jobs directory that end in &conf-HTMLsuffix; will be silently ignored.
+</para><para>
+The invocation of jobs from the command line will only queue them for execution
+and will return the shell prompt before the jobs have actually started
+executing.
+</para><para>
+A common temporary &glos-session; (<mv>mv_tmp_session</mv> == &glos-true;)
+will be created for use by all of the files
+in the job queue. The session will be closed when the jobs complete.
+The remote IP address will be set to <literal>none</literal> and the
+user agent string will be set to <literal>commandline</literal>.
 __END__
 
+<<<<<<< Jobs
+__NAME__ example: Define catalog-level Jobs directive
+Specify directory that will hold the job files, and set up a log file to
+for job runs. Also specify an email address to which any output jobs
+output will be sent:
+<programlisting>
+Jobs &lt;&lt;EOJ
+  base_directory  jobs
+  log             logs/jobs.log
+  email           root@&def-hostname;
+EOJ
+</programlisting>
+__END__
+
+__NAME__ example: Run jobs manually
+Invoke from the command line:
+=======
 __NAME__ example: periodically save database contents to text files
 The following crontab triggers the <literal>db</literal> job every day at 2:12 am.
+>>>>>>> 1.7
 <programlisting>
+<<<<<<< Jobs
+su -c '/PATH/TO/interchange --quiet --runjobs=CATALOG_NAME=DIRECTORY_NAME' USERNAME
+</programlisting>
+__END__
+
+__NAME__ example: Run jobs automatically from Unix crontab
+<programlisting>
+12 2 * * * su -c '/PATH/TO/interchange --quiet --runjobs=CATALOG_NAME=DIRECTORY_NAME' USERNAME
+=======
 12 2 * * * /usr/sbin/interchange --runjobs=standard=db
+>>>>>>> 1.7
 </programlisting>
 __END__
 
 __NAME__ missing
-Diff between initialize and autoload
-Log specifies filename or just 1/0 ?
-Exactly what does add_session do
-Turn list of keys into format NAME (SYNTAX, default DEF) - DESCRIPTION
-Add examples
-Check if there are more keys than listed
+turn itemizedlist into table
 __END__
-
