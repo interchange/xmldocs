@@ -4,6 +4,9 @@
 # creates interchange.fact file which you can load into an
 # infobot (www.infobot.org) to provide factoids on IRC channels.
 
+use warnings;
+use strict;
+
 my @files = <tmp/*.list>;
 s/tmp\/// for @files;
 s/\..*// for @files;
@@ -30,7 +33,7 @@ systemtags   => 'tags',
 uitags       => 'tags',
 usertags     => 'tags',
 glossary     => 'glossary',
-widget       => 'widget',
+widgets      => 'widgets',
 );
 
 # Translation from compound to "English"
@@ -42,7 +45,7 @@ my %trEn = (
 'pragmas'      => 'Pragma: ',
 'tags'         => 'Tag: ',
 'glossary'     => 'Glossary: ',
-'widget'       => 'Widget: ',
+'widgets'      => 'Widget: ',
 );
 
 
@@ -50,6 +53,7 @@ for my $file ( @ files ) {
 	open IN, "< tmp/$file.list" or die "Can't rdopen 'tmp/$file.list' ($!)\n";
 	while ($_ = <IN>) {
 		chomp;
+		#print "FILE:$file TR:$tr{$file} TREN:$trEn{$tr{$file}}\n";
 		my $data = $trEn{$tr{$file}} . $prefix . $tr{$file} . '/' . $_ . '.html';
 
 		unless ( grep {/^$data$/} @{$output{$_}} ) {
