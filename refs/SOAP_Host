@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify list of hosts that are allowed to connect and issue SOAP RPC requests
+(obsolete) specify list of hosts that are allowed to connect and issue SOAP RPC requests
 __END__
 
 __NAME__ see also
