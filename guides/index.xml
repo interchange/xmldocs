@@ -39,8 +39,8 @@
 <authorgroup condition='online'>
 -->
 <authorgroup>
-	<emphasis role='bold'>Search documentation:</emphasis>
-	<xi:include parse='text' href='../search/html-search-box' />
+	<!-- <emphasis role='bold'>Search documentation:</emphasis>
+	<xi:include parse='text' href='../search/html-search-box' /> -->
 </authorgroup>
 
 <legalnotice>
