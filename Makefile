@@ -148,12 +148,12 @@ OUTPUT/%: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos
 	$(PSR) $(PSR_FLAGS)                                                \
 	  $(PROFILE)                                                       \
 	  --stringparam current.docid $*                                   \
-	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
+	  --stringparam target.database.document ../docbook/olinkdb-c.xml \
 	  -o $T/$*-c.profiled docbook/profile.xsl $<
 	$(PSR) $(PSR_FLAGS)                                                \
 	  $(PROFILE)                                                       \
 	  --stringparam current.docid $*                                   \
-	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
+	  --stringparam target.database.document ../docbook/olinkdb-c.xml \
 	  -o $@/ docbook/html-chunks.xsl $T/$*-c.profiled
 OUTPUT/%.man: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/autofiles.ent
 	echo "C     $@/"
