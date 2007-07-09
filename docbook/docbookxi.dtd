@@ -32,7 +32,7 @@
 
 
 <!ENTITY % local.para.char.mix "|xi:include">
-<!ENTITY % local.tech.char.class "|tag|pragma|filter|mv|am|widget|xi:include">
+<!ENTITY % local.tech.char.class "|tag|pragma|filter|mv|am|widget|check|xi:include">
 
 <!-- Load DocBook -->
 <!ENTITY % DocBookDTD PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
@@ -49,6 +49,18 @@
 <!ELEMENT tag %ho; (%para.char.mix;|%para.mix;)*>
 <!--end of tag.element-->]]>
 <!--end of tag.module-->]]>
+
+
+<!-- ordercheck element -->
+<!ENTITY % check.module "INCLUDE">
+<![%check.module;[
+<!ENTITY % local.check.attrib "">
+
+<!ENTITY % check.element "INCLUDE">
+<![%check.element;[
+<!ELEMENT check %ho; (%para.char.mix;|%para.mix;)*>
+<!--end of check.element-->]]>
+<!--end of check.module-->]]>
 
 
 <!-- pragma element -->

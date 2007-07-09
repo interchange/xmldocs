@@ -48,6 +48,7 @@
 	<xsl:template match="am"><xsl:call-template name="inline.monoseq"/></xsl:template>
 	<xsl:template match="filter"><xsl:call-template name="inline.monoseq"/></xsl:template>
 	<xsl:template match="widget"><xsl:call-template name="inline.monoseq"/></xsl:template>
+	<xsl:template match="check"><xsl:call-template name="inline.monoseq"/></xsl:template>
 
   <xsl:param name="local.l10n.xml" select="document('')"/>
   <l:i18n xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">

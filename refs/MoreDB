@@ -1,0 +1,45 @@
+__NAME__ purpose
+enable saving of search paging files into users' DBI sessions
+__END__
+
+
+__NAME__ synopsis
+<group choice='plain'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+This directive enables saving of search paging files into users'
+&glos-session;s.
+</para><para>
+This eliminates the need to have a &conf-ScratchDir; directory
+between all &IC; server nodes.
+</para><para>
+This directive can only be used with DBI (database) sessions; trying
+to use it with non-database sessions will cause errors.
+__END__
+
+__NAME__ notes
+__END__
+
+__NAME__ see also
+SessionDB, SessionType
+__END__
+
+__NAME__ author
+&mheins;
+__END__
+
+
+__NAME__ example: Enabling __FILENAME__
+<programlisting>
+SessionType DBI
+SessionDB session
+
+MoreDB Yes
+</programlisting>
+__END__
+

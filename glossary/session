@@ -161,5 +161,9 @@ In addition, the C<[data ...]> tag can access a number of elements in the Interc
 
 
 
+</para><para>
+When <mv>mv_tmp_session</mv> is defined, [Not]RobotUA is ignored.
+Also mention mv_tmp_session, _no_session, _no_session_id.
+Changing IPs situation
 
 -->

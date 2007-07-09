@@ -26,8 +26,9 @@ anyone guessing and supplying a valid session ID can hijack other client's
 session.
 </para><para>
 The option was introduced to achieve more compatibility with old browsers, at
-cost of some security. Do not enable it unless you first experience problems.
-Also do not use it unless you are using some encryption
+cost of some security. Do not enable it unless your clients experience
+problems caused by IP addresses that change from access to access.
+Also do not use it unless you are using encryption
 (PGP/&conf-CreditCardAuto;) or a real-time payment gateway, or the risk may
 be too high.
 __END__

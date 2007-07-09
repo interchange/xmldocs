@@ -308,6 +308,8 @@ sub wanted {
 		last if $i{ver} eq '4.6.0'
 			and $c{file} =~ /Tagref\.pm$/ and $c{line} =~ /^__DATA__$/;
 
+		# Note. $c{file} is always relative to sources/VERSION/ at this
+		# point. There is no VERSION included in any file path.
 
 		################################################################
 		# Perl program file
@@ -464,7 +466,7 @@ sub wanted {
 			for my $tagname ( @tags ) {
 				push @{ $hash{symbols}{$c{fsubtype}}{$tagname} }, {
 					%c,
-					file => "$i{ver}/$c{file}",
+					# Potentially 4.6.0 gets dots treated as regex here?
 					lnum => scalar @filedata,
 					ctx_p => $ctx_p,
 					ctx_n => $ctx_n,
@@ -502,7 +504,6 @@ sub wanted {
 
 			push @{ $hash{symbols}{$c{fsubtype}}{$fn} }, {
 				%c,
-				file => "$i{ver}/$c{file}",
 				lnum => scalar @filedata,
 				ctx_p => $ctx_p,
 				ctx_n => $ctx_n,
@@ -521,7 +522,6 @@ sub wanted {
 
 			push @{ $hash{symbols}{$c{fsubtype}}{$fn} }, {
 				%c,
-				file => "$i{ver}/$c{file}",
 				lnum => scalar @filedata,
 				ctx_p => $ctx_p,
 				ctx_n => $ctx_n,
@@ -541,7 +541,6 @@ sub wanted {
 
 			push @{ $hash{symbols}{$c{fsubtype}}{$fn} }, {
 				%c,
-				file => "$i{ver}/$c{file}",
 				lnum => scalar @filedata,
 				ctx_p => $ctx_p,
 				ctx_n => $ctx_n,
@@ -661,7 +660,6 @@ sub line_findPragmas {
 	# it always shows that much (that is, workaround file beginning/
 	# file end problems - pad with empty lines or something).
 		%c,
-		file => "$i{ver}/$c{file}",
 		lnum => $c{lnum},
 		func => ${$c{gfunc}}[0],
 		funclnum => ${$c{gfunc}}[1],
@@ -708,7 +706,6 @@ sub line_findCatVars {
 
 		push @{ $hash{symbols}{catvar}{$name} }, {
 			%c,
-			file => "$i{ver}/$c{file}",
 			lnum => $c{lnum},
 			func => ${$c{gfunc}}[0],
 			funclnum => ${$c{gfunc}}[1],
@@ -750,7 +747,6 @@ sub line_findGlobVars {
 		) {
 		push @{ $hash{symbols}{globvar}{$name} }, {
 			%c,
-			file => "$i{ver}/$c{file}",
 			lnum => $c{lnum},
 			func => ${$c{gfunc}}[0],
 			funclnum => ${$c{gfunc}}[1],

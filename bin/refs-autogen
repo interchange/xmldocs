@@ -471,10 +471,13 @@ while ( $path = shift @paths) { # Now, for each IC version specified
 					# Well now dude, *some* files from lib/Vend/* somehow lose the
 					# prefix "lib/". I have no idea how - but we'll fix it when 
 					# it happens.
-					$plf =~ /^Vend/ and $plf = "lib/" . $plf;
+					$plf =~ /^Vend/ and do { $plf = "lib/" . $plf; };
 
 					#my $loc = "$$ctx{file}:$$ctx{lnum}";
 					my $loc = $$ctx{file};
+
+					# What would happen if we inserted into $loc the HTML link,
+					# with <phrase condition="online"> ?
 					
 					my ( $cstart, $cend, $ctxmeta ) = ("", "", "");
 					my $all = 0; # Showing all for an item?

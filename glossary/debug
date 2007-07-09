@@ -1,2 +1,5 @@
 No debugging options are enabled by default in &IC;. See &conf-DebugFile; for
 a quick introduction to enabling debug messages.
+</para><para>
+Before &conf-DebugHost; can be used to restrict diagnostics to specfic
+set of hosts, the debug mode itself has to be enabled using &conf-DebugFile;.

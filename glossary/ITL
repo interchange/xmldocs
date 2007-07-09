@@ -267,7 +267,7 @@ argument. For example, this <emphasis role='bold'>WILL NOT</emphasis> work:
 [page scan se=[scratch <replaceable>variable_name</replaceable>]]
 </programlisting>
 
-Actually, the above code is in a really bad shape. To make it work, we
+The above code is in really bad shape. To make it work, we
 need to do two things: switch to named syntax, and properly quote arguments
 containing whitespace:
 

@@ -25,9 +25,9 @@ and differentiate users and ongoing, active sessions.
 	<para>
 	Large majority of any state-dependent software out there simply 
 	<emphasis role='bold'>requires</emphasis> that the clients accept 
-	storage and retrieval of cookies. Even solutions put forth eBay require
-	cookies, let alone any much weaker competitors such as Microsoft or the
-	wanna-be rivaling "shopping carts".
+	storage and retrieval of cookies. Even eBay requires
+	cookies, let alone any much weaker competitors such as
+	various rivalling "shopping carts".
 	</para><para>
 	<emphasis role='bold'>
 	&IC;, on the other side, does not require client support for cookies.
@@ -66,7 +66,7 @@ wish &IC; to stop appending session IDs to non-problematic clients, and we
 can just say this is possible, as you'll learn from further discussion.
 </para><para>
 Having said the above,
-if the &glos-scratch; variable <mv>mv_no_session_id</mv> is set in their
+if the &glos-scratch; variable <mv>mv_no_session_id</mv> is set in user's
 session, the session ID will not be appended to the URL. Furthermore,
 on a somewhat related note (the elegance of generated URLs), if the scratch
 value <mv>mv_no_count</mv> is set, then the page count

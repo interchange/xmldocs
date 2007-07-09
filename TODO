@@ -1,6 +1,7 @@
 Bugs:
-- swish breaks description if it contains "
+u CVS listi, da je fajl nejm link na CVS 
 - documentation for bounce and restrict is ignored
+- some small error in glossary/pragma at the bottom, [tag pragma]0[/tag]
 
 - order counter, Session->{mv_order_number}, cronjob -0001, or file da-te.counter, or session_id.time
 - in iccattut, s/item-field/item-param/ at least on some places. 
