@@ -173,7 +173,13 @@ Note that the values, once you set them, remain persistent during the
 user's session.
 __END__
 
-__NAME__ example2: Displaying the label and form element in two passes
+__NAME__ example: Change indicator for errors
+<programlisting><![CDATA[
+[formel label=Username name=username signal="<b>%s</b>"]
+]]></programlisting>
+__END__
+
+__NAME__ example: Displaying the label and form element in two passes
 If you had specific requirements, you could,
 by using a little trickery, display the form element label and the
 element itself in two passes:
