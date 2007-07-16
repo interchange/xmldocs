@@ -358,7 +358,7 @@ treated as the master item, and all other are sub-items.
 ]]></programlisting>
 
 Incredible, but you can also define multiple master items! All you need to 
-do is define a <mv>mv_value_group</mv> for each individual item.
+do is define a <mv>mv_order_group</mv> for each individual item.
 Master item "owns" all subsequent sub-items until the next master
 is defined.
 
