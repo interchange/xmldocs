@@ -1,4 +1,27 @@
+__NAME__ purpose
+display component
+__END__
+
 __NAME__ synopsis 
+<row>
+
+	<entry>
+	component
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	component name
+	</entry>
+
+</row> 
 <row>
 
 	<entry>
@@ -30,7 +53,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+&var-MV_COMPONENT_TABLE;, <literal>component</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
@@ -49,7 +72,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+&var-MV_COMPONENT_DIR;, <literal>templates/components</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
@@ -78,3 +101,8 @@ __NAME__ synopsis
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
 __END__
+
+__NAME__ see also
+MV_COMPONENT_DIR, MV_COMPONENT_TABLE, MV_COMPONENT_CACHE
+__END__
+
