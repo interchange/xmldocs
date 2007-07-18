@@ -18,7 +18,7 @@ __END__
 
 __NAME__ description
 The directive specifies names of the &PERL; subroutines to be invoked
-when users' &glos-cart; contents change. The subroutines can 
+when &glos-cart; contents change. The subroutines can 
 be defined on both global and catalog level.
 </para><para>
 The subroutines execute whenever the contents of cart are changed via
