@@ -77,9 +77,31 @@ responsibility of deciding whether or not it is appropriate to invoke cart
 triggers along the way.
 __END__
 
-__NAME__ example: Specifying CartTrigger
-<programlisting>
-CartTrigger cart_update1 cart_update2
-</programlisting>
+__NAME__ example: Quantity of sub items follows their master item
+The quantity of sub items are automatically changed to the quantity of
+the corresponding master item <emphasis role='bold'>regardless</emphasis> 
+of the current quantity.
+
+<programlisting><![CDATA[
+Sub <<EOS
+sub update_cart {
+	my ($cartref, $action, $newref, $oldref, $cartname) = @_;
+
+	# act upon the main cart only
+	return unless $cartname eq 'main';
+
+	if ($action eq 'update' && $newref->{mv_si} == 0
+		&& $newref->{quantity} != $oldref->{quantity}) {
+		# update quantities of sub items
+		for my $subref (grep {$_->{mv_mi} eq $newref->{mv_mi}} @$cartref) {
+			$subref->{quantity} = $newref->{quantity};
+		}
+	}
+}
+EOS
+
+CartTrigger update_cart
+CartTriggerQuantity Yes
+]]></programlisting>
 __END__
 
