@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify whether quantity changes to existing electronic cart items will cause CartTrigger subroutines to execute
+specify whether quantity changes to cart items will cause CartTrigger subroutines to execute
 __END__
 
 
@@ -16,7 +16,7 @@ __END__
 
 
 __NAME__ description
-The directive specifies whether quantity changes on existing electronic cart
+The directive specifies whether quantity changes on existing cart
 items will cause specified &conf-CartTrigger; subroutines to execute.
 </para><para>
 Note, however, that a quantity change to zero will result in item deletion,
