@@ -1,3 +1,7 @@
+__NAME__ purpose
+convert date to a specified format
+__END__
+
 __NAME__ synopsis 
 <row>
 
