@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify subroutines to invoke when users' electronic cart contents change
+specify subroutines to invoke when cart contents change
 __END__
 
 
@@ -18,10 +18,10 @@ __END__
 
 __NAME__ description
 The directive specifies names of the &PERL; subroutines to be invoked
-when users' electronic &glos-cart; contents change. The subroutines can 
+when users' &glos-cart; contents change. The subroutines can 
 be defined on both global and catalog level.
 </para><para>
-The subroutines execute whenever the contents of users' cart are changed via
+The subroutines execute whenever the contents of cart are changed via
 the standard means available through &glos-CGI; variable space (i.e. when
 changes are invoked via the &tag-process; system &glos-actionmap; &mdash;
 through <mv>mv_order_item</mv> and <mv>mv_order_quantity</mv> field submissions,
@@ -34,7 +34,7 @@ functions multiple times.
 The following arguments are passed to all specified subroutines:
 <itemizedlist>
 <listitem><para>
-A reference to the user's cart
+A reference to cart
 </para></listitem>
 <listitem><para>
 A scalar representing the action that fired the trigger; its value will be
