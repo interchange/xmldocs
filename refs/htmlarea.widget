@@ -1,0 +1,20 @@
+__NAME__ purpose
+rich text editor widget
+__END__
+
+__NAME__ description
+The htmlarea widget makes calls to a rich-text editor that replaces 
+a TEXTAREA component on supported browsers. It operates as a normal 
+textarea otherwise.
+</para>
+<para>
+Two flavours of rich-text editors are available, htmlarea (HTMLArea) and
+fckeditor (<ulink url="http://www.fckeditor.net/">FCKeditor</ulink>).
+</para>
+<para>
+Most modern browsers are supported.
+__END__
+
+__NAME__ see also
+HTMLAREA_FLAVOUR
+__END__
