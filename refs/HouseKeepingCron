@@ -3,7 +3,7 @@ Specifies Crontab for Regular Tasks
 __END__
 
 __NAME__ synopsis
-HouseKeepingCron &lt;crontab
+<arg choice='plain'>&lt;<replaceable>filename</replaceable></arg>
 __END__
 
 __NAME__ description
@@ -28,13 +28,12 @@ __NAME__ description
 </para>
 <para>
 <programlisting><![CDATA[
+HouseKeeping 1
 
-
-     HouseKeeping 1
-	 HouseKeepingCron <<EOC
-	 */5 * * * * * :restart
-	 */5 * * * * * :jobs
-	 EOC
+HouseKeepingCron <<EOC
+*/5 * * * * * :restart
+*/5 * * * * * :jobs
+EOC
 ]]></programlisting>
 __END__
 
