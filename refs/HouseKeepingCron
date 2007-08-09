@@ -1,4 +1,54 @@
+__NAME__ purpose
+Specifies Crontab for Regular Tasks
+__END__
 
-__NAME__ missing
-All
+__NAME__ synopsis
+HouseKeepingCron &lt;crontab
+__END__
+
+__NAME__ description
+  The targets are GlobalSub or anything which you can make run
+  with Vend::Dispatch::run_macro. Bear in mind there is no
+  catalog context.
+</para>
+<para>
+  Two special targets exist, <literal>:reconfig</literal> and <literal>:jobs</literal>. 
+  They allow calling
+  of the catalog reconfig routines and jobs routines, respectively.
+  The etc/reconfig and etc/jobsqueue files will be ignored if these
+  targets are not present -- a warning will be issued at startup
+  (and crontab change) if they are not there.
+</para>
+<para>
+  A target prepended with > runs *after* the reconfig/restart/jobs/pid
+  mgmt cycle. Normal specifications run before.
+</para>
+<para>
+  The basic entry to implement <literal>HouseKeeping 5</literal> would be:
+</para>
+<para>
+<programlisting><![CDATA[
+
+
+     HouseKeeping 1
+	 HouseKeepingCron <<EOC
+	 */5 * * * * * :restart
+	 */5 * * * * * :jobs
+	 EOC
+]]></programlisting>
+__END__
+
+__NAME__ example: Running Batch Jobs
+<programlisting><![CDATA[
+HouseKeepingCron <<EOC
+0 0 * * * * =standard hourly
+0 1 2 * * * =standard daily
+0 2 4 * * 7 =standard weekly
+0 0 3 1 * * =standard monthly
+EOC
+]]></programlisting>
+__END__
+
+__NAME__ see also
+HouseKeeping
 __END__
