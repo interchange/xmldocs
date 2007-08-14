@@ -1,5 +1,5 @@
 __NAME__ purpose
-perform dump (display) of user session
+display dump of current session
 __END__
 
 
