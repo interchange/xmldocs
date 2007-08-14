@@ -17,7 +17,7 @@ __NAME__ synopsis
 	None (all keys)
 	</entry>
 	<entry>
-	Dump just one named variable from the user &glos-session;.
+	Display a specific subset of the &glos-session;.
 	</entry>
 
 </row> 
@@ -26,14 +26,14 @@ __NAME__ synopsis
 	<entry></entry>
 	<entry></entry>
 	<entry>0</entry>
-	<entry>Do not output &glos-environment; structure?</entry>
+	<entry>Exclude HTTP &glos-environment; variables.</entry>
 </row> 
 <row>
 	<entry>no_cgi</entry>
 	<entry></entry>
 	<entry></entry>
 	<entry>0</entry>
-	<entry>Do not output &glos-CGI; structure?</entry>
+	<entry>Exclude &glos-CGI; variables.</entry>
 </row> 
 <row>
 	<entry>show_all</entry>
@@ -56,9 +56,23 @@ __END__
 
 
 __NAME__ description
-The tag dumps client connection information, &glos-cart; contents, query value,
-&glos-environment; contents, &glos-session; contents, and &glos-CGI; contents
-to the page. This is useful for &glos-debug;ging.
+This tag dumps the complete &glos-session; or parts of it, and HTTP environment
+variables in a human readable format, which is useful for debugging.
+</para>
+<para>
+The most important of the possible subsets are:
+<informaltable>
+<tgroup cols="2">
+<thead>
+<row><entry>Subset</entry><entry>Contents</entry></row>
+</thead>
+<tbody>
+<row><entry>&glos-cart;s</entry><entry>Cart contents.</entry></row>
+<row><entry>&glos-scratch;</entry><entry>Scratchpad variables.</entry></row>
+<row><entry>&glos-value;s</entry><entry>Value variables.</entry></row>
+</tbody>
+</tgroup>
+</informaltable>
 __END__
 
 
