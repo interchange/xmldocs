@@ -1,3 +1,11 @@
+<para>
+The session contains:
+</para>
+<itemizedlist>
+<listitem>&glos-cart; contents</listitem>
+<listitem>&glos-CGI; variables</listitem>
+<listitem>&glos-value; variables</listitem>
+</itemizedlist>
 <!--
 =item Session parameters
 
