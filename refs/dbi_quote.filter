@@ -57,3 +57,21 @@ for &MYSQL; or &PGSQL;, and
 <literal>'some string \ or other'</literal> for &ORACLE;.
 __END__
 
+__NAME__ example: Quoting for the $Db query method
+<programlisting><![CDATA[
+ActionMap set <<EOR
+sub {
+	my ($action, $name) = split('/', shift, 2);
+	my ($val, $set);
+	
+	# lookup code first
+	$Tag->perl({tables => 'sets'});
+
+	$val = $Tag->filter({op => 'dbi_quote.sets', body => $name});
+	$set = $Db{sets}->query({sql => "select code,description from sets where name = $val"});
+
+	...
+}
+EOR
+]]></programlisting>
+__END__
