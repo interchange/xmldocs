@@ -244,6 +244,14 @@ values above are not properly aligned. This is an unfortunate nature of
   <entry>The usual &glos-HTML; attributes.</entry>
 </row>
 ">
+<!ENTITY ROW_AUTOCREATEDIR "
+<row>
+  <entry>auto_create_dir</entry>	
+  <entry></entry><entry></entry>
+  <entry>0</entry>
+  <entry>Auto-create directories in the file path?</entry>
+</row>
+">
 <!ENTITY ROW_CURRENCYDISPLAY "
 <row>
   <entry>display</entry>	
