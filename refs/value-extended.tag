@@ -1,3 +1,7 @@
+__NAME__ purpose
+Expand value
+__END__
+
 __NAME__ synopsis 
 <row>
 
@@ -147,7 +151,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Returns file contents from a upload field.
 	</entry>
 
 </row> 
@@ -185,10 +189,12 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	File name for output file
 	</entry>
 
-</row> 
+</row>
+&ROW_AUTOCREATEDIR;
+&ROW_UMASK_none;
 <row>
 
 	<entry>
