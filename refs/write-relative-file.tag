@@ -30,12 +30,13 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	1
+	0
 	</entry>
 	<entry>
 	Auto-create directories in the file path?
 	</entry>
 </row> 
+&ROW_UMASK_none;
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
 __END__
