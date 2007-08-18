@@ -16,16 +16,16 @@ __END__
 
 __NAME__ online: Filter example
 <programlisting>
-OK (yes)? [filter yesno]Good input[/filter] [br]
-OK (no)? [filter yesno][/filter]            [br]
+OK (yes)? [filter yesno]Good input[/filter]
+OK (no)? [filter yesno][/filter]
 </programlisting>
 __END__
 
 __NAME__ online: Reaching "yesno" decision after any whitespace is removed first
 <programlisting>
-OK (yes)? [filter yesno]Good input[/filter]  [br]
-OK (yes)? [filter yesno]   [/filter]         [br]
-OK (no)? [filter strip yesno]   [/filter] [br]
+OK (yes)? [filter yesno]Good input[/filter]
+OK (yes)? [filter yesno][/filter]
+OK (no)? [filter strip yesno][/filter]
 </programlisting>
 __END__
 

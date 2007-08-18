@@ -1,5 +1,8 @@
 Bugs:
-u CVS listi, da je fajl nejm link na CVS 
+- on online docs, mention that obsolete examples are obsolete, 
+  provide search box, provide static files for download, 
+	describe keys like alt+n
+- u CVS listi, da je fajl nejm link na CVS 
 - documentation for bounce and restrict is ignored
 - some small error in glossary/pragma at the bottom, [tag pragma]0[/tag]
 

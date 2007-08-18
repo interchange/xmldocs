@@ -831,7 +831,6 @@ for my $group ( keys %symbols ) {
 
   <partintro id="partintro">
   <para>
-	<phrase condition='online'>[restrict log='none']</phrase>
   $preamble{$group}
   </para>
   </partintro>
@@ -857,13 +856,21 @@ ENDD
 				}
 			}
 		}
-		
+
+		# XXX Ok, here are two ugly hacks to insert IC
+		# [restrict] thing for online docs.
+		$symbols{$group}{$key} =~
+		s#<title>#<title><phrase condition='online'>[restrict log='none']</phrase>#s or
+		warn "Didn't manage to insert restrict for $group/$key!\n";
+
+		$symbols{$group}{$key} =~
+		s#(.*)</para>#$1<phrase condition='online'>\[/restrict\]</phrase></para>#s or
+		warn "Didn't manage to insert /restrict for $group/$key!\n";
+
 		$refpage .= $symbols{$group}{$key};
 	}
 
-	## Close up
-	$refpage .= "\n" . "<phrase condition='online'>[/restrict]</phrase>" . '</reference>';
-;
+	$refpage .= "\n</reference>";
 
 	# Dump page
 	my $prefix = ""; #$compounds ? "ic" : "";
@@ -1191,19 +1198,10 @@ sub update_field {
 				die "Empty online example for $name (no <programlisting> found)\n";
 
 		#	# Let's see if we'll get away this easy
+			$code =~ s/^\s*//s;
+			$code =~ s/\s*$//s;
 			$content .= qq{
-<phrase condition='online'>
-<emphasis role='bold'>Example in action:</emphasis>
-</phrase>
-<programlisting>
-<textobject>
-<phrase condition='online'>
-[/restrict]
-$code
-[restrict log='none']
-</phrase>
-</textobject>
-</programlisting>
+<phrase condition='online'><emphasis role='bold'>Example in action:</emphasis></phrase><programlisting><textobject><phrase condition='online'>[/restrict]$code\[restrict log='none']</phrase></textobject></programlisting>
 };
 
 		# And rewrite section to example:

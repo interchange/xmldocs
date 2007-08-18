@@ -5,9 +5,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'><replaceable>DSN</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>DSN</replaceable></arg>
 __END__
 
 __NAME__ description
@@ -19,13 +17,23 @@ __NAME__ notes
 No magic is happening here, mind you. Your "template", the demo catalog,
 or some piece of code must &mdash; at some point &mdash; refer to the
 &var-SQLDSN; variable explicitly. &IC; does not somehow do this by itself.
+</para><para>
+See the &glos-DSN; glossary entry for complete discussion.
 __END__
 
 __NAME__ see also
 __END__
 
-__NAME__ example: Setting SQLDSN
+__NAME__ example: Setting SQLDSN for Postgres
 <programlisting>
-Variable SQLDSN dbi:Pg:dbname=MYDBNAME
+Variable SQLDSN dbi:Pg:database=MYDBNAME
 </programlisting>
 __END__
+
+__NAME__ example: Setting SQLDSN for MySQL
+<programlisting>
+Variable SQLDSN dbi:mysql:database=MYDBNAME
+</programlisting>
+__END__
+
+

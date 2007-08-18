@@ -1,0 +1,35 @@
+
+<literal>Data Source Name</literal> or a DSN is an application's data source identifier. It provides all parameters for the connection to a database.
+</para><para>
+In its simplest form, it has the format of 
+<literal>
+	<replaceable>protocol</replaceable>:
+</literal>
+<literal>
+	<replaceable>subprotocol</replaceable>:
+</literal>
+<literal>
+	<replaceable>host</replaceable>:
+</literal>
+<literal>
+	<replaceable>port</replaceable>:
+</literal>
+<literal>
+	<replaceable>database</replaceable>
+</literal>
+
+</para><para>
+
+It's also possible to explicitly name the parameters, like this:
+
+
+<literal>
+	<replaceable>protocol</replaceable>:
+</literal>
+<literal>
+	<replaceable>subprotocol</replaceable>:
+</literal>
+<literal>
+	<replaceable>database=DBNAME;port=PORT</replaceable>
+</literal>
+

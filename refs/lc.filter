@@ -17,9 +17,9 @@ __END__
 
 __NAME__ online: Filter example
 <programlisting><![CDATA[
-[filter lc]You are kindly invited to [filter] 
-<a href="http://www.j-walk.com/other/conf/">The 3rd Annual Nigerian
-EMail Conference</a>.
+[filter lc]YOU ARE KINDLY INVITED TO
+<a href="http://www.j-walk.com/other/conf/">The 3rd Annual Nigerian EMail Conference</a>.
+[/filter]
 ]]></programlisting>
 __END__
 

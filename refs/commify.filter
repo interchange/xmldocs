@@ -12,14 +12,7 @@ __END__
 __NAME__ online: Filter example
 <programlisting>
 [set online_commify_test]1234567890.123456[/set]
-
-My commified value, trimmed to 2 decimal places is:
-[filter commify.2][scratchd online_commify_test][/filter]
+[filter op=commify.2 interpolate=1][scratchd online_commify_test][/filter]
 </programlisting>
-__END__
-
-
-__NAME__ missing
-Why 12345.6789 with [filter commify.2] becomes 0.67 ?
 __END__
 

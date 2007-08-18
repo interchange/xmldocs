@@ -68,17 +68,17 @@ __END__
 
 __NAME__ online: Using date_change
 <programlisting><![CDATA[
-[filter date_change]2005-01-01[/filter]    <br/>
-[filter date_change]2005/01/01[/filter]    <br/>
-<br/>
-[filter date_change]2005-01-01:10[/filter]    <br/>
-[filter date_change]2005/05/29:1536[/filter]    <br/>
-<br/>
-[filter date_change]05-29-2005:1536[/filter]    <br/>
-[filter date_change]05-29-05:1536[/filter]    <br/>
-<br/>
-[filter date_change]0000-00-00[/filter]    <br/>
-[filter date_change][/filter]    <br/>
+[filter date_change]2005-01-01[/filter]
+[filter date_change]2005/01/01[/filter]
+
+[filter date_change]2005-01-01:10[/filter]
+[filter date_change]2005/05/29:1536[/filter]
+
+[filter date_change]05-29-2005:1536[/filter]
+[filter date_change]05-29-05:1536[/filter]
+
+[filter date_change]0000-00-00[/filter]
+[filter date_change][/filter]
 ]]></programlisting>
 __END__
 

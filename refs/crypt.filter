@@ -25,8 +25,7 @@ __NAME__ online: Filter example with hand-specified salt
 The encrypted string should be the same each time you run the code
 because the salt does not change.
 <programlisting>
-Encrypted string <literal>TEST</literal> with salt of 
-<literal>AB</literal> is: 
+Encrypted string <literal>TEST</literal> with salt of <literal>AB</literal> is: 
 [filter crypt.AB]TEST[/filter].
 </programlisting>
 __END__

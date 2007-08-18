@@ -21,6 +21,7 @@
 	<!ENTITY whatsnew SYSTEM "../tmp/WHATSNEW-c.db"> 
 	<!ENTITY databases SYSTEM "../tmp/databases-c.db"> 
 	<!ENTITY optimization SYSTEM "../tmp/optimization-c.db"> 
+	<!ENTITY xmldocs SYSTEM "../tmp/xmldocs-c.db"> 
 ]>
 
 <targetset>
@@ -29,8 +30,7 @@
   </targetsetinfo>
 
 	<sitemap>
-		<dir name="OUTPUT"> 
-			
+		<dir name="OUTPUT">
 			<dir name='iccattut'>
 				<document targetdoc="iccattut">
 				&iccattut;
@@ -139,6 +139,11 @@
 				</document>
 			</dir>
 
+			<dir name='xmldocs'>
+				<document targetdoc="xmldocs">
+				&xmldocs;
+				</document>
+			</dir>
 		</dir>
 	</sitemap>
 

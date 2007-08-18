@@ -37,14 +37,14 @@ __END__
 
 __NAME__ online: Converting dates and times to seconds since Epoch
 <programlisting><![CDATA[
-[filter date2time]01/01/2005[/filter]    <br/>
-[filter date2time]01/01/05[/filter]      <br/>
-<br/>
-[filter date2time]01-01-2005[/filter]    <br/>
-[filter date2time]01-01-05[/filter]      <br/>
-<br/>
-[filter date2time]01-01-2005:10[/filter] <br/>
-[filter date2time]01-01-05:1045[/filter] <br/>
+[filter date2time]01/01/2005[/filter]
+[filter date2time]01/01/05[/filter]
+
+[filter date2time]01-01-2005[/filter]
+[filter date2time]01-01-05[/filter]
+
+[filter date2time]01-01-2005:10[/filter]
+[filter date2time]01-01-05:1045[/filter]
 ]]></programlisting>
 __END__
 

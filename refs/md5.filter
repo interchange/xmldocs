@@ -13,11 +13,11 @@ __END__
 
 __NAME__ online: Filter example
 <programlisting>
-[filter md5][/filter]                  [br]
-[filter md5]One[/filter]               [br]
-[filter md5]Two[/filter]               [br]
-[filter md5]MyPassword[/filter]        [br]
-[filter md5]Very long string[/filter]  [br]
+[filter md5][/filter]
+[filter md5]One[/filter]
+[filter md5]Two[/filter]
+[filter md5]MyPassword[/filter]
+[filter md5]Very long string[/filter]
 </programlisting>
 __END__
 
