@@ -7,7 +7,7 @@
 <article id='iccattut'>
 
 <articleinfo>
-	<title><phrase condition="online">[restrict log='none']</phrase>Interchange Guides: the Catalog Building Tutorial</title>
+	<title>Interchange Guides: the Catalog Building Tutorial</title>
 	<titleabbrev>iccattut</titleabbrev>
 
 	<copyright>
@@ -72,6 +72,7 @@
 
 	<legalnotice>
 		<para>
+		<phrase condition="online">[restrict log='none']</phrase>
 		This documentation is free; you can redistribute it and/or modify
 		it under the terms of the &GNU; General Public License as published by
 		the Free Software Foundation; either version 2 of the License, or

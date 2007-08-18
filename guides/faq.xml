@@ -6,7 +6,7 @@
 <article id='faq'>
 
 <articleinfo>
-	<title><phrase condition="online">[restrict log='none']</phrase>Interchange FAQ: Frequently Asked Questions</title>
+	<title>Interchange FAQ: Frequently Asked Questions</title>
 	<titleabbrev>faq</titleabbrev>
 
 	<copyright>
@@ -31,6 +31,7 @@
 
 	<legalnotice>
 		<para>
+		<phrase condition="online">[restrict log='none']</phrase>
 		This documentation is free; you can redistribute it and/or modify
 		it under the terms of the &GNU; General Public License as published by
 		the Free Software Foundation; either version 2 of the License, or

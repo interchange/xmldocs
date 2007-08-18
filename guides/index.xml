@@ -6,10 +6,11 @@
 <book id='index'>
 
 <bookinfo>
-<title><phrase condition="online">[restrict log='none']</phrase>Interchange Documentation</title>
+<title>Interchange Documentation</title>
 <titleabbrev>index</titleabbrev>
 </bookinfo>
 
+<para><phrase condition="online">[restrict log='none']</phrase></para>
 
 
 <!--

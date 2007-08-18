@@ -7,7 +7,7 @@
 <article id='icdb'>
 
 <articleinfo>
-	<title><phrase condition="online">[restrict log='none']</phrase>Interchange Guides: Database and Field Descriptions</title>
+	<title>Interchange Guides: Database and Field Descriptions</title>
 	<titleabbrev>icdb</titleabbrev>
 
 	<copyright>
@@ -27,6 +27,7 @@
 
 	<legalnotice>
 		<para>
+		<phrase condition="online">[restrict log='none']</phrase>
 		This documentation is free; you can redistribute it and/or modify
 		it under the terms of the &GNU; General Public License as published by
 		the Free Software Foundation; either version 2 of the License, or

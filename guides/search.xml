@@ -6,7 +6,7 @@
 <article id='search'>
 
 <articleinfo>
-	<title><phrase condition="online">[restrict log='none']</phrase>Interchange Guides: Search Tutorial</title>
+	<title>Interchange Guides: Search Tutorial</title>
 	<titleabbrev>search</titleabbrev>
 
 	<copyright>
@@ -25,6 +25,7 @@
 
 	<legalnotice>
 		<para>
+		<phrase condition="online">[restrict log='none']</phrase>
 		This documentation is free; you can redistribute it and/or modify
 		it under the terms of the &GNU; General Public License as published by
 		the Free Software Foundation; either version 2 of the License, or

@@ -6,7 +6,7 @@
 <article id='optimization'>
 
 <articleinfo>
-	<title><phrase condition="online">[restrict log='none']</phrase>Interchange Guides: Optimization</title>
+	<title>Interchange Guides: Optimization</title>
 	<titleabbrev>optimization</titleabbrev>
 
 	<copyright>
@@ -32,6 +32,7 @@
 
 	<legalnotice>
 		<para>
+		<phrase condition="online">[restrict log='none']</phrase>
 		This documentation is free; you can redistribute it and/or modify
 		it under the terms of the &GNU; General Public License as published by
 		the Free Software Foundation; either version 2 of the License, or
