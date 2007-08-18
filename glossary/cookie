@@ -10,29 +10,32 @@ is set by &conf-SaveExpire;.
 Clients can control whether they reject or accept cookies from all or 
 some sites, and can enforce their expiry time.
 </para><para>
-Requests arriving from users
-are "anonymous" and unrelated to each other, even of course if they are
-coming from the same user, because the server can't conclude that for sure,
-based on just the IP addresses it sees.
+Web page requests arriving from users are "anonymous" and basically
+unrelated to each other even if they are
+coming from the same user. This is because the HTTP protocol is "stateless"
+and server can't map requests to specific clients based on just the IP
+addresses it sees.
 Therefore, cookies are a crucial mechanism for preserving state
-information in programs with web-based interfaces. By reading the session ID
+information in programs with web-based interfaces. By reading the
+&glos-session; ID
 value (stored in a cookie on client's computer), the server can now recognize
-and differentiate users and ongoing, active sessions.
+associate users with their ongoing, active sessions.
 </para>
 
 <note>
 	<title>Interchange and its non-dependence on client cookies</title>
 	<para>
-	Large majority of any state-dependent software out there simply 
-	<emphasis role='bold'>requires</emphasis> that the clients accept 
-	storage and retrieval of cookies. Even eBay requires
-	cookies, let alone any much weaker competitors such as
-	various rivalling "shopping carts".
+	Many web-based solutions 
+	<emphasis role='bold'>require</emphasis> that the clients accept 
+	storage and retrieval of cookies. When cookies are not enabled on 
+	client side, the usage of the site is limited, or clients are even
+	denied access completely.
 	</para><para>
 	<emphasis role='bold'>
 	&IC;, on the other side, does not require client support for cookies.
 	</emphasis>
-	If the storage of cookies is denied by the client, &IC; appends session
+	If the storage of cookies is denied or unsupported by the client,
+	&IC; appends session
 	information in generated URLs and uses them to continue keeping track of
 	user sessions. (An example session ID "embedded" in an URL looks like
 	<literal>?id=YjiSdrek</literal>).
@@ -51,28 +54,28 @@ and differentiate users and ongoing, active sessions.
 </note>
 
 <para>
-When a new client accesses its first page from the &IC; catalog, &IC; gives
-it both the requested page and a cookie in return. At that point, &IC; can't
+When a new client accesses its first page from the &IC; catalog, &IC; sends
+it both the requested page and a cookie. At that point, &IC; can't
 know whether the client accepted the cookie or not &mdash; it has to wait for
-the client to initiate the next page request.
+the client to initiate the second page request.
+(Historically, many application servers always bounced the first request
+to provoke the second access from the client and to check for
+cookie support. Interchange does not do it.)
+</para><para>
 If the user sends a cookie back to &IC; (which, as you see, can happen no
 sooner than on second request), &IC; knows the client is cookie-capable and
 there's no <emphasis>need</emphasis> to embed session ID in URLs.
 </para><para>
 One possibly confusing thing is that, by default, &IC; always appends
 session ID information to the URLs it generates &mdash; even if clients
-have no cookie-handing problems. For ultimate elegance, you sometimes
-wish &IC; to stop appending session IDs to non-problematic clients, and we
-can just say this is possible, as you'll learn from further discussion.
-</para><para>
-Having said the above,
-if the &glos-scratch; variable <mv>mv_no_session_id</mv> is set in user's
+have no cookie-handing problems.
+If the &glos-scratch; variable <mv>mv_no_session_id</mv> is set in the user's
 session, the session ID will not be appended to the URL. Furthermore,
-on a somewhat related note (the elegance of generated URLs), if the scratch
+on a somewhat related note, if the scratch
 value <mv>mv_no_count</mv> is set, then the page count
 (<literal>mv_pc=<replaceable>random</replaceable></literal>) will not be
-appended either (page counter otherwise serves to prevent client browsers
-from caching pages).
+appended either. "PC" is a page counter that serves to prevent client browsers
+from caching pages.
 
 <!--
 .No session ID or count will be shown. That makes the URL shown above to be http://machine.company.com/cgi-bin/vlink/shirts.html. Once again, this is on the second page the user accesses, if they are taking and sending cookies. If the user has a pre-existing C<MV_SESSION_ID> or C<MV_USERNAME> cookie from a prior session, the effect will be immediate.
