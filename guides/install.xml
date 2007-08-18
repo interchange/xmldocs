@@ -6,7 +6,7 @@
 <article id='install'>
 
 <articleinfo>
-	<title>Interchange Guides: Installation</title>
+	<title><phrase condition="online">[restrict log='none']</phrase>Interchange Guides: Installation</title>
 	<titleabbrev>install</titleabbrev>
 
 	<copyright>
@@ -411,6 +411,7 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	<para>
 	For all information on starting, stopping, restarting and otherwise
 	controlling the &IC; server, see &howto-daemon-control;.
+	<phrase condition="online">[/restrict]</phrase>
 	</para>
 </sect1>
 

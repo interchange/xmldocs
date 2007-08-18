@@ -6,7 +6,7 @@
 <book id='index'>
 
 <bookinfo>
-<title>Interchange Documentation</title>
+<title><phrase condition="online">[restrict log='none']</phrase>Interchange Documentation</title>
 <titleabbrev>index</titleabbrev>
 </bookinfo>
 
@@ -271,6 +271,7 @@ the Free Software Foundation; either version 2 of the License, or
 
 <para role="copyright">
 	Copyright 2005-2007 <ulink url='http://www.icdevgroup.org/'>Interchange Development Group (http://www.icdevgroup.org/)</ulink>, Davor Ocelic, <ulink url='mailto:docelic+icdevgroup.org'>(docelic+icdevgroup.org)</ulink>
+	<phrase condition="online">[/restrict]</phrase>
 </para>
 
 </book>

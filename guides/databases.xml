@@ -7,7 +7,7 @@
 <article id='icdb'>
 
 <articleinfo>
-	<title>Interchange Guides: Database and Field Descriptions</title>
+	<title><phrase condition="online">[restrict log='none']</phrase>Interchange Guides: Database and Field Descriptions</title>
 	<titleabbrev>icdb</titleabbrev>
 
 	<copyright>
@@ -139,6 +139,6 @@
 <section id='userdb'>
 	<title>User Database</title>
 <para>
-</para>
+<phrase condition='online'>[/restrict]</phrase></para>
 </section>
 </article>

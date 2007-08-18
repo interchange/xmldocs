@@ -6,7 +6,7 @@
 <article id='search'>
 
 <articleinfo>
-	<title>Interchange Guides: Search Tutorial</title>
+	<title><phrase condition="online">[restrict log='none']</phrase>Interchange Guides: Search Tutorial</title>
 	<titleabbrev>search</titleabbrev>
 
 	<copyright>
@@ -820,6 +820,7 @@ Search for [value searchstring] in [value column]
        os=yes"
 ]Renaissance and Impressionist Paintings&lt;a&gt;
 </programlisting>
+<phrase condition="online">[/restrict]</phrase>
 		</para>
 		</section>
 </section>

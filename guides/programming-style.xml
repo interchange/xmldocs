@@ -7,7 +7,7 @@
 <article id='programming-style'>
 
 <articleinfo>
-	<title>Interchange Guides: Official Programming Style</title>
+	<title><phrase condition="online">[restrict log='none']</phrase>Interchange Guides: Official Programming Style</title>
 	<titleabbrev>programming-style</titleabbrev>
 
 	<copyright>
@@ -299,6 +299,7 @@ if (
   ['TagDir',        'root_dir_array',   'code'],
 ]]></programlisting>
 </literallayout>
+<phrase condition="online">[/restrict]</phrase>
 		</para></listitem>
 	</itemizedlist>
 </sect1>

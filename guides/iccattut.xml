@@ -7,7 +7,7 @@
 <article id='iccattut'>
 
 <articleinfo>
-	<title>Interchange Guides: the Catalog Building Tutorial</title>
+	<title><phrase condition="online">[restrict log='none']</phrase>Interchange Guides: the Catalog Building Tutorial</title>
 	<titleabbrev>iccattut</titleabbrev>
 
 	<copyright>
@@ -1249,6 +1249,7 @@ Variable BOTTOM <bottom
 		</para></listitem>
 		<listitem><para>
 		Organize your products into categories and group lists by category
+		<phrase condition="online">[/restrict]</phrase>
 		</para></listitem>
 	</itemizedlist>
 </sect1>

@@ -7,7 +7,7 @@
 <article id='upgrade'>
 
 <articleinfo>
-	<title>Interchange Guides: Upgrading</title>
+	<title><phrase condition="online">[restrict log='none']</phrase>Interchange Guides: Upgrading</title>
 	<titleabbrev>upgrade</titleabbrev>
 
 	<copyright>
@@ -1031,6 +1031,7 @@ Minivend 4/&IC; method:</para>
 If you do this wrong, you'll get an error that looks like this:</para>
 
 <para>
+<phrase condition="online">[/restrict]</phrase>
 <programlisting>
  115.202.115.237 H8gbq6oK:115.202.115.237 - \
   [28/February/2001:18:58:50 -0500] testcat /cgi-bin/testcat.cgi \

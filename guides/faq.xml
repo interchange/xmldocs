@@ -6,7 +6,7 @@
 <article id='faq'>
 
 <articleinfo>
-	<title>Interchange FAQ: Frequently Asked Questions</title>
+	<title><phrase condition="online">[restrict log='none']</phrase>Interchange FAQ: Frequently Asked Questions</title>
 	<titleabbrev>faq</titleabbrev>
 
 	<copyright>
@@ -1992,6 +1992,7 @@ All in all, &IC; has been proven to be securable over time.
 But we all have to do our part and think about what we are doing
 with user-entered data.
 
+<phrase condition="online">[/restrict]</phrase>
 </para>
 </answer></qandaentry>
 

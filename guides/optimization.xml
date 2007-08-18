@@ -6,7 +6,7 @@
 <article id='optimization'>
 
 <articleinfo>
-	<title>Interchange Guides: Optimization</title>
+	<title><phrase condition="online">[restrict log='none']</phrase>Interchange Guides: Optimization</title>
 	<titleabbrev>optimization</titleabbrev>
 
 	<copyright>
@@ -493,6 +493,7 @@ Overhead:
 			You can also retrieve values using <code>[scratchd <replaceable>VARIABLE_NAME</replaceable>]</code>
 			to return the contents and delete them from the session at the same
 			time.
+			<phrase condition="online">[/restrict]</phrase>
 			</para>
 		</sect3>
 	</sect2>
