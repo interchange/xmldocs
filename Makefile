@@ -53,6 +53,12 @@ all: skel cache refxmls                                            \
      olinkdbs-nc olinkdbs-c                                        \
 		 glossary symbols guides howtos
 
+chunked:  skel cache refxmls olinkdbs-nc olinkdbs-c                \
+          $(foreach doc,$(ALL_DOCS),OUTPUT/$(doc))
+
+nonchunked:  skel cache refxmls olinkdbs-nc olinkdbs-c             \
+          $(foreach doc,$(ALL_DOCS),OUTPUT/$(doc).html )
+
 guides:   $(foreach doc,$(GUIDES),OUTPUT/$(doc).html  )            \
           $(foreach doc,$(GUIDES),OUTPUT/$(doc))
 
