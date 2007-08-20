@@ -310,6 +310,10 @@ a {
 	color: #208cbd;
 }
 
+.varname a {
+	color: #fff;
+}
+
 img {
 	border: 0;
 }

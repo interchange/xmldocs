@@ -147,12 +147,16 @@ return if $::Pragma->{download};
 				containing changes and fixes to multiple areas) it is best to create
 		file-specific comments addressing individual fixes. Using blank
 		comments is not encouraged.
-	</para><para>
+	</para>
+	<!--
+	<para>
 		Also, the CVS commit messages you write will be used to construct
     <olink targetdoc='WHATSNEW' /> entries, so make sure your text is both
 		user- and developer-friendly, not longer than necessary, clear,
 		and concise.
-	</para></listitem>
+	</para>
+	-->
+	</listitem>
 
 	<listitem><para>
 		<emphasis role='bold'>Loops</emphasis> - we prefer to declare loop

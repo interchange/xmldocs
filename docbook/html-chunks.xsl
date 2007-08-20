@@ -102,6 +102,16 @@
 
 
 
+  <!-- works only for this stylesheet, should be modified for others -->
+  <xsl:template match="varname">
+        <xsl:text disable-output-escaping="yes">&lt;span class="varname"&gt;</xsl:text>
+        <xsl:text disable-output-escaping="yes">&lt;a href="../vars/</xsl:text>
+        <xsl:value-of select="." />
+        <xsl:text disable-output-escaping="yes">.html"&gt;</xsl:text>
+        <xsl:value-of select="." />
+        <xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
+        <xsl:text disable-output-escaping="yes">&lt;/span&gt;</xsl:text>
+  </xsl:template>
 
 
 
