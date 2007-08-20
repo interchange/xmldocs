@@ -31,7 +31,6 @@
 
 	<legalnotice>
 		<para>
-		<phrase condition="online">[restrict log='none']</phrase>
 		This documentation is free; you can redistribute it and/or modify
 		it under the terms of the &GNU; General Public License as published by
 		the Free Software Foundation; either version 2 of the License, or
@@ -1992,8 +1991,6 @@ people won't know what it is).
 All in all, &IC; has been proven to be securable over time.
 But we all have to do our part and think about what we are doing
 with user-entered data.
-
-<phrase condition="online">[/restrict]</phrase>
 </para>
 </answer></qandaentry>
 

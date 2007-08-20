@@ -25,7 +25,6 @@
 
 	<legalnotice>
 		<para>
-		<phrase condition="online">[restrict log='none']</phrase>
 		This documentation is free; you can redistribute it and/or modify
 		it under the terms of the &GNU; General Public License as published by
 		the Free Software Foundation; either version 2 of the License, or
@@ -821,7 +820,6 @@ Search for [value searchstring] in [value column]
        os=yes"
 ]Renaissance and Impressionist Paintings&lt;a&gt;
 </programlisting>
-<phrase condition="online">[/restrict]</phrase>
 		</para>
 		</section>
 </section>

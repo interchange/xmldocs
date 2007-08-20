@@ -17,9 +17,11 @@
 	<xsl:param name="use.id.as.filename"/>
 	<xsl:param name="root.filename">index</xsl:param>
 	<xsl:param name="chunk.fast">0</xsl:param>
+	<xsl:param name="chunk.quetly">1</xsl:param>
 	<xsl:param name="chunk.section.depth">1</xsl:param>
+	<xsl:param name="chunk.first.sections">1</xsl:param>
 	<xsl:param name="chunker.output.encoding" select="'ISO-8859-1'" />
-	<xsl:param name="chunker.output.indent">no</xsl:param>
+	<xsl:param name="chunker.output.indent">yes</xsl:param>
 
 	
 	<!-- a parameter added to docbook after my inquiry. Will have no
@@ -30,7 +32,14 @@
 	<xsl:param name="refclass.suppress">1</xsl:param>
 
 
-  <xsl:template name="user.footer.content" >
+
+	<!-- insert [restrict] [/restrict] into documents for online
+		viewing -->
+	<xsl:template name="user.header.content">
+		<xsl:comment>[restrict log='none']</xsl:comment>
+	</xsl:template>
+	<xsl:template name="user.footer.content">
+		<xsl:comment>[/restrict]</xsl:comment>
   <p class='w3c'>
     <a href="http://www.docbook.org/">
       <img
@@ -45,7 +54,7 @@
         class='w3cimg'/>
     </a>
   </p>
-  </xsl:template>
+	</xsl:template>
 
 
 	<!-- Norman Walsh gave me a nice idea and code. Since chunked documents
@@ -131,6 +140,7 @@
 
 	<xsl:include href="common.xsl"/>
 	<xsl:include href="html-common.xsl"/>
+
 
 </xsl:stylesheet>
 

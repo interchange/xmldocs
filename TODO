@@ -1,4 +1,5 @@
 Bugs:
+- search doc se nevidi jer je search neki actionmap
 - on online docs, mention that obsolete examples are obsolete, 
   provide search box, provide static files for download, 
 	describe keys like alt+n

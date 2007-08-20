@@ -27,7 +27,6 @@
 
 	<legalnotice>
 		<para>
-		<phrase condition="online">[restrict log='none']</phrase>
 		This documentation is free; you can redistribute it and/or modify
 		it under the terms of the &GNU; General Public License as published by
 		the Free Software Foundation; either version 2 of the License, or
@@ -412,7 +411,6 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	<para>
 	For all information on starting, stopping, restarting and otherwise
 	controlling the &IC; server, see &howto-daemon-control;.
-	<phrase condition="online">[/restrict]</phrase>
 	</para>
 </sect1>
 

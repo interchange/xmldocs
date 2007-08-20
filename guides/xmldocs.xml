@@ -27,7 +27,6 @@
 
 	<legalnotice>
 		<para>
-		<phrase condition="online">[restrict log='none']</phrase>
 		This documentation is free; you can redistribute it and/or modify
 		it under the terms of the &GNU; General Public License as published by
 		the Free Software Foundation; either version 2 of the License, or
@@ -191,7 +190,6 @@ Add the following to your &ccf;:
 	<ulink url="http://www.docbook.org/tdg/en/html/ulink.html">ulink</ulink> - link to external resources<sbr/>
 	<ulink url="http://www.docbook.org/tdg/en/html/warning.html">warning</ulink> - warning block, stands out<sbr/>
 	<ulink url="http://www.docbook.org/tdg/en/html/xref.html">xref</ulink> - link within the same document<sbr/>
-<phrase condition="online">[/restrict]</phrase>
 	</para>
 
 </sect1>

@@ -857,16 +857,6 @@ ENDD
 			}
 		}
 
-		# XXX Ok, here are two ugly hacks to insert IC
-		# [restrict] thing for online docs.
-		$symbols{$group}{$key} =~
-		s#<title>#<title><phrase condition='online'>[restrict log='none']</phrase>#s or
-		warn "Didn't manage to insert restrict for $group/$key!\n";
-
-		$symbols{$group}{$key} =~
-		s#(.*)</para>#$1<phrase condition='online'>\[/restrict\]</phrase></para>#s or
-		warn "Didn't manage to insert /restrict for $group/$key!\n";
-
 		$refpage .= $symbols{$group}{$key};
 	}
 
