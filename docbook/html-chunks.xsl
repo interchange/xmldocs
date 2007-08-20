@@ -128,7 +128,7 @@
         <xsl:text disable-output-escaping="yes">.html"&gt;</xsl:text>
         <xsl:value-of select="." />
         <xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
-        <xsl:text disable-output-escaping="yes">&lt;/code&gt;]</xsl:text>
+        <xsl:text disable-output-escaping="yes">&lt;/code&gt;] </xsl:text>
   </xsl:template>
   <xsl:template match="pragma">
         <xsl:text disable-output-escaping="yes">&lt;code class="pragma"&gt;</xsl:text>
