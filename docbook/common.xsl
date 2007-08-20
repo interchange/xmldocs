@@ -40,27 +40,10 @@
 		glossary   toc,title
 	</xsl:param>
 
+	  <xsl:template match="mv"><xsl:call-template name="inline.monoseq"/></xsl:template>
+		<xsl:template match="am"><xsl:call-template name="inline.monoseq"/></xsl:template>
 
-	<!--<xsl:template match="tag"><xsl:text>[</xsl:text><xsl:call-template name="inline.monoseq"/><xsl:text>]</xsl:text></xsl:template>-->
-	<xsl:template match="tag">[<xsl:call-template name="inline.monoseq"/>]</xsl:template>
-	<xsl:template match="pragma"><xsl:call-template name="inline.monoseq"/></xsl:template>
-	<xsl:template match="mv"><xsl:call-template name="inline.monoseq"/></xsl:template>
-	<xsl:template match="am"><xsl:call-template name="inline.monoseq"/></xsl:template>
-	<xsl:template match="filter"><xsl:call-template name="inline.monoseq"/></xsl:template>
-	<xsl:template match="widget"><xsl:call-template name="inline.monoseq"/></xsl:template>
-	<xsl:template match="check"><xsl:call-template name="inline.monoseq"/></xsl:template>
-	<xsl:template match="varname">
-		<xsl:call-template name="olink">
-			<xsl:with-param name="content" select="."/>
-			<xsl:with-param name="targetdoc" select="'vars'"/>
-			<xsl:with-param name="targetptr" select="."/>
-		</xsl:call-template>
-		<!--
-		<xsl:variable name="content">
-			<xsl:call-template name="inline.monoseq"/>
-		</xsl:variable>
-		-->
-	</xsl:template>
+
 
   <xsl:param name="local.l10n.xml" select="document('')"/>
   <l:i18n xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">
