@@ -57,7 +57,9 @@
 						Configuration Directives
 					</emphasis><sbr/>
 					<ulink url="confs/index.html">Multi-HTML</ulink><phrase condition="standard">
-					<ulink url="confs.html">HTML</ulink>
+					<phrase condition="standard">
+					| <ulink url="confs.html">HTML</ulink>
+					</phrase>
 					</phrase>
 				</entry>
 
