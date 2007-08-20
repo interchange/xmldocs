@@ -120,7 +120,6 @@
         <xsl:value-of select="." />
         <xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;/code&gt;</xsl:text>
-				<xsl:call-template name="inline.monoseq"/>
   </xsl:template>
   <xsl:template match="tag">
         <xsl:text disable-output-escaping="yes">&lt;code class="tag"&gt;</xsl:text>
@@ -130,7 +129,6 @@
         <xsl:value-of select="." />
         <xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;/code&gt;]</xsl:text>
-				<xsl:call-template name="inline.monoseq"/>
   </xsl:template>
   <xsl:template match="pragma">
         <xsl:text disable-output-escaping="yes">&lt;code class="pragma"&gt;</xsl:text>
@@ -140,7 +138,6 @@
         <xsl:value-of select="." />
         <xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;/code&gt;</xsl:text>
-				<xsl:call-template name="inline.monoseq"/>
   </xsl:template>
   <xsl:template match="check">
         <xsl:text disable-output-escaping="yes">&lt;code class="check"&gt;</xsl:text>
@@ -150,7 +147,6 @@
         <xsl:value-of select="." />
         <xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;/code&gt;</xsl:text>
-				<xsl:call-template name="inline.monoseq"/>
   </xsl:template>
   <xsl:template match="widget">
         <xsl:text disable-output-escaping="yes">&lt;code class="widget"&gt;</xsl:text>
@@ -160,7 +156,6 @@
         <xsl:value-of select="." />
         <xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;/code&gt;</xsl:text>
-				<xsl:call-template name="inline.monoseq"/>
   </xsl:template>
   <xsl:template match="filter">
         <xsl:text disable-output-escaping="yes">&lt;code class="filter"&gt;</xsl:text>
@@ -170,7 +165,6 @@
         <xsl:value-of select="." />
         <xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;/code&gt;</xsl:text>
-				<xsl:call-template name="inline.monoseq"/>
   </xsl:template>
 
 
