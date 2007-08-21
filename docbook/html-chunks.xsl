@@ -106,15 +106,13 @@
   <!-- works only for this stylesheet, should be modified for others.
 	(Thanks dpawson, www.dpawson.co.uk) -->
 	<xsl:template match="tag">
-		<code class='tag'>
-		<xsl:element name="a">
+		<code class='tag'>[<xsl:element name="a">
 		<xsl:attribute name="href">
 		<xsl:value-of select="'../tags/'"/>
 		<xsl:value-of select="."/>
 		</xsl:attribute>
 		<xsl:value-of select="."/>
-		</xsl:element>
-		</code>
+		</xsl:element>]</code>
 	</xsl:template>
 	<xsl:template match="option">
 		<code class='option'>
