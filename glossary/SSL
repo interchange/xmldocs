@@ -3,11 +3,11 @@ Sockets Layer</ulink> resource at &WIKIPEDIA;.
 </para><para>
 &IC; has several features that enable secure ordering via SSL.
 Despite their mystique, SSL web servers are actually
-quite easy to operate. The difference between the standard &HTTP; server
+quite easy to operate. The difference between the standard HTTP server
 and the SSL HTTPS server, from the standpoint of the user, is only in
 the encryption that happens kind-of transparently, and the specification
 of the URL -- <literal>https:</literal> is used for the
-&URL; protocol specification instead of the usual <literal>http:</literal>
+URL protocol specification instead of the usual <literal>http:</literal>
 designation.
 </para>
 

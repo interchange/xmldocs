@@ -45,7 +45,7 @@ database columns <database class='field'>heavy</database> and
 able to perform decisions
 based on <code>$item-&gt;{heavy}</code> and
 <code>$item-&gt;{downloadable}</code> (but there are more access methods,
-see the &gloss-attribute; &GE;.
+see the &glos-attribute; &GE;.
 __END__
 
 

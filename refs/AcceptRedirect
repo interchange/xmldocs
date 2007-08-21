@@ -22,7 +22,7 @@ for a Web server such as &APACHE;. For instance, if your Apache
 
 then a request for <literal>/somedir/index.html</literal> that is not found
 on the Web server would be resent to
-<literal>/cgi-bin/ic/foundation/somedir/index.html</literal>, and
+<literal>/cgi-bin/ic/standard/somedir/index.html</literal>, and
 would be indistinguishable from the static Web server-served page.
 __END__
 
