@@ -104,65 +104,72 @@
 
   <!-- works only for this stylesheet, should be modified for others -->
   <xsl:template match="varname">
+				<xsl:variable name="input" select="."/>
         <xsl:text disable-output-escaping="yes">&lt;code class="varname"&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;a href="../vars/</xsl:text>
-        <xsl:value-of select="." />
+        <xsl:value-of select="$input" />
         <xsl:text disable-output-escaping="yes">.html"&gt;</xsl:text>
-        <xsl:value-of select="." />
+        <xsl:value-of select="$input" />
         <xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;/code&gt;</xsl:text>
   </xsl:template>
   <xsl:template match="option">
+				<xsl:variable name="input" select="."/>
         <xsl:text disable-output-escaping="yes">&lt;code class="option"&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;a href="../confs/</xsl:text>
-        <xsl:value-of select="." />
+        <xsl:value-of select="$input" />
         <xsl:text disable-output-escaping="yes">.html"&gt;</xsl:text>
-        <xsl:value-of select="." />
+        <xsl:value-of select="$input" />
         <xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;/code&gt;</xsl:text>
   </xsl:template>
   <xsl:template match="tag">
+				<xsl:variable name="input" select="."/>
         <xsl:text disable-output-escaping="yes">&lt;code class="tag"&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">[&lt;a href="../tags/</xsl:text>
-        <xsl:value-of select="." />
+        <xsl:value-of select="$input" />
         <xsl:text disable-output-escaping="yes">.html"&gt;</xsl:text>
-        <xsl:value-of select="." />
+        <xsl:value-of select="$input" />
         <xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;/code&gt;] </xsl:text>
   </xsl:template>
   <xsl:template match="pragma">
+				<xsl:variable name="input" select="."/>
         <xsl:text disable-output-escaping="yes">&lt;code class="pragma"&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;a href="../pragmas/</xsl:text>
-        <xsl:value-of select="." />
+        <xsl:value-of select="$input" />
         <xsl:text disable-output-escaping="yes">.html"&gt;</xsl:text>
-        <xsl:value-of select="." />
+        <xsl:value-of select="$input" />
         <xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;/code&gt;</xsl:text>
   </xsl:template>
   <xsl:template match="check">
+				<xsl:variable name="input" select="."/>
         <xsl:text disable-output-escaping="yes">&lt;code class="check"&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;a href="../orderchecks/</xsl:text>
-        <xsl:value-of select="." />
+        <xsl:value-of select="$input" />
         <xsl:text disable-output-escaping="yes">.html"&gt;</xsl:text>
-        <xsl:value-of select="." />
+        <xsl:value-of select="$input" />
         <xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;/code&gt;</xsl:text>
   </xsl:template>
   <xsl:template match="widget">
+				<xsl:variable name="input" select="."/>
         <xsl:text disable-output-escaping="yes">&lt;code class="widget"&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;a href="../widgets/</xsl:text>
-        <xsl:value-of select="." />
+        <xsl:value-of select="$input" />
         <xsl:text disable-output-escaping="yes">.html"&gt;</xsl:text>
-        <xsl:value-of select="." />
+        <xsl:value-of select="$input" />
         <xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;/code&gt;</xsl:text>
   </xsl:template>
   <xsl:template match="filter">
+				<xsl:variable name="input" select="."/>
         <xsl:text disable-output-escaping="yes">&lt;code class="filter"&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;a href="../filters/</xsl:text>
-        <xsl:value-of select="." />
+        <xsl:value-of select="$input" />
         <xsl:text disable-output-escaping="yes">.html"&gt;</xsl:text>
-        <xsl:value-of select="." />
+        <xsl:value-of select="$input" />
         <xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
         <xsl:text disable-output-escaping="yes">&lt;/code&gt;</xsl:text>
   </xsl:template>
