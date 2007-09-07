@@ -46,7 +46,7 @@ a number of items:
 <literal>negative_sign</literal> -
 </para></listitem>
 <listitem><para>
-<literal>p_cs_precedes</literal> - where currency symbol precedes price or vice versa
+<literal>p_cs_precedes</literal> - whether currency symbol precedes price or vice versa
 </para></listitem>
 <listitem><para>
 <literal>p_sep_by_space</literal> - number of spaces between currency symbol and price
