@@ -8,4 +8,4 @@ accidentally sending mail to end users.
 </para><para>
 A header in the form of <literal>X-Intercepted-To:</literal> is inserted 
 in the message to show the original destination. At the same time,
-he interception is also noted in the &glos-catalog; error log file.
+the interception is also noted in the &glos-catalog; error log file.
