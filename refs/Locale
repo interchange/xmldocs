@@ -22,7 +22,7 @@ a number of items:
 <literal>int_curr_symbol</literal> -
 </para></listitem>
 <listitem><para>
-<literal>int_currency_symbol</literal> -
+<literal>int_currency_symbol</literal> - currency symbol for plain text display
 </para></listitem>
 <listitem><para>
 <literal>int_frac_digits</literal> -
