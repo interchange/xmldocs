@@ -1,3 +1,7 @@
+__NAME__ purpose
+Change current locale
+__END__
+
 __NAME__ synopsis 
 <row>
 
@@ -68,10 +72,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	change locale for complete session
 	</entry>
 
 </row> 
@@ -79,13 +83,18 @@ __NAME__ synopsis
 &ROW_REPARSE_1;
 __END__
 
-__NAME__ example Use German locale for current page
+__NAME__ description
+This tag changes the current &glos-locale;. 
+By default the change is only in effect for the current page.
+__END__
+
+__NAME__ example: Use German locale for current page
 <programlisting>
 [setlocale de_DE]
 </programlisting>
 __END__
 
-__NAME__ example Use Croatian locale for complete session
+__NAME__ example: Use Croatian locale for complete session
 <programlisting>
 [setlocale locale=hr_HR persist=1]
 </programlisting>
