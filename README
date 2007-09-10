@@ -232,6 +232,9 @@ DEVELOPMENT NOTES
 
    Some of the symbol information is derived from the source automatically;
    other parts must be added manually by us. 
+
+   Please note that the symbol name must match the symbol used in the source,
+   although tags allowed to be used with two forms (dash and underscore).
    
    Let's take an example of "post_page" pragma (but the principle is the same
    for any symbol). User-supplied information is found in either:
