@@ -15,7 +15,7 @@ __NAME__ synopsis
 	Yes
 	</entry>
 	<entry>
-	<literal>$Vend::Items</literal>
+	<literal>main</literal>
 	</entry>
 	<entry>
 	Cart name.
