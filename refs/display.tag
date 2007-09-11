@@ -481,3 +481,13 @@ __NAME__ synopsis
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
 __END__
+
+__NAME__ example: Dropdown menus with country names
+Display country dropdown menus looked up from the <literal>country</literal> table,
+using empty value for billing as default.
+<programlisting>
+[display name="country" table="country" lookup=code field=name type="select" value="[value country]"]
+[display name="b_country" table="country" lookup=code field=name type="select" value="[value b_country]" options="=-- [L]Please select[/L] --"]
+</programlisting>
+__END__
+
