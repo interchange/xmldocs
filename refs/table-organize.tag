@@ -22,6 +22,27 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
+
+<row>
+
+	<entry>
+	rows
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	Optional number of rows. Implies "table" parameter.
+	</entry>
+
+</row> 
+
 <row>
 
 	<entry>
@@ -103,6 +124,25 @@ as numbers change. Formula: $num_cells % $opt->{min_rows}.
 <row>
 
 	<entry>
+	tr
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	Attributes for table rows.
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	td
 	</entry>
 	<entry>
@@ -115,7 +155,7 @@ as numbers change. Formula: $num_cells % $opt->{min_rows}.
 	<!-- DFL -->
 	</entry>
 	<entry>
-	Attributes for table cells. Can be an array.
+	Attributes for table cells.
 	</entry>
 
 </row> 
@@ -135,25 +175,6 @@ as numbers change. Formula: $num_cells % $opt->{min_rows}.
 	</entry>
 	<entry>
 	Adds newline and tab characters to provide some reasonable indenting.
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	tr
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	Attributes for table rows. Can be an array.
 	</entry>
 
 </row> 
@@ -191,26 +212,7 @@ as numbers change. Formula: $num_cells % $opt->{min_rows}.
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	rows
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	Optional number of rows. Implies "table" parameter.
+	Attributes for HTML <literal>&lt;font></literal> inside table cells.
 	</entry>
 
 </row> 
@@ -287,7 +289,7 @@ Display cells in (newspaper) column order, i.e. rotated.
 	<!-- DFL -->
 	</entry>
 	<entry>
-	Table &lt;caption&gt; container text, if any. Can be an array.
+	Table <literal>&lt;caption&gt;</literal> container text, if any.
 	</entry>
 
 </row> 
