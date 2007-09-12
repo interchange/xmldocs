@@ -46,6 +46,26 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	columnize
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+Display cells in (newspaper) column order, i.e. rotated.
+	</entry>
+
+</row> 
+
+<row>
+
+	<entry>
 	min_rows
 	</entry>
 	<entry>
@@ -60,7 +80,7 @@ __NAME__ synopsis
 	<entry>
 On small result sets, can be ugly to build more than necessary columns.
 This will guarantee a minimum number of rows -- columns will change
-as numbers change. Formula: $num_cells % $opt->{min_rows}.
+as numbers change. Formula: <literal>$num_cells % $opt->{min_rows}</literal>.
 	</entry>
 
 </row> 
@@ -118,6 +138,45 @@ as numbers change. Formula: $num_cells % $opt->{min_rows}.
 	</entry>
 	<entry>
 	Maximum number of cells to use. Truncates extra cells silently.
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	table
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	If present, will cause a surrounding <literal>&lt;table&gt;
+&lt;/table&gt;</literal> pair with the attributes specified in this option.
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	caption
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	Table <literal>&lt;caption&gt;</literal> container text, if any.
 	</entry>
 
 </row> 
@@ -193,7 +252,7 @@ as numbers change. Formula: $num_cells % $opt->{min_rows}.
 	<literal>&amp;nbsp;</literal>
 	</entry>
 	<entry>
-	Contents to place in empty cells put on as filler.
+	Contents for empty cells.
 	</entry>
 
 </row> 
@@ -219,26 +278,6 @@ as numbers change. Formula: $num_cells % $opt->{min_rows}.
 <row>
 
 	<entry>
-	table
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	If present, will cause a surrounding &lt;table&gt; &lt;/table&gt; pair
-    with the attributes specified in this option.
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
 	joiner
 	</entry>
 	<entry>
@@ -252,44 +291,6 @@ as numbers change. Formula: $num_cells % $opt->{min_rows}.
 	</entry>
 	<entry>
 	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	columnize
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-Display cells in (newspaper) column order, i.e. rotated.
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	caption
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	Table <literal>&lt;caption&gt;</literal> container text, if any.
 	</entry>
 
 </row> 
