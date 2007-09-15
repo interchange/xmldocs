@@ -33,6 +33,11 @@ __NAME__ description
 <entry>number of retries on file locking</entry>
 </row>
 <row>
+<entry>ip_session_expire</entry>
+<entry>60 minutes</entry>
+<entry>see &conf-RobotLimit;</entry>
+</row>
+<row>
 <entry>no_ship_message</entry>
 <entry></entry>
 <entry></entry>
@@ -71,8 +76,8 @@ __NAME__ description
 </row>
 <row>
 <entry>robot_expire</entry>
-<entry>1</entry>
-<entry></entry>
+<entry>1 day</entry>
+<entry>see &conf-RobotLimit;</entry>
 </row>
 <row>
 <entry>session_id_length</entry>
