@@ -23,6 +23,14 @@ the catalog URLs will be rewritten to
 </para><para>
 The short pause amounts to 30 seconds and can be configured using the &conf-Limit;
 directive's <literal>lockout_reset_seconds</literal> setting.
+</para><para>
+If a remote client gets assigned a new session with every visit, rather than
+maintaining a single session, then this directive sets the limit for the
+number of sessions that may be assigned to the individual IP address over a
+one hour period.  The one hour period can be overridden using the &conf-Limit;
+directive's <literal>ip_session_expire</literal> setting. If a lockout is triggered it will
+remain in effect for 1 day.  The one day period can be overridden with the
+&conf-Limit; directive's <literal>robot_expire</literal> setting. 
 __END__
 
 
