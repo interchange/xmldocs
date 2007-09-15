@@ -50,7 +50,7 @@ __NAME__ description
 
 <row>
 <entry>lockout_reset_seconds</entry>
-<entry>32</entry>
+<entry>30</entry>
 <entry>see &conf-RobotLimit;</entry>
 </row>
 
