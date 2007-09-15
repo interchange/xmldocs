@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify maximum number of pages a user can visit without a 30 second pause
+specify maximum number of pages a user can visit without a short pause
 __END__
 
 
@@ -14,12 +14,15 @@ __END__
 
 __NAME__ description
 Specify maximum number of 
-consecutive pages a user may access without a 30 second pause.
+consecutive pages a user may access without a short pause.
 </para><para>
 When the &conf-RobotLimit; is 
 exceeded, the command defined in &conf-LockoutCommand; will be executed and
 the catalog URLs will be rewritten to 
 <literal>127.0.0.1</literal>, effectively pointing the robot back to itself.
+</para><para>
+The short pause amounts to 30 seconds and can be configured using the &conf-Limit;
+directive's <literal>lockout_reset_seconds</literal> setting.
 __END__
 
 
