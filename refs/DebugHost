@@ -1,5 +1,5 @@
 __NAME__ purpose
-restrict debug mode to requests comming from specific hosts
+restrict debug mode to requests originating from specific hosts
 __END__
 
 __NAME__ synopsis
