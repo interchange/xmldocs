@@ -53,10 +53,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>item</literal>
 	</entry>
 	<entry>
-	item
+	list prefix
 	</entry>
 
 </row> 
