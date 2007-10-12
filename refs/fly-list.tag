@@ -1,4 +1,27 @@
+__NAME__ purpose
+display item in a flypage-like fashion
+__END__ 
+
 __NAME__ synopsis 
+<row>
+
+	<entry>
+	code
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	item code
+	</entry>
+
+</row> 
 <row>
 
 	<entry>
@@ -33,7 +56,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	item
 	</entry>
 
 </row> 
