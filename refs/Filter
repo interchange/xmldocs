@@ -14,8 +14,12 @@ __NAME__ synopsis
 __END__
 
 __NAME__ description
-The directive assigns one or more (comma separated) &glos-filter;s
-that should be automatically applied to a variable.
+The directive specifies one or more &glos-filter;s
+that should automatically be applied to &glos-CGI;
+&glos-variable;s.
+</para><para>
+That way, by the time you get to call &tag-cgi;, the 
+variable value is already filtered and ready for use.
 __END__
 
 
@@ -29,6 +33,12 @@ Filter mail_lists  null_to_space
 ]]></programlisting>
 __END__
 
+__NAME__ example: Appling multiple filters to a variable
+<programlisting><![CDATA[
+Filter firstname  "lc ucfirst"
+]]></programlisting>
+__END__
+
 
 __NAME__ notes
 You could also use the &tag-filter; tag to help yourself, but in the long
@@ -37,7 +47,7 @@ of omission.
 __END__
 
 __NAME__ missing
-Comma-separated list when multiple filters, right? Can't be space, it'd split into directive=value pair.
 More examples
+It filters only CGI vars, right?
 __END__
 

@@ -110,6 +110,7 @@
 		<xsl:attribute name="href">
 		<xsl:value-of select="'../tags/'"/>
 		<xsl:value-of select="."/>
+		<xsl:value-of select="'.html'"/>
 		</xsl:attribute>
 		<xsl:value-of select="."/>
 		</xsl:element>]</code>
@@ -120,6 +121,7 @@
 		<xsl:attribute name="href">
 		<xsl:value-of select="'../confs/'"/>
 		<xsl:value-of select="."/>
+		<xsl:value-of select="'.html'"/>
 		</xsl:attribute>
 		<xsl:value-of select="."/>
 		</xsl:element>
@@ -131,6 +133,7 @@
 		<xsl:attribute name="href">
 		<xsl:value-of select="'../vars/'"/>
 		<xsl:value-of select="."/>
+		<xsl:value-of select="'.html'"/>
 		</xsl:attribute>
 		<xsl:value-of select="."/>
 		</xsl:element>
@@ -142,6 +145,7 @@
 		<xsl:attribute name="href">
 		<xsl:value-of select="'../orderchecks/'"/>
 		<xsl:value-of select="."/>
+		<xsl:value-of select="'.html'"/>
 		</xsl:attribute>
 		<xsl:value-of select="."/>
 		</xsl:element>
@@ -153,6 +157,7 @@
 		<xsl:attribute name="href">
 		<xsl:value-of select="'../widgets/'"/>
 		<xsl:value-of select="."/>
+		<xsl:value-of select="'.html'"/>
 		</xsl:attribute>
 		<xsl:value-of select="."/>
 		</xsl:element>
@@ -164,6 +169,7 @@
 		<xsl:attribute name="href">
 		<xsl:value-of select="'../pragmas/'"/>
 		<xsl:value-of select="."/>
+		<xsl:value-of select="'.html'"/>
 		</xsl:attribute>
 		<xsl:value-of select="."/>
 		</xsl:element>
@@ -175,6 +181,7 @@
 		<xsl:attribute name="href">
 		<xsl:value-of select="'../filters/'"/>
 		<xsl:value-of select="."/>
+		<xsl:value-of select="'.html'"/>
 		</xsl:attribute>
 		<xsl:value-of select="."/>
 		</xsl:element>
