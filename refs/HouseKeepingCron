@@ -1,32 +1,82 @@
 __NAME__ purpose
-Specifies Crontab for Regular Tasks
+define Interchange-aware crontab entries
 __END__
 
 __NAME__ synopsis
-<arg choice='plain'>&lt;<replaceable>filename</replaceable></arg>
+<arg choice='plain'>
+<replaceable>seconds</replaceable>
+</arg>
+<arg choice='plain'>
+<replaceable>minutes</replaceable>
+</arg>
+<arg choice='plain'>
+<replaceable>hours</replaceable>
+</arg>
+<arg choice='plain'>
+<replaceable>days</replaceable>
+</arg>
+<arg choice='plain'>
+<replaceable>months</replaceable>
+</arg>
+<arg choice='plain'>
+<replaceable>days_of_week</replaceable>
+</arg>
+<arg choice='plain'>
+<replaceable>target</replaceable>
+</arg>
 __END__
 
 __NAME__ description
-  The targets are GlobalSub or anything which you can make run
-  with Vend::Dispatch::run_macro. Bear in mind there is no
-  catalog context.
-</para>
-<para>
-  Two special targets exist, <literal>:reconfig</literal> and <literal>:jobs</literal>. 
-  They allow calling
-  of the catalog reconfig routines and jobs routines, respectively.
-  The etc/reconfig and etc/jobsqueue files will be ignored if these
-  targets are not present -- a warning will be issued at startup
-  (and crontab change) if they are not there.
-</para>
-<para>
-  A target prepended with > runs *after* the reconfig/restart/jobs/pid
-  mgmt cycle. Normal specifications run before.
-</para>
-<para>
-  The basic entry to implement <literal>HouseKeeping 5</literal> would be:
-</para>
-<para>
+&conf-__FILENAME__; is an &IC;-equivalent of the usual Unix "cron"
+(periodic execution) facility.
+</para><para>
+Time specifications (first six fields) behave exactly like
+with the traditional Vixie cron.
+That includes numbers, ranges and '<literal>*</literal>';
+see <citerefentry><refentrytitle>crontab</refentrytitle>
+<manvolnum>5</manvolnum></citerefentry> manual page.
+Additional features are provided by the <classname>Set::Crontab</classname>
+&PERL; module:
+The '<literal>&lt;<replaceable>N</replaceable></literal>' and
+'<literal>&gt;<replaceable>N</replaceable></literal>' select
+elements smaller and larger than <replaceable>N</replaceable>.
+<literal>!<replaceable>N</replaceable></literal> excludes
+<replaceable>N</replaceable> from the set. "<literal>!3</literal>"
+with a range of "<literal>1-10</literal>" corresponds to
+"<literal>1-2,4-10</literal>", and "<literal>>3,!7</literal>"
+in the same range means "<literal>4-6,8-10</literal>".
+</para><para>
+Target specification, provided in form of everything after the 6th field,
+consists of the catalog name and action. Catalog name can be prefixed
+with <literal>&gt;</literal>, <literal>&lt;</literal> and 
+<literal>=</literal>.
+Name prepended with '<literal>&gt;</literal>' will make the
+commands run <emphasis role='bold'>after</emphasis> the
+reconfig/restart/jobs/pid management cycle (usually they run before).
+</para><para>
+Interchange-specific things you can run include 
+everything you can put into execution over 
+<function>Vend::Dispatch::run_macro</function> function.
+That means &conf-GlobalSub;s, &conf-Sub;s and anything
+else that is suitable for interpolation (all &glos-ITL; code).
+</para><para>
+Bear in mind, though, that there is no catalog context; everything is
+executing on the global level.
+</para><para>
+In addition to the above, two special targets exist,
+<literal>:reconfig</literal> and <literal>:jobs</literal>. 
+They allow calling
+of the catalog reconfig routines and jobs routines respectively.
+The <filename>etc/reconfig</filename> and
+<filename>etc/jobsqueue</filename> files will be ignored
+(they won't have any special effect) if &conf-__FILENAME__; is 
+specified but these targets are not included.
+In that case, a warning will be issued at
+&IC; startup or crontab change.
+</para><para>
+__END__
+
+__NAME__ example: Running :restart and :jobs every 5 seconds
 <programlisting><![CDATA[
 HouseKeeping 1
 
@@ -37,7 +87,7 @@ EOC
 ]]></programlisting>
 __END__
 
-__NAME__ example: Running Batch Jobs
+__NAME__ example: Running batch jobs
 <programlisting><![CDATA[
 HouseKeepingCron <<EOC
 0 0 * * * * =standard hourly
@@ -51,3 +101,11 @@ __END__
 __NAME__ see also
 HouseKeeping
 __END__
+
+
+__NAME__ missing
+run_macro() also supports calling Interpolate::tag_profile if argument is \w+-\w+ but it's not documented ATM as I have no idea what to do with it
+more about <>= in target specification
+Last example (batch jobs) needs to be fixed
+__END__
+
