@@ -33,7 +33,7 @@ Filter mail_lists  null_to_space
 ]]></programlisting>
 __END__
 
-__NAME__ example: Appling multiple filters to a variable
+__NAME__ example: Applying multiple filters to a variable
 <programlisting><![CDATA[
 Filter firstname  "lc ucfirst"
 ]]></programlisting>
