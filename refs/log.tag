@@ -63,8 +63,8 @@ __NAME__ synopsis
 	Special actions to perform on the log message before writing to the
 	log file. By default, this includes removing leading and trailing whitespace,
 	and forcing every <literal>\r\n</literal> sequence to a single Unix
-	line-feed character (<literal>\n</literal>). Use "<literal>nostrip</literal>"
-	to prevent stripping.
+	line-feed character (<literal>\n</literal>). Use a value of
+	"<literal>nostrip</literal>" to prevent default processing.
 	</entry>
 
 </row> 
@@ -80,18 +80,18 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>text</literal>
 	</entry>
 	<entry>
 	Log type to produce. Possible options are <literal>text</literal>
-	(the usual), <literal>quot</literal> (quotes each field, where fields
-	are separated by <option>record_delim</option>), <literal>error</literal>
-	(formats and logs message like standard Interchange error message) and
+	(standard), <literal>quot</literal> (quotes each field, where fields
+	are separated by <option>delimiter</option>), <literal>error</literal>
+	(formats and logs message like the standard Interchange error message) and
 	<literal>debug</literal> (formats and logs message like standard
 	Interchange debug message). Options <literal>error</literal> and
 	<literal>debug</literal> actually invoke &IC;'s 
 	<function>logError</function> or <function>logDebug</function> functions
-	in addition to writing to the specified log file.
+	in addition to writing to the log file (if any was specified).
 	</entry>
 
 </row> 
@@ -110,7 +110,8 @@ __NAME__ synopsis
 	&NEWLINE;
 	</entry>
 	<entry>
-	Record delimiter.
+	Line delimiter. Allows the tag to identify multiple "records" in input
+	submitted at once.
 	</entry>
 
 </row> 
@@ -126,10 +127,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	&TAB;
 	</entry>
 	<entry>
-	Line delimiter.
+	Field delimiter. Allows the tag to identify fields within the line.
 	</entry>
 
 </row> 
@@ -143,7 +144,7 @@ LogFile, DEBUG
 __END__
 
 __NAME__ description
-The &tag-__FILENAME__; tag is used to write custom, possibly multiline,
+The &tag-__FILENAME__; tag can be used to write custom, possibly multiline,
 log messages to arbitrary log files.
 __END__
 
@@ -151,3 +152,30 @@ __END__
 __NAME__ missing
 in sub log (Interpolate), qw/delim record_delim/ should be qw/delimiter record_delim/, right ?
 __END__
+
+
+__NAME__ example: Log message to catalog's error.log
+<programlisting>
+[log type=error]
+An error occured.
+[/log]
+</programlisting>
+
+Or the same example that &glos-interpolate;s message text:
+
+<programlisting>
+[log type=error interpolate=1]
+An error occured, inform [value fname] at [value email].
+[/log]
+</programlisting>
+__END__
+
+
+__NAME__ example: Log to custom log
+<programlisting>
+[log file=var/log/custom.log]
+Custom log message.
+[/log]
+</programlisting>
+__END__
+

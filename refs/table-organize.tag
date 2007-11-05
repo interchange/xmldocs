@@ -6,7 +6,10 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	cols | columns
+		<group>
+			<arg choice='plain'>cols</arg>
+			<arg choice='plain'>columns</arg>
+		</group>
 	</entry>
 	<entry>
 	yes
