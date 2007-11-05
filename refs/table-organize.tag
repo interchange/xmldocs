@@ -1,12 +1,12 @@
 __NAME__ purpose
-organizes table cells into a number of rows
+automatically organize table cells into rows or columns
 __END__
 
 __NAME__ synopsis 
 <row>
 
 	<entry>
-	cols
+	cols | columns
 	</entry>
 	<entry>
 	yes
@@ -58,7 +58,8 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-Display cells in (newspaper) column order, i.e. rotated.
+	Display cells in "newspaper" column order. (Rotate the table &mdash;
+	instead of filling rows, fill columns).
 	</entry>
 
 </row> 
@@ -75,11 +76,11 @@ Display cells in (newspaper) column order, i.e. rotated.
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
 	</entry>
 	<entry>
-On small result sets, can be ugly to build more than necessary columns.
-This will guarantee a minimum number of rows -- columns will change
+On small result sets, it can be ugly to build more than the necessary number
+of columns.
+This option will guarantee a minimum number of rows &mdash; columns will change
 as numbers change. Formula: <literal>$num_cells % $opt->{min_rows}</literal>.
 	</entry>
 
@@ -118,7 +119,9 @@ as numbers change. Formula: <literal>$num_cells % $opt->{min_rows}</literal>.
 	<!-- DFL -->
 	</entry>
 	<entry>
-	Allow to embed tables with lowercase of uppercase HTML tags.
+	Allows embedding other table elements within tables you want to 
+	organize. See more in <xref linkend="table-organize_description"/>
+	and examples.
 	</entry>
 
 </row> 
@@ -153,11 +156,10 @@ as numbers change. Formula: <literal>$num_cells % $opt->{min_rows}</literal>.
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
 	</entry>
 	<entry>
-	If present, will cause a surrounding <literal>&lt;table&gt;
-&lt;/table&gt;</literal> pair with the attributes specified in this option.
+	If specified, causes a surrounding HTML <literal>&lt;table&gt;
+&lt;/table&gt;</literal> to be generated with the specified attributes.
 	</entry>
 
 </row> 
@@ -173,10 +175,10 @@ as numbers change. Formula: <literal>$num_cells % $opt->{min_rows}</literal>.
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
 	</entry>
 	<entry>
 	Table <literal>&lt;caption&gt;</literal> container text, if any.
+	(Can be an array).
 	</entry>
 
 </row> 
@@ -195,7 +197,7 @@ as numbers change. Formula: <literal>$num_cells % $opt->{min_rows}</literal>.
 	<!-- DFL -->
 	</entry>
 	<entry>
-	Attributes for table rows.
+	Attributes for table rows. (Can be an array).
 	</entry>
 
 </row> 
@@ -214,7 +216,7 @@ as numbers change. Formula: <literal>$num_cells % $opt->{min_rows}</literal>.
 	<!-- DFL -->
 	</entry>
 	<entry>
-	Attributes for table cells.
+	Attributes for table cells. (Can be an array).
 	</entry>
 
 </row> 
@@ -233,7 +235,8 @@ as numbers change. Formula: <literal>$num_cells % $opt->{min_rows}</literal>.
 	<!-- DFL -->
 	</entry>
 	<entry>
-	Adds newline and tab characters to provide some reasonable indenting.
+	Adds newline and TAB characters to provide some reasonable indenting
+	in the &glos-HTML; source.
 	</entry>
 
 </row> 
@@ -249,10 +252,12 @@ as numbers change. Formula: <literal>$num_cells % $opt->{min_rows}</literal>.
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<literal>&amp;nbsp;</literal>
+	<literal>&amp;nbsp;</literal> (non-breaking space)
 	</entry>
 	<entry>
-	Contents for empty cells.
+	Content to automatically place in empty, "filler" cells. It could be
+	important to provide at least minimal content in there since some
+	browsers do not display empty cells.
 	</entry>
 
 </row> 
@@ -271,7 +276,7 @@ as numbers change. Formula: <literal>$num_cells % $opt->{min_rows}</literal>.
 	<!-- DFL -->
 	</entry>
 	<entry>
-	Attributes for HTML <literal>&lt;font></literal> inside table cells.
+	Attributes for HTML <literal>&lt;font></literal> inside table cells, if any.
 	</entry>
 
 </row> 
@@ -287,10 +292,12 @@ as numbers change. Formula: <literal>$num_cells % $opt->{min_rows}</literal>.
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>\n\t\t</literal> if <literal>pretty</literal> is
+	specified, none otherwise.
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Element to use in joining cells. This is mostly used for visual
+	layout in &glos-HTML; source.
 	</entry>
 
 </row> 
@@ -298,106 +305,140 @@ as numbers change. Formula: <literal>$num_cells % $opt->{min_rows}</literal>.
 &ROW_REPARSE_1;
 __END__
 
+
 __NAME__ description
-Takes an unorganized set of table cells and organizes them into
-rows based on the number of columns; it will also break them into
-separate tables.
+__FILENAME__ takes an bunch of table cells and organizes them into
+rows based on the specified number of columns.
 </para><para>
-If the number of cells are not on an even modulus of the number of columns,
-then <literal>filler</literal> cells are pushed on.
+If the number of cells is not on an even modulus of the number of columns,
+then "filler" cells will be included to keep table structure correct.
 </para><para>
-The <literal>tr</literal>, <literal>td</literal>, and <literal>caption</literal> attributes can be specified with indexes;
-if they are, then they will alternate according to the modulus.
-</para><para>
-The <literal>td</literal> option array size should probably always equal the
+Attributes <literal>tr</literal>, <literal>td</literal> and
+<literal>caption</literal> can be specified as an array
+(with indexes); if they are, they will alternate according to the modulus.
+The <literal>td</literal> array size should always equal the
 number of columns; if it is bigger, then trailing elements are ignored. If
-it is smaller, no attribute is used.
+it is smaller, the attribute is ignored altogether.
 </para><para>
-For example, to produce a table that 1) alternates rows with background
-colors <literal>#EEEEEE</literal> and <literal>#FFFFFF</literal>, and 2) 
-aligns the columns RIGHT CENTER LEFT, do:
-<programlisting><![CDATA[
-        [table-organize
-            cols=3
-            pretty=1
-            tr.0='bgcolor="#EEEEEE"'
-            tr.1='bgcolor="#FFFFFF"'
-            td.0='align=right'
-            td.1='align=center'
-            td.2='align=left'
-            ]
-            [loop list="1 2 3 1a 2a 3a 1b"] <td> [loop-code] </td> [/loop]
-        [/table-organize]
-]]></programlisting>
-which will produce:
-<programlisting><![CDATA[
-        <tr bgcolor="#EEEEEE">
-                <td align=right>1</td>
-                <td align=center>2</td>
-                <td align=left>3</td>
-        </tr>
-        <tr bgcolor="#FFFFFF">
-                <td align=right>1a</td>
-                <td align=center>2a</td>
-                <td align=left>3a</td>
-        </tr>
-        <tr bgcolor="#EEEEEE">
-                <td align=right>1b</td>
-                <td align=center>&nbsp;</td>
-                <td align=left>&nbsp;</td>
-        </tr>
-]]></programlisting>
-If the attribute <literal>columnize</literal> is present, the result will look like:
-<programlisting><![CDATA[
-        <tr bgcolor="#EEEEEE">
-                <td align=right>1</td>
-                <td align=center>1a</td>
-                <td align=left>1b</td>
-        </tr>
-        <tr bgcolor="#FFFFFF">
-                <td align=right>2</td>
-                <td align=center>2a</td>
-                <td align=left>&nbsp;</td>
-        </tr>
-        <tr bgcolor="#EEEEEE">
-                <td align=right>3</td>
-                <td align=center>3a</td>
-                <td align=left>&nbsp;</td>
-        </tr>
-]]></programlisting>
-<refsect2>
-<title>Embedding tables</title>
-<para>
-If you want to embed other tables inside, make sure they are called with
-lower case <literal>&lt;td></literal> elements, then set the embed tag and
-make the cells you wish to organize be <literal>&lt;TD></literal>
-elements. To switch that sense, and make the upper-case 
-or mixed case be the ignored cells, set the embed parameter to <literal>lc</literal>.
-<programlisting><![CDATA[
-    [table-organize embed=lc]
-		<td>
-			<TABLE>
-				<TR>
-				<TD> something 
-				</TD>
-				</TR>
-			</table>
-		</td>
-    [/table-organize]
-]]></programlisting>
-or
-<programlisting><![CDATA[
-    [table-organize embed=uc]
-		<TD>
-			<table>
-				<tr>
-				<td> something 
-				</td>
-				</tr>
-			</table>
-		</TD>
-	[/table-organize]
-]]></programlisting>
-</para>
-</refsect2>
+If you will want to embed other tables inside the table you want to
+organize, you'll run into an interesting problem; &tag-table-organize;
+won't know whether &lt;td&gt;s belong to the table you want to 
+arrange or to the "subtable" that should be left intact. To solve
+this problem, we resort to differentiating them by lowercase
+&lt;td&gt; and uppercase &lt;TD&gt;. See more in
+<xref linkend='table-organize_examples'/>.
 __END__
+
+__NAME__ missing
+What does this mean: it will also break them into separate tables.
+Docs for cells= argument
+__END__
+
+__NAME__ example: Advanced table-organize example
+To produce a table that alternates between two row background colors
+and specifies custom alignment for the three columns, use:
+
+<programlisting><![CDATA[
+<table>
+  [table-organize
+    cols=3
+    pretty=1
+    tr.0='bgcolor="#EEEEEE"'
+    tr.1='bgcolor="#FFFFFF"'
+    td.0='align=right'
+    td.1='align=center'
+    td.2='align=left'
+  ]
+  [loop list="1 2 3 1a 2a 3a 1b"] <td> [loop-code] </td> [/loop]
+  [/table-organize]
+</table>
+]]></programlisting>
+
+(In the above example, &tag-loop; tag is used to produce example
+data for the table cells.) The final result produced will 
+look like this:
+
+<programlisting><![CDATA[
+<table>
+  <tr bgcolor="#EEEEEE">
+    <td align=right>1</td>
+    <td align=center>2</td>
+    <td align=left>3</td>
+  </tr>
+  <tr bgcolor="#FFFFFF">
+    <td align=right>1a</td>
+    <td align=center>2a</td>
+    <td align=left>3a</td>
+  </tr>
+  <tr bgcolor="#EEEEEE">
+    <td align=right>1b</td>
+    <td align=center>&nbsp;</td>
+    <td align=left>&nbsp;</td>
+  </tr>
+<table>
+]]></programlisting>
+
+If you also provide the <literal>columnize=1</literal> attribute, the result
+will be a "rotated" table:
+
+<programlisting><![CDATA[
+<table>
+  <tr bgcolor="#EEEEEE">
+    <td align=right>1</td>
+    <td align=center>1a</td>
+    <td align=left>1b</td>
+  </tr>
+  <tr bgcolor="#FFFFFF">
+    <td align=right>2</td>
+    <td align=center>2a</td>
+    <td align=left>&nbsp;</td>
+  </tr>
+  <tr bgcolor="#EEEEEE">
+    <td align=right>3</td>
+    <td align=center>3a</td>
+    <td align=left>&nbsp;</td>
+  </tr>
+</table>
+]]></programlisting>
+__END__
+
+
+__NAME__ example: Embedding tables
+To embed tables, make sure the table you want to organize uses
+lowercase &lt;td&gt; and set attribute <literal>embed=lc</literal>.
+To invert the meaning and make uppercase &lt;TD&gt;s arranged
+(ignoring lower- or mixed-case cells), set the 
+<literal>embed</literal> attribute to any other &glos-true; value
+except <literal>lc</literal> (<literal>embed=uc</literal> will work well).
+
+<programlisting><![CDATA[
+<table>
+  [table-organize embed=lc]
+  <td>
+    <TABLE>
+    <TR>
+    <TD>something embedded</TD>
+    </TR>
+    </TABLE>
+  </td>
+  [/table-organize]
+</table>
+]]></programlisting>
+
+or
+
+<programlisting><![CDATA[
+<table>
+  [table-organize embed=uc]
+  <TD>
+    <table>
+    <tr>
+    <td>something</td>
+    </tr>
+    </table>
+  </TD>
+  [/table-organize]
+</table>
+]]></programlisting>
+__END__
+
