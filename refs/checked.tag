@@ -1,4 +1,46 @@
-__NAME__ synopsis 
+__NAME__ purpose
+indicate checked status of checkboxes
+__END__
+
+__NAME__ synopsis
+<row>
+
+	<entry>
+	name
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	variable name
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	value
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row>
 <row>
 
 	<entry>
@@ -14,7 +56,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Whether to use CGI namespace instead of Value namespace.
 	</entry>
 
 </row> 
@@ -22,25 +64,6 @@ __NAME__ synopsis
 
 	<entry>
 	default
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	value
 	</entry>
 	<entry>
 	<!-- POS -->
