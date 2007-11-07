@@ -22,17 +22,55 @@ in global configuration.
 This is useful to ensure that needed facilities are present, especially if 
 you run the catalog on different locations.
 </para><para>
-"Capabilities" you can check for are
-<literal>globalsub</literal>,
-<literal>sub</literal>,  
-<literal>taggroup</literal>,
-<literal>usertag</literal> and
-<literal>module</literal>.
-</para>
-<para>
-This directive can also be used to implicitly load &PERL; modules. If you add
-a directory name as a fourth argument, the directory will be included in Perl's
-module search path.
+"Capabilities" you can require are:
+<itemizedlist>
+<listitem><para>
+<literal>globalsub</literal> &mdash; existence of a &conf-GlobalSub;
+</para></listitem>
+<listitem><para>
+<literal>sub</literal> &mdash; existence of a &conf-Sub;
+</para></listitem>
+<listitem><para>
+<literal>taggroup</literal> &mdash; existence of a &conf-TagGroup;
+</para></listitem>
+<listitem><para>
+<literal>usertag</literal> &mdash; existence of a &conf-UserTag;
+</para></listitem>
+<listitem><para>
+<literal>module (or perlmodule)</literal> &mdash; existence of a &PERL; module. Optional additional argument is the custom Perl module path.
+</para></listitem>
+<listitem><para>
+<literal>include (or perlinclude)</literal> &mdash; prepend specified path to &PERL;'s <varname>@INC</varname> include path (makes most sense with &conf-Require;, not with &conf-Suggest; or &conf-Capability; even though it <emphasis>can</emphasis> be called that way for equivalent effect)
+</para></listitem>
+<listitem><para>
+<literal>file</literal> &mdash; existence of a readable file
+</para></listitem>
+<listitem><para>
+<literal>executable</literal> &mdash; existence of an executable file
+</para></listitem>
+</itemizedlist>
+__END__
+
+__NAME__ example: Requiring existence of all supported items
+<programlisting>
+__FILENAME__ globalsub my_global_sub
+__FILENAME__ sub my_sub
+__FILENAME__ taggroup :group1,:group2 :group3
+__FILENAME__ usertag my_global_usertag
+__FILENAME__ usertag my_catalog_usertag
+__FILENAME__ module Archive::Zip
+__FILENAME__ module Set::Crontab /usr/local/perl/modules/
+__FILENAME__ file /etc/syslog.conf
+__FILENAME__ file relative-dir/file
+__FILENAME__ executable /usr/local/bin/gfont
+__FILENAME__ executable bin/gfont
+</programlisting>
+__END__
+
+__NAME__ example: Requiring existence of old-style Perl modules
+<programlisting>
+__FILENAME__ module /path/to/module.pl
+</programlisting>
 __END__
 
 __NAME__ example: Requiring features

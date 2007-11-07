@@ -1,0 +1,42 @@
+__NAME__ purpose
+specify whether information from both GET and POST method should be parsed when form is submitted using POST method
+__END__
+
+
+__NAME__ synopsis
+<group choice='plain'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+When &conf-__FILENAME__; is enabled, &glos-GET; requests to URLs with
+<mv>mv_pc</mv> or <mv>mv_source</mv> set to an affiliate code are redirected
+to the same URL minus the affiliate code.
+</para><para>
+This keeps search engines that respect redirects from storing the affiliate
+code-salted URLs in their indexes, and helps them focus on the real resource
+with a single URL instead of a multitude of salted links.
+__END__
+
+__NAME__ notes
+When this directive is enabled and visitors do not already have a session
+&glos-cookie; (the most common case on first access), they are bounced to an URL
+that does not have the affiliate code but has the &glos-session; ID.
+There's no easy way around this, and we consider it a separate issue from the
+&conf-BounceReferrals; concept.
+If session IDs in URLs are a concern, they'll need a separate solution.
+</para><para>
+Historically, many application servers always bounce the first request
+to check for &glos-cookie; support. Nowadays, many simply require cookies for
+anything that needs a session. &IC; is different on both counts.
+__END__
+
+__NAME__ example: Enabling __FILENAME__
+<programlisting>
+__FILENAME__ yes
+</programlisting>
+__END__
+
