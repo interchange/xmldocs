@@ -18,6 +18,14 @@ The following payment gateway transactions are known by Interchange:
 <entry>Payment authorization</entry>
 </row>
 <row>
+<entry>return</entry>
+<entry></entry>
+</row>
+<row>
+<entry>reverse</entry>
+<entry>Reverse former transaction</entry>
+</row>
+<row>
 <entry>void</entry>
 <entry>Cancel or refund payment</entry>
 </row>
@@ -64,6 +72,11 @@ code:
 <entry></entry>
 </row>
 <row>
+<entry><literal>EFSNet</literal></entry>
+<entry><ulink url='http://www.concordefsnet.com'>Concord EFSNet</ulink></entry>
+<entry></entry>
+</row>
+<row>
 <entry><literal>ICS</literal></entry>
 <entry>Cybersource ICS</entry>
 <entry></entry>
@@ -75,7 +88,12 @@ code:
 </row>
 <row>
 <entry><literal>Signio</literal></entry>
+<entry>Payflow Pro</entry>
 <entry></entry>
+</row>
+<row>
+<entry><literal>Skipjack</literal></entry>
+<entry>Skipjack</entry>
 <entry></entry>
 </row>
 </tbody>
@@ -88,6 +106,16 @@ code:
 <section>
 <title>Prerequisites</title>
 <para>
+</para>
+</section>
+</section>
+
+<section>
+<title>ECHO</title>
+<section>
+<title>Prerequisites</title>
+<para>
+OpenECHO module from <ulink url='http://www.openecho.com/'>http://www.openecho.com/</ulink>.
 </para>
 </section>
 </section>
