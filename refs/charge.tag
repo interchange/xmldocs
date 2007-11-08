@@ -1,3 +1,7 @@
+__NAME__ purpose
+perform a transaction with a payment gateway
+__END__
+
 __NAME__ synopsis 
 <row>
 
@@ -33,7 +37,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	amount of money to charge
 	</entry>
 
 </row> 
@@ -115,4 +119,8 @@ __NAME__ synopsis
 </row> 
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
+__END__
+
+__NAME__ see also
+MV_PAYMENT_CURRENCY, MV_PAYMENT_PRECISION
 __END__
