@@ -1,11 +1,13 @@
 
 __NAME__ purpose
+hostname or IP of the payment gateway
 __END__
 
 
 __NAME__ synopsis
 <group choice='req'>
-	<arg choice='plain'><replaceable></replaceable></arg>
+	<arg choice='plain'><replaceable>hostname</replaceable></arg>
+	<arg choice='plain'><replaceable>IP</replaceable></arg>
 </group>
 __END__
 
@@ -16,7 +18,7 @@ __END__
 
 
 __NAME__ description
-Specifies the address of the payment gateway.
+Specifies hostname or IP of the payment gateway.
 __END__
 
 
