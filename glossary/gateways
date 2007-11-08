@@ -1,6 +1,10 @@
+</para>
+<section>
+<title>Transaction Types</title>
+<para>
 The following payment gateway transactions are known by Interchange:
 
-<table>
+<informaltable>
 <tgroup cols="2">
 <thead>
 <row>
@@ -26,18 +30,26 @@ The following payment gateway transactions are known by Interchange:
 <entry>Reverse former transaction</entry>
 </row>
 <row>
+<entry>settle</entry>
+<entry></entry>
+</row>
+<row>
 <entry>void</entry>
 <entry>Cancel or refund payment</entry>
 </row>
 </tbody>
 </tgroup>
-</table>
+</informaltable>
+</para>
+</section>
 
+<section>
+<title>Payment Modules</title>
+<para>
 Modules for the following payment gateways are included in the Interchange source
 code:
 
-<table>
-<title>Payment Modules</title>
+<informaltable>
 <tgroup cols="3">
 <thead>
 <row>
@@ -98,8 +110,9 @@ code:
 </row>
 </tbody>
 </tgroup>
-</table>
+</informaltable>
 </para>
+</section>
 
 <section>
 <title>AuthorizeNet</title>
