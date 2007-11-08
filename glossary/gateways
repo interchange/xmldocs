@@ -1,3 +1,30 @@
+The following payment gateway transactions are known by Interchange:
+
+<table>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>Transaction</entry>
+<entry>Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry>avs</entry>
+<entry>Address verification (&glos-AVS;)</entry>
+</row>
+<row>
+<entry>auth</entry>
+<entry>Payment authorization</entry>
+</row>
+<row>
+<entry>void</entry>
+<entry>Cancel or refund payment</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
 Modules for the following payment gateways are included in the Interchange source
 code:
 
@@ -24,7 +51,7 @@ code:
 <row>
 <entry><literal>BusinessOnlinePayment</literal></entry>
 <entry>Business::OnlinePayment</entry>
-<entry>wrapper for Business::OnlinePayment</entry>
+<entry>wrapper for <ulink url='http://search.cpan.org/perldoc?Business::OnlinePayment'>Business::OnlinePayment</ulink></entry>
 </row>
 <row>
 <entry><literal>Cybercash</literal></entry>
@@ -34,6 +61,21 @@ code:
 <row>
 <entry><literal>ECHO</literal></entry>
 <entry>Electronic Clearing House, Inc.</entry>
+<entry></entry>
+</row>
+<row>
+<entry><literal>ICS</literal></entry>
+<entry>Cybersource ICS</entry>
+<entry></entry>
+</row>
+<row>
+<entry><literal>NetBilling</literal></entry>
+<entry>NetBilling</entry>
+<entry></entry>
+</row>
+<row>
+<entry><literal>Signio</literal></entry>
+<entry></entry>
 <entry></entry>
 </row>
 </tbody>
