@@ -25,25 +25,6 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	amount
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	amount of money to charge
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
 	gateway
 	</entry>
 	<entry>
@@ -57,6 +38,44 @@ __NAME__ synopsis
 	</entry>
 	<entry>
 	payment &glos-gateway;s
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	transaction
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	transaction type
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	amount
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	amount of money to charge
 	</entry>
 
 </row> 
