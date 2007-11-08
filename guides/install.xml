@@ -58,7 +58,7 @@
 		generic tarballs. You might want to prefer tarballs over 
 		distribution-specific packages if you are either using a non-standard
 		platform, or want to always access the latest releases (when 
-		distribution-specific packages are laggign behind).
+		distribution-specific packages are lagging behind).
 		<emphasis role='bold'>So far, it seems the tarballs are the 
 		cleanest and most preferred installation method.</emphasis>
 		</para><para>
@@ -124,7 +124,8 @@
 		an up-to-30% performance drop. For home installations and testing, both
 		the performance impact and even an older Perl version are acceptable.
 		For production sites, consider compiling a special, non-threaded version
-		of Perl that will be used to run &IC;.
+		of Perl that will be used to run &IC;. Pointers on how to make &IC;
+		use your custom Perl installation are given later in this guide.
 		</para>
 		<para>
 		Interchange relies on a number of non-standard Perl modules.
@@ -149,9 +150,9 @@ $ /path/to/perl -MCPAN -e 'install "Bundle::InterchangeKitchenSink"'
 		<title>C compiler</title>
 		<para>
 		&IC; uses the so-called "&glos-link-program;" to provide a link between
-		the web and Interchange servers. It is, in fact, a very simple C
-		program that is installed as a CGI script and that passes parameters
-		back and forth.
+		the web server (usually &APACHE;) and the Interchange server. It is, in
+		fact, a very simple C program that is installed as a CGI script and that
+		passes parameters back and forth.
 		</para><para>
 		To compile the link program, you will need a C compiler. Most of the
 		time it will be &GCC;, but the link program is trivial and well
@@ -164,6 +165,12 @@ $ /path/to/perl -MCPAN -e 'install "Bundle::InterchangeKitchenSink"'
 		it for you, and then keep copying it around to new names for each of the
 		catalogs (unless, of course, you want to modify compile-time link 
 		program setttings such as socket file location or timeout values).
+		</para><para>
+		There are also other ways to connect the web server with &IC;; one is
+		using <literal>mod_interchange</literal> module for Apache 1, and
+		the other is using <classname>Interchange::Link</classname> for 
+		<literal>mod_perl</literal>, but those two options will not be
+		considered in this guide.
 		</para>
 	</sect2>
 
@@ -212,7 +219,7 @@ $ /path/to/perl -MCPAN -e 'install "Bundle::InterchangeKitchenSink"'
 		It is not required, but is suggested to put your tables in some kind of
 		an &glos-SQL; database. &IC; works with many database types, but the 
 		mainstream ones, such as &MYSQL;, &PGSQL; or &ORACLE; will probably
-		cause no suspicious problems on first run.
+		cause no unexpected problems on first run.
 		</para>
 		<para>
 		In fact, our demo catalog '&std-catalog;' requires use of an &glos-SQL;
@@ -226,11 +233,12 @@ $ /path/to/perl -MCPAN -e 'install "Bundle::InterchangeKitchenSink"'
 		Know the database administrator user name and password.
 		</para>
 		<para>
-		If you do not employ an SQL database, &IC; will use &GDBM; or 
-		&BDBM;, depending on what it finds on the system.
+		If you do not employ an SQL database, &IC; will use in-file databases
+		such as &GDBM; or &BDBM;, depending on what it finds on the system.
 		Yet another option is &glos-SDBM;, but it is severely limited in
 		functionality and is not selected unless explicitly specified by the
-		user.
+		user (SDBM limits field size to 2KB which is too little to accomodate
+		our demo catalog and we do not consider SDBM as a realistic option).
 		</para>
 	</sect2>
 
@@ -308,12 +316,10 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	If you do not get an <literal>OK</literal> on all the tests ran,
 	you have a problem that you need to fix before moving any further.
 	</para><para>
-	For help, look under <!-- TODO appendix troubleshooting -->.
-	If your problem is not listed, or you think it's not, 
-	your best bet is to visit our
+	For any additional help, your best bet is to visit our
 <ulink url="http://www.icdevgroup.org/i/dev/users/community">community</ulink>
-	page and drop by on IRC, or post your problem to
-	the users mailing list (see &PUBLIC_MLS; page).
+	web page and drop by on IRC, or post your problem to
+	the Users Mailing List (see &PUBLIC_MLS; page).
 	</para>
 </sect1>
 
@@ -344,7 +350,7 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	</para><para>
 	Regardless of whether you want to base your own catalogs on our demo or not,
 	it is strongly suggested to install the demo. It will let you
-	see whether your Interchange installation is correct, and it will also be
+	see whether your Interchange installation works, and it will also be
 	a nice presentation of Interchange features.
 	</para>
 
@@ -360,7 +366,7 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	catalog creation phase, so the first <command>makecat</command> session will
 	seem very long, and some of the questions will seem duplicated.
 	</para><para>
-	The <command>makecat</command> is self-documented. Each question is
+	The <command>makecat</command> utility is self-documented. Each question is
 	accompanyed with an introduction, examples, and a reasonable Unix default.
 	</para><para>
 	By far the most common problem on the way to installing a working demo,
