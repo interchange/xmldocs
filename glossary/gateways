@@ -1,0 +1,53 @@
+Modules for the following payment gateways are included in the Interchange source
+code:
+
+<table>
+<title>Payment Modules</title>
+<tgroup cols="3">
+<thead>
+<row>
+<entry>Module</entry>
+<entry>Name</entry>
+<entry>Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><literal>AuthorizeNet</literal></entry>
+<entry>AuthorizeNet</entry>
+</row>
+<row>
+<entry><literal>BoA</literal></entry>
+<entry>Bank of America</entry>
+<entry></entry>
+</row>
+<row>
+<entry><literal>BusinessOnlinePayment</literal></entry>
+<entry>Business::OnlinePayment</entry>
+<entry>wrapper for Business::OnlinePayment</entry>
+</row>
+<row>
+<entry><literal>Cybercash</literal></entry>
+<entry>Cybercash</entry>
+<entry></entry>
+</row>
+<row>
+<entry><literal>ECHO</literal></entry>
+<entry>Electronic Clearing House, Inc.</entry>
+<entry></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</para>
+
+<section>
+<title>AuthorizeNet</title>
+<section>
+<title>Prerequisites</title>
+<para>
+</para>
+</section>
+</section>
+
+<para>

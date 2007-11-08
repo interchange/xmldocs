@@ -56,7 +56,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	payment &glos-gateways;
 	</entry>
 
 </row> 
