@@ -113,12 +113,20 @@ __NAME__ synopsis
 	No
 	</entry>
 	<entry>
-	Return results as a hash reference?
+	Return complete result hash as a reference?
 	</entry>
 
 </row> 
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
+__END__
+
+__NAME__ description
+Returns transaction identifier.
+</para>
+<para>
+The transaction identifier returned from the payment gateway will be stored
+in the session as <literal>payment_id</literal>.
 __END__
 
 __NAME__ see also
