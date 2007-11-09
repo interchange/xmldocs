@@ -1,0 +1,9 @@
+__NAME__ example: Change default display type for Matrix widgets
+<programlisting>
+Options Matrix display_type separate
+</programlisting>
+__END__
+
+__NAME__ see also
+OptionsEnable
+__END__
