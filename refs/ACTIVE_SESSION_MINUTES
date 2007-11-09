@@ -1,6 +1,6 @@
 
 __NAME__ purpose
-specify a duration after which idle user sessions are expired, overriding SessionExpire directive
+specify maximum session age for [dump-session]
 __END__
 
 
@@ -10,19 +10,13 @@ __END__
 
 
 __NAME__ description
-This &glos-variable; overrides the &conf-SessionExpire; directive. See 
-&conf-SessionExpire; for information.
+This &glos-variable; specifies the maximum session age in minutes and is used
+only by the &tag-dump-session; tag.
 __END__
 
 __NAME__ notes
 This variable only accepts input specified in minutes.
 __END__
-
-
-__NAME__ see also
-SessionExpire
-__END__
-
 
 __NAME__ example: 
 __END__
