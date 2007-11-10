@@ -1,0 +1,29 @@
+__NAME__ purpose
+display country selector dropdown box
+__END__
+
+__NAME__ synopsis
+__END__
+
+__NAME__ description
+The &widget-__FILENAME__; widget displays an elegantly-formatted
+country selector dropdown box.
+__END__
+
+__NAME__ notes
+__END__
+
+
+__NAME__ online: Country selector
+<programlisting>
+[widget name=widget_countryselect type=country_select]
+</programlisting>
+__END__
+
+__NAME__ missing
+widget is considerably more complex that what is documented
+__END__
+
+__NAME__ see also
+state_select
+__END__

@@ -1,0 +1,24 @@
+__NAME__ purpose
+display value, providing HTML input box change it
+__END__
+
+__NAME__ synopsis
+__END__
+
+__NAME__ description
+The &widget-__FILENAME__; widget displays &glos-variable;s
+from the &glos-value;s space in a &glos-HTML; text input box.
+__END__
+
+__NAME__ notes
+__END__
+
+
+__NAME__ online: Value initialization and display
+<programlisting>
+[value name=widget_testtext set="Test Widget Value" hide=1]
+
+[widget name=widget_testtext type=text]
+</programlisting>
+__END__
+

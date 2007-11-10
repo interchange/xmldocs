@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify whether information from both GET and POST method should be parsed when form is submitted using POST method
+remove visible affiliate code from URLs after first access
 __END__
 
 

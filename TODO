@@ -1,4 +1,6 @@
 Bugs:
+-textarea widget is hidden as it is found in text.widget file
+-check if really linking between widgets is not working
 - search doc se nevidi jer je search neki actionmap
 - on online docs, mention that obsolete examples are obsolete, 
   provide search box, provide static files for download, 

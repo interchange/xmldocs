@@ -2,6 +2,25 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	name
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	Name of the resulting &glos-HTML; element.
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	set
 	</entry>
 	<entry>
@@ -14,7 +33,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Override current or default widget value with specific data.
 	</entry>
 
 </row> 
@@ -33,7 +52,9 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Default value for a widget. The default is applied if there is 
+	no corresponding value for the widget in the &glos-value;s
+	variable space.
 	</entry>
 
 </row> 
@@ -52,7 +73,8 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Filter name or names (separated by spaces) to apply to the widget's
+	value prior to display.
 	</entry>
 
 </row> 
@@ -78,7 +100,10 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	table
+	<group>
+	<arg choice='plain'>table</arg>
+	<arg choice='plain'>db</arg>
+	</group>
 	</entry>
 	<entry>
 	<!-- POS -->
@@ -97,7 +122,32 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	field
+	<group>
+	<arg choice='plain'>field</arg>
+	<arg choice='plain'>column</arg>
+	</group>
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	<group>
+	<arg choice='plain'>key</arg>
+	<arg choice='plain'>outboard</arg>
+	</group>
 	</entry>
 	<entry>
 	<!-- POS -->
@@ -193,25 +243,6 @@ __NAME__ synopsis
 
 	<entry>
 	rows
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	key
 	</entry>
 	<entry>
 	<!-- POS -->

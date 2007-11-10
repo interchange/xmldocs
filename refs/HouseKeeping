@@ -17,9 +17,15 @@ to a <literal>-stop</literal> command.
 __END__
 
 
-__NAME__ example: Adjusting the HouseKeeping interval
+__NAME__ example: Adjusting the HouseKeeping interval to 120 seconds
 <programlisting>
-HouseKeeping 5
+HouseKeeping 2 minutes
+</programlisting>
+__END__
+
+__NAME__ example: Adjusting the HouseKeeping interval to 1 hour
+<programlisting>
+HouseKeeping 1 hour
 </programlisting>
 __END__
 

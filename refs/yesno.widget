@@ -1,0 +1,48 @@
+__NAME__ purpose
+display a yes/no option
+__END__
+
+__NAME__ synopsis
+__END__
+
+__NAME__ description
+The &widget-__FILENAME__; widget creates a simple "Yes or No" option.
+</para><para>
+The actual widget titles, "<literal>Yes</literal>" and 
+"<literal>No</literal>", are &glos-locale;-aware so adding their
+translated versions to the locale &glos-database; will be enough to
+have them adjusted to visitors' language settings.
+</para><para>
+A negative answer will return a blank (&glos-false;) value to the application.<sbr/>
+A positive answer will return value <literal>1</literal> (&glos-true;) to the application.
+__END__
+
+__NAME__ notes
+The widget is created by Interchange's <function>Vend::Form::yesno</function>
+function. Passing attribute <literal>type="yesno radio"</literal> to it is
+equivalent to passing attributes <literal>type=yesno variant=radio</literal>.
+However, only method <literal>type="yesno radio"</literal> is available when the
+&glos-widget; is invoked through the &tag-widget; tag and &glos-ITL;.
+__END__
+
+
+__NAME__ online: 'Yes or No' widget, rendered as a dropdown list
+<programlisting>
+[widget name=example type=yesno]
+</programlisting>
+__END__
+
+__NAME__ online: 'Yes or No' widget, rendered as a "radio" button
+<programlisting>
+[widget name=example type='yesno radio']
+</programlisting>
+__END__
+
+__NAME__ online: 'Yes or No' widget, created in an alternative way
+A similar (eventually more flexible) "Yes or No" button can be created
+using the general-purpose &tag-display; tag:
+<programlisting>
+[display name=example type=select passed="=No,1=Yes"]
+</programlisting>
+__END__
+

@@ -1,0 +1,26 @@
+__NAME__ purpose
+display time selector dropdown box
+__END__
+
+__NAME__ synopsis
+__END__
+
+__NAME__ description
+The &widget-__FILENAME__; widget displays a 24-hour time span in a day
+as a series of 15-minute increments in a dropdown list.
+__END__
+
+__NAME__ notes
+__END__
+
+
+__NAME__ online: Basic time selector
+<programlisting>
+[widget name=widget_testtime type=time]
+</programlisting>
+__END__
+
+__NAME__ missing
+Time widget is considerably more complex that what is documented
+__END__
+

@@ -1,0 +1,34 @@
+__NAME__ purpose
+display a no/yes option
+__END__
+
+__NAME__ synopsis
+__END__
+
+__NAME__ description
+The &widget-__FILENAME__; widget creates a simple "Yes or No" option.
+This widget is exactly the same as &widget-yesno; with the return
+values for Yes and No inverted.
+</para><para>
+The actual widget titles, "<literal>Yes</literal>" and 
+"<literal>No</literal>", are &glos-locale;-aware so adding their
+translated versions to the locale &glos-database; will be enough to
+have them adjusted to visitors' language settings.
+</para><para>
+A negative answer will return value <literal>1</literal> (&glos-true;) to the application.<sbr/>
+A positive answer will return a blank (&glos-false;) value to the application.
+__END__
+
+__NAME__ notes
+See very similar widget &widget-yesno; for additional examples.
+__END__
+
+__NAME__ online: 'Yes or No' widget, rendered as a dropdown list
+<programlisting>
+[widget name=example type=noyes]
+</programlisting>
+__END__
+
+__NAME__ see also
+yesno
+__END__

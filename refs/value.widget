@@ -1,0 +1,31 @@
+__NAME__ purpose
+display value, providing no option to change it
+__END__
+
+__NAME__ synopsis
+__END__
+
+__NAME__ description
+The &widget-__FILENAME__; widget simply displays &glos-variable;s
+from the &glos-value;s space and does not create any &glos-HTML;
+form element that would allow changing them.
+__END__
+
+__NAME__ notes
+The variable value is automatically encoded before display; to 
+avoid any processing before display, use widget &widget-realvalue;.
+__END__
+
+
+__NAME__ online: Basic value initialization and display
+<programlisting>
+[value name=widget_testvalue set="Test Widget Value" hide=1]
+
+[widget name=widget_testvalue type=value]
+</programlisting>
+__END__
+
+__NAME__ see also
+text, textarea, realvalue
+__END__
+

@@ -1,0 +1,54 @@
+__NAME__ purpose
+display raw, unencoded value, providing no option to change it
+__END__
+
+__NAME__ synopsis
+__END__
+
+__NAME__ description
+The &widget-__FILENAME__; widget simply displays &glos-variable;s
+from the &glos-value;s space and does not create any &glos-HTML;
+form element that would allow changing them.
+</para><para>
+It is similar to &widget-value;, but more dangerous. It does not
+perform any encoding on the value before display, allowing for
+possible untrusted data (including both &glos-HTML; and &glos-ITL;!)
+to be injected into the &glos-HTML; stream.
+</para><para>
+Use this widget with caution and always only on data you absolutely
+trust.
+__END__
+
+__NAME__ notes
+The variable value is not encoded before display; to 
+enabled recommended processing before display,
+use widget &widget-value;.
+__END__
+
+
+__NAME__ online: Basic value initialization and display
+<programlisting>
+[value name=widget_testrealvalue set="Test Widget Value" hide=1]
+
+[widget name=widget_testrealvalue type=realvalue]
+</programlisting>
+__END__
+
+__NAME__ online: Basic value initialization and display, showing arbitrary HTML and ITL code insertion
+<programlisting>
+[set widget_testrealvalue_input]
+Test &lt;i&gt;Widget&lt;i&gt; &lt;b&gt;Value&lt;/b&gt;. The time is: [time]
+[/set]
+
+[value name=widget_testrealvalue
+  set="[scratch widget_testrealvalue_input]"
+  hide=1]
+
+[widget name=widget_testrealvalue type=realvalue]
+</programlisting>
+__END__
+
+__NAME__ see also
+text, textarea, value
+__END__
+

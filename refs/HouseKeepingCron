@@ -65,26 +65,22 @@ executing on the global level.
 </para><para>
 In addition to the above, two special targets exist,
 <literal>:reconfig</literal> and <literal>:jobs</literal>. 
-They allow calling
-of the catalog reconfig routines and jobs routines respectively.
+They define the intervals at which 
+catalog reconfiguration and job executions would run (if any
+requests for it were issued).
 The <filename>etc/reconfig</filename> and
-<filename>etc/jobsqueue</filename> files will be ignored
-if &conf-__FILENAME__; is 
-specified but these targets are not included. This will render
-reconfiguration and/or triggering batch jobs from the commandline
-useless.
-In that case, a warning will be issued at
-&IC; startup or crontab change, e.g.:
-<programlisting>
-WARNING: suggested cron entry ':reconfig' not present.
-</programlisting>
-</para><para>
+<filename>etc/jobsqueue</filename> files are ignored
+if &conf-__FILENAME__; is specified and these targets not included.
+In that case, a warning will be issued because, without the two
+entries, catalog reconfiguration or job execution requests are
+ignored &mdash; something you almost never want in regular operation.
 __END__
 
-__NAME__ example: Running :restart and :jobs every 5 seconds
-The basic entry to implement <literal>HouseKeeping 5</literal> would be:
+__NAME__ example: Running :restart and :jobs every 5 minutes
+The basic entry to implement <literal>HouseKeeping 300</literal>
+would be:
 <programlisting><![CDATA[
-HouseKeeping 1
+HouseKeeping 1 minute
 
 HouseKeepingCron <<EOC
 */5 * * * * * :restart
@@ -104,6 +100,13 @@ EOC
 ]]></programlisting>
 __END__
 
+__NAME__ example: Warning message when :reconfig entry is not present
+The warning message would look like this:
+<programlisting>
+WARNING: suggested cron entry ':reconfig' not present.
+</programlisting>
+__END__
+
 __NAME__ see also
 HouseKeeping, RunDir
 __END__
@@ -112,6 +115,7 @@ __END__
 __NAME__ missing
 run_macro() also supports calling Interpolate::tag_profile if argument is \w+-\w+ but it's not documented ATM as I have no idea what to do with it
 more about <>= in target specification
-Last example (batch jobs) needs to be fixed
+Last example (batch jobs) needs to be fixed (or clarified how it works?)
+Clarify what the first 6 fields mean and adjust synopsis/description
 __END__
 
