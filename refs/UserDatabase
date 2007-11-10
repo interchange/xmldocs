@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify name of the database to use for client verification
+specify name of table to use as user database
 __END__
 
 
@@ -9,7 +9,7 @@ __END__
 
 
 __NAME__ synopsis
-<arg choice='plain'><replaceable>database_name</replaceable></arg>
+<arg choice='plain'><replaceable>table_name</replaceable></arg>
 __END__
 
 
@@ -18,14 +18,15 @@ __END__
 
 
 __NAME__ notes
+See &glos-userDB; glossary entry for complete discussion.
 __END__
 
 __NAME__ example: UserDatabase layout
 <programlisting>
-<xi:include parse='text'  href='../files/various/userdatabase.txt'/>
+<xi:include parse='text'  href='../files/userdb/userdatabase.txt'/>
 </programlisting>
 The database can be downloaded 
-<ulink url='files/various/userdatabase.txt'>verbatim</ulink>.
+<ulink url='files/userdb/userdatabase.txt'>verbatim</ulink>.
 __END__
 
 __NAME__ example: Specifying UserDatabase
