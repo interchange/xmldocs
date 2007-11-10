@@ -1,0 +1,46 @@
+[set Login]
+  [userdb login]
+[/set]
+
+[set Logout_choice]
+  [if type=explicit compare="[userdb function=logout clear='[cgi clear_values]']"]
+    [set mv_no_count]1[/set]
+    [set mv_no_session_id]1[/set]
+    [if cgi clear_cart]
+      [calc] @$Items = (); return; [/calc]
+    [/if]
+  [/if]
+[/set]
+
+[tmp cookie_username][read-cookie MV_USERNAME][/tmp]
+
+<form action="[process secure=1]" method="POST">
+  <input type="hidden" name="mv_todo"  value="return">
+  <input type="hidden" name="mv_nextpage" value="index">
+  [form-session-id]
+
+  [if !session logged_in]
+    <input type="hidden" name="mv_click" value="Login">
+
+    <input name="mv_username" type="text">
+    <input name="mv_password" type="password">
+
+    [if config CookieLogin]
+    <input type="hidden" name="mv_cookie_password" value="0">
+    <input type="checkbox" name="mv_cookie_password" value="1" [if scratch cookie_username]CHECKED[/if]>
+    [/if]
+
+  [else]
+    <input type="hidden" name="mv_click" value="Logout_choice">
+
+    Logged in as [data session username].
+
+    <input class="input" type="hidden" name="clear_values" value="1">
+    <input class="input" type="checkbox" name="clear_values" checked value="1"> Erase values.
+
+  [/else]
+  [/if]
+
+  <input type="submit" value="Submit">
+</form>
+

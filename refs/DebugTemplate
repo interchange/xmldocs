@@ -1,0 +1,63 @@
+__NAME__ purpose
+specify format of debug messages
+__END__
+
+__NAME__ synopsis
+<group rep='repeat'>
+  <arg><replaceable>time_spec</replaceable></arg>
+  <arg><literal>{CALLER0}</literal> ... <literal>{CALLER9}</literal></arg>
+  <arg><literal>{CATALOG}</literal></arg>
+  <arg><literal>{HOST}</literal></arg>
+  <arg><literal>{MESSAGE}</literal></arg>
+  <arg><literal>{PAGE}</literal></arg>
+  <arg><literal>{REMOTE_ADDR}</literal></arg>
+  <arg><literal>{TAG}</literal></arg>
+</group>
+__END__
+
+__NAME__ see also
+DebugFile, DEBUG
+__END__
+
+__NAME__ description
+&conf-DebugTemplate;, a global directive, allows you to change the
+format of debug messages. The meaning of the above literal 
+elements is:
+
+<itemizedlist>
+	<listitem><para>
+	<literal>time_spec</literal> -
+	POSIX::strftime() format specifiers. Take
+	a look at the &glos-time; glossary entry for a complete list. Since the
+	character <literal>%</literal> is treated as the beginning of a specifier,
+	use <literal>%%</literal> to insert a literal <literal>%</literal>.
+	</para></listitem>
+	<listitem><para>
+	<literal>{CALLER0}</literal> ... <literal>{CALLER9}</literal> -
+	members of the caller() list (see caller() &PERL; function).
+	</para></listitem>
+	<listitem><para>
+	<literal>{CATALOG}</literal> - catalog name
+	</para></listitem>
+	<listitem><para>
+	<literal>{HOST}</literal> - remote hostname or IP address
+	</para></listitem>
+	<listitem><para>
+	<literal>{MESSAGE}</literal> - actual debug message
+	</para></listitem>
+	<listitem><para>
+	<literal>{PAGE}</literal> - current page name (&var-MV_PAGE;)
+	</para></listitem>
+	<listitem><para>
+	<literal>{REMOTE_ADDR}</literal> - remote IP address
+	</para></listitem>
+	<listitem><para>
+	<literal>{TAG}</literal> - current tag name
+	(from <classname>Vend::Parse</classname>)
+	</para></listitem>
+</itemizedlist>
+__END__
+
+__NAME__ notes
+__END__
+

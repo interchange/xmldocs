@@ -1,1 +1,182 @@
 
+The name "UserDB" stands for a set of built-in &IC; features related to
+the user &glos-database;. That includes the database table that will hold your
+visitors data, and the set of functions operating either on that database
+or on people's &glos-session; information.
+</para><para>
+&IC;'s set of user database functions is elaborate, but it still manages
+not to place
+application-specific requirements on your practical database. While it
+is possible to use &IC;'s UserDB functions with your custom type of
+database, it is strongly recommended to follow simple UserDB naming and
+usage standards. That alone will instantly give you a huge amount of
+built-in userdb functionality with no overhead programming.
+</para><para>
+
+</para><para>
+The whole UserDB set consists of:
+<itemizedlist>
+
+	<listitem><para>
+	The user database. It is the &glos-database; table that will actually 
+	contain all persistent information for visitors who create an account
+	at your website. This table has only a few required fields.
+	</para></listitem>
+	<listitem><para>
+	Set of predefined &IC; variables (such as <mv>mv_username</mv>,
+	<mv>mv_password</mv> and <mv>mv_verify</mv>.)
+	As you will see, most of the UserDB functions in
+	&IC; will be simplified to placing data in predefined variables
+	and then invoking required actions; no matter how complex the 
+	actions might be internally.
+	</para></listitem>
+	<listitem><para>
+	The &tag-userdb; tag. This tag is the convenient method of invoking
+	UserDB functions. As long as you will adhere to naming and usage
+	standards, UserDB invocations will be as simple as 
+	<code>[userdb login]</code>, <code>[userdb save]</code> or
+	<code>[userdb logout]</code>.
+	</para></listitem>
+
+</itemizedlist>
+</para>
+
+<section>
+	<title>Creating the user database</title>
+	<para>
+	To create the database, you could follow a very simple structure.
+	The only two required fields are
+	<database class='field'>username</database> and 
+	<database class='field'>password</database>.
+	Your <ulink url='files/userdb/userdatabase.txt'>sample test database</ulink>
+	could look like this:
+<programlisting>
+<xi:include parse='text' href='../files/userdb/userdatabase.txt'/>
+</programlisting>
+	(Note that the name of the first column &mdash; the primary key &mdash;
+	is arbitrary because &IC;'s default functions are not accessing it by
+	name. But it is a good standard to name the first field 
+	<database class='field'>code</database> in all your database tables).
+	</para><para>
+	It is, however, recommended to use an &glos-SQL; database for any
+	more complex functions. Let's take a look at a
+	<ulink url='files/userdb/userdb.pgsql'>more elaborate user
+	database</ulink>
+	that, among other things, has support for visitors' first and last name,
+	inactivity flag and billing and shipping addresses:
+<programlisting>
+<xi:include parse='text' href='../files/userdb/userdb.pgsql'/>
+</programlisting>
+	</para><para>
+	The above is &IC;'s database representation format that allows &IC;
+	to be aware of the database structure and automagically create it 
+	if it's missing. See &glos-database; glossary entry for complete
+	information.
+	</para><para>
+	The above is &PGSQL;-compatible definition. We have  the equivalent
+	<ulink url='files/userdb/userdb.mysql'>MySQL version</ulink> available
+	(in short, you only need to replace
+	type <literal>=text</literal> with MySQL's <literal>=BLOB</literal>).
+	</para>
+</section>
+
+
+<section>
+	<title>Registering the database</title>
+	<para>
+	To make the new database table accessible to &IC;, and to define
+	a couple more UserDB-specific options, you could add the following
+	to your &ccf;:
+<programlisting>
+# For SQL databases:
+Database  userdb  userdb.txt   __SQLDSN__
+
+# Or for file-based database (DBM):
+Database  userdb  userdb.txt   TAB
+
+# Encrypt passwords?
+UserDB    default    crypt         0
+
+# Ignore uppercase/lowercase in usernames?
+UserDB    default    ignore_case   1
+
+# Enable this in combination with the above, so that
+# username is always 'normalized':
+Filter    mv_username lc
+
+# To disable field containing date of last change:
+UserDB    default    time_field    none
+
+# To enable field containing date of last change
+#UserDB    default    time_field    mod_time
+
+UserDB    default    logfile       var/log/userdb.log
+
+# To allow people login using their email, and not their username
+# (in that case, username does not have to be meaningful and
+# can be automatically assigned, like "U00001"):
+#UserDB    default    indirect_login  email
+</programlisting>
+  </para>
+</section>
+
+<section>
+  <title>Creating the login page</title>
+  <para>
+  The login page could again be very simple, like this:
+<programlisting><![CDATA[
+[set Login]
+[userdb login]
+[/set]
+
+<form action="[process secure=1]" method="POST">
+  <input type="hidden" name="mv_todo"  value="return">
+  <input type="hidden" name="mv_nextpage" value="index">
+  <input type="hidden" name="mv_click" value="Login">
+  [form-session-id]
+
+  <input name="mv_username" type="text">
+  <input name="mv_password" type="password">
+  <input value="Submit"   type="submit">
+</form>
+]]></programlisting>
+  </para><para>
+	<ulink url='files/userdb/login.txt'>
+  More complex login page</ulink>
+	with support for cookies and "remembering"
+  users, and that displays a logout option if the user is already 
+  logged in could look like this:
+<programlisting>
+<xi:include parse='text' href='../files/userdb/login.txt'/>
+</programlisting>
+  </para>
+</section>
+
+
+<section>
+  <title>Conclusion</title>
+  <para>
+	When the user logs in, user database values are automatically
+	copied to their &glos-value;s space and can be retrieved at
+	any time using the &tag-value; tag. (Values which are not present
+	in the database might take on a default value defined with
+	&conf-ValuesDefault;).
+	</para><para>
+	Often times, you would like to save users' data back to the user
+	database, be it during or at the end of user session. To that
+	effect, use the following simple yet powerful code:
+<programlisting>
+[userdb save]
+</programlisting>
+	The above code saves all users' &glos-value;s back to the database.
+	Values which do not have a corresponding database field are 
+	ignored (as there's no place to save them). This is a fault-tolerant
+	behavior and something you almost always want to happen anyway.
+	</para><para>
+	For all advanced examples and more technical discussion, see
+	&tag-userdb; tag documentation.
+	</para>
+</section>
+
+<para>
+

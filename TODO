@@ -1,6 +1,7 @@
 Bugs:
 -textarea widget is hidden as it is found in text.widget file
 -check if really linking between widgets is not working
+-sort keys in infobot file so that they don't end up in different order each time and look like a file to commit
 - search doc se nevidi jer je search neki actionmap
 - on online docs, mention that obsolete examples are obsolete, 
   provide search box, provide static files for download, 
