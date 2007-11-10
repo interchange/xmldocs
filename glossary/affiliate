@@ -1,0 +1,28 @@
+
+When giving links to your website to your partners, often times you want
+to embed an identification string that will link visits or eventual
+sales to the corresponding partner.
+</para><para>
+&IC; supports affiliate tracking; the source of the visit or order
+is always accessible using <code>[data session source]</code>.
+</para><para>
+So when giving links to your affiliates, make sure the affiliate code
+you assign them is embedded in one of the following ways:
+<programlisting>
+http://&def-hostname;/cgi-bin/&std-catalog;/index?;;thesource         (old Minivend 3 way, still works)
+http://&def-hostname;/cgi-bin/&std-catalog;/index?mv_pc=thesource     (Interchange way, still works)
+http://&def-hostname;/cgi-bin/&std-catalog;/index?mv_source=thesource (current way)
+</programlisting>
+Note that <mv>mv_source</mv> was added as an affiliate code-passing option
+only in &IC; 4.9.x. Before that, affiliate code was passed in <mv>mv_pc</mv>.
+The <mv>mv_pc</mv> variable is used as a variable containing a random number
+to prevent caching of pages. So if you want to use mv_pc as a way of 
+carrying over the affiliate code, it must contain at least one non-digit.
+(<literal>mv_pc=A12</literal> is a good affiliate code,
+<literal>mv_pc=12</literal> is not). If using <mv>mv_source</mv>, affiliate
+code is free of this restriction.
+</para><para>
+Sometimes you want the affiliate code to disappear from the URL after
+the visitors get redirected to your page. To enable that feature, see
+&conf-BounceReferrals; configuration directive.
+

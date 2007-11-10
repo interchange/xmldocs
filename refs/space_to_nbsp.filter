@@ -1,5 +1,5 @@
 __NAME__ purpose
-replace all spaces (" ") with null ("\0") characters
+replace all spaces (" ") with nonbreakable space ("&amp;nbsp;") characters
 __END__
 
 
@@ -10,18 +10,18 @@ __END__
 
 __NAME__ description
 The filter replaces all space ("<literal> </literal>") characters
-with &glos-HTML;'s Non-breakable-space ("<literal>&amp;nbsp;</literal>")
+with &glos-HTML;'s nonbreakable-space ("<literal>&amp;nbsp;</literal>")
 characters.
 </para><para>
 This is useful for places where you want strings to appear in a single
-line, without word-wrapping to the next row.
+line, without word-wrapping to the next line.
 __END__
 
 __NAME__ notes
-In &glos-HTML;, multiple spaces in a row render as just one space on the
+In &glos-HTML;, multiple spaces in a line render as just one space on the
 screen. When the spaces are converted to "&amp;nbsp;", however, every
-non-breakable space will produce one space character on the screen &mdash;
-it's how &glos-HTML; works..
+nonbreakable space will produce one space character on the screen &mdash;
+it's how &glos-HTML; works.
 Use the &glos-filter;'s <option>compress</option> when you want to 
 preserve the behavior of only one space being visible on the screen.
 __END__
@@ -29,13 +29,13 @@ __END__
 __NAME__ online: Filter example
 <programlisting><![CDATA[
 <div style="width: 80px;">
-This is a very small DIV and will surely word-wrap this text to multiple lines..
-With the filter applied, however, it will force the DIV to stretch and render as single line.
+This is a very   small DIV and will   surely word-wrap this text to multiple lines.
+With the filter applied, however, it will force the DIV to stretch and            render as single line.
 </div>
 
 <div style="width: 80px;">
 [filter space_to_nbsp]
-With the filter applied, however,    it will    force the DIV to stretch and render as single line.
+With the filter        applied, however, it will force the DIV to stretch and render as single line.
 [/filter]
 </div>
 ]]></programlisting>
@@ -47,8 +47,9 @@ __NAME__ online: Filter example
 <programlisting><![CDATA[
 <div>
 [filter space_to_nbsp.compress]
-Multiple    spaces    in a row   will render   as just   single  space.
+Multiple    spaces    in a line   will render   as just   single  space.
 [/filter]
 </div>
 ]]></programlisting>
 __END__
+

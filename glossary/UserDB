@@ -163,9 +163,12 @@ UserDB    default    logfile       var/log/userdb.log
 	&conf-ValuesDefault;).
 	</para><para>
 	Often times, you would like to save users' data back to the user
-	database, be it during or at the end of user session. To that
-	effect, use the following simple yet powerful code:
+	database, be it during or at the end of user session. You can 
+	automatically do this with a combination of form processing
+	directives, but if you want to do it manually,
+	use the following simple yet powerful code:
 <programlisting>
+[update values]
 [userdb save]
 </programlisting>
 	The above code saves all users' &glos-value;s back to the database.
