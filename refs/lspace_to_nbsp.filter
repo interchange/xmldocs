@@ -1,0 +1,30 @@
+__NAME__ purpose
+replace leading spaces (" ") with nonbreakable space ("&amp;nbsp;") characters
+__END__
+
+
+__NAME__ see also
+space_to_null, lspace_to_nbsp
+__END__
+
+
+__NAME__ description
+The filter replaces leading space ("<literal> </literal>") characters
+with &glos-HTML;'s nonbreakable-space ("<literal>&amp;nbsp;</literal>")
+characters.
+</para><para>
+This is similar in functionality to &filter-space_to_nbsp; filter,
+where all space (not just leading) is converted.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting><![CDATA[
+</div>
+[filter lspace_to_nbsp]
+          Text with leading whitespace.
+[/filter]
+</div>
+]]></programlisting>
+__END__
+

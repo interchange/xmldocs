@@ -1,0 +1,28 @@
+__NAME__ purpose
+calculate SHA1 sum of input
+__END__
+
+__NAME__ see also
+md5
+__END__
+
+
+__NAME__ description
+The filter outputs SHA1 sum for the input text.
+__END__
+
+
+__NAME__ online: Filter example
+<programlisting>
+[filter sha1][/filter]
+[filter sha1]One[/filter]
+[filter sha1]Two[/filter]
+[filter sha1]MyPassword[/filter]
+[filter sha1]Very long string[/filter]
+</programlisting>
+__END__
+
+__NAME__ author
+&jon;
+__END__
+
