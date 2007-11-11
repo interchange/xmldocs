@@ -4,16 +4,15 @@ __END__
 
 
 __NAME__ description
-The filter rounds input value in a floating-point-safe way, using 
-&IC;'s built-in function <function>Vend::util::round_to_frac_digits</function>.
+The filter rounds input value in a floating-point-safe way.
 __END__
 
 
 __NAME__ online: Filter example
 <programlisting>
-[filter round.4]512.78953334[/filter]
-[filter round.4]512.78955334[/filter]
-[filter round.4]512.78958334[/filter]
+[filter round.4]512.78953[/filter]
+[filter round.4]512.78955[/filter]
+[filter round.4]512.78958[/filter]
 </programlisting>
 __END__
 

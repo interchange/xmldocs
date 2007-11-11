@@ -168,7 +168,7 @@ sub wanted {
 	return if $file eq '.';
 
 	# Things we ignore
-	return if /(^|\/)(CVS|\.cvs|\.svn|\.autoload)(\/.+[^\/])?$/;
+	return if /(^|\/)(CVS|\.cvs|\.svn|\.autoload|\.gitignore)(\/.+[^\/])?$/;
 	
 	stat($file) or warn "Can't stat '$file' ? ($!)\n";
 
@@ -319,10 +319,13 @@ sub wanted {
 			if ( $c{line} =~ /^\s*#/ ) {         # commented line
 				$hash{tree}{$c{file}}{comments}++ ;
 				$hash{total}{perl_comments}++;
-				# PLANNED TODO check if the comment contains ::log[A-Z]\w+
+
+				# check if the comment contains ::log[A-Z]\w+
 				# to discover calls to logGlobal/logDebug/logError.
-				# I don't plan this anymore since wasn't there some talk
-				# on replacing those hack routines with some formal logging?
+				if ( $c{line} =~ /log(Debug|Global|Error|Once|Data)/ ) {
+					$hash{tree}{$c{file}}{commented_debugs}++;
+					$hash{total}{perl_commented_debugs}++;
+				}
 
 			} elsif ( $c{line} =~ /\s+(?<!s)#/ ) {     # code + inline comment
 				$hash{tree}{$c{file}}{gray}++ ;
@@ -520,17 +523,121 @@ sub wanted {
 			( my $fn = $file ) =~ s#.+/##;
 			$fn =~ s/\.widget$//;
 
-			push @{ $hash{symbols}{$c{fsubtype}}{$fn} }, {
-				%c,
-				lnum => scalar @filedata,
-				ctx_p => $ctx_p,
-				ctx_n => $ctx_n,
-				ctxs => 1,
-				ctxe => scalar @filedata,
-				ctx => [ format_ctx(@filedata) ]
-			};
+			my %specific; # Item-specific data # Pretty ugly hack
+			my @widgets; # Support multiple widgets defined in the same file.
 
-			$hash{total}{$fsubtype . "s"}++;
+			# This is where we parse widget file to discover multiple
+			# widgets defined in the same file.
+			for (my $lnum = 1; $lnum < scalar @filedata; $lnum++) {
+				my $_l = $filedata[$lnum];
+				next unless $_l =~ /^codedef\s/i;
+				my @lis = split /\s+/, $_l;
+
+				# Remove "CodeDef" which is first word in every line. (Safety check
+				# done just above so we can go ahead unconditionally)
+				shift @lis;
+
+				# Widget name as really defined, not just the file name
+				# (Most often, the difference is in _ and -).
+				# See if this is ok, or makes only problems (since ITL is 
+				# dash-insensitive anyway).
+				my $wn = shift @lis;
+
+				# Extract tagCanon field, it's just the next field
+				my $widgetopt = lc(shift @lis);
+
+				# Check if there's a sub defined for this tagCanon (if it is, it
+				# would be defined at the top in %tagCanon hash). If there really
+				# is, call that trigger function.
+				$tagCanon{lc $widgetopt} and &{ $tagCanon{lc $widgetopt} }(\%c);
+				
+				next if $widgetopt =~ /^documentation$/; # Docs inside this section
+				# are ignored by a "side-effect": namely, all lines not matching
+				# /^CodeDef/ are ignored, as you see at the beginning of for() loop...
+
+				# Now follows a SWITCH series, based on value of $widgetopt (tagCanon).
+
+				# See if it's a routine and parse routine lines as usual perl lines
+				if ( $widgetopt =~ /^routine$/ and "@lis" =~ /\s*<<(\S+)\s*$/i ) {
+					my $ender = $1;
+					for (my $lnum2 = $lnum; $lnum2 < scalar @filedata; $lnum2++) {
+						my $_t = $filedata[$lnum2];
+						last if $_t =~ /^$ender$/;
+
+						$c{line} = $_t;
+						$c{lnum} = $lnum2;
+
+						# TODO move those in a discover_everything() wrapper, since we
+						# call it from multiple places
+						line_findPragmas(\%c, {group =>$c{fsubtype}, name=>$wn});
+						line_findGlobVars(\%c, {group => $c{fsubtype}, name=>$wn});
+						line_findCatVars(\%c, {group => $c{fsubtype}, name=>$wn});
+						#line_findGlobConfs(\%c); # Read above function definition
+						line_findCatConfs(\%c);
+						line_findFunctionName(\%c, {group => $c{fsubtype}, name=>$wn});
+					}
+					next;
+
+				} elsif ( $widgetopt =~ /^maproutine$/ ) {
+
+					@lis == 1 or die "$wn MapRoutines, but argc != 1 ?\n";
+					next if "@lis" =~ /^::/;
+					# TODO : Functions don't end up having proper Line: x-y in source
+					# contexts but have Lines: as if the whole file was shown.
+					file_extractSub($wn, "@lis", \%c, {group => $c{fsubtype},name=>$wn});
+					#file_extractSub($wn, "@lis", \%c, {group => 'function',name=>$wn});
+				}
+				
+				if ( "@lis" =~ /<</ and $widgetopt !~ /^routine/ ) {
+					warn "TODO: Unsupported << in $wn (in $i{ver})\n" if $verbose;
+					next;
+				}
+
+				# New widget name we didn't see yet
+				# (either first run or another widget definition in the same file).
+				# We'll record all of them in @widgets, then create appropriate records
+				# for each. File body will be shared, this just ensures that they are
+				# recognized under different names (that no widgets 'slip through' as
+				# being undetected if they disguise themselves inside a "host" file).
+				{ no warnings;
+				if (!grep{/^$wn$/}@widgets and $lis[0] !~/^alias$/i){ push @widgets,$wn}
+				}
+
+				$specific{$wn}{"_widgetopt$widgetopt"} = "@lis";
+			}
+			
+			# For each widget found in the file, create appropriate data in hash.
+			for my $widgetname ( @widgets ) {
+				push @{ $hash{symbols}{$c{fsubtype}}{$widgetname} }, {
+					%c,
+					# Potentially 4.6.0 gets dots treated as regex here?
+					lnum => scalar @filedata,
+					ctx_p => $ctx_p,
+					ctx_n => $ctx_n,
+					ctxs => 1,
+					ctxe => scalar @filedata,
+					ctx => [ format_ctx(@filedata) ]
+				};
+
+				$hash{total}{$fsubtype . "s"}++;
+				$hash{total}{widgets}++;
+
+				$hash{specific}{$widgetname} = { # Append/update, don't overwrite
+					%{ $hash{specific}{$widgetname} || {}},
+					%{ $specific{$widgetname} || {}},
+				};
+
+				# Push whole resolved chain; last item is actual function
+				if ( $resolver_path{$c{fsubtype}}{$widgetname} ) {
+					while (my $spath=shift @{ $resolver_path{$c{fsubtype}}{$widgetname}}){
+						push @{ $hash{symbols}{$c{fsubtype}}{$widgetname} }, {
+							ctx_p => 0,
+							ctx_n => 0,
+							%$spath,
+						};
+					}
+				}
+			}
 			last;
 
 		##########################################################
