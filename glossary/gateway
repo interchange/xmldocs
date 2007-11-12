@@ -1,5 +1,33 @@
 </para>
 <section>
+<title>Gateway Configuration</title>
+<para>
+If we are using only one gateway in a catalog, setting up
+<literal>MV_PAYMENT</literal> variables is sufficient.
+
+<informaltable>
+<tgroup cols="3">
+<thead>
+<row>
+<entry>Variable</entry>
+<entry>Purpose</entry>
+<entry>Notes</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry>&var-MV_PAYMENT_MODE;</entry>
+<entry></entry>
+<entry></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</para>
+</section>
+
+<section id="gateway_transaction_types">
 <title>Transaction Types</title>
 <para>
 The following payment gateway transactions are known by Interchange:
@@ -50,11 +78,12 @@ Modules for the following payment gateways are included in the Interchange sourc
 code:
 
 <informaltable>
-<tgroup cols="3">
+<tgroup cols="4">
 <thead>
 <row>
 <entry>Module</entry>
 <entry>Name</entry>
+<entry>Mode</entry>
 <entry>Description</entry>
 </row>
 </thead>
@@ -62,52 +91,112 @@ code:
 <row>
 <entry><literal>AuthorizeNet</literal></entry>
 <entry>AuthorizeNet</entry>
+<entry><literal>authorizenet</literal></entry>
 </row>
 <row>
 <entry><literal>BoA</literal></entry>
 <entry>Bank of America</entry>
+<entry><literal>boa</literal></entry>
 <entry></entry>
 </row>
 <row>
 <entry><literal>BusinessOnlinePayment</literal></entry>
 <entry>Business::OnlinePayment</entry>
+<entry><literal>onlinepayment</literal></entry>
 <entry>wrapper for <ulink url='http://search.cpan.org/perldoc?Business::OnlinePayment'>Business::OnlinePayment</ulink></entry>
 </row>
 <row>
 <entry><literal>Cybercash</literal></entry>
 <entry>Cybercash</entry>
+<entry><literal>cybercash</literal></entry>
 <entry></entry>
 </row>
 <row>
 <entry><literal>ECHO</literal></entry>
 <entry>Electronic Clearing House, Inc.</entry>
+<entry><literal>echo</literal></entry>
 <entry></entry>
 </row>
 <row>
 <entry><literal>EFSNet</literal></entry>
-<entry><ulink url='http://www.concordefsnet.com'>Concord EFSNet</ulink></entry>
+<entry><ulink url='http://www.concordefsnet.com'>Concord
+EFSNet</ulink></entry>
+<entry><literal>echo</literal></entry>
+<entry></entry>
+</row>
+<row>
+<entry><literal>Ezic</literal></entry>
+<entry>EziC</entry>
+<entry><literal>ezic</literal></entry>
 <entry></entry>
 </row>
 <row>
 <entry><literal>ICS</literal></entry>
 <entry>Cybersource ICS</entry>
+<entry><literal>ICS</literal></entry>
+<entry></entry>
+</row>
+<row>
+<entry><literal>iTransact</literal></entry>
+<entry>iTransact</entry>
+<entry><literal>itransact</literal></entry>
+</row>
+<row>
+<entry><literal>Linkpoint</literal></entry>
+<entry>LinkPoint</entry>
+<entry><literal>linkpoint</literal></entry>
+<entry></entry>
+</row>
+<row>
+<entry><literal>MCVE</literal></entry>
+<entry>Mainstreet Credit Verification Engine</entry>
+<entry><literal>mcve</literal></entry>
 <entry></entry>
 </row>
 <row>
 <entry><literal>NetBilling</literal></entry>
 <entry>NetBilling</entry>
+<entry><literal>netbilling</literal></entry>
+<entry></entry>
+</row>
+<row>
+<entry><literal>PRI</literal></entry>
+<entry>Payment Resources International</entry>
+<entry><literal>PRI</literal></entry>
+<entry></entry>
+</row>
+<row>
+<entry><literal>PSiGate</literal></entry>
+<entry>PSiGate</entry>
+<entry><literal>psigate</literal></entry>
 <entry></entry>
 </row>
 <row>
 <entry><literal>Signio</literal></entry>
 <entry>Payflow Pro</entry>
-<entry></entry>
+<entry><literal>signio</literal></entry>
 </row>
 <row>
 <entry><literal>Skipjack</literal></entry>
 <entry>Skipjack</entry>
-<entry></entry>
+<entry><literal>skipjack</literal></entry>
 </row>
+<row>
+<entry><literal>TCLink</literal></entry>
+<entry>TrustCommerce</entry>
+<entry><literal>trustcommerce</literal></entry>
+</row>
+<row>
+<entry><literal>TestPayment</literal></entry>
+<entry>Payment Test</entry>
+<entry><literal>testpayment</literal></entry>
+</row>
+<row>
+<entry><literal>WellsFargo</literal></entry>
+<entry>WellsFargo</entry>
+<entry><literal>wellsfargo</literal></entry>
+</row>
+
 </tbody>
 </tgroup>
 </informaltable>
@@ -129,6 +218,18 @@ code:
 <title>Prerequisites</title>
 <para>
 OpenECHO module from <ulink url='http://www.openecho.com/'>http://www.openecho.com/</ulink>.
+</para>
+</section>
+</section>
+
+<section>
+<title>TCLink</title>
+<section>
+<title>Prerequisites</title>
+<para>
+Net::TCLink module from <ulink
+url='http://www.trustcommerce.com/tclink.html'>http://www.trustcommerce.com/tclink.html</ulink>
+or <ulink url='http://search.cpan.org/perldoc?Net::TCLink'>CPAN</ulink>.
 </para>
 </section>
 </section>
