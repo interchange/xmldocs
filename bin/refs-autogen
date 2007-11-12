@@ -970,6 +970,22 @@ unless ( $no_autorefs ) {
 			print ATD <<ENDD;
 <!ENTITY ${prefix}-$_ "<$tag>$_</$tag>">
 ENDD
+
+			# For easier writing of docs, create version of the entity that
+			# has all dashes (no underscores).. so you can always write
+			# something like &tag-convert-date;, not having to worry if it is
+			# convert-date or convert_date. Still, even with this, the original
+			# name will work, and the displayed name will be the one that
+			# is correct. (So the "all-dashes" version will only be a help
+			# in writing - the displayed data will still be correct as
+			# you'd expect).
+			my $dashname = $_;
+			$dashname =~ s/_/-/g;
+			unless ($dashname eq $_ ) {
+			print ATD <<ENDD;
+<!ENTITY ${prefix}-$dashname "<$tag>$_</$tag>">
+ENDD
+			}
 		}
 	}
 
