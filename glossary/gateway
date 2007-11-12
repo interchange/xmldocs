@@ -1,6 +1,13 @@
 </para>
 <section>
 <title>Gateway Configuration</title>
+<para>The first step is to fulfil the prerequisites of the payment module
+(listed in the individual module documentation below) and enable the module
+in the global configuration file with the &conf-Require; directive:
+<programlisting>
+require Vend::Payment::NetBilling
+</programlisting>
+</para>
 <para>
 If we are using only one gateway in a catalog, setting up
 <literal>MV_PAYMENT</literal> variables is sufficient.
@@ -20,10 +27,31 @@ If we are using only one gateway in a catalog, setting up
 <entry>gateway mode name</entry>
 <entry></entry>
 </row>
+<row>
+<entry>&var-MV_PAYMENT_SERVER;</entry>
+<entry>gateway host name</entry>
+<entry>optional (predefined in module)</entry>
+</row>
+<row>
+<entry>&var-MV_PAYMENT_ID;</entry>
+<entry>merchant identifier</entry>
+<entry></entry>
+</row>
+<row>
+<entry>&var-MV_PAYMENT_SECRET;</entry>
+<entry>password</entry>
+<entry></entry>
+</row>
 </tbody>
 </tgroup>
 </informaltable>
 
+An example configuration looks like:
+<programlisting>
+Variable MV_PAYMENT_MODE signio
+Variable MV_PAYMENT_ID nevairbe
+Variable MV_PAYMENT_SECRET foobar
+</programlisting>
 </para>
 </section>
 
@@ -219,6 +247,34 @@ EFSNet</ulink></entry>
 <para>
 OpenECHO module from <ulink url='http://www.openecho.com/'>http://www.openecho.com/</ulink>.
 </para>
+</section>
+</section>
+
+<section>
+<title>Netbilling</title>
+<para>
+The Netbilling module implements the <ulink
+url="http://netbilling.com/direct/direct2.html">Netbilling Direct Mode
+2.1</ulink>.
+</para>
+<section><title>Prerequisites</title>
+</section>
+<section><title>Parameters</title>
+<section><title><literal>host</literal></title>
+<para>
+The domain name of the NetBilling secure server.  Defaults to
+<literal>secure.netbilling.com</literal>.
+</para>
+</section>
+<section><title><literal>id</literal></title>
+<para>
+This is your account and sitetag separated by a colon (ACCOUNT:SITETAG).
+ACCOUNT is the number of your Netbilling merchant or agent account, as a
+12-character string. Required for ALL transactions. SITETAG is the site
+tag of your website configured in the Netbilling system. Required for
+membership transactions, optional for others.
+</para>
+</section>
 </section>
 </section>
 
