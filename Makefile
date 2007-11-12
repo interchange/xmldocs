@@ -7,7 +7,7 @@
 #
 
 # Those two need to be adjusted with time
-export XMLDOCS_CUR_DEVEL = 5.5.0
+export XMLDOCS_CUR_DEVEL = 5.5.2
 IC_VERSIONS = 4.6.0 4.8.0 5.0.0 5.2.0 5.4.0 cvs-head
 
 #############################################################
