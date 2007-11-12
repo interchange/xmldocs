@@ -911,6 +911,7 @@ sub line_findCatConfs {
 	}
 }
 
+# Look one function above.
 sub line_findGlobConfs {
 	######################################################
 	# Diskover global config directives
