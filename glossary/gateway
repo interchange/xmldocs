@@ -17,7 +17,7 @@ If we are using only one gateway in a catalog, setting up
 <tbody>
 <row>
 <entry>&var-MV_PAYMENT_MODE;</entry>
-<entry></entry>
+<entry>gateway mode name</entry>
 <entry></entry>
 </row>
 </tbody>
@@ -71,7 +71,7 @@ The following payment gateway transactions are known by Interchange:
 </para>
 </section>
 
-<section>
+<section id="gateway_payment_modules">
 <title>Payment Modules</title>
 <para>
 Modules for the following payment gateways are included in the Interchange source

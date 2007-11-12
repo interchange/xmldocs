@@ -1,11 +1,12 @@
 
 __NAME__ purpose
+payment gateway mode name
 __END__
 
 
 __NAME__ synopsis
 <group choice='req'>
-	<arg choice='plain'><replaceable></replaceable></arg>
+	<arg choice='plain'><replaceable>mode</replaceable></arg>
 </group>
 __END__
 
@@ -16,11 +17,7 @@ __END__
 
 
 __NAME__ description
-Payment Gateway Which payment processor module you wish to use.
-The default value is  not set.
-<!-- TODO autodetect -->
-Valid values are : authorizenet, boa, echo, mcve, psigate,signio, skipjack, trustcommerce,
-testpayment, wellsfargo, itransact and linkpoint.
+Payment gateway mode name for one of the available <olink targetdoc='glossary' targetptr='gateway_payment_modules'>payment modules</olink>. 
 __END__
 
 
