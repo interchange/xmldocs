@@ -42,6 +42,16 @@ If we are using only one gateway in a catalog, setting up
 <entry>password</entry>
 <entry></entry>
 </row>
+<row>
+<entry><literal>MV_PAYMENT_REFERER</literal></entry>
+<entry>referring URL</entry>
+<entry></entry>
+</row>
+<row>
+<entry><literal>MV_PAYMENT_TEST</literal></entry>
+<entry>test mode</entry>
+<entry></entry>
+</row>
 </tbody>
 </tgroup>
 </informaltable>
@@ -51,6 +61,20 @@ An example configuration looks like:
 Variable MV_PAYMENT_MODE signio
 Variable MV_PAYMENT_ID nevairbe
 Variable MV_PAYMENT_SECRET foobar
+</programlisting>
+</para>
+</section>
+
+<section id="gateway_multiple">
+<title>Multiple Gateways</title>
+<para>
+With the &conf-Route; directive it is possible to specify payment gateways
+for special purposes. The payment route should set all relevant payment
+parameters for the gateway, otherwise the settings from the MV_PAYMENT_* may
+leak into the route.
+<programlisting>
+Route signio id nevairbe
+Route signio secret foobar
 </programlisting>
 </para>
 </section>
@@ -84,6 +108,10 @@ The following payment gateway transactions are known by Interchange:
 <row>
 <entry>reverse</entry>
 <entry>Reverse former transaction</entry>
+</row>
+<row>
+<entry>sale</entry>
+<entry></entry>
 </row>
 <row>
 <entry>settle</entry>
@@ -233,10 +261,25 @@ EFSNet</ulink></entry>
 
 <section>
 <title>AuthorizeNet</title>
+<para>
+The AuthorizeNet module implements the ADC Direct Response method for
+AuthorizeNet version 3.
+</para>
 <section>
 <title>Prerequisites</title>
 <para>
+Either Net::SSLeay or LWP::UserAgent and Crypt::SSLeay from CPAN.
 </para>
+</section>
+<section>
+<title>Parameters</title>
+<para>Required parameters are id and secret.</para>
+<section>
+<title>id</title>
+<para>
+The AuthorizeNet account ID, received from AuthorizeNet after sign up.
+</para>
+</section>
 </section>
 </section>
 
