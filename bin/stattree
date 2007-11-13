@@ -702,6 +702,12 @@ sub wanted {
 	if ( $c{file} eq 'lib/Vend/Config.pm' ) {
 		file_parseVendConfig(\%c, \@filedata);
 	}
+
+	####################################################################
+	# lib/Vend/Interpolate.pm
+	if ( $c{file} eq 'lib/Vend/Interpolate.pm' ) {
+		file_parseVendInterpolate(\%c, \@filedata);
+	}
 }
 
 # Format the context lines before saving to the db.
@@ -1087,8 +1093,70 @@ sub file_parseVendConfig {
 	}
 }
 
+# Parse Interpolate.pm and take out some great stuff ;-)
+sub file_parseVendInterpolate {
+	my %c = %{ (shift) };
+	my $content = shift; # Complete lib/Vend/Interpolate.pm file
+
+	my $linenr = -1;     # Increases as we parse file (search "MINUS" above)
+	my $startline;       # Remember first line nr. of context, not last
+	my $context = "systemtag";
+	my @tags;            # List of tags found and line nrs at which they start
+
+	for my $line (@$content) {
+		$linenr++;
+		$startline = $linenr;
+		
+		# If we found a tag
+		if ( $line =~ /^sub\s+tag_(\S+)\s*{\s*$/ ) {
+			push @tags, [ $1, $startline ] ;
+			$hash{total}{systemtags}++;
+			$hash{total}{tags}++;
+		}
+	} # END for()
+
+	for my $itm (@tags) {
+		my ($tag, $lnum) = @$itm;
+		push @{ $hash{symbols}{$context}{$tag} }, {
+			%c,
+			lnum => $lnum,
+			ctx => [ '' ], #?format_ctx(split(/\n/, $tag)) ],
+		};
+
+		file_extractSub($tag, "Vend::Interpolate::tag_$tag",
+				\%c, {group => $context});
+
+		if ( $resolver_path{$context}{$tag} ) {
+			while (my $spath=shift @{ $resolver_path{$context}{$tag}}){
+				push @{ $hash{symbols}{$context}{$tag} }, {
+					ctx_p => 0,
+					ctx_n => 0,
+					%$spath,
+				};
+			}
+		}else{
+				push @{ $hash{symbols}{$context}{$tag} }, {
+					ctx_p => 0,
+					ctx_n => 0,
+					ctx => [ 'No extracted context' ],
+				};
+		}
+	}
+}
+
 
 # This is basically an excersize in bracket-matching
+# Invoke as:
+#  (
+#    symbol_this_function_belongs_to,
+#    Path::To::function(),
+#    \%c,
+#    { context_data }
+#  )
+# This will extract a function (function body) and push it
+# onto @{ $resolver_path{$$context_data{group}}{$funcname} }.
+# So after you call extractSub, check if anything was pushed
+# onto that variable for your processing.
 sub file_extractSub {
 	my ( $funcname, $func, $c, $context_data) = @_;
 
