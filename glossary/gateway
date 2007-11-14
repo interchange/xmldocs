@@ -28,7 +28,7 @@ If we are using only one gateway in a catalog, setting up
 <entry></entry>
 </row>
 <row>
-<entry>&var-MV_PAYMENT_SERVER;</entry>
+<entry><literal>MV_PAYMENT_HOST</literal></entry>
 <entry>gateway host name</entry>
 <entry>optional (predefined in module)</entry>
 </row>
@@ -59,6 +59,7 @@ If we are using only one gateway in a catalog, setting up
 An example configuration looks like:
 <programlisting>
 Variable MV_PAYMENT_MODE signio
+Variable MV_PAYMENT_PARTNER verisign
 Variable MV_PAYMENT_ID nevairbe
 Variable MV_PAYMENT_SECRET foobar
 </programlisting>
@@ -73,6 +74,7 @@ for special purposes. The payment route should set all relevant payment
 parameters for the gateway, otherwise the settings from the MV_PAYMENT_* may
 leak into the route.
 <programlisting>
+Route signio partner verisign
 Route signio id nevairbe
 Route signio secret foobar
 </programlisting>
@@ -280,6 +282,12 @@ Either Net::SSLeay or LWP::UserAgent and Crypt::SSLeay from CPAN.
 The AuthorizeNet account ID, received from AuthorizeNet after sign up.
 </para>
 </section>
+<section>
+<title>secret</title>
+<para>
+The AuthorizeNet account password, received from AuthorizeNet after sign up.
+</para>
+</section>
 </section>
 </section>
 
@@ -322,6 +330,17 @@ membership transactions, optional for others.
 </section>
 
 <section>
+<title>Signio</title>
+<section>
+<title>Parameters</title>
+<para>
+Required parameters are <literal>partner</literal>, <literal>id</literal>,
+and <literal>secret</literal>.
+</para>
+</section>
+</section>
+
+<section>
 <title>TCLink</title>
 <section>
 <title>Prerequisites</title>
@@ -330,6 +349,36 @@ Net::TCLink module from <ulink
 url='http://www.trustcommerce.com/tclink.html'>http://www.trustcommerce.com/tclink.html</ulink>
 or <ulink url='http://search.cpan.org/perldoc?Net::TCLink'>CPAN</ulink>.
 </para>
+</section>
+</section>
+
+<section>
+<title>WellsFargo</title>
+<section>
+<title>Prerequisites</title>
+<para>
+Either Net::SSLeay or LWP::UserAgent and Crypt::SSLeay from CPAN.
+</para>
+</section>
+<section>
+<title>Parameters</title>
+<para>
+<!--
+Required parameters are <literal>id</literal>, <literal>referer</literal>.
+-->
+</para>
+<section>
+<title><literal>id</literal></title>
+<para>
+The WellsFargo merchant ID, received from WellsFargo after sign up.
+</para>
+</section>
+<section>
+<title><literal>referer</literal></title>
+<para>
+The url of the web page you are posting from.
+</para>
+</section>
 </section>
 </section>
 
