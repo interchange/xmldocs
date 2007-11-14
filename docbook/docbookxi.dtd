@@ -32,7 +32,8 @@
 
 
 <!ENTITY % local.para.char.mix "|xi:include">
-<!ENTITY % local.tech.char.class "|tag|pragma|filter|mv|am|widget|check|xi:include">
+<!ENTITY % local.tech.char.class "|tag|pragma|filter|mv|am|widget|check">
+<!ENTITY % local.tech.char.class "|searchbox|linkftr|xi:include">
 
 <!-- Load DocBook -->
 <!ENTITY % DocBookDTD PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
@@ -121,4 +122,31 @@
 <!ELEMENT widget %ho; (%para.char.mix;|%para.mix;)*>
 <!--end of widget.element-->]]>
 <!--end of widget.module-->]]>
+
+
+<!-- searchbox element -->
+<!-- In 'online html' mode, this will display the search box and
+     some extra stuff on top of index.html -->
+<!ENTITY % searchbox.module "INCLUDE">
+<![%searchbox.module;[
+<!ENTITY % local.searchbox.attrib "">
+
+<!ENTITY % searchbox.element "INCLUDE">
+<![%searchbox.element;[
+<!ELEMENT searchbox %ho; (%para.char.mix;|%para.mix;)*>
+<!--end of searchbox.element-->]]>
+<!--end of searchbox.module-->]]>
+
+<!-- linkftr element -->
+<!-- In 'online html' mode, this will display some links
+     at the bottom of index.html -->
+<!ENTITY % linkftr.module "INCLUDE">
+<![%linkftr.module;[
+<!ENTITY % local.linkftr.attrib "">
+
+<!ENTITY % linkftr.element "INCLUDE">
+<![%linkftr.element;[
+<!ELEMENT linkftr %ho; (%para.char.mix;|%para.mix;)*>
+<!--end of linkftr.element-->]]>
+<!--end of linkftr.module-->]]>
 

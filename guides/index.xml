@@ -31,6 +31,9 @@
 </informaltable>
 -->
 
+<para>
+<searchbox/>
+</para>
 
 <informaltable
 	align='center' pgwide='1' orient='port' title='' label='' frame='vsides'
@@ -271,6 +274,10 @@ the Free Software Foundation; either version 2 of the License, or
 
 <para role="copyright">
 	Copyright 2005-2007 <ulink url='http://www.icdevgroup.org/'>Interchange Development Group (http://www.icdevgroup.org/)</ulink>, Davor Ocelic, <ulink url='mailto:docelic+icdevgroup.org'>(docelic+icdevgroup.org)</ulink>
+</para>
+
+<para>
+<linkftr/>
 </para>
 
 </book>

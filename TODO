@@ -9,6 +9,8 @@ Bugs:
 - some small error in glossary/pragma at the bottom, [tag pragma]0[/tag]
 - see if the files we parse in bin/stattree in block (like parseVendConfig, parseVendInterpolate) allow some stuff to go unaccounted for mkreport
 - with tags from Interpolate.pm, context for systemtag is not always 'whole file', but can be x-y as well
+- dal autogen preskoci kontekst koji je prazan? i zasto uopce unkondicionalno
+  ekspandira @$ctx ako moze da nema konteksta?
 
 
 - order counter, Session->{mv_order_number}, cronjob -0001, or file da-te.counter, or session_id.time

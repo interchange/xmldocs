@@ -389,6 +389,15 @@ thead {
 	font-weight: bold;
 }
 
+input, textarea, select {
+	/*border: 1px solid #004183;*/
+	border: 1px solid #000;
+	padding: 2px;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+
 
 /* AUGMENTING DEFINITIONS FOR PRINTING AND PROJECTION */
 
