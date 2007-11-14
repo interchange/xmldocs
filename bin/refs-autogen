@@ -281,6 +281,7 @@ while ( $path = shift @paths) { # Now, for each IC version specified
 			$_ .
 			qq{ "<ulink url='http://www.icdevgroup.org/cgi-bin/cvsweb/interchange/} .
 			$MANIFEST[$i] . $i{cvstag} . "'>" .
+			#'?rev=' . $hash{revision}{$_}->[0] . ';content-type=text/plain' .  "'>" .
 			$MANIFEST[$i] . qq{</ulink>"} . ">\n";
 
 		# If this is the last version we generate docs for, also provide
@@ -292,6 +293,7 @@ while ( $path = shift @paths) { # Now, for each IC version specified
 				$_ .
 				qq{ "<ulink url='http://www.icdevgroup.org/cgi-bin/cvsweb/interchange/}.
 				$MANIFEST[$i] . $i{cvstag} . "'>" .
+			#'?rev=' . $hash{revision}{$_}->[0] . ';content-type=text/plain' .  "'>" .
 				$MANIFEST[$i] . qq{</ulink>"} . ">\n";
 		}
 	}
@@ -567,11 +569,13 @@ while ( $path = shift @paths) { # Now, for each IC version specified
 					{ no warnings; # XXX If someone can figure out which of the used vars here is undefined...
 #<screen linenumbering='numbered' startinglinenumber='$ls'>
 					my $id = make_ok_for_id('context', "$loc $revinfo$ctxmeta", 1);
+					( my $loc_for_link = $loc) =~ s/\//_/g;
+					my $r = $hash{revision}{$loc}->[0];
 					$$ag{source} .= <<ENDD;
 <para>
 </para>
 <figure id="$id">
-<title>$loc $revinfo$ctxmeta</title>
+<title>&cvsfile$i{series}-$loc_for_link; $revinfo$ctxmeta</title>
 
 <screen>
 <![CDATA[$ctxsdata]]>
