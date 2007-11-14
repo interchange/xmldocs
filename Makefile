@@ -280,6 +280,11 @@ docbook/autofiles.ent: refxmls
 files/infobot/interchange.fact facts: refxmls bin/infobot.facts
 	bin/infobot.facts
 
+#############################################################
+# IC source tree stats
+guides/stats.xml: guides/stats-template.xml
+	bin/mkreport
+
 ## Helper target, only used by docelic
 #colt-preview:
 #	tar jcf OUTPUT.tar.bz2 OUTPUT

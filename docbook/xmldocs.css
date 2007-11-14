@@ -327,8 +327,8 @@ thead {
 
 .informaltable td {
 	border: 0.5pt solid black;
-	padding: 2px;
-	margin: 0
+	padding: 0px;
+	margin: 0px;
 }
 
 /*

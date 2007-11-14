@@ -1,0 +1,232 @@
+<?xml version="1.0" standalone="no"?>
+
+<!DOCTYPE stats PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+	"../docbook/docbookxi.dtd">
+
+<article id='stats'>
+
+<articleinfo>
+	<title>Interchange: Source Code Statistics</title>
+	<titleabbrev>stats</titleabbrev>
+</articleinfo>
+
+<para role='stats'>
+
+<informaltable pgwide='1' frame='none' role='stats'>
+<tgroup cols='4' align='left'>
+<colspec colname=''/>
+<colspec colname=''/>
+<colspec colname=''/>
+<colspec colname=''/>
+
+  <tbody>
+    <row>
+      <entry>Total size
+      </entry>
+      <entry>$hash{total}{size}
+			KB
+      </entry>
+      <entry>Config directives
+      </entry>
+      <entry>$hash{total}{confs}
+      </entry>
+    </row>
+    <row>
+      <entry>Total files
+      </entry>
+      <entry>$hash{total}{files}
+      </entry>
+      <entry>Global
+      </entry>
+      <entry>$hash{total}{globconfs}
+      </entry>
+    </row>
+    <row>
+      <entry>Total directories
+      </entry>
+      <entry>$hash{total}{directories}
+      </entry>
+      <entry>Catalog
+      </entry>
+      <entry>$hash{total}{catconfs}
+      </entry>
+    </row>
+    <row>
+      <entry>ASCII files
+      </entry>
+      <entry>$hash{total}{ascii}
+      </entry>
+      <entry>Tags
+      </entry>
+      <entry>$hash{total}{tags}
+      </entry>
+    </row>
+    <row>
+      <entry>C program files
+      </entry>
+      <entry>$hash{total}{c}
+      </entry>
+      <entry>System
+      </entry>
+      <entry>$hash{total}{systemtags}
+      </entry>
+    </row>
+    <row>
+      <entry>Interchange config files
+      </entry>
+      <entry>$hash{total}{config}
+      </entry>
+      <entry>User
+      </entry>
+      <entry>$hash{total}{usertags}
+      </entry>
+    </row>
+    <row>
+      <entry>Interchange database files
+      </entry>
+      <entry>$hash{total}{database}
+      </entry>
+      <entry>UI
+      </entry>
+      <entry>$hash{total}{uitags}
+      </entry>
+    </row>
+    <row>
+      <entry>HTML/ITL pages
+      </entry>
+      <entry>$hash{total}{html}
+      </entry>
+      <entry>
+      </entry>
+      <entry>
+      </entry>
+    </row>
+    <row>
+      <entry>Perl program files
+      </entry>
+      <entry>$hash{total}{perl}
+      </entry>
+      <entry>Widgets
+      </entry>
+      <entry>$hash{total}{widgets}
+      </entry>
+    </row>
+    <row>
+      <entry>Total lines
+      </entry>
+      <entry>$hash{total}{lines}
+      </entry>
+      <entry>
+      </entry>
+      <entry>
+      </entry>
+    </row>
+    <row>
+      <entry>
+      </entry>
+      <entry>
+      </entry>
+      <entry>Filters
+      </entry>
+      <entry>$hash{total}{filters}
+      </entry>
+    </row>
+    <row>
+      <entry>Binary files
+			</entry>
+      <entry>$hash{total}{binary_files}
+			</entry>
+      <entry>
+      </entry>
+      <entry>
+      </entry>
+    </row>
+    <row>
+      <entry>Images
+      </entry>
+      <entry>$hash{total}{images}
+      </entry>
+      <entry>Order checks
+      </entry>
+      <entry>$hash{total}{orderchecks}
+      </entry>
+    </row>
+    <row>
+      <entry>Perl
+      </entry>
+      <entry>
+      </entry>
+      <entry>Pragmas
+      </entry>
+      <entry>$hash{total}{pragmas}
+      </entry>
+    </row>
+    <row>
+      <entry>Lines of code
+      </entry>
+      <entry>$hash{total}{perl_code}
+			</entry>
+      <entry>
+      </entry>
+      <entry>
+      </entry>
+    </row>
+    <row>
+      <entry>Functions
+      </entry>
+      <entry>$hash{total}{perl_functions}
+      </entry>
+      <entry>Variables
+      </entry>
+      <entry>$hash{total}{vars}
+      </entry>
+    </row>
+    <row>
+      <entry>Comments
+      </entry>
+      <entry>$hash{total}{perl_comments}
+      </entry>
+      <entry>Global
+      </entry>
+      <entry>$hash{total}{globvars}
+      </entry>
+    </row>
+    <row>
+      <entry>Inline comments
+      </entry>
+      <entry>$hash{total}{perl_gray}
+      </entry>
+      <entry>Catalog
+      </entry>
+      <entry>$hash{total}{catvars}
+      </entry>
+    </row>
+    <row>
+      <entry>Empty lines
+      </entry>
+      <entry>$hash{total}{perl_empty}
+      </entry>
+      <entry>
+      </entry>
+      <entry>
+      </entry>
+    </row>
+    <row>
+      <entry>Lines of POD documentation
+      </entry>
+      <entry>$hash{total}{perl_pod}
+      </entry>
+      <entry>
+      </entry>
+      <entry>
+      </entry>
+    </row>
+	</tbody>
+</tgroup>
+
+</informaltable>
+
+</para>
+
+</article>
+

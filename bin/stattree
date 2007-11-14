@@ -946,8 +946,6 @@ sub line_findFunctionName {
 		$hash{total}{perl_functions}++;
 		@{ $$c{gfunc} } = ( $1, $$c{lnum} );
 	}
-
-	$hash{total}{functions}++;
 }
 
 # Parse Config.pm and take out some great stuff ;-)

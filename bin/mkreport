@@ -1,7 +1,6 @@
 #!/usr/bin/perl
 
-# Loads csche dump from stattree and generates statistics
-# TODO needs serious work (on producing report.txt file)
+# Loads cache dump from stattree and generates statistics
 
 use warnings;
 use strict;
@@ -32,162 +31,40 @@ unless ( GetOptions (
 	"verbose|v!" => \$verbose,
 )) { die "Error parsing options\n" }
 
-@ARGV == 1 or die "Usage: $0 path[/]\n";
+@ARGV == 1 or warn "No arguments, assuming sources/cvs-head\n";
 
 
 my $path = shift;
+$path ||= "sources/cvs-head";
 ( my $dumppath = $path ) =~ s#.+?/##;
 ( $i{ver} = $dumppath ) =~ s/\/$//;
 my $dumpdir = $dumppath;
 $dumppath .= "/.cache.bin";
+my $sf = 'guides/stats-template.xml';
+my $so = 'guides/stats.xml';
+my @sf;
 
 # Load DB
 loaddb( "$cachedir/$dumppath" );
 
-# First dump leafnodes-to-files
-# Hashvalue -> file conversion
-my @stack = ();
-while (my($k,$v) = each %hash) {
-	procitem(\@stack, $k,$v);
+open IN, "< $sf" or die "Can't rdopen '$sf' ($!)\n";
+@sf = <IN>;
+close IN or die "Can't rdclose '$sf' ($!)\n";
+
+for (@sf) {
+	s/(\$hash\{.+\})\s$/$1/gee;
 }
 
-# TODO this needs work
-open(OUT, "> $reportdir/$i{ver}/treestats.txt") or
-	die "Cant write/open report file: $!\n";
-select OUT;
-O("
-== Interchange version $i{ver}
+open OUT, "> $so" or die "Can't wropen '$so' ($!)\n";
+print OUT @sf;
+close OUT or die "Can't wrclose '$so' ($!)\n";
 
-               =FILES= ===%=== ===BYTES=== ===%===
-
-      Overall:${\( gs() )}
-
-+   Perl code:${\( gs('extensions', [qw/pm pl/], 1) )}
-
-       C code:${\( gs('extensions', [qw/c/], 0) )}
-   HTML pages:${\( gs('extensions', [qw/html/], 0) )}
-
-+    ITL Tags:${\( gs('extensions', [qw/coretag tag/], 1) )}
-
-+      Images:${\( gs('extensions', [qw/png gif jpg/], 1) )}
-
-         Text:${\( gs('extensions', [qw/txt/], 0) )}
-
-               =KLOCS= ===%===
-
-+       KLOCS:${\( gs('klocs', [qw/code html coretag tag pod comment/],1) )}
-
-");
-close (OUT);
-select STDOUT;
-
-for my $p (qw/pragma globvar/) {
-	my $tfile = '';
-	open(OUT, "> $reportdir/$i{ver}/total.symbols.$p") or
-		die "Can't write symbols.$p ($!)\n";
-	print OUT scalar keys %{ $hash{symbols}{$p} };
-	close OUT;
-	while (my ($k,$v) = each %{ $hash{symbols}{$p} } ) {
-		$tfile .= "$k\n";
-			for my $fe ( @$v ) {
-				local $" = ":";
-				$tfile .= "\t@$fe[0,1] $$fe[2]\n";
-				local $" = "\t\t";
-				$tfile .= "\t\t@{@$fe[3]}\n";
-			}
-	}
-	open(OUT, "> $reportdir/$i{ver}/symbols.$p") or
-		die "Can't write symbols.$p ($!)\n";
-	print OUT $tfile;
-	close OUT;
-}
 
 exit 0;
 
-#################################################################
-# Helpers below
-
-sub gs {
-#	my $stype = shift;
-#	my @exts = @{(shift)};
-	my @stat = (0,0,0,0); # important to initialize, we use $#stat below
-#	my $extended = shift;
-	my %estats;
+############################################################################
+# Helper functions
 #
-	$^A = "";
-#
-#	# BY EXTENSION
-#	if ( $stype eq 'extensions' ) { # By extension
-#		if ( @exts ) {
-#			for my $ext ( @exts ) {
-#				$estats{$ext}[0] += $h{$stype}{$ext}{files};
-#				$estats{$ext}[2] += $h{$stype}{$ext}{size};
-#				$estats{$ext}[1] = sprintf("%.2f", $estats{$ext}[0] /
-#						$h{total}{files} * 100);
-#				$estats{$ext}[3] = sprintf("%.2f", $estats{$ext}[2] /
-#						$h{total}{size} * 100);
-#
-#				$stat[$_] += $estats{$ext}[$_] for (0..$#stat);
-#				# Fill empty fields with ""
-#				push @{$estats{$ext}}, "", "", "", "";
-#			}
-#
-#		} else { # Total statistics
-	unless ( @_ ) {
-		@stat = ( $hash{total}{files}, "100.00",
-				$hash{total}{size}, "100.00",
-				$hash{total}{lines}, "100.00" );
-	}
-#
-#	} elsif ( $stype eq 'klocs' ) { # By contents
-#		@stat = (0, 0);
-#		if ( @exts ) {
-#			for my $styp ( @exts ) {
-#				$estats{$styp}[0] += $h{$stype}{$styp}{lines};
-#				$estats{$styp}[1] = sprintf("%.2f", $estats{$styp}[0] /
-#						$h{total}{klocs} * 100);
-#				$estats{$styp}[0] = sprintf("%.2f", $estats{$styp}[0] / 1000);
-#
-#				# Fill empty fields with ""
-#				push @{$estats{$styp}}, "", "", "", "";
-#
-#				for my $f (0..$#stat) { $stat[$f] += $estats{$styp}[$f] }
-#			}
-#		} else {
-#			@stat = ( $h{total}{klocs}, "100.00" );
-#		}
-#	}
-#
-#	unless ( $stype eq 'klocs' ) {
-	for (my $i = 0; $i <= $#stat; $i+=2 ) {
-		( $stat[$i] = reverse $stat[$i] ) =~ s/(.{3})(?!$)/$1,/g;
-		$stat[$i] = reverse $stat[$i];
-	}
-	for my $key ( keys %estats ) {
-		( $estats{$key}[0] = reverse $estats{$key}[0] ) =~ s/(.{3})(?!$)/$1,/g;
-		( $estats{$key}[2] = reverse $estats{$key}[2] ) =~ s/(.{3})(?!$)/$1./g;
-		$estats{$key}[0] = reverse $estats{$key}[0];
-		$estats{$key}[2] = reverse $estats{$key}[2];
-	}
-#	}
-
-	# Fill empty fields with ""
-	push @stat, "", "", "", "";
-
-	formline <<'ENDD', @stat;
-@>>>>>>> @>>>>>> @>>>>>>>>>> @>>>>>>
-ENDD
-
-#	if ( $extended ) {
-#		for my $ext ( @exts ) {
-#			formline <<'ENDD', $desc{$ext} || $ext, @{$estats{$ext}};
-#`@>>>>>>>>>>>:@>>>>>>> @>>>>>> @>>>>>>>>>> @>>>>>>
-#ENDD
-#		}
-#	}
-	chomp($^A); $^A
-}
-
 sub loaddb {
 	my $dbpath = shift;
 
@@ -209,34 +86,4 @@ sub loaddb {
 	}
 }
 
-# Recursive procedure to find leaf nodes in a hash
-# (For hashvalue -> file conversion)
-sub procitem {
-	my ($stack, $key, $val) = @_;
-	
-	# Ignores:
-	return if "$key" eq "tree";
-	return if "$key" eq "symbols";
-	return if "@$stack" eq "total" and $key eq "matches";
-	
-	unless (ref $val eq 'HASH') {
-		$val = join("\n", @$val) if ( ref $val eq 'ARRAY' );
-		local $" = ".";
-		# Handle cases like $hash{version}, where it's a toplevel element
-		# without anything on @$stack.
-		( my $fout = "@$stack.$key" ) =~ s/^\.//;
-		open OUT, "> $cachedir/$dumpdir/$fout" or
-			die "Can't dump $dumpdir/@$stack.$key ($!)\n";
-		print OUT $val;
-		close OUT;
-	} else {
-		push @$stack, $key;
-		while (my($k,$v) = each %$val) {
-			procitem($stack, $k, $v);
-		}
-		pop @$stack;
-	}
-}
-
-sub O { print "@_\n"; print STDOUT "@_\n" if $verbose }
 

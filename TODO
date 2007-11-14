@@ -2,7 +2,6 @@ Bugs:
 - work on bin/mkreport
 - search doc se nevidi jer je search neki actionmap
 - provide static files for download, describe keys like alt+n
-- u CVS listi, da je fajl nejm link na CVS 
 - documentation for bounce and restrict is ignored
 - some small error in glossary/pragma at the bottom, [tag pragma]0[/tag]
 - see if the files we parse in bin/stattree in block (like parseVendConfig, parseVendInterpolate) allow some stuff to go unaccounted for mkreport
@@ -21,10 +20,6 @@ Bugs:
 - remove NEW from <meta>
 - In tags, make XSLT code print position number besides "Yes" word in 
   positional parameters for tags
-- add search box to guides/index.xml
-- make See Also only go two or three levels recursively. Currently we do it
-  until the "chain" ends, which results in having many unrelated options
-  listed under See Also.
 - in search.xml replace mv_ listitems with sections so they're listed in TOC
 - note in configuration glossentry to use '' to skip values 
 - Check ConfigDatabase and DirectiveDatabase. Is description correct? One seems to be wrong

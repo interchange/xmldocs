@@ -87,14 +87,10 @@
 
 	<abstract>
 		<para>
-		The purpose of this document is to guide you through constructing a simple &IC; catalog <emphasis role='bold'>from scratch</emphasis>. The standard catalogs that ship with Interchange are quite complex since they are ready to be used for business and highlight many of the capabilities that Interchange offers. Those catalogs can be too intimidating<footnote><para>Intimidate: to make timid or fearful; to frighten into submission.</para></footnote> places to start the journey if you're interested in learning the basic Interchange building blocks.
+		The purpose of this document is to guide you through constructing a simple &IC; catalog <emphasis role='bold'>from scratch</emphasis>. The standard catalogs that ship with Interchange are quite complex since they are ready to be used for business and highlight many of the capabilities that Interchange offers. Those catalogs may not be the right places to start the journey if you're interested in learning the basic Interchange building blocks.
 		</para> <para>
 		Although this tutorial provides ready-to-use examples, please <emphasis role='bold'>think</emphasis>
-		about them (and ideally, retype them instead of copy-pasting to your test catalog). From personal
-		experience, I can tell you <emphasis role='bold'>re-implementing the catalog manually on your system
-		is the only proper way to read this tutorial</emphasis>. All the examples serve only to quickly 
-		clarify all your doubts and save the time you'd spend wondering about which style is right
-		and officially encouraged.
+		about them (and ideally, retype them instead of copy-pasting to your test catalog).
 		</para>
 	</abstract>
 
