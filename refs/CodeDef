@@ -31,8 +31,9 @@ CoreTags, &conf-UserTag;s,
 &glos-form-action;s,
 &conf-GlobalSub;s,
 ItemActions,
-LocaleChanges and 
-OrderChecks.
+LocaleChanges,
+OrderChecks,
+and Widgets.
 __END__
 
 _NAME__ example: Defining a subroutine
