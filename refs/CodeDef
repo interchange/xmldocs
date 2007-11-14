@@ -36,9 +36,12 @@ OrderChecks,
 and Widgets.
 __END__
 
-_NAME__ example: Defining a subroutine
-_END__
+__NAME__ example: Defining a subroutine
+__END__
 
+__NAME__ example: Widgets with multiple selections
+CodeDef checkbox Multiple 1
+__END__
 
 __NAME__ notes
 __END__
