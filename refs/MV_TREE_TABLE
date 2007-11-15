@@ -1,11 +1,12 @@
 
 __NAME__ purpose
+database name for tree menus
 __END__
 
 
 __NAME__ synopsis
 <group choice='req'>
-	<arg choice='plain'><replaceable></replaceable></arg>
+	<arg choice='plain'><replaceable>database</replaceable></arg>
 </group>
 __END__
 
@@ -16,15 +17,16 @@ __END__
 
 
 __NAME__ description
-It allows one to specify another table.
 __END__
 
 
 __NAME__ notes
+&DATABASE-NOTE;
 __END__
 
 
 __NAME__ see also
+tree
 __END__
 
 
