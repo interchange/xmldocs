@@ -1,0 +1,13 @@
+__NAME__ purpose
+database name for components
+__END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>database</replaceable></arg>
+</group>
+__END__
+
+__NAME__ notes
+&DATABASE-NOTE;
+__END__
