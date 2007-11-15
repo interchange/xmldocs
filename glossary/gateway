@@ -249,11 +249,6 @@ EFSNet</ulink></entry>
 <entry>Payment Test</entry>
 <entry><literal>testpayment</literal></entry>
 </row>
-<row>
-<entry><literal>WellsFargo</literal></entry>
-<entry>WellsFargo</entry>
-<entry><literal>wellsfargo</literal></entry>
-</row>
 
 </tbody>
 </tgroup>
@@ -349,36 +344,6 @@ Net::TCLink module from <ulink
 url='http://www.trustcommerce.com/tclink.html'>http://www.trustcommerce.com/tclink.html</ulink>
 or <ulink url='http://search.cpan.org/perldoc?Net::TCLink'>CPAN</ulink>.
 </para>
-</section>
-</section>
-
-<section>
-<title>WellsFargo</title>
-<section>
-<title>Prerequisites</title>
-<para>
-Either Net::SSLeay or LWP::UserAgent and Crypt::SSLeay from CPAN.
-</para>
-</section>
-<section>
-<title>Parameters</title>
-<para>
-<!--
-Required parameters are <literal>id</literal>, <literal>referer</literal>.
--->
-</para>
-<section>
-<title><literal>id</literal></title>
-<para>
-The WellsFargo merchant ID, received from WellsFargo after sign up.
-</para>
-</section>
-<section>
-<title><literal>referer</literal></title>
-<para>
-The url of the web page you are posting from.
-</para>
-</section>
 </section>
 </section>
 
