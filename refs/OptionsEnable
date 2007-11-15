@@ -1,0 +1,27 @@
+__NAME__ purpose
+specify table and/or column for option type 
+__END__
+
+__NAME__ synopsis
+<group choice='plain'>
+	<arg choice='plain'>
+		<replaceable>table</replaceable>:<replaceable>column</replaceable>
+	</arg>
+	<arg choice='plain'>
+		<replaceable>column</replaceable>
+	</arg>
+</group>
+__END__
+
+__NAME__ description
+__END__
+
+__NAME__ example: Designate field in products database
+<programlisting>
+OptionsEnable option_type
+</programlisting>
+__END__
+
+__NAME__ see also
+options
+__END__
