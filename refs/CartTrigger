@@ -84,7 +84,7 @@ of the current quantity.
 
 <programlisting><![CDATA[
 Sub <<EOS
-sub update_cart {
+sub cascade_quantities {
 	my ($cartref, $action, $newref, $oldref, $cartname) = @_;
 
 	# act upon the main cart only
@@ -100,7 +100,7 @@ sub update_cart {
 }
 EOS
 
-CartTrigger update_cart
+CartTrigger cascade_quantities
 CartTriggerQuantity Yes
 ]]></programlisting>
 __END__
