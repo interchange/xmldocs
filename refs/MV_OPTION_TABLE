@@ -1,11 +1,12 @@
 
 __NAME__ purpose
+table for product options
 __END__
 
 
 __NAME__ synopsis
 <group choice='req'>
-	<arg choice='plain'><replaceable></replaceable></arg>
+	<arg choice='plain'><replaceable>table</replaceable></arg>
 </group>
 __END__
 
