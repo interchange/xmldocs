@@ -1,5 +1,6 @@
 
 __NAME__ purpose
+applies column mapping to all options types
 __END__
 
 
@@ -34,4 +35,7 @@ __END__
 
 
 __NAME__ example: 
+<programlisting>
+Variable MV_OPTION_TABLE_MAP o_label=title
+</programlisting>
 __END__
