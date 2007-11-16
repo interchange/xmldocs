@@ -423,5 +423,5 @@ Show all errors:
 __END__
 
 __NAME__ see also
-MV_ERROR_STD_LABEL
+CSS_CONTRAST, MV_ERROR_STD_LABEL
 __END__
