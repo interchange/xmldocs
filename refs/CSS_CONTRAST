@@ -1,0 +1,12 @@
+__NAME__ purpose
+CSS class to designate problems
+__END__
+
+__NAME__ description
+__END__
+
+__NAME__ example
+<programlisting>
+Variable CSS_CONTRAST error
+</programlisting>
+__END__
