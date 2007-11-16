@@ -1,3 +1,14 @@
+__NAME__ purpose
+define options types and behavior
+__END__
+
+__NAME__ example: Find and add a new option type
+<programlisting>
+Options Module table modules
+</programlisting>
+That will cause a require of <literal>Vend::Options::Module</literal>.
+__END__
+
 __NAME__ example: Change default display type for Matrix widgets
 <programlisting>
 Options Matrix display_type separate
