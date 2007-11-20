@@ -34,10 +34,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	change currency settings only
 	</entry>
 
 </row> 
