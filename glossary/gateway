@@ -101,11 +101,11 @@ The following payment gateway transactions are known by Interchange:
 </row>
 <row>
 <entry>auth</entry>
-<entry>Payment authorization</entry>
+<entry>Payment authorization (Charge)</entry>
 </row>
 <row>
 <entry>return</entry>
-<entry></entry>
+<entry>Credit</entry>
 </row>
 <row>
 <entry>reverse</entry>
@@ -113,11 +113,11 @@ The following payment gateway transactions are known by Interchange:
 </row>
 <row>
 <entry>sale</entry>
-<entry></entry>
+<entry>Charge <emphasis>and</emphasis> capture</entry>
 </row>
 <row>
 <entry>settle</entry>
-<entry></entry>
+<entry>Capture of an authorized charge</entry>
 </row>
 <row>
 <entry>void</entry>
