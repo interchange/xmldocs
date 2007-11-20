@@ -124,11 +124,11 @@ __NAME__ synopsis2
 <row>
 	<entry><arg choice='plain'>signal</arg></entry>
 	<entry></entry><entry></entry>
-	<entry><![CDATA[<font color="__CONTRAST__">%s</font>]]></entry>
+	<entry><literal><![CDATA[<span class="mv_contrast">%s</span>]]></literal></entry>
 	<entry>
-	Label container in case of errors. If the
-	<varname>CONTRAST</varname> variable is not defined, <literal>red</literal>
-	is used as default.
+	Label container in case of errors. If the &var-CSS_CONTRAST; variable
+	is defined, it is used instead of the <literal>mv_contrast</literal>
+	class name.
 	</entry>
 </row>
 <row>
@@ -144,7 +144,7 @@ __END__
 
 
 __NAME__ see also
-button, widget
+CSS_CONTRAST, button, widget
 __END__
 
 
@@ -153,8 +153,8 @@ This tag can create HTML form elements. Note that it preserves user input
 from previous displays of the same page and keeps track of input errors
 (using the <tag>error</tag> tag).
 </para><para>
-The error messages will be displayed in red color (or the color defined
-in the <varname>CONTRAST</varname> variable).
+The error messages will be displayed according to the <literal>mv_contrast</literal> 
+CSS class (or the class defined in the &var-CSS_CONTRAST; variable).
 </para><para>
 Note that you can define values to control this tag's defaults. See
 <xref linkend="formel_examples"/>.
