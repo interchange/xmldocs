@@ -19,7 +19,10 @@ GLOSSARY    = glossary
 ALL_DOCS    = $(GLOSSARY) $(HOWTOS) $(GUIDES) $(SYMBOL_TYPES)
 SHELL       = /bin/sh
 OUTPUT     ?= -std
+TARGET     ?= $(XMLDOCS_CUR_DEVEL)
 PROFILE    ?= --stringparam profile.condition standard
+PROFILE    += --stringparam profile.revision r$(TARGET)
+TARGET_RELEASE = --last $(TARGET)
 export O    = OUTPUT$(OUTPUT)
 export T    = tmp
 export XCF  = docbook/catalog.xml
@@ -45,7 +48,6 @@ VPATH       = guides refs howtos glossary whatsnew
 .PHONY: cache caches
 .PHONY: refxmls
 .PHONY: $O
-
 
 #############################################################
 # Complete build
@@ -162,19 +164,19 @@ OUTPUT/%: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-c.xml \
 	  -o $@/ docbook/html-chunks.xsl $T/$*-c.profiled
-#OUTPUT/%.man: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/autofiles.ent
-#	echo "C     $@/"
-#	mkdir -p "$@"
-#	$(PSR) $(PSR_FLAGS)                                                \
-#	  $(PROFILE)                                                       \
-#	  --stringparam current.docid $*                                   \
-#	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
-#	  -o $T/$*-c.profiled docbook/profile.xsl $<
-#	$(PSR) $(PSR_FLAGS)                                                \
-#	  $(PROFILE)                                                       \
-#	  --stringparam current.docid $*                                   \
-#	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
-#	  -o $@/ docbook/reference.xsl $T/$*-c.profiled
+OUTPUT/%.man: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/autofiles.ent
+	echo "C     $@/"
+	mkdir -p "$@"
+	$(PSR) $(PSR_FLAGS)                                                \
+	  $(PROFILE)                                                       \
+	  --stringparam current.docid $*                                   \
+	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
+	  -o $T/$*-c.profiled docbook/profile.xsl $<
+	$(PSR) $(PSR_FLAGS)                                                \
+	  $(PROFILE)                                                       \
+	  --stringparam current.docid $*                                   \
+	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
+	  -o $@/ docbook/reference.xsl $T/$*-c.profiled
 #OUTPUT/%.pdf: tmp/%.latex
 #	echo "C     $@"
 #	pdflatex $<
