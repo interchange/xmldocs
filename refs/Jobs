@@ -14,7 +14,7 @@ __END__
 
 __NAME__ description
 </para><para>
-The directive configures Interchange periodic &glos-jobs; facility.
+The directive configures Interchange batch &glos-jobs; facility.
 It accepts a list of key/value pairs.
 </para><para>
 It can be specified at both the global and &glos-catalog; level.
