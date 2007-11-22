@@ -29,9 +29,6 @@ To save on processing time, only the most common protocols
 (http/https, ftp and mailto) are actually enabled in the filter.
 For the rest of the protocols, you need to uncomment the appropriate
 lines in the filter source and restart &IC;.
-</para><para>
-The regular expressions used are really scary &mdash; don't try
-them at home! ;-)
 __END__
 
 __NAME__ author
@@ -42,26 +39,27 @@ __NAME__ online: Filter example
 Here's an incomplete collection of URLs that the filter can recognize.
 <programlisting><![CDATA[
 [filter liven_urls]
-http://www.acl.lanl.gov/URI/archive/uri-archive.index.html<br/>
-ftp://@host.com/<br/>
-ftp://host.com/<br/>
-ftp://foo:@host.com/<br/>
-ftp://myname@host.dom/%2Fetc/motd<br/>
-ftp://myname@host.dom/etc/motd<br/>
-ftp://myname@host.dom//etc/motd<br/>
-file://vms.host.edu/disk$user/my/notes/note12345.txt<br/>
-prospero://host.dom//pros/name<br/>
-ldap:///o=University%20of%20Michigan,c=US<br/>
-ldap://ldap.itd.umich.edu/o=University%20of%20Michigan,c=US<br/>
-ldap://ldap.itd.umich.edu/o=University%20of%20Michigan,c=US?postalAddress<br/>
-ldap:///o=University%20of%20Michigan,c=US??sub?(cn=Babs%20Jensen)<br/>
-ldap://ldap.itd.umich.edu/c=GB?objectClass?one<br/>
-z39.50s://melvyl.ucop.edu/cat<br/>
-z39.50r://melvyl.ucop.edu/mags?elecworld.v30.n19<br/>
-z39.50r://cnidr.org:2100/tmf?bkirch_rules__a1;esn=f;rs=marc<br/>
-mid:foo4%25foo1@bar.net<br/>
-cid:foo4*foo1@bar.net<br/>
-mid:960830.1639@XIson.com/partA.960830.1639@XIson.com<br/>
+http://www.acl.lanl.gov/URI/archive/uri-archive.index.html
+ftp://@host.com/
+ftp://host.com/
+ftp://foo:@host.com/
+ftp://myname@host.dom/%2Fetc/motd
+ftp://myname@host.dom/etc/motd
+ftp://myname@host.dom//etc/motd
+mailto:noaddress@host.dom
+file://vms.host.edu/disk$user/my/notes/note12345.txt
+prospero://host.dom//pros/name
+ldap:///o=University%20of%20Michigan,c=US
+ldap://ldap.itd.umich.edu/o=University%20of%20Michigan,c=US
+ldap://ldap.itd.umich.edu/o=University%20of%20Michigan,c=US?postalAddress
+ldap:///o=University%20of%20Michigan,c=US??sub?(cn=Babs%20Jensen)
+ldap://ldap.itd.umich.edu/c=GB?objectClass?one
+z39.50s://melvyl.ucop.edu/cat
+z39.50r://melvyl.ucop.edu/mags?elecworld.v30.n19
+z39.50r://cnidr.org:2100/tmf?bkirch_rules__a1;esn=f;rs=marc
+mid:foo4%25foo1@bar.net
+cid:foo4*foo1@bar.net
+mid:960830.1639@XIson.com/partA.960830.1639@XIson.com
 [/filter]
 ]]></programlisting>
 __END__

@@ -1,0 +1,58 @@
+__NAME__ purpose
+honor ccTLD domains in IP qualification
+__END__
+
+
+
+__NAME__ synopsis
+<arg choice='plain'><replaceable>country_code</replaceable></arg>
+<arg choice='plain' rep='repeat'><replaceable>ccTLD_list</replaceable></arg>
+__END__
+
+
+__NAME__ description
+This directive enables &IC; to take &ccTLD;s into account when 
+&conf-DomainTail; is enabled.
+</para><para>
+For example, if a visit comes from an address like
+"<literal>machine.example.co.uk</literal>" and <literal>co.uk</literal>
+is listed as &ccTLD;, then, with
+&conf-__FILENAME__;, "<literal>example.co.uk</literal>" would be used
+as domain tail instead of just "<literal>co.uk</literal>".
+</para><para>
+&conf-__FILENAME__; accepts a list of country codes and their
+subdomains. A predefined,  ready for use configuration
+block can be found in file
+&cvsfile-dist_subdomains.cfg; in &IC; source and
+should be included from &gcf;.
+__END__
+
+
+__NAME__ example: Including ready-made subdomains.cfg in interchange.cfg
+<programlisting>
+include subdomains.cfg
+</programlisting>
+__END__
+
+__NAME__ example: Appending or overwriting entries in CountrySubdomains list
+<programlisting>
+CountrySubdomains &lt;&lt;EOC
+  ae "ac gov mil name net org pro sch"
+  af "bank com edu gov hotel law music net org tv"
+  ag "co com org net nom"
+  al "com edu gov net org"
+  ao "co ed gv it og pb"
+EOC
+
+CountrySubdomains ar "com edu gov int mil net org" at "ac co gv or priv"
+</programlisting>
+__END__
+
+__NAME__ see also
+DomainTail,IpHead,IpQuad,WideOpen,CountrySubdomains
+__END__
+
+__NAME__ author
+&kwalsh;
+__END__
+

@@ -3,10 +3,6 @@ only honor the toplevel domain in IP qualification
 __END__
 
 
-__NAME__ see also
-DomainTail,IpHead,IpQuad,WideOpen
-__END__
-
 
 __NAME__ synopsis
 <group choice='plain'>
@@ -21,6 +17,12 @@ The directive simply specifies that only the toplevel domain
 should be used in IP qualification for &glos-session; IDs.
 If, for example, an IP was <literal>ri01-053.dialin.iskon.hr</literal>,
 only <literal>iskon.hr</literal> would be used.
+</para>
+<para>
+&IC; also supports taking various &ccTLD;s into account; 
+see &conf-CountrySubdomains;.
+</para>
+<para>
 __END__
 
 TODO: how does this work with non-resolving stuff?
@@ -41,5 +43,10 @@ __NAME__ example: Disabling DomainTail
 <programlisting>
 DomainTail No
 </programlisting>
+__END__
+
+
+__NAME__ see also
+DomainTail,IpHead,IpQuad,WideOpen,CountrySubdomains
 __END__
 

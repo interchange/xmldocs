@@ -32,11 +32,11 @@ After that point, you can omit OUTPUT= from subsequent calls to "make"
 and things will still clap together nicely.
 
 Also, it is possible to generate documentation for a specific Interchange
-release, such as 5.0.0 or 5.2.0. To do so, use TARGET_RELEASE env variable:
+release, such as 5.0.0 or 5.2.0. To do so, use TARGET env variable:
 
-  TARGET_RELEASE="--last 5.2.0" make refxmls
+  TARGET="5.2.0" make refxmls
 
-Just make sure to have TARGET_RELEASE defined on each 'make' invocation.
+Just make sure to have TARGET defined on each 'make' invocation.
 
 **  -- -- --   -- -- -- --   -- -- -- --   -- -- -- --   -- -- -- --  **
 

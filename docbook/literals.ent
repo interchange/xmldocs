@@ -3,6 +3,15 @@
 <!ENTITY first-xmldocs-release "5.4">
 <!ENTITY PERL_VER_REQUIRED "5.6">
 
+<!-- This is used for including paragraphs based on IC version
+     they're generated for. Keep the list sorted like you see it. -->
+<!ENTITY r4.6.0 "4.6.0">
+<!ENTITY r4.8.0 "4.6.0;4.8.0">
+<!ENTITY r5.0.0 "4.6.0;4.8.0;5.0.0">
+<!ENTITY r5.2.0 "4.6.0;4.8.0;5.0.0;5.2.0">
+<!ENTITY r5.5.0 "4.6.0;4.8.0;5.0.0;5.2.0;5.5.0">
+<!ENTITY r5.5.2 "4.6.0;4.8.0;5.0.0;5.2.0;5.5.0;5.5.2">
+
 <!-- GENERAL ENTITIES -->
 <!ENTITY GNU "<ulink url='http://www.gnu.org'>GNU</ulink>">
 <!ENTITY IC "<ulink url='http://www.icdevgroup.org'>Interchange</ulink>">
@@ -39,6 +48,7 @@
 <!ENTITY GPG "<ulink url='http://www.gnupg.org/'>GPG</ulink>">
 <!ENTITY WIKIPEDIA "<ulink url='http://www.wikipedia.org/'>Wikipedia</ulink>">
 <!ENTITY MOD_PERL "<ulink url='http://perl.apache.org/'>mod_perl</ulink>">
+<!ENTITY ccTLD "<ulink url='http://en.wikipedia.org/wiki/Country_code_top-level_domain'>ccTLD</ulink>">
 
 
 
