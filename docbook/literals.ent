@@ -324,6 +324,19 @@ values above are not properly aligned. This is an unfortunate nature of
 </row>
 ">
 
+<!ENTITY SYNOPSIS_NOYES "
+<group choice='plain'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+">
+
+<!ENTITY SYNOPSIS_YESNO "
+<group choice='plain'>
+	<arg choice='plain'>Yes</arg>
+	<arg choice='plain'>No</arg>
+</group>
+">
 
 <!ENTITY COMMERCIAL-SUPPORT-BLURB "
 <para>

@@ -4,10 +4,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='plain'>
-	<arg choice='plain'>No</arg>
-	<arg choice='plain'>Yes</arg>
-</group>
+&SYNOPSIS_NOYES;
 __END__
 
 
