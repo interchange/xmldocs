@@ -1,0 +1,15 @@
+__NAME__ purpose
+enable user tracking
+__END__
+
+__NAME__ synopsis
+&SYNOPSIS_YESNO;
+__END__
+
+__NAME__ description
+Enable &glos-tracking; features.
+__END__
+
+__NAME__ see also
+usertrack, TrackFile
+__END__
