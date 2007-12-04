@@ -1,10 +1,18 @@
 __NAME__ purpose
-fetch an URL using Perl LWP and return contents
+dispatch HTTP request and return response
 __END__
 
 __NAME__ missing
 Fix examples
 Fix description
+__END__
+
+__NAME__ description
+Dispatches HTTP request for the URI supplied with the <literal>url</literal> parameter.
+__END__
+
+__NAME__ notes
+<literal>[get-url]</literal> is just a thin wrapper around LWP::UserAgent.
 __END__
 
 __NAME__ synopsis
