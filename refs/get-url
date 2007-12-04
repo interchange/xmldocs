@@ -12,7 +12,9 @@ Dispatches HTTP request for the URI supplied with the <literal>url</literal> par
 __END__
 
 __NAME__ notes
-&tag-get-url; is just a thin wrapper around <classname>LWP::UserAgent</classname>.
+&tag-get-url; is just a thin wrapper around
+<ulink url='http://search.cpan.org/perldoc?LWP::UserAgent'>
+LWP::UserAgent</ulink>.
 __END__
 
 __NAME__ synopsis
@@ -51,7 +53,7 @@ __NAME__ synopsis
 		<arg choice='plain'>content_type</arg>
 	</entry>
 	<entry></entry><entry></entry>
-	<entry><literal>x-www-form-urlencoded</literal></entry>
+	<entry><literal>application/x-www-form-urlencoded</literal></entry>
 	<entry>&glos-MIME; content type.</entry>
 </row>
 <row>
@@ -109,17 +111,13 @@ __NAME__ synopsis
 __END__
 
 
-__NAME__ description
-__END__
-
-
 __NAME__ example
 <programlisting>
 [get-url
   url="valid_url"
   method="POST"
   strip=1
-  content_type="x-www-form-urlencoded"
+  content_type="application/x-www-form-urlencoded"
   content="name=Brev"
   authuser="username"
   authpass="password"
@@ -141,4 +139,3 @@ __NAME__ example2
 ]
 </programlisting>
 __END__
-
