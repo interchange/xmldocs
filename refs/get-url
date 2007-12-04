@@ -14,7 +14,8 @@ __END__
 __NAME__ notes
 &tag-get-url; is just a thin wrapper around
 <ulink url='http://search.cpan.org/perldoc?LWP::UserAgent'>
-LWP::UserAgent</ulink>.
+LWP::UserAgent</ulink>. Therefore the default for the
+<literal>timeout</literal> parameter is imposed by this module.
 __END__
 
 __NAME__ synopsis
@@ -103,7 +104,7 @@ __NAME__ synopsis
 		<arg choice='plain'>timeout</arg>
 	</entry>
 	<entry></entry><entry></entry>
-	<entry>No timeout</entry>
+	<entry><literal>180</literal></entry>
 	<entry>Set timeout for the operation. Timeout can be specified
 	as a valid &glos-interval;
 	(such as "3 min").</entry>
