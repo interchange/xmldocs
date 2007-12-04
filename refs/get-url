@@ -12,7 +12,7 @@ Dispatches HTTP request for the URI supplied with the <literal>url</literal> par
 __END__
 
 __NAME__ notes
-<literal>[get-url]</literal> is just a thin wrapper around LWP::UserAgent.
+&tag-get-url; is just a thin wrapper around <classname>LWP::UserAgent</classname>.
 __END__
 
 __NAME__ synopsis
