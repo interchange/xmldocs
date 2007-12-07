@@ -56,7 +56,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	transaction type
+	<olink targetdoc="glossary" targetptr="gateway_transaction_types">transaction type</olink>
 	</entry>
 
 </row> 
