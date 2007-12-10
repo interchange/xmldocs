@@ -38,16 +38,17 @@ CommonAdjust [calc-price]
 </para>
 <para>
 The following example can be used to base your own usertag on. Product code and
-quantity for the price calculation can be found in 
-<literal>$Vend::Interpolate::item</literal>.
+quantity for the price calculation can be found in the 
+<literal>$item</literal> variable from the
+<literal>Vend::Interpolate</literal> namespace.
 
 <programlisting><![CDATA[
 UserTag calc_price Routine <<EOR
 sub {
 	my ($code, $quantity, $set);
 
-	$code = $Vend::Interpolate::item->{code};
-	$quantity = $Vend::Interpolate::item->{quantity};
+	$code = $item->{code};
+	$quantity = $item->{quantity};
 
 	$Tag->perl({tables => 'vendors_pricing'});
 
