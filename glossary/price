@@ -23,6 +23,46 @@ or arbitrary other factors, then read on.
 </para>
 </section>
 
+<section id="CustomPricing">
+	<title>Custom Pricing</title>
+<para>
+Although the &conf-CommonAdjust; directive provides a lot of options to
+describe pricing schemes, it might not match yours or you are just feeling
+more comfortable in writing code instead of delving through the following
+section. In this case you can simply write your own usertag calculating the
+price with the following settings for &conf-CommonAdjust; and &conf-PriceField;:
+<programlisting>
+PriceField 0
+CommonAdjust [calc-price]
+</programlisting>
+</para>
+<para>
+The following example can be used to base your own usertag on. Product code and
+quantity for the price calculation can be found in 
+<literal>$Vend::Interpolate::item</literal>.
+
+<programlisting><![CDATA[
+UserTag calc_price Routine <<EOR
+sub {
+	my ($code, $quantity, $set);
+
+	$code = $Vend::Interpolate::item->{code};
+	$quantity = $Vend::Interpolate::item->{quantity};
+
+	$Tag->perl({tables => 'vendors_pricing'});
+
+	$set = $Db{vendors_pricing}->query(q{select price from vendors_pricing where sku = '%s' order by price asc limit 1}, $code);
+
+	if (@$set) {
+		return $set->[0]->[0];
+	} else {
+		return 0;
+	}
+}
+EOR
+]]></programlisting>
+</para>
+</section>
 
 <section id="CommonAdjustPricing">
 	<title>"CommonAdjust" Pricing</title>
