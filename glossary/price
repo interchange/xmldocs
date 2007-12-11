@@ -319,9 +319,9 @@ pricing:p1..p5,p10:
 	can be used in there, but the  <function>tag_data()</function> function
 	(&tag-data; tag, basically)
 	<emphasis>is</emphasis> available, the <emphasis>current</emphasis> price is
-	available in variable <varname>$s</varname>, and 
+	available in variable <literal>$s</literal>, and 
 	the current item details (code, quantity, price, and any attributes) are
-	available inside the <varname>$item</varname> &glos-hash; reference.
+	available inside the <literal>$item</literal> &glos-hash; reference.
 	All are found in &PERL; package <classname>Vend::Interpolate</classname>.
 	</para>
 	<para>
