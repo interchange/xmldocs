@@ -45,6 +45,23 @@ __NAME__ synopsis
 	<entry>Additional e-mail headers to include. For example,
 	<literal>Errors-To: errors@mydomain.local</literal>.</entry>
 </row>
+<row>
+	<entry>
+		<arg choice='plain'>html</arg>
+	</entry>
+	<entry></entry>
+	<entry></entry>
+	<entry></entry>
+	<entry>HTML part for the message</entry>
+</row>
+<row>
+	<entry>attach</entry>
+	<entry></entry>
+	<entry></entry>
+	<entry></entry>
+	<entry>File(s) to attach to the generated email.</entry>
+</row>
+	
 &ROW_HIDE_0;
 __END__
 
@@ -62,6 +79,25 @@ You do not need to provide the headers yourself, because you can pass
 all relevant information using tag attributes.
 The <arg choice='plain'>to</arg> parameter must be supplied and contain
 a valid e-mail address, or the message surely won't be delivered.
+</para>
+<refsect2><title>Attaching Files</title>
+<para>
+To add a single file as an attachment, you just do:
+</para>
+<programlisting><![CDATA[
+[email
+    from=foo@bar.com
+    to=bar@foo.com
+    subject=test
+    attach=foo.gif
+] Here is the gif file I promised.  [/email]
+]]></programlisting>
+<para>
+It automatically picks up the MIME type, and handles many if you
+have the optional MIME::Types module installed.
+</para>
+</refsect2>
+<para>
 __END__
 
 
@@ -77,3 +113,13 @@ Hello, World!
 </programlisting>
 __END__
 
+__NAME__ example: HTML message
+<programlisting>
+[email
+   from=foo@bar.com
+            to=bar@foo.com
+            subject=test
+            html="[scratch some_big_hairy_mess]"
+            ]This is the plain text part.[/email]
+</programlisting>
+__END__
