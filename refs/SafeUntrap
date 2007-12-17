@@ -18,11 +18,6 @@ For a complete discussion and the complete list of opcodes, see
 <manvolnum>3perl</manvolnum></citerefentry> manual page.
 __END__
 
-__NAME__ notes
-Please see the &glos-safe; glossary entry for the introduction and guidelines
-to programming under <classname>Safe.pm</classname> restrictions.
-__END__
-
 __NAME__ example: Disabling all but most restrictive opcodes
 <programlisting>
 SafeUntrap
