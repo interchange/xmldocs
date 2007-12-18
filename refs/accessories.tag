@@ -1,3 +1,7 @@
+__NAME__ purpose
+access to product options attributes
+__END__
+
 __NAME__ synopsis 
 <row>
 
@@ -113,7 +117,6 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
 __END__
 
