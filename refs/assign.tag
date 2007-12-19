@@ -17,8 +17,7 @@ __NAME__ synopsis
 	None
 	</entry>
 	<entry>
-	Sales &glos-tax; assignment.
-	This total amount of sales tax is taken verbatim and is not rounded.
+	Override for &tag-salestax;.
 	</entry>
 </row> 
 <row>
@@ -35,11 +34,8 @@ __NAME__ synopsis
 	None
 	</entry>
 	<entry>
-	&glos-shipping; assignment.
-	For the assigned shipping amount to be used,
-	<mv>mv_shipmode</mv> must be set to <literal>shipping</literal>.
-	This total amount of shipping costs is rounded to &glos-locale;-specific
-	number of fractional digits.
+	Override for &tag-shipping;. Applies only if 
+	<mv>mv_shipmode</mv> is set to <literal>shipping</literal>.
 	</entry>
 </row> 
 <row>
@@ -56,11 +52,8 @@ __NAME__ synopsis
 	None
 	</entry>
 	<entry>
-	Handling assignment.
-	For the assigned handling amount to be used,
-	<mv>mv_handling</mv> must be set to <literal>handling</literal>.
-	This total amount of handling costs is rounded to &glos-locale;-specific
-	number of fractional digits.
+	Override for &tag-handling;. Applies only if
+	<mv>mv_handling</mv> is set to <literal>handling</literal>.
 	</entry>
 </row> 
 <row>
@@ -77,9 +70,7 @@ __NAME__ synopsis
 	None
 	</entry>
 	<entry>
-	Subtotal assignment. It sets the &glos-cart; subtotal that would otherwise
-	be calculated by summing up individual item prices.
-	This subtotal amount is taken verbatim and is not rounded.
+	Override for &tag-subtotal;.
 	</entry>
 </row> 
 <row>
@@ -134,6 +125,16 @@ active assignments. To clear an individual assignment, set its value
 (Beware, a specification such as <literal>handling=0</literal> actually sets
 handling costs to zero, it does not clear the assignment. To clear the
 assignment, you must use <literal>handling=""</literal>).
+</para>
+<refsect2>
+<title>Rounding</title>
+<para>
+Overrides for &tag-shipping; and &tag-handling; are rounded to &glos-locale;-specific
+number of fractional digits. Overrides for &tag-subtotal; and &tag-salestax; are 
+used verbatim.
+</para>
+</refsect2>
+<para>
 __END__
 
 
