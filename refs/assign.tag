@@ -1,5 +1,5 @@
 __NAME__ purpose
-assign direct values for certain steps of checkout instead of performing calculations
+assign overrides for salestax, shipping, handling and subtotal
 __END__
 
 __NAME__ synopsis 
@@ -116,8 +116,6 @@ __NAME__ synopsis
 	Clear all assignments?
 	</entry>
 </row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
 __END__
 
 
