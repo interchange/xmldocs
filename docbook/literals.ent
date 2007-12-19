@@ -136,6 +136,17 @@ values above are not properly aligned. This is an unfortunate nature of
 
 <!-- ENTITIES TO EASIER CONSTRUCT TAG PARAMETERS LIST -->
 <!-- put standard ones here, such as Hide or Interpolate/reparse -->
+<!ENTITY TAG_NON_CONTAINER "
+<row>
+	<entry>
+		<arg choice='plain'>interpolate</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>&glos-interpolate; tag output?</entry>
+</row>
+">
+
 <!ENTITY ROW_INTERPOLATE_0 "
 <row>
 	<entry>

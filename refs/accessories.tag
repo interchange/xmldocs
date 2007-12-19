@@ -117,7 +117,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 __NAME__ description
