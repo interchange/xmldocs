@@ -1,15 +1,12 @@
 Dump complete Vend::Cfg structure
 
-Create usertag named <literal>cfgdump</literal> as shown below and
-save it as <filename>code/UserTag/cfgdump.tag</filename> in your
-&glos-ICROOT; directory:
+To dump the complete config structure at will, run:
 <programlisting><![CDATA[
-UserTag cfgdump  Routine   <<EOR
-sub {
-  use Data::Dumper; 
-  Dumper $Vend::Cfg;
-}
-EOR
+[uneval ref=`$Config`]
 ]]></programlisting>
 
-Restart &IC; (see &howto-daemon-control;) to load the tag.
+Also, at &glos-catalog; startup, a file named 
+<filename>etc/<replaceable>CATNAME</replaceable>.structure</filename>
+will be created relative to the catalog root directory. A complete
+configuration dump will be saved there.
+
