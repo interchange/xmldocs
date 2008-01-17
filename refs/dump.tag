@@ -60,19 +60,13 @@ This tag dumps the complete &glos-session; or parts of it, and HTTP environment
 variables in a human readable format, which is useful for debugging.
 </para>
 <para>
-The most important of the possible subsets are:
-<informaltable>
-<tgroup cols="2">
-<thead>
-<row><entry>Subset</entry><entry>Contents</entry></row>
-</thead>
-<tbody>
-<row><entry>&glos-cart;s</entry><entry>Cart contents.</entry></row>
-<row><entry>&glos-scratch;</entry><entry>Scratchpad variables.</entry></row>
-<row><entry>&glos-value;s</entry><entry>Value variables.</entry></row>
-</tbody>
-</tgroup>
-</informaltable>
+To display only a subset from the user's &glos-session;, use
+parameter <literal>key=</literal>. The key can be any information
+from the user's session, but most often you will want to display
+<literal>carts</literal>, <literal>scratch</literal> or
+<literal>values</literal>. For a list of all possible keys,
+smply invoke <code>[dump]</code> and look under
+"<literal>SESSION</literal>".
 __END__
 
 
