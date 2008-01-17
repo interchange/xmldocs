@@ -86,3 +86,9 @@ __NAME__ example: Displaying current user's cart structure
 ]]></programlisting>
 __END__
 
+__NAME__ example: Session dump focusing on session values, without HTTP environment
+<programlisting><![CDATA[
+<pre>[dump show_all=1 no_env=1]</pre>
+]]></programlisting>
+__END__
+
