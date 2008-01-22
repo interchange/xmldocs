@@ -5,3 +5,9 @@ __END__
 __NAME__ synopsis
 <arg choice='plain'><replaceable>directory_name</replaceable></arg>
 __END__
+
+__NAME__ example: Relocate to &conf-ScratchDir;
+<programlisting>
+PermanentDir tmp/perm
+</programlisting>
+__END__
