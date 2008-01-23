@@ -1,0 +1,31 @@
+__NAME__ purpose
+disallow tax calculations to apply negative value
+__END__
+
+
+__NAME__ synopsis
+<group choice='plain'>
+	<arg choice='plain'>0</arg>
+	<arg choice='plain'>1</arg>
+</group>
+__END__
+
+
+__NAME__ default
+0
+__END__
+
+
+__NAME__ description
+When the pragma is enabled and the &glos-tax; calculation yields a negative
+number, the tax amount applied will be reset to zero.
+__END__
+
+
+__NAME__ example: Enable __FILENAME__
+Put the following in &ccf;:
+<programlisting>
+Pragma no_negative_tax
+</programlisting>
+__END__
+
