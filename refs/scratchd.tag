@@ -1,5 +1,5 @@
 __NAME__ purpose
-return content of the named scratch variable, then delete the variable
+return value of scratch variable, then delete the variable
 __END__
 
 __NAME__ synopsis 
@@ -41,27 +41,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-<row>
-
-	<entry>
-	keep
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	0
-	</entry>
-	<entry>
-	Keep variable value in memory intact, and only apply filter for display?
-	</entry>
-
-</row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 
