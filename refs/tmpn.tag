@@ -1,5 +1,5 @@
 __NAME__ purpose
-set content of the named scratch variable
+temporarily set value of scratch variable, without interpolation
 __END__
 
 __NAME__ synopsis 
