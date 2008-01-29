@@ -122,6 +122,33 @@ endif
 </section>
 
 <section>
+<title>Apache-like statement blocks</title>
+<para>
+It is possible to define configuration directives for the duration 
+of the block, using the <literal>&lt;<replaceable>DIRECTIVE</replaceable> <replaceable>VALUE</replaceable>&gt; ... &lt;/<replaceable>DIRECTIVE</replaceable>&gt;</literal> notation:
+</para>
+<programlisting>
+Variable HELLO Hello World!
+
+ParseVariables No
+
+# Will print: Our greeting is: __HELLO__
+Message Our greeting is: __HELLO__
+
+&lt;ParseVariables Yes&gt;
+
+# Will print: Our greeting is the shiny Hello World!
+Message Our greeting is the shiny __HELLO__
+
+&lt;/ParseVariables&gt;
+
+# Will print: Our greeting is back to: __HELLO__
+Message Our greeting is back to: __HELLO__
+
+</programlisting>
+</section>
+
+<section>
 <title>Variables and expansion</title>
 <para>
 &IC;, of course, offers a way to define variables. Variables defined
