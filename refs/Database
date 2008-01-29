@@ -28,8 +28,8 @@ that will be used to refer to the table within &IC;. Names can be composed
 of alphanumeric characters including underscore, and we recommend they're in
 all lower- or upper-case.
 </para><para>
-<literal>source_file</literal> specifies the initial database
-source file, and <literal>type</literal> specifies its format.
+<literal>source_file</literal> specifies the initial database text
+source file, and <literal>type</literal> specifies database format.
 </para><para>
 For more about &IC; and databases, and supported formats, see &glos-database;
 glossary entry.
@@ -57,7 +57,61 @@ Database reviews reviews.txt CSV
 </programlisting>
 __END__
 
+__NAME__ example: Definition of a Postgres database table
+<programlisting>
+#
+# Required for PostgreSQL
+#
+Require module DBI
+Require module DBD::Pg
+
+Variable SQLDSN dbi:Pg:dbname=database_name
+Variable SQLUSER username
+Variable SQLPASS password
+Variable SOME_DATABASE 1
+
+&lt;ParseVariables Yes&gt;
+
+DatabaseDefault USER __SQLUSER__
+DatabaseDefault PASS __SQLPASS__
+DatabaseDefault NO_ASCII_INDEX 1
+
+Message -i -n Using PostgreSQL, DSN=__SQLDSN__...
+
+#
+# Individual database table definitions
+#
+
+Database  table_name  table_name.txt   __SQLDSN__
+
+&lt;/ParseVariables&gt;
+
+#
+# Optional table descriptions
+#
+
+Database  table_name  LENGTH_EXCEPTION_DEFAULT  truncate_log
+Database  table_name  DEFAULT_TYPE varchar(255)
+
+Database  table_name  KEY          sku
+Database  table_name  HIDE_FIELD   inactive
+
+Database  table_name  COLUMN_DEF   "sku=varchar(64) NOT NULL PRIMARY KEY"
+Database  table_name  COLUMN_DEF   "description=varchar(128)"
+Database  table_name  COLUMN_DEF   "price=varchar(12)"
+
+Database  table_name  INDEX        description
+Database  table_name  INDEX        price
+
+</programlisting>
+
+For the above example to work, you will need file <literal><replaceable>table_name.txt</replaceable></literal> present within &conf-ProductDir;, containing the initial data set for the table. If there's no initial data set and the table should be empty, the file still needs to contain a single line with three column names, separated by a TAB:
+<programlisting>
+sku	description	price
+</programlisting>
+__END__
+
 __NAME__ missing
-Examples for each DB type supported (Oracle, Pg, Mys,... )
+Examples for each DB type supported (Oracle, Mys,... )
 List of all keys that can occur in a specification
 __END__
