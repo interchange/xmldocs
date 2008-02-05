@@ -1,0 +1,37 @@
+__NAME__ purpose
+specify timeout on client sockets
+__END__
+
+
+__NAME__ synopsis
+<group choice='plain'>
+	<arg choice='plain'><replaceable>time_in_seconds</replaceable></arg>
+</group>
+__END__
+
+
+__NAME__ description
+The &conf-__FILENAME__; directive specifies the amount of time
+&IC; will wait for data on client sockets.
+</para><para>
+The default is one second, which is the same as the previous
+unconfigurable value.
+__END__
+
+__NAME__ notes
+__END__
+
+__NAME__ see also
+__END__
+
+__NAME__ author
+&kwalsh;
+__END__
+
+
+__NAME__ example: Specifying __FILENAME__
+<programlisting>
+__FILENAME__ 5
+</programlisting>
+__END__
+
