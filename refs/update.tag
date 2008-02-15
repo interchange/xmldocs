@@ -1,4 +1,27 @@
+__NAME__ purpose
+refresh specific set of internal data
+__END__
+
 __NAME__ synopsis 
+<row>
+
+	<entry>
+	function
+	</entry>
+	<entry>
+	yes
+	</entry>
+	<entry>
+	yes
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	name of function (see below)
+	</entry>
+
+</row> 
 <row>
 
 	<entry>
@@ -14,10 +37,9 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	&glos-cart; name (<literal>cart</literal> function only)
 	</entry>
 
 </row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
