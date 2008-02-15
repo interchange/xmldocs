@@ -12,20 +12,14 @@ __NAME__ description
 Specify &glos-database; tables that should be, all together, logically seen
 as one bigger <database>products</database> database.
 </para><para>
-For example, when doing product searches, all &conf-ProductFiles; databases
-will be searched.
+This directive is an alias for &conf-ProductFiles;; see the other
+&glos-configuration; directive for complete documentation.
 __END__
 
 
-__NAME__ notes
-This directive is also available through an alias
-<literal>DefaultTables</literal>.
-__END__
-
-
-__NAME__ example: Setting ProductFiles
+__NAME__ example: Setting DefaultDataTables
 <programlisting>
-ProductFiles vendor_a vendor_b
+DefaultDataTables vendor_a vendor_b
 </programlisting>
 __END__
 

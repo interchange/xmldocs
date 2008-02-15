@@ -127,6 +127,20 @@
 return if $::Pragma->{download};
 </programlisting>
 	</para></listitem>
+	<listitem><para>
+		<emphasis role='bold'>Filehandles</emphasis> - Use lexical variables (added in 2008):
+<programlisting>
+# BAD
+open SRC, $assertfile
+
+# GOOD
+open my $src, $assertfile
+</programlisting>
+	</para></listitem>
+
+	<listitem><para>
+		<emphasis role='bold'>Return from subroutines</emphasis> - Use explicit <code>return</code> statements.
+	</para></listitem>
 
 	<listitem><para>
 		<emphasis role='bold'>Globals</emphasis> - global variables and subs
@@ -172,7 +186,8 @@ return if $::Pragma->{download};
 	<listitem><para>
 		<emphasis role='bold'>HTML</emphasis> - in late 2004, it was agreed to
 		make the HTML code as XHTML-compliant as possible, but without using
-		XHTML constructs that could cause problems for older browsers.
+		XHTML constructs that could cause problems for older browsers. (This
+		subset of support should also be common to HTML).
 		</para>
 		<para>
 		In essence, all &glos-HTML; tag and argument names should be lowercased,

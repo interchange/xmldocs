@@ -1,5 +1,5 @@
 __NAME__ purpose
-number of seconds between periodic "house keeping" jobs
+specify number of seconds between periodic "house keeping" jobs
 __END__
 
 

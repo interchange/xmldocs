@@ -1,5 +1,5 @@
 __NAME__ purpose
-IPC socket filename
+specify IPC socket filename
 __END__
 
 __NAME__ see also

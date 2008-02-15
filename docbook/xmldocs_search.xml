@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+ xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+
+	<ShortName>icdevgroup.org search</ShortName>
+
+	<Description>
+	Search the Interchange documentation at www.icdevgroup.org
+	</Description>
+
+	<Url type="text/html" method="POST"
+	 template="http://www.icdevgroup.org/i/dev/Swish">
+		<Param name="search_mailinglists" value="1"/>
+		<Param name="mv_searchspec" value="{searchTerms}"/>
+	</Url>
+
+	<Image width="16" height="16">http://www.icdevgroup.org/favicon.ico</Image>
+
+	<InputEncoding>UTF-8</InputEncoding>
+
+</OpenSearchDescription>

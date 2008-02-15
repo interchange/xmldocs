@@ -1,5 +1,5 @@
 __NAME__ purpose
-environment variables to inherit from the calling CGI link program
+specify environment variables to inherit from the calling CGI link program
 __END__
 
 

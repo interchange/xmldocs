@@ -120,3 +120,11 @@ __NAME__ synopsis
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
 __END__
+
+
+__NAME__ example: Ad-hoc table display
+<programlisting>
+[query sql="select * from products" type=html /]
+</programlisting>
+__END__
+

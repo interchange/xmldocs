@@ -1,5 +1,5 @@
 __NAME__ purpose
-filename extension for files in the pages/ directory
+specify filename extension for files in the PageDir and TemplateDir directories
 __END__
 
 

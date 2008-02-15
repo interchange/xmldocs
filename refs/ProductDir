@@ -15,6 +15,9 @@ __END__
 
 __NAME__ notes
 The specified location is, unless absolute, treated relative to &glos-CATROOT;.
+</para><para>
+This directive is also available through an alias
+<literal>DataDir</literal>.
 __END__
 
 __NAME__ example: Setting ProductDir

@@ -1,5 +1,5 @@
 __NAME__ purpose
-config files to read as part of every catalog's configuration, before any of its files are read in
+specify config files to read as part of every catalog's configuration, before any of its files are read in
 __END__
 
 

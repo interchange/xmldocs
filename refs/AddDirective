@@ -59,18 +59,23 @@ Please see the &glos-configuration; glossary entry for a discussion
 on config directives.
 __END__
 
-__NAME__ example: Adding a new catalog configuration directive
+__NAME__ example: Adding a new catalog configuration directive with a custom parse routine
 Let's add the <literal>DocRoot</literal> directive. Put the following 
 in your &gcf;:
 <programlisting><![CDATA[
 GlobalSub <<EOS
-sub parse_docroot {
-	my ($var, $value) = @_;
+sub declare_extra_config {
 
-	unless ( -d $value ) { $@ = errmsg("Directory $value: $!") }
-	if ($@) { config_warn($@) }
+	package Vend::Config;
 
-	return;
+	sub parse_docroot {
+		my ($var, $value) = @_;
+
+		unless ( -d $value ) { $@ = errmsg("Directory $value: $!") }
+		if ($@) { config_warn($@) }
+
+		return;
+	}
 }
 EOS
 
@@ -78,7 +83,7 @@ AddDirective DocRoot docroot "/var/www"
 ]]></programlisting>
 __END__
 
-__NAME__ example: Adding the Swish directive
+__NAME__ example: Adding the "Swish" directive with an existing parse routine
 <programlisting> 
 Require       module  Vend::Swish
 
@@ -86,11 +91,5 @@ Variable      swish   Vend::Swish
 
 AddDirective  Swish   hash
 </programlisting>
-__END__
-
-__NAME__ missing
-Make better example, and exactly show how to define a new parser function without modifying Config.pm directly.
-Docroot example doesn't work
-also, does it only extends the set available in catalog.cfg or also in interchange.cfg ?
 __END__
 

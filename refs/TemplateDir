@@ -22,3 +22,9 @@ TemplateDir /usr/local/interchange/default_pages
 </programlisting>
 __END__
 
+__NAME__ example: Setting TemplateDir to multiple directories
+<programlisting>
+TemplateDir /usr/local/interchange/default_pages /common/pages
+</programlisting>
+__END__
+

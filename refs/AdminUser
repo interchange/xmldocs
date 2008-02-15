@@ -1,5 +1,5 @@
 __NAME__ purpose
-usernames that are given full access to all catalogs, regardless of any permissions
+specify usernames that are given full access to all catalogs, regardless of any permissions
 __END__
 
 __NAME__ synopsis

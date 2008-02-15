@@ -1,5 +1,5 @@
 __NAME__ purpose
-treat the same items in the cart as separate, instead of just increasing quantity?
+treat items with quantity greater than 1 as separate items
 __END__
 
 

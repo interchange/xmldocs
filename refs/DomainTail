@@ -1,5 +1,5 @@
 __NAME__ purpose
-only honor the toplevel domain in IP qualification
+honor only the toplevel domain in IP qualification
 __END__
 
 

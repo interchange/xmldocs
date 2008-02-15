@@ -1,5 +1,5 @@
 __NAME__ purpose
-modify or define custom Interchange actions
+modify existing or define custom Interchange actions
 __END__
 
 
@@ -8,21 +8,34 @@ AddDirective,CodeDef,UserTag
 __END__
 
 
-#__NAME__ synopsis
-#<group choice='req'>
-#	<arg choice='plain'>No</arg>
-#	<arg choice='plain'>Yes</arg>
-#</group>
-#__END__
+__NAME__ synopsis
+<arg choice='plain'>action_name</arg>
+<arg choice='plain'>perl_subroutine_or_ITL_code</arg>
+__END__
 
 
 __NAME__ description
-The directive allows definition of Interchange &glos-ActionMap;s, whose
-contents are usually &PERL; subroutines.
+The directive allows creation of new (and modification of existing)
+Interchange &glos-ActionMap;s. ActionMap contents are usually &PERL;
+subroutines.
+</para><para>
+If the action does not return a &glos-true; value, &IC; processing
+will stop right there, allowing you to fully handle the request from
+your action.
+</para><para>
+See &glos-ActionMap; glossary entry for more explanation and the list
+of built-in &IC; actionmaps.
 __END__
 
 __NAME__ notes
 For an introduction to Action Maps, see &glos-ActionMap; glossary entry.
+</para><para>
+The standard <literal>process</literal> ActionMap has a number of 
+configuration settings which can be controlled through &conf-FormAction;.
+</para><para>
+For catalog-level &glos-ActionMap;s, &IC; does not strip the actionmap nam
+from the requested HTTP path; for global ActionMaps it does. See
+<xref linkend='ActionMap_examples'/>.
 __END__
 
 
@@ -33,12 +46,42 @@ ActionMap order sub { 1 }
 </programlisting>
 Since we effectively turned Order into a no-operation action, the usual
 order link such as
-<code><![CDATA[<A HREF="[area order/nextpage]">Go to the next page</A>]]></code>
-would be equivalent to <code><![CDATA[[page order/nextpage]Go to the next page</a>]]></code>.
+<code><![CDATA[<A HREF="[area order/nextpage]">Order</a>]]></code>
+would be equivalent to <code><![CDATA[[page nextpage]Order (does nothing)</a>]]></code>.
 __END__
 
+__NAME__ example: Splitting a request into action map, page name and arguments
+Here's an example of an actionmap "<literal>test</literal>" that translates
+HTTP requests in form of <literal>test/<replaceable>page</replaceable>/<replaceable>arguments</replaceable></literal>
+into actual page requests to <literal>page.html</literal> with optional <literal>arguments</literal>.
+</para><para>
+Note that, as hinted above, global-level actionmap have the actionmap name
+already already stripped from the URL.
+
+<programlisting><![CDATA[
+ActionMap test <<EOA
+sub {
+  my $url = shift;
+
+  # Remove actionmap name from the URL (only needed for catalog-level
+  # actionmaps which do not receive the URL with actionmap name already
+  # removed)
+  $url =~ s:^test/+::i;
+
+  # Arguments are optional
+  if ($url =~ s:/+(.*)$::) {
+    $CGI->{mv_arg} = $1;
+  }
+
+  $CGI->{mv_nextpage} = $url;
+  return 1;
+}   
+EOA 
+]]></programlisting>
+__END__
+
+
 __NAME__ missing
-In the example, I provided some erroneous comment (the part about [area].. equal to [page]...
-Also fix description and add synopsis
+Kevon's example of /prod/cat/search
 __END__
 

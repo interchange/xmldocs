@@ -1,5 +1,5 @@
 __NAME__ purpose
-parse (interpolate) variable values before storing them
+parse (interpolate) config file variables
 __END__
 
 

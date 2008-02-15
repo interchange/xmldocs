@@ -1,5 +1,5 @@
 __NAME__ purpose
-name of SOAP RPC socket files
+specify name of SOAP RPC socket file
 __END__
 
 __NAME__ see also

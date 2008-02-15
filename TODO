@@ -1,4 +1,5 @@
 Bugs:
+-document <ParseVaribles Yes>
 - work on bin/mkreport
 - search doc se nevidi jer je search neki actionmap
 - provide static files for download, describe keys like alt+n

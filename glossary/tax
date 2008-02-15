@@ -257,4 +257,12 @@ taxing scheme of truly arbitrary complexity.
 <!-- TODO where does "Levy" come from? -->
 </section>
 
+<section>
+	<title>Conclusion</title>
+<para>
+To prevent tax calculation routines from ever applying a negative
+tax amount, see pragma &pragma-no-negative-tax;.
+</para>
+</section>
+
 <para>

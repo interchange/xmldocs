@@ -23,7 +23,14 @@ If it is desirable to turn on &PERL; warnings for pages, you can use
 __END__
 
 
-__NAME__ example: Enable perl_warnings_in_page page-wide
+__NAME__ example: Enable __FILENAME__ catalog-wide
+Put the following in &ccf;:
+<programlisting>
+Pragma perl_warnings_in_page
+</programlisting>
+__END__
+
+__NAME__ example: Enable __FILENAME__ page-wide
 <programlisting>
 [pragma perl_warnings_in_page]
 </programlisting>

@@ -1,10 +1,5 @@
 __NAME__ purpose
-specify global subroutines that can be used only by catalogs listed under AllowGlobal
-directive
-__END__
-
-
-__NAME__ missing
+specify global subroutines that can be used only by catalogs listed under AllowGlobal directive
 __END__
 
 

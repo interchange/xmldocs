@@ -1,0 +1,28 @@
+__NAME__ purpose
+specify time format used in TrackFile logs
+__END__
+
+__NAME__ synopsis
+<arg choice='plain'><replaceable>time_format</replaceable></arg>
+__END__
+
+__NAME__ description
+The &conf-__FILENAME__; directive specifies the time format to be 
+used in &conf-TrackFile; logs.
+</para><para>
+The default format is <literal>%Y%m%d</literal>. For a list of 
+accepted POSIX format specifiers, see the &glos-time; glossary entry.
+__END__
+
+__NAME__ example: Apache-equivalent time format
+<programlisting>
+__FILENAME__ %d/%b/%Y:%H:%M:%S %z
+</programlisting>
+__END__
+
+__NAME__ example: ISO 8601 time format
+<programlisting>
+__FILENAME__ %Y-%m-%dT%H:%M:%S%z
+</programlisting>
+__END__
+

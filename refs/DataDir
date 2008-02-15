@@ -1,0 +1,24 @@
+__NAME__ purpose
+specify directory containing database files
+__END__
+
+
+__NAME__ synopsis
+<arg choice='plain'><replaceable>directory</replaceable></arg>
+__END__
+
+
+__NAME__ description
+Specify the directory containing database files.
+The directory cannot be absolute, unless &conf-NoAbsolute; is disabled.
+</para><para>
+This directive is an alias for &conf-ProductDir;; see the other
+&glos-configuration; directive for complete documentation.
+__END__
+
+__NAME__ example: Setting DataDir
+<programlisting>
+DataDir databases
+</programlisting>
+__END__
+

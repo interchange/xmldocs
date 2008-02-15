@@ -1,6 +1,6 @@
 &IC; allows you to create "virtual catalog pages" by associating 
-code (such as &PERL; subroutines) with parts of an URL. This can be
-used for anything from implementing one-click searches and orders
+code (such as &PERL; subroutines or &glos-ITL; tags) with parts of an URL.
+This can be used for anything from implementing one-click searches and orders
 to displaying on-the-fly data.
 </para><para>
 On every &glos-catalog; access, the leading part of a requested page path
@@ -16,12 +16,9 @@ page names that you access in your catalog) are:
 <listitem><para>
 <literal>process</literal> - Generic form processing function.
 
-<!-- 
-Besides using Perl, Interchange tags may be used in an action, though they are not nearly as efficient.
-^^- only process or all actions?
-
-pointers to all variables it honors.
--->
+</para></listitem>
+<listitem><para>
+<literal>process</literal>  -  Generic &glos-HTML; form processor for user data
 </para></listitem>
 <listitem><para>
 <literal>order</literal>  -  Order items
@@ -36,16 +33,6 @@ pointers to all variables it honors.
 
 
 <!--
-TODO format
-Interchange form processing is based on an C<action> and a C<todo>. The 
-predefined actions at the first level are:
-
-    process       process a todo
-    search        form-based search
-    scan          path-based search
-    order         order an item
-    minimate      get access to a database via MiniMate
-
 You can define any action you desire with C<ActionMap>.
 
 The C<process> action has a second C<todo> level called with C<mv_todo>
