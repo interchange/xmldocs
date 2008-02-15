@@ -43,3 +43,8 @@ __NAME__ synopsis
 </row> 
 &TAG_NON_CONTAINER;
 __END__
+
+__NAME__ description
+<literal>[update values]</literal> updates the &glos-value; namespace from the volatile
+&glos-CGI; namespace.
+__END__
