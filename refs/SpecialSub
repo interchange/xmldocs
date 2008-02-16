@@ -17,9 +17,9 @@ The available events are:
 
 <itemizedlist>
 <listitem><para>
-	<literal>catalog_init</literal> &mdash;
-	event triggered after catalog 
-  selection and before &glos-session; assignment.
+	<literal>request_init</literal> &mdash;
+	event triggered on every request, that is, after catalog
+	selection and before &glos-session; assignment.
 </para></listitem>
 <listitem><para>
 	<literal>debug_qualify</literal> &mdash; 
