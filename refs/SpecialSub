@@ -18,8 +18,16 @@ The available events are:
 <itemizedlist>
 <listitem><para>
 	<literal>request_init</literal> &mdash;
-	event triggered on every request, that is, after catalog
+	event triggered on every request, right after catalog
 	selection and before &glos-session; assignment.
+</para></listitem>
+<listitem><para>
+	<literal>admin_init</literal> &mdash;
+	for users with administrator privileges, event triggered on every
+	request, after initialization of
+	embedded Perl objects. This allows &glos-catalog; subroutines to 
+  be specified as request handlers and have properly initialized
+	&glos-session; variables by the time they run.
 </para></listitem>
 <listitem><para>
 	<literal>debug_qualify</literal> &mdash; 
@@ -99,6 +107,9 @@ insufficient permissions to execute all of your commands. To solve that
 problem, either relax the restrictions by using &conf-SafeUntrap;,
 or define the subroutines at the global level (in &gcf;) using
 unrestricted &conf-GlobalSub;s.
+</para><para>
+As a misnomer, SpecialSub <literal>catalog_init</literal> was
+renamed to <literal>request_init</literal> in &IC; 5.5.2.
 __END__
 
 __NAME__ example: Defining "SpecialSub missing"
@@ -177,6 +188,21 @@ Sub check_cc <<EOS
     return 'LOCAL_TYPE' if $num =~ /^41/;
     return;
   }
+EOS
+]]></programlisting>
+__END__
+
+__NAME__ example: Defining SpecialSub admin_init
+Put the following in &ccf;:
+<programlisting><![CDATA[
+SpecialSub  admin_init on_admin_init
+
+Sub on_admin_init <<EOS
+sub {
+  unless ($Session->{username} eq 'foundation') {
+    $Variable->{MV_MENU_DIRECTORY} = 'include/foundation/menus';
+  }
+}
 EOS
 ]]></programlisting>
 __END__
