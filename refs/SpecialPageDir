@@ -10,6 +10,7 @@ __END__
 
 __NAME__ description
 Specify the directory containing &glos-special; catalog pages.
+The default is <literal>special_pages</literal>.
 </para><para>
 This directive can be set in &glos-locale; settings to allow different page
 sets for different locales.
@@ -21,7 +22,7 @@ __END__
 
 __NAME__ example: Setting SpecialPageDir
 <programlisting>
-SpecialPageDir /special_html
+SpecialPageDir pages/special
 </programlisting>
 __END__
 
