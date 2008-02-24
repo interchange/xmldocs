@@ -19,7 +19,8 @@ Valid types are:
 	<listitem><para>
 	<literal>badsearch</literal> &mdash; 
 
-	Defaults to <literal></literal>.
+	Defaults to <literal>badsearch</literal>, displayed if search initialization failed.
+
 	</para></listitem>
 	<listitem><para>
 	<literal>canceled</literal> &mdash; 
@@ -69,7 +70,7 @@ Valid types are:
 	<listitem><para>
 	<literal>receipt</literal> &mdash; 
 
-	Defaults to <literal></literal>.
+	Default page displayed as order receipt.
 	</para></listitem>
 	<listitem><para>
 	<literal>results</literal> &mdash; 
@@ -119,7 +120,7 @@ SpecialPage  violation      special/violation
 __END__
 
 __NAME__ see also
-DirectoryIndex
+SpecialPageDir, DirectoryIndex
 __END__
 
 
