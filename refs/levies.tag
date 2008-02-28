@@ -1,3 +1,7 @@
+__NAME__ purpose
+display total cost of levy charges
+__END__
+
 __NAME__ synopsis 
 <row>
 
@@ -14,7 +18,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	force recalculation of levy charges
 	</entry>
 
 </row> 
@@ -37,25 +41,5 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-<row>
-
-	<entry>
-	hide
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
