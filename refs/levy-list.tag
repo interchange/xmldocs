@@ -1,3 +1,7 @@
+__NAME__ purpose
+display a list of levy charges
+__END__
+
 __NAME__ synopsis 
 <row>
 
@@ -11,13 +15,40 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>levy</literal>
 	</entry>
 	<entry>
-	<!-- DSC -->
+	list prefix
 	</entry>
 
 </row> 
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
+__END__
+
+__NAME__ description
+You access the levies cart with <literal>[levy-list] LIST [/levy-list]</literal>. The
+behavior of the list is exactly the same as with an <literal>[item-list]</literal> for a
+shopping cart -- <literal>[levy-param description]</literal> will access the "description"
+member of the hash for that levy.
+__END__
+
+__NAME__ notes
+See &glos-levy; glossary entry for more information.
+__END__
+
+__NAME__ example
+<programlisting><![CDATA[
+[levies recalculate=1 hide=1]
+[levy-list]
+<tr>
+    <td align=left class=contentbar1>[levy-param label]:</TD>
+    <td align=right class=contentbar1>[levy-param cost]</TD>
+</tr>
+[/levy-list]
+]]></programlisting>
+__END__
+
+__NAME__ see also
+levies, Levies, Levy
 __END__
