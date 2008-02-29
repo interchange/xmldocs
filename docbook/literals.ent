@@ -273,6 +273,14 @@ values above are not properly aligned. This is an unfortunate nature of
   <entry>Auto-create directories in the file path?</entry>
 </row>
 ">
+<!ENTITY ROW_CURRENCYCONVERT "
+<row>
+  <entry>convert</entry>	
+  <entry></entry><entry></entry>
+  <entry>No</entry>
+  <entry>Convert the amount according to the &conf-PriceDivide; value for the current locale.</entry>
+</row>
+">
 <!ENTITY ROW_CURRENCYDISPLAY "
 <row>
   <entry>display</entry>	
