@@ -27,8 +27,7 @@ __NAME__ synopsis
 	<entry>All &conf-ProductFiles; databases</entry>
 	<entry>Database to look up the product in.</entry>
 </row>
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 
