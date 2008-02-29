@@ -12,12 +12,12 @@ __NAME__ synopsis
 	<entry>main</entry>
 	<entry>&glos-cart; name</entry>
 </row>
+&ROW_CURRENCYCONVERT;
 &ROW_CURRENCYNOFORMAT;
 &ROW_CURRENCYDISPLAY;
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 __NAME__ see also
-currency, total-cost
+assign, currency, total-cost
 __END__
