@@ -18,7 +18,7 @@ The <replaceable>value</replaceable> can be one of three types:
 </thead>
 <tbody>
 <row><entry><literal>multi</literal></entry>
-<entry>Enables table-based lookup of tax rates, based upon the value of form values, by default the values used are country and state.</entry>
+<entry>Enables table-based lookup of tax rates, based upon form input values, by default the values used are country and state.</entry>
 </row>
 <row><entry>ITL</entry><entry>If the <replaceable>value</replaceable>
 contains a square bracket, it is interpolated as &glos-ITL;. The result is
