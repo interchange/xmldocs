@@ -23,19 +23,29 @@ __NAME__ synopsis
 	</entry>
 	<entry></entry>
 	<entry></entry>
-	<entry></entry>
+	<entry>1</entry>
 	<entry>quantity</entry>
 </row>
+<row>
+	<entry>discount</entry>
+	<entry></entry>
+	<entry></entry>
+	<entry>No</entry>
+	<entry>Apply &glos-discount;.</entry>
+</row>
+&ROW_CURRENCYCONVERT;
 &ROW_CURRENCYNOFORMAT;
 &ROW_CURRENCYDISPLAY;
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 
 __NAME__ description
 The tag calculates the &glos-price; for a specified product and returns
 it formatted.
+</para><para>
+The price tag will not apply discounts unless you supply the 
+<literal>discount=1</literal> parameter.
 __END__
 
 
