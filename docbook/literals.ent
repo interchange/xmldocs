@@ -146,7 +146,64 @@ values above are not properly aligned. This is an unfortunate nature of
 	<entry>&glos-interpolate; tag output?</entry>
 </row>
 ">
+<!ENTITY TAG_LIST_CONTAINER "
+<row>
 
+	<entry>
+	more
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	No
+	</entry>
+	<entry>
+	enable paginating with &tag-more-list;
+	</entry>
+</row> 
+<row>
+
+	<entry>
+	ml
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	50
+	</entry>
+	<entry>
+	number of items to display
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	more_template
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	template for &tag-more-list;
+	</entry>
+
+</row> 
+">
 <!ENTITY ROW_INTERPOLATE_0 "
 <row>
 	<entry>
