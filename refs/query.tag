@@ -1,8 +1,27 @@
 __NAME__ purpose
-perform SQL-like query
+run SQL query
 __END__
 
 __NAME__ synopsis 
+<row>
+
+	<entry>
+	sql
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	SQL statement
+	</entry>
+
+</row> 
 <row>
 
 	<entry>
@@ -22,25 +41,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-<row>
-
-	<entry>
-	more
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
+&TAG_LIST_CONTAINER;
 <row>
 
 	<entry>
@@ -75,7 +76,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	text to return if query fails
 	</entry>
 
 </row> 
