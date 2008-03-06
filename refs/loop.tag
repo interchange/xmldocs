@@ -1,3 +1,7 @@
+__NAME__ purpose
+iterate through a list
+__END__
+
 __NAME__ synopsis 
 <row>
 
@@ -75,45 +79,8 @@ __NAME__ synopsis
 	<!-- DSC -->
 	</entry>
 
-</row> 
-<row>
-
-	<entry>
-	ml
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	more
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
+</row>
+&TAG_LIST_CONTAINER;
 <row>
 
 	<entry>
