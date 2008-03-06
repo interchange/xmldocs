@@ -1,4 +1,27 @@
+__NAME__ purpose
+iterate through items in the cart
+__END__
+
 __NAME__ synopsis 
+<row>
+
+	<entry>
+	cart
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<literal>main</literal>
+	</entry>
+	<entry>
+	name of cart to iterate through
+	</entry>
+
+</row> 
 <row>
 
 	<entry>
@@ -37,6 +60,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
+&TAG_LIST_CONTAINER;
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
 __END__
