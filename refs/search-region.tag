@@ -60,6 +60,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
+&TAG_LIST_CONTAINER;
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
 __END__
