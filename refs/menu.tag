@@ -30,12 +30,35 @@ __NAME__ synopsis
 <entry></entry>
 <entry>list of fields to localize</entry>
 </row>
+<row>
+<entry>
+<arg choice='plain'>logged_in</arg>
+</entry>
+<entry></entry>
+<entry></entry>
+<entry></entry>
+<entry>selection field for authorized users</entry>
+</row>
+<row>
+<entry>menu_type</entry>
+<entry></entry>
+<entry></entry>
+<entry><literal>simple</literal></entry>
+<entry>menu type (<literal>simple</literal>, <literal>tree</literal>, <literal>flyout</literal>)</entry>
+</row>
+&ROW_INTERPOLATE_0;
+&ROW_REPARSE_1;
 __END__
 
 __NAME__ description
 This tag reads a tab-separated menu file and display its contents according
 to the parameters. The template for each menu entry can be passed in the tag
 body.
+
+Selection fields determine which menu entries are displayed.
+
+The following columns are recognized in the menu file:
+
 __END__
 
 __NAME__ example: Simple Menubar
@@ -63,6 +86,18 @@ __NAME__ example: Simple Menubar with Different Links
 This menu contains links to external sites (<literal>href</literal>) and 
 internal pages (<literal>url</literal>).
 </para>
+__END__
+
+__NAME__ example: Flyout Menu
+<programlisting><![CDATA[
+[menu
+	name="[control tree_selector Products]"
+	link-class="barlink"
+	flyout-class="flyout_class"
+	flyout-style="flyout_style"
+	menu-type=flyout
+][/menu]
+]]></programlisting>
 __END__
 
 __NAME__ see also
