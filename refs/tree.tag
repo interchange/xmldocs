@@ -1,4 +1,86 @@
+__NAME__ purpose
+display tree-like structure from database
+__END__
+
 __NAME__ synopsis 
+<row>
+
+	<entry>
+	table
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<emphasis>None</emphasis>
+	</entry>
+	<entry>
+	Database table which contains the tree.
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	master
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<emphasis>None</emphasis>
+	</entry>
+	<entry>
+	Column which contains the parent item.
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	subordinate
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<emphasis>None</emphasis>
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+
+<row>
+
+	<entry>
+	start
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<emphasis>None</emphasis>
+	</entry>
+	<entry>
+	Root item of the tree.
+	</entry>
+
+</row> 
+
 <row>
 
 	<entry>
@@ -11,10 +93,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<emphasis>None</emphasis>
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Use specified tab-seperated file instead of database table.
 	</entry>
 
 </row> 
@@ -22,25 +104,6 @@ __NAME__ synopsis
 
 	<entry>
 	delimiter
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	subordinate
 	</entry>
 	<entry>
 	<!-- POS -->
