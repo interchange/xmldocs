@@ -1,0 +1,13 @@
+__NAME__ purpose
+check string length
+__END__
+
+__NAME__ description
+Checks whether the value has a minimum length or is inside a length range.
+__END__
+
+__NAME__ example
+<programlisting>
+username=length 6-32 Size limits exceeded (6-32 characters)
+</programlisting>
+__END__
