@@ -176,7 +176,7 @@ Check types, however, can take on one of the following values:
 <para>
 Checks can be combined with the <literal>&amp;and</literal> and 
 <literal>&amp;or</literal> profile operators. The following example
-uses the <literal>regex</literal> and <literal>length</literal>
+uses the &ordercheck-regex; and &ordercheck-length;
 checks to ensure that the input is suitable for system usernames
 and is within certain length bounds.
 <programlisting>
