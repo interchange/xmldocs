@@ -171,6 +171,22 @@ Check types, however, can take on one of the following values:
 
 </section>
 
+<section>
+<title>Chained Checks</title>
+<para>
+Checks can be combined with the <literal>&amp;and</literal> and 
+<literal>&amp;or</literal> profile operators. The following example
+uses the <literal>regex</literal> and <literal>length</literal>
+checks to ensure that the input is suitable for system usernames
+and is within certain length bounds.
+<programlisting>
+username=regex ^[a-z][-a-z0-9]*$ "Invalid characters in username."
+&amp;and
+username=length 6-32 Size limits exceeded (6-32 characters)
+</programlisting>
+</para>
+</section>
+
 <para>
 
 
