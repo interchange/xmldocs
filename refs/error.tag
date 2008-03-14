@@ -397,7 +397,7 @@ $Vend::Session-gt;{errors};
 -->
 __END__
 
-__NAME__ example: the most simple error display
+__NAME__ example: Automatic error display
 The following will simply display all accumulated session errors.
 (Note that after display, session errors will be cleared and will
 not show up on subsequent page accesses).
@@ -408,20 +408,24 @@ not show up on subsequent page accesses).
 ]]></programlisting>
 __END__
 
-__NAME__ example 
-Trigger an error:
+__NAME__ example: Trigger an error
 <programlisting>
 [error name="email" set="Invalid email address"]
 </programlisting>
 __END__
 
-__NAME__ example
-Show all errors:
+__NAME__ example: Show all errors
 <programlisting>
 [error all=1 show_error=1]
 </programlisting>
 __END__
 
+__NAME__ example: Clear all errors
+<programlisting>
+[tmp clear_errors][error all=1 comment="Clear errors"][/tmp]
+</programlisting>
+__END__
+
 __NAME__ see also
-CSS_CONTRAST, MV_ERROR_STD_LABEL
+warnings, CSS_CONTRAST, MV_ERROR_STD_LABEL
 __END__
