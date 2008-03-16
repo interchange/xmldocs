@@ -6,6 +6,25 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	name
+	</entry>
+	<entry>
+	yes
+	</entry>
+	<entry>
+	yes
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	variable name
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	values_space
 	</entry>
 	<entry>
@@ -34,17 +53,17 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>1</literal>
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Return value on success.
 	</entry>
 
 </row> 
 <row>
 
 	<entry>
-	'no'
+	no
 	</entry>
 	<entry>
 	<!-- POS -->
@@ -56,7 +75,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Return value on failure.
 	</entry>
 
 </row> 
@@ -189,7 +208,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	File name for output file
+	File name for output file.
 	</entry>
 
 </row>
@@ -229,29 +248,11 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Maximum size of uploaded file.
 	</entry>
 
 </row> 
-<row>
 
-	<entry>
-	no
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
 <row>
 
 	<entry>
