@@ -1,4 +1,28 @@
+__NAME__ purpose
+display and manipulate warnings stored in session
+__END__
+
 __NAME__ synopsis 
+<row>
+
+	<entry>
+	message
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+
 <row>
 
 	<entry>
@@ -170,6 +194,5 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
