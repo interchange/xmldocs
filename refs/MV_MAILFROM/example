@@ -6,7 +6,6 @@ Setting the MV_MAILFROM variable
 
 <para>
 Add the following to <filename>interchange.cfg</filename>:
-</para>
 
 <programlisting><![CDATA[
 Variable MV_MAILFROM interchange

@@ -30,7 +30,7 @@ code	product_supported
 145	1
 146	-1
 </screen>
-</para><para>
+
 Then, performing
 <code>[filter lookup.support.product_supported]144[/filter]</code> would
 yield <literal>0</literal>.

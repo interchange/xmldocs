@@ -154,7 +154,6 @@ __END__
 
 
 __NAME__ example: Specifying PostgreSQL schema
-</para><para>
 The following setting for &PGSQL; would make &IC; only see the tables
 in the <literal>public</literal> schema of a database, and not in
 any other schemas.

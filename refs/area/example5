@@ -4,6 +4,8 @@
 Implementing searches using href=/arg= options
 </title>
 
+<para>
+
 <programlisting><![CDATA[
 <a href="[area scan
     se=Impressionists
@@ -11,9 +13,7 @@ Implementing searches using href=/arg= options
 ">Search for Impressionist Paintings</a>
 ]]></programlisting>
 
-<para>
 Or the equivalent, using named parameters and more understandable quoting:
-</para>
 
 <programlisting><![CDATA[
 <a href="[area href=scan
@@ -22,10 +22,8 @@ Or the equivalent, using named parameters and more understandable quoting:
 ">Search for Impressionist Paintings</a>
 ]]></programlisting>
 
-
-<para>
 If the <arg choice='plain'>arg</arg> parameter is set, it will be available
 within the search display page as <code>[value mv_arg]</code>.
-</para>
 
+</para>
 </example>

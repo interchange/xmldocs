@@ -4,6 +4,8 @@
 Embedding HTML forms in the area tag
 </title>
 
+<para>
+
 <programlisting><![CDATA[
 <a href="[area form="
   mv_order_item=99-102
@@ -14,9 +16,7 @@ Embedding HTML forms in the area tag
 ]">Order T-shirt in Large size</a>
 ]]></programlisting>
 
-<para>
 Or another example:
-</para>
 
 <programlisting><![CDATA[
 <a href="[area form="
@@ -26,9 +26,7 @@ Or another example:
 "]">Order item 000101</a>
 ]]></programlisting>
 
-<para>
 Which is equivalent to the usual HTML form:
-</para>
 
 <programlisting><![CDATA[
 <form action="[area process]" method="post">

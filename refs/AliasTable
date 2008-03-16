@@ -29,14 +29,13 @@ __NAME__ example: Defining AliasTable
 Database alias alias.txt TAB
 AliasTable alias
 </programlisting>
-</para><para>
 __END__
 
 __NAME__ example: Creating AliasTable database 
 <programlisting>
 <xi:include parse='text' href='../files/various/alias.txt'/>
 </programlisting>
-</para><para>
+<para>
 In our example, page <literal>4595</literal>.html redirects
 back to the index page.
 </para><para>

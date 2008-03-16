@@ -6,7 +6,6 @@ Turn around the workaround
 
 <para>
 Add the following to <filename>interchange.cfg</filename>:
-</para>
 
 <programlisting><![CDATA[
 Variable MV_BAD_LOCK 1

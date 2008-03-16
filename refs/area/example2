@@ -6,16 +6,13 @@ Pass arguments onto the target page
 
 <para>
 Add the following link to an Interchange page:
-</para>
 
 <programlisting><![CDATA[
 Visit the <a href="[area href='test' arg='arg1=value1/arg2=value2']">test</a> page.
 ]]></programlisting>
 
-<para>
 The relevant part of your <filename>test.html</filename> page could then
 look like this:
-</para>
 
 <programlisting>
 <xi:include parse='text' href='../files/area/test.html'/>

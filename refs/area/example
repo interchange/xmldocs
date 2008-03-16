@@ -6,7 +6,6 @@ Produce the basic hypertext link
 
 <para>
 Add the following to an Interchange page:
-</para>
 
 <programlisting><![CDATA[
 Please visit our <a href="[area index]">Welcome</a> page.

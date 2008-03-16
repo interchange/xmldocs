@@ -68,6 +68,7 @@ is "downloadable", set:
 <programlisting>
 AutoModifier heavy downloadable
 </programlisting>
+<para>
 Also make sure to have the
 <database class='field'>heavy</database> and 
 <database class='field'>downloadable</database> columns defined in your 

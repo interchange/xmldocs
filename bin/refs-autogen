@@ -157,12 +157,12 @@ my @mandatory = (qw/synopsis example description purpose/);
 # The header is inserted
 # *after* <title>, if title was specified in section definition.
 my %item_header = (
-	example => "<example id='%s'>\n%s<para>",
-	online => "<example id='%s'>\n%s<para>",
+	example => "<example id='%s'>\n%s",
+	online => "<example id='%s'>\n%s",
 );
 my %item_footer = (
-	example => "</para>\n</example>",
-	online => "</para>\n</example>",
+	example => "\n</example>",
+	online => "\n</example>",
 );
 
 # Support preamble texts
@@ -1257,9 +1257,14 @@ sub populate {
 
 					my $id = make_ok_for_id('', $title||"", 1);
 					$title = $title ?  "<title id='title_$id'>$title</title>" : '';
-					$pre_content =  sprintf($item_header{$section}||"",
-							"example_$id", $title);
-					$post_content = sprintf($item_footer{$section}||"", $title);
+
+					# Insert automatic <para> only if there's non-program text in the
+					# example. And if we insert it, close it before the first
+					# program text starts, not at the end of everything.
+					my $predata = $item_header{$section}||"";
+					my $postdata = $item_footer{$section}||"";
+					$pre_content =  sprintf($predata, "${section}_$id", $title);
+					$post_content = sprintf($postdata);
 					next
 
 				} elsif ( $line =~ /^__END__/ ) {
@@ -1313,6 +1318,31 @@ sub update_field {
 
 	$pre ||= "";
 	$post ||= "";
+
+	# To get rid of empty <p></p> in examples, which happens if an 
+	# example has a <programlisting> section and no non-program text,
+	# we removed <para></para> from the item template. That calls
+	# for special case detection here, where we need to modify 
+	# passed content to include paras, or we'd have to change a lot
+	# of reference pages to insert them manually.
+	# The policy here is: insert <para> at beginning if content begins
+	# with a non-xml element (!= "<"), and terminate para on encountering
+	# <programlisting>. If the end of program, </programlisting>,
+	# is followed by a non-xml element, insert <para> again.
+	# At the end, if the block does not end in an xml-element,
+	# insert </para>.
+	if ( $sect eq 'example' ) {
+		if ( $content =~ /\S/ and $content !~ /^\s*</s ) {
+			$content = '<para>' . $content;
+		}
+
+		$content =~ s/(.[^(>|\^)])(\s*<(programlisting|screen)>)/$1<\/para>$2/sg;
+		$content =~ s/(<\/(programlisting|screen)>)(?!\s*(<|$))/$1<para>/sg;
+
+		if ( $content =~ /\S/ and $content !~ />\s*$/s ) {
+			$content .= '</para>';
+		}
+	}
 
 	if ( $sect ne 'missing' ) {
 

@@ -6,7 +6,6 @@ Reading the value of MV_SUBJECT
 
 <para>
 Add the following to a test Interchange page:
-</para>
 
 <programlisting><![CDATA[
 Subject/title: @@MV_SUBJECT@@

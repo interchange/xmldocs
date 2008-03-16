@@ -10,7 +10,6 @@ strings.
 If it does not, we consider it not to have a template and add the
 definitions ourselves.
 The following is needed in <filename>catalog.cfg</filename>:
-</para>
 
 <programlisting><![CDATA[
 Pragma  init_page=wrap_page

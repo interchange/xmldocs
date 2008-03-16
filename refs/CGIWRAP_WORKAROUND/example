@@ -6,7 +6,6 @@ Turn on the workaround code
 
 <para>
 Add the following to <filename>interchange.cfg</filename>:
-</para>
 
 <programlisting><![CDATA[
 Variable CGIWRAP_WORKAROUND 1

@@ -11,7 +11,6 @@ When <arg choice='plain'>search</arg> is used,
 <arg choice='plain'>href</arg> will be set to <literal>scan</literal> and
 <arg choice='plain'>arg</arg> to the value of 
 <arg choice='plain'>search</arg>.
-</para>
 
 <programlisting><![CDATA[
 <a href="[area search="

@@ -6,7 +6,6 @@ Setting MV_EMAIL_INTERCEPT to "root@&def-domain;"
 
 <para>
 Set the following in &gcf; or &ccf;:
-</para>
 
 <programlisting><![CDATA[
 Variable MV_EMAIL_INTERCEPT root@mydomain.local

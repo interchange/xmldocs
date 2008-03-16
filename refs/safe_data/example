@@ -6,7 +6,6 @@ Enabling safe_data catalog-wide
 
 <para>
 Add the following to <filename>catalog.cfg</filename>:
-</para>
 
 <programlisting><![CDATA[
 Pragma safe_data

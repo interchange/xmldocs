@@ -6,7 +6,6 @@ Display the content of the MV_FILE variable
 
 <para>
 Add the follwing to a test Interchange page:
-</para>
 
 <programlisting><![CDATA[
 The last filename is: @@MV_FILE@@

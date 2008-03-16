@@ -6,7 +6,6 @@ Enabling the MV_HTML4_COMPLIANT feature
 
 <para>
 Add the following to <filename>interchange.cfg</filename>:
-</para>
 
 <programlisting><![CDATA[
 Variable MV_HTML4_COMPLIANT 1

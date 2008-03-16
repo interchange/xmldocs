@@ -9,21 +9,17 @@ If the <pragma>no_image_rewrite</pragma> pragma is
 <emphasis>disabled</emphasis> and
 <option>ImageDir</option> is set to "/standard/images", an image URL
 like:
-</para>
 
 <programlisting><![CDATA[
 <img src="fancy.gif">
 ]]></programlisting>
 
-<para>
 would be changed to:
-</para>
 
 <programlisting><![CDATA[
 <img src="/standard/images/fancy.gif">
 ]]></programlisting>
 
-<para>
 With the directive enabled, the image URLs would be left intact.
 </para>
 

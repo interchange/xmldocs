@@ -8,7 +8,6 @@ Display the client connection and browser information
 The client's remote address and port are kept in <envar>REMOTE_ADDR</envar>
 and <envar>REMOTE_PORT</envar> variables. User's browser ID string is kept in
 <envar>HTTP_USER_AGENT</envar>.
-</para>
 
 <programlisting><![CDATA[
 Client connection: [env REMOTE_ADDR]:[env name="REMOTE_PORT"]<br/>

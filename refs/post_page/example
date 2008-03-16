@@ -8,7 +8,6 @@ Treat URLs relative to current directory
 It is possible to have URL links treated
 as being relative to the current directory.
 The following is needed in <filename>catalog.cfg</filename>:
-</para>
 
 <programlisting><![CDATA[
 Pragma   post_page=relative_urls

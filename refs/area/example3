@@ -4,6 +4,8 @@
 Simple item ordering using the area tag
 </title>
 
+<para>
+
 <programlisting><![CDATA[
 Order a <a href="[area order TK112]" target='newframe'>Toaster</a> today.
 ]]></programlisting>

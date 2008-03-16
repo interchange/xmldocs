@@ -7,7 +7,6 @@ Tag parsing
 <para>
 If you want to enable this pragma for only a particular page,
 do anywhere in the page:
-</para>
 
 <programlisting><![CDATA[
 [pragma no_html_parse]

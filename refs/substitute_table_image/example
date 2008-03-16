@@ -6,7 +6,6 @@ Enabling table image paths rewriting
 
 <para>
 In the <filename>catalog.cfg</filename> file, add:
-</para>
 
 <programlisting><![CDATA[
 Pragma substitute_table_image

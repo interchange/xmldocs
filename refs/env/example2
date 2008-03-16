@@ -4,6 +4,8 @@
 Display the simple HTML table with the complete HTTP environment
 </title>
 
+<para>
+
 <programlisting><![CDATA[
 HTTP environment: <br/>
 [env]

@@ -26,7 +26,7 @@ operation.
 __END__
 
 __NAME__ example: Enabling DisplayErrors
-<para>Put the following in &gcf;</para>
+Put the following in &gcf;:
 <programlisting>
 DisplayErrors Yes
 </programlisting>

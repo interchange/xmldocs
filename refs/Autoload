@@ -38,6 +38,7 @@ GlobalSub <<EOR
 	}
 EOR
 ]]></programlisting>
+<para>
 Put the following in &ccf;:
 <programlisting>
 Autoload simple_gsub
@@ -81,6 +82,7 @@ Autoload <<EOA
 [/perl]
 EOA
 ]]></programlisting>
+<para>
 Please note that &conf-SpecialPage; is the corresponding directive in 
 the catalog &glos-configuration; (and not <literal>Special</literal> as
 we see above). This is an exceptional case &mdash; the hash keys otherwise

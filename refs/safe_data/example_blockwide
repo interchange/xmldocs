@@ -7,7 +7,6 @@ Enabling safe_data block-wide
 <para>
 We'll restrict the available tags to <tag>area</tag> and <tag>page</tag>, and
 enclose the critical section in <code>[tag pragma ...]</code>:
-</para>
 
 <programlisting><![CDATA[
 [tag pragma safe_data]1[/tag]

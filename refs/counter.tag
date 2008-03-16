@@ -354,7 +354,8 @@ sub {
 }
 EOR
 ]]></programlisting>
-</para><para>
+
+<para>
 And the following on an &IC; page:
 <programlisting>
 [counter file=counter.p3 start=20 inc-routine=three_steps_forward ]

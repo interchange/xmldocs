@@ -6,7 +6,6 @@ Enabling safe_data page-wide
 
 <para>
 Add the following <emphasis>anywhere</emphasis> on an Interchange page:
-</para>
 
 <programlisting><![CDATA[
 [pragma safe_data]

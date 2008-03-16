@@ -6,7 +6,6 @@ Adjusting the MV_SESSION_READ_RETRY value
 
 <para>
 Add the following to <filename>interchange.cfg</filename>:
-</para>
 
 <programlisting><![CDATA[
 Variable MV_SESSION_READ_RETRY 3

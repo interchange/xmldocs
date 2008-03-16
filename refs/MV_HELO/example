@@ -6,7 +6,6 @@ Using SMTP to send mail and setting a HELO string
 
 <para>
 Add the following to <filename>interchange.cfg</filename>:
-</para>
 
 <programlisting><![CDATA[
 SendMailProgram Net::SMTP

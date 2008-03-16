@@ -6,7 +6,6 @@ Setting MV_DOLLAR_ZERO to "1"
 
 <para>
 Set the following in <filename>interchange.cfg</filename>:
-</para>
 
 <programlisting><![CDATA[
 Variable MV_DOLLAR_ZERO 1

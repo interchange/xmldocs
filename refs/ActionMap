@@ -44,6 +44,7 @@ Put the following in &ccf;:
 <programlisting>
 ActionMap order sub { 1 }
 </programlisting>
+<para>
 Since we effectively turned Order into a no-operation action, the usual
 order link such as
 <code><![CDATA[<A HREF="[area order/nextpage]">Order</a>]]></code>
