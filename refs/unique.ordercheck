@@ -1,0 +1,21 @@
+__NAME__ purpose
+record doesn't exist in a database table
+__END__
+
+__NAME__ description
+This profile checks whether a matching record exists in a database table.
+It succeeds if there is <emphasis>no</emphasis> such record.
+__END__
+
+__NAME__ example: Ensure unique email address
+<programlisting>
+email=email_only Please enter a valid email address.
+&amp;and
+email=unique userdb:email An account with this email address already exists.
+</programlisting>
+__END__
+
+__NAME__ notes
+This check doesn't guarantee unique records, as there is a small window of
+time between performing this check and creating a new record.
+__END__
