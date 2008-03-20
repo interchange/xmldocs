@@ -2,11 +2,24 @@ __NAME__ purpose
 CSS class to designate problems
 __END__
 
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>class</replaceable></arg>
+</group>
+__END__
+
 __NAME__ description
+<literal>CSS_CONTRAST</literal> is used by &tag-error; and &tag-formel; to
+designate problems. Both use <literal>mv_contrast</literal> as default if
+<literal>CSS_CONTRAST</literal> has no value.
 __END__
 
 __NAME__ example
 <programlisting>
 Variable CSS_CONTRAST error
 </programlisting>
+__END__
+
+__NAME__ see also
+error, formel
 __END__
