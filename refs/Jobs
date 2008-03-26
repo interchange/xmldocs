@@ -26,6 +26,8 @@ are:
 </para></listitem>
 <listitem><para><literal>MaxServers</literal> (<replaceable>number_of_processes</replaceable>, default 1) - maximum number of concurrently running Job servers
 </para></listitem>
+<listitem><para><literal>UseGlobal</literal> (<replaceable>true/false</replaceable>, default false) - search always for global job definitions
+</para></listitem>
 </itemizedlist>
 </para>
 <para>
@@ -67,6 +69,9 @@ The available keys for the <emphasis role='bold'>catalog directive</emphasis> ar
 	none) -
 	value for the "From: " field in the outgoing emails
 	</para></listitem>
+	<listitem><para><literal>ignore_errors</literal> (<replaceable>true/false</replaceable>, default
+	false) - excludes fatal errors from job output
+	</para></listitem>
 	<listitem><para><literal>initialize</literal> (&conf-Sub; or &conf-GlobalSub;, default none) -
 	a macro to execute once before each job
 	</para></listitem>
@@ -91,7 +96,7 @@ The available keys for the <emphasis role='bold'>catalog directive</emphasis> ar
 	</para></listitem>
 	<listitem><para><literal>use_global</literal> (<replaceable>true/false</replaceable>,
 	default false) -
-	search for jobs defined in directory
+	search for global jobs definitions in directory
 	<filename class='directory'>&conf-ConfDir;/jobs/</filename>
 	and add them to the queue for execution
 	</para></listitem>
