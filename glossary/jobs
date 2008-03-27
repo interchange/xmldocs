@@ -1,3 +1,6 @@
+Interchange batch jobs can be triggered from the commandline or an Unix cronjob.
+</para>
+<para>
 Dispatch a job from the commandline:
 
 <programlisting>
@@ -6,3 +9,45 @@ interchange --runjobs=training=db
 
 Jobs are run asynchronously. The command will return before the job is
 completed or even started.
+
+</para>
+
+<section id="JobDirectories">
+<title>Job Directories and Files</title>
+<para>
+Every job is tied to a directory containing job files. The selection
+of the files is controlled by the &Conf-HTMLsuffix; and the 
+<literal>suffix</literal> &conf-Jobs; attribute. By default all files not
+matching &Conf-HTMLsuffix; are included. 
+</para>
+<para>
+The following configuration example directs Interchange to execute
+all files matching
+<literal>jobs/</literal><replaceable>NAME</replaceable><literal>/*.job</literal>
+for the job named <replaceable>NAME</replaceable>.
+<programlisting>
+Job base_directory jobs
+Job suffix .job
+</programlisting>
+</para>
+</section>
+
+<section id="JobOutput">
+<title>Job Output and Logging</title>
+<para>
+Interchange gathers the output of all job files and passes through
+the filter(s) specified with <literal>filter</literal> key of the &conf-Jobs;
+directive. 
+</para>
+<para>
+The remaining output is optionally written to the job logfile and/or
+emailed as specified by the <literal>log</literal> and <literal>email</literal>
+keys of the &conf-Jobs; directive. 
+<programlisting>
+Job email racke@linuxia.de
+Job log logs/job
+</programlisting>
+</para>
+</section>
+
+<para>
