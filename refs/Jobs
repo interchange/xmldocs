@@ -55,60 +55,106 @@ are:
 </para>
 <para>
 The available keys for the <emphasis role='bold'>catalog directive</emphasis> are:
+
+<informaltable>
+<tgroup cols="3">
+<thead>
+<row>
+<entry>Key</entry>
+<entry>Default</entry>
+<entry>Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><literal>add_session</literal></entry>
+<entry><literal>false</literal></entry>
+<entry>Add session dump to 
+<olink targetdoc='glossary' targetptr='JobOutput'>job output</olink>.</entry>
+</row>
+<row>
+<entry><literal>autoend</literal></entry>
+<entry><emphasis>None</emphasis></entry>
+<entry>
+A macro executed after each invidiual file in the job.
+</entry>
+</row>
+<row>
+<entry><literal>autoload</literal></entry>
+<entry><emphasis>None</emphasis></entry>
+<entry>
+A macro executed before each invidiual file in the job.
+</entry>
+</row>
+<row>
+<entry><literal>base_directory</literal></entry>
+<entry><literal>etc/jobs</literal></entry>
+<entry><olink targetdoc='glossary' targetptr='JobDirectories'>Directory</olink>
+to search for batch jobs.</entry>
+</row>
+<row>
+<entry><literal>email</literal></entry>
+<entry><emphasis>None</emphasis></entry>
+<entry>Email <olink targetdoc='glossary' targetptr='JobOutput'>job output</olink>
+to this address.</entry>
+</row>
+<row>
+<entry><literal>from</literal></entry>
+<entry>&conf-MailOrderTo;</entry>
+<entry>"From" address in emails.</entry>
+</row>
+<row>
+<entry><literal>ignore_errors</literal></entry>
+<entry><literal>false</literal></entry>
+<entry>Excludes fatal errors from
+<olink targetdoc='glossary' targetptr='JobOutput'>job output</olink>.
+</entry>
+</row>
+<row>
+<entry><literal>filter</literal></entry>
+<entry>&filter-strip;</entry>
+<entry>Filter(s) applied to
+<olink targetdoc='glossary' targetptr='JobOutput'>job output</olink>.</entry>
+</row>
+<row>
+<entry><literal>initialize</literal></entry>
+<entry><emphasis>None</emphasis></entry>
+<entry>
+A macro executed before the job commences.
+</entry>
+</row>
+<row>
+<entry><literal>log</literal></entry>
+<entry><emphasis>None</emphasis></entry>
+<entry>Write <olink targetdoc='glossary' targetptr='JobOutput'>job output</olink>
+to this logfile.</entry>
+</row>
+<row>
+<entry><literal>subject</literal></entry>
+<entry><literal>Interchange results for job: %s</literal></entry>
+<entry>Subject for emails, including placeholder for job name.</entry>
+</row>
+<row>
+<entry><literal>suffix</literal></entry>
+<entry><emphasis>None</emphasis></entry>
+<entry>Restrict job to files matching the specified suffix.</entry>
+</row>
+<row>
+<entry><literal>use_global</literal></entry>
+<entry><literal>false</literal></entry>
+<entry>Search for global job definitions.</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
 <itemizedlist>
-	<listitem><para><literal>add_session</literal> (<replaceable>true/false</replaceable>, default
-	false) -
-	include the current &glos-session; in the jobs output. The output is saved
-	to log files or e-mailed to specified user
-	</para></listitem>
-	<listitem><para><literal>autoend</literal> (&conf-Sub; or &conf-GlobalSub;, default none) -
-	a subroutine to run at the end of each jobs file
-	</para></listitem>
-	<listitem><para><literal>autoload</literal> (&conf-Sub; or &conf-GlobalSub;, default none) -
-	a subroutine to run at the beginning of each jobs file
-	</para></listitem>
-	<listitem><para><literal>base_directory</literal> (<replaceable>DIRECTORY_NAME</replaceable>,
-	default <literal><replaceable>CATROOT</replaceable>/etc/jobs/</literal>) -
-	directory to search for cron jobs.
-	The <literal><replaceable>DIRECTORY_NAME</replaceable></literal>
-	placeholder seen in the examples below is treated relative to this
-	base directory.
-	</para></listitem>
-	<listitem><para><literal>email</literal> (<replaceable>email_address</replaceable>, default
-	none) -
-	e-mail for session reports, if any result from running jobs
-	</para></listitem>
 	<listitem><para><literal>extra_headers</literal> (<replaceable>e-mail_headers</replaceable>,
 	default none) -
 	any additional headers for an e-mail message. The input should be already
 	formatted in the e-mail headers style
 	</para></listitem>
-	<listitem><para><literal>filter</literal> (<replaceable>filter_name</replaceable>, default
-	&filter-strip;) -
-	run the job output through specified &glos-filter; before saving it to 
-	a log file or e-mailing
-	</para></listitem>
-	<listitem><para><literal>from</literal> (<replaceable>email_sender</replaceable>, default
-	none) -
-	value for the "From: " field in the outgoing emails
-	</para></listitem>
-	<listitem><para><literal>ignore_errors</literal> (<replaceable>true/false</replaceable>, default
-	false) - excludes fatal errors from job output
-	</para></listitem>
-	<listitem><para><literal>initialize</literal> (&conf-Sub; or &conf-GlobalSub;, default none) -
-	a macro to execute once before each job
-	</para></listitem>
-	<listitem><para><literal>log</literal> (<replaceable>log_filename</replaceable>, default none) -
-	logfile for session reports, if any result from running jobs
-	</para></listitem>
-	<listitem><para><literal>reply_to</literal> (<replaceable>email_address</replaceable>, 
-	default: system default) -
-	value for the "Reply-To: " field in the outgoing emails
-	</para></listitem>
-	<listitem><para><literal>subject</literal> (<replaceable>email_subject</replaceable>, default <literal>Interchange results for job: <replaceable>JOB_NAME</replaceable></literal>) -
-	value for the "Subject: " field in the outgoing emails
-	</para></listitem>
-	<listitem><para><literal>trackdb</literal> (<replaceable>table_name</replaceable>, default
+<listitem><para><literal>trackdb</literal> (<replaceable>table_name</replaceable>, default
 	none) -
 	write job run information to specified &glos-table;. The 
 	table must have the necessary fields
