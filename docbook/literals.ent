@@ -437,7 +437,7 @@ for more information.</para>">
 	build warnings -->
 
 <!ENTITY conf-GPG_PATH "<literal>GPG_PATH</literal>">
-<!ENTITY filter-strip "<literal>strip</literal>">
+<!ENTITY filter-strip "<filter>strip</filter>">
 <!ENTITY glos-actionmap "<literal>actionmap</literal>">
 <!ENTITY glos-captcha "<literal>captcha</literal>">
 <!ENTITY glos-form "<literal>form</literal>">
