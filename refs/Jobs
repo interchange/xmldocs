@@ -21,14 +21,37 @@ It can be specified at both the global and &glos-catalog; level.
 </para><para>
 The available keys for the <emphasis role='bold'>global directive</emphasis>
 are:
-<itemizedlist>
-<listitem><para><literal>MaxLifetime</literal> (<replaceable>seconds</replaceable>, default 600) - maximum life time for a &glos-jobs;
-</para></listitem>
-<listitem><para><literal>MaxServers</literal> (<replaceable>number_of_processes</replaceable>, default 1) - maximum number of concurrently running Job servers
-</para></listitem>
-<listitem><para><literal>UseGlobal</literal> (<replaceable>true/false</replaceable>, default false) - search always for global job definitions
-</para></listitem>
-</itemizedlist>
+<informaltable>
+<tgroup cols="3">
+<thead>
+<row>
+<entry>Key</entry>
+<entry>Default</entry>
+<entry>Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><literal>MaxLifetime</literal></entry>
+<entry><literal>600</literal></entry>
+<entry>The maximum time (in seconds) that a job will be allowed to run.</entry>
+</row>
+<row>
+<entry><literal>MaxServers</literal></entry>
+<entry><literal>1</literal></entry>
+<entry>The maximum number of servers processing jobs. Excess jobs will be queued.
+</entry>
+</row>
+<row>
+<entry><literal>UseGlobal</literal></entry>
+<entry><literal>false</literal></entry>
+<entry>Search always for global job definitions.
+</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
 </para>
 <para>
 The available keys for the <emphasis role='bold'>catalog directive</emphasis> are:
