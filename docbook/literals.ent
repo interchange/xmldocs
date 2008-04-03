@@ -136,6 +136,7 @@ values above are not properly aligned. This is an unfortunate nature of
 
 <!-- ENTITIES TO EASIER CONSTRUCT TAG PARAMETERS LIST -->
 <!-- put standard ones here, such as Hide or Interpolate/reparse -->
+<!ENTITY NODEFAULT "<emphasis>None</emphasis>">
 <!ENTITY TAG_NON_CONTAINER "
 <row>
 	<entry>
