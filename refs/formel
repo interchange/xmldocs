@@ -149,9 +149,9 @@ __END__
 
 
 __NAME__ description
-This tag can create HTML form elements. Note that it preserves user input
-from previous displays of the same page and keeps track of input errors
-(using the <tag>error</tag> tag).
+This tag creates HTML form elements. <tag>formel</tag> consults the &glos-value; namespace 
+for defaults, thus preserving user input from previous HTML forms. It also keeps track 
+of input errors (using the <tag>error</tag> tag).
 </para><para>
 The error messages will be displayed according to the <literal>mv_contrast</literal> 
 CSS class (or the class defined in the &var-CSS_CONTRAST; variable).
