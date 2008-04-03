@@ -222,6 +222,9 @@ The timezone can be set globally for the &IC; installation by defining
 the <envar>TZ</envar> environment variable and restarting Interchange.
 __END__
 
+__NAME__ see also
+date
+__END__
 
 __NAME__ example: Basic example
 <programlisting>
