@@ -14,7 +14,7 @@ __END__
 
 __NAME__ description
 </para><para>
-The directive configures Interchange batch &glos-jobs; facility.
+This directive configures Interchange batch &glos-jobs; facility.
 It accepts a list of key/value pairs.
 </para><para>
 It can be specified at both the global and &glos-catalog; level.
@@ -99,6 +99,11 @@ to search for batch jobs.</entry>
 to this address.</entry>
 </row>
 <row>
+<entry><literal>extra_headers</literal></entry>
+<entry><emphasis>None</emphasis></entry>
+<entry>Additional email headers.</entry>
+</row>
+<row>
 <entry><literal>from</literal></entry>
 <entry>&conf-MailOrderTo;</entry>
 <entry>"From" address in emails.</entry>
@@ -140,6 +145,11 @@ to this logfile.</entry>
 <entry>Restrict job to files matching the specified suffix.</entry>
 </row>
 <row>
+<entry><literal>trackdb</literal></entry>
+<entry><emphasis>None</emphasis></entry>
+<entry>Table for <olink targetdoc='glossary' targetptr='JobTracking'>tracking jobs</olink>.</entry>
+</row>
+<row>
 <entry><literal>use_global</literal></entry>
 <entry><literal>false</literal></entry>
 <entry>Search for global job definitions.</entry>
@@ -147,29 +157,9 @@ to this logfile.</entry>
 </tbody>
 </tgroup>
 </informaltable>
-
-<itemizedlist>
-	<listitem><para><literal>extra_headers</literal> (<replaceable>e-mail_headers</replaceable>,
-	default none) -
-	any additional headers for an e-mail message. The input should be already
-	formatted in the e-mail headers style
-	</para></listitem>
-<listitem><para><literal>trackdb</literal> (<replaceable>table_name</replaceable>, default
-	none) -
-	write job run information to specified &glos-table;. The 
-	table must have the necessary fields
-	<database class='field'>code</database>,
-	<database class='field'>name</database>,
-	<database class='field'>begin_run</database> and
-	<database class='field'>pid</database>.
-	</para></listitem>
-	<listitem><para><literal>use_global</literal> (<replaceable>true/false</replaceable>,
-	default false) -
-	search for global jobs definitions in directory
-	<filename class='directory'>&conf-ConfDir;/jobs/</filename>
-	and add them to the queue for execution
-	</para></listitem>
-</itemizedlist>
+</para><para>
+For more information about Interchange batch jobs see &glos-jobs; glossary
+entry.
 </para><para>
 __END__
 
