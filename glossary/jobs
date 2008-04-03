@@ -13,12 +13,12 @@ completed or even started.
 </para>
 
 <section id="JobDirectories">
-<title>Job Directories and Files</title>
+<title>Directories and Files</title>
 <para>
 Every job is tied to a directory containing job files. The selection
-of the files is controlled by the &Conf-HTMLsuffix; and the 
+of the files is controlled by the &conf-HTMLsuffix; and the 
 <literal>suffix</literal> &conf-Jobs; attribute. By default all files not
-matching &Conf-HTMLsuffix; are included. 
+matching &conf-HTMLsuffix; are included. 
 </para>
 <para>
 The following configuration example directs Interchange to execute
@@ -33,7 +33,7 @@ Job suffix .job
 </section>
 
 <section id="JobOutput">
-<title>Job Output and Logging</title>
+<title>Output and Logging</title>
 <para>
 Interchange gathers the output of all job files and passes through
 the filter(s) specified with <literal>filter</literal> key of the &conf-Jobs;
@@ -42,11 +42,27 @@ directive.
 <para>
 The remaining output is optionally written to the job logfile and/or
 emailed as specified by the <literal>log</literal> and <literal>email</literal>
-keys of the &conf-Jobs; directive. 
+keys of the &conf-Jobs; directive.
 <programlisting>
 Job email racke@linuxia.de
 Job log logs/job
 </programlisting>
+</para>
+</section>
+
+<section id="JobTracking">
+<title>Tracking</title>
+<para>
+Tracking jobs into a database table can be enabled with the
+<literal>trackdb</literal> key of the &conf-Jobs; directive.
+</para>
+<programlisting>
+Job trackdb jobs
+</programlisting>
+<para>
+Required fields for this table are <literal>code</literal>,
+<literal>name</literal>, <literal>pid</literal>,
+<literal>begin_run</literal>, <literal>end_run</literal>.
 </para>
 </section>
 
