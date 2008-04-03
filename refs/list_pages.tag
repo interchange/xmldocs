@@ -1,4 +1,27 @@
+__NAME__ purpose
+list pages
+__END__
+
 __NAME__ synopsis 
+<row>
+
+	<entry>
+	options
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	No
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
 <row>
 
 	<entry>
@@ -75,6 +98,5 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
