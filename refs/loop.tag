@@ -2,6 +2,12 @@ __NAME__ purpose
 iterate through a list
 __END__
 
+__NAME__ description
+<tag>loop</tag> belongs to the so-called looping tags, see
+<olink targetdoc="glossary" targetptr="LoopingTags">glossary</olink>
+for a complete discussion of this class of tags.
+__END__
+
 __NAME__ synopsis 
 <row>
 
@@ -9,7 +15,7 @@ __NAME__ synopsis
 	list
 	</entry>
 	<entry>
-	<!-- POS -->
+	Yes
 	</entry>
 	<entry>
 	<!-- REQ -->
@@ -22,7 +28,6 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-
 <row>
 
 	<entry>
@@ -35,10 +40,29 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>item</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	list_prefix
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<literal>list</literal>
+	</entry>
+	<entry>
+	changes subtag for list
 	</entry>
 
 </row> 
