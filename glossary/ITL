@@ -729,7 +729,7 @@ setting the &pragma-interpolate_itl_references; pragma.
 </section>
 
 
-<section>
+<section id="LoopingTags">
 <title>Looping Tags and Sub-tags</title>
 
 
@@ -806,7 +806,7 @@ positional parameters</emphasis>. The default prefixes follow:
 </row>
 
 <row>
-  <entry>&tag-item-list;
+  <entry><tag>item-list</tag>
   </entry>
   <entry><literal>item</literal>
   </entry>
@@ -818,7 +818,7 @@ positional parameters</emphasis>. The default prefixes follow:
 </row>
 
 <row>
-  <entry>&tag-search-list;
+  <entry>&tag-search-region;
   </entry>
   <entry><literal>item</literal>
   </entry>
@@ -838,6 +838,18 @@ positional parameters</emphasis>. The default prefixes follow:
 	<code>[sql-code]</code><sbr/>
 	<code>[sql-field price]</code><sbr/>
 	<code>[sql-increment]</code><sbr/>
+  </entry>
+</row>
+
+<row>
+  <entry>&tag-tree;
+  </entry>
+  <entry><literal>item</literal>
+  </entry>
+  <entry>
+	<code>[item-code]</code><sbr/>
+	<code>[item-field price]</code><sbr/>
+	<code>[item-increment]</code><sbr/>
   </entry>
 </row>
 
