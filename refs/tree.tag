@@ -15,7 +15,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<emphasis>None</emphasis>
+	&NODEFAULT;
 	</entry>
 	<entry>
 	Database table which contains the tree.
@@ -34,7 +34,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<emphasis>None</emphasis>
+	&NODEFAULT;
 	</entry>
 	<entry>
 	Column which contains the parent item.
@@ -53,7 +53,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<emphasis>None</emphasis>
+	&NODEFAULT;
 	</entry>
 	<entry>
 	<!-- DSC -->
@@ -73,7 +73,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<emphasis>None</emphasis>
+	&NODEFAULT;
 	</entry>
 	<entry>
 	Root item of the tree.
@@ -93,7 +93,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<emphasis>None</emphasis>
+	&NODEFAULT;
 	</entry>
 	<entry>
 	Use specified tab-seperated file instead of database table.
