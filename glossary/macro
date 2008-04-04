@@ -1,0 +1,6 @@
+Interchange macros are:
+
+<itemizedlist>
+<listitem><para>global subroutines (&conf-GlobalSub;)</para></listitem>
+<listitem><para>catalog subroutines (&conf-Sub;)</para></listitem>
+</itemizedlist>
