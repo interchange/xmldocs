@@ -12,10 +12,6 @@ __NAME__ description
 The directive specifies the filename to which formatted orders will be appended.
 __END__
 
-__NAME__ see also
-SendMailProgram
-__END__
-
 __NAME__ notes
 If the &conf-Route; directive is set to "<literal>supplant</literal>", this
 directive is ignored.
