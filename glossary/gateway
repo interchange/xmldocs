@@ -1,3 +1,5 @@
+<!-- ICS: Sonny Cook, Linkpoint: keyfile => secret -->
+
 </para>
 <section>
 <title>Gateway Configuration</title>
@@ -39,8 +41,8 @@ If we are using only one gateway in a catalog, setting up
 </row>
 <row>
 <entry>&var-MV_PAYMENT_SECRET;</entry>
-<entry>password</entry>
-<entry></entry>
+<entry>secret part of credentials</entry>
+<entry>password or certificate</entry>
 </row>
 <row>
 <entry><literal>MV_PAYMENT_REFERER</literal></entry>
@@ -123,6 +125,10 @@ The following payment gateway transactions are known by Interchange:
 <entry>void</entry>
 <entry>Cancel or refund payment</entry>
 </row>
+<row>
+<entry>abort</entry>
+<entry>Abort pending capture.</entry>
+</row>
 </tbody>
 </tgroup>
 </informaltable>
@@ -189,6 +195,12 @@ EFSNet</ulink></entry>
 <entry></entry>
 </row>
 <row>
+<entry><literal>Getitcard</literal></entry>
+<entry><ulink url='http://www.getitcard.com'>Getitcard</ulink></entry>
+<entry><literal>getitcard</literal></entry>
+<entry>Prepaid cards from Getitcard.</entry>
+</row>
+<row>
 <entry><literal>ICS</literal></entry>
 <entry>Cybersource ICS</entry>
 <entry><literal>ICS</literal></entry>
@@ -227,6 +239,11 @@ EFSNet</ulink></entry>
 <entry><literal>PSiGate</literal></entry>
 <entry>PSiGate</entry>
 <entry><literal>psigate</literal></entry>
+<entry></entry>
+</row>
+<row>
+<entry><literal>Sage</literal></entry>
+<entry></entry>
 <entry></entry>
 </row>
 <row>
@@ -297,6 +314,69 @@ OpenECHO module from <ulink url='http://www.openecho.com/'>http://www.openecho.c
 </section>
 
 <section>
+<title>Getitcard</title>
+<para>
+The Getitcard payment module is used for purchases with prepaid cards issued
+by Getitcard&reg;
+(<ulink url='http://www.getitcard.com/'>http://www.getitcard.com/</ulink>).
+</para>
+<section>
+<title>Prerequisites</title>
+<para>
+Either Net::SSLeay or LWP::UserAgent and Crypt::SSLeay from CPAN.
+</para>
+</section>
+</section>
+
+<section>
+<title>LinkPoint</title>
+<para>
+</para>
+<section><title>Parameters</title>
+<para>Required parameters are <literal>id</literal> and <literal>keyfile</literal>.
+</para>
+<section><title><literal>host</literal></title>
+<para>
+The domain name of the LinkPoint Secure Payment Gateway (LSPG). Default is
+<literal>secure.linkpt.net</literal> for production and
+<literal>staging.linkpt.net</literal> for testing.
+</para>
+</section>
+<section><title><literal>id</literal></title>
+<para>
+Store number assigned to your merchant account.
+</para>
+</section>
+<section><title><literal>keyfile</literal></title>
+<para>
+File name of the merchant security certificate. This file should contain the
+RSA private key and the certificate, otherwise you get an error like
+"Unable to open/parse client certificate file."
+</para>
+</section>
+<section><title><literal>transaction</literal></title>
+<para>
+The type of transaction to be run. Valid values are:
+</para>
+<informaltable>
+<tgroup cols="2">
+<thead>
+<row><entry>Interchange</entry><entry>Linkpoint</entry></row>
+</thead>
+<tbody>
+<row><entry>auth</entry><entry>preauth</entry></row>
+<row><entry>sale</entry><entry>sale</entry></row>
+</tbody>
+</tgroup>
+</informaltable>
+<para>
+Default is <literal>sale</literal>.
+</para>
+</section>
+</section>
+</section>
+
+<section>
 <title>Netbilling</title>
 <para>
 The Netbilling module implements the <ulink
@@ -321,6 +401,15 @@ tag of your website configured in the Netbilling system. Required for
 membership transactions, optional for others.
 </para>
 </section>
+</section>
+</section>
+
+<section>
+<title>Sage</title>
+<section>
+<title>Parameters</title>
+<para>
+</para>
 </section>
 </section>
 
