@@ -1,0 +1,11 @@
+__NAME__ purpose
+display file upload widget
+__END__
+
+__NAME__ see also
+uploadblob
+__END__
+
+__NAME_ notes
+File upload has to be enabled in the HTML form containing this widget.
+__END__
