@@ -326,6 +326,10 @@ by Getitcard&reg;
 Either Net::SSLeay or LWP::UserAgent and Crypt::SSLeay from CPAN.
 </para>
 </section>
+<section>
+<title>Parameters</title>
+<para>Required parameter is <literal>id</literal>.</para>
+</section>
 </section>
 
 <section>
@@ -409,6 +413,7 @@ membership transactions, optional for others.
 <section>
 <title>Parameters</title>
 <para>
+Required parameters are <literal>id</literal> and <literal>secret</literal>.
 </para>
 </section>
 </section>
