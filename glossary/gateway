@@ -243,8 +243,8 @@ EFSNet</ulink></entry>
 </row>
 <row>
 <entry><literal>Sage</literal></entry>
-<entry></entry>
-<entry></entry>
+<entry><ulink url='http://www.sagepayments.com/'>Sage Payment</ulink></entry>
+<entry><literal>sage</literal></entry>
 </row>
 <row>
 <entry><literal>Signio</literal></entry>
