@@ -37,7 +37,7 @@ __NAME__ synopsis
 	</entry>
 	<entry>Yes</entry><entry></entry>
 	<entry>
-	Value of the <option>SpecialPage catalog</option> directive
+	Value of the <olink targetdoc='confs' targetptr='SpecialPage'>SpecialPage catalog</olink> directive
 	(which is usually <literal>index.html</literal>).
 	</entry>
 	<entry>
@@ -110,6 +110,16 @@ collapseall           1
 	The default value shows a meaningful example. Note that since this is
 	a hash, the number <literal>1</literal> (or any true value for that matter)
 	after each entry is necessary, but redundant.
+	</entry>
+</row>
+<row>
+	<entry>
+		<arg choice='plain'>sizelimit</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry><literal>1024</literal></entry>
+	<entry>
+	maximum limit for resulting URL
 	</entry>
 </row>
 __END__
