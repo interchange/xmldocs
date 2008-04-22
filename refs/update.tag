@@ -45,6 +45,13 @@ __NAME__ synopsis
 __END__
 
 __NAME__ description
+<literal>[update cart]</literal> updates the &glos-cart;. If the user has
+put in <literal>0</literal> for any quantity, delete that item from the
+cart. Also adjust the cart to take minimum and maximum order quantities
+as specified by the &conf-MinQuantityField; and &conf-MaxQuantityField; 
+directives into account.
+</para>
+<para>
 <literal>[update values]</literal> updates the &glos-value; namespace from the volatile
 &glos-CGI; namespace.
 __END__
