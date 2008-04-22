@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify actions to be executed automatically at the end of every page access
+specify macro to be executed automatically at the end of every page access
 __END__
 
 
@@ -8,13 +8,12 @@ AutoEnd,Autoload
 __END__
 
 __NAME__ synopsis
-<arg choice='plain' rep='repeat'><replaceable>subroutine_name_or_ITL_code</replaceable></arg>
+<arg choice='plain'><replaceable>macro</replaceable></arg>
 __END__
 
 
 __NAME__ description
-Specify actions (in form of &PERL; subroutines or &glos-ITL; tags)
-that are to be invoked automatically, at the end of every 
+Specify an Interchange &glos-macro; to be invoked automatically,at the end of every
 page access. This step is performed after all page parsing occurs,
 just before the whole transaction ends.
 </para><para>
@@ -24,7 +23,3 @@ __END__
 
 __NAME__ notes
 __END__
-
-__NAME__ example:
-__END__
-
