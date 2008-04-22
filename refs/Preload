@@ -1,0 +1,18 @@
+__NAME__ purpose
+specify macro to be executed at the very beginning of every page access
+__END__
+
+__NAME__ synopsis
+<arg choice='plain'><replaceable>macro</replaceable></arg>
+__END__
+
+__NAME__ see also
+Autoload, AutoEnd
+__END__
+
+__NAME__ description
+This is just like &conf-Autoload; as it executes an Interchange &glos-macro;
+but runs at the earliest possible stage of
+page processing, which allows tweaking the session, path, robot status,
+cookie handling, authorization, etc.
+__END__
