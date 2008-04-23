@@ -1,0 +1,17 @@
+OUTPUT*
+sources
+tmp
+cache
+docbook/autofiles.ent
+docbook/autoglossary.ent
+docbook/autohowtos.ent
+docbook/autorefs.ent
+glossary/glossary.xml
+howtos/howtos.xml
+refs/confs.xml
+refs/filters.xml
+refs/orderchecks.xml
+refs/pragmas.xml
+refs/tags.xml
+refs/vars.xml
+refs/widgets.xml
