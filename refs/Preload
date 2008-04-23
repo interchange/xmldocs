@@ -19,6 +19,7 @@ __END__
 
 __NAME__ example: Simple Preload example
 This example shows how to not create a session for any but explicitly listed URL prefixes.
+</para>
 <para>
 Put the following in &gcf;:
 <programlisting><![CDATA[
