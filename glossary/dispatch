@@ -1,0 +1,33 @@
+<para>
+This entry describes how Interchange processes a request after assiging
+it to a catalog.
+</para>
+
+<orderedlist>
+<listitem>
+<para>
+Running macro(s) defined by &conf-Preload; directive.
+</para>
+</listitem>
+<listitem>
+<para>
+Checking authorization.
+</para>
+</listitem>
+<listitem>
+<para>
+Session, cookie and robot handling.
+</para>
+</listitem>
+<listitem>
+<para>
+Redirect GET requests with affiliate code when &conf-BounceReferrals;
+directive is enabled. Effectively terminates processing of the request.
+</para>
+</listitem>
+<listitem>
+<para>
+...
+</para>
+</listitem>
+</orderedlist>
