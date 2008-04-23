@@ -91,7 +91,7 @@ __END__
 __NAME__ example: Flyout Menu
 <programlisting><![CDATA[
 [menu
-	name="[control tree_selector Products]"
+	name="Products"
 	link-class="barlink"
 	flyout-class="flyout_class"
 	flyout-style="flyout_style"
@@ -101,5 +101,5 @@ __NAME__ example: Flyout Menu
 __END__
 
 __NAME__ see also
-MV_MENU_DIRECTORY
+MV_MENU_DIRECTORY, tree
 __END__
