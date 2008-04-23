@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ see also
-AutoEnd
+Preload, AutoEnd
 __END__
 
 __NAME__ synopsis
@@ -35,7 +35,7 @@ GlobalSub <<EOR
     open OUT, "> /tmp/out";
     print OUT scalar localtime, "\n";
     close OUT;
-	}
+  }
 EOR
 ]]></programlisting>
 <para>
@@ -77,7 +77,7 @@ Opera web browsers:
 Autoload <<EOA
 [perl] 
   if ($Session->{browser} =~ /opera/i) {
-	  $Config->{Special}->{flypage} = 'opera_flypage';
+    $Config->{Special}->{flypage} = 'opera_flypage';
   }
 [/perl]
 EOA

@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify macro to be executed at the very beginning of every page access
+specify macro to be executed at the very beginning of every request
 __END__
 
 __NAME__ synopsis
@@ -12,7 +12,40 @@ __END__
 
 __NAME__ description
 This is just like &conf-Autoload; as it executes an Interchange &glos-macro;
-but runs at the earliest possible stage of
-page processing, which allows tweaking the session, path, robot status,
-cookie handling, authorization, etc.
+but runs at the earliest possible stage of request processing, which
+allows tweaking the session, path, robot status, cookie handling,
+authorization, etc.
+__END__
+
+__NAME__ example: Simple Preload example
+This example shows how to not create a session for any but explicitly listed URL prefixes.
+<para>
+Put the following in &gcf;:
+<programlisting><![CDATA[
+GlobalSub <<EOR
+sub skip_session {
+    $CGI::values{mv_tmp_session} = 1
+        if $CGI::path_info =~ m{\A/(?:aboutus|contact|info)};
+    return;
+}
+EOR
+]]></programlisting>
+<para>
+Put the following in &ccf;:
+<programlisting><![CDATA[
+Preload skip_session
+]]></programlisting>
+<para>
+For diagnostic purposes, you can put a footer in your bottom page
+template to show the current session ID:
+<programlisting><![CDATA[
+session ID=[data session id]
+]]></programlisting>
+<para>
+Restart Interchange, then visit various pages. Whenever you visit a page
+whose path starts with "aboutus", "contact", or "info", no session will
+be assigned, which you can verify by looking at your diagnostic output
+at the bottom of the page. This can be useful if you require cookies for
+session access, and don't want to incur the overhead of session access
+on pages that don't need it.
 __END__

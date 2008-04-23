@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ see also
-AutoEnd,Autoload
+Autoload, Preload
 __END__
 
 __NAME__ synopsis
@@ -13,7 +13,7 @@ __END__
 
 
 __NAME__ description
-Specify an Interchange &glos-macro; to be invoked automatically,at the end of every
+Specify an Interchange &glos-macro; to be invoked automatically, at the end of every
 page access. This step is performed after all page parsing occurs,
 just before the whole transaction ends.
 </para><para>
