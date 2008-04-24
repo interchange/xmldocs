@@ -465,12 +465,13 @@ while ( $path = shift @paths) { # Now, for each IC version specified
 
 			if ( $ar ) {
 				$$ag{source} = "";
-				$covered{$gkey}{$key} = {}; # This one was though to find ;-)
+				$covered{$gkey}{$key} = {}; # This one was tough to find ;-)
 			}
 
 			my $ctxtotal = scalar @$ar;
 			my $ctxshown = 0;
 			for my $ctx ( @$ar ) {
+				no warnings 'uninitialized';
 
 				my $fi = $$ctx{file};
 				my $ln = $$ctx{lnum} || 0; #HA! How come $$ctx{lnum} is undefined??
@@ -1312,9 +1313,12 @@ sub populate {
 sub update_field {
 	my ($mode, $group, $name, $sref, $fn, $sect, $content, $pre, $post) = @_;
 
-	$sect =~ s/[\-\.\+_:\d].*//;
-	$sect =~ s/([a-z])([A-Z])/$1 $2/g;
-	$sect = lc $sect;
+	{
+		no warnings 'uninitialized';
+		$sect =~ s/[\-\.\+_:\d].*//;
+		$sect =~ s/([a-z])([A-Z])/$1 $2/g;
+		$sect = lc $sect;
+	}
 
 	$pre ||= "";
 	$post ||= "";

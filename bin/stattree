@@ -909,11 +909,10 @@ sub line_findCatConfs {
 		($c{line} =~ /(()|\$())\$(::)?Cfg(->\2|\3){(\w+?)}/ and $name=$6)
 		or ($c{line} =~ /(()|\$())\$(::)?Config(->\2|\3){(\w+?)}/ and $name=$6)
 		) {
-
-		push(
-				@{$hash{uses}{$$context_data{group}}{$$context_data{name}}{catconf}},
-				$name) unless grep {/^$name$/}
-		@{$hash{uses}{$$context_data{group}}{$$context_data{name}}{catconf}}
+		no warnings 'uninitialized';
+		push @{$hash{uses}{$$context_data{group}}{$$context_data{name}}{catconf}}, $name
+			unless grep {/^$name$/}
+				@{$hash{uses}{$$context_data{group}}{$$context_data{name}}{catconf}};
 	}
 }
 
