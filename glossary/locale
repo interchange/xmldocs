@@ -30,7 +30,7 @@ Besides using actual "programmatic" methods to set locales, you can achieve
 the same effect by using one terrific feature of the <literal>process</literal>
 &glos-ActionMap;; to display page named "<literal>pricelist</literal>" in
 locale <literal>fr_FR</literal> and currency <literal>en_US</literal>, simply
-Sall &glos-ITL; tag
+call &glos-ITL; tag
 <code>[page process/locale/fr_FR/currency/en_US/page/pricelist]</code>.
 </para>
 </section>
