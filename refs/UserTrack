@@ -1,5 +1,5 @@
 __NAME__ purpose
-enable saving of user tracking information and control X-Track HTTP header
+enable sending of X-Track HTTP header
 __END__
 
 __NAME__ synopsis
@@ -8,18 +8,13 @@ __END__
 
 __NAME__ description
 The directive specifies whether the <literal>X-Track</literal> HTTP header
-is issued to clients when the user &glos-tracking; feature is enabled.
-</para><para>
-To disable the feature, do not specify &conf-__FILENAME__; in your config
-file at all. Otherwise, the feature will be enabled and will control the
-said <literal>X-Track</literal> header.
+is issued to clients.
 __END__
 
 __NAME__ notes
-Starting with Interchange 5.5.2, the behavior of &conf-__FILENAME__; is
-as described. Previously, there was no option to disable the
-<literal>X-Track</literal> HTTP header, and this option controlled
-whether user &glos-tracking; was enabled or not.
+Prior to &IC; 5.5.2, there was no ability to control 
+<literal>X-Track</literal> header, and it was unconditionally enabled
+if &conf-TrackFile; was defined.
 __END__
 
 __NAME__ see also
