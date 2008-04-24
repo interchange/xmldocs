@@ -1,5 +1,5 @@
 __NAME__ purpose
-include an external file into the current page and reparse contents for tags
+include file into the current page and reparse contents for tags
 __END__
 __NAME__ synopsis 
 <row>
@@ -21,12 +21,13 @@ __NAME__ synopsis
 	</entry>
 </row> 
 &ROW_LOCALE_1;
-&ROW_INTERPOLATE_1;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 __NAME__ description
-The tag inserts the contents of the named file.
+The tag inserts the contents of the named file, which is searched relative to the
+catalog root directory or any directories specified by the &conf-TemplateDir;
+directive.
 </para><para>
 The file should normally be relative to the catalog directory.
 File names beginning with <literal>/</literal> or <literal>..</literal>
