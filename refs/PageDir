@@ -9,7 +9,8 @@ __END__
 
 
 __NAME__ description
-Specify the directory containing &glos-catalog; pages.
+Specify the directory containing &glos-catalog; pages. The default for this
+directive is <literal>pages</literal>.
 </para><para>
 Speaking of &glos-internationalization;, it can be useful to set this
 directive to
