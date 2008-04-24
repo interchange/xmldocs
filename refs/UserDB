@@ -19,8 +19,7 @@ __NAME__ description
 The directive sets parameters to adjust the behavior of Interchange's
 user database functions.
 </para><para>
-<table>
-<title>UserDB Options</title>
+<informaltable>
 <tgroup cols="3">
 <thead>
 <row><entry>Parameter</entry><entry>Explanation</entry><entry>Default</entry></row>
@@ -46,7 +45,7 @@ user database functions.
 </entry><entry><filename>etc/username.counter</filename></entry></row>
 <row><entry>crypt</entry><entry>Encrypt passwords?
 </entry><entry>1</entry></row>
-<row><entry>database</entry><entry>Actual user database name
+<row><entry>database</entry><entry>&glos-database; name
 </entry><entry><literal>userdb</literal></entry></row>
 <row><entry>db_acl</entry><entry>Field name for database access control
 </entry><entry><literal>db_acl</literal></entry></row>
@@ -102,7 +101,7 @@ user database functions.
 <entry><literal>-A-Za-z0-9_@.</literal></entry></row>
 </tbody>
 </tgroup>
-</table>
+</informaltable>
 __END__
 
 
