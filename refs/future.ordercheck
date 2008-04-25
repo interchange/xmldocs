@@ -1,0 +1,50 @@
+__NAME__ purpose
+date is a future date
+__END__
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+Verification of the form field value succeeds if
+the passed time and date are in the future, compared to the
+current time.
+</para><para>
+It is possible to specify a minimum accepted time difference between the
+current and passed date. The specification can be any valid &glos-interval;.
+__END__
+
+__NAME__ notes
+This &glos-order-check; makes sense with date fields and widgets
+only.
+</para><para>
+The time difference can be specified as a negative value as well, 
+effectively allowing you to check whether the passed date is "too behind"
+the current date.
+__END__
+
+__NAME__ example: Check for future date
+<programlisting>
+FORM_FIELD_NAME=__FILENAME__
+</programlisting>
+__END__
+
+__NAME__ example: Check for future date, displaying a custom error message
+<programlisting>
+FORM_FIELD_NAME=__FILENAME__ "Date must be in the future"
+</programlisting>
+__END__
+
+__NAME__ example: Check for future date, at least 2 days ahead
+<programlisting>
+FORM_FIELD_NAME=__FILENAME__ 2 days "Date must be at least two days ahead"
+</programlisting>
+__END__
+
+__NAME__ example: Check for date within 60 minutes behind the current time
+<programlisting>
+FORM_FIELD_NAME=__FILENAME__ -60 minutes "Time must be within an hour behind"
+</programlisting>
+__END__
+

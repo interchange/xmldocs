@@ -1,0 +1,21 @@
+__NAME__ purpose
+CGI value matches another CGI value
+__END__
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+Verification of the form field value succeeds if
+the passed value matches that of another specified &glos-CGI; variable.
+__END__
+
+__NAME__ notes
+__END__
+
+__NAME__ example: Match mv_password and mv_verify
+<programlisting>
+mv_verify=__FILENAME__ mv_password "The passwords must match"
+</programlisting>
+__END__
