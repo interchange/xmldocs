@@ -1,0 +1,64 @@
+__NAME__ purpose
+specify custom tax calculation function
+__END__
+
+__NAME__ see also
+&glos-tax;,
+__END__
+
+__NAME__ synopsis
+<arg choice='plain'><replaceable>subroutine_name</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive specifies custom sales &glos-tax; function.
+</para><para>
+The function return value has to be a &PERL; hash, just like
+other &IC; tax calculation methods would return. 
+<emphasis role='bold'>Make sure the "DEFAULT" value is returned, or
+the tax will unconditionally yield zero</emphasis>.
+__END__
+
+
+__NAME__ notes
+__END__
+
+__NAME__ example: Calculate tax amount based on vendor
+<programlisting><![CDATA[
+SalesTaxFunction  <<EOR
+my $vendor_id = $Session->{source};
+
+my $tax_hash = $TextSearch->hash( {
+  se => $vendor_id,
+  fi => 'salestax.asc',
+  sf => 'vendor_code',
+  ml => 1000,
+  } );
+
+$tax_hash = {} if ! $tax_hash;
+$tax_hash->{DEFAULT} = 0;
+
+return $tax_hash;
+]]></programlisting>
+__END__
+
+__NAME__ example: Calculate tax
+<programlisting><![CDATA[
+SalesTaxFunction  <<EOR
+return {
+  DEFAULT => 0.0,
+  IL => 0.075,
+  OH => 0.065,
+};
+]]></programlisting>
+__END__
+
+
+__NAME__ example: Specify tax subroutine defined elsewhere
+<programlisting><![CDATA[
+SalesTaxFunction  custom_tax_routine
+]]></programlisting>
+__END__
+
+
