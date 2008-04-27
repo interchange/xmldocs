@@ -1,15 +1,15 @@
 __NAME__ purpose
-eliminate non-digit characters, with the exception of dots
+eliminate non-digit characters, with the exception of dashes
 __END__
 
 __NAME__ see also
-digits
+digits_dot
 __END__
 
 
 __NAME__ description
-The filter eliminates any non-digit characters, except dots. (That is,
-anything that's not a dot ("<literal>.</literal>") or
+The filter eliminates any non-digit characters, except dashes. (That is,
+anything that's not a dash ("<literal>-</literal>") or
 in a <literal>0-9</literal> range).
 __END__
 
@@ -23,7 +23,7 @@ __END__
 
 __NAME__ online: Filter example
 <programlisting>
-[filter digits_dot]Only the date should come out, and it is 01.01.2000[/filter]
+[filter __FILENAME__]Digits-dash code is: 90901212-3124[/filter]
 </programlisting>
 __END__
 
