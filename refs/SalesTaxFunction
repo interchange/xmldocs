@@ -40,6 +40,7 @@ $tax_hash = {} if ! $tax_hash;
 $tax_hash->{DEFAULT} = 0;
 
 return $tax_hash;
+EOR
 ]]></programlisting>
 __END__
 
@@ -51,6 +52,7 @@ return {
   IL => 0.075,
   OH => 0.065,
 };
+EOR
 ]]></programlisting>
 __END__
 
