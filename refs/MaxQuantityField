@@ -9,7 +9,7 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='plain'>
+<group choice='plain' rep='repeat'>
 	<arg choice='plain'>
 		<replaceable>table</replaceable>:<replaceable>column</replaceable>
 	</arg>
@@ -21,8 +21,8 @@ __END__
 
 
 __NAME__ description
-The &conf-__FILENAME__; directive specifies the &glos-database;
-and database column containing the maximum allowed order quantity
+The &conf-__FILENAME__; directive specifies the &glos-database;s
+and database columns containing the maximum allowed order quantity
 for an item.
 </para><para>
 When two arguments are supplied (concatenated by a colon, <literal>:</literal>),
@@ -33,6 +33,10 @@ table defaults to the <database>products</database> database.
 The code of the item in question must be present in the 
 database (<database class='field'>code</database> column),
 or the quantity will be unlimited.
+</para><para>
+It is possible to specify multiple database fields (separated by commas), 
+in which case the maximum quantity allowed is set to the sum of all quantities
+found.
 __END__
 
 __NAME__ notes
@@ -49,6 +53,13 @@ __END__
 __NAME__ example: Setting __FILENAME__
 <programlisting>
 MaxQuantityField inventory:quantity
+</programlisting>
+__END__
+
+
+__NAME__ example: Setting __FILENAME__
+<programlisting>
+MaxQuantityField inventory:quantity, products:on_hand
 </programlisting>
 __END__
 
