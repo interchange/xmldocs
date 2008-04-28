@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify table and/or column containing maximum allowed quantity for an item
+specify tables and columns containing maximum allowed quantity for an item
 __END__
 
 
@@ -25,14 +25,13 @@ The &conf-__FILENAME__; directive specifies the &glos-database;s
 and database columns containing the maximum allowed order quantity
 for an item.
 </para><para>
-When two arguments are supplied (concatenated by a colon, <literal>:</literal>),
-they indicate the appropriate &glos-database; table and column name.
-When only one argument is supplied, it indicates the name of the column;
-table defaults to the <database>products</database> database.
+If the argument contains a colon "<literal>:</literal>", it is treated
+as a <literal><replaceable>TABLE:COLUMN</replaceable></literal> specification.
+Otherwise it indicates the name of the column and the table
+defaults to the first (of possibly more) &conf-ProductFiles; databases.
 </para><para>
-The code of the item in question must be present in the 
-database (<database class='field'>code</database> column),
-or the quantity will be unlimited.
+The record with the matching product &glos-SKU; must exist in the 
+target database, or the quantity will be unlimited.
 </para><para>
 It is possible to specify multiple database fields (separated by commas), 
 in which case the maximum quantity allowed is set to the sum of all quantities
