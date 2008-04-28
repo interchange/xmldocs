@@ -1,0 +1,31 @@
+__NAME__ purpose
+number is a natural number
+__END__
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+Verification of the form field value succeeds if
+the passed value is a natural number, greater than zero.
+__END__
+
+__NAME__ notes
+Up to &IC; 5.5.2, there was a problem in implementation of this
+&glos-order-check; which allowed negative values and zero to 
+pass as valid.
+__END__
+
+__NAME__ example: Natural number check
+<programlisting>
+FORM_FIELD_NAME=__FILENAME__
+</programlisting>
+__END__
+
+__NAME__ example: Natural number check, displaying a custom error message
+<programlisting>
+FORM_FIELD_NAME=__FILENAME__ "Number is not a natural number"
+</programlisting>
+__END__
+
