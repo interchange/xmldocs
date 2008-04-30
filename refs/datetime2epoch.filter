@@ -43,24 +43,24 @@ __END__
 
 __NAME__ online: Converting dates and times to seconds since Epoch
 <programlisting><![CDATA[
-[filter date2time]01/01/2008[/filter]
-[filter date2time]01/01/08[/filter]
+[filter __FILENAME__]01/01/2008[/filter]
+[filter __FILENAME__]01/01/08[/filter]
 
-[filter date2time]01-01-2008[/filter]
-[filter date2time]01-01-08[/filter]
+[filter __FILENAME__]01-01-2008[/filter]
+[filter __FILENAME__]01-01-08[/filter]
 
-[filter date2time]01-01-2008:10[/filter]
-[filter date2time]01-01-08:10:45[/filter]
-[filter date2time]01-01-08:10:45:00[/filter]
+[filter __FILENAME__]01-01-2008:10[/filter]
+[filter __FILENAME__]01-01-08:10:45[/filter]
+[filter __FILENAME__]01-01-08:10:45:00[/filter]
 ]]></programlisting>
 __END__
 
 
 __NAME__ online: Converting ISO/MySQL dates and times to seconds since Epoch
 <programlisting><![CDATA[
-[filter date2time]2008-01-01 10[/filter]
-[filter date2time]2008-01-01 10:45[/filter]
-[filter date2time]2008-01-01 10:45:00[/filter]
+[filter __FILENAME__]2008-01-01 10[/filter]
+[filter __FILENAME__]2008-01-01 10:45[/filter]
+[filter __FILENAME__]2008-01-01 10:45:00[/filter]
 ]]></programlisting>
 __END__
 
