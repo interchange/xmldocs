@@ -59,10 +59,12 @@
 						(<olink targetdoc='glossary' targetptr='configuration'>?</olink>)
 						Configuration Directives
 					</emphasis><sbr/>
-					<ulink url="confs/index.html">Multi-HTML</ulink><phrase condition="standard">
+					<ulink url="confs/index.html">Multi-HTML</ulink>
+					<phrase condition="online">
+					| <ulink url="/offline/confs.html">HTML</ulink>
+					</phrase>
 					<phrase condition="standard">
 					| <ulink url="confs.html">HTML</ulink>
-					</phrase>
 					</phrase>
 				</entry>
 
@@ -71,6 +73,9 @@
 						Installation/Configuration FAQ
 					</emphasis><sbr/>
 					<ulink url="install/index.html">Multi-HTML</ulink>
+					<phrase condition="online">
+					| <ulink url="/offline/install.html">HTML</ulink>
+					</phrase>
 					<phrase condition="standard">
 					| <ulink url="install.html">HTML</ulink>
 					</phrase>
@@ -81,6 +86,9 @@
 						Catalog Tutorial
 					</emphasis><sbr/>
 					<ulink url="iccattut/index.html">Multi-HTML</ulink>
+					<phrase condition="online">
+					| <ulink url="/offline/iccattut.html">HTML</ulink>
+					</phrase>
 					<phrase condition="standard">
 					| <ulink url="iccattut.html">HTML</ulink>
 					</phrase>
@@ -95,6 +103,9 @@
 						ITL Tags
 					</emphasis><sbr/>
 					<ulink url="tags/index.html">Multi-HTML</ulink>
+					<phrase condition="online">
+					| <ulink url="/offline/tags.html">HTML</ulink>
+					</phrase>
 					<phrase condition="standard">
 					| <ulink url="tags.html">HTML</ulink>
 					</phrase>
@@ -105,6 +116,9 @@
 						HOWTOs Collection
 					</emphasis><sbr/>
 					<ulink url="howtos/index.html">Multi-HTML</ulink>
+					<phrase condition="online">
+					| <ulink url="/offline/howtos.html">HTML</ulink>
+					</phrase>
 					<phrase condition="standard">
 					| <ulink url="howtos.html">HTML</ulink>
 					</phrase>
@@ -115,6 +129,9 @@
 						Search Tutorial
 					</emphasis><sbr/>
 					<ulink url="search/index.html">Multi-HTML</ulink>
+					<phrase condition="online">
+					| <ulink url="/offline/search.html">HTML</ulink>
+					</phrase>
 					<phrase condition="standard">
 					| <ulink url="search.html">HTML</ulink>
 					</phrase>
@@ -129,6 +146,9 @@
 						Variables
 					</emphasis><sbr/>
 					<ulink url="vars/index.html">Multi-HTML</ulink>
+					<phrase condition="online">
+					| <ulink url="/offline/vars.html">HTML</ulink>
+					</phrase>
 					<phrase condition="standard">
 					| <ulink url="vars.html">HTML</ulink>
 					</phrase>
@@ -139,6 +159,9 @@
 						Optimization/Efficiency FAQ
 					</emphasis><sbr/>
 					<ulink url="optimization/index.html">Multi-HTML</ulink>
+					<phrase condition="online">
+					| <ulink url="/offline/optimization.html">HTML</ulink>
+					</phrase>
 					<phrase condition="standard">
 					| <ulink url="optimization.html">HTML</ulink>
 					</phrase>
@@ -149,6 +172,9 @@
 						Programming Style
 					</emphasis><sbr/>
 					<ulink url="programming-style/index.html">Multi-HTML</ulink>
+					<phrase condition="online">
+					| <ulink url="/offline/programming-style.html">HTML</ulink>
+					</phrase>
 					<phrase condition="standard">
 					| <ulink url="programming-style.html">HTML</ulink>
 					</phrase>
@@ -163,6 +189,9 @@
 						Filters
 					</emphasis><sbr/>
 					<ulink url="filters/index.html">Multi-HTML</ulink>
+					<phrase condition="online">
+					| <ulink url="/offline/filters.html">HTML</ulink>
+					</phrase>
 					<phrase condition="standard">
 					| <ulink url="filters.html">HTML</ulink>
 					</phrase>
@@ -173,6 +202,9 @@
 						Glossary
 					</emphasis><sbr/>
 					<ulink url="glossary/index.html">Multi-HTML</ulink>
+					<phrase condition="online">
+					| <ulink url="/offline/glosary.html">HTML</ulink>
+					</phrase>
 					<phrase condition="standard">
 					| <ulink url="glossary.html">HTML</ulink>
 					</phrase>
@@ -183,6 +215,9 @@
 						Upgrade Guide
 					</emphasis><sbr/>
 					<ulink url="upgrade/index.html">Multi-HTML</ulink>
+					<phrase condition="online">
+					| <ulink url="/offline/upgrade.html">HTML</ulink>
+					</phrase>
 					<phrase condition="standard">
 					| <ulink url="upgrade.html">HTML</ulink>
 					</phrase>
@@ -196,6 +231,9 @@
 						Checks
 					</emphasis><sbr/>
 					<ulink url="orderchecks/index.html">Multi-HTML</ulink>
+					<phrase condition="online">
+					| <ulink url="/offline/orderchecks.html">HTML</ulink>
+					</phrase>
 					<phrase condition="standard">
 					| <ulink url="orderchecks.html">HTML</ulink>
 					</phrase>
@@ -212,6 +250,9 @@
 						Pragmas
 					</emphasis><sbr/>
 					<ulink url="pragmas/index.html">Multi-HTML</ulink>
+					<phrase condition="online">
+					| <ulink url="/offline/pragmas.html">HTML</ulink>
+					</phrase>
 					<phrase condition="standard">
 					| <ulink url="pragmas.html">HTML</ulink>
 					</phrase>
@@ -231,6 +272,9 @@
 						Widgets
 					</emphasis><sbr/>
 					<ulink url="widgets/index.html">Multi-HTML</ulink>
+					<phrase condition="online">
+					| <ulink url="/offline/widgets.html">HTML</ulink>
+					</phrase>
 					<phrase condition="standard">
 					| <ulink url="widgets.html">HTML</ulink>
 					</phrase>
@@ -264,6 +308,19 @@
 	<xi:include parse='text' href='../search/html-search-box' />
 </authorgroup>
 -->
+
+<note><para>
+<phrase condition='online'>
+Reference pages in Multi-HTML format include live preview of the examples
+(where applicable); other documents and formats contain offline version
+of the examples only.
+</phrase>
+<phrase condition='standard'>
+This documentation is "offline" and does not include the previewable version
+of the examples. For reference pages with live previews, please visit
+<ulink url="http://d.icdevgroup.org">Online documentation</ulink>.
+</phrase>
+</para></note>
 
 <para role="legalnotice">
 This documentation is free; you can redistribute it and/or modify
