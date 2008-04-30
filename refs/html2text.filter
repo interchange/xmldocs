@@ -18,7 +18,7 @@ __END__
 __NAME__ notes
 Support for stripping 
 <literal>&lt;b&gt;</literal>,
-<literal>&lt<important>&gt;</literal> and
+<literal>&lt;i&gt;</literal> and
 <literal>&lt;u&gt;</literal> tags was added
 in &IC; 5.5.2.
 </para><para>
