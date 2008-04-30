@@ -1,15 +1,27 @@
 __NAME__ purpose
-transform input most basic HTML input to plain-text
+transform basic HTML input to plain-text
 __END__
 
 
 __NAME__ description
-The filter only replaces &glos-HTML; newlines and paragraphs with ASCII
-equivalents (newlines or empty strings).
+The filter performs simple replacement of input &glos-HTML; &mdash;
+it strips the
+<literal>&lt;b&gt;</literal>,
+<literal>&lt;i&gt;</literal> and
+<literal>&lt;u&gt;</literal> tags, and replaces 
+line breaks (<literal>&lt;br&gt;</literal>) and
+paragraphs (<literal>&lt;pgt;</literal>)
+with newlines.
 __END__
 
 
 __NAME__ notes
+Support for stripping 
+<literal>&lt;b&gt;</literal>,
+<literal>&lt<important>&gt;</literal> and
+<literal>&lt;u&gt;</literal> tags was added
+in &IC; 5.5.2.
+</para><para>
 For more information on &PERL; Regular Expressions, pattern matching and
 character classes, see
 <citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.
@@ -20,10 +32,10 @@ __NAME__ online: Filter example
 <programlisting><![CDATA[
 [filter html2text]
 <p>
-Perl is a lot of fun!
+Perl is <b>a lot</b> of <u>fun</u>!
 </p>
 <p>
-Interesting tricks with the language can be seen at: <br>
+Interesting tricks with <i>the language</i> can be seen at: <br>
 MJD's <a href="http://perl.plover.com/">plover.com</a>.
 </p>
 <p>
