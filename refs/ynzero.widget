@@ -13,7 +13,7 @@ The actual widget titles, "<literal>Yes</literal>" and
 translated versions to the locale &glos-database; will be enough to
 have them adjusted to visitors' language settings.
 </para><para>
-A negative answer will return a blank (&glos-false;) value to the application.<sbr/>
+A negative answer will return value <literal>0</literal> (&glos-false;) to the application.<sbr/>
 A positive answer will return value <literal>1</literal> (&glos-true;) to the application.
 __END__
 
@@ -28,24 +28,16 @@ __END__
 
 __NAME__ online: 'Yes or No' widget, rendered as a dropdown list
 <programlisting>
-[display name=example type=yesno]
+[display name=example type=__FILENAME__]
 </programlisting>
 __END__
 
 __NAME__ online: 'Yes or No' widget, rendered as a "radio" button
 <programlisting>
-[display name=example type='yesno radio']
-</programlisting>
-__END__
-
-__NAME__ online: 'Yes or No' widget, created in an alternative way
-A similar (eventually more flexible) "Yes or No" button can be created
-using the general-purpose &tag-display; tag:
-<programlisting>
-[display name=example type=select passed="=No,1=Yes"]
+[display name=example type='__FILENAME__ radio']
 </programlisting>
 __END__
 
 __NAME__ see also
-ynzero
+yesno
 __END__
