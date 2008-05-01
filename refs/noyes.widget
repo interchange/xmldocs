@@ -25,7 +25,7 @@ __END__
 
 __NAME__ online: 'Yes or No' widget, rendered as a dropdown list
 <programlisting>
-[display name=example type=noyes]
+[display name=example type=__FILENAME__]
 </programlisting>
 __END__
 

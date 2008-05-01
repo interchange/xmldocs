@@ -21,20 +21,20 @@ __NAME__ notes
 The widget is created by Interchange's <function>Vend::Form::yesno</function>
 function. Passing attribute <literal>type="yesno radio"</literal> to it is
 equivalent to passing attributes <literal>type=yesno variant=radio</literal>.
-However, only method <literal>type="yesno radio"</literal> is available when the
+However, only method <literal>type="yesno radio"</literal> is available if the
 &glos-widget; is invoked through the &tag-widget; tag and &glos-ITL;.
 __END__
 
 
 __NAME__ online: 'Yes or No' widget, rendered as a dropdown list
 <programlisting>
-[display name=example type=yesno]
+[display name=example type=__FILENAME__]
 </programlisting>
 __END__
 
 __NAME__ online: 'Yes or No' widget, rendered as a "radio" button
 <programlisting>
-[display name=example type='yesno radio']
+[display name=example type=__FILENAME__ variant=radio]
 </programlisting>
 __END__
 
