@@ -241,25 +241,6 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	list_container
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
 	header
 	</entry>
 	<entry>
@@ -292,6 +273,82 @@ __NAME__ synopsis
 	</entry>
 	<entry>
 	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	list_container
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<literal>ul</literal>
+	</entry>
+	<entry>
+	Default list container HTML tag (applicable only if <literal>auto</literal> is enabled).
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	class
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	&NODEFAULT;
+	</entry>
+	<entry>
+	CSS class name (applicable only if <literal>auto</literal> is enabled).
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	style
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	&NODEFAULT;
+	</entry>
+	<entry>
+	CSS style value (applicable only if <literal>auto</literal> is enabled).
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	extra
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	&NODEFAULT;
+	</entry>
+	<entry>
+	Extra HTML attributes (applicable only if <literal>auto</literal> is enabled).
 	</entry>
 
 </row> 
@@ -364,8 +421,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 
