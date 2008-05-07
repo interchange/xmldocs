@@ -34,7 +34,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>on</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
@@ -72,7 +72,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<literal>on</literal>
+	&NODEFAULT;
 	</entry>
 	<entry>
 	<!-- DSC -->
