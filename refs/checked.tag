@@ -149,7 +149,13 @@ __NAME__ description
 The tag provides "memory" for &glos-HTML; checkboxes and radio buttons.
 __END__
 
-
+__NAME__ example: Radio Button
+Displays a radio button and selects the second choice by default:
+<programlisting><![CDATA[
+<input type="radio" name="factory_sealed" value="1"[checked factory_sealed 1]>&nbsp;[L]Yes[/L]<br>
+<input type="radio" name="factory_sealed" value="0"[checked factory_sealed value=0 default=1]>&nbsp;[L]No[/L]
+]]></programlisting>
+__END__
 
 
 You can provide a "memory" for drop-down menus, radio buttons, and
