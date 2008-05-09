@@ -1,0 +1,17 @@
+__NAME__ purpose
+control access to SOAP features
+__END__
+
+__NAME__ see also
+SOAP, SOAP_Action
+__END__
+
+__NAME__ example: Allow actions only.
+<programlisting>
+SOAP_Control Action always
+SOAP_Control Tag never
+SOAP_Control Values never
+SOAP_Control Database never
+SOAP_Control Scratch never
+</programlisting>
+__END__
