@@ -12,7 +12,7 @@ __NAME__ synopsis
 	Yes
 	</entry>
 	<entry>
-	<!-- REQ -->
+	Yes
 	</entry>
 	<entry>
 	&NODEFAULT;
@@ -31,7 +31,7 @@ __NAME__ synopsis
 	Yes
 	</entry>
 	<entry>
-	<!-- REQ -->
+	Yes
 	</entry>
 	<entry>
 	&NODEFAULT;
@@ -50,13 +50,13 @@ __NAME__ synopsis
 	Yes
 	</entry>
 	<entry>
-	<!-- REQ -->
+	Yes
 	</entry>
 	<entry>
 	&NODEFAULT;
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Column which serves as subordinate.
 	</entry>
 
 </row> 
@@ -245,10 +245,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	&NODEFAULT;
 	</entry>
 	<entry>
-	<!-- DSC -->
+	SQL where clause.
 	</entry>
 
 </row> 
