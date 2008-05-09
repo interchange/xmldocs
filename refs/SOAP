@@ -3,7 +3,7 @@ enable handling of SOAP RPC requests
 __END__
 
 __NAME__ see also
-SOAP_Host, SOAP_Socket, SOAP_Perms, Soap_MaxRequests, SOAP_StartServers
+SOAP_Socket, SOAP_Perms, Soap_MaxRequests, SOAP_StartServers
 __END__
 
 __NAME__ synopsis
