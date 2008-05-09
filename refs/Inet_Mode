@@ -17,7 +17,8 @@ __END__
 
 __NAME__ description
 Specify whether the &IC; server should open an INET-domain socket and
-listen on some port (<literal>7786</literal> by default).
+listen on some port (<literal>7786</literal> by default). The port can be
+changed with the &conf-TcpMap; directive.
 </para><para>
 This &glos-configuration; directive can be overridden using 
 <literal>interchange -i</literal> switch on the command line.
