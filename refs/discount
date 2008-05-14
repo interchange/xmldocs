@@ -13,9 +13,9 @@ __NAME__ synopsis
 </row>
 <row>
 	<entry>
-		<group choice='plain'>
-			<arg>discount_space</arg>
-			<arg>space</arg>
+		<group choice='opt'>
+			<arg choice='plain'>discount_space</arg>
+			<arg choice='plain'>space</arg>
 		</group>
 	</entry>
 	<entry></entry>
@@ -168,6 +168,28 @@ Total discount applied to [item-code] is: [currency][calc]
                                        [item-discount noformat=1] * [item-quantity]
                                      [/calc][/currency]
 [/item-list]
+</programlisting>
+__END__
+
+
+__NAME__ example: Using wholesale price for special promotions
+In the following example, items with modifier "promotion" receive the
+price defined in <database class='field'>products:wholesale</database>
+instead of <database class='field'>products:price</database>.
+<programlisting>
+[perl tables='products']
+my %seen = ();
+
+foreach $item (@{$Items}) {
+  next unless $item->{promotion};
+  next if $seen{$item->{code}}++;
+
+  my $promo_price = $Tag->data('products','wholesale',$item->{code});
+
+  $Session->{discount}->{$item->{code}} = "$promo_price * \$q";
+}
+[/perl]
+
 </programlisting>
 __END__
 
