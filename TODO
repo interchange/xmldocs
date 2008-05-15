@@ -1,7 +1,4 @@
-Bugs:
--document <ParseVaribles Yes>
 - work on bin/mkreport
-- search doc se nevidi jer je search neki actionmap
 - provide static files for download, describe keys like alt+n
 - documentation for bounce and restrict is ignored
 - some small error in glossary/pragma at the bottom, [tag pragma]0[/tag]
@@ -13,7 +10,6 @@ Bugs:
 
 - order counter, Session->{mv_order_number}, cronjob -0001, or file da-te.counter, or session_id.time
 - in iccattut, s/item-field/item-param/ at least on some places. 
-- Make xmldocs tarball in ftp autoupdated
 - Change -latest to version number in tarball download
 - fix/update AdminUser docs
 - aliases like DataDir/DefaultTables are not documented
@@ -21,7 +17,6 @@ Bugs:
 - remove NEW from <meta>
 - In tags, make XSLT code print position number besides "Yes" word in 
   positional parameters for tags
-- in search.xml replace mv_ listitems with sections so they're listed in TOC
 - note in configuration glossentry to use '' to skip values 
 - Check ConfigDatabase and DirectiveDatabase. Is description correct? One seems to be wrong
 - preprocessor directives in configuration ?

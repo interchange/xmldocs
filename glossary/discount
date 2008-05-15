@@ -29,17 +29,19 @@ and are of the following types:
 
 </itemizedlist>
 
-The discounts are specified using a formula. The formula is scanned for
+Discounts within the &tag-discount; tag are specified using a formula.
+The formula is scanned for
 the <varname>$q</varname> and <varname>$s</varname> variables which are
 substituted for the item quantity and subtotal respectively.
 The variable <varname>$s</varname> is saved between
 iterations, so that the discounts can be cumulative.
 </para><para>
-In case of individual item discounts, the formula must be defined in a way 
-that it produces a subtotal which includes <emphasis>all items</emphasis> of
-the same &glos-SKU; that are found in the user's basket. There are many ways
-and reasons why the same &glos-SKU; might be present multiple times in the
-user's basket &mdash; one is the &conf-SeparateItems; configuration directive.
+In case of individual item discounts, the formula must be constructed to
+handle all instances of a particular &glos-SKU; found in the user's basket.
+There are many ways how same &glos-SKU; might occur
+multiple times in the user's basket (for example, with &conf-SeparateItems;
+enabled) &mdash; the same formula will be invoked on every occurrence and 
+it should always give out the correct individual subtotal.
 </para><para>
 In case of an entire order discount, the formula is usually simpler
 and defines a flat discount amount or percentage.

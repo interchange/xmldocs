@@ -21,7 +21,7 @@ use constant DEBUG_ITEM => '';
 $Data::Dumper::Indent = 1;
 $Data::Dumper::Terse++;
 $Data::Dumper::Sortkeys++;
-$ENV{XMLDOCS_CUR_DEVEL} ||= "";
+$ENV{XMLDOCS_CUR_DEVEL} ||= '';
 }
 
 my $dumpdb = 0;
@@ -44,7 +44,7 @@ my %todo; # Helper to better manage "Contains TODO item" messages
 my @set_unused; # Notice which files inside refs/ were not used
 my @parsed_versions; # IC versions we parsed
 my $specific_only; # Build only one specific .xml ?
-my $output_spec; # 'list' produces tag list, 'xml' produces real xml source
+my $output_spec; # 'list' produces symbol lists, 'xml' produces real xml source
 my $output_both; # Unconditionally override $output_spec
 my $no_autorefs; # Generate autorefs.ent collection of entities by default
 my $validate = 0; # Whether to validate XML chunks
@@ -306,7 +306,7 @@ while ( $path = shift @paths) { # Now, for each IC version specified
 
 	# Ok, now we're done with the by-the-way tasks, and the real work begins.
 
-	# Outer loop: $gkey: symbol types (pragmas, globvars, ...)
+	# Outer loop: $gkey: symbol groups (pragmas, globvars, ...)
 	# Inner loop (~25 lines below): $key, actual symbols from symbol groups
 
 	while ( my ($gkey,$gval) = each %{ $hash{symbols} } ) {
@@ -514,7 +514,7 @@ while ( $path = shift @paths) { # Now, for each IC version specified
 					# What would happen if we inserted into $loc the HTML link,
 					# with <phrase condition="online"> ?
 					
-					my ( $cstart, $cend, $ctxmeta ) = ("", "", "");
+					my ( $cstart, $cend, $ctxmeta ) = ('','','');
 					my $all = 0; # Showing all for an item?
 
 					if ( $gkey !~ /(tag|filter|widget|actionmap|ordercheck)$/ ) {

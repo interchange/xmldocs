@@ -3,7 +3,7 @@ eliminate non-digit characters
 __END__
 
 __NAME__ see also
-digits_dot
+digits_dot, digits_dash
 __END__
 
 

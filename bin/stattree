@@ -107,7 +107,7 @@ $i{ver} =~ s/\/$//;
 $dumppath .= "/.cache.bin";
 
 # Ok, onto some work now
-chdir $path; # Go into the directory
+chdir $path; # Go into the Interchange tree which needs to be parsed
 
 # Let's just pick CVS lines first:
 my @files = `find . -name Entries | cut -b 3-`;

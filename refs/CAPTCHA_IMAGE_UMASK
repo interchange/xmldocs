@@ -1,0 +1,23 @@
+__NAME__ purpose
+specify default "captcha" umask
+__END__
+
+__NAME__ synopsis
+<replaceable>umask</replaceable>
+__END__
+
+__NAME__ description
+The variable specifies umask for creating &glos-captcha; images.
+The default umask is 002.
+__END__
+
+__NAME__ example
+<programlisting>
+Variable __FILENAME__ 022
+</programlisting>
+__END__
+
+__NAME__ see also
+CAPTCHA_IMAGE_LOCATION, CAPTCHA_IMAGE_PATH
+__END__
+

@@ -34,6 +34,7 @@ This prevents &IC; from bringing in tables in non-default schemas
 in &PGSQL; 7.4 and newer.
 <programlisting>
 DatabaseAutoIgnore  ^sql_
+DatabaseAuto   dbi:Pg:dbname=DBNAME;host=PGHOST
 </programlisting>
 __END__
 

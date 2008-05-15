@@ -1,0 +1,22 @@
+__NAME__ purpose
+specify company or entity name
+__END__
+
+__NAME__ synopsis
+<replaceable>name</replaceable>
+__END__
+
+__NAME__ description
+The variable specifies company or entity name to
+display in appropriate contexts.
+__END__
+
+__NAME__ example
+<programlisting>
+Variable __FILENAME__ Interchange Development Group
+</programlisting>
+__END__
+
+__NAME__ see also
+__END__
+
