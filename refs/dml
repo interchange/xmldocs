@@ -1,0 +1,50 @@
+__NAME__ purpose
+control behavior of Vend::Data::update_data()
+__END__
+
+
+__NAME__ synopsis
+<group choice='plain'>
+	<arg choice='plain'><emphasis>none</emphasis></arg>
+	<arg choice='plain'><literal>preserve</literal></arg>
+	<arg choice='plain'><literal>strict</literal></arg>
+</group>
+__END__
+
+
+__NAME__ default
+<emphasis>none</emphasis>
+__END__
+
+__NAME__ description
+This &glos-pragma; controls the behavior of
+<function>Vend::Data::update_data()</function> function
+in regard to manipulating &glos-database; records.
+</para><para>
+No value implies the traditional and backward-compatible &IC;
+behavior of "update or insert" (upsert).
+</para><para>
+Value '<literal>preserve</literal>'
+restricts inserts to insert-only, but allows
+the fall-through behavior from update to insert.
+As the name preserve implies, it means records can
+be inserted, but no existing data can be clobbered.
+</para><para>
+Value '<literal>strict</literal>' forces update or insert
+to only perform the requested action.
+__END__
+
+__NAME__ notes
+__END__
+
+__NAME__ see also
+__END__
+
+__NAME__ example: dml strict
+Pragma dml=strict
+__END__
+
+__NAME__ author
+&markj;
+__END__
+
