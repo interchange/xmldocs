@@ -12,6 +12,8 @@ __END__
 
 __NAME__ example: Specifying year range
 <programlisting>
-[display type=date name=create_date value="[value create_date]" year_begin=1975 year_end=2020]
+[display type=date name=create_date
+  value="[value create_date]"
+  year_begin=1975 year_end=2020]
 </programlisting>
 __END__

@@ -40,6 +40,23 @@
 		<code class='filter'><xsl:value-of select="."/></code>
 	</xsl:template>
 
+	<xsl:template match="ulink">
+		<xsl:variable name="content">
+			<xsl:apply-templates/>
+		</xsl:variable>
+		<xsl:variable name="url" select="@url"/>
+		<xsl:choose>
+			<xsl:when test="$url=$content or $content=''">
+				<xsl:text>\fI</xsl:text>
+				<xsl:value-of select="$url"/>
+				<xsl:text>\fR</xsl:text>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$content"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
 	<xsl:include href="common.xsl"/>
 	
 </xsl:stylesheet>

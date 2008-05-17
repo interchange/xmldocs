@@ -164,7 +164,7 @@ OUTPUT/%: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-c.xml \
 	  -o $@/ docbook/html-chunks.xsl $T/$*-c.profiled
-OUTPUT/%.man: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/autofiles.ent
+OUTPUT/%.man: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/autofiles.ent docbook/reference.xsl
 	echo "C     $@/"
 	mkdir -p "$@"
 	$(PSR) $(PSR_FLAGS)                                                \

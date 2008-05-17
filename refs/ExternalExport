@@ -63,7 +63,8 @@ ExternalExport <<EOD
 EOD
 ]]></programlisting>
 After restarting Interchange, file <filename>/tmp/external</filename> will
-be created with the following contents:
+be created with the following contents (shown here in human-readable
+format):
 <programlisting><![CDATA[
 {
   'number_of_catalogs' => 4,

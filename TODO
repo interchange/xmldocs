@@ -1,3 +1,4 @@
+- manpages, first line of <screen> loses linebreaks
 - work on bin/mkreport
 - provide static files for download, describe keys like alt+n
 - documentation for bounce and restrict is ignored
@@ -6,7 +7,6 @@
 - with tags from Interpolate.pm, context for systemtag is not always 'whole file', but can be x-y as well
 - dal autogen preskoci kontekst koji je prazan? i zasto uopce unkondicionalno
   ekspandira @$ctx ako moze da nema konteksta?
-
 
 - order counter, Session->{mv_order_number}, cronjob -0001, or file da-te.counter, or session_id.time
 - in iccattut, s/item-field/item-param/ at least on some places. 
