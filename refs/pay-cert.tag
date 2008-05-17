@@ -151,7 +151,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	Validity period, specified as one of <replaceable>X<replaceable>
+	Validity period, specified as one of <replaceable>X</replaceable>
 	<literal>y</literal>(ears),
 	<literal>mon</literal>(ths),
 	<literal>m</literal>(inutes),
