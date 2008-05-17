@@ -1,0 +1,12 @@
+The set of &glos-configuration; directives prefixed "External" allows
+export of Interchange variables for use by other programs and languages,
+such as PHP, Ruby or Python.
+</para><para>
+The three directives are &conf-External;, &conf-ExternalFile; and
+&conf-ExternalExport;.
+</para><para>
+The current functionality is just a proof of concept and is
+not for serious use. The interface needs serious work.
+</para><para>
+A working example for accessing data from PHP is provided in the
+&conf-External; reference page.

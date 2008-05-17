@@ -132,18 +132,18 @@ Variable HELLO Hello World!
 
 ParseVariables No
 
-# Will print: Our greeting is: __HELLO__
 Message Our greeting is: __HELLO__
+# Will print: Our greeting is: __HELLO__
 
 &lt;ParseVariables Yes&gt;
 
-# Will print: Our greeting is the shiny Hello World!
 Message Our greeting is the shiny __HELLO__
+# Will print: Our greeting is the shiny Hello World!
 
 &lt;/ParseVariables&gt;
 
-# Will print: Our greeting is back to: __HELLO__
 Message Our greeting is back to: __HELLO__
+# Will print: Our greeting is back to: __HELLO__
 
 </programlisting>
 </section>

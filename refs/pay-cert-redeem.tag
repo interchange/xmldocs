@@ -2,6 +2,25 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	certs
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	table
 	</entry>
 	<entry>
@@ -11,7 +30,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>pay_certs</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->

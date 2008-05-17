@@ -1,4 +1,37 @@
-
-__NAME__ missing
-All
+__NAME__ purpose
+specify external dump filename
 __END__
+
+__NAME__ synopsis
+<arg choice='plain'><replaceable>filename</replaceable></arg>
+__END__
+
+
+__NAME__ description
+Specify "external" output filename. Default is
+<filename>external.structure</filename> in global &conf-RunDir;.
+</para><para>
+For the directive to have any effect, &conf-External; must be enabled.
+__END__
+
+__NAME__ notes
+For discussion and examples of connecting Interchange to external programs,
+see glossary entry &glos-external;.
+__END__
+
+__NAME__ example: Setting __FILENAME__
+In &gcf;:
+<programlisting>
+External yes
+ExternalFile /tmp/external
+</programlisting>
+__END__
+
+__NAME__ see also
+External, ExternalExport
+__END__
+
+__NAME__ author
+&mheins;
+__END__
+

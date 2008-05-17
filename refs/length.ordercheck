@@ -1,5 +1,5 @@
 __NAME__ purpose
-check string length
+string is within specified length limits
 __END__
 
 __NAME__ description

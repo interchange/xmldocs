@@ -2,6 +2,25 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	code
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	Yes if <literal>auth</literal>=&glos-true;
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	code_scratch
 	</entry>
 	<entry>
@@ -46,7 +65,7 @@ __NAME__ synopsis
 	<!-- POS -->
 	</entry>
 	<entry>
-	<!-- REQ -->
+	Yes if <literal>issue</literal>=&glos-true;
 	</entry>
 	<entry>
 	<!-- DFL -->
@@ -87,10 +106,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Issue (create) the gift certificate?
 	</entry>
 
 </row> 
@@ -103,20 +122,24 @@ __NAME__ synopsis
 	<!-- POS -->
 	</entry>
 	<entry>
-	<!-- REQ -->
+	Yes if <literal>issue</literal>=&glos-true;
 	</entry>
 	<entry>
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Gift certificate amount.
 	</entry>
 
 </row> 
 <row>
 
 	<entry>
-	expires
+	<group choice='plain'>
+	<arg choice='plain'>expires</arg>
+	<arg choice='plain'>expire</arg>
+	<arg choice='plain'>expiration</arg>
+	</group>
 	</entry>
 	<entry>
 	<!-- POS -->
@@ -128,45 +151,13 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	expire
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	expiration
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
+	Validity period, specified as one of <replaceable>X<replaceable>
+	<literal>y</literal>(ears),
+	<literal>mon</literal>(ths),
+	<literal>m</literal>(inutes),
+	<literal>h</literal>(ours),
+	<literal>d</literal>(ays) or
+	<literal>w</literal>(eeks).
 	</entry>
 
 </row> 
@@ -182,10 +173,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Do not issue a <literal>MV_GIFT_CERT_CODE<literal> cookie to the
+	client's browser?
 	</entry>
 
 </row> 

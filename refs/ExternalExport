@@ -1,5 +1,101 @@
-
-__NAME__ missing
-All
+__NAME__ purpose
+specify Perl variables to dump to external file
 __END__
 
+__NAME__ see also
+External, ExternalFile
+__END__
+
+__NAME__ synopsis
+Global: <arg choice='plain' rep='repeat'><replaceable>Interchange::Object</replaceable>=<replaceable>Output_name</replaceable></arg><sbr/>
+Catalog: <arg choice='plain' rep='repeat'><replaceable>Object</replaceable><arg choice='opt'>-&gt;<replaceable>key_or_index</replaceable></arg></arg>
+__END__
+
+__NAME__ description
+The directive specifies &PERL; variables to dump to &conf-ExternalFile;.
+</para><para>
+On global level, using the equal sign ("<literal>=</literal>") it is possible
+to specify original Perl structure and the resulting "translated" name in the
+output file. Global elements appear directly under each catalog hash in the
+output file.
+</para><para>
+On catalog level, it is not possible to "translate" names, but you can use
+the notation "<literal>-&gt;</literal>" to dump specific elements from array
+or hash structures. Catalog elements appear under hash key 
+"<literal>external_config</literal>" under each catalog hash in the
+output file.
+</para><para>
+See <xref linkend="ExternalExport_examples"/> for clarification.
+__END__
+
+__NAME__ notes
+For discussion and examples of connecting Interchange to external programs,
+see glossary entry &glos-external;.
+__END__
+
+__NAME__ example: Defining __FILENAME__
+Here's a complete example and the expected result:
+</para><para>
+In &gcf;:
+<programlisting>
+External yes
+ExternalExport Global::Catalog=number_of_catalogs
+ExternalFile /tmp/external
+</programlisting>
+In &ccf;:
+<programlisting><![CDATA[
+External yes
+ExternalExport <<EOD
+  CatalogName
+  ScratchDefault
+  ValuesDefault
+  ScratchDir
+  SessionDB
+  Sess
+  sionDatabase
+  SessionExpire
+  VendRoot
+  VendURL
+  SecureURL
+  Variable->SQLDSN
+  Variable->SQLPASS
+  Variable->SQLUSER
+EOD
+]]></programlisting>
+After restarting Interchange, file <filename>/tmp/external</filename> will
+be created with the following contents:
+<programlisting><![CDATA[
+{
+  'number_of_catalogs' => 4,
+  'Catalogs' => {
+    'catalog1' => {
+      'external_config' => {
+        'VendRoot' => '/home/interchange/catalog1',
+        'ValuesDefault' => {},
+        'CatalogName' => 'catalog1',
+        'SessionExpire' => 3600,
+        'ScratchDefault' => {
+          'mv_no_session_id' => '1',
+          'mv_no_count' => '1',
+          'mv_add_dot_html' => '1'
+        },
+        'SessionDB' => '',
+        'ScratchDir' => '/home/interchange/catalog1/tmp',
+        'VendURL' => 'http://myhost.mydomain.local/cgi-bin/catalog1',
+        'SessionDatabase' => '/home/interchange/catalog1/session',
+        'SecureURL' => 'http://myhost.mydomain.local/cgi-bin/catalog1',
+        'Variable' => {
+          'SQLUSER' => 'interch',
+          'SQLDSN' => 'dbi:Pg:dbname=catalog1',
+          'SQLPASS' => 'interch'
+        }
+      }
+    }
+  }
+}
+]]></programlisting>
+__END__
+
+__NAME__ author
+&mheins;
+__END__

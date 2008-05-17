@@ -1,4 +1,5 @@
 __NAME__ purpose
+enable dump of selected global and catalog values for use by external programs
 __END__
 
 
@@ -9,20 +10,104 @@ __NAME__ synopsis
 </group>
 __END__
 
-
 __NAME__ description
+The directive enables dump of selected global and catalog information for
+use by external programs, possibly written in languages such as PHP, Python
+or Ruby.
+</para><para>
+Dump file format is a direct &PERL; memory dump, internally most often
+produced by invoking Perl's <classname>Storable</classname> methods.
+</para><para>
+The dump takes place at time of &glos-catalog; (re)configuration.
+</para><para>
+Global &conf-External; must be enabled first to allow individual catalogs
+to use &conf-External; themselves and dump their information.
 __END__
 
 __NAME__ notes
-The global &conf-External; must be enabled to allow individual catalog setting.
+For discussion and examples of connecting Interchange to external programs,
+see glossary entry &glos-external;.
 __END__
 
 __NAME__ example: Defining External
+Put the following in both global &gcf; and the specific
+&ccf;s:
 <programlisting>
 External yes
 </programlisting>
 __END__
 
-__NAME__ missing
-What is it
+__NAME__ example: PHP connector for accessing the structure file
+<programlisting><![CDATA[
+<?php
+
+$interchange_base = '/usr/lib/interchange';
+$interchange_lib = "$interchange_base/lib";
+$interchange_struct = "/var/run/interchange/external.structure";
+
+putenv("PERL_SIGNALS=unsafe");
+umask(7);
+
+$perl = new Perl();
+
+$perlstring = "
+  use lib '$interchange_lib';
+  \$ENV{EXT_INTERCHANGE_FILE} = '$interchange_struct';
+  \$ENV{EXT_INTERCHANGE_DIR} = '$interchange_base';
+";
+$perl->eval($perlstring);
+$perl->require("Vend/External.pm");
+
+$origsid = $sid = $_COOKIE["MV_SESSION_ID"];
+
+if(! $sid) {
+	$_REQUEST["mv_session_id"];
+}
+$cat = 'standard';
+$catback = $perl->catalog($cat);
+
+$out = "sid=$sid<br>";
+$out .= "parm is debug=" . $_REQUEST["debug"] . "<br>";
+$out .= "catalog is $catback<br>";
+$out .= "now sid=$sid<br>";
+$remote = $_SERVER['REMOTE_ADDR'];
+
+$perl->remote_addr($remote);
+$new = $perl->session($sid);
+
+if($new) {
+	$sid = $perl->session_name();
+	$out .= "new session, now sid=$sid<br>";
+}
+
+if($sid != $origsid) {
+	setcookie('MV_SESSION_ID', $sid, 0 , '/');
+}
+
+## Can print now that cookie is set
+print $out;
+
+$fname =  $perl->value("values","fname");
+$lname =  $perl->value("values","lname");
+print "Well what do you know, we have a '$fname $lname'!<br>";
+$cart = $perl->value('carts', 'main');
+$nitems = count($cart);
+if($nitems) {
+	print "We have a cart with $nitems items</br>";
+	for($i = 0; $i < $nitems; $i++) {
+		$code = $cart[$i]["code"];
+		$quantity = $cart[$i]["quantity"];
+		print "Item $code is in cart, quantity $quantity.<br>";
+	}
+}
+?>
+]]></programlisting>
+__END__
+
+__NAME__ see also
+ExternalFile, ExternalExport
+__END__
+
+__NAME__ author
+&mheins;
 __END__

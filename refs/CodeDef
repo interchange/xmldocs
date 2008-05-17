@@ -31,6 +31,7 @@ CoreTags, &conf-UserTag;s,
 &glos-form-action;s,
 &conf-GlobalSub;s,
 ItemActions,
+SearchOps,
 LocaleChanges,
 OrderChecks,
 and Widgets.

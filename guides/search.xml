@@ -138,15 +138,16 @@ swish-e -w purpose=LWP -f db/xmldocs
 <title>Configuration File Examples</title>
 <para>
 Indexing web sites is pretty easy. Swish provides a spider script, which is
-simply called with the parameters <literal>default</literal> and the starting
-URL. Create a configuration file similar to the following:
+simply called with the parameters <literal>default
+<replaceable>starting_URL</replaceable></literal>. Create a configuration
+file similar to the following:
 <programlisting>
 IndexFile db/icdevgroup
 IndexDir /usr/local/lib/swish-e/spider.pl
 SwishProgParameters default http://www.icdevgroup.org/docs/
 </programlisting>
 Now you can start indexing with <literal>swish-e -S prog -c
-icdevgroup.conf</literal>. 
+<replaceable>icdevgroup.conf</replaceable></literal>. 
 </para>
 </section>
 </section>
@@ -165,16 +166,24 @@ icdevgroup.conf</literal>.
 		<section id="mv_base_directory"><title>
 		<literal>bd &mdash; mv_base_directory</literal></title><cmdsynopsis>
 		(<replaceable>directory_name</replaceable>,
-		default Interchange installation directory)</cmdsynopsis><para>
+		default &conf-ProductDir;)</cmdsynopsis><para>
 		base directory in which to look up text files to search
 		(related option <literal>fi</literal>).
+		</para><para>
+		Directory paths can be absolute, provided that the pathname is
+		equal to the <varname>MV_SEARCH_FILE</varname> &glos-variable;, or 
+		a &glos-scratch; variable of the same name is 1.
+		To enable searching in say,
+		<filename class='directory'>/etc/dict</filename>, use either
+		<code>[calcn]$Variable->{MV_SEARCH_FILE} =
+		'/etc/dict'; return[/calcn]</code> or
+		<code>[tmp /etc/dict]1[/tmp]</code>.
 		</para>
 		</section>
 		<section id="mv_begin_string"><title>
 		<literal>bs &mdash; mv_begin_string</literal></title><cmdsynopsis>
-		(<replaceable>regular_expression</replaceable>,
-		default none)</cmdsynopsis><para>
-		&glos-regexp; that the beginning of the searched field value must match.
+		(1/0, default false)</cmdsynopsis><para>
+		the search string matches only at the beginning of a column.
 		</para>
 		</section>
 		<section id="mv_cache_key"><title>
@@ -184,6 +193,20 @@ icdevgroup.conf</literal>.
 		not intended for common use. When &tag-more; tag is used,
 		this option automatically provides a pointer to the search
 		reference.
+		</para>
+		</section>
+		<section id="mv_case"><title>
+		<literal>cs &mdash; mv_case</literal></title><cmdsynopsis>
+		(<literal>0</literal>/<literal>1</literal>,
+		default <literal>0</literal>)</cmdsynopsis><para>
+		case sensitive search.
+		</para>
+		</section>
+		<section id="mv_column_op"><title>
+		<literal>op &mdash; mv_column_op</literal></title><cmdsynopsis>
+		(<literal></literal>/<literal></literal>,
+		default <literal></literal>)</cmdsynopsis><para>
+		operation to perform to check field for a match.
 		</para>
 		</section>
 		<section id="mv_coordinate"><title>
@@ -225,13 +248,6 @@ icdevgroup.conf</literal>.
 		</itemizedlist>
 		</para>
 		</section>
-		<section id="mv_case"><title>
-		<literal>cs &mdash; mv_case</literal></title><cmdsynopsis>
-		(<literal>0</literal>/<literal>1</literal>,
-		default <literal>0</literal>)</cmdsynopsis><para>
-		case sensitive search.
-		</para>
-		</section>
 		<section id="mv_verbatim_columns"><title>
 		<literal>cv  &mdash; mv_verbatim_columns</literal></title><cmdsynopsis>
 		(<literal></literal>/<literal></literal>,
@@ -250,7 +266,8 @@ icdevgroup.conf</literal>.
 		<literal>df &mdash; mv_dict_fold</literal></title><cmdsynopsis>
 		(<literal></literal>/<literal></literal>,
 		default <literal></literal>)</cmdsynopsis><para>
-
+		Make dictionary matching case-insensitive. Ignored unless
+		<mv>mv_dict_look</mv> is set.
 		</para>
 		</section>
 		<section id="mv_dict_limit"><title>
@@ -278,7 +295,9 @@ icdevgroup.conf</literal>.
 		<literal>do &mdash; mv_dict_order</literal></title><cmdsynopsis>
 		(<literal></literal>/<literal></literal>,
 		default <literal></literal>)</cmdsynopsis><para>
-
+		Make dictionary matching follow dictionary order, where only word
+		characters and whitespace matter.
+		Ignored unless <mv>mv_dict_look</mv> is set.
 		</para>
 		</section>
 		<section id="mv_record_delim"><title>
@@ -295,7 +314,8 @@ icdevgroup.conf</literal>.
 		default <literal>0</literal>)</cmdsynopsis><para>
 		require that search field matches the search specification exactly
 		(as opposed to the default word-based matching, or substring matching
-		with <literal>su</literal>).
+		with <literal>su</literal>). Search specification will behave as it 
+		was enclosed in quotes.
 		</para>
 		</section>
 		<section id="mv_spelling_errors"><title>
@@ -319,8 +339,8 @@ icdevgroup.conf</literal>.
 		<section id="mv_search_file"><title>
 		<literal>fi &mdash; mv_search_file</literal></title><cmdsynopsis>
 		(<literal></literal>/<literal></literal>,
-		default <literal></literal>)</cmdsynopsis><para>
-
+		default all &conf-ProductFiles; tables)</cmdsynopsis><para>
+		tables and/or text files to be searched.
 		</para>
 		</section>
 		<section id="mv_field_title"><title>
@@ -376,9 +396,10 @@ icdevgroup.conf</literal>.
 		</section>
 		<section id="mv_like_field"><title>
 		<literal>lf &mdash; mv_like_field</literal></title><cmdsynopsis>
-		(<literal></literal>/<literal></literal>,
-		default <literal></literal>)</cmdsynopsis><para>
-
+		(<literal><replaceable>field_name</replaceable></literal>,
+		default none)</cmdsynopsis><para>
+		perform search similar to &glos-SQL; "LIKE" functionality.
+		When defined, <mv>mv_like_spec</mv> is required as well.
 		</para>
 		</section>
 		<section id="mv_list_only"><title>
@@ -397,9 +418,11 @@ icdevgroup.conf</literal>.
 		</section>
 		<section id="mv_like_spec"><title>
 		<literal>ls  &mdash; mv_like_spec</literal></title><cmdsynopsis>
-		(<literal></literal>/<literal></literal>,
-		default <literal></literal>)</cmdsynopsis><para>
-
+		(<literal><replaceable>search_specification</replaceable></literal>,
+		default none)</cmdsynopsis><para>
+		string to search for in <mv>mv_like_field</mv>.
+		The behaviour of the <literal>%</literal> character and case-sensitivity
+		depends upon your &glos-SQL; implementation.
 		</para>
 		</section>
 		<section id="mv_more_alpha"><title>
@@ -468,9 +491,9 @@ icdevgroup.conf</literal>.
 		</section>
 		<section id="mv_min_string"><title>
 		<literal>ms &mdash; mv_min_string</literal></title><cmdsynopsis>
-		(<literal></literal>/<literal></literal>,
-		default <literal></literal>)</cmdsynopsis><para>
-
+		(<literal><replaceable>min_length</replaceable></literal>,
+		default <literal>1</literal> for text-based searches)</cmdsynopsis><para>
+		minimum size of a search string for a search operation.
 		</para>
 		</section>
 		<section id="mv_negate"><title>
@@ -517,16 +540,9 @@ icdevgroup.conf</literal>.
 		</section>
 		<section id="mv_numeric"><title>
 		<literal>nu &mdash; mv_numeric</literal></title><cmdsynopsis>
-		(<literal></literal>/<literal></literal>,
-		default <literal></literal>)</cmdsynopsis><para>
-
-		</para>
-		</section>
-		<section id="mv_column_op"><title>
-		<literal>op &mdash; mv_column_op</literal></title><cmdsynopsis>
-		(<literal></literal>/<literal></literal>,
-		default <literal></literal>)</cmdsynopsis><para>
-
+		(1/0,
+		default 0)</cmdsynopsis><para>
+		search operator will perform numeric (instead of string) comparison.
 		</para>
 		</section>
 		<section id="mv_orsearch"><title>
@@ -545,9 +561,10 @@ icdevgroup.conf</literal>.
 		</section>
 		<section id="mv_return_all"><title>
 		<literal>ra &mdash; mv_return_all</literal></title><cmdsynopsis>
-		(<literal></literal>/<literal></literal>,
-		default <literal></literal>)</cmdsynopsis><para>
-
+		(1/0, 
+		default 0)</cmdsynopsis><para>
+		return all records
+		<!-- XXX how? ignoring searchspec? -->
 		</para>
 		</section>
 		<section id="mv_return_delim"><title>
@@ -609,9 +626,11 @@ icdevgroup.conf</literal>.
 		</section>
 		<section id="mv_return_spec"><title>
 		<literal>rs &mdash; mv_return_spec</literal></title><cmdsynopsis>
-		(<literal></literal>/<literal></literal>,
-		default <literal></literal>)</cmdsynopsis><para>
-
+		(1/0, 
+		default 0)</cmdsynopsis><para>
+		the one and only match from the search will be the value of the
+		<mv>mv_searchspec</mv> itself. Useful in testing, or yes/no
+		confirmation whether the search string was found
 		</para>
 		</section>
 		<section id="mv_range_max"><title>
