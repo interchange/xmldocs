@@ -175,7 +175,7 @@ __NAME__ synopsis
 	<entry>
 	</entry>
 	<entry>
-	Do not issue a <literal>MV_GIFT_CERT_CODE<literal> cookie to the
+	Do not issue a <literal>MV_GIFT_CERT_CODE</literal> cookie to the
 	client's browser?
 	</entry>
 
