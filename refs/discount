@@ -13,7 +13,7 @@ __NAME__ synopsis
 </row>
 <row>
 	<entry>
-		<group choice='opt'>
+		<group choice='plain'>
 			<arg choice='plain'>discount_space</arg>
 			<arg choice='plain'>space</arg>
 		</group>
