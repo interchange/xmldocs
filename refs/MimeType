@@ -1,0 +1,30 @@
+__NAME__ purpose
+specify MIME types
+__END__
+
+__NAME__ see also
+__END__
+
+__NAME__ synopsis
+<arg choice='plain' rep='repeat'>
+<replaceable>extension</replaceable>
+<replaceable>mime_type_name</replaceable>
+</arg>
+__END__
+
+__NAME__ description
+The directive defines MIME types.
+</para><para>
+The argument <literal>extension</literal> is the filename extension,
+or a special value "<literal>default</literal>" to apply to unknown
+content.
+__END__
+
+__NAME__ example: Defining __FILENAME__
+<programlisting><![CDATA[
+MimeType itl text/html
+
+MimeType default text/plain
+]]></programlisting>
+__END__
+

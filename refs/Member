@@ -1,0 +1,48 @@
+__NAME__ purpose
+override catalog variables for logged-in users
+__END__
+
+
+__NAME__ see also
+Variable, var
+__END__
+
+
+__NAME__ synopsis
+<arg choice='plain' rep='repeat'>
+  <replaceable>NAME</replaceable>
+  <replaceable>value</replaceable>
+</arg>
+__END__
+
+
+__NAME__ description
+The directive overrides values of catalog variables for logged-in users
+(usually members of the site).
+</para><para>
+The override functionality is available when the catalog variable is
+accessed using the &tag-var; tag.
+__END__
+
+
+__NAME__ notes
+__END__
+
+
+__NAME__ example: Overriding a variable
+Put the following in &ccf;:
+<programlisting>
+Variable GREETING Hello, Guest!
+
+Member GREETING Hello, Member!
+</programlisting>
+
+Put the following on an &IC; page:
+<programlisting>
+[var GREETING]
+</programlisting>
+The above will return <literal>Hello, Guest!</literal> or 
+<literal>Hello, Member!</literal>, depending on whether
+the user is logged in or not.
+__END__
+

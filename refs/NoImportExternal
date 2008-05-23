@@ -33,3 +33,6 @@ NoImportExternal 1
 </programlisting>
 __END__
 
+__NAME__ missing
+is NoExportExternal's documentation closer to this?
+__END__

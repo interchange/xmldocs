@@ -1,4 +1,27 @@
+__NAME__ purpose
 
-__NAME__ missing
-All
 __END__
+
+
+__NAME__ see also
+
+__END__
+
+
+__NAME__ synopsis
+<group choice='plain'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+__END__
+
+__NAME__ example: Enabling __FILENAME__
+<programlisting>
+__FILENAME__ yes
+</programlisting>
+__END__
+

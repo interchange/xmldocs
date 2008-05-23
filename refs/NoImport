@@ -14,7 +14,7 @@ imported from the text source files.
 __END__
 
 __NAME__ example: Disabling 'products' and 'inventory' table import
-Put the following in &gcf;:
+Put the following in &ccf;:
 <programlisting>
 NoImport products inventory
 </programlisting>

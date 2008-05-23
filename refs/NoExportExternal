@@ -1,0 +1,40 @@
+__NAME__ purpose
+enable use of the NoExport directive
+__END__
+
+
+__NAME__ synopsis
+<group choice='plain'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+The directive enables use of the &conf-NoExport; directive
+to control which external &glos-database; tables 
+should never be re-exported back to text source files.
+__END__
+
+__NAME__ notes
+For an introduction to "exporting" and the times it can occur, see 
+&glos-database; glossary entry and the &conf-NoExport; configuration
+directive.
+__END__
+
+
+__NAME__ see also
+NoExport, NoImport, NoImportExternal
+__END__
+
+__NAME__ example: Enabling __FILENAME__
+<programlisting>
+__FILENAME__ yes
+</programlisting>
+__END__
+
+__NAME__ author
+&jon; and &markj;
+__END__
+

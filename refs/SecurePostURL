@@ -1,0 +1,108 @@
+__NAME__ purpose
+specify URL for secure POST requests
+__END__
+
+
+__NAME__ see also
+PostURL, VendURL, SecureURL
+__END__
+
+
+__NAME__ synopsis
+<arg choice='plain'><replaceable>secure_URL</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive specifies a catalog URL for secure (HTTPS)
+POST form submissions.
+</para><para>
+This allows an automatically different path for GET and POST
+requests, presuming you use the &tag-process; tag as 
+&glos-form; action target.
+__END__
+
+
+__NAME__ notes
+&conf-__FILENAME__; value can also be a relative path, with or
+without the protocol and hostname specification.
+__END__
+
+
+__NAME__ example: Setting __FILENAME__
+Put the following lines in &ccf;:
+<programlisting>
+VendURL        http://&def-hostname;/
+SecureURL      https://&def-hostname;/
+PostURL        http://&def-hostname;/cgi-bin/&std-catalog;
+SecurePostURL  https://&def-hostname;/cgi-bin/&std-catalog;
+</programlisting>
+__END__
+
+__NAME__ author
+&mheins;
+__END__
+
+
+  This allows Interchange to handle internal redirects and DirectoryIndex
+  requests via Apache transparently via reading the REDIRECT_* environment.
+  It should also allow internal redirects via other modules such as mod_perl.
+
+  The default for the [process ..] tag is the same as now, to use VendURL
+  or SecureVendURL as the default URL.
+
+  If you set up in Apache:
+
+  	DirectoryIndex index.html /cgi-bin/foundation
+	<LocationMatch *\.html>
+		ErrorDocument 404 /cgi-bin/foundation
+	</LocationMatch>
+
+  In interchange.cfg:
+
+  	AcceptRedirect Yes
+
+  In catalog.cfg:
+
+  	VendURL        http://www.foo.com/
+  	SecureURL      https://www.foo.com/
+  	PostURL        http://www.foo.com/cgi-bin/foundation
+  	SecurePostURL  https://www.foo.com/cgi-bin/foundation
+
+	ImageDir
+	DirectoryIndex  index.html
+	DeliverImage    yes
+
+  then a properly set up catalog (using [process href="[whatever]"]
+  on any form action that is a POST) will look just like a static
+  HTML site, and will deliver relative images and simple links
+  properly for a GET.
+
+  There should be no difference to normal operation of Interchange if
+  these changes are not made.
+
+* Delivering images properly for a POST is a different story. There
+  needs to be some thought on this -- it could be that:
+
+	<head>
+	[calc]
+		my $method = $Tag->env('REQUEST_METHOD');
+		return unless $method =~ /post/i;
+		my $path = '@@MV_PAGE@@';
+		return unless $path =~ s,(.*)/.*,$1,;
+		return qq{<BASE HREF="$path">};
+	[/calc]
+	</head>
+
+  will handle most anything.
+
+* Improve handling of
+
+	 [page href="http://www.foo.com/bar.html"
+	 	   form="
+		   		buz=baz
+		   "]
+
+   It will now deliver the link you would expect:
+
+   		http://www.foo.com/bar.html?buz=baz

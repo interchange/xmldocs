@@ -1,0 +1,27 @@
+__NAME__ purpose
+specify databases not to re-export
+__END__
+
+
+__NAME__ synopsis
+<arg choice='plain' rep='repeat'><replaceable>table_name</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive specifies external &glos-database; tables that should
+never be exported back to the text source files.
+__END__
+
+__NAME__ example: Disabling 'products' and 'inventory' table export
+Put the following in &ccf;:
+<programlisting>
+NoExport products inventory
+NoExportExternal yes
+</programlisting>
+__END__
+
+__NAME__ author
+&jon; and &markj;
+__END__
+
