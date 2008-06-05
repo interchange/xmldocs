@@ -1,3 +1,7 @@
+__NAME__ purpose
+display forum threads
+__END__
+
 __NAME__ synopsis 
 <row>
 
