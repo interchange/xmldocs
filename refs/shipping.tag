@@ -6,6 +6,25 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	mode
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	possible
 	</entry>
 	<entry>
@@ -18,7 +37,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	list of possible shipping modes
 	</entry>
 
 </row> 
@@ -118,6 +137,23 @@ __NAME__ synopsis
 
 </row> 
 <row>
+	<entry>
+	free
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	text for free shipping
+	</entry>
+</row>
+<row>
 
 	<entry>
 	reset_modes
@@ -215,6 +251,45 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	country_var
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<literal>country</literal>
+	</entry>
+	<entry>
+	name of country variable in &glos-value; namespace
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	state_var
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<literal>state</literal>
+	</entry>
+	<entry>
+	name of state variable in &glos-value; namespace
+	</entry>
+
+</row> 
+
+<row>
+
+	<entry>
 	hide_error
 	</entry>
 	<entry>
@@ -272,4 +347,25 @@ __NAME__ synopsis
 &ROW_CURRENCYDISPLAY;
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
+__END__
+
+__NAME__ example: Show available shipping options
+<programlisting><![CDATA[
+[shipping possible=1]
+]]></programlisting>
+__END__
+
+__NAME__ example: 
+<programlisting><![CDATA[
+<select name="mv_shipmode">
+[shipping free="Free!" label=1 
+    format=|<option value="%M"%S>%D</option>| 
+    mode=|[shipping possible=1]|
+]
+</select>
+]]></programlisting>
+__END__
+
+__NAME__ see also
+SpecialSub, assign
 __END__
