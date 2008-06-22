@@ -11,6 +11,7 @@
 <!ENTITY r5.2.0 "4.6.0;4.8.0;5.0.0;5.2.0">
 <!ENTITY r5.5.0 "4.6.0;4.8.0;5.0.0;5.2.0;5.5.0">
 <!ENTITY r5.5.2 "4.6.0;4.8.0;5.0.0;5.2.0;5.5.0;5.5.2">
+<!ENTITY r5.6.0 "4.6.0;4.8.0;5.0.0;5.2.0;5.5.0;5.5.2;5.6.0">
 
 <!-- GENERAL ENTITIES -->
 <!ENTITY GNU "<ulink url='http://www.gnu.org'>GNU</ulink>">
@@ -291,17 +292,15 @@ values above are not properly aligned. This is an unfortunate nature of
 <row>
   <entry>
     <group choice='plain'>
-			<arg choice='plain'>border</arg>
-			<arg choice='plain'>height</arg>
-			<arg choice='plain'>width</arg>
-			<arg choice='plain'>hspace</arg>
-			<arg choice='plain'>vspace</arg>
-			<arg choice='plain'>align</arg> 
+			<arg choice='plain'>name</arg> 
+			<arg choice='plain'>id</arg> 
+			<arg choice='plain'>class</arg> 
+			<arg choice='plain'>style</arg> 
     </group>
   </entry>
   <entry></entry><entry></entry>
   <entry></entry>
-  <entry>The usual &glos-HTML; attributes.</entry>
+  <entry>The standard &glos-HTML; attributes.</entry>
 </row>
 ">
 <!ENTITY ROW_HTML_ext "

@@ -251,6 +251,7 @@ __NAME__ synopsis2
 	directives. This option does honor locale settings.
 	</entry>
 </row>
+&ROW_HTML_std;
 &ROW_HTML_ext;
 &ROW_EXTRA_none;
 __END__
