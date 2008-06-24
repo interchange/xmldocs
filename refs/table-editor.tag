@@ -1,46 +1,31 @@
+__NAME__ purpose
+table editor
+__END__
+
 __NAME__ synopsis 
 <row>
 
 	<entry>
+	mv_data_table | table
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	table name
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	hidden
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	mv_data_table
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	table
 	</entry>
 	<entry>
 	<!-- POS -->
@@ -546,7 +531,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	inline help
 	</entry>
 
 </row> 
@@ -857,6 +842,25 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	widget_class
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	HTML class for all widgets
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	width
 	</entry>
 	<entry>
@@ -961,10 +965,48 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>OK</literal>
 	</entry>
 	<entry>
-	<!-- DSC -->
+	Label for "OK" button.
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	cancel_text
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<literal>Cancel</literal>
+	</entry>
+	<entry>
+	Label for "Cancel" button.
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	back_text
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<literal>Back</literal>
+	</entry>
+	<entry>
+	Label for "Back" button.
 	</entry>
 
 </row> 
@@ -1066,25 +1108,6 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	cancel_text
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
 	wizard_cancel
 	</entry>
 	<entry>
@@ -1120,25 +1143,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-<row>
 
-	<entry>
-	back_text
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
 <row>
 
 	<entry>
