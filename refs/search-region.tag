@@ -6,6 +6,25 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	arg
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	search
 	</entry>
 	<entry>
