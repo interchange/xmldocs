@@ -6,7 +6,10 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	mv_data_table | table
+	<group>
+	<arg choice='plain'>mv_data_table</arg>
+	<arg choice='plain'>table</arg>
+        </group>
 	</entry>
 	<entry>
 	Yes
@@ -25,19 +28,22 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	hidden
+	<group>
+	<arg choice='plain'>item_id</arg>
+	<arg choice='plain'>key</arg>
+	</group>
 	</entry>
 	<entry>
-	<!-- POS -->
+	Yes
 	</entry>
 	<entry>
-	<!-- REQ -->
+	No
 	</entry>
 	<entry>
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	key
 	</entry>
 
 </row> 
@@ -64,25 +70,6 @@ __NAME__ synopsis
 
 	<entry>
 	cgi
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	item_id
 	</entry>
 	<entry>
 	<!-- POS -->
@@ -367,6 +354,25 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	hidden
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	&NODEFAULT;
+	</entry>
+	<entry>
+	hidden form variables
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	default
 	</entry>
 	<entry>
@@ -376,10 +382,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	&NODEFAULT;
 	</entry>
 	<entry>
-	<!-- DSC -->
+	default values
 	</entry>
 
 </row> 
@@ -1007,6 +1013,25 @@ __NAME__ synopsis
 	</entry>
 	<entry>
 	Label for "Back" button.
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	no_top
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	&NODEFAULT;
+	</entry>
+	<entry>
+	Whether to hide buttons at the top or not.
 	</entry>
 
 </row> 
