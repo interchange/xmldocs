@@ -11,10 +11,10 @@ __END__
 __NAME__ synopsis
 <group choice='plain' rep='repeat'>
 	<arg choice='plain'>
-		<replaceable>table</replaceable>:<replaceable>column</replaceable>
+		[=?]<replaceable>table</replaceable>:<replaceable>column</replaceable>
 	</arg>
 	<arg choice='plain'>
-		<replaceable>column</replaceable>
+		[=?]<replaceable>column</replaceable>
 	</arg>
 </group>
 __END__
@@ -28,14 +28,19 @@ for an item.
 If the argument contains a colon "<literal>:</literal>", it is treated
 as a <literal><replaceable>TABLE:COLUMN</replaceable></literal> specification.
 Otherwise it indicates the name of the column and the table
-defaults to the first (of possibly more) &conf-ProductFiles; databases.
+defaults to the first &conf-ProductFiles; database.
 </para><para>
 The record with the matching product &glos-SKU; must exist in the 
 target database, or the quantity will be unlimited.
 </para><para>
-It is possible to specify multiple database fields (separated by commas), 
-in which case the maximum quantity allowed is set to the sum of all quantities
+It is possible to specify multiple database fields (separated by commas or
+spaces), in which case the maximum quantity allowed is set to the sum of
+all quantities
 found.
+</para><para>
+As of Jun 26, 2008, a field prefixed with <literal>=</literal> overrides
+any previous value, while a field prefixed with <literal>?</literal>
+overrides previous value only if the new value is greater than zero.
 __END__
 
 __NAME__ notes
@@ -55,10 +60,19 @@ MaxQuantityField inventory:quantity
 </programlisting>
 __END__
 
-
 __NAME__ example: Setting __FILENAME__
 <programlisting>
-MaxQuantityField inventory:quantity, products:on_hand
+MaxQuantityField inventory:quantity, products:in_stock products:on_hand
+</programlisting>
+Notice we can use commas and whitespace interchangeably to separate fields.
+__END__
+
+__NAME__ example: Setting __FILENAME__
+Override any previous value with
+<database class='field'>products:on_hand</database>,
+if it contains a value greater than zero.
+<programlisting>
+MaxQuantityField inventory:quantity ?products:on_hand
 </programlisting>
 __END__
 
