@@ -291,12 +291,10 @@ values above are not properly aligned. This is an unfortunate nature of
 <!ENTITY ROW_HTML_std "
 <row>
   <entry>
-    <group choice='plain'>
-			<arg choice='plain'>name</arg> 
-			<arg choice='plain'>id</arg> 
-			<arg choice='plain'>class</arg> 
-			<arg choice='plain'>style</arg> 
-    </group>
+			<arg choice='plain'>name</arg>,
+			<arg choice='plain'>id</arg>,
+			<arg choice='plain'>class</arg>,
+			<arg choice='plain'>style</arg>
   </entry>
   <entry></entry><entry></entry>
   <entry></entry>
@@ -306,16 +304,14 @@ values above are not properly aligned. This is an unfortunate nature of
 <!ENTITY ROW_HTML_ext "
 <row>
   <entry>
-    <group choice='plain'>
-			<arg choice='plain'>border</arg>
-			<arg choice='plain'>height</arg>
-			<arg choice='plain'>width</arg>
-			<arg choice='plain'>hspace</arg>
-			<arg choice='plain'>vspace</arg>
-			<arg choice='plain'>align</arg> 
-			<arg choice='plain'>title</arg> 
+			<arg choice='plain'>border</arg>,
+			<arg choice='plain'>height</arg>,
+			<arg choice='plain'>width</arg>,
+			<arg choice='plain'>hspace</arg>,
+			<arg choice='plain'>vspace</arg>,
+			<arg choice='plain'>align</arg>,
+			<arg choice='plain'>title</arg>,
 			<arg choice='plain'>alt</arg> 
-    </group>
   </entry>
   <entry></entry><entry></entry>
   <entry></entry>
