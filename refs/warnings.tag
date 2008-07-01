@@ -121,7 +121,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	"list_$_"
+	list_style
 	</entry>
 	<entry>
 	<!-- POS -->
@@ -130,7 +130,45 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	&NODEFAULT;
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	list_class
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	&NODEFAULT;
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	list_extra
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	&NODEFAULT;
 	</entry>
 	<entry>
 	<!-- DSC -->
@@ -149,7 +187,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>&lt;li&gt;</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
