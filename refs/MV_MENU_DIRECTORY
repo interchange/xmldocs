@@ -1,3 +1,15 @@
 __NAME__ purpose
 directory for menu files
 __END__
+
+__NAME__ synopsis
+<group choice='req'>
+	<arg choice='plain'><replaceable>path</replaceable></arg>
+</group>
+__END__
+
+__NAME__ example
+<programlisting>
+Variable MV_MENU_DIRECTORY menus
+</programlisting>
+__END__
