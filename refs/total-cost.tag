@@ -18,7 +18,7 @@ __NAME__ synopsis
 	</entry>
 	<entry>Yes</entry>
 	<entry>Yes</entry>
-	<entry>Default cart</entry>
+	<entry><literal>main</literal></entry>
 	<entry>Electronic &glos-cart; name.</entry>
 </row>
 <row>
@@ -60,7 +60,7 @@ __END__
 __NAME__ description
 The tag displays the total monetary value of the user's electronic
 &glos-cart;, including all &glos-price; adjustments such as quantity
-pricing, &glos-discount;s, handling, shipping and &glos-tax;ing.
+pricing, &glos-discount;s, handling, &glos-shipping; and &glos-tax;ing.
 __END__
 
 
