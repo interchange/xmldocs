@@ -31,9 +31,9 @@ and are of the following types:
 
 Discounts within the &tag-discount; tag are specified using a formula.
 The formula is scanned for
-the <varname>$q</varname> and <varname>$s</varname> variables which are
+the <literal>$q</literal> and <literal>$s</literal> variables which are
 substituted for the item quantity and subtotal respectively.
-The variable <varname>$s</varname> is saved between
+The variable <literal>$s</literal> is saved between
 iterations, so that the discounts can be cumulative.
 </para><para>
 In case of individual item discounts, the formula must be constructed to
