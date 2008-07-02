@@ -1,4 +1,11 @@
 __NAME__ see also
-TaxShipping
+DefaultShipping, TaxShipping
 __END__
 
+__NAME__ example
+<programlisting>
+Shipping   Postal     default_geo   45056
+Shipping   QueryUPS   default_geo   45056
+Shipping   default    dir           products/ship
+</programlisting>
+__END__
