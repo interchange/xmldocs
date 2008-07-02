@@ -36,3 +36,8 @@ Your country code is: [value country]
 ]]></programlisting>
 __END__
 
+__NAME__ example: Set default shipping mode
+<programlisting>
+ValuesDefault mv_shipmode UPS
+</programlisting>
+__END__
