@@ -78,5 +78,7 @@ DatabaseDefault      WRITE_TAGGED    1
 __END__
 
 __NAME__ example: Clearing default values
+<programlisting>
 Replace DatabaseDefault
+</programlisting>
 __END__
