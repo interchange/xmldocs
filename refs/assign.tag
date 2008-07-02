@@ -107,6 +107,7 @@ __NAME__ synopsis
 	Clear all assignments?
 	</entry>
 </row> 
+&TAG_NON_CONTAINER;
 __END__
 
 
