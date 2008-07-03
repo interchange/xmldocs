@@ -46,7 +46,7 @@ The tag is used to implement per-customer discounts. Discounts can
 be applied to individual items, groups of items, or total orders.
 </para><para>
 The tag accepts &PERL; code in its body. Two special variables,
-<varname>$q</varname> and <varname>$s</varname>, are available and 
+<literal>$q</literal> and <literal>$s</literal>, are available and 
 represent item quantity and base price.
 </para><para>
 &PERL; variables can be shared among &tag-calc; blocks
