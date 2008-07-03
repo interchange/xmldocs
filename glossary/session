@@ -5,8 +5,9 @@ The session contains:
 <listitem>&glos-cart; contents</listitem>
 <listitem>&glos-CGI; variables</listitem>
 <listitem>&glos-value; variables</listitem>
-<listitem>errors, see <tag>error</tag></listitem>
-<listitem>warnings, see <tag>warnings</tag></listitem>
+<listitem><tag>error</tag>s</listitem>
+<listitem><tag>warnings</tag></listitem>
+<listitem>&glos-discount; settings</listitem>
 <listitem>input filters in the <literal>Filter</literal> key, see <tag>input-filter</tag>
 </listitem>
 </itemizedlist>
