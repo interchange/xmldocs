@@ -41,7 +41,9 @@ __NAME__ see also
 __END__
 
 __NAME__ example: dml strict
+<programlisting>
 Pragma dml=strict
+</programlisting>
 __END__
 
 __NAME__ author
