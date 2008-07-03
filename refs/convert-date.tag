@@ -59,10 +59,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>%d-%b-%Y</literal>
 	</entry>
 	<entry>
-	<!-- DSC -->
+	format string
 	</entry>
 
 </row> 
@@ -113,3 +113,13 @@ __NAME__ missing
 option descriptions
 __END__
 
+__NAME__ description
+The format string is documented in &glos-time;.
+__END__
+
+__NAME__ example
+<programlisting><![CDATA[
+[convert-date format="%B %e, %Y"]20080701[/convert-date]
+]]></programlisting>
+yields <literal>July 1, 2008</literal>.
+__END__
