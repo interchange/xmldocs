@@ -3,7 +3,8 @@ There are different types of profiles in Interchange:
 <itemizedlist>
 <listitem>search profiles</listitem>
 <listitem>form profiles</listitem>
-<listitem>...</listitem>
+<listitem>user profiles (see &conf-Profile;)</listitem>
+<listitem>UserDB profiles (see &conf-UserDB;)</listitem>
 </itemizedlist>
 </para>
 
