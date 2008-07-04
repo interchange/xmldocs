@@ -50,7 +50,10 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	ui_meta_view
+	<group>
+	<arg choice='plain'>ui_meta_view</arg>
+	<arg choice='plain'>view</arg>
+	</group>
 	</entry>
 	<entry>
 	<!-- POS -->
@@ -163,8 +166,11 @@ __NAME__ synopsis
 </row> 
 <row>
 
-	<entry>
-	ui_clone_id
+	<entry>	
+	<group>
+	<arg choice='plain'>ui_clone_id</arg>
+	<arg choice='plain'>clone</arg>
+        </group>
 	</entry>
 	<entry>
 	<!-- POS -->
@@ -176,7 +182,29 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	clone existing record
+	</entry>
+
+</row> 
+<row>
+
+	<entry>	
+	<group>
+	<arg choice='plain'>ui_profile</arg>
+	<arg choice='plain'>profile</arg>
+        </group>
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<olink targetdoc="glossary" targetptr="form_profiles">form profile</olink>
 	</entry>
 
 </row> 
@@ -1211,25 +1239,6 @@ __NAME__ synopsis
 
 	<entry>
 	auto_secure
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	ui_profile
 	</entry>
 	<entry>
 	<!-- POS -->
