@@ -1,4 +1,15 @@
+There are different types of profiles in Interchange:
 
+<itemizedlist>
+<listitem>search profiles</listitem>
+<listitem>form profiles</listitem>
+<listitem>...</listitem>
+</itemizedlist>
+</para>
+
+<section id="form_profiles">
+<title>Form Profiles</title>
+<para>
 &IC; form <emphasis>profiles</emphasis> are used to validate form inputs and
 eventually trigger additional actions. The validation usually consists
 in requiring that some of the fields are non-empty or match a specific regular
@@ -186,7 +197,7 @@ username=length 6-32 Size limits exceeded (6-32 characters)
 </programlisting>
 </para>
 </section>
-
+</section>
 <para>
 
 
