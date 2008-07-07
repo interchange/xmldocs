@@ -243,7 +243,7 @@ With a base date of <literal>Mon 01 Jan 2001 11:29:03 AM EST</literal>,
 this tag would display <literal>Mon 01 Jan 2001 08:29:03 AM EST</literal>.
 __END__
 
-__NAME__ example: Current date suitable for MySQL datetime fields
+__NAME__ example: ISO 8601 date suitable for MySQL datetime and PostgreSQL timestamp fields
 <programlisting>
 [time]%Y-%m-%d %H:%M:%S[/time]
 </programlisting>
