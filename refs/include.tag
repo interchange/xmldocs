@@ -4,7 +4,7 @@ __END__
 __NAME__ synopsis 
 <row>
 	<entry>
-	name
+	file
 	</entry>
 	<entry>
 	Yes
