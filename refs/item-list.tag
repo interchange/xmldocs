@@ -37,7 +37,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	display items in reverse order
 	</entry>
 
 </row> 
@@ -53,7 +53,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>item</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
