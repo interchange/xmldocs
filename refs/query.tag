@@ -34,7 +34,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>sql</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
