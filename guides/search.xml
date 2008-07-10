@@ -218,7 +218,11 @@ Now you can start indexing with <literal>swish-e -S prog -c
 		</para><para>
 		If the number of search fields (<literal>sf</literal> options) equals the
 		number of search specs (<literal>se</literal> options), the search will
-		return only items that match all field-specification pairs.
+		return items that match all or one of the field-specification blocks
+		(controlled with <mv>mv_orsearch</mv>).
+		When the two numbers do not match, coordinated mode will be automatically
+		and silently turned off. To force a coordinated search, see 
+		<mv>mv_force_coordinate</mv>.
 		</para><para>
 		When coordinated searching is used, case sensitivity, substring matching,
 		negation and other options can be specified multiple times and work on a
@@ -323,6 +327,23 @@ Now you can start indexing with <literal>swish-e -S prog -c
 		(<literal></literal>/<literal></literal>,
 		default <literal></literal>)</cmdsynopsis><para>
 
+		</para>
+		</section>
+		<section id="mv_force_coordinate"><title>
+		<literal>fc &mdash; mv_force_coordinate</literal></title><cmdsynopsis>
+		(<literal>0</literal>/<literal>1</literal>,
+		default <literal>0</literal>)</cmdsynopsis><para>
+		force coordinated search (enabled with <mv>mv_coordinate</mv>).
+		</para><para>
+		Normally, coordinated mode is automatically turned off when the
+		number of search specifications does not match the number of search 
+		fields. With this option, however, instead of disabling coordinated mode,
+		&IC; ensures the number of search specifications does match the
+		number of fields by filling the missing specifications with the last
+		one specified, or by discarding extras.
+		</para><para>
+		This option is useful when you want to search for one string
+		in multiple fields with different options.
 		</para>
 		</section>
 		<section id="mv_field_file"><title>
