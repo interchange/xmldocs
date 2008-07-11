@@ -1,0 +1,74 @@
+" Lightweight alternative to vim-docbook plugin
+" Davor Ocelic, docelic@spinlocksolutions.com
+
+im ,a <application>
+im ,A </application>
+im ,c <command>
+im ,C </command>
+im ,g <group choice='opt'>
+im ,G </group>
+im ;c <classname>
+im ;C </classname>
+im ,p <programlisting>
+im ,P </programlisting>
+im ,,p <programlisting><![CDATA[
+im ,,P ]]></programlisting>
+im ,i <listitem><para>
+im ,I </para></listitem>
+im ,l <itemizedlist>
+im ,L </itemizedlist>
+im ,e <emphasis>
+im ,E </emphasis>
+im ,,e <entry>
+im ,,E </entry>
+im ,b <emphasis role='bold'>
+im ,B </emphasis>
+im ,v <literal>
+im ,V </literal>
+im ,r <replaceable>
+im ,R </replaceable>
+im ,d <database>
+im ,D </database>
+im ,f <database class='field'>
+im ,F </database>
+im ,t <title>
+im ,T </title>
+im ,s <section>
+im ,S </section>
+im ;s <screen>
+im ;S </screen>
+im ,u <userinput>
+im ,U </userinput>
+im ,o <option>
+im ,O </option>
+im ,n <note>
+im ,N </note>
+im ,m <citerefentry><refentrytitle/
+im ,,m /<manvolnum/
+im ,M /</>
+im ,k <keysym>
+im ,K </keysym>
+im ;v <varname>
+im ;V </varname>
+im ;p <para>
+im ;P </para>
+im ;d <filename class='directory'>
+im ;D </filename>
+im ;f <filename>
+im ;F </filename>
+im ;p <para>
+im ;P </para>
+im ;e <example>
+im ;E </example>
+im ;i <important>
+im ;I </important>
+im ;a <arg choice='plain'>
+im ;A </arg>
+im ;;I &ROW_INTERPOLATE_0;
+im ;;R &ROW_REPARSE_1;
+im ;;e <envar>
+im ;;E </envar>
+im ,,q <qandaentry><question><para>
+im ,,Q </para></question><answer><para>
+im ,,a </para></question><answer><para>
+im ,,A </para></answer></qandaentry>
