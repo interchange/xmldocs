@@ -38,6 +38,7 @@
 		reference  toc,title,example
 		book       nop
 		glossary   toc,title
+		qandaset   toc
 	</xsl:param>
 
 	  <xsl:template match="mv"><xsl:call-template name="inline.monoseq"/></xsl:template>

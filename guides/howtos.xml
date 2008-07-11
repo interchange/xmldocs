@@ -1,0 +1,1133 @@
+<?xml version="1.0" standalone="no"?>
+
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+	"../docbook/docbookxi.dtd">
+
+<article id='howtos'>
+
+<articleinfo>
+	<title>Interchange HOWTOs: A Collection of Recipes</title>
+	<titleabbrev>howtos</titleabbrev>
+
+	<copyright>
+		<year>2003</year><year>2004</year><year>2005</year>
+		<year>2006</year><year>2007</year><year>2008</year>
+		<holder>Interchange Development Group</holder>
+	</copyright>
+
+	<authorgroup>
+		<author>
+			<firstname>Davor</firstname><surname>Ocelic</surname>
+			<email>docelic@icdevgroup.org</email>
+		</author>
+	</authorgroup>
+
+
+	<legalnotice>
+		<para>
+		This documentation is free; you can redistribute it and/or modify
+		it under the terms of the &GNU; General Public License as published by
+		the Free Software Foundation; either version 2 of the License, or
+		(at your option) any later version.
+		</para>
+		<para>
+		It is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+		</para>
+	</legalnotice>
+
+	<abstract>
+		<para>
+		</para>
+	</abstract>
+
+</articleinfo>
+
+
+<qandaset defaultlabel='howto'>
+
+<qandadiv><title>Interchange</title>
+
+	<qandadiv><title>Core</title>
+		<qandaentry><question><para>
+		Controlling access to pages
+		</para></question><answer><para>
+There's a built-in &IC; way to control access to pages served
+from the &conf-PageDir; directories.
+</para><para>
+If the directory containing the requested page contains file
+named <filename>.access</filename> &mdash; and that file's size is zero bytes
+&mdash; then access can be "gated" in one of the following ways:
+</para>
+<itemizedlist>
+<listitem><para>
+If the file <filename>.access_gate</filename> is also present, it will be
+read and scanned to perform page-based access decision. It will also
+override any other method.
+<!-- XXX overrides as in other methods are not tried, or as in takes precedence? -->
+</para></listitem>
+<listitem><para>
+If the &glos-variable; <varname>MV_USERDB_REMOTE_USER</varname> is set to
+&glos-true; value, any user logged in via &conf-UserDB; will receive access
+to all pages in the directory.
+</para></listitem>
+<listitem><para>
+If the variable <varname>MV_USERDB_ACL_TABLE</varname> is set to a valid
+database identifier, the &conf-UserDB; module can control access with simple
+ACL logic. If <varname>MV_USERDB_REMOTE_USER</varname> is set, this capability
+is not available.
+</para></listitem>
+</itemizedlist>
+
+<para>
+
+<filename>.access_gate</filename> file format is as follows:
+<programlisting>
+<replaceable>PAGE_NAME</replaceable>: <replaceable>CONDITION</replaceable>
+</programlisting>
+<replaceable>PAGE_NAME</replaceable> is the name of page to be controlled,
+and the page suffix (such as <literal>.html</literal>) is optional.
+Page name of <literal>*</literal> can be used to set a default permission.
+</para><para>
+The <replaceable>CONDITION</replaceable> is a simple &glos-true; (or 
+<literal>Yes</literal>) or &glos-false; (or <literal>No</literal>) value
+which may come, and in fact often comes, from
+&glos-interpolate;d &glos-ITL; code.
+The implicit default permission is <literal>No</literal>, so leaving the default
+entry unspecified results in all non-matching users being denied access.
+	</para>
+	<para>
+Here's a very simple example:
+<programlisting>
+pubview: Yes
+*: No
+</programlisting>
+	</para>
+	<para>
+Here's an example that includes &glos-ITL; interpolation and is
+verbose enough not to require additional explanation.
+<programlisting>
+foo.html: [if session username eq 'flycat']
+          Yes
+          [/if]
+
+bar:      [if session username eq 'flycat'][or scratch allow_bar]
+          Yes
+          [/if]
+
+baz:      yes
+
+*:        [data session logged_in]
+</programlisting>
+
+<!-- XXX is it first match wins, and can you say page*: ... ? 
+
+-->
+
+		</para></answer></qandaentry>
+
+
+		<qandaentry><question><para>
+		Implementing banner ad display and rotation
+		</para></question><answer><para>
+	Banner display in &IC; is implemented using the <tag>banner</tag> tag.
+	There are two terms which need to be understood first:
+</para>
+<itemizedlist>
+	<listitem><para>
+	Banner display - term referring to general banner display. Actual code
+	behavior might be affected by the
+	<arg choice='plain'>category</arg> or
+	<arg choice='plain'>weighted</arg> attributes passed to the tag.
+	</para></listitem>
+	<listitem><para>
+	Banner rotation - term referring to selecting exactly one banner, if
+	there are multiple banners defined in the
+	<database class='field'>banner</database> database field. Those
+	multiple banners are displayed in sequential order, with a separate
+	counter kept for each client.
+	</para></listitem>
+</itemizedlist>
+
+
+<para>
+	Additionally, we need to clarify the difference between
+	<emphasis>categorized</emphasis> and <emphasis>rotated</emphasis> display.
+</para><para>
+	Categorized display (mostly used in combination with weighting) makes
+	all banners matching a specific category to be displayed the appropriate
+	amount of time (adding weight gives a banner more visibility).
+	</para><para>
+	Rotated display makes multiple banners from the same
+	<database class='field'>banner</database> database field to be selected
+	<emphasis>in sequential order, for each client separately</emphasis>.
+	</para><para>
+	Both categorized/weighted and rotating techniques can be used together.
+</para>
+<para>
+	For the <tag>banner</tag> tag to work, you will need a
+	<database class='table'>banner</database> table. Here's an 
+	example:
+</para>
+<programlisting>
+<xi:include parse='text' href='../files/banner/banner.txt'/>
+</programlisting>
+<para>
+	You might notice that the fields names and values in the tables
+	above are not properly aligned. This is an unfortunate nature of
+	&glos-tab-delimited; files.
+</para>
+<para>
+	To minimize the chance of confusion, you can download properly composed
+	<ulink url="files/banner/banner.txt">banner.txt</ulink>.
+</para>
+<para>
+	Field descriptions follow:
+<itemizedlist>
+	<listitem><para>
+	<database class='field'>code</database> - key for an item (of course,
+	the key has to be unique).
+	</para><para>
+	In a default non-weighted display, the <arg choice='plain'>category</arg>
+	attribute is expected to reference this unique code.
+	</para><para>
+	In a &glos-weighted; display, the value of this field is not that
+	important because the choice is made by selecting database rows
+	regardless of their <database class='field'>code</database>.
+	</para></listitem>
+	<listitem><para>
+	<database class='field'>category</database> - categorize weighted ads.
+	If empty, the banner will be placed in category
+	<literal>default</literal>.
+	</para></listitem>
+	<listitem><para>
+	<database class='field'>weight</database> - banner weight. Must be an
+	integer equal or greater than 1 to consider the banner for
+	display. 0 or blank will ignore the banner when weighted ads are built.
+	</para></listitem>
+	<listitem><para>
+	<database class='field'>rotate</database> - 
+	must contain a value if weighted banners are
+	<emphasis role='bold'>not</emphasis> used:
+	<itemizedlist>
+		<listitem><para>
+		Empty value will prevent the banner from being displayed.
+		</para></listitem>
+		<listitem><para>
+		Literal value of
+		<literal>0</literal> (zero) will cause the entire content of the banner
+		field to be displayed when the category is matched.
+		</para></listitem>
+		<listitem><para>
+		Non-zero value will cause the banner field to be split into segments
+		using the specified or default delimiter. For each segment, the
+		banner will then rotate in sequence (for each website visitor
+		separately).
+		Obviously, the first banner in the sequence is more likely to be
+		displayed
+		than the last.
+		</para></listitem>
+	</itemizedlist>
+	</para></listitem>
+	<listitem><para>
+	<database class='field'>banner</database> - the field containing actual
+	banner content. Multiple banner texts (if this feature is used) need to be
+	separated using the specified or default delimiter.
+	</para></listitem>
+</itemizedlist>
+</para>
+
+
+<para>
+As usual, &glos-database;s first need to be registered for use
+with the catalog, and so is the case with the above text database.
+The following modification to your
+<filename>catalog.cfg</filename> is needed (and a
+catalog reconfiguration
+afterwards &mdash; see &howto-daemon-control;):
+<programlisting>
+Database   banner   banner.txt   TAB
+Database   banner   NUMERIC      weight
+</programlisting>
+</para>
+<para>
+Now that we have everything in place, we can start experimenting with the
+<tag>banner</tag> tag.
+</para>
+<para>
+To display weighted banners from a specific category (say, 
+<literal>tech</literal>), use
+<code>[banner weighted=1 category=tech]</code>. The tag would look for
+<emphasis>all</emphasis> banners where the
+<database class='field'>weight</database> field is positive integer and
+the <database class='field'>category</database> matches "tech", and 
+build them in the <filename class='directory'>tmp/Banners/tech/</filename>
+directory.
+</para>
+<para>
+To display weighted banners regardless of the category, use
+<code>[banner weighted=1]</code>. The tag would look for
+<emphasis>all</emphasis> banners where the
+<database class='field'>weight</database> field is positive integer, and
+build them in the <filename class='directory'>tmp/Banners/</filename>
+directory. Note that the total sum of weights in our sample database
+is 20, so each weight point is worth
+<literal>100/20 = 5%</literal>. Therefore, the banners
+with the weight of <literal>7</literal> would be displayed
+35% of the time each.
+</para>
+<para>
+To display categorized, non-&glos-rotated-banner;s from category
+<literal>tech</literal>, use
+<code>[banner category=tech]</code>, which is equal in effect to
+<code>[data table=banner field=banner key=tech foreign=category]</code>.
+<emphasis role='bold'>Note that the 
+value of the <database class='field'>rotate</database> field must be
+<literal>0</literal></emphasis>.
+</para>
+<para>
+To display categorized,
+&glos-rotated-banner;s (from category
+<literal>tech</literal>), use
+<code>[banner category=tech]</code>, which is equal in effect to
+<code>[data table=banner col=banner key=tech]</code>. <emphasis role='bold'>
+Note that the 
+value of the <database class='field'>rotate</database> field must be
+<literal>1</literal></emphasis>.
+</para>
+<para>
+To display multilevel-categorized banners (from say, category 
+<literal>tech:hw:monitors</literal>), use
+<code>[banner category=tech:hw:monitors]</code>. The colon will help &IC;
+select the most specific banner available, so the difference in
+respect to single-level categories is the fallback mechanism; if no
+banners are found in the <literal>tech:hw:monitors</literal> category,
+the <tag>banner</tag> will try a fallback to <literal>tech:hw</literal>,
+and finally to <literal>tech</literal>.
+</para>
+<para>
+For futher, supplementary reading on banners ads and standard 
+banner sizes, check out the
+<olink targetdoc='glossary' targetptr='ad'/> glossary entry.
+		</para></answer></qandaentry>
+	</qandadiv>
+
+	<qandadiv><title>Databases</title>
+		<qandaentry><question><para>
+		Finding inconsistencies in Interchange table definition files
+		</para></question><answer><para>
+Interchange can automatically create SQL tables with proper fields and 
+field types, once table structures has been defined in Interchange using
+a series of &conf-Database; directives.
+		</para><para>
+Structure definitions are usually kept in directory
+<filename class='directory'>dbconf/<replaceable>DATABASE_NAME</replaceable>/</filename>,
+and maintained separately for each database type, which requires a great
+deal of manual synchronization between the files.
+</para><para>
+Here's a script that can help you find inconsistencies between database
+definition files.
+<programlisting><![CDATA[
+#!/usr/bin/perl
+
+#
+# This script needs to be run from the dbconf/ directory in order to
+# find the relative filenames
+#
+
+@dbtypes = qw{mysql pgsql oracle sqlite};
+
+%dbsuff = ( mysql => mysql,
+            pgsql => pgsql,
+            oracle => ora,
+            sqlite => lite, );
+$txt = '.txt';
+foreach $gtable  (@gtables = grep { s/\.txt//g } `(cd ../products/; ls *.txt)`) {
+   $gtable =~ s/\n//smg;
+   $all_tables{$gtable} = 1;
+   $fn = $gtable . '.txt';
+
+   $flds = `(cd ../products/; head -1 $fn)`;
+   my @flds =  split /\t/, $flds;
+   foreach $fld (@flds) {
+      $seen{$gtable}{$fld} =1; 
+   }
+}
+
+
+foreach $dbtype (@dbtypes) {
+  # print "\n\ndbtype: $dbtype dbsuff: $dbsuff{$dbtype}\n";
+  @tables = grep { s/\.$dbsuff{$dbtype}//g } `(cd $dbtype; ls *.$dbsuff{$dbtype})`;
+  @tables = grep { s/\n//smg } @tables;
+  foreach $table ( @tables) {
+     my $M = qq{$dbtype/$table.$dbsuff{$dbtype}};
+     $all_tables{$table}=1;
+     # print "$M\n";
+     @fields = `/bin/grep -i COLUMN_DEF $M | /bin/cut -d'"' -f2 `;
+     # here I need to build a hash for each db type 
+     
+     foreach $field (@fields) { 
+         my ($k, $v) = split (/=/, $field);
+         $v =~ s/\n//smg;
+         $table{$dbtype}->{$table}->{$k}= $v;
+     }
+  }
+}
+print "<html><body bgcolor=\"#ffffff\">\n";
+foreach my $table (sort keys %all_tables) {
+   print "<table border=\"1\" width=\"100%\">\n";
+   print "<tr><td colspan=\"5\" align=\"center\"1>$table</td></tr>\n";
+   print "<tr><td>&nbsp;</td>";
+   foreach (@dbtypes) {
+       print "<td>$_</td>";
+   }
+   print "</tr>";
+   foreach my $field (sort keys %{$seen{$table}}) {
+       print "<tr><td>$field</td>";
+       foreach $dbtype  ( @dbtypes) {
+          print "<td>$table{$dbtype}->{$table}->{$field}</td>";
+       }
+       print "</tr>\n";
+   }
+   print "</table>\n<br><br>\n";
+}
+print "</body></html>\n";
+]]></programlisting>
+Thanks Paul Vinciguerra for providing this tip in October 2003.
+		</para></answer></qandaentry>
+
+		<qandaentry><question><para>
+		Modifying text source files and applying changes
+		</para></question><answer><para>
+		With DBM-based &glos-database;s, changes to the text source files
+		will be detected on next client access to the specific database;
+		&IC; will then re-read the text source file and override
+		the previous contents of the DBM database. (In case you want to 
+		disable this automatic behavior, see &conf-NoImport;).
+		</para><para>
+		With &glos-SQL; databases, the import from text source files happens only
+		once (on &glos-database; creation and initial fill).
+		To manually trigger the re-import for a specific database, delete file
+		<filename><replaceable>DATABASE_NAME</replaceable>.sql</filename> from
+		the catalog's &conf-ProductDir; and &glos-reconfigure; the catalog.
+		</para><para>
+		When SQL databases are modified through the user interface, the updates
+		are not automatically propagated to the text source files. So when 
+		text files are updated manually and re-imported into SQL, data that was
+		only present in SQL will be lost.
+		</para><para>
+		If you plan on modifying text source files even after initial import
+		into SQL, make sure to sync tables first (using &tag-export;) before
+		making changes and re-importing.
+		<!-- XXX how standard does autoexport? -->
+		</para></answer></qandaentry>
+	</qandadiv>
+
+	<qandadiv><title>Demo catalogs</title>
+
+		<qandadiv><title>"Tutorial"</title>
+		<qandaentry><question><para>
+		Providing "quantity" field on the basket page
+		</para></question><answer><para>
+	The page we're starting with (the one from
+	<olink targetdoc='iccattut'/>) displays a table of the products placed
+	in your shopping cart.
+	The <database class='field'>Quantity</database> field is displayed but
+	the only way to increase the number is to click the appropriate 
+	<guibutton>Order Now</guibutton> button multiple times, and reducing the
+	quantity
+	is not supported.
+	</para><para>
+	To remind ourselves, let's see our initial page.
+	(This is the one used in the <olink targetdoc='iccattut'/>).
+</para>
+<screen>
+<xi:include parse='text' href='../files/tutorial-phase5/pages/ord/basket.html'/>
+</screen>
+
+<para>
+	What we need to do is:
+	<itemizedlist>
+	<listitem><para>
+		Create an HTML form which is neccesary to submit any client information
+		back to Interchange:<sbr/>
+		<code><![CDATA[<form method='post' action='[process]'>]]></code>
+	</para></listitem>
+	<listitem><para>
+		Replace the <database class='field'>Quantity</database> label 
+		(<code>[item-quantity]</code>) with
+		an HTML text field where quantity can be edited:<sbr/>
+		<code><![CDATA[<input type='text' size='2' name='[quantity-name]' value='[item-quantity]'/>]]></code>
+		</para><para>
+		What we have introduced here is the <tag>quantity-name</tag> tag.
+		Interchange
+		will expand it to the appropriate field name for each item in the
+		cart (<literal>quantity0</literal>, <literal>quantity1</literal>,
+		<literal>quantity2</literal>, ...). This all happens automatically and
+		you have nothing to worry about.
+	</para></listitem>
+	<listitem><para>
+		Provide the submit button that triggers an action and sends information
+		back to Interchange:<sbr/>
+<screen><![CDATA[
+[button text='Recalculate']
+mv_todo=refresh
+[/button]
+]]>
+</screen>
+	</para></listitem>
+	<listitem><para>
+		Close the HTML form with <code><![CDATA[</form>]]></code>.
+	</para></listitem>
+	</itemizedlist>
+</para>
+
+<para>
+Here's a copy of the finished <filename>pages/ord/basket.html</filename>.
+</para>
+
+<screen>
+<xi:include parse='text' href='../files/various/tut-phase5-basket+quantity.html'/>
+</screen>
+
+<para>
+	Test the <filename>ord/basket</filename> page in your browser. Try
+	adjusting the quantity and pressing <guibutton>Recalculate</guibutton>.
+	Note that setting <database class='field'>Quantity</database> to 
+	<literal>0</literal> effectively removes the item from your shopping
+	cart.
+</para><para>
+	</para></answer></qandaentry>
+		</qandadiv>
+
+		<qandadiv><title>"Standard"</title>
+			<qandaentry><question><para>
+			Overriding standard Admin UI pages with per-catalog custom versions
+			</para></question><answer><para>
+At any time, you can copy pages from
+<filename class='directory'>lib/UI/pages/admin/</filename>
+into the <filename class='directory'>pages/admin/</filename> directory
+under your &glos-catalog; tree to make custom versions that override the
+distribution ones.
+</para><para>
+You only need to copy the pages you want to override; the rest are
+automatically
+picked up from the usual, default location.
+			</para></answer></qandaentry>
+		</qandadiv>
+
+	</qandadiv>
+
+	<qandadiv><title>E-mail</title>
+		<qandaentry><question><para>
+		Optimizing e-mail delivery with a custom Sendmail routine
+		</para></question><answer><para>
+It was observed in 2004 that about once in every ten times, the
+<filename>etc/mail_receipt</filename> takes a few <emphasis>extra</emphasis>
+seconds before the receipt is mailed out.
+</para><para>
+The delay occured because in the code used, the &conf-SendMailProgram; ran in
+foreground so the ordering process had to wait for Sendmail to finish 
+sending e-mail. The critical section was reduced to:
+</para>
+
+<screen>
+<![CDATA[
+[email to="[scratch to_email], __MAIL_RECEIPT_CC__"
+       subject="__COMPANY__ Order #[value mv_order_number]: [scratch subject_end]"
+       from=|"__COMPANY__ Order Confirmation" <orders at company.com>| ]
+
+... email contents ...
+
+[/email]
+]]>
+
+</screen>
+<para>
+To eliminate this "delay", you could use a custom script that accepts the
+message on standard input (STDIN), returns control back to your code
+immediately and calls <application>Sendmail</application> in the background.
+</para> <para>
+Save the script with the following contents to
+<filename>/usr/local/bin/sendmail-bg</filename>:
+</para>
+
+<programlisting><![CDATA[
+#!/usr/bin/perl
+
+#use strict;
+#use warnings;
+use File::Temp;
+
+my $basedir = '/tmp/sendmail';
+my $sendmail = '/usr/sbin/sendmail -t';
+umask 2;
+
+mkdir $basedir unless -d $basedir;
+my $tmp = File::Temp->new( DIR => $basedir );
+my $tmpnam = $tmp->filename;
+
+open OUT, "> $tmpnam" or die "Cannot create $tmpnam: $!\n";
+my $cmdline = join " ", $sendmail, '<', $tmpnam, '&';
+while(<>) { print OUT $_; }
+close OUT;
+
+system($cmdline);
+
+if($?) { die "Failed to fork sendmail: $!\n" }
+
+]]></programlisting>
+
+<para>
+And set &conf-SendMailProgram; directive in &ccf;:
+
+<programlisting>
+SendMailProgram /usr/local/bin/sendmail-bg
+</programlisting>
+		</para></answer></qandaentry>
+	</qandadiv>
+
+	<qandadiv><title>Forms and form submissions</title>
+		<qandaentry><question><para>
+		Testing for errors in form submissions
+		</para></question><answer><para>
+		To quickly test whether any errors were set in the last
+		form submission and display them, use:
+<programlisting>
+[if errors]
+  [error all=1 show_error=1 joiner="&lt;br&gt;"]
+[/if]
+</programlisting>
+		The code that works with Minivend 4.02 is as follows:
+<programlisting>
+[if type=explicit compare="[error all=1 keep=1]"]
+  ......
+[/if]
+</programlisting>
+		</para></answer></qandaentry>
+	</qandadiv>
+
+	<qandadiv><title>Ordering</title>
+		<qandaentry><question><para>
+		Forcibly adjusting quantities of ordered items
+		</para></question><answer><para>
+Your stock may be limited, or you might want to force order quantities
+for other reasons.
+</para><para>
+There are a number of ways to do this. Here is one; the code should
+be placed at the top of the basket and checkout pages. It operates on
+the cart "<literal>main</literal>" and prevents people from ordering
+more than what is available according to <database class='field'>quantity</database>
+field in the <database>inventory</database>:
+</para><para>
+<programlisting><![CDATA[
+[perl tables=inventory]
+  my $cart = $Carts->{main};
+  my $item;
+  foreach $item (@$cart) {
+    my $on_hand = tag_data('inventory', 'quantity', $item->{code});
+    next if $on_hand >= $item->{quantity};
+    $item->{quantity} = $on_hand;
+    $item->{q_message} = "Order quantity adjusted to fit stock.";
+  }
+[/perl]
+]]></programlisting>
+
+You can place <code>[item-modifier q_message]</code> somewhere in the
+item line to notify the customer of adjusted quantity.
+</para><para>
+		</para></answer></qandaentry>
+	</qandadiv>
+
+	<qandadiv><title>Searches</title>
+		<qandaentry><question><para>
+		Avoiding search strings in HREF= specifications
+		</para></question><answer><para>
+You should never embed searches in a &glos-HTML; HREF= specification,
+because then you have to worry about escaping and formatting and things
+become fragile.
+</para><para>
+So you should never do something like:
+<programlisting>
+[area href="scan/lf=category/ls=%Hot Dogs"]
+</programlisting>
+
+The proper way to go about it instead, is to use any of the below two methods:
+<programlisting>
+[area search="
+  lf=category
+  ls=%Hot Dogs
+"]
+</programlisting>
+or
+<programlisting>
+[area href=scan arg="
+  lf=category
+  ls=%Hot Dogs
+"]
+</programlisting>
+		</para></answer></qandaentry>
+	</qandadiv>
+
+	<qandadiv><title>Server Process</title>
+
+		<qandaentry><question><para>
+		Adjusting timezone
+		</para></question>
+		<answer><para>
+You can adjust time globally for an Interchange installation by
+setting the <envar>$ENV{TZ}</envar> variable on many systems.
+Set TZ in your environment by one of:
+<programlisting>
+## bash/ksh/sh
+TZ=PST7PDT; export TZ
+
+## csh/tcsh
+setenv TZ PST7PDT
+
+interchange -restart
+</programlisting>
+		</para></answer></qandaentry>
+
+		<qandaentry><question><para>
+		Dumping complete configuration ($Vend::Cfg)
+		</para></question><answer><para>
+To dump the complete config structure at will, run:
+<programlisting><![CDATA[
+[uneval ref=`$Config`]
+]]></programlisting>
+
+Also, at &glos-catalog; startup, a file named 
+<filename>etc/<replaceable>CATNAME</replaceable>.structure</filename>
+will be created relative to the catalog root directory. A complete
+configuration dump will be saved there.
+
+		</para></answer></qandaentry>
+
+		<qandaentry><question><para>
+		Testing configuration, starting, reconfiguring, stopping
+		</para></question>
+		<answer><para>
+Knowing how to manage the Interchange daemon is one of the very basic
+administration tasks.
+</para>
+
+<note><para>
+Since Interchange does not generally like being run with admin privileges
+(user root), you will most probably have to invoke the commands listed
+below under the Interchange username. To do so, you will either log in as
+Interchange user, or as sufficiently-privileged user invoke
+<userinput>su -c '<replaceable>COMMAND</replaceable>' <replaceable>INTERCHANGE_USER</replaceable></userinput>, or 
+<userinput>sudo -u <replaceable>INTERCHANGE_USER</replaceable> <replaceable>COMMAND</replaceable></userinput>.
+</para></note>
+
+<para>
+Configuration is tested without interrupting the running processes
+by invoking:
+<itemizedlist>
+	<listitem><para>
+		<userinput>interchange -test</userinput>
+	</para></listitem>
+</itemizedlist>
+</para><para>
+Interchange is (re)started by one of:
+</para>
+<itemizedlist>
+	<listitem vendor='deb'><para>
+		<userinput>/etc/init.d/interchange restart</userinput> (Debian GNU)
+	</para></listitem>
+	<listitem vendor='rh'><para>
+		<userinput>/etc/rc.d/init.d/interchange restart</userinput> (Red Hat)
+	</para></listitem>
+	<listitem vendor='tarball'><para>
+		<userinput>interchange -r</userinput>
+		(tarball)
+	</para></listitem>
+</itemizedlist>
+<para>
+Specific catalogs are reconfigured by one of:
+</para>
+<itemizedlist>
+	<listitem vendor='deb;rh'><para>
+		Running
+		<userinput>interchange -reconfig
+		<replaceable>CATNAME</replaceable></userinput> 
+	</para></listitem>
+	<listitem><para>
+		Using the tag &tag-reconfig; on an &IC; page
+	</para></listitem>
+	<listitem><para>
+		Touching a file named after the catalog within the 
+		<filename class='directory'>etc/reconfig/</filename> directory in
+		&glos-ICROOT;.
+	</para></listitem>
+</itemizedlist>
+<para>
+Interchange is stopped by one of:
+</para>
+<itemizedlist>
+	<listitem vendor='deb'><para>
+		<userinput>/etc/init.d/interchange stop</userinput> (Debian GNU)
+	</para></listitem>
+	<listitem vendor='rh'><para>
+		<userinput>/etc/rc.d/init.d/interchange stop</userinput> (Red Hat)
+	</para></listitem>
+	<listitem><para>
+		<userinput>interchange -stop</userinput>
+		(tarball)
+	</para></listitem>
+</itemizedlist>
+<note>
+<para>
+Because processes that are waiting for selection can block signals on some
+operating systems, it is possible that you have to wait for &conf-HouseKeeping;
+seconds before the server really closes down. To terminate the server with
+prejudice (in the event it will not stop), use
+<command>interchange -kill</command>.
+</para>
+</note>
+		</answer></qandaentry>
+
+	</qandadiv>
+
+	<qandadiv><title>Sessions</title>
+	<qandaentry><question><para>
+	Expiring
+	</para></question><answer><para>
+	See the &glos-expire; glossary entry.
+	</para></answer></qandaentry>
+	<qandaentry><question><para>
+	Reading and writing user sessions
+	</para></question><answer><para>
+User &glos-session;s are kept in a particular type of database as 
+controlled by &conf-SessionType; configuration directive.
+</para><para>
+Depending on the purpose, sessions can be dumped using tags
+&tag-dump; or &tag-dump-session;.
+</para><para>
+If you are going to do something specific to a &glos-session;, such
+as process it later with an external &PERL; program, you could first
+save it as text representation of the Perl hash to an explicitly-named
+file <filename>tmp/<replaceable>SESSIONID</replaceable>.save</filename>,
+by invoking something along the lines of:
+</para><para>
+<programlisting><![CDATA[
+my $sess_string = $Tag->uneval( { ref => $Session } );
+$Tag->writefile("tmp/$Session->{id}.save", $sess_string);
+]]></programlisting>
+
+Then, in your retrieve routine (which must be a global &glos-usertag;
+if you will be doing it from Interchange), do something like:
+
+<programlisting><![CDATA[
+my $safe = new Safe;
+my $sess_string = $Tag->file("tmp/$id_to_retrieve.save");
+my $session_ref = $safe->reval($sess_string);
+]]></programlisting>
+	</para></answer></qandaentry>
+		<qandaentry><question><para>
+		Storing sessions in MySQL
+		</para></question><answer><para>
+
+&IC; can use databases to store user &glos-session;s. The 
+corresponding &ccf; definition for MySQL-based sessions is:
+<programlisting>
+Message Starting MySQL-based sessions setup...
+
+SessionType DBI
+
+Database  session  session.txt dbi:mysql:sessionfiles:localhost
+Database  session  USER         username
+Database  session  PASS         password
+Database  session  KEY          code
+Database  session  COLUMN_DEF   "code=varchar(64) NOT NULL PRIMARY KEY"
+Database  session  COLUMN_DEF   "session=blob"
+Database  session  COLUMN_DEF   "sessionlock=VARCHAR(64) DEFAULT ''"
+Database  session  COLUMN_DEF   "last_accessed=TIMESTAMP(14)"
+
+SessionDB   session
+
+Message ...Done.
+</programlisting>
+Thanks &danb; for providing this tip in January 2002.
+		</para></answer></qandaentry>
+	</qandadiv>
+
+	<qandadiv><title>Tax / VAT</title>
+		<qandaentry><question><para>
+		Implementing basic, country- and category-based tax/VAT scheme
+		</para></question><answer><para>
+		
+Many european countries use country or category-dependent &glos-tax; rates.
+</para><para>
+The basic idea is to write a &glos-usertag; that will return the tax
+amount. The way usertag reaches the final amount can then be
+modified or improved without having to make other changes to the configuration.
+Let's create the basic tag, include it in &gcf; or &ccf;, and call it from the
+<database>salestax</database> table.
+
+</para><para>
+The basic tag that returns the sum of taxes for all individual products
+in user's basket is as follows:
+
+<programlisting><![CDATA[
+UserTag  vat-calc  Order  table field
+UserTag  vat-calc  addAttr
+UserTag  vat-calc  Routine <<EOR
+sub {
+  my ($table, $field, $opt) = @_;
+  
+  my $error = sub {
+    my $msg = shift;
+    Log($msg);
+    return undef;
+  };
+
+  my $tax = 0;
+  foreach my $item (@$Vend::Items) {
+    my $taxrate = tag_data($table, $field, $item->{code});
+    $tax += ($taxrate * $item->{quantity});
+  }
+  return $tax;
+}
+EOR
+]]></programlisting>
+If you add the above code in &ccf; and not in &gcf;, you will have to 
+make sure you "open" the <database>products</database> &glos-database;
+before this code runs, by using <code>[perl products][/perl]</code>
+if nothing else.
+</para><para>
+To use built-in &glos-tax; support in Interchange and to call our
+new vat-calc tag, create <filename>salestax.asc</filename> as follows:
+<programlisting>
+default [vat-calc products tax]
+UK  [vat-calc products tax]
+FR  [vat-calc products tax]
+US  0
+</programlisting>
+For country-based tax selection, you could modify
+<database>salestax.asc</database>
+to invoke vat-calc with different database or field options depending
+on country, and enable country lookup itself by using the following in
+&ccf;:
+<programlisting>
+SalesTax country
+</programlisting>
+</para><para>
+For category-dependent tax rates, you would modify the vat-calc tag
+to take <code>$item->{category}</code> into account and enable
+the "category" modifier as follows:
+<programlisting>
+AutoModifier products:category
+</programlisting>
+		</para></answer></qandaentry>
+		
+	</qandadiv>
+
+</qandadiv>
+
+<qandadiv><title>HTML</title>
+
+	<qandaentry><question><para>
+	Validating (X)HTML markup
+	</para></question><answer><para>
+	You can validate pages at W3C using &css-validator; or
+	&markup-validator;.
+</para><para>
+	&IC; outputs a lot of &glos-HTML; markup. The markup is a bit
+	inconsistent in style, casing (uppercase/lowercase) and argument quoting,
+	but an effort has been underway to standardize on all-lowercase,
+	properly-quoted markup only.
+</para><para>
+	Lowercasing and quoting arguments does not harm compatiblity with old web
+	browsers, and is a nice step towards strict XHTML compliance.
+</para><para>
+	For XHTML compliance, non-container markup tags should be closed with
+	<literal>/&gt;</literal> instead of just <literal>&gt;</literal>. 
+	Enable the &conf-XHTML; configuration directive which will adjust the
+	output markup on internally-generated non-container HTML tags.
+</para><para>
+	There's the <varname>$Vend::XTrailer</varname> variable which you can
+	also use in your own code to automatically output literal 
+	'<literal>/</literal>' or nothing before the closing of a non-container
+	tag, according to &conf-XHTML;.
+	</para><para>
+	If you patch &IC; source to produce better HTML markup, please send your
+	patches to our users list, <literal>interchange-users</literal>.
+	</para></answer></qandaentry>
+
+</qandadiv>
+
+<qandadiv><title>Web servers</title>
+
+	<qandadiv><title>Apache</title>
+
+
+<qandaentry><question><para>
+Logging to per-vhost logfiles
+</para></question><answer><para>
+Add the following to your &APACHE; vhost configuration:
+</para>
+<programlisting>
+ErrorLog /var/log/apache/&def-hostname;.error.log
+
+CustomLog /var/log/apache/&def-hostname;.log \
+  "%h %l %u %t \"%r\" %&lt;s %b \"%{Referer}i\" \"%{User-Agent}i\""
+
+&lt;IfModule mod_ssl.c&gt;
+  CustomLog /var/log/apache/&def-hostname;.ssl.log \
+    "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
+&lt;/IfModule&gt;
+</programlisting>
+</answer></qandaentry>
+
+		<qandaentry><question><para>
+		Using rewrite rules to avoid /cgi-bin/ in URLs
+		</para></question><answer><para>
+The &APACHE; config file (or a corresponding vhost file) needs something
+like the following:
+</para><para>
+<programlisting>
+RewriteEngine   on
+
+RewriteRule     ^$      /cgi-bin/shop/  [L,NS,PT]
+RewriteRule     ^/$      /cgi-bin/shop/  [L,NS,PT]
+RewriteRule     ^/index.html$      /cgi-bin/shop/  [L,NS,PT]
+
+RewriteCond     /home/shop/www/html/%{REQUEST_FILENAME} -f      [OR]
+RewriteCond     /home/shop/www/html/%{REQUEST_FILENAME} -d
+RewriteRule     ^(.+)$  -  [L,NS]
+
+RewriteCond     /%{REQUEST_FILENAME}    !^.*/cgi-bin/shop.*$
+RewriteRule     ^(.+)$  /cgi-bin/shop/$1  [L,NS,PT]
+</programlisting>
+Thanks to Frederic Steinfels for providing this tip in March 2003.
+		</para></answer></qandaentry>
+	</qandadiv>
+	
+</qandadiv>
+
+<qandadiv><title>Databases</title>
+
+	<qandadiv><title>PostgreSQL</title>
+	</qandadiv>
+
+	<qandadiv><title>MySQL</title>
+		<qandaentry><question><para>
+		Fixing constantly-failing SQL statements
+		</para></question><answer><para>
+One possible cause for the failing &MYSQL; statements is the too-low
+timeout value. Try increasing the timeout to say, 50 minutes, by inserting
+the following in <filename>my.cnf</filename>:
+<programlisting>
+set-variable = wait_timeout=3000
+</programlisting>
+Thanks to Frederic Steinfels for providing this tip in March 2004.
+		</para></answer></qandaentry>
+	</qandadiv>
+
+</qandadiv>
+
+<qandadiv><title>Unix</title>
+	<qandaentry><question><para>
+	Monitoring log files
+	</para></question><answer><para>
+	To monitor all relevant log files at once, use something like:
+	</para><para>
+<programlisting>
+cd /var/log; tail -f {apache,postgresql}/*log mysql.{err,log} interchange/error.log /PATH/TO/catalogs/*/var/log/*.log
+</programlisting>
+</para><para>
+	If you want selective results, colorized output, or output to a 
+	root window in your X session, see 
+	<command>grep</command>,
+	<command>glark</command>,
+	<command>ccze</command>,
+	<command>colorize</command> or
+	<command>root-tail</command>.
+</para>
+
+
+
+<para>
+	Add the following to your global &IC; configuration:
+</para>
+<programlisting>
+Variable DEBUG 1
+DebugFile /var/log/interchange/debug.log
+ErrorFile /var/log/interchange/error.log
+</programlisting>
+
+<para>
+	Add the following to your &IC; catalog configuration:
+</para>
+
+<programlisting>
+ErrorFile var/log/error.log
+TrackFile var/log/track.log
+</programlisting>
+
+	</answer></qandaentry>
+</qandadiv>
+
+<qandadiv><title>Perl</title>
+	<qandaentry><question><para>
+	Making Perl hash modifiable without overriding original values
+	</para></question><answer><para>
+Sometimes you want to make a data structure modifiable, without having the
+changes permanently override original values. To do so, we can use &PERL;'s
+<classname>Tie::ShadowHash</classname> module.
+</para><para>
+This is an old trick, and generally not needed in Interchange, as it
+already supports modification of &glos-configuration; directives for the
+duration of the page only (which is usually done in an &conf-Autoload;
+routine).
+</para><para>
+However, you might find the recipe useful. Here's the usertag:
+<programlisting><![CDATA[
+UserTag modifiable Order thing
+UserTag modifiable Routine <<EOR
+require Tie::ShadowHash;
+sub {
+  my $thing = shift || 'Variable';
+  my $ref = $Vend::Cfg->{$thing};
+  return undef if ref($ref) ne 'HASH';
+
+  my %hash;
+  tie %hash, 'Tie::ShadowHash', $ref;
+
+  my $new = \%hash;
+  $Vend::Cfg->{$thing} = $new;
+
+  if($thing eq 'Variable') {
+    $::Variable = $Vend::Interpolate::Variable = $new;
+  }
+
+  return "$thing set to modifiable";
+}
+EOR
+]]></programlisting>
+To test it, establish initial value of a variable in &ccf;:
+<programlisting>
+Variable FOO bar
+</programlisting>
+And run the following code:
+<programlisting><![CDATA[
+FOO=__FOO__<br>
+FOO=[var FOO]<br>
+[modifiable Variable]<br>
+Set...[calc] $Variable->{FOO} = 'hosed'; [/calc]<br>
+FOO=[var FOO]
+]]></programlisting>
+The output should be the same on every page reload, meaning that the
+new value overrides the initial one for the duration of the page only.
+
+	</para></answer></qandaentry>
+</qandadiv>
+
+</qandaset>
+
+</article>
+

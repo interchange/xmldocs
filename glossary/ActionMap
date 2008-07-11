@@ -1,30 +1,26 @@
-&IC; allows you to create "virtual catalog pages" by associating 
+&IC; allows you to create "virtual pages" by associating 
 code (such as &PERL; subroutines or &glos-ITL; tags) with parts of an URL.
 This can be used for anything from implementing one-click searches and orders
 to displaying on-the-fly data.
 </para><para>
-On every &glos-catalog; access, the leading part of a requested page path
-(URL) is taken and checked if it represents
+On every &glos-catalog; access, the leading part of a requested
+URL is taken and checked if it represents
 a valid <emphasis>action</emphasis>.
-If it does, the action name itself is removed from the
-path and invoked with the rest of the arguments provided in the URL.
+If it does, the action is
+invoked with the rest of the arguments provided in the URL.
 </para><para>
 
 Some of the predefined actions (which you might recognize from special
 page names that you access in your catalog) are:
 <itemizedlist>
 <listitem><para>
-<literal>process</literal> - Generic form processing function.
-
-</para></listitem>
-<listitem><para>
-<literal>process</literal>  -  Generic &glos-HTML; form processor for user data
+<literal>process</literal> - Generic form processing function
 </para></listitem>
 <listitem><para>
 <literal>order</literal>  -  Order items
 </para></listitem>
 <listitem><para>
-<literal>scan</literal>   -  Search based on path info
+<literal>scan</literal>   -  Search based on submitted URL
 </para></listitem>
 <listitem><para>
 <literal>search</literal> -  Search based on submitted form variables

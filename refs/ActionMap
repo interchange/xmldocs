@@ -10,14 +10,13 @@ __END__
 
 __NAME__ synopsis
 <arg choice='plain'>action_name</arg>
-<arg choice='plain'>perl_subroutine_or_ITL_code</arg>
+<arg choice='plain'>perl_subroutine</arg>
 __END__
 
 
 __NAME__ description
 The directive allows creation of new (and modification of existing)
-Interchange &glos-ActionMap;s. ActionMap contents are usually &PERL;
-subroutines.
+Interchange &glos-ActionMap;s using &PERL; subroutines.
 </para><para>
 If the action does not return a &glos-true; value, &IC; processing
 will stop right there, allowing you to fully handle the request from

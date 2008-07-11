@@ -26,6 +26,12 @@ HTMLsuffix .htm
 </programlisting>
 __END__
 
+__NAME__ example: Setting HTMLsuffix
+<programlisting>
+HTMLsuffix .itl
+</programlisting>
+__END__
+
 __NAME__ see also
 Locale
 __END__

@@ -13,10 +13,9 @@ IC_VERSIONS = 4.6.0 4.8.0 5.0.0 5.2.0 5.4.0 5.6.0 cvs-head
 #############################################################
 # Base definitions
 SYMBOL_TYPES= pragmas vars tags confs filters orderchecks widgets
-GUIDES      = iccattut programming-style upgrade faq index optimization search xmldocs WHATSNEW install databases
-HOWTOS      = howtos
+GUIDES      = iccattut programming-style upgrade faq index optimization search xmldocs WHATSNEW install databases howtos
 GLOSSARY    = glossary
-ALL_DOCS    = $(GLOSSARY) $(HOWTOS) $(GUIDES) $(SYMBOL_TYPES)
+ALL_DOCS    = $(GLOSSARY) $(GUIDES) $(SYMBOL_TYPES)
 SHELL       = /bin/sh
 OUTPUT     ?= -std
 TARGET     ?= $(XMLDOCS_CUR_DEVEL)
@@ -36,11 +35,11 @@ PSR_FLAGS   = --xinclude --nonet
 REFS_AUTOGEN = bin/refs-autogen
 REFS_AUTOGEN_FLAGS ?=
 
-VPATH       = guides refs howtos glossary whatsnew
+VPATH       = guides refs glossary whatsnew
 .SILENT:
 .PHONY: all complete
 .PHONY: skel
-.PHONY: guides howtos symbols glossary
+.PHONY: guides symbols glossary
 #.PHONY: olinkdbs-nc olinks-nc olinkdbs-c olinks-c
 .PHONY: clean clean-cache clean-refs distclean look-clean
 .PHONY: up-all cvs-sources srcs cvsrcs cvs cvss all-up cvsup
@@ -53,7 +52,7 @@ VPATH       = guides refs howtos glossary whatsnew
 # Complete build
 all: skel cache refxmls                                            \
      olinkdbs-nc olinkdbs-c                                        \
-		 glossary symbols guides howtos
+		 glossary symbols guides
 
 chunked:  skel cache refxmls olinkdbs-nc olinkdbs-c                \
           $(foreach doc,$(ALL_DOCS),OUTPUT/$(doc))
@@ -63,9 +62,6 @@ nonchunked:  skel cache refxmls olinkdbs-nc olinkdbs-c             \
 
 guides:   $(foreach doc,$(GUIDES),OUTPUT/$(doc).html  )            \
           $(foreach doc,$(GUIDES),OUTPUT/$(doc))
-
-howtos:   $(foreach doc,$(HOWTOS),OUTPUT/$(doc).html  )            \
-          $(foreach doc,$(HOWTOS),OUTPUT/$(doc))
 
 symbols:  $(foreach doc,$(SYMBOL_TYPES),OUTPUT/$(doc).html  )      \
           $(foreach doc,$(SYMBOL_TYPES),OUTPUT/$(doc))
@@ -140,7 +136,7 @@ $T/%-c.db: %.xml
 #############################################################
 # STANDARD TARGETS || two-pass processing method
 #OUTPUT/howtos.html: DEPTH = "--stringparam toc.max.depth 1"
-OUTPUT/%.html: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/autofiles.ent
+OUTPUT/%.html: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autofiles.ent
 	echo "C     $@"
 	$(PSR) $(PSR_FLAGS)                                                \
 	  $(PROFILE)                                                       \
@@ -152,7 +148,7 @@ OUTPUT/%.html: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autoh
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-nc.xml \
 	  -o $@ docbook/html-nochunks.xsl $T/$*-nc.profiled
-OUTPUT/%: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/autofiles.ent
+OUTPUT/%: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autofiles.ent
 	echo "C     $@/"
 	$(PSR) $(PSR_FLAGS)                                                \
 	  $(PROFILE)                                                       \
@@ -164,7 +160,7 @@ OUTPUT/%: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos
 	  --stringparam current.docid $*                                   \
 	  --stringparam target.database.document ../docbook/olinkdb-c.xml \
 	  -o $@/ docbook/html-chunks.xsl $T/$*-c.profiled
-OUTPUT/%.man: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/autofiles.ent docbook/reference.xsl
+OUTPUT/%.man: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autofiles.ent docbook/reference.xsl
 	echo "C     $@/"
 	mkdir -p "$@"
 	$(PSR) $(PSR_FLAGS)                                                \
@@ -186,7 +182,7 @@ OUTPUT/%.man: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autoho
 
 #############################################################
 # Supporting target - LATEX output
-#tmp/%.latex: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autohowtos.ent docbook/autofiles.ent
+#tmp/%.latex: %.xml docbook/autorefs.ent docbook/autoglossary.ent docbook/autofiles.ent
 #	$(PSR) $(PSR_FLAGS)                                                \
 #	  $(PROFILE)                                                       \
 #	  --stringparam current.docid $*                                   \
@@ -215,8 +211,8 @@ clean-refs:
 	-rm -f refs/*.xml
 distclean: clean clean-cache
 	-rm -rf $T
-	-rm -rf {refs,glossary,howtos}/*.xml
-	-rm -rf docbook/auto{refs,glossary,howtos,files}.ent
+	-rm -rf {refs,glossary}/*.xml
+	-rm -rf docbook/auto{refs,glossary,files}.ent
 look-clean:
 	-mv $T $T.temporary 2>/dev/null
 commit:
@@ -253,7 +249,7 @@ cache/%/.cache.bin: sources/% bin/stattree
 # Silly, rewrite this, I forgot about $*. Or $* wouldn't help? I'm not 
 # willing to think about it right now.
 refxmls: BOTH = --both
-refxmls: $(REFS_AUTOGEN) $(foreach stype,$(SYMBOL_TYPES),refs/$(stype).xml) howtos/howtos.xml glossary/glossary.xml
+refxmls: $(REFS_AUTOGEN) $(foreach stype,$(SYMBOL_TYPES),refs/$(stype).xml) glossary/glossary.xml
 	:
 $T/%.list: BNAME = $(subst $T/,,$@)
 refs/%.xml: BNAME = $(subst refs/,,$@)
@@ -271,8 +267,6 @@ $T/%.list refs/%.xml: $(foreach icver,$(IC_VERSIONS),cache/$(icver)/.cache.bin) 
 # One-shot targets
 glossary/glossary.xml docbook/autoglossary.ent: $(shell find glossary/ -regex '.+[^(\.xml)]$$') bin/generic-autogen
 	bin/generic-autogen glossary
-howtos/howtos.xml docbook/autohowtos.ent: $(shell find howtos/ -regex '.+[^(\.xml)]$$') bin/generic-autogen
-	bin/generic-autogen howtos
 docbook/autorefs.ent: refxmls
 docbook/autofiles.ent: refxmls
 

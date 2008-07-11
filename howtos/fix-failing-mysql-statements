@@ -1,9 +1,0 @@
-Fix constantly failing MySQL statements
-
-One possible cause for the failing &MYSQL; statements is the too-low
-timeout value. Try increasing the timeout to say, 50 minutes, by inserting
-the following in <filename>my.cnf</filename>:
-<programlisting>
-set-variable = wait_timeout=3000
-</programlisting>
-Thanks to Frederic Steinfels for providing this tip in March 2004.

@@ -2,14 +2,10 @@ A rectangular graphic image which is included on a content page for
 advertising and promotional purposes.
 </para><para>
 In &IC;, when "banner" or "ad" is used to describe the functionality of
-the &tag-banner; tag, it does not necessarily mean an image, since you can
+the &tag-banner; tag and it does not necessarily mean an image, as you can
 put anything in the content placeholder. In fact, banner examples from
 <olink targetdoc='howtos' targetptr='implementbanners'/> HOW-TO use plain 
 text.
-</para><para>
-Along with animation, contemporary banners are introducing an interactive
-dimension taking advantage of plug-ins such as SVG, Flash or Shockwave to
-liven them up or create banner-based games.
 </para><para>
 Voluntary ad unit guidelines as suggested by the
 <ulink url="http://www.iab.net/standards/adunits.asp">Interactive
