@@ -590,6 +590,26 @@ SendMailProgram /usr/local/bin/sendmail-bg
 	</qandadiv>
 
 	<qandadiv><title>Forms and form submissions</title>
+
+
+		<qandaentry><question><para>
+		Defining mv_metadata width and height for HTML textarea
+		</para></question><answer><para>
+		In <database>mv_metadata</database>, you cannot use the usual
+		<database class='field'>width</database> and
+		<database class='field'>height</database> fields to 
+		set &glos-HTML; &lt;textarea&gt; size.
+		</para><para>
+		Use the following instead (for a 5x50 characters box):
+<programlisting>
+fieldname:
+  widget: textarea_5_50
+  height:
+  width:
+</programlisting>
+		</para></answer></qandaentry>
+
+
 		<qandaentry><question><para>
 		Testing for errors in form submissions
 		</para></question><answer><para>
@@ -642,6 +662,8 @@ item line to notify the customer of adjusted quantity.
 	</qandadiv>
 
 	<qandadiv><title>Searches</title>
+
+
 		<qandaentry><question><para>
 		Avoiding search strings in HREF= specifications
 		</para></question><answer><para>
@@ -669,6 +691,178 @@ or
 "]
 </programlisting>
 		</para></answer></qandaentry>
+
+
+
+
+
+		<qandaentry><question><para>
+		Creating custom search routines for use in mv_column_op
+		</para></question><answer><para>
+		It is possible to define your own search functions that can be
+		specified in <mv>mv_column_op</mv> instead of the usual, built-in
+		operations.
+		</para><para>
+		See &conf-CodeDef; reference page for examples of creating 
+		SearchOps.
+		</para><para>
+		Once you've created the SearchOp, you can use something like the
+		following ad-hoc specification to test it (this example works with
+		the SearchOp example from &conf-CodeDef;):
+<programlisting><![CDATA[
+[loop search="
+  se=rubber hammer
+  sf=description
+  fi=products
+  st=db
+  co=yes
+  rf=*
+  op=find_hammer
+"]
+
+[loop-code] [loop-param description]<br>
+
+[/loop]
+]]></programlisting>
+		</para></answer></qandaentry>
+
+
+		<qandaentry><question><para>
+		Supporting AND, OR, and other advanced search specifications
+		</para></question><answer><para>
+		You can install <classname>Text::Query</classname> Perl module
+		to enable advanced query parsing for search specifications.
+		</para><para>
+		To use <classname>Text::Query</classname>, set <mv>mv_column_op</mv>
+		to <literal>aq</literal> for advanced parsing or 
+		<literal>tq</literal> for simple parsing.
+		</para><para>
+		To learn about the features "<literal>aq</literal>" and 
+		"<literal>tq</literal>" give you, see 
+	<citerefentry>
+	<refentrytitle>Text::Query::ParseAdvanced</refentrytitle>
+	<manvolnum>3pm</manvolnum>
+	</citerefentry> and 
+	<citerefentry>
+	<refentrytitle>Text::Query::ParseSimple</refentrytitle>
+	<manvolnum>3pm</manvolnum>
+	</citerefentry> manual pages.
+	</para><para>
+		You can also make the use of <classname>Text::Query</classname>
+		conditional, based on whether
+		<classname>Text::Query</classname> has been installed on the server:
+<programlisting><![CDATA[
+<input name="mv_column_op" type="hidden" value="[if module-version Text::Query]aq[else]rm[/else][/if]">
+]]></programlisting>
+	</para><para>
+		<classname>Text::Query</classname> parsing honors variables
+		<mv>mv_case</mv> (<literal>-case</literal> option),
+		<mv>mv_all_chars</mv> (<literal>-regexp</literal> option)
+		<mv>mv_substring_match</mv> (<literal>-whole</literal> option) and
+		<mv>mv_exact_match</mv> (<literal>-litspace</literal> option).
+		</para><para>
+		Ad-hoc examples to test search specifications might look like:
+<programlisting><![CDATA[
+[loop search="
+            se=hammer -framing
+            sf=description
+            fi=products
+            st=db
+            co=yes
+            rf=*
+            op=tq
+        "]
+
+[loop-code] [loop-param description]<br>
+
+[/loop]
+
+
+[loop search="
+            se=hammer NEAR framing
+            sf=description
+            fi=products
+            st=db
+            co=yes
+            rf=*
+            op=aq
+        "]
+
+[loop-code] [loop-param description]<br>
+
+[/loop]
+]]></programlisting>
+
+		</para><para>
+		If you have a custom search method and want to manually support AND and
+		OR in search specifications while using the usual "<literal>eq</literal>"
+		and "<literal>rm</literal>" column operations, use something like
+		the following to pre-process the search specification:
+
+<programlisting><![CDATA[
+[calc]
+  my $text_qualification = 'category = Hammers and price < 15';
+
+
+  $CGI->{text_qualification} = <<EOF;
+fi=products
+st=db
+co=1
+  EOF
+  
+  my @entries = split /\s+(and|or)\s+/i,  $text_qualification;
+
+  my $or;
+  for(@entries) {
+    if(/^or$/i) {
+      $or = 1;
+      $CGI->{text_qualification} .= "os=1\n";
+      next;
+    }   
+    elsif(/^and$/i) {
+      $or = 0;
+      $CGI->{text_qualification} .= "os=0\n";
+      next;
+    }   
+    my ($f, $op, $s) = split /\s*([<=!>\^]+)\s*/, $_, 2;
+    $op = "eq" if $op eq "==";
+    $op = "rm" if $op eq "=";
+    if($op eq '^') {
+      $op = 'rm';
+      $CGI->{text_qualification} .= "bs=1\nsu=1\n";
+    }   
+    else {
+      $CGI->{text_qualification} .= "bs=0\nsu=0\n";
+    }   
+    $CGI->{text_qualification} .= "se=$s\nsf=$f\nop=$op\n";
+    if($op =~ /[<>]/ and $s =~ /^[\d.]+$/) {
+      $CGI->{text_qualification} .= "nu=1\n";
+    }   
+    else {
+      $CGI->{text_qualification} .= "nu=0\n";
+    }   
+  }   
+  [/calc]
+]]></programlisting>
+
+		Then use the following to run the search and display search results:
+<programlisting><![CDATA[
+<pre>
+
+Search for: [cgi text_qualification]
+
+Results:
+
+[loop search="[cgi text_qualification]"]
+  [loop-code] [loop-description]
+[/loop]
+
+</pre>
+]]></programlisting>
+
+Thanks &mheins; for providing this tip in January 2001.
+		</para></answer></qandaentry>
+
 	</qandadiv>
 
 	<qandadiv><title>Server Process</title>
@@ -923,6 +1117,34 @@ the "category" modifier as follows:
 AutoModifier products:category
 </programlisting>
 		</para></answer></qandaentry>
+
+
+
+		<qandaentry><question><para>
+		Implementing user-based tax/VAT scheme
+		</para></question><answer><para>
+To set up tax-exempt users, expand your <database>userdb</database> database
+to add field <database class='field'>tax_exempt</database>.
+</para><para>
+Have your &conf-SalesTax; defined as usual, as if no users will be
+tax-exempt. Then, make the following changes to &ccf; to unset
+&conf-SalesTax; for tax exempt users:
+
+<programlisting>
+UserDB default scratch tax_exempt
+
+AutoLoad &lt;&lt;EOL
+[calc]
+if ($Scratch-&gt;{tax_exempt}) {
+	$Config-&gt;{SalesTax} = ' ';
+}
+return;
+[/calc]
+EOL
+</programlisting>
+Thanks Greg Hanson for providing this tip in March 2001.
+		</para></answer></qandaentry>
+		
 		
 	</qandadiv>
 
@@ -1003,7 +1225,7 @@ RewriteRule     ^(.+)$  -  [L,NS]
 RewriteCond     /%{REQUEST_FILENAME}    !^.*/cgi-bin/shop.*$
 RewriteRule     ^(.+)$  /cgi-bin/shop/$1  [L,NS,PT]
 </programlisting>
-Thanks to Frederic Steinfels for providing this tip in March 2003.
+Thanks Frederic Steinfels for providing this tip in March 2003.
 		</para></answer></qandaentry>
 	</qandadiv>
 	
@@ -1024,7 +1246,7 @@ the following in <filename>my.cnf</filename>:
 <programlisting>
 set-variable = wait_timeout=3000
 </programlisting>
-Thanks to Frederic Steinfels for providing this tip in March 2004.
+Thanks Frederic Steinfels for providing this tip in March 2004.
 		</para></answer></qandaentry>
 	</qandadiv>
 
