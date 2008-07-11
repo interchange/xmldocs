@@ -101,7 +101,7 @@
 	<listitem><para>
 		<emphasis role='bold'>Lexical Issues</emphasis> - white space is free,
 		and white space around operators increases readability.
-		Lining up <literal>=</literal>s in a series of assignments can be
+		Lining up equal signs (<literal>=</literal>) in a series of assignments can be
 		used to emphasize the parallel structure.
 <literallayout>
 <programlisting><![CDATA[
