@@ -31,10 +31,6 @@ sub {
 }
 EOR
 ]]></programlisting>
-
-To invoke this form action, use the following HTML form:
-<programlisting><![CDATA[
-]]></programlisting>
 __END__
 
 
