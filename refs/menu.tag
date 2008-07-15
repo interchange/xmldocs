@@ -60,6 +60,10 @@ The following columns are recognized in the menu file:
 
 __END__
 
+__NAME__ notes
+<tag>uc-attr-list</tag> carries out the replacements in the template.
+__END__
+
 __NAME__ example: Simple Menubar
 <programlisting><![CDATA[
 <table><tr>
