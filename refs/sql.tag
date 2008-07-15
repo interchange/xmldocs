@@ -2,6 +2,44 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	type
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	query
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	table
 	</entry>
 	<entry>
@@ -22,25 +60,6 @@ __NAME__ synopsis
 
 	<entry>
 	textref
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
-	"\L$key"
 	</entry>
 	<entry>
 	<!-- POS -->
@@ -113,25 +132,5 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-<row>
-
-	<entry>
-	query
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_CONTAINER;
 __END__

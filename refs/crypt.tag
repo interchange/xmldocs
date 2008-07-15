@@ -6,7 +6,7 @@ __END__
 __NAME__ synopsis
 <row>
 	<entry>
-		<group>
+		<group choice='plain'>
 		<arg choice='plain'>value</arg>
 		<arg choice='plain'>password</arg>
 		</group>
@@ -17,7 +17,7 @@ __NAME__ synopsis
 </row>
 <row>
 	<entry>
-		<group>
+		<group choice='plain'>
 		<arg choice='plain'>salt</arg>
 		<arg choice='plain'>crypted</arg>
 		</group>

@@ -100,7 +100,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	<group>
+	<group choice='plain'>
 	<arg choice='plain'>table</arg>
 	<arg choice='plain'>db</arg>
 	</group>
@@ -122,7 +122,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	<group>
+	<group choice='plain'>
 	<arg choice='plain'>field</arg>
 	<arg choice='plain'>column</arg>
 	</group>
@@ -144,7 +144,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	<group>
+	<group choice='plain'>
 	<arg choice='plain'>key</arg>
 	<arg choice='plain'>outboard</arg>
 	</group>
@@ -334,6 +334,5 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_CONTAINER_1_1;
 __END__

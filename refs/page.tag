@@ -10,7 +10,7 @@ __NAME__ synopsis
 <entry></entry><entry></entry>
 <entry></entry>
 <entry>
-See &tag-area; options.
+See options for tag &tag-area;.
 </entry>
 </row>
 <row>
@@ -21,8 +21,7 @@ See &tag-area; options.
 Name of a &glos-CSS; class to insert as <literal>class=<replaceable>...</replaceable></literal>.
 </entry>
 </row>
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 __NAME__ see also

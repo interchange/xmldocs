@@ -141,7 +141,12 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	modtest
+	<group choice='plain'>
+	<arg choice='plain'>modtest</arg>
+	<arg choice='plain'>module_test</arg>
+	<arg choice='plain'>moduletest</arg>
+	<arg choice='plain'>require</arg>
+	</group>
 	</entry>
 	<entry>
 	<!-- POS -->
@@ -332,8 +337,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 __NAME__ description

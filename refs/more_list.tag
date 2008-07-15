@@ -22,6 +22,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
+&TAG_CONTAINER;
 __END__
 
 __NAME__ description

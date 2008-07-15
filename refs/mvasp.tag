@@ -2,6 +2,28 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	<group choice='plain'>
+		<arg choice='plain'>table</arg>
+		<arg choice='plain'>tables</arg>
+	</group>
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	no_return
 	</entry>
 	<entry>
@@ -18,6 +40,5 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_CONTAINER_0_0;
 __END__

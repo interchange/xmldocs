@@ -6,7 +6,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	<group>
+	<group choice='plain'>
 	<arg choice='plain'>adjust</arg>
 	<arg choice='plain'>days</arg>
 	</group>

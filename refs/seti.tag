@@ -22,8 +22,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_INTERPOLATE_1;
-&ROW_REPARSE_1;
+&TAG_CONTAINER_1_1;
 __END__
 
 

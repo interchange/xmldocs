@@ -20,6 +20,7 @@ __NAME__ synopsis
 	<entry><literal>[alt]</literal></entry>
 	<entry>Separator to split elements on.</entry>
 </row>
+&TAG_CONTAINER;
 __END__
 
 

@@ -6,13 +6,13 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-		<group>
+		<group choice='plain'>
 			<arg choice='plain'>cols</arg>
 			<arg choice='plain'>columns</arg>
 		</group>
 	</entry>
 	<entry>
-	yes
+	Yes
 	</entry>
 	<entry>
 	<!-- REQ -->
@@ -304,8 +304,7 @@ as numbers change. Formula: <literal>$num_cells % $opt->{min_rows}</literal>.
 	</entry>
 
 </row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_CONTAINER_1_1;
 __END__
 
 

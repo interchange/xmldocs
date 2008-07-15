@@ -9,10 +9,10 @@ __NAME__ synopsis
 	name
 	</entry>
 	<entry>
-	yes
+	Yes
 	</entry>
 	<entry>
-	yes
+	Yes
 	</entry>
 	<entry>
 	<!-- DFL -->
@@ -44,7 +44,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	yes
+	Yes
 	</entry>
 	<entry>
 	<!-- POS -->

@@ -26,8 +26,7 @@ __NAME__ synopsis
 	<entry></entry>
 	<entry>Key value</entry>
 </row>
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 

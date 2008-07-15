@@ -11,7 +11,7 @@ __END__
 __NAME__ synopsis
 <row>
 	<entry>
-		<group>
+		<group choice='plain'>
 			<arg choice='plain'>name</arg>
 			<arg choice='plain'>cart</arg>
 		</group>
@@ -32,7 +32,7 @@ __NAME__ synopsis
 </row>
 <row>
 	<entry>
-		<group>
+		<group choice='plain'>
 			<arg choice='plain'>space</arg>
 			<arg choice='plain'>discount_space</arg>
 		</group>
@@ -52,8 +52,7 @@ __NAME__ synopsis
 	<entry>Format price according to the specified locale.</entry>
 </row>
 &ROW_CURRENCYDISPLAY;
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 

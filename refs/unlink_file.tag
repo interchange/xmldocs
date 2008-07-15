@@ -27,8 +27,7 @@ __NAME__ synopsis
 	<entry><literal>tmp/</literal></entry>
 	<entry>Prefix that the filename must match (a safety measure)</entry>
 </row>
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 

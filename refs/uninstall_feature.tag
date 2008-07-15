@@ -1,9 +1,10 @@
 
+
 __NAME__ synopsis
 <row>
 
 	<entry>
-	rotate
+	name
 	</entry>
 	<entry>
 	Yes
@@ -19,6 +20,5 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&TAG_CONTAINER_1_1;
+&TAG_NON_CONTAINER;
 __END__
-

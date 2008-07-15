@@ -21,8 +21,7 @@ __NAME__ synopsis
 </row> 
 &ROW_AUTOCREATEDIR;
 &ROW_UMASK_none;
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_CONTAINER;
 __END__
 
 __NAME__ description

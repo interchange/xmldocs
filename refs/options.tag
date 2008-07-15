@@ -2,6 +2,25 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	code
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	options_type
 	</entry>
 	<entry>
@@ -94,6 +113,5 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__

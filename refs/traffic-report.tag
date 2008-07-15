@@ -2,6 +2,25 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	save
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	header
 	</entry>
 	<entry>
@@ -113,8 +132,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 __NAME__ see also

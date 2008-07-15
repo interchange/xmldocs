@@ -1,9 +1,11 @@
 
+
+
 __NAME__ synopsis
 <row>
 
 	<entry>
-	file
+	from
 	</entry>
 	<entry>
 	Yes
@@ -22,7 +24,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	rollback
+	to
 	</entry>
 	<entry>
 	Yes
@@ -40,4 +42,3 @@ __NAME__ synopsis
 </row> 
 &TAG_NON_CONTAINER;
 __END__
-

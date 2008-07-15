@@ -6,7 +6,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	<group>
+	<group choice='plain'>
 	<arg choice='plain'>mv_data_table</arg>
 	<arg choice='plain'>table</arg>
         </group>
@@ -28,7 +28,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	<group>
+	<group choice='plain'>
 	<arg choice='plain'>item_id</arg>
 	<arg choice='plain'>key</arg>
 	</group>
@@ -37,7 +37,6 @@ __NAME__ synopsis
 	Yes
 	</entry>
 	<entry>
-	No
 	</entry>
 	<entry>
 	<!-- DFL -->
@@ -50,7 +49,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	<group>
+	<group choice='plain'>
 	<arg choice='plain'>ui_meta_view</arg>
 	<arg choice='plain'>view</arg>
 	</group>
@@ -167,7 +166,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>	
-	<group>
+	<group choice='plain'>
 	<arg choice='plain'>ui_clone_id</arg>
 	<arg choice='plain'>clone</arg>
         </group>
@@ -189,7 +188,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>	
-	<group>
+	<group choice='plain'>
 	<arg choice='plain'>ui_profile</arg>
 	<arg choice='plain'>profile</arg>
         </group>
@@ -1425,6 +1424,5 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_CONTAINER;
 __END__

@@ -8,7 +8,7 @@ __NAME__ synopsis
 	check
 	</entry>
 	<entry>
-	yes
+	Yes
 	</entry>
 	<entry>
 	<!-- REQ -->
@@ -26,7 +26,7 @@ __NAME__ synopsis
 	cgi
 	</entry>
 	<entry>
-	yes
+	Yes
 	</entry>
 	<entry>
 	<!-- REQ -->
@@ -44,7 +44,25 @@ __NAME__ synopsis
 	profile
 	</entry>
 	<entry>
-	yes
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+	<entry>
+	name
+	</entry>
+	<entry>
+	Yes
 	</entry>
 	<entry>
 	<!-- REQ -->
@@ -95,8 +113,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 __NAME__ description

@@ -25,7 +25,7 @@ __NAME__ synopsis
 	with the fallback to global, if local one is not defined.</entry>
 </row>
 &ROW_FILTER_none;
-&TAG_NON_CONTAINER;
+&TAG_NON_CONTAINER_1;
 __END__
 
 

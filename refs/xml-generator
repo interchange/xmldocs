@@ -175,9 +175,7 @@ Prevents the second-level of XML tags from being generated
 </entry>
 </row>
 
-
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_CONTAINER_1_1;
 __END__
 
 __NAME__ description

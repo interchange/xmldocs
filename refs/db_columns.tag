@@ -2,7 +2,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	<group>
+	<group choice='plain'>
 		<arg>name</arg>
 		<arg>table</arg>
 	</group>
@@ -24,7 +24,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	<group>
+	<group choice='plain'>
 		<arg>fields</arg>
 		<arg>columns</arg>
 	</group>

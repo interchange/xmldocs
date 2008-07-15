@@ -46,8 +46,7 @@ __NAME__ synopsis
 <entry><literal>simple</literal></entry>
 <entry>menu type (<literal>simple</literal>, <literal>tree</literal>, <literal>flyout</literal>)</entry>
 </row>
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_CONTAINER;
 __END__
 
 __NAME__ description
