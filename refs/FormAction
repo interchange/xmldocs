@@ -1,5 +1,5 @@
 __NAME__ purpose
-define form action (such as existing 'return', 'submit' or 'refresh')
+define or override form action
 __END__
 
 __NAME__ see also
@@ -27,7 +27,8 @@ __NAME__ example: Very basic form action definition
 <programlisting><![CDATA[
 FormAction foo <<EOR
 sub {
-  $CGI->{mv_nextpage} = 'bar';
+    $CGI->{mv_nextpage} = 'bar';
+    return 1;
 }
 EOR
 ]]></programlisting>
