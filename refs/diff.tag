@@ -3,8 +3,8 @@ __NAME__ synopsis
 
 	<entry>
 		<group choice='opt'>
-			<arg>current</arg>
-			<arg>curr</arg>
+			<arg choice='plain'>current</arg>
+			<arg choice='plain'>curr</arg>
 		</group>
 	</entry>
 	<entry>
@@ -25,8 +25,8 @@ __NAME__ synopsis
 
 	<entry>
 		<group choice='opt'>
-			<arg>previous</arg>
-			<arg>prev</arg>
+			<arg choice='plain'>previous</arg>
+			<arg choice='plain'>prev</arg>
 		</group>
 	</entry>
 	<entry>
@@ -138,6 +138,5 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__

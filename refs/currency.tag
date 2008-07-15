@@ -29,8 +29,7 @@ __NAME__ synopsis
 	<entry>Do not format the price?</entry>
 </row>
 &ROW_CURRENCYDISPLAY;
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_CONTAINER;
 __END__
 
 __NAME__ description

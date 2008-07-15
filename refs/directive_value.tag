@@ -2,7 +2,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	<arg>name</arg>
+	name
 	</entry>
 	<entry>
 	Yes
@@ -21,7 +21,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-		<arg>unparse</arg>
+		unparse
 	</entry>
 	<entry>
 	Yes
@@ -37,6 +37,5 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__

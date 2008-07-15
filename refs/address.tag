@@ -215,6 +215,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
+&TAG_NON_CONTAINER;
 __END__
 
 

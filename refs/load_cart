@@ -16,7 +16,7 @@ __END__
 __NAME__ synopsis
 <row>
 	<entry>
-		<group>
+		<group choice='plain'>
 			<arg choice='plain'>nickname</arg>
 			<arg choice='plain'>name</arg>
 		</group>
@@ -30,7 +30,7 @@ __NAME__ synopsis
 	<literal>c</literal> (cart) or <literal>r</literal> (recurring).
 	</entry>
 </row>
-&ROW_INTERPOLATE_0;
+&TAG_NON_CONTAINER;
 __END__
 
 

@@ -61,8 +61,7 @@ __NAME__ synopsis
 	<entry></entry>
 	<entry>File(s) to attach to the generated email.</entry>
 </row>
-	
-&ROW_HIDE_0;
+&TAG_CONTAINER;
 __END__
 
 

@@ -20,7 +20,7 @@ __NAME__ synopsis
 	<entry></entry>
 	<entry>Cart name to switch to.</entry>
 </row>
-&ROW_INTERPOLATE_0;
+&TAG_NON_CONTAINER;
 __END__
 
 

@@ -30,6 +30,7 @@ __NAME__ synopsis
 	verifying the password, like you see in <xref linkend='crypt_examples'/>.
 	</entry>
 </row>
+&TAG_NON_CONTAINER;
 __END__
 
 

@@ -7,6 +7,7 @@ debug
 __END__
 
 __NAME__ synopsis
+&TAG_CONTAINER;
 __END__
 
 __NAME__ description

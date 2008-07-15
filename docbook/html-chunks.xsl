@@ -203,7 +203,6 @@
 	</xsl:template>
 
 
-
 	<!-- This chunk inserts <meta name="purpose" content="PURPOSE_LINE" />,
 	     to help Swish index documentation properly. -->
 	<xsl:template match="refpurpose[1]">

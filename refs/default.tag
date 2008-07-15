@@ -182,9 +182,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_HIDE_0;
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 

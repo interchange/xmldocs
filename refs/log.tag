@@ -6,7 +6,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-		<group>
+		<group choice='plain'>
 			<arg choice='plain'>file</arg>
 			<arg choice='plain'>arg</arg>
 		</group>
@@ -134,9 +134,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_HIDE_0;
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_CONTAINER;
 __END__
 
 __NAME__ see also

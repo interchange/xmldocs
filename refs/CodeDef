@@ -35,9 +35,48 @@ SearchOps,
 LocaleChanges,
 OrderChecks,
 and Widgets.
+
+<itemizedlist>
+	<listitem><para>
+	SearchOp definition needs to be a function that creates and returns a
+search function. The search function will receive the data to match
+and should return <literal>1</literal> if the value matches.
+	</para></listitem>
+</itemizedlist>
 __END__
 
 __NAME__ example: Defining a subroutine
+__END__
+
+__NAME__ example: Defining a custom SearchOp
+Here's an exemplary "<literal>find_hammer</literal>" SearchOp that
+should be placed to &gcf;:
+
+<programlisting><![CDATA[
+CodeDef find_hammer SearchOp find_hammer
+
+CodeDef find_hammer Routine <<EOR
+sub {
+  # Called with:
+  # $self - search object
+  # $i - index into coordinated search array
+  # $string - data to match
+  # $opname - name of the specified mv_column_op
+
+  my($self, $i, $string, $opname);
+  #::logDebug("Calling fake SearchOp");
+  return sub {
+    #::logDebug("testing with fake SearchOp");
+    my $string = shift;
+    $string =~ /hammer/i;
+  };
+}
+EOR
+]]></programlisting>
+The above simple function does not honor <mv>mv_negate</mv> or other
+variables. See <function>Vend::Search::create_text_query</function>
+for an example of how to create a proper search routine and honor 
+various associated search parameters.
 __END__
 
 __NAME__ example: Widgets with multiple selections

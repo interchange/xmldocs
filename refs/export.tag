@@ -6,7 +6,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	<group>
+	<group choice='plain'>
 	<arg choice='plain'>table</arg>
 	<arg choice='plain'>database</arg>
 	<arg choice='plain'>base</arg>
@@ -144,9 +144,7 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_HIDE_0;
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 

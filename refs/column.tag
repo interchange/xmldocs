@@ -2,6 +2,10 @@ __NAME__ purpose
 display column in a text-formatted row
 __END__
 
+__NAME__ synopsis
+&TAG_NON_CONTAINER;
+__END__
+
 __NAME__ description
 As of &IC; 4.9, this tag is part of tag &tag-row; &mdash; please refer
 to it for all documentation.

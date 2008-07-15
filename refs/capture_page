@@ -61,8 +61,7 @@ __NAME__ synopsis
 	<entry>If the file is expired, touch it?</entry>
 </row>
 &ROW_UMASK_none;
-&ROW_HIDE_0;
-&ROW_INTERPOLATE_0;
+&TAG_NON_CONTAINER;
 __END__
 
 __NAME__ description

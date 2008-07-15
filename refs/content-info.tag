@@ -75,4 +75,6 @@ __NAME__ synopsis
 <entry></entry>
 <entry></entry>
 </row>
+
+&TAG_NON_CONTAINER;
 __END__

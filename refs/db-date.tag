@@ -25,8 +25,7 @@ __NAME__ synopsis
 	<entry><literal>%A %d %b %Y</literal></entry>
 	<entry>POSIX strftime format specifier.</entry>
 </row>
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 __NAME__ description

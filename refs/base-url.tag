@@ -8,7 +8,7 @@ __END__
 
 
 __NAME__ synopsis
-&ROW_INTERPOLATE_0;
+&TAG_NON_CONTAINER;
 __END__
 
 

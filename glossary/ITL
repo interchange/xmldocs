@@ -492,29 +492,28 @@ tags.
 </para><para>
 We will explain <arg choice='plain'>interpolate</arg> and 
 <arg choice='plain'>reparse</arg> attributes here. <emphasis role='bold'>
-It is very important to remember that the behavior of the
+It is important to remember that the behavior of the
 <arg choice='plain'>interpolate</arg> attribute (unfortunately) differs,
-depending on whether a tag is <emphasis>stand-alone</emphasis> or a
+based on whether a tag is <emphasis>stand-alone</emphasis> or a
 <emphasis>container</emphasis>.
 In addition,
 the <arg choice='plain'>reparse</arg> attribute is only used with
-container tags (because its function is performed by
-<arg choice='plain'>interpolate</arg> in stand-alone tags).
+container tags.
 </emphasis>
 
 </para><para>
-With container tags, the <arg choice='plain'>interpolate</arg> attribute
-specifies whether the <emphasis>tag body</emphasis> will be
-&glos-interpolate;d before being passed to the tag. 
-<!-- </para><para> -->
-With non-container tags, the <arg choice='plain'>interpolate</arg> attribute
+With standalone tags, the <arg choice='plain'>interpolate</arg> attribute
 specifies whether the <emphasis>output</emphasis> of the tag will be
-&glos-interpolate;d. This is very confusing because it's not intuitive, but
-once you get to remember it a few times in practice, it will stop being a 
-problem.
-</para><para>
+&glos-interpolate;d.<sbr/>
 Output of most of the stand-alone tags is not interpolated by default.
 Exceptions to this rule would include, for example, the &tag-include; tag.
+</para><para>
+With container tags, the <arg choice='plain'>interpolate</arg> attribute
+specifies whether the <emphasis>tag body</emphasis> will be
+&glos-interpolate;d before being passed to the tag. <sbr/>
+The <arg choice='plain'>reparse</arg> attribute specifies whether
+output will be &glos-interpolate;d.
+</para><para>
 
 <!-- TODO
 - mention that users can see behavior in source context header (UserTag lines)

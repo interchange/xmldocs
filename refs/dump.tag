@@ -50,8 +50,7 @@ __NAME__ synopsis
 	<entry>0</entry>
 	<entry>Do not output &glos-session; structure?</entry>
 </row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
 
 

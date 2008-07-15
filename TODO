@@ -9,6 +9,7 @@
   ekspandira @$ctx ako moze da nema konteksta?
 - make howtos chunk
 - fix link to howtos after changing format
+- link to howtos from ref pages
 
 - order counter, Session->{mv_order_number}, cronjob -0001, or file da-te.counter, or session_id.time
 - in iccattut, s/item-field/item-param/ at least on some places. 

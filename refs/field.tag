@@ -7,7 +7,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	<group choice='optional'>
+	<group choice='plain'>
 		<arg choice='plain'>name</arg>
 		<arg choice='plain'>column</arg>
 		<arg choice='plain'>col</arg>
@@ -30,7 +30,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	<group choice='optional'>
+	<group choice='plain'>
 		<arg choice='plain'>code</arg>
 		<arg choice='plain'>row</arg>
 	</group>

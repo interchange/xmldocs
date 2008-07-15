@@ -139,14 +139,18 @@ values above are not properly aligned. This is an unfortunate nature of
 <!-- put standard ones here, such as Hide or Interpolate/reparse -->
 <!ENTITY NODEFAULT "<emphasis>None</emphasis>">
 <!ENTITY TAG_NON_CONTAINER "
-<row>
-	<entry>
-		<arg choice='plain'>interpolate</arg>
-	</entry>
-	<entry></entry><entry></entry>
-	<entry>0</entry>
-	<entry>&glos-interpolate; tag output?</entry>
-</row>
+&ROW_INTERPOLATE_NONCONTAINER_0;
+&ROW_HIDE_0;
+">
+<!ENTITY TAG_CONTAINER "
+&ROW_INTERPOLATE_0;
+&ROW_REPARSE_1;
+&ROW_HIDE_0;
+">
+<!ENTITY TAG_CONTAINER_1_1 "
+&ROW_INTERPOLATE_1;
+&ROW_REPARSE_1;
+&ROW_HIDE_0;
 ">
 <!ENTITY TAG_LIST_CONTAINER "
 <row>
@@ -244,24 +248,6 @@ values above are not properly aligned. This is an unfortunate nature of
 
 </row> 
 ">
-<!ENTITY TAG_CONTAINER "
-<row>
-	<entry>
-		<arg choice='plain'>interpolate</arg>
-	</entry>
-	<entry></entry><entry></entry>
-	<entry>0</entry>
-	<entry>&glos-interpolate; input?</entry>
-</row>
-<row>
-	<entry>
-		<arg choice='plain'>reparse</arg>
-	</entry>
-	<entry></entry><entry></entry>
-	<entry>1</entry>
-	<entry>&glos-reparse; output?</entry>
-</row>
-">
 <!ENTITY ROW_INTERPOLATE_0 "
 <row>
 	<entry>
@@ -282,6 +268,26 @@ values above are not properly aligned. This is an unfortunate nature of
 	<entry>&glos-interpolate; input?</entry>
 </row>
 ">
+<!ENTITY ROW_INTERPOLATE_NONCONTAINER_0 "
+<row>
+	<entry>
+		<arg choice='plain'>interpolate</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>0</entry>
+	<entry>&glos-interpolate; output?</entry>
+</row>
+">
+<!ENTITY ROW_INTERPOLATE_NONCONTAINER_1 "
+<row>
+	<entry>
+		<arg choice='plain'>interpolate</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>1</entry>
+	<entry>&glos-interpolate; output?</entry>
+</row>
+">
 <!ENTITY ROW_REPARSE_0 "
 <row>
 	<entry>
@@ -289,7 +295,7 @@ values above are not properly aligned. This is an unfortunate nature of
 	</entry>
 	<entry></entry><entry></entry>
 	<entry>0</entry>
-	<entry>&glos-reparse; output?</entry>
+	<entry>&glos-interpolate; output?</entry>
 </row>
 ">
 <!ENTITY ROW_REPARSE_1 "
@@ -299,7 +305,7 @@ values above are not properly aligned. This is an unfortunate nature of
 	</entry>
 	<entry></entry><entry></entry>
 	<entry>1</entry>
-	<entry>&glos-reparse; output?</entry>
+	<entry>&glos-interpolate; output?</entry>
 </row>
 ">
 <!ENTITY ROW_HIDE_0 "
