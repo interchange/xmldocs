@@ -1,12 +1,12 @@
-&IC; functions can be accessed via the Interchange Tag Language (&glos-ITL;).
+&IC; functions are accessed via the Interchange Tag Language (&glos-ITL;).
 The pages in a catalog may be mostly &glos-HTML;, but they will use ITL tags
 to provide dynamic content and access Interchange functions in general.
 ITL is a superset of MML, or &glos-Minivend; Markup Language.
 </para><para>
-These ITL tags perform various display and modification operations for
-the user session. There's more than 200 standard predefined tags, and the
-&conf-UserTag; facility allows you to create custom tags that perform your own
-functions and can be just as powerful as the built-in tags. To get started
+ITL tags perform all kinds of operations.
+There's more than 200 standard predefined tags, and the
+&conf-UserTag; facility allows you to create your own custom tags, 
+indistinguishable from the ones "built-in". To get started
 with custom tags, see &glos-usertag; glossary entry.
 </para>
 
@@ -26,10 +26,9 @@ A standalone tag has no ending element, such as &tag-value;:
 [value name]
 </programlisting>
 
-The tag, as seen in the above example, will insert the user's name (provided
-they supplied one in the first place).
+The above example will insert user's name.
 </para><para>
-A container tag has both beginning and ending elements, such as &tag-if;:
+A container tag has both beginning and ending elements, such as tag &tag-if;:
 
 <programlisting>
 [if value name]
@@ -37,28 +36,11 @@ A container tag has both beginning and ending elements, such as &tag-if;:
 [/if]
 </programlisting>
 
-In the above example, you can implicitly see that container tags are mostly
-useful only if some content is provided in their <emphasis>body</emphasis>
+In the above example, you see that container tags are in general
+useful only when content is provided in their <emphasis>body</emphasis>
 (the place between the opening and corresponding ending tag).
 </para><para>
-
-Additionally, container tags for which you do not provide any
-<emphasis>body</emphasis> can be closed using "XML-style" syntax.
-The following two lines are identical in effect:
-<programlisting>
-[forum top="[item-code]" display_page="forum/display"][/forum]
-[forum top="[item-code]" display_page="forum/display" /]
-</programlisting>
-</para>
-<para>
-Note, however, that <emphasis role='bold'>you can use "<literal>/]</literal>"
-only with tags for which you provide no attributes, or the attributes are named
-and quoted</emphasis>. Positional attributes (<emphasis>parameters</emphasis>)
-"absorb" everything (including the "<literal>/</literal>") up to the closing
-bracket.
-</para>
-<para>
-It's probably also useful to mention that there must be no whitespace
+There must be no whitespace
 between the left bracket ([) and the tag name; <code>[forum]</code> is
 valid, <code>[ forum]</code> is not!
 </para>
@@ -75,29 +57,25 @@ If the tag is a container, then body text can additionally be specified
 between the opening and closing marker:
 
 <programlisting>
-[<replaceable>tagname</replaceable> <replaceable>parameters</replaceable> <replaceable>attributes</replaceable>]
+[<replaceable>tagname</replaceable> <replaceable>parameters_or_attributes</replaceable>]
   <replaceable>Body Text</replaceable>
 [/<replaceable>tagname</replaceable>]
 </programlisting>
 
-<note><para>
-Some &IC; <emphasis>macros</emphasis> (plain drop-in text replacements)
-may look like tags or end tags. For example, <code>[/page]</code> is a 
-macro that expands to <literal>&lt;/a&gt;</literal>. This allows you to 
-conveniently write
-<code>[page <replaceable>href</replaceable>]
-<replaceable>Link text</replaceable>
-[/page]</code>, but &tag-page; is <emphasis>not</emphasis> a container
-tag, and link text is not treated as the corresponding body text. Finally,
-since <code>[/page]</code> only adds unnecessary burden on the parser,
-simply writing <code>&lt;/a&gt;</code> is preferred.
-</para></note>
+Note that some &IC; <emphasis>macros</emphasis> (drop-in text replacements)
+may look like tags or end tags. For example, <code>[/page]</code> used to
+be a macro that expanded to <literal>&lt;/a&gt;</literal>, but  &tag-page;
+itself was not a container tag and <literal>[/page]</literal> wasn't its
+closing element. Likewise, some tags perform special subtags processing
+on their own, and the subtags are not considered real tags &mdash;
+they only exist in the context of the surrounding tag and usually support
+only limited options. One such example is tag &tag-row; with its subtag
+&tag-column;.
 
 </para>
 
-<important>
 <para>
-It is very important to mention that
+It is important to mention that
 <emphasis>if a tag <emphasis role='bold'>or</emphasis> argument name
 includes an underscore or dash (such as in &tag-item-list;), then you can
 always choose between the dash <emphasis role='bold'>and</emphasis>
@@ -114,59 +92,6 @@ This is a very convenient feature. It is a common standard to use dashes
 in &PERL; code (because in Perl, dashes would be interpreted as minus operators,
 which is not what you'd expect).
 
-</para>
-</important>
-</section>
-
-
-<section>
-<title>HTML Comments</title>
-
-<para>
-&glos-ITL; also allows you to use <literal>&lt;!--[</literal> and 
-<literal>]--&gt;</literal> as an alternative to plain square
-brackets. In other words, 
-<code>[<replaceable>tagname</replaceable> <replaceable>...</replaceable>]</code>
-and <code>&lt;!--[<replaceable>tagname</replaceable>
- <replaceable>...</replaceable>]--&gt;</code> are equivalent.
-</para><para>
-This allows you to make your raw ITL tags appear as comments in &glos-HTML;
-browsers, and especially in HTML editors which might not like non-HTML markup
-at random positions.
-You might want to use this if your editor has trouble with
-&glos-ITL; tags when editing &IC; page templates, or alternatively, if
-you want to use one <literal>.html</literal> file both as an Interchange
-template and as a static page delivered directly by your web server, without
-performing any Interchange processing.
-</para><para>
-If you really wish to treat HTML comments as plain comments, then you must
-include a whitespace between the HTML comment delimiters and the &glos-ITL;
-square brackets:
-
-<programlisting><![CDATA[
-<!--[value name]-->       becomes  Bill
-<!-- [value name] -->     becomes  <!-- Bill -->
-]]></programlisting>
-
-To prevent &glos-ITL; tags from being &glos-interpolate;d at all, you 
-either need to see the &pragma-no_html_comment_embed; pragma, or enclose
-the block in a special &glos-ITL; &tag-comment; tag:
-
-<programlisting><![CDATA[
-[comment] [value name] [/comment]
-]]></programlisting>
-
-Besides not being interpolated at all, &tag-comment; blocks do not
-appear in the final HTML sent to the client either, so you can be completely
-safe regarding any unintentional code or information leakage.
-</para><para>
-While <literal>&lt;!--[</literal> and <literal>[</literal> are completely
-interchangeable, the &IC; parser does not replace <literal>]--&gt;</literal>
-with <literal>]</literal> unless it also sees <literal>&lt;!--[</literal>
-<emphasis>at least once somewhere on the page</emphasis>.
-This is a small parsing speed optimization and shouldn't cause you any
-trouble as you're supposed to be consistent in your syntax anyway.
-<!-- TODO there's more theoretical stuff in APPENDICES in ictags -->
 </para>
 </section>
 
@@ -203,22 +128,18 @@ well as their position in the set) are fixed and determined in advance. You can
 see a list of accepted positional arguments (and their implicit order) in
 each tag's SYNOPSIS reference section; try &tag-value; for example.
 </para><para>
-Additionally, <emphasis role='bold'>you cannot mix named and positional
+<emphasis role='bold'>You cannot mix named and positional
 attributes in the same tag</emphasis>; use either all named, or all positional.
-<emphasis role='bold'>It seems I cannot stress this enough, this is a common
-beginners' mistake, especially when you copy/paste other people's code and
-combine with your own.</emphasis>
 </para><para>
-In any case, positional syntax is appropriate for simpler tags and 
-&IC; interprets positional arguments somewhat faster (but don't let your
-<emphasis>need for speed</emphasis> drive you here; as 
+Positional syntax is appropriate for simpler tags and 
+&IC; interprets positional arguments slightly faster, but don't let 
+premature optimization kick in &mdash; as
 <ulink url="http://www.thocp.net/biographies/dijkstra_edsger.htm">Edsger W. Dykstra</ulink>
-once said, "Premature optimization is the root of all programming evil").
+once said, "Premature optimization is the root of all programming evil".
 </para><para>
-In most cases, tag attributes specified in the positional fashion
-(<emphasis>parameters</emphasis>) work
-the same as named attributes. However, <emphasis role='bold'>there are a few
-situations where you must use named attributes</emphasis>:
+In most cases, positional attributes (called <emphasis>parameters</emphasis>)
+work the same as named attributes. However, <emphasis role='bold'>there are a
+few situations where you must use named attributes</emphasis>:
 
 <itemizedlist>
   <listitem><para>
@@ -238,14 +159,70 @@ situations where you must use named attributes</emphasis>:
   </para></listitem>
   
   <listitem><para>
-  When you need to use the output of a tag as <emphasis>argument</emphasis> for
-  another tag.
+  When you need to interpolate the value of an attribute, such 
+	as of <literal>default=</literal> in
+	<code>[value name=time default="[time]"]</code>.
   </para></listitem>
   
   <listitem><para>
   When you are using looping subtags (Loop tags and subtags are explained below).
   </para></listitem>
 </itemizedlist>
+</para>
+</section>
+
+
+<section>
+<title>HTML Comments</title>
+
+<para>
+&glos-ITL; also supports a special notation where you use HTML comment
+markers with ITL inside, and where the comments are removed by &IC;
+so that the tag results show up in the generated HTML page.
+</para><para>
+That means <code>[<replaceable>tagname</replaceable> <replaceable>...</replaceable>]</code>
+and <code>&lt;!--[<replaceable>tagname</replaceable>
+ <replaceable>...</replaceable>]--&gt;</code> are equivalent.
+</para><para>
+This allows you to make your raw ITL tags appear as comments in &glos-HTML;
+browsers, and especially in HTML editors which might not like non-HTML markup
+at random positions.
+You might want to use this if your editor has trouble with
+&glos-ITL; tags when editing &IC; page templates, or alternatively, if
+you want to use one <literal>.html</literal> file both as an Interchange
+page and as a static page delivered directly by your web server where no
+&IC; processing is performed.
+</para><para>
+When you really wish to treat HTML comments as plain comments and not remove
+them, then you must include a whitespace between the HTML comment delimiters
+and the &glos-ITL; square brackets:
+
+<programlisting><![CDATA[
+<!--[value name]-->       becomes  Bill
+<!-- [value name] -->     becomes  <!-- Bill -->
+]]></programlisting>
+
+ITL is &glos-interpolate;d in both cases however. To prevent &glos-ITL;
+interpolation within HTML comments, you 
+either need to see the &pragma-no_html_comment_embed; pragma, or enclose
+the block in a special &glos-ITL; &tag-comment; tag instead of in 
+HTML comment:
+
+<programlisting><![CDATA[
+[comment] [value name] [/comment]
+]]></programlisting>
+
+Besides not being interpolated at all, &tag-comment; blocks do not
+appear in the final HTML sent to the client either, so you can be completely
+safe regarding any unintentional code or information leakage.
+</para><para>
+While <literal>&lt;!--[</literal> and <literal>[</literal> are completely
+interchangeable, the &IC; parser does not replace <literal>]--&gt;</literal>
+with <literal>]</literal> unless it sees <literal>&lt;!--[</literal>
+<emphasis>at least once somewhere on the page</emphasis>.
+This is a small parsing speed optimization and shouldn't cause you any
+trouble as you're supposed to be consistent in your syntax anyway.
+<!-- TODO there's more theoretical stuff in APPENDICES in ictags -->
 </para>
 </section>
 
@@ -260,7 +237,7 @@ When ITL tags are <emphasis>expanded</emphasis>, for example when
 are &glos-interpolate;d.
 </para><para>
 If you want to use one tag's output as another tag's input, you
-cannot use positional syntax and you must double-quote the
+must use named syntax and you must double-quote the
 argument. For example, this <emphasis role='bold'>WILL NOT</emphasis> work:
 
 <programlisting>
@@ -276,8 +253,9 @@ containing whitespace:
 </programlisting>
 
 Note that the <arg choice='plain'>href</arg> argument did not need to be
-quoted; only <arg choice='plain'>arg</arg> did because it
-contained a whitespace.
+quoted; <arg choice='plain'>arg</arg> did, because it
+contained a whitespace and it contained a tag intended for interpolation
+(<literal>[scratch variable_name]</literal>).
 </para>
 
 <note><para>
@@ -288,9 +266,10 @@ are normally interpolated (in other words,
 before being passed as value to <literal>arg=</literal>.
 </para>
 <para>
-However, when the attributes are of complex types (array or hash
-references), their values <emphasis role='bold'>are not</emphasis>
-&glos-interpolate;d. The interpolation is controlled by the
+However, when the attributes contain a dot (such as 
+<literal>name.first=</literal> or <literal>name.last=</literal>),
+their values <emphasis role='bold'>are not</emphasis>
+&glos-interpolate;d by default. Their interpolation is controlled by the
 &pragma-interpolate_itl_references; pragma, and more about this whole
 concept can be learned below in <xref linkend="itl_arrays_and_hashes"/>.
 </para>
@@ -321,17 +300,40 @@ Pipes have the additional functionality of
 removing leading and trailing whitespace, but generally you can use 
 all types in combination to do three levels of quoting with ITL; for 
 more deeply nested constructs, use direct &PERL; code.
+</para><para>
+Additionally, container tags
+can be closed using "XML-style" syntax.
+The following two lines are identical in effect:
+<programlisting>
+  [forum top="[item-code]" display_page=forum_display  ][/forum]
+  [forum top="[item-code]" display_page=forum_display /]
+</programlisting>
+</para> 
+<para>
+Note, however, that <emphasis role='bold'>you can use "<literal>/]</literal>"
+only with tags for which you provide no attributes, or the attributes are named
+and quoted</emphasis>.
+Positional attributes (<emphasis>parameters</emphasis>)
+"absorb" everything (including the "<literal>/</literal>") up to the closing
+bracket, and therefore using "/]" is not possible.
 </para>
 <para>
-The above answers to the quoting problem, however, are still not all there is
-to know about quoting.
-In general, <emphasis>loop subtags</emphasis>, which we explain some lines
-below, do not need quotes (even though they sometimes contain whitespace)
-because they are parsed in a separate pass, before the general parser takes on.
+When using "/]" notation, it is still possible to provide body for the tag
+by specifying <literal>body=</literal> attribute.
+</para>
+<para>
+The above covers a good deal of quoting, but it's still not all
+there is to it.
+<emphasis>Loop subtags</emphasis>, which we explain some lines
+below, are an exception to the rule and do not need quotes
+(even though they sometimes contain whitespace),
+because they are parsed earlier in a separate pass, before the
+general parser takes on.
 </para><para>
-Here's an example that would work properly with quotes omitted. (Pay attention
+Here's an example with loop subtags that would work properly even
+with quotes omitted. (Pay attention
 to <code>[item-field url]</code> which, at first sight, looks like it is
-invalid because it is not quoted and contains a space.)
+invalid because it contains a space and is not quoted nor named.)
 <programlisting>
 [item-list]
 [page [item-field url]]detailed info[/page] on [item-description]
@@ -340,13 +342,7 @@ invalid because it is not quoted and contains a space.)
 </para>
 
 <para>
-<code>[page [value mypage]]</code>, however, would <emphasis>not</emphasis>
-work, because the &tag-value; tag shown is not one of the looping subtags
-(for the record, it's not even close). But as we said, we'll get back to
-subtags and their availability in a minute.
-</para>
-<para>
-You might wonder why unquoted tags are even allowed. The answer is
+You might wonder why unquoted tags are  allowed. The answer is
 <emphasis>performance</emphasis>. If you have large lists of tags you can
 achieve significant speed-ups by using positional attributes. Parsing and
 disassembling named attributes takes some more CPU cycles.
@@ -375,10 +371,10 @@ Making complicated ITL constructs much easier, or even trivial
 </para></listitem>
 <listitem><para>
 Enabling direct access to Interchange data structures (and code, and 
-everything), thus achieving unparalleled flexibility
+everything)
 </para></listitem>
 <listitem><para>
-Unify coding style, if you decide to write everything in Perl directly
+Unifying coding style
 </para></listitem>
 </itemizedlist>
 </para>

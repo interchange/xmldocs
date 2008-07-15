@@ -316,6 +316,45 @@ banner sizes, check out the
 
 	<qandadiv><title>Databases</title>
 		<qandaentry><question><para>
+		Counting rows or number of items in a table
+		</para></question><answer><para>
+		If you are using an SQL database, you can retrieve the number
+		of rows in a database using an SQL query:
+<programlisting>
+Rows: [perl products]($Db{products}->query("select count(*) from products"))[0][0][0];[/perl]
+</programlisting>
+
+		If you do not have an SQL database or want a solution that works with
+		&IC; regardless of the underlying database used, here's a slower but
+		generic tag from the &glos-Minivend; days:
+<programlisting><![CDATA[
+# [db-count table]
+#
+# This tag returns the number of records in a database table,
+# 'products' by default.
+
+UserTag  db-count  Order table
+UserTag  db-count  PosNumber 1
+UserTag  db-count  Routine <<EOF
+sub {
+  my ($db) = @_;
+
+  $db = 'products' unless $db;
+
+  my $ref = Vend::Data::database_exists_ref($db)
+    or return "Bad table $db";
+
+  $ref = $ref->ref();
+
+  my $count;
+  while ($ref->each_record()) { $count++ }
+  return $count;
+}
+EOF
+]]></programlisting>
+		Thanks &edl; for providing this tip in Jan 2001.
+		</para></answer></qandaentry>
+		<qandaentry><question><para>
 		Finding inconsistencies in Interchange table definition files
 		</para></question><answer><para>
 Interchange can automatically create SQL tables with proper fields and 
@@ -522,6 +561,205 @@ picked up from the usual, default location.
 
 	<qandadiv><title>E-mail</title>
 		<qandaentry><question><para>
+		Checking for syntactical validity of e-mail addresses
+		</para></question><answer><para>
+		Interchange has two e-mail checks, &ordercheck-email; and &ordercheck-email-only;, which 
+		use a relatively simple regex in checking the syntactical validity
+		of an e-mail address. For a way to run those profile checks on a value,
+		see &tag-run-profile;.
+		</para><para>
+		However, if you need as accurate and bullet-proof e-mail address matching
+		as possible, you can use code from Chapter 7 of the Jeffrey Friedl's 1997
+		book "Mastering Regular Expressions", published by O'Reilly:
+<programlisting><![CDATA[
+# Some things for avoiding backslashitis later on.
+$esc        = '\\\\';               $Period      = '\.';
+$space      = '\040';               $tab         = '\t';
+$OpenBR     = '\[';                 $CloseBR     = '\]';
+$OpenParen  = '\(';                 $CloseParen  = '\)';
+$NonASCII   = '\x80-\xff';          $ctrl        = '\000-\037';
+$CRlist     = '\n\015';  # note: this should really be only \015.
+
+# Items 19, 20, 21
+$qtext = qq/[^$esc$NonASCII$CRlist\"]/;               # for within "..."
+$dtext = qq/[^$esc$NonASCII$CRlist$OpenBR$CloseBR]/;  # for within [...]
+$quoted_pair = qq< $esc [^$NonASCII] >; # an escaped character
+
+##############################################################################
+# Items 22 and 23, comment.
+# Impossible to do properly with a regex, I make do by allowing at most one level of nesting.
+$ctext   = qq< [^$esc$NonASCII$CRlist()] >;
+
+# $Cnested matches one non-nested comment.
+# It is unrolled, with normal of $ctext, special of $quoted_pair.
+$Cnested = qq<
+   $OpenParen                            #  (
+      $ctext*                            #     normal*
+      (?: $quoted_pair $ctext* )*        #     (special normal*)*
+   $CloseParen                           #                       )
+>;
+
+# $comment allows one level of nested parentheses
+# It is unrolled, with normal of $ctext, special of ($quoted_pair|$Cnested)
+$comment = qq<
+   $OpenParen                              #  (
+       $ctext*                             #     normal*
+       (?:                                 #       (
+          (?: $quoted_pair | $Cnested )    #         special
+           $ctext*                         #         normal*
+       )*                                  #            )*
+   $CloseParen                             #                )
+>;
+
+##############################################################################
+
+# $X is optional whitespace/comments.
+$X = qq<
+   [$space$tab]*                    # Nab whitespace.
+   (?: $comment [$space$tab]* )*    # If comment found, allow more spaces.
+>;
+
+
+
+# Item 10: atom
+$atom_char   = qq/[^($space)<>\@,;:\".$esc$OpenBR$CloseBR$ctrl$NonASCII]/;
+$atom = qq<
+  $atom_char+    # some number of atom characters...
+  (?!$atom_char) # ..not followed by something that could be part of an atom
+>;
+
+# Item 11: doublequoted string, unrolled.
+$quoted_str = qq<
+    \"                                     # "
+       $qtext *                            #   normal
+       (?: $quoted_pair $qtext * )*        #   ( special normal* )*
+    \"                                     #        "
+>;
+
+# Item 7: word is an atom or quoted string
+$word = qq<
+    (?:
+       $atom                 # Atom
+       |                       #  or
+       $quoted_str           # Quoted string
+     )
+>;
+
+# Item 12: domain-ref is just an atom
+$domain_ref  = $atom;
+
+# Item 13: domain-literal is like a quoted string, but [...] instead of  "..."
+$domain_lit  = qq<
+    $OpenBR                            # [
+    (?: $dtext | $quoted_pair )*     #    stuff
+    $CloseBR                           #           ]
+>;
+
+# Item 9: sub-domain is a domain-ref or domain-literal
+$sub_domain  = qq<
+  (?:
+    $domain_ref
+    |
+    $domain_lit
+   )
+   $X # optional trailing comments
+>;
+
+# Item 6: domain is a list of subdomains separated by dots.
+$domain = qq<
+     $sub_domain
+     (?:
+        $Period $X $sub_domain
+     )*
+>;
+
+# Item 8: a route. A bunch of "@ $domain" separated by commas, followed by a colon.
+$route = qq<
+    \@ $X $domain
+    (?: , $X \@ $X $domain )*  # additional domains
+    :
+    $X # optional trailing comments
+>;
+
+# Item 6: local-part is a bunch of $word separated by periods
+$local_part = qq<
+    $word $X
+    (?:
+        $Period $X $word $X # additional words
+    )*
+>;
+
+# Item 2: addr-spec is local@domain
+$addr_spec  = qq<
+  $local_part \@ $X $domain
+>;
+
+# Item 4: route-addr is <route? addr-spec>
+$route_addr = qq[
+    < $X                 # <
+       (?: $route )?     #       optional route
+       $addr_spec        #       address spec
+    >                    #                 >
+];
+
+
+# Item 3: phrase........
+$phrase_ctrl = '\000-\010\012-\037'; # like ctrl, but without tab
+
+# Like atom-char, but without listing space, and uses phrase_ctrl.
+# Since the class is negated, this matches the same as atom-char plus space and tab
+$phrase_char =
+   qq/[^()<>\@,;:\".$esc$OpenBR$CloseBR$NonASCII$phrase_ctrl]/;
+
+# We've worked it so that $word, $comment, and $quoted_str to not consume trailing $X
+# because we take care of it manually.
+$phrase = qq<
+   $word                        # leading word
+   $phrase_char *               # "normal" atoms and/or spaces
+   (?:
+      (?: $comment | $quoted_str ) # "special" comment or quoted string
+      $phrase_char *            #  more "normal"
+   )*
+>;
+
+## Item #1: mailbox is an addr_spec or a phrase/route_addr
+$mailbox = qq<
+    $X                                  # optional leading comment
+    (?:
+            $addr_spec                  # address
+            |                             #  or
+            $phrase  $route_addr      # name and address
+     )
+>;
+
+
+###########################################################################
+#
+# The regex used in matching is built in $mailbox.
+#
+# Here's a little snippet to test it.
+# Addresses given on the commandline are described.
+#
+
+my $error = 0;
+my $valid;
+foreach $address (@ARGV) {
+    $valid = $address =~ m/^$mailbox$/xo;
+    printf "`$address' is syntactically %s.\n", $valid ? "valid" : "invalid";
+    $error = 1 if not $valid;
+}
+exit $error;
+]]></programlisting>
+
+The program can be saved to a file and ran for testing e-mail addresses
+validity on the command line.
+</para><para>
+For use with Interchange, you don't need the whole program &mdash; simply
+print the final regex generated in <literal>$mailbox</literal> and then copy
+it to the location where you need it.
+		</para></answer></qandaentry>
+
+		<qandaentry><question><para>
 		Optimizing e-mail delivery with a custom Sendmail routine
 		</para></question><answer><para>
 It was observed in 2004 that about once in every ten times, the
@@ -586,6 +824,8 @@ And set &conf-SendMailProgram; directive in &ccf;:
 <programlisting>
 SendMailProgram /usr/local/bin/sendmail-bg
 </programlisting>
+
+<!-- XXX method with SMTPHost and sending to local exim queue -->
 		</para></answer></qandaentry>
 	</qandadiv>
 
@@ -1145,7 +1385,41 @@ EOL
 Thanks Greg Hanson for providing this tip in March 2001.
 		</para></answer></qandaentry>
 		
-		
+	</qandadiv>
+
+	<qandadiv><title>User database</title>
+		<qandaentry><question><para>
+		Searching through UserDB
+		</para></question><answer><para>
+		While you can normally access data in &glos-UserDB;,
+		searching it using Interchange search functions is
+		prevented by default (using &conf-NoSearch;).
+		</para><para>
+		To temporarily allow searching and perform a search for
+		an email address, use something like the following:
+<programlisting>
+[calcn]
+	$Config->{NoSearch} =~ s/userdb//;
+	return;
+[/calcn]
+
+[loop search="
+ st=db
+    fi=userdb
+    ml=1
+    sf=email
+    se=[value email]
+    rf=username, password
+    "
+]
+	[seti userdb_username][loop-field username][/seti]
+	[seti userdb_password][loop-field password][/seti]
+[/loop]
+</programlisting>
+
+Thanks Hans-Joachim Leidinger for providing this tip in December 2000.
+		</para></answer></qandaentry>
+
 	</qandadiv>
 
 </qandadiv>
