@@ -563,7 +563,7 @@ picked up from the usual, default location.
 		<qandaentry><question><para>
 		Checking for syntactical validity of e-mail addresses
 		</para></question><answer><para>
-		Interchange has two e-mail checks, &ordercheck-email; and &ordercheck-email-only;, which 
+		Interchange has two e-mail checks, <literal>email</literal> and &ordercheck-email-only;, which 
 		use a relatively simple regex in checking the syntactical validity
 		of an e-mail address. For a way to run those profile checks on a value,
 		see &tag-run-profile;.
