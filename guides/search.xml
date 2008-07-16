@@ -835,11 +835,10 @@ Search for [value searchstring] in [value column]
 		<literal>un &mdash; mv_unique</literal></title><cmdsynopsis>
 		(<literal>0</literal>/<literal>1</literal>,
 		default <literal>0</literal>)</cmdsynopsis><para>
-		return only unique fields. The option works on whatever the search
-		return fields (set with <literal>rf</literal>) are.
-		<!-- TODO returns only unique items, or compressed duplicates into one?
-		Also, does it looks for uniques in one field, or an entry is consudered
-		duplicate only if all fields are the same? -->
+		removes duplicate records from the result
+		set. Duplicates are determined by comparing the value
+		of the first
+		search return field (set with <literal>rf</literal>).
 		</para>
 		</section>
 		<section id="mv_value"><title>
