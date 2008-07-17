@@ -1,4 +1,27 @@
+__NAME__ purpose
+lists GPG keys
+__END__
+
 __NAME__ synopsis 
+<row>
+
+	<entry>
+	dir
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	No
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	GPG home directory
+	</entry>
+
+</row> 
 <row>
 
 	<entry>
@@ -14,7 +37,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	include date and id in output
 	</entry>
 
 </row> 
@@ -56,6 +79,5 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-&ROW_INTERPOLATE_0;
-&ROW_REPARSE_1;
+&TAG_NON_CONTAINER;
 __END__
