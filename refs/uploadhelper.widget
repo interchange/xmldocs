@@ -6,6 +6,8 @@ __NAME__ see also
 uploadblob
 __END__
 
-__NAME_ notes
+__NAME__ notes
 File upload has to be enabled in the HTML form containing this widget.
+Also this widget depends on the <literal>process_filter</literal> form
+&glos-profile;.
 __END__
