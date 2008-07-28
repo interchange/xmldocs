@@ -13,7 +13,7 @@
 </refnamediv>
 
 <refsect1 id='$ag{"name"}_synopsis'>
-<title>PARAMETERS</title>
+<title>ATTRIBUTES</title>
 
 <informaltable pgwide='1' frame='none'>
 <tgroup cols='5' align='left'>
