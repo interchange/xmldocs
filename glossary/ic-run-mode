@@ -1,1 +1,16 @@
 low, high, rpc, prefork
+<section>
+<title>Single Forks with PreFork</title>
+<para>
+Standard &conf-PreFork; uses the typical double-fork method in UNIX for
+generating daemons so as to avoid zombies (or more specifically needing
+to deal with them). However, forking Interchange daemons is relatively
+expensive.
+</para><para>
+For most (if not all) sane, modern Unixen, you can avoid the relative
+expense of double forking by setting SIGCHLD to IGNORE in the master,
+which accomplishes roughly the same goal. It states, essentially, that
+the parent is not interested in the result of the child's process, so
+don't zombify my kids waiting for me to check on them.
+</para>
+</section>
