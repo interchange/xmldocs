@@ -23,11 +23,14 @@ actions that you might already be familiar with are
 <literal>refresh</literal>. 
 __END__
 
-__NAME__ example: Very basic form action definition
+__NAME__ example: Checkout Action
+This action can be used on the shopping cart page to update the cart
+and go to the checkout page with an image button.
 <programlisting><![CDATA[
-FormAction foo <<EOR
+FormAction checkout <<EOR
 sub {
-    $CGI->{mv_nextpage} = 'bar';
+    $Tag->update('quantity');
+    $CGI->{mv_nextpage} = 'checkout';
     return 1;
 }
 EOR
