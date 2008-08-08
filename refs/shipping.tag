@@ -306,25 +306,6 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
-<row>
-
-	<entry>
-	hide
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
 &ROW_CURRENCYDISPLAY;
 &TAG_NON_CONTAINER;
 __END__
