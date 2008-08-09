@@ -12,16 +12,21 @@ __END__
 
 
 __NAME__ description
-Specify list of &glos-configuration; directives that are to be automatically
-created as variable/value pairs. This allows you to conveniently
-write say, <code>__<replaceable>DIRECTIVENAME</replaceable>__</code>, and 
+Specify list of &glos-configuration; directives whose values are to be made
+available through the &glos-variable; space.
+This allows you to conveniently
+write say, <code>__<replaceable>DirectiveName</replaceable>__</code>, and 
 retrieve the corresponding configuration directive's value.
 </para><para>
-The above example, however, only works for scalar values. Since &IC; 
-also supports &glos-array;s and &glos-hash;es of values (so, all three
-basic &PERL; types), the syntax had to be extended a little. With 
-array or hashes, you need to append the index number or hash key respectively.
+To support &glos-scalar;s, &glos-array;s and &glos-hash;es of values (all
+three basic &PERL; types), the syntax had to be extended a little. With 
+array or hash &glos-configuration; directives, you need to append the index
+number or hash key respectively.
 See <xref linkend="AutoVariable_examples"/> for clarification.
+</para><para>
+Note that the behavior of &conf-__FILENAME__; is not dynamic &mdash; if need
+to re-invoke &conf-__FILENAME__; every time you want to "refresh" the 
+value visible through <code>__<replaceable>DirectiveName</replaceable>__</code>.
 __END__
 
 

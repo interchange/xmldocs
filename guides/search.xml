@@ -204,9 +204,14 @@ Now you can start indexing with <literal>swish-e -S prog -c
 		</section>
 		<section id="mv_column_op"><title>
 		<literal>op &mdash; mv_column_op</literal></title><cmdsynopsis>
-		(<literal></literal>/<literal></literal>,
-		default <literal></literal>)</cmdsynopsis><para>
+		(<literal>rm</literal> | <literal>eq</literal> |
+		<literal>tq</literal> | <literal>aq</literal>,
+		default <literal>rm</literal>)</cmdsynopsis><para>
 		operation to perform to check field for a match.
+		</para><para>
+		For <literal>tq</literal> and <literal>aq</literal> matching
+		using <classname>Text::Query</classname> module, see 
+		<olink targetdoc="howtos" targetptr="text_query"/>.
 		</para>
 		</section>
 		<section id="mv_coordinate"><title>

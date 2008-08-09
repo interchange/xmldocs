@@ -93,7 +93,7 @@ __END__
 __NAME__ example: Resetting discounts
 To reset a discount, simply set it to the empty string: 
 <programlisting>
-[discount ALL_ITEMS /]
+[discount ALL_ITEMS][/discount]
 </programlisting>
 __END__
 

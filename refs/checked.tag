@@ -148,6 +148,27 @@ __NAME__ description
 The tag provides "memory" for &glos-HTML; checkboxes and radio buttons.
 __END__
 
+__NAME__ example: "Memory" for checkboxes
+<programlisting><![CDATA[
+<pre>
+
+<form action="[process href="@@MV_PAGE@@"]" method="post">
+  [form-session-id]
+  <input type=hidden name=mv_todo value=refresh>
+  
+  <input type=checkbox name=checkbox1 [checked name=checkbox1 cgi=1]> Option1
+  <input type=checkbox name=checkbox2 [checked name=checkbox2 cgi=1]> Option2
+  <input type=checkbox name=checkbox3 [checked name=checkbox3 cgi=1]> Option3
+  <input type=checkbox name=checkbox4 [checked name=checkbox4 cgi=1]> Option4
+  <input type=checkbox name=checkbox5 [checked name=checkbox5 cgi=1]> Option5
+  
+  <input type=submit>
+</form>
+
+</pre>
+]]></programlisting>
+__END__
+
 __NAME__ example: Radio Button
 Displays a radio button and selects the second choice by default:
 <programlisting><![CDATA[

@@ -6,6 +6,7 @@
 - see if the files we parse in bin/stattree in block (like parseVendConfig, parseVendInterpolate) allow some stuff to go unaccounted for mkreport
 - with tags from Interpolate.pm, context for systemtag is not always 'whole file', but can be x-y as well
 - dal autogen preskoci kontekst koji je prazan? i zasto uopce unkondicionalno
+- rijesit html_std/_ext i opcije
   ekspandira @$ctx ako moze da nema konteksta?
 - make howtos chunk
 - fix link to howtos after changing format

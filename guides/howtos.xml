@@ -936,7 +936,7 @@ or
 
 
 
-		<qandaentry><question><para>
+		<qandaentry id=""><question><para>
 		Creating custom search routines for use in mv_column_op
 		</para></question><answer><para>
 		It is possible to define your own search functions that can be
@@ -967,15 +967,15 @@ or
 		</para></answer></qandaentry>
 
 
-		<qandaentry><question><para>
+		<qandaentry id="text_query"><question><para>
 		Supporting AND, OR, and other advanced search specifications
 		</para></question><answer><para>
 		You can install <classname>Text::Query</classname> Perl module
 		to enable advanced query parsing for search specifications.
 		</para><para>
 		To use <classname>Text::Query</classname>, set <mv>mv_column_op</mv>
-		to <literal>aq</literal> for advanced parsing or 
-		<literal>tq</literal> for simple parsing.
+		to "<literal>aq</literal>" for advanced parsing or 
+		"<literal>tq</literal>" for simple parsing.
 		</para><para>
 		To learn about the features "<literal>aq</literal>" and 
 		"<literal>tq</literal>" give you, see 

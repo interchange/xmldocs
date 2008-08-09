@@ -62,7 +62,7 @@ __NAME__ synopsis
 	<literal>%d-%b-%Y</literal>
 	</entry>
 	<entry>
-	format string
+  POSIX strftime format specifier; see &glos-time; glossary entry.
 	</entry>
 
 </row> 

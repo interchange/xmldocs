@@ -49,7 +49,30 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	<group choice='plain'>
+	<group>
+	<arg choice='plain'>ui_data_fields</arg>
+	<arg choice='plain'>mv_data_fields</arg>
+	<arg choice='plain'>fields</arg>
+	</group>
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	No
+	</entry>
+	<entry>
+	All fields.
+	</entry>
+	<entry>
+	Fields to edit.
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	<group>
 	<arg choice='plain'>ui_meta_view</arg>
 	<arg choice='plain'>view</arg>
 	</group>
@@ -1199,25 +1222,6 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	"orig_$_"
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
-<row>
-
-	<entry>
 	tabbed
 	</entry>
 	<entry>
@@ -1421,6 +1425,27 @@ __NAME__ synopsis
 	</entry>
 	<entry>
 	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>	
+	<group>
+	<arg choice='plain'>ui_display_only</arg>
+	<arg choice='plain'>email_fields</arg>
+  </group>
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
 	</entry>
 
 </row> 
