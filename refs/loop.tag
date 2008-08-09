@@ -40,7 +40,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<literal>item</literal>
+	<literal>loop</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
@@ -394,7 +394,15 @@ __NAME__ synopsis
 &TAG_CONTAINER;
 __END__
 
-
+__NAME__ example: Loop through expiration years
+<programlisting><![CDATA[
+<select name="mv_credit_card_exp_year">
+[loop ranges=1 list="2008..2022"]
+<option>[loop-code]
+[/loop]
+</select>
+]]></programlisting>
+__END__
 
 
 
