@@ -1,4 +1,30 @@
+__NAME__ purpose
+produce an order link
+__END__
+
 __NAME__ synopsis 
+<row>
+	<entry>
+	<group choice='optional'>
+		<arg choice='plain'>code</arg>
+		<arg choice='plain'>item</arg>
+		<arg choice='plain'>sku</arg>
+	</group>
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	Item &glos-SKU;
+	</entry>
+
+</row> 
 <row>
 
 	<entry>
@@ -34,7 +60,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	&glos-cart; name
 	</entry>
 
 </row> 
@@ -134,4 +160,8 @@ __NAME__ synopsis
 
 </row> 
 &TAG_NON_CONTAINER;
+__END__
+
+__NAME__ see also
+area,page
 __END__
