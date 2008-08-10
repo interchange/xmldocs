@@ -2,7 +2,6 @@ __NAME__ purpose
 access user database functions
 __END__
 
-
 __NAME__ synopsis
 <row>
 
@@ -13,7 +12,7 @@ __NAME__ synopsis
 	Yes
 	</entry>
 	<entry>
-	<!-- REQ -->
+	Yes
 	</entry>
 	<entry>
 	<!-- DFL -->
@@ -68,6 +67,10 @@ __NAME__ synopsis
 &TAG_NON_CONTAINER;
 __END__
 
+__NAME__ description
+<tag>userdb</tag> provides access to &glos-UserDB; functions.
+__END__
+
 __NAME__ example: Save cart
 <programlisting>
 [userdb function=set_cart nickname=basket]
@@ -80,3 +83,6 @@ __NAME__ example: Restore cart
 </programlisting>
 __END__
 
+__NAME__ see also
+UserDB
+__END__
