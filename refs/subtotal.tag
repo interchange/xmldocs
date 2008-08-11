@@ -5,7 +5,7 @@ __END__
 __NAME__ synopsis
 <row>
 	<entry>
-	<group choice='optional'>
+	<group>
 	<arg choice='plain'>name</arg>
 	<arg choice='plain'>cart</arg>
 	</group>
@@ -31,11 +31,12 @@ __NAME__ example: Basic example
 </programlisting>
 __END__
 
-__NAME__ example: Using [subtotal] programatically
-<programlisting>
+<!--
+example: Using [subtotal] programatically
+<programlisting><![CDATA[
 $subtotal = $Tag->subtotal({noformat => 1});
-</programlisting>
-__END__
+]]></programlisting>
+-->
 
 __NAME__ see also
 currency, total-cost
