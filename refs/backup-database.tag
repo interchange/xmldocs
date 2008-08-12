@@ -24,6 +24,23 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	force
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	&glos-false;
+	</entry>
+	<entry>
+	Force export even if &conf-NoExportExternal; would apply to this table?
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	dir
 	</entry>
 	<entry>

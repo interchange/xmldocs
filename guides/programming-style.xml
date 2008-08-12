@@ -205,12 +205,12 @@ my $buf = qq{<a href="http://www.av.com/">Visit AltaVista!</a>};
 		With non-container tags, such as &lt;input&gt;, &lt;br&gt; or &lt;hr&gt;,
 		closing <literal>&gt;</literal> needs to be replaced with
 		<literal>/&gt;</literal>, but not unconditionally (&IC; must be able to
-		output both the usual, and XHTML variant).
+		output both the usual &gt; and and XHTML variant /&gt;).
 		In such constructs, you can use <varname>$Vend::Xtrailer</varname>
-		that's set to <literal>/</literal> if &conf-XHTML; is enabled, 
-		and we could eventually replace all "raw" calls like &lt;input&gt;
-		with &tag-formel;, &tag-widget; and other tags that will honor 
-		<varname>$Vend::Xtrailer</varname>.
+		that's automatically set to <literal>/</literal> if &conf-XHTML; is
+		enabled, and eventually you could replace your "raw" calls to tags
+		such as &lt;input&gt; with calls to Interchange tags &tag-formel;
+		or &tag-display; that will honor <varname>$Vend::Xtrailer</varname>.
 <programlisting><![CDATA[
 <form action="[process]">
   <input type="text"   name="city" value="[value city]" />
@@ -291,7 +291,7 @@ sub test1 {
 		Do not break obviously "solid" blocks of code to multiple lines. To give
 		you an idea of what I am talking about, let's say you should not break
 		typical xmldocs regexps, such as <literal>/\$::Pragma->{(\w+?)}/</literal>
-		or <literal>/\$Vend::Cfg->{Pragma}{(\w+?)}/</literal>. (Impact: critical. Might prevent the <filename>bin/stattree</filename> script from detecting symbols)
+		or <literal>/\$Vend::Cfg->{Pragma}{(\w+?)}/</literal>. (Impact: important. Might prevent the <filename>bin/stattree</filename> script from detecting symbols)
 <programlisting><![CDATA[
 return if $::Pragma->{download};
 

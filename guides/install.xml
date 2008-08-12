@@ -110,6 +110,7 @@
 		platform. Chances are that the additional, non-standard modules required
 		by &IC; will also be available in your distribution.
 		</para>
+		<!--
 		<para>
 		You should run &IC; with a non-threaded Perl. Unfortunately, almost
 		all distributions compile a threaded version. This problem has caused,
@@ -127,6 +128,7 @@
 		of Perl that will be used to run &IC;. Pointers on how to make &IC;
 		use your custom Perl installation are given later in this guide.
 		</para>
+		-->
 		<para>
 		Interchange relies on a number of non-standard Perl modules.
 		Installing &IC; from the generic tarball will test for the required
@@ -184,7 +186,7 @@ $ /path/to/perl -MCPAN -e 'install "Bundle::InterchangeKitchenSink"'
 		</para>
 		<para>
 		&APACHE; is probably the most commonly used web server, but you might
-		be interested in lighter and more efficient alternatives such as
+		be interested in lighter and efficient alternatives such as
 		&MATHOPD;.
 		</para>
 		<para>
