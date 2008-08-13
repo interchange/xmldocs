@@ -15,7 +15,7 @@ __END__
 
 __NAME__ online: Filter example
 <programlisting>
-"[filter strip]  X  X  [/filter]"
+"[filter __FILENAME__]  X  X  [/filter]"
 </programlisting>
 __END__
 
