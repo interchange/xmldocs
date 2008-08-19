@@ -20,7 +20,7 @@ This is a potential problem as new sessions would keep getting created,
 but they'd never be removed, wasting system resources.<sbr/>
 The way we can detect "closed" &glos-session;s is by measuring time
 between user requests. We can expire sessions where no activity was
-registered for more than the specified maximum interval.
+registered for more than the specified interval.
 </para><para>
 &conf-__FILENAME__; specifies the maximum amount of time for which the
 session information is preserved between two consecutive user requests.
