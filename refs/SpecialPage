@@ -45,12 +45,12 @@ Valid types are:
 	<listitem><para>
 	<literal>interact</literal> &mdash; 
 
-	Defaults to <literal></literal>.
+	Called on various errors, including missing &conf-FormAction;s. Defaults to <literal>interact</literal>.
 	</para></listitem>
 	<listitem><para>
 	<literal>missing</literal> &mdash; 
 
-	Defaults to <literal></literal>.
+	Defaults to <literal>missing</literal>.
 	</para></listitem>
 	<listitem><para>
 	<literal>needfield</literal> &mdash; 
