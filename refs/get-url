@@ -109,6 +109,16 @@ __NAME__ synopsis
 	as a valid &glos-interval;
 	(such as "3 min").</entry>
 </row>
+<row>
+	<entry>
+		<arg choice='plain'>scratch</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry>&NODEFAULT;</entry>
+	<entry>Store result in the named &glos-scratch; variable instead of returning it.
+	</entry>
+</row>
+&TAG_NON_CONTAINER;
 __END__
 
 
