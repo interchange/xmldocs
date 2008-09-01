@@ -265,6 +265,7 @@ EFSNet</ulink></entry>
 <entry><literal>TestPayment</literal></entry>
 <entry>Payment Test</entry>
 <entry><literal>testpayment</literal></entry>
+<entry>for test purposes</entry>
 </row>
 
 </tbody>
@@ -437,6 +438,25 @@ and <literal>secret</literal>.
 Net::TCLink module from <ulink
 url='http://www.trustcommerce.com/tclink.html'>http://www.trustcommerce.com/tclink.html</ulink>
 or <ulink url='http://search.cpan.org/perldoc?Net::TCLink'>CPAN</ulink>.
+</para>
+</section>
+</section>
+
+<section>
+<title>TestPayment</title>
+<para>This module can be used for test purposes.</para>
+<section>
+<title>Card Numbers</title>
+<para>
+If the card number is <literal>4111111111111111</literal> then the
+transaction will be approved.
+</para>
+<para>
+If the card number is <literal>4111111111111129</literal> then the
+transaction will be declined.
+</para>
+<para>
+Any other card number will raise an error and the transaction will be declined.
 </para>
 </section>
 </section>
