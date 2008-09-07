@@ -1,0 +1,29 @@
+Each item in the cart consists of the following fields:
+
+<itemizedlist>
+<listitem><para>code</para></listitem>
+<listitem><para>quantity</para></listitem>
+<listitem><para><mv>mv_ip</mv></para></listitem>
+<listitem><para><mv>mv_mi</mv></para></listitem>
+<listitem><para><mv>mv_si</mv></para></listitem>
+</itemizedlist>
+
+Additional fields can be added with the &conf-UseModifier; and &conf-AutoModifier; configuration
+directives.
+
+</para>
+
+<section>
+<title>Multiple Carts</title>
+<para>
+</para>
+</section>
+
+<section>
+<title>Debugging</title>
+<para>
+<tag>dump</tag> The content of all carts ....
+</para>
+</section>
+
+<para>
