@@ -94,7 +94,24 @@ The available events are:
 	is displaying a page specified by "&conf-SpecialPage; 
 	<literal>missing</literal>".
 </para></listitem>
+<listitem><para>
+	<literal>shipping_callout</literal> &mdash; 
+	event is triggered after shipping calculation, but before result is
+formatted and returned.
 
+It's useful for
+the type of customization that would require modifying too many shipping
+table entries or using entirely custom shipping code, because it allows
+you to build on the powerful shipping features interchange already has.
+</para></listitem>
+<listitem><para>
+	<literal>weight_callout</literal> &mdash; 
+	event is triggered after weight is processed for shipping calculation.
+
+The subroutine is called with the weight as parameter and expects the modified weight as return value.
+
+It does not affect other calculations, such as done by the <tag>weight</tag> usertag.
+</para></listitem>
 </itemizedlist>
 __END__
 
@@ -204,6 +221,37 @@ sub {
   }
 }
 EOS
+]]></programlisting>
+__END__
+
+__NAME__ example: Shipping discount for dealers with SpecialSub shipping_callout
+<programlisting><![CDATA[
+Sub custom_shipping <<EOS
+sub {
+    my ($final, $mode, $opt, $o) = @_;
+    $final *= .90 if $Scratch->{dealer} and $mode =~ /UPS/i;
+    return $final;
+}
+EOS
+SpecialSub shipping_callout custom_shipping
+]]></programlisting>
+__END__
+
+__NAME__ example: Adjusting shipping weight with SpecialSub weight_callout
+<programlisting><![CDATA[
+Sub custom_weight <<EOS
+sub {
+    my ($normal_weight) = @_;
+
+    my $new_weight = 0;
+    for my $item (@$Items) {
+        $new_weight += $item->{weight} * $item->{quantity}
+            unless $item->{is_free_shipping};
+    }
+    return $new_weight;
+}
+EOS
+SpecialSub weight_callout custom_weight
 ]]></programlisting>
 __END__
 
