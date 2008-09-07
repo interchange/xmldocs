@@ -1,8 +1,12 @@
+__NAME__ purpose
+calculate total weight of items in shopping cart
+__END__
+
 __NAME__ synopsis 
 <row>
 
 	<entry>
-	weight
+	attribute
 	</entry>
 	<entry>
 	Yes
@@ -182,7 +186,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>total_weight</literal>
 	</entry>
 	<entry>
 	<!-- DSC -->
@@ -209,4 +213,9 @@ __NAME__ synopsis
 
 </row> 
 &TAG_NON_CONTAINER;
+__END__
+
+__NAME__ description
+Calculates total weight of items in shopping cart, by default setting
+a scratch variable (default "total_weight").
 __END__
