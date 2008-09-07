@@ -34,10 +34,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>main</literal>
 	</entry>
 	<entry>
-	<!-- DSC -->
+	&glos-cart; name
 	</entry>
 
 </row> 
