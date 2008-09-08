@@ -26,6 +26,24 @@ __NAME__ synopsis
 
 </row> 
 <row>
+	<entry>
+	quantity
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	Quantity to order.
+	</entry>
+
+</row> 
+<row>
 
 	<entry>
 	base
@@ -66,8 +84,11 @@ __NAME__ synopsis
 </row> 
 <row>
 
-	<entry>
-	mv_sku
+	<entry>	
+	<group choice='optional'>
+		<arg choice='plain'>mv_sku</arg>
+		<arg choice='plain'>variant</arg>
+	</group>
 	</entry>
 	<entry>
 	<!-- POS -->
@@ -162,6 +183,18 @@ __NAME__ synopsis
 &TAG_NON_CONTAINER;
 __END__
 
+__NAME__ description
+<tag>order</tag> displays an URL which adds an item to the shopping cart
+upon following the link. The next page is determined by <literal>order</literal> &conf-SpecialPage;.
+__END__
+
+__NAME__ example
+<programlisting><![CDATA[
+<a href="[order code="IC2008" quantity=10 area=1]">Buy 10 Interchange T-Shirts</a>
+]]></programlisting>
+__END__
+
 __NAME__ see also
 area,page
 __END__
+
