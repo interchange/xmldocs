@@ -27,7 +27,7 @@ __END__
 __NAME__ description
 This tag generates and/or checks "captcha" images to authenticate user input.
 If called for the first time in a page, it generates a code/image pair and
-sets the code in the session (at $Vend::Session->{captcha}).
+sets the code in the &glos-session; (at $Vend::Session->{captcha}).
 </para>
 <para>
 The captcha tag provides the following functions:

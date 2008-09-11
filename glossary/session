@@ -8,7 +8,10 @@ The session contains:
 <listitem><tag>error</tag>s</listitem>
 <listitem><tag>warnings</tag></listitem>
 <listitem>&glos-discount; settings</listitem>
+<listitem>&glos-levy; charges</listitem>
 <listitem>input filters in the <literal>Filter</literal> key, see <tag>input-filter</tag>
+</listitem>
+<listitem><tag>captcha</tag> code in <literal>captcha</literal> key
 </listitem>
 </itemizedlist>
 <!--
