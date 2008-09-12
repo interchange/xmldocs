@@ -188,10 +188,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>10</literal>
 	</entry>
 	<entry>
-	<!-- DSC -->
+	spacing per level
 	</entry>
 
 </row> 
