@@ -18,7 +18,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	name of the &glos-cookie;
 	</entry>
 
 </row> 
@@ -37,7 +37,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	value of the &glos-cookie;
 	</entry>
 
 </row> 
@@ -113,7 +113,7 @@ __NAME__ synopsis
 	0
 	</entry>
 	<entry>
-	cookie is sent only over SSL connections
+	&glos-cookie; is sent only over SSL connections
 	</entry>
 
 </row> 
