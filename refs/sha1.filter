@@ -11,6 +11,11 @@ __NAME__ description
 The filter outputs SHA1 sum for the input text.
 __END__
 
+__NAME__ notes
+The <literal>sha1</literal> filter uses the
+<ulink url='http://search.cpan.org/perldoc?Digest::SHA1'>Digest::SHA1</ulink>
+module for the SHA1 calculation.
+__END__
 
 __NAME__ online: Filter example
 <programlisting>
