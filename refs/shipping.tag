@@ -56,7 +56,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	resolve shipping mode
 	</entry>
 
 </row> 
@@ -332,6 +332,15 @@ Shipping time:   [shipping-desc mode="[loop-code]" key=s_time]
 Cost:            [shipping mode="[loop-code]"]
 [/loop]
 ]]></programlisting>
+</para>
+</refsect2>
+<refsect2>
+<title>Check and resolve shipping modes</title>
+<para>
+The availability of shipping modes depends on shipping parameters, usually
+the shipping country. <code>[shipping check_validity=1]</code> checks
+whether the shipping mode in the <literal>mv_shipmode</literal> variable is
+still valid. <code>[shipping resolve=1]</code> updates this variable if necesssary.
 </para>
 </refsect2>
 <para>
