@@ -18,7 +18,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	shipping mode
 	</entry>
 
 </row> 
@@ -37,7 +37,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	list of possible shipping modes
+	list available shipping modes
 	</entry>
 
 </row> 
@@ -72,10 +72,10 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	whether to check shipping mode is valid or not
 	</entry>
 
 </row> 
@@ -310,10 +310,31 @@ __NAME__ synopsis
 &TAG_NON_CONTAINER;
 __END__
 
-__NAME__ example: Show available shipping options
+__NAME__ description
+Without any parameters, <tag>shipping</tag> displays the &glos-shipping;
+cost for the items in the cart.
+</para>
+<refsect2>
+<title>List currently available shipping modes and shipping parameters</title>
+<para>
 <programlisting><![CDATA[
 [shipping possible=1]
 ]]></programlisting>
+</para>
+<para>
+This can be used to display custom parameters for the currently available
+shipping modes with the <tag>shipping-desc</tag> tag:
+<programlisting><![CDATA[
+[loop list="[shipping possible=1]"]
+Shipping Mode:   [shipping-desc mode="[loop-code]"]
+Processing time: [shipping-desc mode="[loop-code]" key=p_time]
+Shipping time:   [shipping-desc mode="[loop-code]" key=s_time]
+Cost:            [shipping mode="[loop-code]"]
+[/loop]
+]]></programlisting>
+</para>
+</refsect2>
+<para>
 __END__
 
 __NAME__ example: 
