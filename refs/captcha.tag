@@ -6,6 +6,27 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+		<group choice='plain'>
+			<arg choice='plain'>function</arg>
+			<arg choice='plain'>func</arg>
+		</group>
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	Yes
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	captcha function
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	length
 	</entry>
 	<entry>
@@ -42,8 +63,14 @@ in $Tag->error.
 </refsect2>
 <refsect2>
 <title>code</title>
-Returns the generated code. Generates one if not done previously in session.
+Returns the generated code. Generates one if not done previously in &glos-session;.
 </refsect2>
 <para>
 The image, relative_image and image_tag functions are undocumented.
+__END__
+
+__NAME__ notes
+<tag>captcha</tag> uses the
+<ulink url='http://search.cpan.org/perldoc?Authen::Captcha'>Authen::Captcha</ulink>
+module from &CPAN;.
 __END__
