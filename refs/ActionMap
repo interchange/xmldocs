@@ -55,17 +55,13 @@ Here's an example of an actionmap "<literal>test</literal>" that translates
 HTTP requests in form of <literal>test/<replaceable>page</replaceable>/<replaceable>arguments</replaceable></literal>
 into actual page requests to <literal>page.html</literal> with optional <literal>arguments</literal>.
 </para><para>
-Note that, as hinted below, global-level actionmaps have the actionmap name
-already already stripped out of the URL.
 
 <programlisting><![CDATA[
 ActionMap test <<EOA
 sub {
   my $url = shift;
 
-  # Remove actionmap name from the URL (only needed for catalog-level
-  # actionmaps which do not receive the URL with actionmap name already
-  # removed)
+  # Remove actionmap name from the URL 
   $url =~ s:^test/+::i;
 
   # Arguments are optional
