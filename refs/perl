@@ -25,6 +25,21 @@ __NAME__ synopsis
 </row> 
 <row>
 	<entry>
+	subs
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	0
+	</entry>
+	<entry>
+	imports subroutines defined by &conf-Sub;
+	</entry>
+</row> 
+<row>
+	<entry>
 	short_errors
 	</entry>
 	<entry>
