@@ -732,7 +732,7 @@ setting the &pragma-interpolate_itl_references; pragma.
 Certain tags can only appear in a special context, usually nested within
 other, parent tags. Those include, for example, the ones interpreted as part
 of a surrounding loop tags, such as 
-&tag-loop;, &tag-item-list;, &tag-query; or &tag-search-region;.
+&tag-loop;, &tag-item-list;, &tag-query; or <tag>search-region</tag>.
 
 </para><para>
 Some of those subtags are 
@@ -813,7 +813,7 @@ positional parameters</emphasis>. The default prefixes follow:
 </row>
 
 <row>
-  <entry>&tag-search-region;
+  <entry><tag>search-region</tag>
   </entry>
   <entry><literal>item</literal>
   </entry>
