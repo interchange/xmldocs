@@ -279,28 +279,23 @@ concept can be learned below in <xref linkend="itl_arrays_and_hashes"/>.
 
 <section id="itl_parsing_order">
 <title>Parsing Order</title>
+Interchange parse content like pages, components and profiles in a few
+consecutive passes instead of once from the top to the bottom:
+
 <orderedlist><listitem><para>
-&glos-pragma;s are set from <tag>pragma</tag> in the text.
+&glos-pragma;s are set from <tag>pragma</tag> in the content.
 </para></listitem>
 <listitem><para>
-&conf-Variable;s are replaced (<code>__NAME__</code>, <code>@@NAME@@</code>, <code>@_TITLE_@</code>).
+&conf-Variable;s are replaced (<code>__NAME__</code>, <code>@@NAME@@</code>,
+<code>@_TITLE_@</code>) with their respective values.
 </para></listitem>
 <listitem><para>
 Comments enclosed by <tag>comment</tag> are removed.
 </para></listitem>
 <listitem><para>
-Tag expansion.
+Tags are expanded.
 </para></listitem>
 </orderedlist>
-
-<para>
-This parsing order applies to:
-</para>
-
-<para> 
-Interchange pages, components with <tag>component</tag>,
-files included with <tag>include</tag>.
-</para>
 </section>
 
 <section>
