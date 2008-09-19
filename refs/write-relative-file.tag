@@ -34,5 +34,7 @@ appended).
 __END__
 
 __NAME__ example: Simple file write
+<programlisting>
 [write-relative-file logs/test]Sample content[/write-relative-file]
+</programlisting>
 __END__
