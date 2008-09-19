@@ -277,6 +277,31 @@ concept can be learned below in <xref linkend="itl_arrays_and_hashes"/>.
 
 </section>
 
+<section id="itl_parsing_order">
+<title>Parsing Order</title>
+<orderedlist><listitem><para>
+&glos-pragma;s are set from <tag>pragma</tag> in the text.
+</para></listitem>
+<listitem><para>
+&conf-Variable;s are replaced (<code>__NAME__</code>, <code>@@NAME@@</code>, <code>@_TITLE_@</code>).
+</para></listitem>
+<listitem><para>
+Comments enclosed by <tag>comment</tag> are removed.
+</para></listitem>
+<listitem><para>
+Tag expansion.
+</para></listitem>
+</orderedlist>
+
+<para>
+This parsing order applies to:
+</para>
+
+<para> 
+Interchange pages, components with <tag>component</tag>,
+files included with <tag>include</tag>.
+</para>
+</section>
 
 <section>
 <title>Deeper Look at Argument Quoting</title>
