@@ -34,17 +34,15 @@ File names beginning with <literal>/</literal> or <literal>..</literal>
 are not allowed if the &IC; server administrator
 has enabled &conf-NoAbsolute;.
 </para><para>
-File contents are inserted and then, by default, reparsed for &glos-ITL;
-tags.
-</para><para>
 The maximum number of circular inclusions is controlled by the 
 &conf-Limit; directive, using key <literal>include_depth</literal>.
 __END__
 
 
 __NAME__ notes
-To include file without reparsing contents, use &tag-file; or
-<code>[include name=<replaceable>NAME</replaceable> interpolate=0]</code>.
+File contents are always loaded and &glos-interpolate;d before insertion into
+the source document.
+To include file without reparsing contents, use &tag-file;.
 __END__
 
 __NAME__ example: Simple file include 
