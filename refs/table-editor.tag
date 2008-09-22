@@ -1088,6 +1088,25 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	ok_button_style
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<literal>font-weight: bold; width: 40px; text-align: center</literal>
+	</entry>
+	<entry>
+	HTML style attribute for "OK" button.
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	wizard
 	</entry>
 	<entry>
@@ -1164,7 +1183,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	mv_cancelpage
+	wizard_cancel
 	</entry>
 	<entry>
 	<!-- POS -->
@@ -1183,7 +1202,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	wizard_cancel
+	mv_cancelpage
 	</entry>
 	<entry>
 	<!-- POS -->
@@ -1218,7 +1237,42 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
+<row>
+	<entry>
+	output_map
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
 
+</row> 
+<row>
+	<entry>
+	no_table_meta
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
 <row>
 
 	<entry>
