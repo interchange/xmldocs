@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ description
-The filter simply transforms first characther in input to uppercase.
+The filter simply transforms first character in input to uppercase.
 __END__
 
 
