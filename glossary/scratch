@@ -82,6 +82,10 @@ Here's a complete list of ways to set scratch variables.
 			<entry>$Tag-&gt;tmp('<replaceable>VARNAME</replaceable>');</entry>
 			<entry>Mark scratch variable as temporary, must set a value afterwards</entry>
 		</row>
+		<row>
+			<entry>$Tag-&gt;tmp('<replaceable>VARNAME</replaceable>', '<replaceable>VALUE</replaceable>');</entry>
+			<entry>Mark scratch variable as temporary and set value at the same time</entry>
+		</row>
 	</tbody>
 
 	</tgroup>
