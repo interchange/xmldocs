@@ -53,7 +53,26 @@ __NAME__ synopsis
 	log error message only
 	</entry>
 </row> 
+<row>
+	<entry>
+	no_return
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	0
+	</entry>
+	<entry>
+	store result into &glos-session; key <literal>mv_perl_result</literal> instead of returning it
+	</entry>
+</row> 
 &TAG_CONTAINER;
+__END__
+
+__NAME__ description
+Evaluate embedded Perl code and return the result.
 __END__
 
 __NAME__ see also
