@@ -23,6 +23,22 @@ __NAME__ synopsis
 
 </row> 
 <row>
+	<entry>
+	lines
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	0
+	</entry>
+	<entry>
+	Whether to show the number of lines in the cart instead of the sum of the items.
+	</entry>
+
+</row> 
+<row>
 
 	<entry>
 	qualifier
