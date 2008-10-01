@@ -64,6 +64,24 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
+<row>
+
+	<entry>
+	show_message
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	0
+	</entry>
+	<entry>
+	whether to return message (success or error)
+	</entry>
+
+</row> 
 &TAG_NON_CONTAINER;
 __END__
 
