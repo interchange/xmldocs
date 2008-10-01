@@ -9,7 +9,7 @@ __END__
 
 
 __NAME__ see also
-email, SendMailProgram, customsendmail
+email, SendMailProgram, customsendmail, MV_EMAIL_INTERCEPT
 __END__
 
 
@@ -23,6 +23,9 @@ must have a valid <literal>To:</literal> field, or the message surely
 won't be delivered.
 __END__
 
+__NAME__ notes
+&EMAIL-INTERCEPT-NOTE;
+__END__
 
 __NAME__ example: Simple raw e-mail message
 Put the following on a test page:
