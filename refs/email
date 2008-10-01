@@ -47,6 +47,14 @@ __NAME__ synopsis
 </row>
 <row>
 	<entry>
+		<arg choice='plain'>cc</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>E-mail address for carbon copy.</entry>
+</row>
+<row>
+	<entry>
 		<arg choice='plain'>html</arg>
 	</entry>
 	<entry></entry>
@@ -64,9 +72,12 @@ __NAME__ synopsis
 &TAG_CONTAINER;
 __END__
 
+__NAME__ notes
+&EMAIL-INTERCEPT-NOTE;
+__END__
 
 __NAME__ see also
-email-raw, SendMailProgram, customsendmail
+email-raw, SendMailProgram, customsendmail, MV_EMAIL_INTERCEPT
 __END__
 
 
