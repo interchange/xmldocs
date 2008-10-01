@@ -493,6 +493,12 @@ If you need commercial support, and want the authoritative people take a look at
 </para>
 ">
 
+<!ENTITY EMAIL-INTERCEPT-NOTE "<para>
+All outgoing e-mails can be intercepted
+for development purposes by setting &var-MV_EMAIL_INTERCEPT;.
+</para>
+">
+
 <!ENTITY DATABASE-NOTE "<para>The term <emphasis>database</emphasis> in Interchange lingo
 has a different meaning as in common language, please check &glos-database; 
 for more information.</para>">
