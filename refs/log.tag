@@ -18,7 +18,7 @@ __NAME__ synopsis
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	&conf-LogFile;
 	</entry>
 	<entry>
 	Name of the log file.
