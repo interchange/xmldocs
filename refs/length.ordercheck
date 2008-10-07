@@ -6,7 +6,13 @@ __NAME__ description
 Checks whether the value has a minimum length or is inside a length range.
 __END__
 
-__NAME__ example
+__NAME__ example: Minimum length of 8 characters
+<programlisting>
+password=length 8 Please enter at least 8 characters for your password.
+</programlisting>
+__END__
+
+__NAME__ example: Length between 6 and 32 characters
 <programlisting>
 username=length 6-32 Size limits exceeded (6-32 characters)
 </programlisting>
