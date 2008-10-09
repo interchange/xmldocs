@@ -127,5 +127,5 @@ __NAME__ example: Restore cart
 __END__
 
 __NAME__ see also
-UserDB
+UserDB, UserControl
 __END__
