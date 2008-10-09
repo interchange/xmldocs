@@ -32,6 +32,13 @@ OrderProfile etc/profiles.order etc/profiles.login
 </programlisting>
 __END__
 
+__NAME__ example: Dedicated directory for profile definitions
+A wildcard can be used instead of listing the files individually.
+<programlisting>
+OrderProfile profiles/*
+</programlisting>
+__END__
+
 __NAME__ missing
 Diff between Profiles and OrderProfile ?
 Confusing note in NOTES about scratch space and mv_click actions
