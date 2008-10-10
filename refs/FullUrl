@@ -9,20 +9,33 @@ __END__
 
 
 __NAME__ description
-&IC; determines the appropriate catalog to invoke by the 
-<literal>SCRIPT_NAME</literal> from the CGI call. This means that different
-(possibly virtual) hosts cannot use the same <literal>SCRIPT_NAME</literal>, as
-the catalogs would become indistinguishable. Setting this directive includes
-the hostname in the catalog selection method.
+When a page request comes to &IC;, the &glos-catalog; to invoke is
+determined from CGI value <literal>SCRIPT_NAME</literal>.
 </para><para>
-See the &conf-Catalog; directive for more on the subject and concrete
+For example, 
+if a request for <literal>www.example.com/cat1</literal> comes in,
+<literal>SCRIPT_NAME</literal> will be "<literal>/cat1</literal>".
+If a request for <literal>www.example.com</literal> comes in,
+<literal>SCRIPT_NAME</literal> will be "<literal>/</literal>".
+</para><para>
+By default, hostnames are not honored, so different catalogs cannot use the
+same <literal>SCRIPT_NAME</literal> under the same &IC; server. This prevents
+multiple domains from serving their &IC; pages directly from www.HOSTNAME.com
+(as there can only be one "<literal>/</literal>" script name).
+</para><para>
+With &conf-FullUrl; enabled, catalog selection includes the hostname
+and it becomes possible to uniquely determine catalog name based on both
+hostname and script name.
+</para><para>
+See the &conf-Catalog; directive for further discussion and concrete
 examples.
 __END__
 
 __NAME__ notes
-If &conf-FullUrl; is defined, <emphasis role='bold'>all catalogs must be
-defined with hostnames included</emphasis>. Per-catalog setting can not work,
-as this is used before the catalog name is known.
+If &conf-FullUrl; is defined, <emphasis role='bold'>you must modify all
+&conf-catalog; lines in your &gcf; to include the hostname &mdash; 
+&conf-FullUrl; and non-&conf-FullUrl; &conf-catalog; specifications
+are not compatible.</emphasis>
 __END__
 
 __NAME__ see also
@@ -33,6 +46,15 @@ __END__
 __NAME__ example: Enabling FullUrl
 <programlisting>
 FullUrl yes
+</programlisting>
+__END__
+
+__NAME__ example: Catalog definition example with FullUrl enabled
+An example from &gcf;:
+<programlisting>
+FullUrl yes
+
+Catalog &std-catalog; /path/to/catalogs/&std-catalog;/ &def-hostname;/cgi-bin/&std-catalog;
 </programlisting>
 __END__
 
