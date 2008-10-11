@@ -33,9 +33,9 @@ OrderProfile etc/profiles.order etc/profiles.login
 __END__
 
 __NAME__ example: Dedicated directory for profile definitions
-A wildcard can be used instead of listing the files individually.
+A wildcard can be used instead of listing the files individually. Beware of editor working files, backup files, etc., that would be included with a broad file-matching glob of * even though that would be easiest. It's safer to use something like a uniform .profile suffix as in this example:
 <programlisting>
-OrderProfile profiles/*
+OrderProfile profiles/*.profile
 </programlisting>
 __END__
 
