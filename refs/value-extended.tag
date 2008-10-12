@@ -331,3 +331,13 @@ __NAME__ synopsis
 </row> 
 &TAG_NON_CONTAINER;
 __END__
+
+__NAME__ example: Test for uploaded file
+<programlisting>
+[value-extended name="picture" 
+	test="isfile" 
+	yes="Your picture has been uploaded."
+	no="Please upload your picture!"
+]
+</programlisting>
+__END__
