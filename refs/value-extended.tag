@@ -44,7 +44,7 @@ __NAME__ synopsis
 <row>
 
 	<entry>
-	Yes
+	yes
 	</entry>
 	<entry>
 	<!-- POS -->
