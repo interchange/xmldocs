@@ -332,6 +332,16 @@ __NAME__ synopsis
 &TAG_NON_CONTAINER;
 __END__
 
+__NAME__ description
+<tag>value-extended</tag> can be used for a number of tasks related to
+user input:
+<itemizedlist>
+<listitem><para>Manipulate files uploaded by the user.</para></listitem>
+<listitem><para>Output variables from &glos-value; space.</para></listitem>
+<listitem><para>Perform a test.</para></listitem>
+</itemizedlist>
+__END__
+
 __NAME__ example: Test for uploaded file
 <programlisting>
 [value-extended name="picture" 
