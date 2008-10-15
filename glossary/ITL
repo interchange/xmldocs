@@ -279,9 +279,10 @@ concept can be learned below in <xref linkend="itl_arrays_and_hashes"/>.
 
 <section id="itl_parsing_order">
 <title>Parsing Order</title>
+<para>
 Interchange parse content like pages, components and profiles in a few
 consecutive passes instead of once from the top to the bottom:
-
+</para>
 <orderedlist><listitem><para>
 &glos-pragma;s are set from <tag>pragma</tag> in the content.
 </para></listitem>
