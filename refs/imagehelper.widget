@@ -1,0 +1,17 @@
+__NAME__ purpose
+image upload widget
+__END__
+
+__NAME__ description
+This widget allows image upload and selection for a specific directory.
+__END__
+
+__NAME__ see also
+uploadhelper
+__END__
+
+__NAME__ notes
+File upload has to be enabled in the HTML form containing this widget.
+Also this widget depends on the <literal>process_filter</literal> form
+&glos-profile;.
+__END__
