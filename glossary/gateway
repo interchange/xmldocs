@@ -50,6 +50,11 @@ If we are using only one gateway in a catalog, setting up
 <entry></entry>
 </row>
 <row>
+<entry><literal>&var-MV_PAYMENT_CURRENCY;</literal></entry>
+<entry>currency</entry>
+<entry></entry>
+</row>
+<row>
 <entry><literal>MV_PAYMENT_TEST</literal></entry>
 <entry>test mode</entry>
 <entry></entry>
