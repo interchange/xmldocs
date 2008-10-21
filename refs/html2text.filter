@@ -10,7 +10,7 @@ it strips the
 <literal>&lt;i&gt;</literal> and
 <literal>&lt;u&gt;</literal> tags, and replaces 
 line breaks (<literal>&lt;br&gt;</literal>) and
-paragraphs (<literal>&lt;pgt;</literal>)
+paragraphs (<literal>&lt;p&gt;</literal>)
 with newlines.
 __END__
 
