@@ -271,6 +271,25 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	no_meta
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	&NODEFAULT;
+	</entry>
+	<entry>
+	Turns off meta editor link.
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	across
 	</entry>
 	<entry>
