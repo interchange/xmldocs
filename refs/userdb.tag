@@ -25,6 +25,24 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	profile
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<literal>default</literal>
+	</entry>
+	<entry>
+	UserDB &glos-profile;
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	<group choice='plain'>
 	<arg choice='plain'>db</arg>
 	<arg choice='plain'>table</arg>
@@ -87,6 +105,12 @@ __END__
 
 __NAME__ description
 <tag>userdb</tag> provides access to &glos-UserDB; functions.
+<refsect2>
+<title>Create New Account</title>
+<para>
+<literal>[userdb new_account]</literal> registers a new account.
+</para>
+</refsect2>
 <refsect2>
 <title>Logout function</title>
 <para>
