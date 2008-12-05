@@ -112,6 +112,16 @@ is displaying a page specified by "&conf-SpecialPage;
 </para>
 </refsect2>
 <refsect2>
+<title>Missing product (<literal>order_missing</literal>)</title>
+<para>
+Event triggered when a missing product is been added to the shopping
+cart.
+</para>
+<para>
+A &glos-true; return value will suppress the log message about this event.
+</para>
+</refsect2>
+<refsect2>
 <title>Shipping calculation (<literal>shipping_callout</literal>)</title>
 <para>
 Event is triggered after shipping calculation, but before result is
@@ -279,5 +289,6 @@ __END__
 
 __NAME__ author
 &mheins;
+&racke;
 __END__
 
