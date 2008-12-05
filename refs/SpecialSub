@@ -61,7 +61,7 @@ The subroutine is called with the credit card number.
 A &glos-true; return value should contain the recognized credit card
 type name.
 A &glos-false; value indicates that the number recognition did not
-suceed, and that &IC; should proceed with its built-in detection
+succeed, and that &IC; should proceed with its built-in detection
 algorithm.
 </para>
 </refsect2>
