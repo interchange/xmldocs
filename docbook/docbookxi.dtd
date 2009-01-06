@@ -3,7 +3,6 @@
 <!ENTITY % autorefs	SYSTEM "autorefs.ent">  %autorefs;
 <!ENTITY % autofiles	SYSTEM "autofiles.ent">  %autofiles;
 <!ENTITY % glossary	SYSTEM "autoglossary.ent">  %glossary;
-<!ENTITY % howtos	  SYSTEM "autohowtos.ent">  %howtos;
 
 <!-- Remove MsgSet -->
 <!ENTITY % compound.class "procedure|sidebar">

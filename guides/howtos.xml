@@ -1140,7 +1140,7 @@ configuration dump will be saved there.
 
 		</para></answer></qandaentry>
 
-		<qandaentry><question><para>
+		<qandaentry><question id='daemon-control'><para>
 		Testing configuration, starting, reconfiguring, stopping
 		</para></question>
 		<answer><para>

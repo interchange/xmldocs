@@ -36,6 +36,7 @@
 <!ENTITY OPENLDAP "<ulink url='http://www.openldap.org/'>OpenLDAP</ulink>">
 <!ENTITY BDBM "<ulink url='http://http://www.sleepycat.com//'>Berkeley DBM</ulink>">
 <!ENTITY GDBM "<ulink url='http://www.delorie.com/gnu/docs/gdbm/'>GNU DBM</ulink>">
+<!ENTITY SQLite "<ulink url='http://www.sqlite.org/'>SQLite</ulink>">
 <!ENTITY NFS "<ulink url='http://nfs.sourceforge.net/'>NFS</ulink>">
 <!ENTITY IMAGEMAGICK "<ulink url='http://www.imagemagick.org/'>ImageMagick</ulink>">
 <!ENTITY DOCBOOK "<ulink url='http://www.docbook.org/'>DocBook</ulink>">
@@ -55,6 +56,7 @@
 
 <!-- ENTITIES TO AVOID A LOT OF REPETITION -->
 <!ENTITY mdash "&#x2014;">
+<!ENTITY WW "Wellwell">
 <!ENTITY gcf "<filename>interchange.cfg</filename>">
 <!ENTITY ccf "<filename>catalog.cfg</filename>">
 <!ENTITY gcfs "<filename>interchange.cfg</filename> or <filename>catalog.cfg</filename>">

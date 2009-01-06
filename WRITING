@@ -60,10 +60,9 @@ The system separates documentation contents into 5 major groups:
 
  2 howto collection: direct answers to direct questions; relatively short
  . documents that contain working examples and supporting technical explanation.
- . Some templating is possible here, so we keep individual HOW-TO snippets
- . (in XML format, minus standard headings which are included in the templates)
- . in the CVS, while they are put together in a single howtos.xml file by the
-   bin/generic-autogen script.
+ . In the past, those were small snippets in howtos/* which were put together
+ . by bin/generic-autogen script, but in the meantime we moved directly to
+ . guides/howtos.xml, as howtos started looking much like regular guides.
 
  3 reference pages: short, completely on-topic and focused pages documenting
  . all types of symbols. (Symbols are "units" seen in Interchange source - 
@@ -117,7 +116,7 @@ GENERATING FINAL OUTPUT
 
 bin/refs-autogen is used to generate the reference pages
 (containing many individual refentries). bin/generic-autogen is used for
-the glossary and the HOW-TO collection.
+the glossary.
 The whole autogeneration story comes from the observation that enormous
 piece of the final XML source can be produced automatically, with insertions
 and templating. So, every chunk you write still has to be XML-conformant
@@ -146,25 +145,6 @@ To build a guide manually, invoke "make OUTPUT/name.format", where 'format'
 represents typical filename extensions (such as .html or .ps). If you leave
 ".format" unspecified, the chunked HTML version will be built
 and, of course, saved to OUTPUT/name/.
-
-
-* Modifying HOW-TOs
-
-To modify an existing HOW-TO item, simply edit howtos/name.xml.
-
-To start a new HOWTO item, create a new howtos/name.xml file.
-For a quickstart, copy the exact structure as you see in the existing
-custom-sendmail-routine.xml. It will always reflect the current standard.
-
-To make the new HOW-TO entry build as part of the global make procedure,
-you don't have to do anything; the howtos/howtos.xml is automatically
-regenerated (by following Makefile dependencies). If you need to trigger
-.xml file regeneration manually, invoke make howtos/howtos.xml.
-
-To build the HOW-TO collection, invoke make OUTPUT/howtos.format, where
-'format' represents typical filename extensions (such as .html or .ps).
-If you leave ".format" unspecified, the chunked HTML version of the HOW-TO
-collection will be built and, of course, saved to OUTPUT/howtos/.
 
 
 * Modifying Symbols (pragmas, globvars, *tags, globconfs, catconfs, filters)

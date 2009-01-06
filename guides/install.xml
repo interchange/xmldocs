@@ -241,6 +241,7 @@ $ /path/to/perl -MCPAN -e 'install "Bundle::InterchangeKitchenSink"'
 		functionality and is not selected unless explicitly specified by the
 		user (SDBM limits field size to 2KB which is too little to accomodate
 		our demo catalog and we do not consider SDBM as a realistic option).
+		In late 2008, &SQLite; support was added, but it is not used automatically.
 		</para>
 	</sect2>
 
@@ -261,7 +262,8 @@ $ /path/to/perl -MCPAN -e 'install "Bundle::InterchangeKitchenSink"'
 		For ultimate flexibility, it is a quite common approach to let every
 		catalog user have its own instance of the &IC; server. In that case,
 		make sure you don't mix up different link programs, as they become 
-		instance-specific at compile time.
+		instance-specific at compile time &mdash; compile them separately
+		for each user.
 		</para>
 	</sect2>
 
@@ -330,7 +332,9 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 
 	<para>
 	Interchange is based on &glos-catalog;s. You need to create at least one
-	to start getting any results with &IC;.
+	to start getting any results with &IC;. (There is a quirk in the
+	code that <emphasis>requires</emphasis> at least one catalog configured
+	before &IC; will run correctly).
 	</para><para>
 	&IC; catalogs are structurally very simple and can even be created manually,
 	by editing just a few files. Our document <olink targetdoc='iccattut'/>
@@ -340,7 +344,7 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	or want to keep everything under your own control. However, there is the
 	so-called "&std-catalog;" demo that ships with &IC; &mdash; it is extremely
 	elaborate and feature-rich for someone looking to build an Internet store,
-	and it allows custom modifications to be performed on it. The most common
+	and it allows for custom modifications. The most common
 	way to create a catalog based on our demo is to run our
 	<command>makecat</command> script.
 	</para><para>
@@ -373,7 +377,10 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	</para><para>
 	By far the most common problem on the way to installing a working demo,
 	is wrong information given to the <command>makecat</command> program.
-	</para><para>
+	</para>
+
+<!--
+<para>
 	Among the questions that <command>makecat</command> will ask you, there are
 	four quite important ones; the script will need to know:
 	</para>
@@ -393,6 +400,7 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	TODO
 	</para></listitem>
 	</itemizedlist>
+-->
 
 	<para>
 	If you don't get it right the first time, re-run the configuration again,
@@ -418,7 +426,7 @@ $ gzip -dc interchange-latest.tar.gz | tar xvf -
 	<title>Starting Interchange</title>
 	<para>
 	For all information on starting, stopping, restarting and otherwise
-	controlling the &IC; server, see &howto-daemon-control;.
+	controlling the &IC; server, see <olink targetdoc='howtos' targetptr='daemon-control'/>.
 	</para>
 </sect1>
 

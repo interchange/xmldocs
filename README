@@ -77,8 +77,6 @@ must be available:
   - docbook-xml
   - docbook-xsl
   - xsltproc
-  - exuberant-ctags (to be)
-  - db2latex-xsl
   - tetex-extra (and actually, packages it depends on)
   - XML::Twig Perl module (if you want to call bin/refs-autogen --validate)
 
@@ -158,7 +156,6 @@ DEVELOPMENT NOTES
    docbook       - DocBook XML support files
    files         - Support files, such as downloadable examples etc.
    guides        - Collection of guides
-   howtos        - Collection of howtos
    refs          - Collection of reference pages
    glossary      - Collection of glossary items
    images        - All images
@@ -308,7 +305,7 @@ DEVELOPMENT NOTES
    *** Obscure information END /// Not needed in general ***
 
 
-** To create the documentation for a yet non-existant item, your best bet
+** To create the documentation for a yet non-existent item, your best bet
 ** is to start off by copying an existing item over.
 
 ** When adding documentation entries, please favor QUALITY over QUANTITY.

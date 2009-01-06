@@ -1,3 +1,6 @@
+- adjust title of <question> olinks (see if just id/title= works)
+- adjust iccattut to use tarball install paths
+
 - manpages, first line of <screen> loses linebreaks
 - work on bin/mkreport
 - provide static files for download, describe keys like alt+n
@@ -8,12 +11,10 @@
 - dal autogen preskoci kontekst koji je prazan? i zasto uopce unkondicionalno
 - rijesit html_std/_ext i opcije
   ekspandira @$ctx ako moze da nema konteksta?
-- make howtos chunk
 - fix link to howtos after changing format
 - link to howtos from ref pages
 
 - order counter, Session->{mv_order_number}, cronjob -0001, or file da-te.counter, or session_id.time
-- in iccattut, s/item-field/item-param/ at least on some places. 
 - Change -latest to version number in tarball download
 - fix/update AdminUser docs
 - aliases like DataDir/DefaultTables are not documented
