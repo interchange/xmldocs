@@ -1,0 +1,86 @@
+<?xml version="1.0" standalone="no"?>
+
+<!-- catalog not working ? -->
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook-Interchange XML V4.2//EN"
+	"../docbook/docbookxi.dtd">
+
+<article id='wellwell'>
+
+<articleinfo>
+	<title>Interchange Guides: the "Wellwell" Catalog Tutorial</title>
+	<titleabbrev>wellwell</titleabbrev>
+
+	<copyright>
+		<year>2008</year><year>2009</year>
+		<holder>Interchange Development Group</holder>
+	</copyright>
+
+	<authorgroup>
+		<author>
+			<firstname>Davor</firstname><surname>Ocelic</surname>
+			<email>docelic@spinlocksolutions.com</email>
+		</author>
+		<author>
+			<firstname>Stefan</firstname><surname>Hornburg</surname>
+			<email>racke@linuxia.de</email>
+		</author>
+	</authorgroup>
+
+	<legalnotice>
+		<para>
+		This documentation is free; you can redistribute it and/or modify
+		it under the terms of the &GNU; General Public License as published by
+		the Free Software Foundation; either version 2 of the License, or
+		(at your option) any later version.
+		</para>
+		<para>
+		It is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+		</para>
+	</legalnotice>
+
+	<abstract>
+		<para>
+		This guide provides installation and usage instructions for the new Interchange catalog called "&WW;".
+		</para><para>
+		The &WW; catalog is intended to be used as a base for production websites in &IC;, and places emphasis on usefulness out of the box, clarity, modern HTML &amp; CSS, and ease of customization.
+		</para>
+	</abstract>
+
+</articleinfo>
+
+
+<section>
+	<title>Introduction</title>
+	<para>
+	</para>
+</section>
+
+<section>
+	<title>Templating system</title>
+	<para>
+	</para>
+</section>
+
+<section>
+	<title>Components</title>
+	<para>
+	</para>
+</section>
+
+<section>
+	<title>Plugins</title>
+	<para>
+	</para>
+</section>
+
+<section>
+	<title>Code</title>
+	<para>
+	</para>
+</section>
+
+</article>
+

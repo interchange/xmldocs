@@ -12,6 +12,7 @@
 	<!ENTITY xmldocs SYSTEM "../tmp/xmldocs-nc.db"> 
 
 	<!ENTITY howtos SYSTEM "../tmp/howtos-nc.db"> 
+	<!ENTITY wellwell SYSTEM "../tmp/wellwell-nc.db"> 
 	<!ENTITY glossary SYSTEM "../tmp/glossary-nc.db"> 
 	<!ENTITY pragmas SYSTEM "../tmp/pragmas-nc.db"> 
 	<!ENTITY vars SYSTEM "../tmp/vars-nc.db"> 
@@ -37,6 +38,7 @@
 			<document targetdoc="programming-style" baseuri="programming-style.html"> &programming-style; </document>
 			<document targetdoc="index" baseuri="index.html"> &index; </document>
 			<document targetdoc="howtos" baseuri="howtos.html"> &howtos; </document>
+			<document targetdoc="wellwell" baseuri="wellwell.html"> &howtos; </document>
 			<document targetdoc="glossary" baseuri="glossary.html"> &glossary; </document>
 			<document targetdoc="pragmas" baseuri="pragmas.html"> &pragmas; </document>
 			<document targetdoc="vars" baseuri="vars.html"> &vars; </document>

@@ -7,6 +7,7 @@
 	<!ENTITY programming-style SYSTEM "../tmp/programming-style-c.db"> 
 	<!ENTITY index SYSTEM "../tmp/index-c.db"> 
 	<!ENTITY howtos SYSTEM "../tmp/howtos-c.db"> 
+	<!ENTITY wellwell SYSTEM "../tmp/wellwell-c.db"> 
 	<!ENTITY glossary SYSTEM "../tmp/glossary-c.db"> 
 	<!ENTITY pragmas SYSTEM "../tmp/pragmas-c.db"> 
 	<!ENTITY install SYSTEM "../tmp/install-c.db"> 
@@ -64,6 +65,12 @@
 			<dir name='howtos'>
 				<document targetdoc="howtos">
 				&howtos;
+				</document>
+			</dir>
+			
+			<dir name='wellwell'>
+				<document targetdoc="wellwell">
+				&wellwell;
 				</document>
 			</dir>
 			

@@ -13,7 +13,7 @@ IC_VERSIONS = 4.6.0 4.8.0 5.0.0 5.2.0 5.4.0 5.6.0 cvs-head
 #############################################################
 # Base definitions
 SYMBOL_TYPES= pragmas vars tags confs filters orderchecks widgets
-GUIDES      = iccattut programming-style upgrade faq index optimization search xmldocs WHATSNEW install databases howtos
+GUIDES      = iccattut programming-style upgrade faq index optimization search xmldocs WHATSNEW install databases howtos wellwell
 GLOSSARY    = glossary
 ALL_DOCS    = $(GLOSSARY) $(GUIDES) $(SYMBOL_TYPES)
 SHELL       = /bin/sh
