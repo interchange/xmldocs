@@ -39,7 +39,7 @@ __NAME__ notes
 Leaving this directive enabled on a production server usually leads to
 unnecessary performance degradation. The additional process spawn
 (and the time it takes to complete) every time a page is visited is
-very costly.
+costly.
 </para><para>
 <emphasis role='bold'>
 Additionally, this directive currently appears to be broken 

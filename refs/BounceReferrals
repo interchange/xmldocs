@@ -29,7 +29,7 @@ There's no easy way around this, and we consider it a separate issue from the
 &conf-BounceReferrals; concept.
 If session IDs in URLs are a concern, they'll need a separate solution.
 </para><para>
-Historically, many application servers always bounce the first request
+Historically, many application servers always bounced the first request
 to check for &glos-cookie; support. Nowadays, many simply require cookies for
 anything that needs a session. &IC; is different on both counts.
 __END__

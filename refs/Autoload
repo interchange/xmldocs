@@ -82,10 +82,12 @@ Autoload <<EOA
 [/perl]
 EOA
 ]]></programlisting>
+<!-- (Remark irrelevant in the context)
 <para>
 Please note that &conf-SpecialPage; is the corresponding directive in 
 the catalog &glos-configuration; (and not <literal>Special</literal> as
 we see above). This is an exceptional case &mdash; the hash keys otherwise
 have the same name as the catalog configuration directives themselves.
+-->
 __END__
 

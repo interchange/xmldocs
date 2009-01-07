@@ -24,7 +24,7 @@ name in error, warning, and informational messages. It must contain only
 alphanumeric characters, hyphens, and underscores. It is highly recommended that
 it is also all lowercase.
 </para><para>
-Second argument specifies the local filesystem base directory of the catalog.
+Second argument specifies the filesystem base directory of the catalog.
 If the directory does not exist, the required &ccf; is not there, or &IC;
 detects any other problem, catalog configuration will be skipped and the
 &glos-catalog;
@@ -33,7 +33,7 @@ won't be activated.
 Third argument is the so called <literal>SCRIPT_NAME</literal> of the 
 &glos-link-program;. It is a webserver path by which the catalog can be 
 accessed. It can be followed by different
-<emphasis role='bold'>aliases</emphasis>, all allowing you to access
+<emphasis role='bold'>aliases</emphasis>, all allowing access to
 the same &glos-catalog;. For example, this is useful when calling an SSL
 server or a
 members-only alias that requires a Basic HTTP authorization using the 
@@ -58,8 +58,8 @@ the &conf-Catalog; line in the &gcf; file as part of the standard procedure.
 </para><para>
 If the &ccf; file, expected in the catalog base directory, is not found, or is
 unreadable by the &IC; server, somewhat misguiding error message will be reported.
-Namely, instead of the appropriate permissions-problem message, the mandatory
-&conf-VendURL; directive will be reported undefined.
+Instead of the appropriate permissions-problem message, the mandatory
+&conf-VendURL; directive will be reported as undefined.
 __END__
 (Did I do this right? Now that MailOrderTo isn't mandatory anymore, 
 error will be about VendURL? Check that out.)
@@ -82,8 +82,8 @@ including it in your &glos-configuration;.
 __END__
 
 __NAME__ example: Elaborate Catalog directive definition
-Given the nature of the &conf-Catalog; directive, a catalog can be somewhat
-verbosely registered as:
+Given the nature of the &conf-Catalog; directive, a catalog can be registered somewhat
+verbosely with:
 <programlisting>
 Catalog simple  directory /home/catalogs/simple
 Catalog simple  script    /cgi-bin/ic/simple

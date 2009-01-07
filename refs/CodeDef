@@ -50,7 +50,7 @@ __END__
 
 __NAME__ example: Defining a custom SearchOp
 Here's an exemplary "<literal>find_hammer</literal>" SearchOp that
-should be placed to &gcf;:
+should be placed in &gcf;:
 
 <programlisting><![CDATA[
 CodeDef find_hammer SearchOp find_hammer

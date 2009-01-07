@@ -18,9 +18,8 @@ __NAME__ description
 there are no problems arising from long-running processes
 (such as memory leaks).
 </para><para>
-In general, periodic &IC; page server re-starting is handled by the
-&conf-MaxRequestsPerChild; configuration directive which re-starts
-each server after a specified number of served client requests.
+In general, restarting is handled by the
+&conf-MaxRequestsPerChild; configuration directive.
 </para><para>
 However, when &conf-PreFork; &glos-ic-run-mode; is used, some page servers
 never win the page server "selection battle"; they never get to serve a page

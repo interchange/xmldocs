@@ -33,8 +33,8 @@ __END__
 
 __NAME__ notes
 If &conf-FullUrl; is defined, <emphasis role='bold'>you must modify all
-&conf-catalog; lines in your &gcf; to include the hostname &mdash; 
-&conf-FullUrl; and non-&conf-FullUrl; &conf-catalog; specifications
+&conf-Catalog; lines in your &gcf; to include the hostname &mdash; 
+&conf-FullUrl; and non-&conf-FullUrl; &conf-Catalog; specifications
 are not compatible.</emphasis>
 __END__
 

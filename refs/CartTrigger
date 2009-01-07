@@ -17,7 +17,7 @@ __END__
 
 
 __NAME__ description
-The directive specifies names of the &PERL; subroutines to be invoked
+The directive specifies names of the &PERL; subroutines to invoke
 when &glos-cart; contents change. The subroutines can 
 be defined on both global and catalog level.
 </para><para>
@@ -52,7 +52,7 @@ action); for the <literal>update</literal> action, this will be a
 The old row will no longer be a member of the cart
 </para></listitem>
 <listitem><para>
-The cart symbolic name
+The symbolic name of the cart
 </para></listitem>
 </itemizedlist>
 </para><para>
@@ -77,7 +77,7 @@ responsibility of deciding whether or not it is appropriate to invoke cart
 triggers along the way.
 __END__
 
-__NAME__ example: Quantity of sub items follows their master item
+__NAME__ example: Quantity of subitems follows their master item
 The quantity of sub items are automatically changed to the quantity of
 the corresponding master item <emphasis role='bold'>regardless</emphasis> 
 of the current quantity.

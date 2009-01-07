@@ -18,11 +18,10 @@ Furthermore, it is hard to manually determine what subset of code is required,
 especially when an &glos-ITL; tag calls
 <code>$Tag-&gt;<replaceable>TAGNAME</replaceable>()</code>
 which calls some filter which calls some sort of an action &mdash; 
-you get the picture.
+you get the idea.
 </para><para>
-A feature was needed to allow building catalogs with a more optimal
-set of code than just "everything". And as we'll see in a second,
-&conf-CodeRepository; does just that.
+&conf-__FILENAME__; allows building catalogs with a more optimal
+set of code than just "everything".
 </para><para>
 &conf-CodeRepository; depends on a related directive, &conf-AccumulateCode;.
 If &conf-AccumulateCode; is disabled, operation is traditional and everything
@@ -43,10 +42,7 @@ after &conf-HouseKeeping; seconds), &IC; will find the code already compiled
 and ready to go.
 </para><para>
 Fetched code blocks are copied to 
-<filename class='directory'>&glos-ICROOT;/code/Accumulated/</filename>
-directory
-(<filename class='directory'>
-<varname>$Global::TagDir</varname>/Accumulated/</filename>, to be exact).
+<filename class='directory'><varname>$Global::TagDir</varname>/Accumulated/</filename>.
 When you restart &IC; the next time, these code blocks will be found,
 read normally and need not be recompiled and loaded on the fly again.
 </para><para>
