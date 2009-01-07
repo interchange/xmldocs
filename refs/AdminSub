@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify global subroutines that can be used only by catalogs listed under AllowGlobal directive
+restrict specific global subroutines to catalogs listed under AllowGlobal directive
 __END__
 
 
@@ -15,11 +15,11 @@ __END__
 
 
 __NAME__ description
-Specify global subroutines that may only be used by &glos-catalog;s
-which are listed under the &conf-AllowGlobal; directive.
+Restrict usage of specified global subroutines to &glos-catalog;s
+listed under the &conf-AllowGlobal; directive.
 </para><para>
-Otherwise, in the default course of action, global subroutines can be used
-by all catalogs.
+If __FILENAME__ is unspecified, all global subroutines can be used by
+all catalogs.
 __END__
 
 __NAME__ example: Defining AdminSub

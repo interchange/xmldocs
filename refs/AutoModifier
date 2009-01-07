@@ -1,12 +1,11 @@
 __NAME__ purpose
-specify products database columns containing values for product attributes
+specify products table columns containing values for product attributes
 __END__
 
 
 __NAME__ missing
 improve description based on syntax seen in examples
 in the examples, explain mv_sku lookup, not clear now
-incorporate NAME=table:column syntax in synopsis
 __END__
 
 
@@ -15,17 +14,14 @@ UseModifier
 __END__
 
 __NAME__ synopsis
-<arg choice='plain' rep='repeat'>
-	<arg choice='opt'><replaceable>table</replaceable>:</arg>
-	<replaceable>column</replaceable>
-	<arg choice='opt'>:<replaceable>key</replaceable></arg>
+<arg choice='opt'><replaceable>name</replaceable>=</arg><arg choice='plain' rep='repeat'><arg choice='opt'><replaceable>table</replaceable>:</arg><replaceable>column</replaceable><arg choice='opt'>:<replaceable>key</replaceable></arg>
 </arg>
 __END__
 
 
 __NAME__ description
 The directive specifies names of the product &glos-attribute;s 
-which should be automatically loaded from database columns.
+which should be automatically loaded from table columns.
 Table, column and key identifiers belonging to a single specification
 are separated by a colon (<literal>:</literal>), while multiple specifications
 are separated by whitespace.
@@ -39,13 +35,13 @@ This facility will often be employed in determining product
 &glos-price;, &glos-discount;, &glos-tax; and &glos-shipping;, and 
 other custom attributes; these attributes will probably
 be used in custom &PERL; code that will scan the electronic
-&glos-cart; contents and perform some decisions. For example, by defining
-database columns <database class='field'>heavy</database> and
+&glos-cart; contents and perform decisions. For example, by defining
+columns <database class='field'>heavy</database> and
 <database class='field'>downloadable</database>, you will be
 able to perform decisions
 based on <code>$item-&gt;{heavy}</code> and
 <code>$item-&gt;{downloadable}</code> (but there are more access methods,
-see the &glos-attribute; &GE;.
+see the &glos-attribute; &GE;).
 __END__
 
 
@@ -75,19 +71,19 @@ Also make sure to have the
 <database>products</database> database.
 __END__
 
-__NAME__ example: set attribute 'heavy' from inventory table
+__NAME__ example: set attribute 'heavy' from table 'inventory'
 <programlisting>
 AutoModifier inventory:heavy
 </programlisting>
 __END__
 
-__NAME__ example: set attribute 'weighty' from inventory table, column 'heavy'
+__NAME__ example: set attribute 'weighty' from table 'inventory', column 'heavy'
 <programlisting>
 AutoModifier weighty=inventory:heavy
 </programlisting>
 __END__
 
-__NAME__ example: set attribute 'heavy' from inventory table, with a different SKU
+__NAME__ example: set attribute 'heavy' from table 'inventory', with a different SKU
 <programlisting>
 AutoModifier inventory:heavy:mv_sku
 </programlisting>

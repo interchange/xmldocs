@@ -1,5 +1,7 @@
 - adjust title of <question> olinks (see if just id/title= works)
 - adjust iccattut to use tarball install paths
+-see how AcrossLocks works... does it open tables directly, or opens all tables so you dont have to put perl tables=
+- see why 'attribute' glossentry isn't found
 
 - manpages, first line of <screen> loses linebreaks
 - work on bin/mkreport

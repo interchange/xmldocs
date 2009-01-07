@@ -4,10 +4,8 @@ __END__
 
 __NAME__ synopsis
 	<arg choice='plain'><replaceable>directive_name</replaceable></arg>
-	<arg>
-		<replaceable>parse_function_name</replaceable>
-		<arg><replaceable>default_value</replaceable></arg>
-	</arg>
+	<arg><replaceable>parse_function_name</replaceable>
+		<arg><replaceable>default_value</replaceable></arg></arg>
 __END__
 
 
@@ -22,7 +20,7 @@ Three standard arguments can be specified: the
 <literal>parse_function_name</literal> and
 <literal>default_value</literal>.
 </para><para>
-If the parser function is not defined (either by omitting it or 
+If the parse function is not defined (either by omitting it or 
 literally specifying <literal>undef</literal>), then no parser
 will be called on the value at all,
 and the value of the directive will be exactly what users specify in their
@@ -37,11 +35,11 @@ parser functions, which are recognized by the mandatory prefix
 <literal>parse_</literal>. (You do not, however, include
 <literal>parse_</literal> in the <literal>parse_function_name</literal>.)
 </para><para>
-The <literal>default_value</literal> does not have to be specified.
+The <literal>default_value</literal> is optional.
 </para><para>
 Directly modifying <filename>Config.pm</filename> (or any other 
-files from the &IC; installation) is discouraged for portability and other
-reasons. Therefore, to add your custom parsing function, you should
+files from the &IC; installation) is discouraged for portability
+reasons. Therefore, to add a custom parsing function, you should
 modify &gcf; as seen in <xref linkend="AddDirective_examples"/>
 (note again that the parser definition
 must logically come before &conf-AddDirective;).

@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify config directives that are to be made available through the Variable space
+specify config directives to make available through the Variable space
 __END__
 
 
@@ -24,15 +24,15 @@ array or hash &glos-configuration; directives, you need to append the index
 number or hash key respectively.
 See <xref linkend="AutoVariable_examples"/> for clarification.
 </para><para>
-Note that the behavior of &conf-__FILENAME__; is not dynamic &mdash; if need
-to re-invoke &conf-__FILENAME__; every time you want to "refresh" the 
-value visible through <code>__<replaceable>DirectiveName</replaceable>__</code>.
+Note that the behavior of &conf-__FILENAME__; is not dynamic &mdash; you need
+to re-invoke &conf-__FILENAME__; every time you want to update the 
+value in <code>__<replaceable>DirectiveName</replaceable>__</code>.
 __END__
 
 
 __NAME__ notes
 The directive does not support &glos-hash; keys that contain non-word
-characters or whitespace. Also, only the first-level of array and hash
+characters or whitespace. In addition, only the first-level of array and hash
 indices/keys is translated properly.
 __END__
 

@@ -9,11 +9,11 @@ __NAME__ synopsis
 __END__
 
 __NAME__ description
-Username and password pairs for users which are given administrator
+Username and password pairs which are given administrator
 privileges to all catalogs.
 </para><para>
 This functionality is standalone &mdash;
-you do not need to have the access &glos-database; since
-usernames and passwords here are specified directly.
+you do not need to have the users present in the &glos-UserDB; or the
+access &glos-database;.
 __END__
 

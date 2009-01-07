@@ -32,9 +32,9 @@ For an introduction to Action Maps, see &glos-ActionMap; glossary entry.
 The standard <literal>process</literal> ActionMap has a number of 
 configuration settings which can be controlled through &conf-FormAction;.
 </para><para>
-For catalog-level &glos-ActionMap;s, &IC; does not strip the actionmap nam
-from the requested HTTP path; for global ActionMaps it does. See
-<xref linkend='ActionMap_examples'/>.
+In the past, global &glos-ActionMap;s had the action name stripped from the
+HTTP path. Beginning with &IC; 5.5, catalog and global &glos-ActionMap;s are
+consistent in behavior and do not strip action name from the path.
 __END__
 
 

@@ -14,7 +14,7 @@ __END__
 __NAME__ description
 All configured &glos-database;s are opened every time an &IC; page is
 visited and enters processing. Opening a new database connection takes
-time, so &IC; provides fast dummy pointer to each database until that
+time, so &IC; provides fast dummy pointer to each database until the
 database is actually used within the page.
 </para><para>
 Enabling this directive has the effect of disabling fast pointers

@@ -17,7 +17,7 @@ Specify an Interchange &glos-macro; to be invoked automatically, at the end of e
 page access. This step is performed after all page parsing occurs,
 just before the whole transaction ends.
 </para><para>
-In other respects, it behaves the same as its closely related
+Except for the time of execution, it behaves the same as its closely related
 directive &conf-Autoload;.
 __END__
 

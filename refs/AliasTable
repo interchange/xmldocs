@@ -1,19 +1,19 @@
 __NAME__ purpose
-specify database that contains page aliases ("redirect" instructions)
+specify table containing page aliases ("redirect" instructions)
 __END__
 
 
 __NAME__ synopsis
-<arg choice='plain'><replaceable>database_name</replaceable></arg>
+<arg choice='plain'><replaceable>table_name</replaceable></arg>
 __END__
 
 
 __NAME__ description
-The directive specifies Interchange &glos-database; that 
-contains page aliases (default database name is 
+The directive specifies Interchange &glos-table; that 
+contains page aliases (default table name is 
 <database>alias</database>).
 </para><para>
-This way, flypages can be aliased and redirected to different locations
+This way, &glos-flypage;s can be aliased and redirected to different locations
 without performing file lookup cycles.
 </para><para>
 Primary applications include content management and creation of
