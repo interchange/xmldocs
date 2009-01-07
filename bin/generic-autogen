@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # Generic .xml generator
-# Currently builds glossary or howtos.
+# Currently builds glossary only. (Used to build howtos, not any more)
 # Invoke as: bin/generic-autogen NAME
 # (It creates NAME/NAME.xml with files from NAME/*)
 
@@ -74,12 +74,13 @@ open ENT, "> docbook/auto$cat.ent" or
 
 # LOAD ITEMS
 opendir DIR, $cat or die "Can't open $cat/ ($!)\n";
-readdir DIR; readdir DIR;
 
 # Read all elements from a directory
 while ( my $file = readdir DIR ) {
 	next if $file =~ /^\.|^CVS|\.xml$/;
 	open IN, "< $cat/$file" or die "Can't read-open $cat/$file ($!)\n";
+	my $lcfile = lc $file;
+
 
 	if ( $cat eq 'howtos' ) {
 		$visible_name = <IN>;
@@ -98,7 +99,12 @@ while ( my $file = readdir DIR ) {
 	print ENT <<ENDO;
 <!ENTITY $sn{$cat}-$file "$link$more">
 ENDO
-	print "Added $file\n" if $verbose;
+	if ($file ne $lcfile) {
+	print ENT <<ENDO;
+<!ENTITY $sn{$cat}-$lcfile "$link$more">
+ENDO
+	}
+	print "Added $file / $lcfile\n" if $verbose;
 
 	close IN or warn "Error closing $cat/$file ($!)\n";
 }

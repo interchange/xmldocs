@@ -12,6 +12,7 @@
 <!ENTITY r5.5.0 "4.6.0;4.8.0;5.0.0;5.2.0;5.5.0">
 <!ENTITY r5.5.2 "4.6.0;4.8.0;5.0.0;5.2.0;5.5.0;5.5.2">
 <!ENTITY r5.6.0 "4.6.0;4.8.0;5.0.0;5.2.0;5.5.0;5.5.2;5.6.0">
+<!ENTITY r5.7.0 "4.6.0;4.8.0;5.0.0;5.2.0;5.5.0;5.5.2;5.6.0;5.7.0">
 
 <!-- GENERAL ENTITIES -->
 <!ENTITY GNU "<ulink url='http://www.gnu.org'>GNU</ulink>">
@@ -518,11 +519,9 @@ for more information.</para>">
 
 <!ENTITY conf-GPG_PATH "<literal>GPG_PATH</literal>">
 <!ENTITY filter-strip "<filter>strip</filter>">
-<!ENTITY glos-actionmap "<literal>actionmap</literal>">
 <!ENTITY glos-captcha "<literal>captcha</literal>">
 <!ENTITY glos-form "<literal>form</literal>">
 <!ENTITY glos-safe "<literal>safe</literal>">
-<!ENTITY gloss-attribute "<literal>attribute</literal>">
 <!ENTITY glos-UserTag "<literal>UserTag</literal>">
 <!ENTITY howto-dump-vend-structure "<literal>dump-vend-structure</literal>">
 <!ENTITY pragma-filter_sql_no_backslash "<literal>filter_sql_no_backslash</literal>">
