@@ -13,6 +13,9 @@ Specify the error log file location.
 </para><para>
 The Interchange daemon must have the permission to create and write to the
 specified file.
+</para><para>
+When using the directive on a &glos-catalog; level, specifying absolute
+filenames might not be allowed due to &conf-NoAbsolute;.
 __END__
 
 __NAME__ see also

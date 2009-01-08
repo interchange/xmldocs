@@ -14,11 +14,11 @@ As this tends to produce large amounts of output, only use it if
 there's a strong chance that your problem is related to DBI.
 </para><para>
 Setting of <literal>0</literal> disables tracing.<sbr/>
-Setting of <literal>1</literal> traces DBI method calls with return values (or errors)<sbr/>
-Setting of <literal>2</literal> traces as (1) plus the parameters used in method calls<sbr/>
+Setting of <literal>1</literal> traces DBI method calls with return values (or errors).<sbr/>
+Setting of <literal>2</literal> traces as (1) plus the parameters used in method calls.<sbr/>
 Setting of <literal>3</literal> traces as (2) plus some high-level information from the driver, and some internal information from the DBI<sbr/>
 Setting of <literal>4</literal> traces as (3) plus more detailed information from the driver. Also includes DBI mutex information when using threaded Perl<sbr/>
-Setting of <literal>5</literal> traces as (4) plus more and more obscure information<sbr/>
+Setting of <literal>5</literal> traces as (4) plus more and more obscure information.<sbr/>
 </para><para>
 Trace level of <literal>1</literal> is suitable in most situations.
 __END__

@@ -3,17 +3,13 @@ register existing database table for use with Interchange
 __END__
 
 __NAME__ synopsis
-<group choice='plain'>
-	<arg choice='plain'><replaceable>table_name</replaceable></arg>
-	<arg choice='plain'><replaceable>table_source_file</replaceable></arg>
-	<arg choice='plain'><replaceable>table_type</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>table_name</replaceable></arg>
+<arg choice='plain'><replaceable>table_source_file</replaceable></arg>
+<arg choice='plain'><replaceable>table_type</replaceable></arg>
 <sbr/>
-<group choice='plain'>
-	<arg choice='plain'><replaceable>table_name</replaceable></arg>
-	<arg choice='plain'><replaceable>attribute</replaceable></arg>
-	<arg choice='plain'><replaceable>value</replaceable></arg>
-</group>
+<arg choice='plain'><replaceable>table_name</replaceable></arg>
+<arg choice='plain'><replaceable>attribute</replaceable></arg>
+<arg choice='plain'><replaceable>value</replaceable></arg>
 __END__
 
 __NAME__ see also
@@ -40,7 +36,7 @@ In &IC;, words <literal>table</literal> and <literal>database</literal>
 are used to refer to the same thing &mdash; database table.
 </para><para>
 Defining databases on an &IC; (global) level
-<emphasis role='bold'>does not work</emphasis>! If you want to share
+<emphasis role='bold'>won't work</emphasis>. If you want to share
 databases among catalogs, define them in each &ccf; separately (possibly
 by including the generic file with &conf-Database; definitions).
 __END__
@@ -55,6 +51,16 @@ __NAME__ example: Simple definition of a CSV-style database source format
 <programlisting>
 Database reviews reviews.txt CSV
 </programlisting>
+__END__
+
+__NAME__ example: Automatically configure all tables from an existing PostgreSQL database
+<programlisting>
+DatabaseAutoIgnore ^sql_
+DatabaseAuto __SQLDSN__
+NoImportExternal Yes
+</programlisting>
+
+For further discussion, see &conf-DatabaseAuto;.
 __END__
 
 __NAME__ example: Definition of a Postgres database table

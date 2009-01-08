@@ -170,6 +170,16 @@ DatabaseAuto dbi:Pg:dbname=DBNAME USERNAME PASSWORD  ''  public  ''  VIEW
 &mdash; literally and in uppercase).
 __END__
 
+__NAME__ example: Automatically configure all tables from an existing PostgreSQL database
+<programlisting>
+Variable SQLDSN  dbi:Pg:dbname=DATABASE_NAME
+
+DatabaseAutoIgnore ^sql_
+DatabaseAuto __SQLDSN__
+NoImportExternal Yes
+</programlisting>
+__END__
+
 
 __NAME__ author
 &mheins;

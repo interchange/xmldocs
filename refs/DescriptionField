@@ -20,10 +20,7 @@ __END__
 
 
 __NAME__ notes
-The existence of the field is not exactly crucial, but it's important
-for say, &glos-flypage;s.
-</para><para>
-It's also useful to set the directive value based on &glos-locale;,
+It's useful to set this directive based on &glos-locale;,
 allowing for locale-specific product descriptions.
 __END__
 
@@ -34,9 +31,8 @@ display."
 
 __NAME__ example: Redefining DescriptionField
 <programlisting>
-DescriptionField opis
+DescriptionField dsc
 </programlisting>
-"Opis", for example, is a croatian equivalent of "description".
 __END__
 
 __NAME__ example: Setting DecriptionField depending on current locale

@@ -4,15 +4,9 @@ __END__
 
 __NAME__ synopsis
 <group choice='plain'>
-  <arg choice='plain'>
-		<replaceable>table_name</replaceable>
-		<arg choice='opt'>
-			<replaceable>table_source_filename</replaceable>
-			<arg choice='opt'>
-			<replaceable>table_source_type</replaceable>
-			</arg>
-		</arg>
-	</arg>
+  <arg choice='plain'><replaceable>table_name</replaceable>
+		<arg choice='opt'><replaceable>table_source_filename</replaceable>
+			<arg choice='opt'><replaceable>table_source_type</replaceable></arg></arg></arg>
 </group>
 __END__
 

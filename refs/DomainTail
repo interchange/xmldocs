@@ -35,7 +35,7 @@ by default.
 </para><para>
 If you are encrypting credit cards with PGP/GPG or using payment services,
 then look at the &conf-WideOpen; directive, which
-enables even more browser compatibility, again at the cost of even more
+enables even more browser compatibility, again at the cost of some
 security.
 __END__
 

@@ -16,13 +16,14 @@ prevents &conf-DatabaseAuto; from automatically configuring
 <emphasis>all</emphasis> tables found. (For example, you will want
 to exclude tables in non-default schemas.)
 </para><para>
-Note that instead of using this directive, you may prefer to directly
-specify <literal>schema</literal> argument to the &conf-DatabaseAuto; directive.
-(&conf-DatabaseAutoIgnore; easily ignores more tables than you intend).
+A loose regex specification can easily ignore more tables than you 
+intended, and if the goal is just using tables from the public schema, you
+might prefer specifying <literal>schema</literal> argument to 
+&conf-DatabaseAuto; directly.
 __END__
 
 __NAME__ notes
-This directive must be set before &conf-DatabaseAuto; to have meaningful
+This directive must be set before &conf-DatabaseAuto; to have a meaningful
 effect.
 </para><para>
 For more about &IC; and databases, and supported formats, see &glos-database;

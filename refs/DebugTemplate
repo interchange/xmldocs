@@ -3,15 +3,15 @@ specify format of debug messages
 __END__
 
 __NAME__ synopsis
-<group rep='repeat'>
-  <arg><replaceable>time_spec</replaceable></arg>
-  <arg><literal>{CALLER0}</literal> ... <literal>{CALLER9}</literal></arg>
-  <arg><literal>{CATALOG}</literal></arg>
-  <arg><literal>{HOST}</literal></arg>
-  <arg><literal>{MESSAGE}</literal></arg>
-  <arg><literal>{PAGE}</literal></arg>
-  <arg><literal>{REMOTE_ADDR}</literal></arg>
-  <arg><literal>{TAG}</literal></arg>
+<group rep='repeat' choice='plain'>
+	<arg><replaceable>time_spec</replaceable></arg>
+	<arg choice='plain'><literal>{CALLER0}</literal> ... <literal>{CALLER9}</literal></arg>
+	<arg choice='plain'><literal>{CATALOG}</literal></arg>
+	<arg choice='plain'><literal>{HOST}</literal></arg>
+	<arg choice='plain'><literal>{MESSAGE}</literal></arg>
+	<arg choice='plain'><literal>{PAGE}</literal></arg>
+	<arg choice='plain'><literal>{REMOTE_ADDR}</literal></arg>
+	<arg choice='plain'><literal>{TAG}</literal></arg>
 </group>
 __END__
 
@@ -21,8 +21,7 @@ __END__
 
 __NAME__ description
 &conf-DebugTemplate;, a global directive, allows you to change the
-format of debug messages. The meaning of the above literal 
-elements is:
+format of debug messages.
 
 <itemizedlist>
 	<listitem><para>
