@@ -7,12 +7,10 @@ CodeDef,UserTag
 __END__
 
 __NAME__ synopsis
-<group choice='req'>
-	<arg choice='plain'>
-		<replaceable>action_name</replaceable>
-		<replaceable>perl_code</replaceable>
-	</arg>
-</group>
+<arg choice='plain'>
+	<replaceable>action_name</replaceable>
+	<replaceable>perl_code</replaceable>
+</arg>
 __END__
 
 __NAME__ description

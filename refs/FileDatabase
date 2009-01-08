@@ -28,10 +28,6 @@ The file database must, as always, be registered first with the
 </para><para>
 Files in the filesystem, if they exist, always take precedence over file
 contents in the database.
-</para><para>
-As you see, this directive allows you to create catalogs that live in the
-database space, without a single file stored on disk. Don't, however,
-be fooled by this option &mdash; in general, filesystem is the only
 right place for your files.
 __END__
 

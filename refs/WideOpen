@@ -18,7 +18,8 @@ __END__
 
 __NAME__ description
 The &conf-WideOpen; directive disables IP-based qualification of user
-&glos-session;s.
+&glos-session;s, and everyone's hostname part of the &IC; &glos-cookie; is
+set to <literal>nobody</literal>.
 This increases compatibility, but reduces &glos-catalog; security.
 </para><para>
 When this directive is enabled, no IP-based checking is done, so 

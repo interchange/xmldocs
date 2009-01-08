@@ -28,7 +28,7 @@ __END__
 
 __NAME__ example: Enabling FractionalItems
 <programlisting>
-FractionalItems 1
+FractionalItems Yes
 </programlisting>
 __END__
 

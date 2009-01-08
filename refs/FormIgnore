@@ -13,7 +13,8 @@ __END__
 
 __NAME__ description
 The directive specifies variables that should not be propagated from the
-&glos-CGI; into &glos-value;s space.
+&glos-CGI; into &glos-value;s space, when a call such as
+<code>[update values]</code> is made.
 __END__
 
 __NAME__ example: Defining FormIgnore

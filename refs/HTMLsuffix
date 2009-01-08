@@ -9,8 +9,16 @@ __END__
 
 
 __NAME__ description
-Specify extension to append to the filenames when looking for the source
-files in the <filename class='directory'>pages/</filename> directory.
+Specify extension (suffix) to use with filenames when looking for the
+source files in the <filename class='directory'>pages/</filename> directory.
+</para><para>
+If a page with the configured suffix does not exist on the disk, &IC; will
+unconditionally try the usual "<literal>.html</literal>" variant.
+</para><para>
+Note that 
+this setting applies strictly to the disk file lookup &mdash;
+page names in the users' browsers will always appear as
+"<literal>.html</literal>".
 __END__
 
 

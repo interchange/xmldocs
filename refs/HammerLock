@@ -10,8 +10,7 @@ __END__
 
 __NAME__ description
 The directive specifies an interval after which a locked session could be
-considered to be
-lost due to malfunction. This will also clean up the session lock.
+considered lost due to malfunction. This will also clean up the session lock.
 __END__
 
 __NAME__ notes
