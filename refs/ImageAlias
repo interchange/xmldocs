@@ -19,7 +19,9 @@ The directive specifies an alias for the base images location, which is
 set by &conf-ImageDir; and related directives.
 </para><para>
 It is similar in effect to the "alias" feature of Web servers such as 
-&APACHE; or NCSA. 
+&APACHE; or NCSA, and applies to <literal>&lt;body background=</literal>, 
+table elements <literal>background=</literal> and all 
+<literal>src=</literal> specifications.
 __END__
 
 __NAME_ notes

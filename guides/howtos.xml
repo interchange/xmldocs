@@ -51,7 +51,7 @@
 <qandadiv><title>Interchange</title>
 
 	<qandadiv><title>Core</title>
-		<qandaentry><question><para>
+		<qandaentry><question id='gate'><para>
 		Controlling access to pages
 		</para></question><answer><para>
 There's a built-in &IC; way to control access to pages served
@@ -89,7 +89,11 @@ is not available.
 </programlisting>
 <replaceable>PAGE_NAME</replaceable> is the name of page to be controlled,
 and the page suffix (such as <literal>.html</literal>) is optional.
-Page name of <literal>*</literal> can be used to set a default permission.
+</para><para>
+Page name of "<literal>*</literal>" can be used to set a default permission, but
+globbing is not possible ("<literal>ind*</literal>" will not match
+"<literal>index</literal>"). The default permission has lower precedence
+than any rule that matches the page name explicitly.
 </para><para>
 The <replaceable>CONDITION</replaceable> is a simple &glos-true; (or 
 <literal>Yes</literal>) or &glos-false; (or <literal>No</literal>) value
@@ -121,10 +125,6 @@ baz:      yes
 
 *:        [data session logged_in]
 </programlisting>
-
-<!-- XXX is it first match wins, and can you say page*: ... ? 
-
--->
 
 		</para></answer></qandaentry>
 

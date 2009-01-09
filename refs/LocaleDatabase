@@ -26,3 +26,6 @@ LocaleDatabase locale
 </programlisting>
 __END__
 
+__NAME__ missing
+example of LocaleDatabase structure (what fields etc.?)
+__END__

@@ -25,7 +25,7 @@ __END__
 
 __NAME__ example: Enabling Mall
 <programlisting>
-Mall 1
+Mall Yes
 </programlisting>
 __END__
 

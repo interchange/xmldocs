@@ -17,31 +17,15 @@ __NAME__ description
 &conf-ImageDir; is one of quite basic settings in every &ccf;.
 </para><para>
 The directive specifies a base location, accessible over the web,
-where &IC; should look for IMG and INPUT &glos-HTML;
-<literal>src=</literal> file specifications.
-To be precise, actually, this setting applies to image locations mentioned
+where &IC; should look for image files, when just relative image
+filename is given.
+Automatically "translated" are image locations mentioned
 in <![CDATA[
 <img src="">, <input src="">, <body background="">, <table background=""> and table subelements (<th>, <tr> and <td>).]]>
 </para><para>
-As you might know, &IC; keeps its pages in a special directory
-<filename class='directory'>pages/</filename> (which is a subdirectory of 
-your catalog's &glos-CATROOT;). That directory can be readable only by the 
-&IC; user, and contents in it cannot be accessed by the web server without
-&IC; mediating the connection. This directory is generally supposed to 
-only contain directories and Interchange-enabled &glos-HTML; pages,
-nothing else.
-</para><para>
-It is therefore obvious that an alternative way has to be provided
-to serve images. When you define &conf-ImageDir;, &IC; will appropriately
-and transparently prefix all &lt;img src=...&gt; &glos-HTML; tags with
-your value.
-</para><para>
-For example, if the &glos-link-program; and images are kept on the same
-server, and images are found in your web server's document root,
-in the <filename class='directory'>images/</filename> subdirectory, then
-you would set &conf-ImageDir; to <literal>/images/</literal>.
-With this setting in effect, a link such as &lt;img src="order.png"&gt;
-would automatically be translated to &lt;img src="/images/order.png"&gt;.
+A setting of &conf-ImageDir; <literal>/images/</literal> and a specification
+of <literal>&lt;img src="test/test.png"&gt;</literal> would be
+translated to <literal>&lt;img src="/images/test/test.png"&gt;</literal>.
 __END__
 
 __NAME_ notes

@@ -9,19 +9,12 @@ __END__
 
 
 __NAME__ synopsis
-<group choice='plain' rep='repeat'>
-	<arg choice='plain'>
-		[=?]<replaceable>table</replaceable>:<replaceable>column</replaceable>
-	</arg>
-	<arg choice='plain'>
-		[=?]<replaceable>column</replaceable>
-	</arg>
-</group>
+<group choice='opt'><arg choice='plain'>=</arg><arg choice='plain'>?</arg></group><arg choice='opt'><replaceable>table</replaceable>:</arg><arg choice='plain'><replaceable>column</replaceable></arg>
 __END__
 
 
 __NAME__ description
-The &conf-__FILENAME__; directive specifies the &glos-database;s
+The &conf-__FILENAME__; directive specifies &glos-database;s
 and database columns containing the maximum allowed order quantity
 for an item.
 </para><para>
@@ -38,7 +31,7 @@ spaces), in which case the maximum quantity allowed is set to the sum of
 all quantities
 found.
 </para><para>
-As of Jun 26, 2008, a field prefixed with <literal>=</literal> overrides
+As of &IC; 5.7.0, a field prefixed with <literal>=</literal> overrides
 any previous value, while a field prefixed with <literal>?</literal>
 overrides previous value only if the new value is greater than zero.
 __END__

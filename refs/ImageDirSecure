@@ -19,10 +19,10 @@ where &IC; should look for IMG and INPUT &glos-HTML;
 <literal>src=</literal> file specifications,
 <emphasis role='bold'>when the originating page is being served
 over a secure connection (HTTPS)</emphasis>.
-To be precise, actually, this setting applies to image locations mentioned in <![CDATA[ <img src="">, <input src="">, <body background="">, <table background=""> and table subelements (<th>, <tr> and <td>).]]>
+This setting applies to image locations mentioned in <![CDATA[ <img src="">, <input src="">, <body background="">, <table background=""> and table subelements (<th>, <tr> and <td>).]]>
 </para><para>
 This is useful if you are using separate HTTPS and HTTP servers, and cannot
-make the image directory path heads match. If &conf-ImageDirSecure; is
+make the image directory paths match. If &conf-ImageDirSecure; is
 unspecified, it defaults to &conf-ImageDir;.
 __END__
 

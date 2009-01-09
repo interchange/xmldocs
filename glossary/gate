@@ -1,3 +1,11 @@
 In &IC; parlance, "gating" is the process of controlling access to
-certain pages. See &howto-control-access-to-certain-pages; HOW-TO entry
+certain pages. See <olink targetdoc='howtos' targetptr='gate'/> HOW-TO entry
 for further information and examples.
+</para>
+	<note><para>
+		In &IC; versions prior to 5.7.0, <filename>.access</filename> file found
+		directly in &conf-PageDir; (i.e.
+		<filename class='directory'>pages/</filename>) is mistakenly ignored,
+		but does work for subdirectories.
+	</para></note>
+<para>

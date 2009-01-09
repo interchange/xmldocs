@@ -22,7 +22,7 @@ __END__
 
 __NAME__ example: Defining __FILENAME__
 <programlisting><![CDATA[
-MimeType itl text/html
+MimeType itl text/plain
 
 MimeType default text/plain
 ]]></programlisting>

@@ -26,8 +26,8 @@ This &glos-configuration; directive can be overridden using
 __END__
 
 __NAME__ notes
-You will need &IC; INET mode in only rare circumstances (that is, only if your
-Web and &IC; server are not the same machine).
+In general, you will need &IC; INET mode when the
+Web and &IC; server are not the same machine.
 </para><para>
 The default port number, <literal>7786</literal>, was chosen since it
 represents the ASCII numbers of letters <literal>M</literal> and

@@ -18,7 +18,7 @@ This directive enables saving of search paging files into users'
 This eliminates the need to have a &conf-ScratchDir; directory
 between all &IC; server nodes.
 </para><para>
-This directive can only be used with DBI (database) sessions; trying
+This directive can only be used with DBI (database) &glos-session;s; trying
 to use it with non-database sessions will cause errors.
 __END__
 

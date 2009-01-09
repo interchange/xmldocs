@@ -17,7 +17,7 @@ Specify &glos-catalog; log file. If the filename is not absolute,
 it is treated relative to the catalog root directory (&glos-CATROOT;).
 </para><para>
 The file will gather output of the
-<function>::logData()</function> function.
+<function>::logData()</function> function (including the tag &tag-log;).
 __END__
 
 __NAME__ see also

@@ -16,7 +16,7 @@ a number of items:
 <literal>currency_symbol</literal> - default currency symbol. Can be a simple value like "<literal>$</literal>" or " <literal>E</literal>", or a more flexible setting such as '<literal>&lt;img src="euro.png" /&gt;</literal>'.
 </para></listitem>
 <listitem><para>
-<literal>frac_digits</literal> - 
+<literal>frac_digits</literal> -
 </para></listitem>
 <listitem><para>
 <literal>int_curr_symbol</literal> -

@@ -15,9 +15,10 @@ __END__
 __NAME__ description
 </para><para>
 This directive configures Interchange batch &glos-jobs; facility.
-It accepts a list of key/value pairs.
+For detailed discussion, please see the &glos-jobs; glossary entry.
 </para><para>
-It can be specified at both the global and &glos-catalog; level.
+The directive accepts a list of key/value pair and
+can be specified at both global and &glos-catalog; level.
 </para><para>
 The available keys for the <emphasis role='bold'>global directive</emphasis>
 are:
@@ -34,18 +35,18 @@ are:
 <row>
 <entry><literal>MaxLifetime</literal></entry>
 <entry><literal>600</literal></entry>
-<entry>The maximum time (in seconds) that a job will be allowed to run.</entry>
+<entry>The maximum time in seconds that a job will be allowed to run</entry>
 </row>
 <row>
 <entry><literal>MaxServers</literal></entry>
 <entry><literal>1</literal></entry>
-<entry>The maximum number of servers processing jobs. Excess jobs will be queued.
+<entry>The maximum number of servers processing jobs. Excess jobs will be queued
 </entry>
 </row>
 <row>
 <entry><literal>UseGlobal</literal></entry>
 <entry><literal>false</literal></entry>
-<entry>Search always for global job definitions.
+<entry>Always search for global job definitions?
 </entry>
 </row>
 </tbody>
@@ -70,20 +71,20 @@ The available keys for the <emphasis role='bold'>catalog directive</emphasis> ar
 <entry><literal>add_session</literal></entry>
 <entry><literal>false</literal></entry>
 <entry>Add session dump to 
-<olink targetdoc='glossary' targetptr='JobOutput'>job output</olink>.</entry>
+<olink targetdoc='glossary' targetptr='JobOutput'>job output</olink>?</entry>
 </row>
 <row>
 <entry><literal>autoend</literal></entry>
-<entry><emphasis>None</emphasis></entry>
+<entry>None</entry>
 <entry>
-A macro executed after each invidiual file in the job.
+A macro to execute after each invidiual file in the job
 </entry>
 </row>
 <row>
 <entry><literal>autoload</literal></entry>
-<entry><emphasis>None</emphasis></entry>
+<entry>None</entry>
 <entry>
-A macro executed before each invidiual file in the job.
+A macro to execute before each invidiual file in the job
 </entry>
 </row>
 <row>
@@ -94,65 +95,65 @@ to search for batch jobs.</entry>
 </row>
 <row>
 <entry><literal>email</literal></entry>
-<entry><emphasis>None</emphasis></entry>
+<entry>None</entry>
 <entry>Email <olink targetdoc='glossary' targetptr='JobOutput'>job output</olink>
-to this address.</entry>
+to this address</entry>
 </row>
 <row>
 <entry><literal>extra_headers</literal></entry>
-<entry><emphasis>None</emphasis></entry>
-<entry>Additional email headers.</entry>
+<entry>None</entry>
+<entry>Additional email headers</entry>
 </row>
 <row>
 <entry><literal>from</literal></entry>
 <entry>&conf-MailOrderTo;</entry>
-<entry>"From" address in emails.</entry>
+<entry>"From" address in emails</entry>
 </row>
 <row>
 <entry><literal>ignore_errors</literal></entry>
 <entry><literal>false</literal></entry>
 <entry>Excludes fatal errors from
-<olink targetdoc='glossary' targetptr='JobOutput'>job output</olink>.
+<olink targetdoc='glossary' targetptr='JobOutput'>job output</olink>
 </entry>
 </row>
 <row>
 <entry><literal>filter</literal></entry>
 <entry>&filter-strip;</entry>
-<entry>Filter(s) applied to
-<olink targetdoc='glossary' targetptr='JobOutput'>job output</olink>.</entry>
+<entry>Filters applied to
+<olink targetdoc='glossary' targetptr='JobOutput'>job output</olink></entry>
 </row>
 <row>
 <entry><literal>initialize</literal></entry>
-<entry><emphasis>None</emphasis></entry>
+<entry>None</entry>
 <entry>
-A macro executed before the job commences.
+A macro executed before the job commences
 </entry>
 </row>
 <row>
 <entry><literal>log</literal></entry>
-<entry><emphasis>None</emphasis></entry>
+<entry>None</entry>
 <entry>Write <olink targetdoc='glossary' targetptr='JobOutput'>job output</olink>
-to this logfile.</entry>
+to this logfile</entry>
 </row>
 <row>
 <entry><literal>subject</literal></entry>
 <entry><literal>Interchange results for job: %s</literal></entry>
-<entry>Subject for emails, including placeholder for job name.</entry>
+<entry>Subject for emails, including placeholder for job name</entry>
 </row>
 <row>
 <entry><literal>suffix</literal></entry>
-<entry><emphasis>None</emphasis></entry>
-<entry>Restrict job to files matching the specified suffix.</entry>
+<entry>None</entry>
+<entry>Restrict job to files matching the specified suffix</entry>
 </row>
 <row>
 <entry><literal>trackdb</literal></entry>
-<entry><emphasis>None</emphasis></entry>
-<entry>Table for <olink targetdoc='glossary' targetptr='JobTracking'>tracking jobs</olink>.</entry>
+<entry>None</entry>
+<entry>Table for <olink targetdoc='glossary' targetptr='JobTracking'>tracking jobs</olink></entry>
 </row>
 <row>
 <entry><literal>use_global</literal></entry>
 <entry><literal>false</literal></entry>
-<entry>Search for global job definitions.</entry>
+<entry>Search for global job definitions?</entry>
 </row>
 </tbody>
 </tgroup>
@@ -170,7 +171,7 @@ The invocation of jobs from the command line will only queue them for execution
 and will return the shell prompt before the jobs have actually started
 executing.
 </para><para>
-A common temporary &glos-session; (<mv>mv_tmp_session</mv> == &glos-true;)
+In that case, a common temporary &glos-session; (<mv>mv_tmp_session</mv> == &glos-true;)
 will be created for use by all of the files
 in the job queue. The session will be closed when the jobs complete.
 The remote IP address will be set to <literal>none</literal> and the
@@ -178,13 +179,10 @@ user agent string will be set to <literal>commandline</literal>.
 __END__
 
 __NAME__ example: Define catalog-level Jobs directive
-Specify directory that will hold the job files, and set up a log file to
-for job runs. Also specify an email address to which any output jobs
-output will be sent:
 <programlisting>
 Jobs &lt;&lt;EOJ
-  base_directory  jobs
   log             logs/jobs.log
+  base_directory  jobs
   email           root@&def-hostname;
 EOJ
 </programlisting>

@@ -14,7 +14,7 @@ __NAME__ description
 <tbody>
 <row>
 <entry>cart_quantity_per_line</entry>
-<entry>-</entry>
+<entry>none</entry>
 <entry>maximum quantity per item in cart</entry>
 </row>
 <row>
@@ -97,4 +97,8 @@ __END__
 
 __NAME__ see also
 RobotLimit
+__END__
+
+__NAME__ missing
+fill in complete limits table
 __END__

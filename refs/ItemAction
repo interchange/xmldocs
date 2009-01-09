@@ -40,14 +40,13 @@ Consequently, direct manipulation of the &glos-cart; from within &PERL;
 <emphasis role='bold'>will not</emphasis> cause this function to be invoked. The
 triggers only fire when the cart contents are modified through the standard
 Interchange &glos-CGI;-based variable processing. Therefore, it is assumed
-(for the moment, at least) that any programmer sufficiently comfortable or
+that any programmer sufficiently comfortable or
 confident to manipulate cart contents directly can also be given the
 responsibility of deciding whether or not it is appropriate to manually invoke
 this function.
 </para><para>
 This &glos-configuration; directive is very similar to &conf-CartTrigger;
-and &conf-CartTriggerQuantity;, the two directives that could be percieved
-as more recent and flexible options.
+and &conf-CartTriggerQuantity;, the two more recent and flexible options.
 __END__
 
 __NAME__ example: Specifying __FILENAME__

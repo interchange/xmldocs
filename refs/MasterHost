@@ -8,19 +8,9 @@ __END__
 
 __NAME__ description
 This directive specifies the hostname or IP &glos-regexp; that the
-incoming requests must match in order to be allowed access to directories
-protected by non-zero-length <filename>.access</filename> file.
-</para><para>
-For more about this form of access control, see 
-&glos-gate; glossary entry.
+incoming requests must match in order to be allowed access to protected
+directories (see &glos-gate; &GE;), databases and administrative functions.
 __END__
-
-__NAME__ notes
-As you might remember, directories containing file
-<filename>.access</filename> of non-zero bytes in length are accessible only
-to clients matching &conf-MasterHost; or &conf-RemoteUser;.
-__END__
-
 
 __NAME__ example: Defining __FILENAME__
 <programlisting>
