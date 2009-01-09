@@ -35,9 +35,8 @@ is the same as:
 Database variables variables.txt TAB
 VariableDatabase variables
 </programlisting>
-So as you see, if you want to use a non-default &glos-database;, you must
-explicitly
-define it using the &conf-Database; directive and do so before the 
+But if you want to use a non-default &glos-database;, you must
+explicitly define it using the &conf-Database; directive and do so before the 
 &conf-VariableDatabase; line.
 __END__
 

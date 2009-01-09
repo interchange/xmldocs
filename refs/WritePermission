@@ -1,5 +1,5 @@
 __NAME__ purpose
-affect file mode (write permissions, specifically) on Interchange-generated files
+affect file mode (write permissions) on Interchange-generated files
 __END__
 
 

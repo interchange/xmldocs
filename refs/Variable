@@ -38,7 +38,9 @@ syntax:
 	unless found
 	</para></listitem>
 	<listitem><para>
-	Using the &tag-var; tag
+	Using the &tag-var; tag (Note: the &tag-var; tag is parsed together with 
+	all other tags, unlike the previous methods which are parsed separately,
+	before &glos-ITL; tag processing takes place)
 	</para></listitem>
 </itemizedlist>
 __END__

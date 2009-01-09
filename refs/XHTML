@@ -31,12 +31,12 @@ Making HTML output XHTML-compliant is extremely easy (basically, you only
 need to lowercase argument names, quote argument options, and include 
 <varname>$Vend::Xtrailer</varname> before the ending
 "<literal>&gt;</literal>" for standalone tags. That said, XHTML-compliance
-patches are gladly accepted to speed up the transition process.
+patches are gladly accepted to speed up the effort.
 __END__
 
 __NAME__ example: Enabling XHTML
 <programlisting>
-XHTML 1
+XHTML Yes
 </programlisting>
 __END__
 
