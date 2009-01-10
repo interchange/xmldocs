@@ -17,7 +17,7 @@ __END__
 
 __NAME__ description
 The directive sets parameters to adjust the behavior of Interchange's
-user database functions.
+built-in user database functions.
 </para><para>
 <informaltable>
 <tgroup cols="3">
@@ -45,11 +45,11 @@ user database functions.
 </entry><entry><filename>etc/username.counter</filename></entry></row>
 <row><entry>crypt</entry><entry>Encrypt passwords?
 </entry><entry>1</entry></row>
-<row><entry>database</entry><entry>&glos-database; name
+<row><entry>database</entry><entry>Name of the user &glos-database;
 </entry><entry><literal>userdb</literal></entry></row>
 <row><entry>db_acl</entry><entry>Field name for database access control
 </entry><entry><literal>db_acl</literal></entry></row>
-<row><entry>expire_field</entry><entry>Field name for account's expiration data
+<row><entry>expire_field</entry><entry>Field name for account expiration data
 </entry><entry><literal>expiration</literal></entry></row>
 <row><entry>file_acl</entry><entry>Field name for file access control
 </entry><entry><literal>file_acl</literal></entry></row>

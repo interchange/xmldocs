@@ -14,6 +14,10 @@ __END__
 
 
 __NAME__ description
+Specify name of the user database.
+</para><para>
+The default user database name is "<literal>userdb</literal>" and rarely
+needs to be changed.
 __END__
 
 

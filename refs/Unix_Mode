@@ -2,9 +2,8 @@ __NAME__ purpose
 specify whether Interchange server should open an UNIX socket
 __END__
 
-
 __NAME__ see also
-Unix_Mode,Inet_Mode
+Unix_Mode, Inet_Mode, SocketFile, SocketPerms
 __END__
 
 __NAME__ synopsis
