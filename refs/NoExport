@@ -11,13 +11,17 @@ __END__
 __NAME__ description
 The directive specifies external &glos-database; tables that should
 never be exported back to the text source files.
+</para><para>
+Invocations of &tag-backup-database; are not affected
+by this setting, and &tag-export; can force the export by specifying
+<literal>force=1</literal>.
 __END__
 
 __NAME__ example: Disabling 'products' and 'inventory' table export
 Put the following in &ccf;:
 <programlisting>
-NoExport products inventory
 NoExportExternal yes
+NoExport products inventory
 </programlisting>
 __END__
 

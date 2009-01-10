@@ -12,9 +12,12 @@ __END__
 
 
 __NAME__ description
-The directive enables use of the &conf-NoExport; directive
-to control which external &glos-database; tables 
-should never be re-exported back to text source files.
+The directive disables automatic export of internal database formats
+(&glos-SQL; and LDAP) back to the text source files.
+</para><para>
+Invocations of &tag-backup-database; are not affected
+by this setting, and &tag-export; can force the export by specifying
+<literal>force=1</literal>.
 __END__
 
 __NAME__ notes

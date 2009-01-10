@@ -11,8 +11,8 @@ __END__
 
 
 __NAME__ description
-Specify one or more filename fragments that will be matched against the file
-name used in any attempted search (the <mv>mv_search_file</mv> attribute).
+Specify database names or globs that will be matched against the databases
+used in any attempted search.
 You may separate multiple match strings with whitespace, and may include
 shell-style wildcards (globs).
 </para><para>
@@ -22,8 +22,8 @@ means that, by default, you cannot use &IC;-style searches on the
 __END__
 
 __NAME__ notes
-This directive only disables file/database-based searches, pure SQL
-searches still work with it, however.
+This directive only disables &IC; file/database-based searches; pure SQL
+searches still work.
 __END__
 
 __NAME__ example: Defining NoSearch

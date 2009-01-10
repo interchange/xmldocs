@@ -18,7 +18,7 @@ __END__
 
 __NAME__ example: Setting OrderReport
 <programlisting>
-OrderReport /data/order-form
+OrderReport etc/report
 </programlisting>
 __END__
 

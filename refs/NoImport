@@ -10,7 +10,7 @@ __END__
 
 __NAME__ description
 The directive specifies &glos-database; tables that should never be 
-imported from the text source files.
+automatically imported from the text source files.
 __END__
 
 __NAME__ example: Disabling 'products' and 'inventory' table import

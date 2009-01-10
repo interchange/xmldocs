@@ -13,7 +13,7 @@ __END__
 
 __NAME__ description
 The directive specifies that all external &glos-database; tables 
-should not be re-imported.
+should not be reimported from text source files.
 __END__
 
 __NAME__ notes

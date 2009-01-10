@@ -68,6 +68,25 @@ __NAME__ synopsis
 <row>
 
 	<entry>
+	force
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	false
+	</entry>
+	<entry>
+	Force database export, even if &conf-NoExportExternal; or &conf-NoExport; is enabled?
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
 	sort
 	</entry>
 	<entry>
