@@ -37,5 +37,5 @@ Pragma dynamic_variables 0
 __END__
 
 __NAME__ see also
-pragma
+pragma, tag
 __END__

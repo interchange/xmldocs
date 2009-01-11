@@ -4,7 +4,7 @@ __END__
 
 
 __NAME__ see also
-StartServers
+StartServers, PreForkSingleFork
 __END__
 
 __NAME__ synopsis
@@ -22,11 +22,10 @@ By using &conf-PreFork;, it is possible to <emphasis>pre-fork</emphasis>
 (or in other words, "start ahead of time") some number of &IC; servers
 that will be ready to serve client requests immediately as they come in.
 </para><para>
-If you're running PreFork, you should always try &conf-PreForkSingleFork; too
-to start. Only turn off &conf-PreForkSingleFork; if something pathological
-happens (the most likely outcome being a slew of zombies piling up that
-are never reaped). Using it successfully creates the absolute minimal
-number of forks necessary.
+If you're running PreFork, you should use it in combination with
+&conf-PreForkSingleFork;, to create the absolute minimal number of forks
+necessary. Only turn &conf-PreForkSingleFork; off 
+if it causes zombie processes to pile up.
 </para><para>
 This method reduces system overhead due to forking and is the fastest and
 best way to run a busy &IC; server.

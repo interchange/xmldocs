@@ -1,5 +1,5 @@
 __NAME__ purpose
-specify files containing OrderProfile and SearchProfile definitions
+specify files containing OrderProfile definitions on a global level
 __END__
 
 
@@ -19,8 +19,8 @@ __END__
 
 
 __NAME__ description
-Specify filenames that contain &conf-OrderProfile; and &conf-SearchProfile; 
-definitions.
+Specify filenames that contain &conf-OrderProfile;
+definitions on a global level.
 __END__
 
 

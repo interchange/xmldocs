@@ -16,7 +16,7 @@ __END__
 
 
 __NAME__ description
-Allow output of &glos-HTML; code from &glos-value; variables.
+Allow output of &glos-HTML; code from &tag-value; tags.
 __END__
 
 __NAME__ notes

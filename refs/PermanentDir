@@ -11,3 +11,7 @@ __NAME__ example: Relocate to &conf-ScratchDir;
 PermanentDir tmp/perm
 </programlisting>
 __END__
+
+__NAME__ missing
+description
+__END__

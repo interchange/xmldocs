@@ -1,4 +1,26 @@
+__NAME__ purpose
+specify default price field in chained pricing schemes
+__END__
 
-setira defaultni field kad je specifikacija chained pricinga
-table:field:key i field nije namjesten
+__NAME__ synopsis
+<arg choice='plain'><replaceable>field_name</replaceable></arg>
+__END__
 
+__NAME__ description
+When chained &glos-price; scheme is used and a specification of
+<literal><replaceable>table</replaceable>:<replaceable>field</replaceable>:<replaceable>key</replaceable></literal> is given without explicit
+<literal>:<replaceable>field</replaceable></literal>, the value in
+&conf-__FILENAME__; will be used.
+</para><para>
+The default value is <literal>price</literal>.
+__END__
+
+__NAME__ example: Setting __FILENAME__
+<programlisting>
+__FILENAME__ price
+</programlisting>
+__END__
+
+__NAME__ see also
+PriceField
+__END__

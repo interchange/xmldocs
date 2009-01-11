@@ -12,7 +12,7 @@ __END__
 
 
 __NAME__ description
-Specify that the &glos-configuration; directives should have their 
+Specify whether the &glos-configuration; directives should have their 
 values parsed (&glos-interpolate;d).
 </para><para>
 This applies to all configuration directives except &conf-Variable;.

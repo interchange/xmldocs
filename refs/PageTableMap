@@ -2,3 +2,37 @@ __NAME__ purpose
 map field names for page lookup tables
 __END__
 
+Revision 2.21: download - view: text, markup, annotated - select for diffs
+Tue Jan 22 02:07:08 2002 UTC (6 years, 11 months ago) by mheins
+Branches: MAIN
+Diff to: previous 2.20: preferred, colored
+Changes since revision 2.20: +10 -2 lines
+
+	* Add new PageTables capability. Includes:
+
+		-- PageTables directive in Config.pm (enables/routes PageTables)
+		-- PageTableMap directive in Config.pm (to map field names)
+		-- Support for database read of pages in Vend::Util::readin
+		-- "Teleport" mode which reads a page as it was/is at a particular
+		   time.
+
+	  This capablity theoretically would work with GDBM databases but
+	  you would never want to use it that way.
+
+	  Basically, if you place a record in the table "PageTables" with a
+	  key of "index", a read of that key in the page table will pre-empt
+	  a read from any PageDir or TemplateDir .
+
+	  If you set Vend::Session->{teleport} to a %Y%h%m%H%M time value,
+	  it will return pages with a show_date earlier than that value
+	  and an expiration date later than that value.  In the case of
+	  a tie, the later show_date wins.
+
+	  PageTableMap allows you to remap field names if desired; not
+	  recommended as UI may not honor mapping to begin with, but
+	  makes remap possible.
+
+	* Move Control space to Vend::Interpolate::Tmp to prevent
+	  storage in session. Also, allows multiple control spaces
+	  to be set up (for nesting).
+

@@ -24,9 +24,8 @@ __END__
 
 __NAME__ example: Redefining PriceField
 <programlisting>
-PriceField cijena
+PriceField preis
 </programlisting>
-"Cijena", for example, is a croatian equivalent of "price".
 __END__
 
 __NAME__ example: Setting PriceField depending on current locale
@@ -37,7 +36,7 @@ PriceField    price
 # Establish locale-specific price field
 Locale fr_FR  PriceField  prix
 </programlisting>
-Just by the way, if &conf-PriceBreaks; is enabled, the
+With the above example, if &conf-PriceBreaks; is enabled, the
 <database class='field'>prix</database> field from the
 <database>pricing</database> database will be used to develop quantity-based
 pricing.
