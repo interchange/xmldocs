@@ -22,9 +22,3 @@ __NAME__ notes
 The directive is obsolete since &IC; 4.9.
 __END__
 
-
-## disabled.. note missing __ ##
-NAME__ example:
-END__
-
-

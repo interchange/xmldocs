@@ -25,7 +25,9 @@ see &conf-CountrySubdomains;.
 <para>
 __END__
 
+__NAME__ missing
 TODO: how does this work with non-resolving stuff?
+__END__
 
 __NAME__ notes
 This directive is a compromise on security, but it allows browsers that

@@ -40,6 +40,5 @@ OrderProfile profiles/*.profile
 __END__
 
 __NAME__ missing
-Diff between Profiles and OrderProfile ?
 Confusing note in NOTES about scratch space and mv_click actions
 __END__

@@ -28,13 +28,9 @@ custom text source file and table type.
 they are passed to it directly.)
 __END__
 
-__NAME__ notes
-<!-- 
+__NAME__ missing
 Using this directive, it's possible to configure catalogs that have no
 &ccf; at all. How ?
--->
-</para><para>
-<!-- What's tha directive to load pages from DB ? -->
 __END__
 
 __NAME__ see also

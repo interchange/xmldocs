@@ -28,10 +28,9 @@ Bear in mind that &IC; provides this order number counter only as a convenience
 for display, and that no internal functions depend on it. Custom order number
 routines may be defined and used without fear of consequences.
 </para><para>
-<!-- IS This demo-specific note?
 If &conf-Route; is set to <literal>supplant</literal> and the
 <literal>counter</literal> attribute is set there, this directive is ignored.
-</para><para> -->
+</para><para>
 See &glos-order; glossary entry for complete discussion of &IC;'s
 ordering process.
 __END__

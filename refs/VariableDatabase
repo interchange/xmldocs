@@ -61,5 +61,3 @@ __HELLO__, [scratch user]!
 ]]></programlisting>
 __END__
 
-TODO: It's easy. Just make sure you do before "VariableDatabase variable":
- Database variable variable.txt dbi:mysql:database=foo;host=hostname;etc=etc

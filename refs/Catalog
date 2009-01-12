@@ -61,8 +61,6 @@ unreadable by the &IC; server, somewhat misguiding error message will be reporte
 Instead of the appropriate permissions-problem message, the mandatory
 &conf-VendURL; directive will be reported as undefined.
 __END__
-(Did I do this right? Now that MailOrderTo isn't mandatory anymore, 
-error will be about VendURL? Check that out.)
 
 __NAME__ example: Registering a catalog
 <programlisting>
@@ -107,5 +105,5 @@ Can catalog.cfg override cat-specific directives set in interchange.cfg ?
 How if catalog names supported regexps, so you could do like: Catalog \S+  directive ErrorFile /var/log/interchange/$1-error.log
 List all possible hash keys used with Catalog
 Remove from NOTES line about undefined VendURL if we fixed the error msg
- __END__
+__END__
 
