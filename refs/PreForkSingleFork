@@ -1,5 +1,5 @@
 __NAME__ purpose
-ensure the prefork code path is entirely controllable by the value of PreFork
+perform one instead of two forks in PreFork mode
 __END__
 
 
@@ -17,15 +17,14 @@ __END__
 
 __NAME__ description
 This directive affects &IC; behavior in conjunction with
-&conf-PreFork;, ensuring the prefork code path is entirely
-controllable by the value of &conf-PreFork;.
+&conf-PreFork;, by using one instead of two <function>fork()</function>
+calls to prefork a server.
 </para><para>
-If you're running PreFork, you should use it in combination with
-&conf-PreForkSingleFork;, to create the absolute minimal number of forks
-necessary. Only turn &conf-PreForkSingleFork; off 
-if it causes zombie processes to pile up.
+If you are running &IC; in prefork mode, you should use it in combination with
+this directive. Only turn &conf-PreForkSingleFork; off if it causes zombie
+processes to pile up on your system.
 </para><para>
-This method reduces system overhead due to forking and is the fastest and
+This method reduces system overhead when forking and is the fastest and
 best way to run a busy &IC; server.
 __END__
 

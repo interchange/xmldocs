@@ -11,7 +11,7 @@ __END__
 __NAME__ description
 Specify required value of the <envar>REMOTE_USER</envar> HTTP environment 
 variable that will enable catalog reconfiguration. HTTP basic authentication
-must be set configured independently at web server side, for this to work.
+must be configured at web server side for this to work.
 __END__
 
 

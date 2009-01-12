@@ -16,8 +16,7 @@ __END__
 __NAME__ description
 Just like &conf-Capability; or &conf-Suggest;, this directive checks for
 a feature or capability. When the tested feature is missing, a 
-catalog is <emphasis role='bold'>not</emphasis> configured and included
-in global configuration.
+catalog is not configured and not included in global configuration.
 </para><para>
 This is useful to ensure that needed facilities are present, especially if 
 you run the catalog on different locations.

@@ -12,7 +12,7 @@ __NAME__ description
 Specify the <emphasis>usertrack</emphasis> log file location. 
 </para><para>
 User &glos-tracking; can be used in back office administration to summarize
-traffic by affiliates.
+traffic by affiliates or provide other statistics.
 __END__
 
 __NAME__ notes

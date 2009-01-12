@@ -10,11 +10,12 @@ __END__
 
 
 __NAME__ description
-Cause another directive's value to be emptied and re-set to the specified 
+Cause &glos-configuration; directive's value to be emptied and reset to the specified 
 value, or to its default.
 </para><para>
-This is primarily useful for directives which append to existing
-definition by default, so at first glance there's no way to "clean" them.
+This is useful primarily for resetting configuration directives which append
+to existing data, so there's no other convenient way to reset them to 
+initial values.
 __END__
 
 __NAME__ notes
@@ -28,5 +29,6 @@ Replace NoCache ord special multi reconfig query
 __END__
 
 __NAME__ see also
+AddDirective
 __END__
 

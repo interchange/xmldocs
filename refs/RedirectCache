@@ -1,24 +1,33 @@
-* Add RedirectCache directive which allows redirected page requests to
-  be set to mv_tmp_session then written to the target from which it was
-  redirected. This allows a complete web site to be mirrored to static
-  HTML as it is requested, accompanied with the proper setting of
-  AcceptRedirect in Interchange and ErrorDocument in the Apache server.
+__NAME__ purpose
+use Interchange to generate static web server pages
+__END__
 
-  To use: 
-  
-       * Set ErrorDocument 404 to the Interchange URL in Apache.
-
-     * Set "AcceptRedirect Yes" in interchange.cfg.
-  
-     * Set "RedirectCache /var/www/html" in interchange.cfg (use
-       your document root in place of /var/www/html).
-
-  When a page http://yourdomain.tld/subdir/page.html is not found,
-  Interchange gets a redirect which causes it to set mv_tmp_session=1.
-  If Interchange doesn't find the page, then it returns "missing" and
-  no writing is done. If IC does find the page, it is written to
-  /var/www/html/subdir/page.html and the page will be found on next
-  access.
+__NAME__ synopsis
+<arg choice='plain'><replaceable>directory_name</replaceable></arg>
+__END__
 
 
-session is not initialized with redirectcache
+__NAME__ description
+This directive, along with &conf-AcceptRedirect;, allows
+the web server to route requests for missing static HTML pages to &IC;.
+Interchange processes the requests and saves the produced static content
+to the directory pointed by &conf-__FILENAME__;. On next web server
+page access, the pages are found and served as static content by the
+web server directly.
+</para><para>
+Requests routed to &IC; in this way use a temporary session (<mv>mv_tmp_session</mv>).
+In case the &IC; page is not found, the usual &conf-SpecialPage; "missing"
+is shown and no writing to the web server HTML directory takes place.
+__END__
+
+__NAME__ example: Enabling __FILENAME__
+<programlisting>
+AcceptRedirect Yes
+__FILENAME__ /var/www/html
+</programlisting>
+__END__
+
+__NAME__ see also
+AcceptRedirect
+__END__
+

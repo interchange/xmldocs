@@ -9,22 +9,23 @@ __END__
 
 
 __NAME__ description
-Specify directories containing default pages. This effectively allows you to 
-keep pages common for all &glos-catalog;s in common directories, or &mdash; in case
-of a catalog directive &mdash; extend the page
-search outside the catalog's <filename class='directory'>pages/</filename>
-directory.
+Specify directories containing default pages that are to be looked up if pages
+are not found in the usual &conf-PageDir;. This effectively allows 
+keeping pages common for all &glos-catalog;s in common directories,
+or &mdash; in case
+of a catalog directive &mdash; extending page
+search outside the catalog's &conf-PageDir;.
 __END__
 
-__NAME__ example: Setting TemplateDir
+__NAME__ example: Setting __FILENAME__
 <programlisting>
-TemplateDir /usr/local/interchange/default_pages
+__FILENAME__ /usr/local/interchange/default_pages
 </programlisting>
 __END__
 
-__NAME__ example: Setting TemplateDir to multiple directories
+__NAME__ example: Setting __FILENAME__ to multiple directories
 <programlisting>
-TemplateDir /usr/local/interchange/default_pages /common/pages
+__FILENAME__ /usr/local/interchange/default_pages /common/pages
 </programlisting>
 __END__
 

@@ -60,8 +60,8 @@ __END__
 
 
 __NAME__ example: Searching using SQL
-When using SQL-based database searches, this directive in effect
-turns the base search query of say,
+When using SQL-based database searches, the <literal>owner=username</literal>
+directive in effect turns the base search query of say,
 <programlisting>
 SELECT * FROM products
 </programlisting>

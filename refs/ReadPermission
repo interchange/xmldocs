@@ -15,7 +15,7 @@ __END__
 __NAME__ description
 By default, only the user account that &IC; runs under,
 can read and read files created by &IC;. The specified option allows
-adjustment of file &glos-mode;s (read permissions, specifically).
+adjustment of file read permissions.
 __END__
 
 __NAME__ example: Producing desired read and write file modes

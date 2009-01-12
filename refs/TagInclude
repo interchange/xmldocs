@@ -7,11 +7,7 @@ TagGroup, TagExclude
 __END__
 
 __NAME__ synopsis
-	<arg choice='opt'><literal>!</literal></arg>
-	<group choice='opt' rep='repeat'>
-		<arg choice='plain'><literal>:</literal><replaceable>group_name</replaceable></arg>
-		<arg choice='plain'><replaceable>tag_name</replaceable></arg>
-	</group>
+	<arg choice='opt'><literal>!</literal></arg><group choice='opt' rep='repeat'><arg choice='plain'><literal>:</literal><replaceable>group_name</replaceable></arg><arg choice='plain'><replaceable>tag_name</replaceable></arg></group>
 __END__
 
 

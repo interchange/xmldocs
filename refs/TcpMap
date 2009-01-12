@@ -68,9 +68,10 @@ Even though the internal Web server in &IC; is gone,
 <literal>tlink</literal> (Inet &glos-link-program;) still relies only on
 the <envar>SCRIPT_PATH</envar> environment variable to determine which
 catalog was requested. This means that the
-functional equivalent of catalogs bound to ports can still be achieved,
-by use of Web server location aliases and &IC; script path aliases. Actually, 
-you'd probably want to do this just to reduce the length of
+functional equivalent of catalogs bound to ports can still be achieved (without
+&conf-TcpMap;),
+by the use of Web server location aliases and &IC; script path aliases.
+Actually, you'd probably want to do this just to reduce the length of
 &glos-HTML; links.
 </para><para>
 Here's an example of needed &APACHE; Web server configuration:
