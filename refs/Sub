@@ -58,7 +58,7 @@ __END__
 __NAME__ notes
 As with &PERL; "here documents," the "<literal>EOF</literal>" (or arbitrarily
 named end marker) must be the <emphasis>only</emphasis> thing on the line,
-without leading or trailing white space. Do not even append a semicolon to the
+without leading or trailing white space. Do not append a semicolon to the
 marker (as you would in &PERL;).
 </para><para>
 Catalog subroutines may not perform unsafe operations. The

@@ -16,7 +16,7 @@ __END__
 
 __NAME__ description
 The directive specifies the number of servers which should be started
-and handling &glos-SOAP-RPC; requests.
+to handle &glos-SOAP-RPC; requests.
 </para><para>
 The default is <literal>1</literal>. Setting the directive to more than
 <literal>50</literal> is unreasonable and produces an error.

@@ -26,7 +26,7 @@ Please see the &glos-safe; glossary entry for the introduction and guidelines
 to programming under <classname>Safe.pm</classname> restrictions.
 </para><para>
 The &conf-SafeUntrap; directive runs <emphasis role='bold'>after</emphasis> 
-&conf-SafeTrap; (so, it takes priority). Make sure the opcodes you want
+&conf-SafeTrap; and takes precedence. Make sure the opcodes you want
 to trap are not later untrapped with &conf-SafeUntrap;.
 __END__
 

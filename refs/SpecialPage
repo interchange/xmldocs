@@ -35,7 +35,7 @@ Valid types are:
 	<listitem><para>
 	<literal>failed</literal> &mdash; 
 
-	standard handler for failed orders.
+	Standard handler for failed orders.
 	</para></listitem>
 	<listitem><para>
 	<literal>flypage</literal> &mdash; 
@@ -65,7 +65,7 @@ Valid types are:
 	<listitem><para>
 	<literal>put_handler</literal> &mdash; 
 
-	standard handler for <literal>PUT</literal> operations.
+	Standard handler for <literal>PUT</literal> operations.
 	</para></listitem>
 	<listitem><para>
 	<literal>receipt</literal> &mdash; 
@@ -100,7 +100,7 @@ Valid types are:
 </itemizedlist>
 __END__
 
-__NAME__ example: Setting SpecialPages
+__NAME__ example: Setting __FILENAME__
 <programlisting>
 SpecialPage  catalog        index
 SpecialPage  violation      special/violation
@@ -116,6 +116,16 @@ SpecialPage  needfield      special/needfield
 SpecialPage  order          ord/basket
 SpecialPage  search         results
 SpecialPage  violation      special/violation
+</programlisting>
+__END__
+
+__NAME__ example: Setting __FILENAME__
+<programlisting>
+SpecialPage catalog   index
+SpecialPage target    index
+SpecialPage missing   not_found
+SpecialPage violation not_found
+SpecialPage order     cart
 </programlisting>
 __END__
 

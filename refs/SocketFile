@@ -14,7 +14,7 @@ __END__
 
 __NAME__ description
 The directive specifies the filename which &IC; should create to enable
-Unix-domain socket communication. The filename must, of course, be writable
+Unix-domain socket communication. The filename must be writable
 by the Interchange daemon.
 __END__
 

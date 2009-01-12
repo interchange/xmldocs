@@ -18,7 +18,7 @@ The directive specifies a catalog URL for POST form submissions.
 </para><para>
 This allows an automatically different path for GET and POST
 requests, presuming you use the &tag-process; tag as 
-&glos-form; action target.
+form action target.
 __END__
 
 

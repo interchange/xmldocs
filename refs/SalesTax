@@ -3,7 +3,7 @@ specifies sales tax calculation mode
 __END__
 
 __NAME__ synopsis
-<arg choice='plain'><replaceable>value</replaceable></arg>
+<group choice='plain'><arg choice='plain'><literal>multi</literal></arg><arg choice='plain'><replaceable>ITL_code</replaceable></arg><arg choice='plain' rep='repeat'><replaceable>name</replaceable></arg></group>
 __END__
 
 __NAME__ description
@@ -18,15 +18,14 @@ The <replaceable>value</replaceable> can be one of three types:
 </thead>
 <tbody>
 <row><entry><literal>multi</literal></entry>
-<entry>Enables table-based lookup of tax rates, based upon form input values, by default the values used are country and state.</entry>
+<entry>Enables table-based lookup of tax rates, based upon form input values, by default the values used are <literal>country</literal> and <literal>state</literal>.</entry>
 </row>
-<row><entry>ITL</entry><entry>If the <replaceable>value</replaceable>
+<row><entry>ITL</entry><entry>If the value
 contains a square bracket, it is interpolated as &glos-ITL;. The result is
 used as the amount of the salestax.
 This could be useful if you want to use a custom UserTag for sales tax
 calculations.</entry></row>
-<row><entry><replaceable>name1, name2,
-...</replaceable></entry><entry>A comma-separated list of form values in
+<row><entry><replaceable>name</replaceable>...</entry><entry>A comma-separated list of form values in
 priority order. Enables look up of the tax rate "salestax.asc" file.</entry></row>
 </tbody>
 </tgroup>

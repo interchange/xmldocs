@@ -6,7 +6,7 @@ __NAME__ see also
 SOAP, SOAP_Action
 __END__
 
-__NAME__ example: Allow actions only.
+__NAME__ example: Allow actions only
 <programlisting>
 SOAP_Control Action always
 SOAP_Control Tag never

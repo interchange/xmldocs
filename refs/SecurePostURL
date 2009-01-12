@@ -19,7 +19,7 @@ POST form submissions.
 </para><para>
 This allows an automatically different path for GET and POST
 requests, presuming you use the &tag-process; tag as 
-&glos-form; action target.
+form <literal>action=</literal> target.
 __END__
 
 

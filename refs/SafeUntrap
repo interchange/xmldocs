@@ -52,7 +52,7 @@ Adding <literal>:filesys_read</literal> to SafeUntrap solves this problem:
 SafeUntrap :filesys_read
 </programlisting>
 
-As said, see the 
+See the 
 <citerefentry><refentrytitle>Opcode</refentrytitle>
 <manvolnum>3perl</manvolnum></citerefentry> manual page for
 more information and the complete list of operation codes and groups.
