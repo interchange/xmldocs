@@ -4,10 +4,14 @@ __END__
 
 
 __NAME__ description
-The filter adds thousands separator (a comma "<literal>,</literal>", usually)
+The filter adds a thousands separator
 to a number, and trims decimal places to a specified maximum length.
 __END__
 
+__NAME__ notes
+The thousands separator is a comma ("<literal>,</literal>"), and does
+not honor &conf-Locale; <literal>mon_thousands_sep</literal>.
+__END__
 
 __NAME__ online: Filter example
 <programlisting>

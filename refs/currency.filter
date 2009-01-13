@@ -3,9 +3,24 @@ format number as currency, honoring default or specified locale
 __END__
 
 __NAME__ description
-The filter formats input number as a currency. The default locale is honored,
-but a specific locale can also be specified. &IC; currency-related options
-are honored too, of course.
+The filter formats input number as a currency. All currency-related options
+and default locale are honored, and a specific locale can also be set as well.
+__END__
+
+__NAME__ online: Displaying a value formatted as a currency
+<programlisting>
+[filter currency]40.2[/filter]
+</programlisting>
+__END__
+
+__NAME__ example: Displaying a value in specific locale formatted as a currency
+<programlisting>
+[filter currency.LOCALE_NAME]40.2[/filter]
+</programlisting>
+__END__
+
+__NAME__ missing
+Actual value that can be specified for LOCALE_NAME parameter
 __END__
 
 __NAME__ see also

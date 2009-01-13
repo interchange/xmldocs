@@ -19,14 +19,12 @@ __END__
 
 
 __NAME__ notes
-Although this filter looks almost exactly like the &tag-convert-date; tag, 
-there's one simple difference in the implementation which is interesting
-to mention. If you call the &tag-convert-date; tag with empty 
-(or invalid) time string, it will default to the current
-time; if you call this &filter-convert_date; filter with an empty time string,
-then the current time will <emphasis role='bold'>not</emphasis> be assumed
-(because &filter-convert_date; won't call &tag-convert-date; with no data)
-and empty string will stay an empty string.
+This filter looks almost exactly like the &tag-convert-date; tag, 
+but there's a simple difference in the implementation.
+&tag-convert-date; tag called with an empty
+or invalid time string it will default to the current
+time; this filter called with an empty or invalid time string
+will default to an empty value.
 __END__
 
 __NAME__ online: Filter example

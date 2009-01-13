@@ -10,7 +10,7 @@ __END__
 
 __NAME__ description
 The filter eliminates any non-alphanumeric characters
-(that is, anything that's not in <literal>a-zA-Z0-9</literal> range).
+(anything not in <literal>a-zA-Z0-9</literal> range).
 __END__
 
 
