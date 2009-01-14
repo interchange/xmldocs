@@ -27,6 +27,8 @@ __END__
 
 
 __NAME__ notes
+This filter is considered deprecated, and is replaced by &filter-datetime2epoch;.
+</para><para>
 For more information on &PERL; Regular Expressions, pattern matching and
 character classes, see
 <citerefentry><refentrytitle>perlre</refentrytitle><manvolnum>1</manvolnum></citerefentry>.

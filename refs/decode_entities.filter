@@ -23,7 +23,7 @@ __END__
 
 __NAME__ online: Filter example
 <programlisting>
-[filter decode_entities]One &amp; Two &amp; Three[filter]
+[filter decode_entities]One &amp; Two &amp; Three[/filter]
 </programlisting>
 __END__
 

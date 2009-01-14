@@ -1,0 +1,22 @@
+__NAME__ purpose
+string is a valid ISBN-10/ISBN-13 code
+__END__
+
+__NAME__ see also
+__END__
+
+
+__NAME__ description
+Verification of the form field value succeeds if
+the passed value is a valid &glos-ISBN;-10/ISBN-13 code.
+__END__
+
+__NAME__ notes
+__END__
+
+__NAME__ example: Verifying ISBN code
+<programlisting>
+FORM_FIELD_NAME=__FILENAME__ "Not a valid ISBN code"
+</programlisting>
+__END__
+

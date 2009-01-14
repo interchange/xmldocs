@@ -24,6 +24,21 @@ to a temporary file name.
 If &IC; can found a variant of <command>gpg</command>/<command>pgp</command>
 on your system, it is the default. Setting of <literal>none</literal> disables
 encryption.
+</para><para>
+Specifying command line options for the encryption program isn't required,
+as &IC; automatically adds the following options, depending on the program
+recognized:
+<itemizedlist>
+  <listitem><para>
+    <literal>gpg --batch --always-trust -e -a -r <replaceable>KEY</replaceable></literal>
+  </para></listitem>
+  <listitem><para>
+    <literal>pgpe -fat -r <replaceable>KEY</replaceable></literal>
+  </para></listitem>
+  <listitem><para>
+    <literal>pgp -fat - <replaceable>KEY</replaceable></literal>
+  </para></listitem>
+</itemizedlist>
 __END__
 
 
@@ -54,7 +69,7 @@ __END__
 
 __NAME__ example: Specifying EncryptProgram with full path and arguments
 <programlisting>
-EncryptProgram /usr/local/bin/gpg -feat orders@&def-domain;
+EncryptProgram /usr/local/bin/gpg --batch --always-trust -e -a -r orders@&def-domain;
 </programlisting>
 __END__
 
@@ -66,6 +81,7 @@ __END__
 
 __NAME__ missing
 PORT_OLD
+Will autoadding of options in Vend::Order::pgp_encrypt properly honor any manually set options?
 __END__
 
 

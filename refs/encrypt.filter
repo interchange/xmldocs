@@ -4,6 +4,23 @@ __END__
 
 __NAME__ description
 The filter PGP-encrypts the provided input.
+</para><para>
+It accepts two optional arguments, encryption key and encryption program.
+</para><para>
+Specifying command line options for the encryption program isn't possible, but
+it isn't needed as &IC; automatically adds the following options, depending on
+the program recognized:
+<itemizedlist>
+	<listitem><para>
+		<literal>gpg --batch --always-trust -e -a -r <replaceable>KEY</replaceable></literal>
+	</para></listitem>
+	<listitem><para>
+		<literal>pgpe -fat -r <replaceable>KEY</replaceable></literal>
+	</para></listitem>
+	<listitem><para>
+		<literal>pgp -fat - <replaceable>KEY</replaceable></literal>
+	</para></listitem>
+</itemizedlist>
 __END__
 
 
@@ -12,10 +29,15 @@ PGP, EncryptProgram
 __END__
 
 
-__NAME__ online: Filter example
+__NAME__ online: Filter example using specific key ID
 <programlisting>
-[filter encrypt.KEY]Secret phrase or a credit card number[filter]
+[filter encrypt.KEY]Secret phrase or a credit card number[/filter]
 </programlisting>
 __END__
 
-TODO Standalone example
+__NAME__ online: Filter example using specific key ID and encrypt program
+<programlisting>
+[filter encrypt.KEY./usr/local/bin/gpg]Secret phrase or a credit card number[/filter]
+</programlisting>
+__END__
+

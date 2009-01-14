@@ -1,10 +1,10 @@
 __NAME__ purpose
-simply return integer value of the input
+return integer value of the input
 __END__
 
 
 __NAME__ description
-The filter simply returns integer value of the input
+The filter returns integer value of the inputr.
 __END__
 
 
@@ -17,13 +17,13 @@ __END__
 
 __NAME__ online: Filter example
 <programlisting>
-[filter integer]12.4[filter] 
+[filter integer]12.4[/filter] 
 </programlisting>
 __END__
 
 __NAME__ online: Erase whitespace, filter out non-digits, and return integer part of the number
 <programlisting>
-The whole is:  [filter no_white digits_dot integer]Stock 904.82[filter] 
+The whole is:  [filter op="no_white digits_dot integer"]Stock 904.82[/filter] 
 </programlisting>
 __END__
 

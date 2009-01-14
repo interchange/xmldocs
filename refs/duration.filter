@@ -25,9 +25,8 @@ __END__
 
 __NAME__ online: Obtaining an end date string
 The following example sets start date to Feb 12, 2005 (at 8:00 am),
-and the duration to 12 hours. Filter output should return again, Feb 12, 2005,
-but with the time set to 8:00 pm. So exactly, it should return 
-<literal>200502122000</literal>.
+and the duration to 12 hours.
+
 <programlisting>
 [cgi name=start_date set=200502120800 hide=1]
 [cgi name=length     set="12 hours"   hide=1]

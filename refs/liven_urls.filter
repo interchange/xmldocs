@@ -23,7 +23,7 @@ character classes, see
 </para><para>
 The matching expressions were generated with the help of
 Abigail's
-<ulink url="http://ucan.foad.org/~abigail/Perl/url2.html">Regex for URLs</ulink>.
+<ulink url="http://ucan.foad.org/~abigail/Perl/url2.html">Regex for URLs</ulink> (link appears broken, and no replacement found).
 </para><para>
 To save on processing time, only the most common protocols 
 (http/https, ftp and mailto) are actually enabled in the filter.
@@ -39,7 +39,7 @@ __NAME__ online: Filter example
 Here's an incomplete collection of URLs that the filter can recognize.
 <programlisting><![CDATA[
 [filter liven_urls]
-http://www.acl.lanl.gov/URI/archive/uri-archive.index.html
+http://www.clusty.com/
 ftp://@host.com/
 ftp://host.com/
 ftp://foo:@host.com/

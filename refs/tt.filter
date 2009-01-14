@@ -13,7 +13,7 @@ __NAME__ online: Filter example
 <programlisting><![CDATA[
 R. J. Zavada's <a href="http://www.jfk-info.com/zreport.htm">report</a>:<br/>
 [filter tt]Zapruder, eight millimeter, 8mm, cage print, B&H Model J Printer,<br/>
-B&H 414PD Camera, NARA, ARRB[filter] 
+B&H 414PD Camera, NARA, ARRB[/filter] 
 ]]></programlisting>
 __END__
 
