@@ -12,7 +12,7 @@ The filter encloses input data in &glos-HTML; &lt;small&gt; tag.
 __END__
 
 
-__NAME__ online: Filter example
+__NAME__ example: Filter example
 <programlisting>
 You can see that "[filter small] This text is smaller than usual. [/filter]"
 </programlisting>

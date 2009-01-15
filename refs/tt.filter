@@ -1,10 +1,10 @@
 __NAME__ purpose
-simply enclose input in HTML &lt;tt&gt; (typewriter) tag
+enclose input in HTML &lt;tt&gt; (typewriter) tag
 __END__
 
 
 __NAME__ description
-The filter simply encloses input in &glos-HTML; &lt;tt&gt; (typewriter)
+The filter encloses input in &glos-HTML; &lt;tt&gt; (typewriter)
 tag.
 __END__
 

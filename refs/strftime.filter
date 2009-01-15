@@ -2,7 +2,6 @@ __NAME__ purpose
 transform UNIX time (number of seconds) to a date/time string, according to specified format
 __END__
 
-
 __NAME__ see also
 time
 __END__
@@ -18,8 +17,6 @@ such as <literal>Fri Dec 16 15:04:33 2005</literal>.
 __END__
 
 
-__NAME__ online: Filter example
-<programlisting>
-</programlisting>
+__NAME__ missing
+Why IC goes nuts when I run an example for this filter?
 __END__
-TODO EXAMPLE! Why IC goes nuts when I run an example?
