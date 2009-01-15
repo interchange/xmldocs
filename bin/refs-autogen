@@ -1375,8 +1375,7 @@ sub update_field {
 		#	# Let's see if we'll get away this easy
 			$code =~ s/^\s*//s;
 			$code =~ s/\s*$//s;
-			$content .= qq{
-<phrase condition='online'><emphasis role='bold'>Example in action:</emphasis></phrase><programlisting><textobject><phrase condition='online'>[/restrict]$code\[restrict log='none']</phrase></textobject></programlisting>
+			$content .= qq{<phrase condition='online'>[/restrict]<emphasis role='bold'>Example in action:</emphasis></phrase><programlisting><textobject><phrase condition='online'>$code\[restrict log='none']</phrase></textobject></programlisting>
 };
 
 		# And rewrite section to example:

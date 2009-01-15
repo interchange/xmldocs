@@ -12,8 +12,7 @@ __NAME__ description
 The filter returns "<literal>f</literal>" (false) if the input is
 undefined, <literal>0</literal>, <literal>f</literal> or 
 <literal>false</literal> (in a case-insensitive manner).
-If the said are not met, the filter returns "<literal>t</literal>"
-(true).
+Otherwise, it returns "<literal>t</literal>" (true).
 __END__
 
 

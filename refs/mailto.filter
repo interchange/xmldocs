@@ -15,8 +15,7 @@ __END__
 
 __NAME__ online: Filter example
 <programlisting>
-Mail [filter mailto]docelic@icdevgroup.org[/filter] with comments or
-suggestions.
+Mail [filter mailto]someone@&def-domain;[/filter].
 </programlisting>
 __END__
 

@@ -7,6 +7,10 @@ The filter takes a filename as input, determines file extension and
 returns the appropriate &glos-MIME; type for it.
 __END__
 
+__NAME__ see also
+MimeType
+__END__
+
 __NAME__ online: Filter example
 <programlisting>
 [filter mime_type]image.jpg[/filter]
