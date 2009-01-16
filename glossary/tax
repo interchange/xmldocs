@@ -183,7 +183,7 @@ are applied:
 	in the <database>country</database> database is done; it's something along
 	the lines of 
 <programlisting>
-select tax from state where country = [value country] and state = [value state]
+select tax from state where country = '[value country]' and state = '[value state]'
 </programlisting>
 	The value is then applied as explained in the following steps
 	</para></listitem>
