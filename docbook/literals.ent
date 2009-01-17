@@ -474,6 +474,506 @@ values above are not properly aligned. This is the nature of
   <entry>Honor &glos-locale;s?</entry>
 </row>
 ">
+<!ENTITY TAG_SUB_DISPLAY "
+<row>
+
+	<entry>
+	attribute
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	Value of <literal>name=</literal>
+	</entry>
+	<entry>
+	<!-- DSC -->
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	default
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	override
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	pre_filter
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	display_filter
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	item
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	item
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	prepend
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	append
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	delimiter
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	rows
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	cols
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	js_check
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	js
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	lookup_query
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	lookup_exclude
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	lookup_merge
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	lookup
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	label_joiner
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<literal>-</literal>
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	sort
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<literal>-</literal>
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	options
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<literal>-</literal>
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	price_data
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	value
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	cgi_default
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	values_default
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	blank_default
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	price_data
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	class
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	extra
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	Value of <literal>class=</literal>
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	variant
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	</entry>
+</row> 
+<row>
+	<entry>
+	check
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	</entry>
+</row> 
+">
 
 <!ENTITY SYNOPSIS_NOYES "
 <group choice='plain'>
@@ -518,11 +1018,8 @@ for more information.</para>">
 	build warnings -->
 
 <!ENTITY conf-GPG_PATH "<literal>GPG_PATH</literal>">
-<!ENTITY filter-strip "<filter>strip</filter>">
-<!ENTITY glos-captcha "<literal>captcha</literal>">
 <!ENTITY glos-UserTag "<literal>UserTag</literal>">
 <!ENTITY howto-dump-vend-structure "<literal>dump-vend-structure</literal>">
-<!ENTITY pragma-filter_sql_no_backslash "<literal>filter_sql_no_backslash</literal>">
 <!ENTITY tag-ascii-graph "<literal>ascii-graph</literal>">
 <!ENTITY tag-benchmark "<literal>benchmark</literal>">
 <!ENTITY tag-cache "<literal>cache</literal>">
