@@ -151,10 +151,28 @@
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	<literal>0</literal>
 	</entry>
 	<entry>
-	<!-- DSC -->
+	whether to use &conf-SecureURL; or &conf-VendURL;
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	match_security
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	<literal>0</literal>
+	</entry>
+	<entry>
 	</entry>
 
 </row> 
