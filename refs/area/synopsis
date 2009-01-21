@@ -188,10 +188,10 @@
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<!-- DFL -->
+	0
 	</entry>
 	<entry>
-	<!-- DSC -->
+	suppress page counter (<literal>mv_pc</literal>) if set
 	</entry>
 
 </row> 
