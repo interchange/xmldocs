@@ -16,9 +16,9 @@ saves processor power to assign a scalar instead of looking it up every time.
 </note>
 
 <para>
-To define a pragma catalog-wide, use the <option>Pragma</option> directive:
+To define a pragma catalog-wide, use the <option>Pragma</option> directive in &ccf;:
 <programlisting>
-Pragma <replaceable>NAME</replaceable> <group choice='opt'><arg choice='plain'>0</arg><arg choice='plain'>1</arg><arg choice='plain'>=<replaceable>pragma-specific value</replaceable></arg></group>
+Pragma <replaceable>NAME</replaceable><arg choice='opt'>=<replaceable>value</replaceable></arg>
 </programlisting>
 </para><para>
 To define a pragma for a particular page, use the &tag-pragma;

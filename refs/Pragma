@@ -5,12 +5,13 @@ __END__
 
 __NAME__ synopsis
 	<arg choice='plain'><replaceable>pragma_name</replaceable></arg>
-	<arg choice='opt'><replaceable>value</replaceable></arg>
+	<arg choice='opt'>=<replaceable>value</replaceable></arg>
 __END__
 
 
 __NAME__ description
-Sets the default value of an Interchange &glos-pragma;.
+The directive enables specified Interchange &glos-pragma; by
+setting it to "<literal>1</literal>" or a user-supplied value.
 __END__
 
 __NAME__ notes
