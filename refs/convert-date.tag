@@ -104,6 +104,25 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
+<row>
+
+	<entry>
+	empty
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	Current date
+	</entry>
+	<entry>
+	Text to display if the date value to convert is empty
+	</entry>
+
+</row> 
 &TAG_CONTAINER;
 __END__
 
