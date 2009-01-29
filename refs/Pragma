@@ -19,21 +19,21 @@ Please see the &glos-pragma; glossary entry for complete information.
 __END__
 
 
-__NAME__ example: Enabling 'dynamic_variables' pragma (variant 1)
+__NAME__ example: Enabling 'dynamic_variables' pragma
 <programlisting>
 Pragma dynamic_variables
 </programlisting>
 __END__
 
-__NAME__ example: Enabling 'dynamic_variables' pragma (variant 2)
+__NAME__ example: Disabling 'dynamic_variables' pragma
 <programlisting>
-Pragma dynamic_variables 1
+Pragma dynamic_variables=0
 </programlisting>
 __END__
 
-__NAME__ example: Disabling 'dynamic_variables' pragma
+__NAME__ example: Setting 'init_page' pragma to a specific value
 <programlisting>
-Pragma dynamic_variables 0
+Pragma init_page=myInitRoutine
 </programlisting>
 __END__
 
