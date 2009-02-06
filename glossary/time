@@ -105,6 +105,12 @@ Sun</entry>
 <entry>57</entry>
 </row>
 <row>
+<entry><literal>%s</literal></entry>
+<entry>seconds since <olink targetdoc='glossary' targetptr='epoch'>epoch</olink></entry>
+<entry></entry>
+<entry>1233908038</entry>
+</row>
+<row>
 <entry><literal>%S</literal></entry>
 <entry>second</entry>
 <entry>00-59</entry>
