@@ -2,6 +2,10 @@ __NAME__ purpose
 specify default settings for Database directives
 __END__
 
+__NAME__ synopsis
+<arg rep='repeat' choice='plain'><replaceable>key</replaceable> <replaceable>value</replaceable></arg>
+__END__
+
 __NAME__ see also
 Database, Replace
 __END__
@@ -75,6 +79,16 @@ __NAME__ example: Specifying WRITE_CONTROL and WRITE_TAGGED defaults
 DatabaseDefault      WRITE_CONTROL   1
 DatabaseDefault      WRITE_TAGGED    1
 </programlisting>
+__END__
+
+__NAME__ example: Specifying defaults in here-document style
+<programlisting><![CDATA[
+DatabaseDefault <<EOD
+  WRITE_CONTROL   1
+  WRITE_TAGGED    1
+  HIDE_AUTO_FILES 1
+EOD
+]]></programlisting>
 __END__
 
 __NAME__ example: Clearing default values
