@@ -120,25 +120,7 @@
 	</entry>
 
 </row> 
-<row>
 
-	<entry>
-	no_session
-	</entry>
-	<entry>
-	<!-- POS -->
-	</entry>
-	<entry>
-	<!-- REQ -->
-	</entry>
-	<entry>
-	<!-- DFL -->
-	</entry>
-	<entry>
-	<!-- DSC -->
-	</entry>
-
-</row> 
 <row>
 
 	<entry>
@@ -151,7 +133,7 @@
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<literal>0</literal>
+	0
 	</entry>
 	<entry>
 	whether to use &conf-SecureURL; or &conf-VendURL;
@@ -170,9 +152,28 @@
 	<!-- REQ -->
 	</entry>
 	<entry>
-	<literal>0</literal>
+	0
 	</entry>
 	<entry>
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	no_session_id
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	0
+	</entry>
+	<entry>
+	suppress session identifier (<literal>id</literal>) if set
 	</entry>
 
 </row> 
@@ -192,6 +193,25 @@
 	</entry>
 	<entry>
 	suppress page counter (<literal>mv_pc</literal>) if set
+	</entry>
+
+</row> 
+<row>
+
+	<entry>
+	no_session
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	0
+	</entry>
+	<entry>
+	same as <literal>no_session_id</literal> and <literal>no_count</literal> combined
 	</entry>
 
 </row> 
