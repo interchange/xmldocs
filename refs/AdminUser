@@ -4,7 +4,7 @@ __END__
 
 __NAME__ synopsis
 <arg choice='plain' rep='repeat'>
-<replaceable>username</replaceable>:<replaceable>password</replaceable>
+<replaceable>username</replaceable>:<replaceable>crypted_password</replaceable>
 </arg>
 __END__
 
@@ -12,8 +12,17 @@ __NAME__ description
 Username and password pairs which are given administrator
 privileges to all catalogs.
 </para><para>
+Passwords are encrypted using standard Unix &glos-crypt;.
+</para><para>
 This functionality is standalone &mdash;
 you do not need to have the users present in the &glos-UserDB; or the
 access &glos-database;.
+__END__
+
+__NAME__ example: Setting __FILENAME__
+An example with username "thunder" and password "rolls":
+<programlisting>
+AdminUser thunder:H0NJOAxjci1Lw
+</programlisting>
 __END__
 

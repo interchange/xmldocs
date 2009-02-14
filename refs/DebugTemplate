@@ -60,3 +60,9 @@ __END__
 __NAME__ notes
 __END__
 
+__NAME__ example: Setting __FILENAME__
+<programlisting>
+DebugTemplate %c {CALLER0} {MESSAGE} {PAGE} {TAG}
+</programlisting>
+__END__
+

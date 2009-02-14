@@ -26,6 +26,10 @@ LocaleDatabase locale
 </programlisting>
 __END__
 
-__NAME__ missing
-example of LocaleDatabase structure (what fields etc.?)
+__NAME__ example: LocaleDatabase table structure
+<programlisting>
+code	en_US	en_GB	fr_FR	de_DE	nl_NL
+color	color	colour	couleur	Farbe	kleur
+</programlisting>
 __END__
+
