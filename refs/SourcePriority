@@ -1,0 +1,102 @@
+__NAME__ purpose
+specify list of CGI variables to check for source (affiliate) name
+__END__
+
+__NAME__ see also
+__END__
+
+
+__NAME__ synopsis
+<arg choice='plain' rep='repeat'><replaceable>CGI_variable</replaceable></arg>
+__END__
+
+
+__NAME__ description
+The directive specifies a prioritized list of &glos-CGI; variables to check
+when looking for the source (affiliate) name. The first name found is used.
+</para><para>
+The directive also accepts the following special values:
+
+<itemizedlist>
+
+<listitem><para>
+<literal>mv_pc</literal> &mdash; try reading affiliate name from the existing
+<mv>mv_pc</mv>
+variable, but don't interfere with <mv>mv_pc</mv>'s special values
+(value "<literal>RESET</literal>" or values containing only digits).
+</para></listitem>
+
+<listitem><para>
+<literal>cookie-<replaceable>NAME</replaceable></literal> &mdash; check the
+cookie with label <replaceable>NAME</replaceable>.
+</para></listitem>
+
+<listitem><para>
+<literal>session</literal> &mdash; stop processing if a &glos-session; for
+a visitor already exists.
+This setting is useful for sending affiliate traffic to other sites but
+preventing them from getting credit for sales made by customers following
+their banner back to your site.
+</para></listitem>
+
+<listitem><para>
+<literal>session-<replaceable>NAME</replaceable></literal> &mdash; stop
+processing if 
+<replaceable>NAME</replaceable> session variable is set.
+</para></listitem>
+
+</itemizedlist>
+
+__END__
+
+__NAME__ notes
+__END__
+
+
+__NAME__ example: Read affiliate name from CGI variable and cookie
+<programlisting>
+__FILENAME__ mv_source cookie-MV_SOURCE
+</programlisting>
+__END__
+
+__NAME__ example: Read affiliate name from "mv_pc", CGI variable and cookie
+<programlisting>
+__FILENAME__ mv_pc mv_source cookie-MV_SOURCE
+</programlisting>
+__END__
+
+__NAME__ example: Read affiliate name from CGI variable "affid"
+<programlisting>
+__FILENAME__ affid
+</programlisting>
+__END__
+
+__NAME__ example: Ignore source name for visitors returning back to your site
+Use "<literal>session</literal>" to prevent affiliate sites from getting
+credit for sales when a customer follows a banner back to your site:
+<programlisting>
+__FILENAME__ session mv_pc mv_source
+</programlisting>
+__END__
+
+__NAME__ example: Special treatment for affiliates using variable "specialsource"
+Make affiliates who use CGI variable <literal>specialsource</literal>
+instead of <literal>mv_source</literal> get special treatment by
+overriding the "<literal>sessions</literal>" check:
+<programlisting>
+__FILENAME__ specialsource session mv_pc mv_source
+</programlisting>
+__END__
+
+__NAME__ example: Setting __FILENAME__
+Allow affiliates to get credit from redirecting customers back to
+your site (there is already a &glos-session;), but only if no other
+affiliate is already set:
+<programlisting>
+__FILENAME__ session-source mv_pc mv_source
+</programlisting>
+__END__
+
+__NAME__ author
+&pajamian;
+__END__
