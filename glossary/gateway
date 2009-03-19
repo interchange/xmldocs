@@ -52,7 +52,7 @@ If we are using only one gateway in a catalog, setting up
 <row>
 <entry><literal>&var-MV_PAYMENT_CURRENCY;</literal></entry>
 <entry>currency</entry>
-<entry></entry>
+<entry>three-letter currency code according to <ulink url="http://en.wikipedia.org/wiki/ISO_4217">ISO 4217</ulink></entry>
 </row>
 <row>
 <entry><literal>MV_PAYMENT_TEST</literal></entry>
