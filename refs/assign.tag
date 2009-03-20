@@ -34,8 +34,8 @@ __NAME__ synopsis
 	None
 	</entry>
 	<entry>
-	Override for &tag-shipping;. Applies only if 
-	<mv>mv_shipmode</mv> is set to <literal>shipping</literal>.
+	Override for &tag-shipping;. Applies to <tag>total-cost</tag>
+	only if <mv>mv_shipmode</mv> is set.
 	</entry>
 </row> 
 <row>
@@ -52,8 +52,8 @@ __NAME__ synopsis
 	None
 	</entry>
 	<entry>
-	Override for &tag-handling;. Applies only if
-	<mv>mv_handling</mv> is set to <literal>handling</literal>.
+	Override for &tag-handling;. Applies to <tag>total-cost</tag> only if
+	<mv>mv_handling</mv> is set.
 	</entry>
 </row> 
 <row>
