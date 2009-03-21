@@ -62,6 +62,12 @@ The tag displays the total monetary value of the user's electronic
 pricing, &glos-discount;s, handling, &glos-shipping; and &glos-tax;ing.
 __END__
 
+__NAME__ notes
+Handling and shipping costs are not applied to the total cost 
+if the corresponding values (<mv>mv_shipmode</mv> resp. <mv>mv_handling</mv>) 
+are empty. This can happen if you use <tag>assign</tag> to set the
+costs and there are no defaults for the values.
+__END__
 
 __NAME__ example: Basic example
 <programlisting>
