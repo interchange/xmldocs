@@ -1,0 +1,64 @@
+__NAME__ purpose
+specify the number of levels to hash session directories
+__END__
+
+__NAME__ synopsis
+<arg choice='plain'><replaceable>integer</replaceable></arg>
+__END__
+
+
+__NAME__ see also
+SessionHashLength
+__END__
+
+
+__NAME__ description
+This directive combiles with SessionHashLength to configure the number of levels and hash length for
+the directory structure of file-based sessions.
+
+Default is 1.
+
+This solves the problem of session IDs passed from CGI::Session or other
+modules that use a quasi-sequential session ID. You end up placing all
+sessions in the S/2 directory for a long time, followed by the S/3 directory,
+etc. A setting of:
+
+SessionHashLength   4
+SessionHashLevels   1
+
+would break sessions up into separate directories instead of putting all
+sessions in a huge directory.
+__END__
+
+__NAME__ notes
+The default value of 2, combined with SessionHashLength of 1, creates a 
+directory structure like:
+
+<programlisting>
+	4
+	 +----w
+	6
+	 +----r
+	D
+	 +----9
+	 +----R
+	r
+	 +----z
+	s
+	 +----s
+	X
+	 +----s
+	z
+	 +----3
+</programlisting>
+
+__END__
+
+__NAME__ example: Setting SessionExpire
+Put the following in &ccf;:
+<programlisting>
+SessionHashLevels  1
+SessionHashLength  4
+</programlisting>
+__END__
+
