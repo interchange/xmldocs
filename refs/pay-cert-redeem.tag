@@ -115,3 +115,7 @@ __NAME__ synopsis
 </row> 
 &TAG_NON_CONTAINER;
 __END__
+
+__NAME__ see also
+pay-cert
+__END__
