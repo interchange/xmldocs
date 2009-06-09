@@ -1,3 +1,7 @@
+__NAME__ purpose
+retrieve file information
+__END__
+
 __NAME__ synopsis 
 <row>
 
@@ -109,7 +113,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	return time of last modification in seconds since &glos-epoch;
 	</entry>
 
 </row> 
