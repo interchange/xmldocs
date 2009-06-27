@@ -9,6 +9,9 @@ __END__
 __NAME__ description
 Verification of the form field value succeeds if
 the passed value is a valid &glos-ISBN;-10/ISBN-13 code.
+</para>
+<para>
+The check can be advised to only accept ISBN-10 resp. ISBN-13 code.
 __END__
 
 __NAME__ notes
@@ -20,3 +23,14 @@ FORM_FIELD_NAME=__FILENAME__ "Not a valid ISBN code"
 </programlisting>
 __END__
 
+__NAME__ example: Verifying ISBN-13 code
+<programlisting>
+FORM_FIELD_NAME=__FILENAME__ 13 "Not a valid ISBN-13 code"
+</programlisting>
+__END__
+
+__NAME__ example: Verifying ISBN-10 code
+<programlisting>
+FORM_FIELD_NAME=__FILENAME__ 10 "Not a valid ISBN-10 code"
+</programlisting>
+__END__
