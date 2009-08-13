@@ -26,8 +26,8 @@ all files matching
 <literal>jobs/</literal><replaceable>NAME</replaceable><literal>/*.job</literal>
 for the job named <replaceable>NAME</replaceable>.
 <programlisting>
-Job base_directory jobs
-Job suffix .job
+Jobs base_directory jobs
+Jobs suffix .job
 </programlisting>
 </para>
 </section>
@@ -44,8 +44,8 @@ The remaining output is optionally written to the job logfile and/or
 emailed as specified by the <literal>log</literal> and <literal>email</literal>
 keys of the &conf-Jobs; directive.
 <programlisting>
-Job email racke@linuxia.de
-Job log logs/job
+Jobs email racke@linuxia.de
+Jobs log logs/job
 </programlisting>
 </para>
 </section>
@@ -57,7 +57,7 @@ Tracking jobs into a database table can be enabled with the
 <literal>trackdb</literal> key of the &conf-Jobs; directive.
 </para>
 <programlisting>
-Job trackdb jobs
+Jobs trackdb jobs
 </programlisting>
 <para>
 Required fields for this table are <literal>code</literal>,
