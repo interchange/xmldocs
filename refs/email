@@ -55,6 +55,14 @@ __NAME__ synopsis
 </row>
 <row>
 	<entry>
+		<arg choice='plain'>bcc</arg>
+	</entry>
+	<entry></entry><entry></entry>
+	<entry></entry>
+	<entry>E-mail address for blind carbon copy.</entry>
+</row>
+<row>
+	<entry>
 		<arg choice='plain'>html</arg>
 	</entry>
 	<entry></entry>
