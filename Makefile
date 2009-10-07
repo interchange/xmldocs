@@ -92,15 +92,18 @@ OUTPUT/files: $(shell find files) bin/dbgen
 	rm -rf $@/
 	cp -a files $O/
 	rm -rf `find $@ -name CVS`
+	rm -rf `find $@ -name .git`
 	cp bin/dbgen $O/files/
 	cd files; for p in *; do                                     \
 	  if test "$$p" != "CVS"; then                               \
-	    if test -d "$$p"; then                                   \
-	      cp -a $$p ../$O/files/;                                \
-	      tar --exclude=CVS -cf ../$O/files/$$p.tar $$p;         \
-	      tar --exclude=CVS -zcf ../$O/files/$$p.tar.gz $$p;     \
-	      tar --exclude=CVS -jcf ../$O/files/$$p.tar.bz2 $$p     \
-	    ; fi                                                     \
+			if test "$$p" != ".git"; then                               \
+				if test -d "$$p"; then                                   \
+					cp -a $$p ../$O/files/;                                \
+					tar --exclude=CVS --exclude=.git -cf ../$O/files/$$p.tar $$p;         \
+					tar --exclude=CVS --exclude=.git -zcf ../$O/files/$$p.tar.gz $$p;     \
+					tar --exclude=CVS --exclude=.git -jcf ../$O/files/$$p.tar.bz2 $$p     \
+				; fi                                                     \
+			; fi                                                       \
 	  ; fi                                                       \
 	; done
 OUTPUT/images: $(shell find images)
@@ -108,6 +111,7 @@ OUTPUT/images: $(shell find images)
 	rm -rf $@/
 	cp -a images $O/
 	rm -rf `find $@ -name CVS`
+	rm -rf `find $@ -name .git`
 OUTPUT/xmldocs.css: docbook/xmldocs.css
 	echo "C     $@"
 	cp $< $@

@@ -2,8 +2,8 @@
 
 # Manages your sources/ subdirectory inside xmldocs.
 # Automatically check-outs or updates source trees.
-# Run as: bin/coup REV, like bin/coup 5.2.0 or bin/coup cvs-head
-# bin/coup -u REV will run cvs update
+# Run as: bin/coup REV, like bin/coup 5.2.0 or bin/coup git-head
+# bin/coup -u REV will run git update
 
 use warnings;
 use strict;
@@ -21,27 +21,31 @@ my $rev = shift;
 $rev or die "Usage: $0 <IC version>\n";
 
 my $rev_no_minor;
-my $cvs_r = "";
+my $git_r = "";
 
-if ( $rev =~ /^\d/ ) { # Everything except 'cvs-head'
+if ( $rev =~ /^\d/ ) { # Everything except 'git-head'
 	( $rev_no_minor = reverse $rev ) =~ s/.+?\.//;
 	$rev_no_minor = reverse $rev_no_minor;
-	( $cvs_r = $rev_no_minor ) =~ s/\./_/g;
-	$cvs_r = "-r STABLE_$cvs_r-branch";
+	( $git_r = $rev_no_minor ) =~ s/\./_/g;
+	$git_r = "STABLE_$git_r-branch";
 }
 
 if ( -d ($_ = "sources/$rev") ) { # Source is here, only update
 	if ( $update ) {
 		chdir $_;
 		print STDERR "CUP   $rev\n";
-		DEBUG and print "DBG $ENV{PWD}: cvs -z9 update -d >& ../../tmp/cup.$rev\n";
-		system("cvs -z9 update -d >& ../../tmp/cup.$rev");
+		DEBUG and print "DBG $ENV{PWD}: git pull >& ../../tmp/cup.$rev\n";
+		system("git pull >& ../../tmp/cup.$rev");
 	}
 }
 else { # Need to perform checkout
-	chdir "sources";
+	chdir "sources" or die "Can't chdir sources ($!)";
 	print STDERR "CO    $rev\n";
-	DEBUG and print "DBG $ENV{PWD}: cvs -z9 -d:pserver:cvs\@cvs.icdevgroup.org:/var/cvs checkout -d $rev $cvs_r interchange > ../tmp/co.$rev 2>&1";
-	system("cvs -z9 -d:pserver:cvs\@cvs.icdevgroup.org:/var/cvs checkout -d $rev $cvs_r interchange > ../tmp/co.$rev 2>&1");
+	DEBUG and print "DBG $ENV{PWD}: git clone git://git.icdevgroup.org/interchange $rev > ../tmp/co.$rev 2>&1";
+	system("git clone git://git.icdevgroup.org/interchange $rev > ../tmp/co.$rev 2>&1");
+
+	chdir "$rev" or die "Can't chdir $rev ($!)";
+	DEBUG and print "DBG $ENV{PWD}: git checkout --track -b '$git_r' > ../../tmp/co.$rev 2>&1";
+	system("git checkout --track -b '$git_r'");
 }
 
