@@ -78,7 +78,15 @@ must be available:
   - docbook-xsl
   - xsltproc
   - tetex-extra (and actually, packages it depends on)
-  - XML::Twig Perl module (if you want to call bin/refs-autogen --validate)
+
+Optional Perl modules:
+
+  - XML::Twig
+
+(Install the Twig module if if you want to syntax-check your additions by
+calling i.e. "bin/refs-autogen --validate git-head").
+
+RedHat setups
 
 If running on Red Hat and not Debian GNU, apply this patch:
 http://icdevgroup.org/~docelic/xmldocs-rh.diff . It allows you to get
