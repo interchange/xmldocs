@@ -7,7 +7,7 @@
 <article id='wellwell'>
 
 <articleinfo>
-	<title>Interchange Guides: the "Wellwell" Catalog Tutorial</title>
+	<title>Interchange Guides: the "Wellwell" Tutorial</title>
 	<titleabbrev>wellwell</titleabbrev>
 
 	<copyright>
@@ -17,12 +17,12 @@
 
 	<authorgroup>
 		<author>
-			<firstname>Davor</firstname><surname>Ocelic</surname>
-			<email>docelic@spinlocksolutions.com</email>
-		</author>
-		<author>
 			<firstname>Stefan</firstname><surname>Hornburg</surname>
 			<email>racke@linuxia.de</email>
+		</author>
+		<author>
+			<firstname>Davor</firstname><surname>Ocelic</surname>
+			<email>docelic@spinlocksolutions.com</email>
 		</author>
 	</authorgroup>
 
@@ -42,45 +42,702 @@
 	</legalnotice>
 
 	<abstract>
-		<para>
-		This guide provides installation and usage instructions for the new Interchange catalog called "&WW;".
-		</para><para>
-		The &WW; catalog is intended to be used as a base for production websites in &IC;, and places emphasis on usefulness out of the box, clarity, modern HTML &amp; CSS, and ease of customization.
-		</para>
+	<para>
+	&WW; is a functional frame for building new &IC; catalogs.
+	</para>
+	<para>
+	Its main difference from previous template catalogs
+	(i.e. Foundation / Standard) is that it doesn't tend to be a demo,
+	but rather an officially-supported frame designed specifically for
+	new catalog deployments.
+	</para>
+	<para>
+	The purpose of this Guide is to explain the concepts and show basic
+	working examples that should help you understand the WellWell design
+	decisions. You will then be able to read, understand and modify WellWell
+	code as needed.
+	</para>
+	<para>
+	Some of the &WW; design goals are:
+	<itemizedlist>
+		<listitem><para>
+		No stone left unturned if it can be improved
+		</para></listitem>
+		<listitem><para>
+		KISS instead of convoluted ITL code in the Standard demo and its predecessors
+		</para></listitem>
+		<listitem><para>
+		Replace all of &tag-process; with &glos-ActionMap;s
+		</para></listitem>
+		<listitem><para>
+		Supersede Interchange's routes and profiles with a complete form framework
+		</para></listitem>
+		<listitem><para>
+		Keep core of WellWell small, use plugins for extended functionality
+		</para></listitem>
+		<listitem><para>
+		Deprecate bloated code and tags (i.e. &tag-button;, &tag-image;)
+		</para></listitem>
+		<listitem><para>
+		Usefulness and clarity out of the box
+		</para></listitem>
+		<listitem><para>
+		Modern HTML &amp; CSS
+		</para></listitem>
+		<listitem><para>
+		Ease of customization
+		</para></listitem>
+	</itemizedlist>
+	</para>
+	<caution>
+	We don't pay any heed to backward compatibility for Wellwell until
+	it is announced as stable and mature enough.
+	</caution>
 	</abstract>
 
 </articleinfo>
 
+<section>
+	<title>Pre-requisites</title>
+	<para>
+	Minimum versions: &IC; 5.7.1, Dispatch.pm 1.103, Order.pm 2.104.
+	</para>
+	<para>
+	You should have all this if you checkout Git head of the Interchange tree.
+	</para>
+</section>
+
 
 <section>
 	<title>Introduction</title>
+
 	<para>
+	By convention, WellWell pages use the suffix <literal>.itl</literal> to
+	indicate they
+	contain &glos-ITL; code. If a page with suffix <literal>.itl</literal>
+	is not found, Interchange will look for <literal>.html</literal>, but
+	you should not rely on this behavior.
 	</para>
+	<para>
+	The basis of all WellWell-enabled pages is the &tag-compose; tag.
+	Basically, it just elegantly loads the specified template and components,
+	and fits components' output into the appropriate slots within the template.
+	</para>
+	<para>
+	Page body can, but doesn't have to be present. For example, the Login
+	functionality is implemented completely within the Login component (including
+	the supporting text and error any reporting), so an ITL page
+	<literal>login.itl</literal> doesn't have anything to do but
+	call the component.
+	</para>
+	<para>
+	Components rely heavily on CSS and try to avoid any hard-coded HTML.
+	This allows you to re-use the same components (i.e. the Login component)
+	in multiple contexts (i.e. small, boxed display and whole-page display).
+	You only need to adjust the CSS, and options exist to auto-wrap the
+	components in appropriate CSS &lt;div&gt;s that you can immediately use
+	them as selectors in your CSS files.
+	</para>
+		
+	<para>
+	Here's an example of page <filename>index.itl</filename> that fits
+	two components into container named "RIGHT", and two components 
+	into container named "BODY". Also, options are passed to
+	two of the components, product_info and products_list:
+	</para>
+<programlisting>
+[compose
+  components.right="login create_account"
+  components.body="product_list product_info"
+  
+  attributes.product_info.sku="1"
+  attributes.product_list.category="2"
+]
+
+(Body text goes here, but none needed in this context.)
+
+[/compose]
+</programlisting>
+
+<para>
+&nbsp;
+</para>
+
 </section>
 
 <section>
 	<title>Templating system</title>
 	<para>
+	Templates are complete HTML files with no &glos-ITL; code.
 	</para>
+	<para>
+	They cannot contain ITL as they're not parsed for Interchange tags.
+	</para>
+	<para>
+	The HTML in the templates should be complete, that means including the 
+	whole page, from the opening &lt;html&gt; to closing &lt;/html&gt;.
+	</para>
+	<para>
+	The only and intended way to populate the templates with real data is
+	via placeholders. Placeholders are uppercase words in curly braces,
+	such as {LEFT}, {RIGHT} and {BODY}.
+	</para>
+	<para>
+	A very simple template saved in file <filename>templates/simple</filename>
+	could look like this:
+	</para>
+<programlisting><![CDATA[
+<html>
+
+  <head>
+  </head>
+  
+  <body>
+  {BODY}
+  </body>
+
+</html>
+]]></programlisting>
+
+<para>
+As the contained HTML is complete and the {PLACEHOLDER} marks
+do not interfere with HTML parsing, you can create or edit templates
+in graphical HTML editors.
+</para>
 </section>
 
 <section>
 	<title>Components</title>
 	<para>
+	Components are combined ITL/HTML/CSS blocks that produce certain output.
+	That output is then fitted into template placeholders. Note
+	that one placeholder can contain output of multiple components (including
+	the same component multiple times), and that this work of loading,
+	evaluating and fitting components into the template is carried out by
+	the &tag-compose; tag.
 	</para>
+	<para>
+	Here's an example of a component <literal>hello_world</literal> and
+	a page that uses it, based on the above template:
+	</para>
+	<para>
+	Component saved in file <filename>components/hello_world</filename>:
+	</para>
+<programlisting>
+Hello, World! The time is [time]
+</programlisting>
+	<para>
+	WellWell page saved in <filename>pages/test.itl</filename>:
+	</para>
+<programlisting>
+[compose
+  template=simple
+  components.body="hello_world"
+  skip_auto_components=1
+/]
+</programlisting>
+	<para>
+	Final HTML output:
+	</para>
+<programlisting><![CDATA[
+<html>
+
+  <head>
+  </head>
+  
+  <body>
+  Hello, World! The time is Wed Oct  7 12:12:25 2009.
+
+  </body>
+
+</html>
+]]></programlisting>
+<para>
+&nbsp;
+</para>
+
+<!-- 
+	XXX document local_body, COMPOSE_CONTAINER, container= -->
+
+	<section>
+		<title>Default components and attributes</title>
+		<para>
+		As said, it is possible to specify default components that will be
+		placed in containers, along with their corresponding options.
+		The definitions are passed via <varname>MV_COMPONENT_AUTO</varname>
+		and <varname>MV_ATTRIBUTE_AUTO</varname>. Example:
+		</para>
+<programlisting><![CDATA[
+Variable MV_COMPONENT_AUTO <<EOD
+  htmlhead:htmlhead
+  left:menu,categorynav
+  body:infobox
+EOD
+
+Variable MV_ATTRIBUTE_AUTO <<EOD
+  menu.name=main
+EOD
+]]></programlisting>
+
+	<para>
+	The default components are always inserted, because a manual setting of
+<code>components.<replaceable>PLACEHOLDER</replaceable>=...</code>
+within pages only appends the list.
+So to skip insertion of some of the default components, you can use
+&tag-compose; attribute <code>skip_auto_components=</code>. It can contain
+names of the components to skip, or "1" to skip all default components.
+	</para>
+	<para>
+	Many more options are supported &mdash; for a full reference, see tag
+	&tag-compose;.
+	</para>
+	</section>
+
 </section>
 
 <section>
-	<title>Plugins</title>
+	<title>Users, Roles and Permissions</title>
 	<para>
+	<emphasis role='bold'>Users</emphasis> are stored in the 
+	<database>users</database> table.
+	The non-modifiable primary key is <database class='field'>uid</database>,
+	quite like
+	an Unix user id, which is used to identify the user through the system.
+	Other settings like username and email can be changed by the user.
+	</para>
+	<para>
+	<emphasis role='bold'>Roles</emphasis> allow to group users and grant
+	them permissions. Users are allowed
+	to be in multiple roles.
+	Roles are stored in the <database>roles</database> table. The primary key
+	is <database class='field'>rid</database>, quite like
+	an Unix group id, with two default roles
+	(<literal>anonymous</literal> and <literal>authenticated</literal>).
+	</para>
+	<para>
+	The default user roles are:
+	</para>
+	<itemizedlist>
+		<listitem><para>
+		Anonymous user (rid 1): this role is used for users that don't have a user account or that are not authenticated
+		</para></listitem>
+		<listitem><para>
+		Authenticated user (rid 2): this role is automatically granted to all logged in users
+		</para></listitem>
+	</itemizedlist>
+	<para>
+	The relationship between users and roles is kept in the
+	<database>user_roles</database> table.
+	</para>
+	<para>
+	<emphasis role='bold'>Permissions</emphasis> can be assigned to a role or to an user. The tag to use in
+	checking the appropriate permissions is &tag-acl;.
+	</para>
+	<para>
+	The following example produces a link only if the current user
+	has the "<literal>create_content</literal>" permission:
+	</para>
+<programlisting><![CDATA[
+  [acl check create_content]
+	  <a href="[area new_content]">Create content</a>
+  [/acl]
+]]></programlisting>
+
+<para>
+&tag-acl; returns its body on success, or the permission value if body is
+	empty. Please note that <code>[acl check]</code> without a permission
+	is always successful.
+	<!-- XXX clarify? -->
+</para>
+
+	<section>
+		<title>Per-page permissions in [compose] calls</title>
+		<para>
+		Permissions can be checked for a complete page:
+		</para>
+<programlisting>
+[compose
+  acl.check="view_titles"
+  acl.bounce="index"
+
+  components.body="title_info"
+]
+</programlisting>
+<para>
+&nbsp;
+</para>
+<note>
+Forms created and submitted via &tag-form; bypass this permission
+check because they are evaluated earlier, during autoload routine.
+</note>
+	</section>
+
+	<section>
+		<title>Menu permissions</title>
+		<para>
+		It is possible to only show menu entries for which users have
+		corresponding permissions, using the field
+		<database class='field'>permission</database> in
+		the <database>menus</database> table.
+		</para>
+	</section>
+
+</section>
+
+
+<section>
+	<title>Forms</title>
+	<para>
+	Forms are displayed using the &tag-form; tag.
+	</para>
+	<para>
+	The recommended way to call them is within the &tag-compose; tag:
+	</para>
+<programlisting>
+[compose
+  components.body="product_info wishlist_add"
+  forms.wishlist_add.name="wishlist_add"
+/]
+</programlisting>
+<para>
+&nbsp;
+</para>
+
+
+	<section>
+		<title>Form parts</title>
+		<para>
+		Each form consists of one or multiple subforms, called parts.
+		The parts are stored in the table <database>form_series</database>
+		with the following fields:
+		</para>
+		<itemizedlist>
+			<listitem><para>
+			<database class='field'>name</database>:     Form name
+			</para></listitem>
+			<listitem><para>
+			<database class='field'>part</database>:     Part name
+			</para></listitem>
+			<listitem><para>
+			<database class='field'>label</database>:    Label displayed on top of the form (optional)
+			</para></listitem>
+			<listitem><para>
+			<database class='field'>template</database>: Template (optional)
+			</para></listitem>
+			<listitem><para>
+			<database class='field'>profile</database>:  Profile to check input in this part (optional)
+			</para></listitem>
+			<listitem><para>
+			<database class='field'>position</database>: Position of part (1,2,3,...)
+			</para></listitem>
+		</itemizedlist>
+	</section>
+
+
+	<section>
+		<title>Form templates</title>
+		<para>
+		Forms too are built from templates. The default template is located
+		in <filename>templates/form</filename>. Alternative templates can be
+		specified through <database>form_series</database> field as shown
+		above.
+		</para>
+		<para>
+		The default template is:
+		</para>
+<programlisting><![CDATA[
+{PREPEND}
+{TOP}
+<fieldset>
+<legend>{TITLE}</legend>
+{FIELDS}
+{SUBMIT}
+</fieldset>
+{BOTTOM}
+]]></programlisting>
+	<para>
+	Explanations:
+	</para>
+		<itemizedlist>
+			<listitem><para>
+			{PREPEND}: placeholder for form components <!-- XXX explain -->
+			</para></listitem>
+			<listitem><para>
+			{TOP}: starts HTML form
+			</para></listitem>
+			<listitem><para>
+			{TITLE}: shows the label field from the form_series table
+			</para></listitem>
+			<listitem><para>
+			{FIELDS}: contains the regular form elements
+			</para></listitem>
+			<listitem><para>
+			{SUBMIT} contains the button form elements (as specified in form_elements
+			table or default submit button)
+			</para></listitem>
+			<listitem><para>
+			{BOTTOM} ends the HTML form.
+			</para></listitem>
+		</itemizedlist>
+	</section>
+
+	<section>
+		<title>Form elements</title>
+		<para>
+The elements of a form (part) are stored in the
+<database>form_elements</database> table with the following fields:
+	</para>
+		<itemizedlist>
+			<listitem><para>
+			<database class='field'>code</database>: Unique serial number
+			</para></listitem>
+			<listitem><para>
+			<database class='field'>name</database>: Name of form element
+			</para></listitem>
+			<listitem><para>
+			<database class='field'>label</database>: Label for form element
+			</para></listitem>
+			<listitem><para>
+			<database class='field'>component</database>: Part name
+			</para></listitem>
+			<listitem><para>
+			<database class='field'>priority</database>: Sort order (descending)
+			</para></listitem>
+			<listitem><para>
+			<database class='field'>widget</database>: Widget to display
+			</para></listitem>
+		</itemizedlist>
+		<para>
+The widget is passed by the form_element_field theme function to the
+&tag-display; tag.  One exception to that is the widget named
+"<literal>legend</literal>" just displays the label of the form_element.
+	</para>
+	</section>
+
+	<section>
+		<title>Form attributes</title>
+		<para>
+Every form element can have a set of attributes, stored in the
+<database>form_attributes</database>
+table. They are working pretty much the same as the
+<database>metadata</database> table for the Interchange UI.
+	</para>
+	<para>
+Attributes can be applied for every form element with a certain name
+or only for a certain from:
+		</para>
+<screen>
+wellwell=> select * from form_attributes where name = 'country';
+ code |  name   | component |  attribute   |                           value                            
+------+---------+-----------+--------------+------------------------------------------------------------
+   32 | country |           | lookup_query | SELECT code,name FROM country ORDER BY priority DESC, name
+
+
+
+wellwell=> select * from form_attributes where component = 'content_edit';
+ code | name |  component   | attribute | value 
+------+------+--------------+-----------+-------
+   30 | uri  | content_edit | width     | 200
+   31 | body | content_edit | height    | 400
+</screen>
+	<para>
+	&nbsp;
 	</para>
 </section>
 
-<section>
-	<title>Code</title>
-	<para>
+	<section>
+		<title>Form hooks</title>
+		<para>
+		There are two hooks for forms:
+
+		<literal>form_<replaceable>NAME</replaceable>_load</literal> (e.g.
+		form_checkout_load) and
+		<literal>form_<replaceable>NAME</replaceable>_save</literal> (e.g.
+		form_checkout_save)
+			</para>
+			<para>
+		The first parameter for both hook subs is the part name.
+			</para>
+			<para>
+		<emphasis role='bold'>The load hook</emphasis> is called for the setup of
+		a form part. It is not
+		called if the profile check for the form part has failed.
+		The return value of the load hook is either a false value or
+		a hash reference which can contain the following members:
+		</para>
+		<itemizedlist>
+			<listitem><para>
+				page  &mdash; triggers a bounce to that page instead of displaying the form
+			</para></listitem>
+			<listitem><para>
+				attributes  &mdash; hash reference providing defaults for form attributes
+			</para></listitem>
+		</itemizedlist>
+
+			<para>
+		<emphasis role='bold'>The save hook</emphasis> is called if the form part has
+		been successfully submitted (e.g. profile check successful).
+			</para>
+		</section>	
+
+		<section>
+			<title>Form theming</title>
+			<para>
+			Most aspects of a form can be 'themed': the title, elements
+			(complete, label and field) and the submit button.
+			</para>
+			<para>
+Currently, you can modify one of the existing theme functions:
 	</para>
+	<screen>
+theme_form_title
+theme_form_element
+theme_form_element_label
+theme_form_element_field
+theme_form_submit
+</screen>
+		</section>
+
+		<section>
+			<title>Form components</title>
+			<para>
+			Regular components can also included in forms. Examples are 
+			dynamic form parts and supplementary content.
+			</para>
+			<para>
+			They are stored in <database>form_components</database> table
+			with the following fields:
+			</para>
+			<itemizedlist>
+				<listitem><para>
+				<database class='field'>name</database>: Form name
+				</para></listitem>
+				<listitem><para>
+				<database class='field'>part</database>: Form part (empty if component applies to all parts of the form)
+				</para></listitem>
+				<listitem><para>
+				<database class='field'>component</database>: Component name
+				</para></listitem>
+				<listitem><para>
+				<database class='field'>location</database>: Placeholder used to place the component, e.g prepend for {PREPEND} placeholder
+				</para></listitem>
+				<listitem><para>
+				<database class='field'>priority</database>: Sort order in placeholder (descending)
+				</para></listitem>
+			</itemizedlist>
+
+	</section>
+	</section>
+
+	<section>
+		<title>Plugins</title>
+		<para>
+	Plugins are living in the <filename class='directory'>plugins/</filename>
+	subdirectory.
+		</para>
+		<para>
+	They are activated by adding them to variable <literal>PLUGINS</literal>
+	(comma separated list of plugins).
+		</para>
+		<para>
+	Please read the README for the plugin first and follow the
+	instructions before activating the plugin.
+		</para>
+		 <section>
+		     <title>Authoring plugins</title>
+				 <para>
+	Plugins are basically a small WellWell catalog on its own.
+	The configuration file is called &pcf;. The basic &pcf; configuration
+	can be as follows:
+	</para>
+<programlisting>
+  Message Loading helloworld plugin.
+  
+  Variable CURPLUGIN helloworld
+  include plugins/default.cfg
+</programlisting>
+
+	<para>
+	Each plugin should have an info file <filename><replaceable>NAME</replaceable>.info</filename> that contains basic information about the plugin, such as:
+	</para>
+<programlisting><![CDATA[
+  name = Hello world!
+  version = 0.1
+  author = Stefan Hornburg (Racke) <racke@linuxia.de>
+  
+  Directory structure
+  
+  NAME.info  - info file (see Info file)
+  plugin.cfg - configuration file (see Configuration)
+  code       - directory for custom code (tags, functions, ...)
+  pages/NAME - directory for pages
+  components - directory for components
+]]></programlisting>
+<para>
+&nbsp;
+</para>
+
+	</section>
 </section>
+
+
+	<section>
+		<title>Product images</title>
+		<para>
+		Originals for product images are kept in <database>images</database> table.
+		</para>
+	</section>
+
+	<section>
+		<title>Paging</title>
+		<para>
+		Paging can be controlled by passing parameters to
+		&tag-searchcontainer;:
+		</para>
+<screen>
+paging_startlinks => always show # links at the beginning
+paging_endlinks => always show # links at the end
+paging_slidelength => length of sliding window
+
+Example:
+96 pages, startlinks 3, endlinks 1, slidelength 5
+
+page 1 shows: 1,2,3,4,5,..,96
+page 8 shows: 1,2,3,..,6,7,8,9,10,..,96
+</screen>
+	</section>
+
+<section>
+	<title>Processing</title>
+<para>
+1. Autoload
+Autoload checks for form submissions so we can reroute the request based on
+certain conditions.
+</para>
+</section>
+
+<section>
+	<title>Routes</title>
+<para>
+More flexible routes needs modifications to Interchange itself, but here we go:
+- complementing record files with record macros
+</para>
+</section>
+
+<section>
+	<title>Modules for Composition Framework</title>
+<screen>
+Vend::Compose::Address => addresses, [address]
+Vend::Compose::Taxonomy
+</screen>
+	</section>
+
+<section>
+	<title>Features</title>
+	<para>
+- deal gracefully with discontinued items (through order_missing SpecialSub)
+	</para>
+	</section>
+
 
 </article>
-

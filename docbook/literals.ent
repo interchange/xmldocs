@@ -60,6 +60,7 @@
 <!ENTITY WW "Wellwell">
 <!ENTITY gcf "<filename>interchange.cfg</filename>">
 <!ENTITY ccf "<filename>catalog.cfg</filename>">
+<!ENTITY pcf "<filename>plugin.cfg</filename>">
 <!ENTITY gcfs "<filename>interchange.cfg</filename> or <filename>catalog.cfg</filename>">
 <!ENTITY cgfs "<filename>catalog.cfg</filename> or <filename>interchange.cfg</filename>">
 <!ENTITY ICROOT "<olink targetdoc='glossary' targetptr='ICROOT'>ICROOT</olink>">
