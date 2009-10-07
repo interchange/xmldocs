@@ -344,9 +344,9 @@ names of the components to skip, or "1" to skip all default components.
 ]]></programlisting>
 
 <para>
-&tag-acl; returns its body on success, or the permission value if body is
-	empty. Please note that <code>[acl check]</code> without a permission
-	is always successful.
+&tag-acl; returns its body on success, or the first matching permission if
+body is empty. Please note that <code>[acl check]</code> without a permission
+	specified is always successful.
 	<!-- XXX clarify? -->
 </para>
 
