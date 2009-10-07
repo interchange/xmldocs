@@ -1,0 +1,14 @@
+__NAME__ purpose
+specify database tables accessible for remote searches
+__END__
+
+__NAME__ synopsis
+<arg choice='plain' rep='repeat'><replaceable>table_name</replaceable></arg>
+__END__
+
+__NAME__ notes
+Any table specified in this option will be remotely searchable, and you should
+not permit any table with sensitive information to be searched in this way. You
+should carefully consider the implications of adding any further tables to this
+configuration option.
+__END__
