@@ -3,7 +3,7 @@ The Interchange Development Group
 http://www.icdevgroup.org
 
 ICDEVGROUP Documentation Set
-http://www.icdevgroup.org/cgi-bin/cvsweb/xmldocs/
+http://git.icdevgroup.org/?p=xmldocs.git;a=tree
 
 This is a technical look at the XMLDOCS system, and it tells you how to get
 the documentation generated. For XMLDOCS authoring, see file WRITING.
