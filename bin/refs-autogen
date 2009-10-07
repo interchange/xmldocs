@@ -1153,7 +1153,8 @@ sub process_symbol {
 sub populate {
 	my ($ref, $group, $name, $file, $mode) = @_;
 
-	my $fgroup = $group; $fgroup =~ /tag$/ and $fgroup = 'tag';
+	my $fgroup = $group;
+	$fgroup = 'tag' if $fgroup =~ /tag$/;
 	my $specpath = "refs/$name.$fgroup";  # Specific path
 	my $genpath = "refs/$name";          # Generic path (no type visible in it)
 	my $refpath; # USE THIS FOR PATHNAME
