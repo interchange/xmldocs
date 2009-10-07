@@ -14,7 +14,7 @@ INTRODUCTION
 The (new) Interchange XML documentation set is completely self-contained.
 To build the complete documentation set, just run:
 
-  make cvs
+  make git
   make
 
 Sometimes you want to build multiple versions of documentation at once
@@ -44,7 +44,7 @@ To build specific targets, see Makefile for target names. Few useful
 targets would include:
 
  -- Those that are not part of 'make' routine:
-  make cvs          (to create complete sources/ directory, or update existing)
+  make git          (to create complete sources/ directory, or update existing)
   make clean        (removes OUTPUT/)
   make distclean    (remove OUTPUT/ and tmp/)
   make look-clean   (clean + 'mv tmp tmp.temporary'. Useful to only make
@@ -73,7 +73,7 @@ must be available:
 
   - Perl
   - Shell commands: mkdir, cp, ln, find, tar, gzip, bzip2, make
-  - cvs
+  - git-core
   - docbook-xml
   - docbook-xsl
   - xsltproc
@@ -90,7 +90,7 @@ too - patches welcome).
 On Gentoo GNU/Linux systems, the prerequisite ebuild packages are as follows:
 
   - dev-lang/perl
-  - dev-util/cvs
+  - dev-util/git
   - app-arch/gzip
   - app-arch/bzip2
   - app-text/docbook-xml-dtd
@@ -165,7 +165,7 @@ DEVELOPMENT NOTES
                    the docset, but don't have the time to prepare it
                    yourself, just drop it in there and someone will pick
                    it up.
-   sources       - (not in CVS). run 'make cvs' to auto-create this 
+   sources       - (not in CVS). run 'make git' to auto-create this 
                    directory with all needed contents. 
    whatsnew      - A directory containing whatsnew.xml, continuously updated
                    what's new list. The items are added automatically; just
@@ -179,9 +179,9 @@ DEVELOPMENT NOTES
    The dotfiles found in cache/ can only be generated when the sources/
    directory is present as described above, and contains Interchange releases
    in directories named after release numbers (with the exception of
-   "cvs-head"). Run 'make cvs' to create that sources/ directory with
-   all the contents. Run 'make up-all' to invoke cvs update on all
-   versions (or 'make up-<ver>' for specific). ('make cvs' can also be used
+   "git-head"). Run 'make git' to create that sources/ directory with
+   all the contents. Run 'make up-all' to invoke git update on all
+   versions (or 'make up-<ver>' for specific). ('make git' can also be used
    to update repositories).
 
 
@@ -213,7 +213,7 @@ DEVELOPMENT NOTES
  The "CVS CO/UP" script:
    There's bin/coup tool that helps you manage sources/ directory.
    See the script or the Makefile for invocation examples.
-   ('make cvs' and 'make up-<ver|all>' invoke bin/coup).
+   ('make git' and 'make up-<ver|all>' invoke bin/coup).
 
 
 

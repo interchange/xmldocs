@@ -8,7 +8,7 @@
 
 # Those two need to be adjusted with time
 export XMLDOCS_CUR_DEVEL = 5.7.0
-IC_VERSIONS = 4.6.0 4.8.0 5.0.0 5.2.0 5.4.0 5.6.0 cvs-head
+IC_VERSIONS = 4.6.0 4.8.0 5.0.0 5.2.0 5.4.0 5.6.0 git-head
 
 #############################################################
 # Base definitions
@@ -42,8 +42,8 @@ VPATH       = guides refs glossary whatsnew
 .PHONY: guides symbols glossary
 #.PHONY: olinkdbs-nc olinks-nc olinkdbs-c olinks-c
 .PHONY: clean clean-cache clean-refs distclean look-clean
-.PHONY: up-all cvs-sources srcs cvsrcs cvs cvss all-up cvsup
-.PHONY: up-% cvs-% %-up %-cvs
+.PHONY: up-all git-sources srcs gitrcs git gits all-up gitup
+.PHONY: up-% git-% %-up %-git
 .PHONY: cache caches
 .PHONY: refxmls
 .PHONY: $O
@@ -221,7 +221,7 @@ look-clean:
 	-mv $T $T.temporary 2>/dev/null
 commit:
 	make look-clean
-	cvs commit
+	git commit
 
 
 
@@ -232,11 +232,11 @@ sources:
 	mkdir -p $@
 sources/%: sources $T
 	bin/coup $(subst sources/,,$@)
-up-all cvs-sources srcs cvsrcs cvs cvss all-up cvsup: sources $T
+up-all git-sources srcs gitrcs git gits all-up gitup: sources $T
 	for p in $(IC_VERSIONS); do      \
 	  bin/coup -u $$p                \
 	; done
-up-% cvs-% %-up %-cvs: sources/% $T
+up-% git-% %-up %-git: sources/% $T
 	bin/coup -u $(subst sources/,,$<)
 
 

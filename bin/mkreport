@@ -31,11 +31,11 @@ unless ( GetOptions (
 	"verbose|v!" => \$verbose,
 )) { die "Error parsing options\n" }
 
-@ARGV == 1 or warn "No arguments, assuming sources/cvs-head\n";
+@ARGV == 1 or warn "No arguments, assuming sources/git-head\n";
 
 
 my $path = shift;
-$path ||= "sources/cvs-head";
+$path ||= "sources/git-head";
 ( my $dumppath = $path ) =~ s#.+?/##;
 ( $i{ver} = $dumppath ) =~ s/\/$//;
 my $dumpdir = $dumppath;

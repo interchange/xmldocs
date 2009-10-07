@@ -168,7 +168,7 @@ sub wanted {
 	return if $file eq '.';
 
 	# Things we ignore
-	return if /(^|\/)(CVS|\.cvs|\.svn|\.autoload|\.gitignore)(\/.+[^\/])?$/;
+	return if /(^|\/)(CVS|\.cvs|\.svn|\.autoload|\.git(ignore)?)(\/.+[^\/])?$/;
 	
 	stat($file) or warn "Can't stat '$file' ? ($!)\n";
 
@@ -692,7 +692,7 @@ sub wanted {
 			# So if this is CVS Head that we can't retrieve version for,
 			# read XMLDOCS_CUR_DEVEL (variable exported by Makefile).
 			# Else, take that version == directory name.
-			$hash{version} = ( $i{ver} eq 'cvs-head' ) ? 
+			$hash{version} = ( $i{ver} eq 'git-head' ) ? 
 				$ENV{XMLDOCS_CUR_DEVEL} : $i{ver};
 		}
 	}

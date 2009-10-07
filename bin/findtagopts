@@ -37,7 +37,7 @@ unless ( GetOptions (
 
 @ARGV or die "Usage: $0 <tagname>\n";
 
-loaddb("$cachedir/cvs-head/.cache.bin");
+loaddb("$cachedir/git-head/.cache.bin");
 
 my $tagname = shift;
 
