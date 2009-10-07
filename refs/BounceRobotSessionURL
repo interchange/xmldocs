@@ -1,0 +1,33 @@
+__NAME__ purpose
+remove explicit mv_session_id in RobotUA request if provided
+__END__
+
+
+__NAME__ synopsis
+<group choice='plain'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+When &conf-__FILENAME__; is enabled, &glos-GET; requests from RobotUAs
+to URLs with <mv>mv_session_id</mv> provided are redirected to the
+same URL minus the session_id
+</para><para>
+This keeps search engines that respect redirects from storing the
+session_id-salted URLs in their indexes, and helps them focus on the
+real resource with a single URL instead of a multitude of salted
+links.
+__END__
+
+__NAME__ notes
+__END__
+
+__NAME__ example: Enabling __FILENAME__
+<programlisting>
+__FILENAME__ yes
+</programlisting>
+__END__
+
