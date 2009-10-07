@@ -90,7 +90,7 @@ $O:
 OUTPUT/files: $(shell find files) bin/dbgen
 	echo "C     $@/"
 	rm -rf $@/
-	cp -a files $O/
+	cp -Rp files $O/
 	rm -rf `find $@ -name CVS`
 	rm -rf `find $@ -name .git`
 	cp bin/dbgen $O/files/
@@ -98,7 +98,7 @@ OUTPUT/files: $(shell find files) bin/dbgen
 	  if test "$$p" != "CVS"; then                               \
 			if test "$$p" != ".git"; then                               \
 				if test -d "$$p"; then                                   \
-					cp -a $$p ../$O/files/;                                \
+					cp -Rp $$p ../$O/files/;                                \
 					tar --exclude=CVS --exclude=.git -cf ../$O/files/$$p.tar $$p;         \
 					tar --exclude=CVS --exclude=.git -zcf ../$O/files/$$p.tar.gz $$p;     \
 					tar --exclude=CVS --exclude=.git -jcf ../$O/files/$$p.tar.bz2 $$p     \
@@ -109,7 +109,7 @@ OUTPUT/files: $(shell find files) bin/dbgen
 OUTPUT/images: $(shell find images)
 	echo "C     $@/"
 	rm -rf $@/
-	cp -a images $O/
+	cp -Rp images $O/
 	rm -rf `find $@ -name CVS`
 	rm -rf `find $@ -name .git`
 OUTPUT/xmldocs.css: docbook/xmldocs.css
