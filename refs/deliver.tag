@@ -55,7 +55,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	URL for redirection
 	</entry>
 
 </row> 
@@ -117,6 +117,19 @@ __NAME__ synopsis
 
 </row> 
 &TAG_CONTAINER;
+__END__
+
+__NAME__ description
+The &tag-deliver; tag delivers possibly binary content to the user 
+or redirects the user to another URL.
+</para>
+<para>
+The content is read from a file specified by the <literal>file</literal>
+parameter or passed in the tag body.
+</para>
+<para>
+Alternatively, you may use the tag to redirect the user to any URL passed
+in the <literal>location</literal> parameter. 
 __END__
 
 __NAME__ Example
