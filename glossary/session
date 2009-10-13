@@ -14,6 +14,9 @@ The session contains:
 <listitem><tag>captcha</tag> code in <literal>captcha</literal> key
 </listitem>
 </itemizedlist>
+<para>
+The length of the session identifier is determined by the <code>session_id_length</code> &conf-Limit; setting.
+</para>
 <!--
 =item Session parameters
 
