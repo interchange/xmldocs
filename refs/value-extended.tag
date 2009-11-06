@@ -212,6 +212,21 @@ __NAME__ synopsis
 	</entry>
 
 </row>
+<row>
+	<entry>
+	encoding
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	</entry>
+	<entry>
+	<!-- DFL -->
+	</entry>
+	<entry>
+	Encoding for output file (UTF-8, raw).
+	</entry>
+</row> 
 &ROW_AUTOCREATEDIR;
 &ROW_UMASK_none;
 <row>
