@@ -15,12 +15,15 @@ __END__
 
 __NAME__ description
 This tag simply feeds <option>SendMailProgram</option> with the raw-formatted
-e-mail body that you provide.
+e-mail data you provide.
 </para><para>
-This means you also need to provide all the headers yourself.
+This means you also need to provide all the e-mail headers.
 Header lines must be at the beginning of the line, and the header
 must have a valid <literal>To:</literal> field, or the message surely
 won't be delivered.
+</para><para>
+Also, as usual, there has to be one empty line between the last header line and
+beginning of e-mail body.
 __END__
 
 __NAME__ notes
