@@ -158,7 +158,7 @@ __NAME__ synopsis
 	<!-- DFL -->
 	</entry>
 	<entry>
-	<!-- DSC -->
+	file to read the list from
 	</entry>
 
 </row> 
