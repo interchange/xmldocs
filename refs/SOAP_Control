@@ -2,6 +2,21 @@ __NAME__ purpose
 control access to SOAP features
 __END__
 
+__NAME__ synopsis
+<arg choice='plain'><replaceable>subject</replaceable></arg>
+<arg choice='plain'><replaceable>permission</replaceable></arg>
+__END__
+
+__NAME__ description
+Defines which SOAP features are allowed.
+__END__
+
+__NAME__ notes
+The global settings take precedence. For example, allowing actions in the
+catalog configuration with <code>SOAP_Control Action always</code> only
+works when the global configuration permit this feature as well.
+__END__
+
 __NAME__ see also
 SOAP, SOAP_Action
 __END__
