@@ -63,3 +63,7 @@ __NAME__ synopsis
 &ROW_INTERPOLATE_0;
 &ROW_REPARSE_1;
 __END__
+
+__NAME__ description
+Performs the flypage lookup function and displays the item as on the &glos-flypage;.
+__END__
