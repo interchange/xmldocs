@@ -122,6 +122,23 @@ __NAME__ synopsis
 	Text to display if the date value to convert is empty
 	</entry>
 
+</row>
+<row>
+	<entry>
+	compensate_dst
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	0
+	</entry>
+	<entry>
+	Compensate the adjusted time for daylight savings time changes.
+	</entry>
 </row> 
 &TAG_CONTAINER;
 __END__
