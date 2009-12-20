@@ -248,6 +248,14 @@ __NAME__ example: ISO 8601 date suitable for MySQL datetime and PostgreSQL times
 </programlisting>
 __END__
 
+__NAME__ example: Convert epoch value to ISO 8601 date
+Time values as seconds since &glos-epoch; can be converted by passing
+the value as time attribute.
+<programlisting>
+[time time="1261306319"]%Y-%m-%d %H:%M:%S[/time]
+</programlisting>
+__END__
+
 __NAME__ example: Specifying adjust= attribute in timezone format
 <programlisting><![CDATA[
 [time]%c[/time]
