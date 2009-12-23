@@ -1,1 +1,88 @@
+</para>
+
+<section>
+<title>Basic setup</title>
+<para>
+To enable the Interchange SOAP server, set &conf-SOAP; to yes in the
+global configuration file. It is also important to allow SOAP actions
+with &conf-SOAP_Control; both in the global configuration and in
+the catalog configuration file in order to provide web services.
+</para>
+
+<programlisting>
+SOAP_Control Action always
+</programlisting>
+
+<para>
+After restart, the Interchange SOAP server
+will listen on port 7780 for requests.
+</para>
+
+<para>
+For all catalogs providing SOAP services, do the following steps:
+</para>
+<orderedlist>
+<listitem>
+<para>
+Enable &conf-SOAP; and allow SOAP actions in the catalog configuration file:
+<programlisting>
+SOAP Yes
+SOAP_Control Action always
+</programlisting>
+</para>
+</listitem>
+<listitem>
+<para>
+Add SOAP URL to &conf-Catalog; directive in the global configuration file:
+</para>
+<programlisting>
+Catalog wellwell /home/interchange/catalogs/wellwell /cgi-bin/wellwell /soap
+</programlisting>
+</listitem>
+<listitem>
+<para>
+Define SOAP actions with &conf-SOAP_Action;.
+</para>
+</listitem>
+</orderedlist>
+<para>
+Finally, restart your Interchange server.
+</para>
+</section>
+
+<section>
+<title>Advanced setup</title>
+<para>
+The port can be changed with the &conf-SOAP-Socket; configuration
+directive.
+</para>
+</section>
+
+<section>
+<title>Faults</title>
+<para>
+If Interchange cannot determine the catalog for the SOAP request,
+it will trigger the <literal>soap:Client.NotFound</literal> fault.
+</para>
+<para>
+If the catalog hasn't enabled &conf-SOAP;, Interchange will trigger
+the <literal>soap:Client.NotAvailable</literal> fault.
+</para>
+<para>
+If the called SOAP action dies, Interchange triggers a 
+<literal>soap:Server</literal> fault with the message
+<literal>Application error</literal>.
+</para>
+</section>
+
+<section>
+<title>SOAP references</title>
+<para>
 <ulink url='http://www.w3.org/TR/soap/'>SOAP</ulink> resource at W3C.
+</para>
+<para>
+<ulink url='http://www.soaplite.com/'>SOAP::Lite</ulink> homepage.
+</para>
+</section>
+
+<para>
