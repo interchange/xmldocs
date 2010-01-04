@@ -15,14 +15,14 @@
 <!ENTITY r5.7.0 "4.6.0;4.8.0;5.0.0;5.2.0;5.5.0;5.5.2;5.6.0;5.7.0">
 
 <!-- GENERAL ENTITIES -->
-<!ENTITY GNU "<ulink url='http://www.gnu.org'>GNU</ulink>">
-<!ENTITY IC "<ulink url='http://www.icdevgroup.org'>Interchange</ulink>">
-<!ENTITY ICDEVGROUP "<ulink url='http://www.icdevgroup.org'>Interchange Development Group</ulink>">
-<!ENTITY RH "<ulink url='http://www.redhat.com'>Red Hat</ulink>">
-<!ENTITY DEB "<ulink url='http://www.debian.org'>Debian</ulink>">
-<!ENTITY DEBGNU "<ulink url='http://www.debian.org'>Debian GNU</ulink>">
+<!ENTITY GNU "<ulink url='http://www.gnu.org/'>GNU</ulink>">
+<!ENTITY IC "<ulink url='http://www.icdevgroup.org/'>Interchange</ulink>">
+<!ENTITY ICDEVGROUP "<ulink url='http://www.icdevgroup.org/'>Interchange Development Group</ulink>">
+<!ENTITY RH "<ulink url='http://www.redhat.com/'>Red Hat</ulink>">
+<!ENTITY DEB "<ulink url='http://www.debian.org/'>Debian</ulink>">
+<!ENTITY DEBGNU "<ulink url='http://www.debian.org/'>Debian GNU</ulink>">
 <!ENTITY ICDL "<ulink url='http://www.icdevgroup.org/i/dev/download.html'>download</ulink>">
-<!ENTITY ICCVS "<ulink url='http://www.icdevgroup.org/cgi-bin/cvsweb/interchange/'>CVS</ulink>">
+<!ENTITY ICGIT "<ulink url='http://git.icdevgroup.org/?p=interchange.git;a=summary'>Git</ulink>">
 <!ENTITY PUBLIC_MLS "<ulink url='http://www.icdevgroup.org/mailman/listinfo/'>Public Interchange Mailing Lists</ulink>">
 <!ENTITY APACHE "<ulink url='http://www.apache.org/'>Apache</ulink>">
 <!ENTITY MATHOPD "<ulink url='http://www.mathopd.org/'>Mathopd</ulink>">
@@ -35,8 +35,8 @@
 <!ENTITY PGSQL "<ulink url='http://www.postgresql.org/'>PostgreSQL</ulink>">
 <!ENTITY ORACLE "<ulink url='http://www.oracle.com/'>Oracle</ulink>">
 <!ENTITY OPENLDAP "<ulink url='http://www.openldap.org/'>OpenLDAP</ulink>">
-<!ENTITY BDBM "<ulink url='http://http://www.sleepycat.com//'>Berkeley DBM</ulink>">
-<!ENTITY GDBM "<ulink url='http://www.delorie.com/gnu/docs/gdbm/'>GNU DBM</ulink>">
+<!ENTITY BDBM "<ulink url='http://www.oracle.com/database/berkeley-db/index.html'>Berkeley DB</ulink>">
+<!ENTITY GDBM "<ulink url='http://www.vivtek.com/gdbm/'>GNU DBM</ulink>">
 <!ENTITY SQLite "<ulink url='http://www.sqlite.org/'>SQLite</ulink>">
 <!ENTITY NFS "<ulink url='http://nfs.sourceforge.net/'>NFS</ulink>">
 <!ENTITY IMAGEMAGICK "<ulink url='http://www.imagemagick.org/'>ImageMagick</ulink>">

@@ -3,7 +3,7 @@ The Interchange Development Group
 http://www.icdevgroup.org
 
 ICDEVGROUP Documentation Set
-http://www.icdevgroup.org/cgi-bin/cvsweb/xmldocs/
+http://git.icdevgroup.org/?p=xmldocs.git;a=summary
 
 Documentation writing/authoring QuickStart.
 
@@ -38,11 +38,11 @@ invoked[1], the XML source files must already be put together and wait ready
 to be processed.
 
 As we've said that our goal is to autogenerate as much XML as possible, it's
-obvious that we do not keep the XML sources in the CVS. (That would be pretty
+obvious that we do not keep the XML sources in Git. (That would be pretty
 inflexible, make larger changes very inconvenient, and require daily fixes and
-updates to the CVS).
+updates to the Git repo.)
 
-Instead of the above, what we keep in the CVS are a number of documentation
+Instead of the above, what we keep in Git are a number of documentation
 snippets (only those parts that need to be written manually). We first rely on
 the bin/stattree script to extract information from Interchange sources[2],
 then on bin/*-autogen scripts to combine templates, mentioned stattree
@@ -54,7 +54,7 @@ The system separates documentation contents into 5 major groups:
  1 guides: prose-based documents that explain concepts and are intended to
  . be read from top to bottom.
  . Autogeneration of contents is obviously of little use here, so we directly
- . keep .xml sources in the CVS.
+ . keep .xml sources in Git.
  . At (many) places where the external contents need to be included, we use
    xi:include, native DocBook feature.
 
@@ -68,19 +68,19 @@ The system separates documentation contents into 5 major groups:
  . all types of symbols. (Symbols are "units" seen in Interchange source - 
  . tags, filters, pragmas, global/catalog variables, Perl functions, ...).
  . Enormous ammount of autogeneration and templating is possible here, and
- . we keep snippets in CVS (format is, again, XML with all kinds of headers
+ . we keep snippets in Git (format is, again, XML with all kinds of headers
    and containers already included in templates so you can just focus on text).
 
  4 glossary: prose-based collection of glossary items.
  . Some templating is possible here, so we keep individual glossary snippets
  . (in XML format, minus standard headings which are included in the templates)
- . in the CVS, while they are put together in a single glossary.xml file by the
+ . in Git, while they are put together in a single glossary.xml file by the
    bin/generic-autogen script.
 
  5 whatsnew file: there's a bin/whatsnew-update script that takes care of
  . automatic whatsnew file updates.
- . The .xml file is directly kept in the CVS, while bin/whatsnew-update knows
- . how to update it; you only need to check-in the updated whatsnew file to CVS.
+ . The .xml file is directly kept in Git, while bin/whatsnew-update knows
+ . how to update it; you only need to check-in the updated whatsnew file to Git.
  . More information on this can be found in bin/whatsnew-update and
    whatsnew/whatsnew.xml.
 

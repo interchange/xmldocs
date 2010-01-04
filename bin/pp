@@ -31,7 +31,7 @@ my %tt = (
 # Mimic docbook entities
 my %entities = ( 
 	IC        =>'<ulink url="http://www.icdevgroup.org">Interchange</ulink>',
-	ICCVS     => '<ulink url="http://www.icdevgroup.org/i/dev/cvs.html">CVS</ulink>',
+	ICGIT     => '<ulink url="http://www.icdevgroup.org/i/dev/download">Git</ulink>',
 	ICDL      => '<ulink url="http://http://www.icdevgroup.org/i/dev/download.html">tarball</ulink>',
 	ICSTDCAT  => 'interchange-cat-standard',
 	FS        => '<ulink url="http://www.fsf.org">Free Software</ulink>',

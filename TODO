@@ -93,8 +93,7 @@ Ideas:
    - new developer howto
 - filenames in Source contexts should also be clickable. this is longterm
   because it'll involve perltidy and other stuff I have in mind ...
-- CVS page: http://www.icdevgroup.org/i/dev/cvs.html?id=auxbUMnz
-  Make a tutorial : IC from CVS, Catalog in SVN, replicated setup online
+- Make a tutorial : IC from Git, Catalog in SVN, replicated setup online
   and locally
 - How to deal with Safe
 Programming guidelines doc - integrate with programming style. Advise
@@ -185,7 +184,7 @@ Community-contributed usertags (was usertag.pod before 4.7.0; too messy)
 icstart - Getting Started Guide
 * FAQ for each demo catalog (foundation, construct, barry, artstore)
 * FAQ for each database (DBM, MySQL, PostgreSQL, Oracle)
-* FAQ for each payment processor (CCVS, Cybercash, Signio, Authorize.net, etc.)
+* FAQ for each payment processor (Payflow Pro, Authorize.net, etc.)
 
 
 

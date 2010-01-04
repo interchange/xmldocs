@@ -78,9 +78,9 @@
 			</xsl:element> |
 			<xsl:element name="a">
 				<xsl:attribute name="href">
-					<xsl:value-of select="'http://www.icdevgroup.org/cgi-bin/cvsweb/interchange/'"/>
+					<xsl:value-of select="'http://git.icdevgroup.org/?p=interchange.git;a=summary'"/>
 				</xsl:attribute>
-				Interchange CVS
+				Interchange Git
 			</xsl:element>
 			(<xsl:element name="a">
 				<xsl:attribute name="href">
@@ -88,9 +88,9 @@
 				</xsl:attribute>Commits</xsl:element>) |
 			<xsl:element name="a">
 				<xsl:attribute name="href">
-					<xsl:value-of select="'http://www.icdevgroup.org/cgi-bin/cvsweb/xmldocs/'"/>
+					<xsl:value-of select="'http://git.icdevgroup.org/?p=xmldocs.git;a=summary'"/>
 				</xsl:attribute>
-				Documentation CVS
+				Documentation Git
 			</xsl:element>
 			(<xsl:element name="a">
 				<xsl:attribute name="href">

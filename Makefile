@@ -1,7 +1,7 @@
 #
 # ICDEVGROUP Documentation Makefile
 # http://www.icdevgroup.org
-# http://www.icdevgroup.org/cgi-bin/cvsweb/xmldocs
+# http://git.icdevgroup.org/?p=xmldocs.git;a=summary
 # 
 # Davor Ocelic, docelic@icdevgroup.org
 #
