@@ -96,3 +96,9 @@ __NAME__ example: Clearing default values
 Replace DatabaseDefault
 </programlisting>
 __END__
+
+__NAME__ example: Prevent display of database errors on the storefront
+<programlisting>
+DatabaseDefault LOG_ERROR_SESSION 0
+</programlisting>
+__END__
