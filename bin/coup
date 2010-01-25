@@ -34,8 +34,8 @@ if ( -d ($_ = "sources/$rev") ) { # Source is here, only update
 	if ( $update ) {
 		chdir $_;
 		print STDERR "CUP   $rev\n";
-		DEBUG and print "DBG $ENV{PWD}: git pull >& ../../tmp/cup.$rev\n";
-		system("git pull >& ../../tmp/cup.$rev");
+		DEBUG and print "DBG $ENV{PWD}: git pull > ../../tmp/cup.$rev 2>&1\n";
+		system("git pull > ../../tmp/cup.$rev 2>&1");
 	}
 }
 else { # Need to perform checkout
@@ -45,7 +45,9 @@ else { # Need to perform checkout
 	system("git clone git://git.icdevgroup.org/interchange $rev > ../tmp/co.$rev 2>&1");
 
 	chdir "$rev" or die "Can't chdir $rev ($!)";
-	DEBUG and print "DBG $ENV{PWD}: git checkout --track -b '$git_r' > ../../tmp/co.$rev 2>&1";
-	system("git checkout --track -b '$git_r'");
+	if (length($git_r)) {
+		DEBUG and print "DBG $ENV{PWD}: git checkout --track -b '$git_r' > ../../tmp/co.$rev 2>&1";
+		system("git checkout --track -b '$git_r'");
+	}
 }
 
