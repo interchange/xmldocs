@@ -19,7 +19,18 @@ I think it's simple enough to notice variables <literal>mv_arg</literal> and
 <literal>mv_pc</literal> being submitted. The GET method is very convenient
 because all data is embedded in the URL, making it very easy to copy and
 share links with other people.
-</para><para>
+</para>
+<para>
+It is recommended to create these links in Interchange with &tag-area;.,e.g.:
+</para>
+<programlisting>
+<![CDATA[
+<a href="[area href="" form="param1=foo
+  param2=bar"]">FOO & BAR</a>
+</a>
+]]>
+</programlisting>
+<para>
 The other method is called POST. This way, the information is sent in a way
 not visible to the user. POST forms have this disadvantage of not being suitable
 for copy-pasting &glos-HTML; links directly, but they do offer greater
