@@ -1,9 +1,12 @@
 __NAME__ purpose
-specify usernames that are given full access to all catalogs, regardless of any permissions
+(obsolete) specify usernames that are given full access to all catalogs, regardless of any permissions
 __END__
 
 __NAME__ notes
-The AdminUser functionality is considered to be flawed, see <ulink url='http://www.icdevgroup.org/pipermail/interchange-users/2010-March/051763.html'>this mailing list post</ulink> for more information.
+The AdminUser functionality is considered to be flawed,
+see <ulink url='http://www.icdevgroup.org/pipermail/interchange-users/2010-March/051763.html'>this mailing list post</ulink> for more information.
+</para><para>
+This directive has been removed in &IC; 5.7 (Mar 11, 2010).
 __END__
 
 __NAME__ synopsis
