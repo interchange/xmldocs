@@ -296,6 +296,62 @@ names of the components to skip, or "1" to skip all default components.
 </section>
 
 <section>
+	<title>Taxonomy</title>
+	<para>
+The taxonomy system in WellWell allows products to be
+categorized in various ways, e.g. by genre, producer
+and star for videos. 
+	</para>
+	<para>
+	Categories are kept in the
+	<database>categories</database> table:
+	</para>
+	<informaltable>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>Field</entry>
+<entry>Description</entry>
+<entry>Remarks</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry>code</entry>
+<entry>category identifier</entry>
+<entry>numeric, assigned automatically</entry>
+</row>
+<row>
+<entry>name</entry>
+<entry>category name</entry>
+<entry>used as title in category navigation</entry>
+</row>
+<row>
+<entry>type</entry>
+<entry>category type</entry>
+<entry>e.g. genre, star, tag</entry>
+</row>
+<row>
+<entry>parent</entry>
+<entry>identifier of parent category</entry>
+<entry>0 for top level categories</entry>
+</row>
+<row>
+<entry>priority</entry>
+<entry>category priority for sorting</entry>
+<entry>numeric, highest number comes first</entry>
+</row>
+<row>
+<entry>uri</entry>
+<entry>page to view the category</entry>
+<entry></entry>
+</row>
+</tbody>
+</tgroup>
+	  </informaltable>
+</section>
+
+<section>
 	<title>Users, Roles and Permissions</title>
 	<para>
 	<emphasis role='bold'>Users</emphasis> are stored in the 
