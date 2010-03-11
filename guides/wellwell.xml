@@ -487,6 +487,29 @@ check because they are evaluated earlier, during autoload routine.
 			<database class='field'>position</database>: Position of part (1,2,3,...)
 			</para></listitem>
 		</itemizedlist>
+	    <para>As example we are looking at the checkout form, with the
+			following parts:
+		</para>
+		<itemizedlist>
+			<listitem>Shipping</listitem>
+			<listitem>Payment</listitem>
+			<listitem>Confirmation</listitem>
+			<listitem>Receipt</listitem>
+		</itemizedlist>
+		<para>
+			These are the corresponding entries in <database class='table'>form_series</database>:
+		</para>
+		<screen>
+mysql> select name,part,label,profile,position from form_series where name = 'checkout' order by position;
++----------+--------------+--------------+----------+----------+
+| name     | part         | label        | profile  | position |
++----------+--------------+--------------+----------+----------+
+| checkout | shipping     | Shipping     | shipping |        1 | 
+| checkout | payment      | Payment      |          |        2 | 
+| checkout | confirmation | Confirmation |          |        3 | 
+| checkout | receipt      | Receipt      |          |        4 | 
++----------+--------------+--------------+----------+----------+
+		</screen>
 	</section>
 
 
