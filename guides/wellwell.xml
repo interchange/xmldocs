@@ -586,11 +586,28 @@ The elements of a form (part) are stored in the
 			<database class='field'>widget</database>: Widget to display
 			</para></listitem>
 		</itemizedlist>
+
 		<para>
-The widget is passed by the form_element_field theme function to the
-&tag-display; tag.  One exception to that is the widget named
-"<literal>legend</literal>" just displays the label of the form_element.
-	</para>
+			The widget is passed by the form_element_field theme function to the
+			&tag-display; tag. Exceptions to that are explained below.
+		</para>
+
+		<sect3>
+			<title>Special Form Widgets</title>
+				<para>
+					A form element with the widget named
+					"<literal>legend</literal>" just displays the label of the
+					form_element.
+					This is useful if you want to separate your form into separate
+					visual parts.
+				</para>
+				<para>
+					Form elements with the widget named "<literal>button</literal>"
+					are used to produce submit buttons.
+					This is useful if you want to have multiple buttons in your 
+					form without changing your form template, like Preview or Delete.
+				</para>
+		</sect3>
 	</section>
 
 	<section>
