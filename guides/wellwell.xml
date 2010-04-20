@@ -659,11 +659,12 @@ wellwell=> select * from form_attributes where component = 'content_edit';
 		a form part. It is not
 		called if the profile check for the form part has failed.
 		The return value of the load hook is either a false value or
-		a hash reference which can contain the following members:
+		a hash reference where the following members are recognized:
 		</para>
 		<itemizedlist>
 			<listitem><para>
-				page  &mdash; triggers a bounce to that page instead of displaying the form
+				page  &mdash; loads the specified page through the
+<literal>$CGI->{mv_nextpage}</literal> mechanism
 			</para></listitem>
 			<listitem><para>
 				attributes  &mdash; hash reference providing defaults for form attributes
@@ -672,8 +673,18 @@ wellwell=> select * from form_attributes where component = 'content_edit';
 
 			<para>
 		<emphasis role='bold'>The save hook</emphasis> is called if the form part has
-		been successfully submitted (e.g. profile check successful).
+		been successfully submitted (e.g. profile check successful). The return value of the load hook is either a false value or
+		a hash reference where the following members are recognized:
 			</para>
+	  	<itemizedlist>
+			<listitem><para>
+				page  &mdash; loads the specified page through the
+<literal>$CGI->{mv_nextpage}</literal> mechanism
+			</para></listitem>
+			<listitem><para>
+				redirect &mdash; redirects to the specified page if true
+			</para></listitem>
+		</itemizedlist>
 		</section>	
 
 		<section>
