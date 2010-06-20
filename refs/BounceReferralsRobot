@@ -1,0 +1,35 @@
+__NAME__ purpose
+remove visible affiliate code from URLs after first access (for robots only)
+__END__
+
+
+__NAME__ synopsis
+<group choice='plain'>
+	<arg choice='plain'>No</arg>
+	<arg choice='plain'>Yes</arg>
+</group>
+__END__
+
+
+__NAME__ description
+This directive is similar to &conf-BounceReferralsRobot; but it
+takes effect only on URLs accessed by robots.
+__END__
+
+__NAME__ notes
+This is useful for Google Analytics, Omniture SiteCatalyst, and
+similar analytics that need to see the referrals in the URL, and
+doesn't hurt anything for most users because redirecting away from
+the referral is most important for SEO.
+__END__
+
+__NAME__ example: Enabling __FILENAME__
+<programlisting>
+__FILENAME__ yes
+</programlisting>
+__END__
+
+__NAME__ author
+&jon;
+__END__
+
