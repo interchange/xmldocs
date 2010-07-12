@@ -455,10 +455,16 @@ check because they are evaluated earlier, during autoload routine.
   forms.wishlist_add.name="wishlist_add"
 /]
 </programlisting>
-<para>
-&nbsp;
-</para>
 
+<para>
+In this example <literal>product_info</literal> refers to an existing
+component, while <literal>wishlist_add</literal> can be seen as virtual
+component which will be replace by the form specified in the second
+parameter of &tag-compose;. 
+</para>
+<note><para>
+Forms without matching virtual component will be ignored.
+</para></note>
 
 	<section>
 		<title>Form parts</title>
