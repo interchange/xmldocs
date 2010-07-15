@@ -642,9 +642,28 @@ wellwell=> select * from form_attributes where component = 'content_edit';
    30 | uri  | content_edit | width     | 200
    31 | body | content_edit | height    | 400
 </screen>
-	<para>
-	&nbsp;
-	</para>
+<para>
+	The form load hook can also be used to provide form atttributes:
+</para>
+<programlisting><![CDATA[
+Sub form_address_edit_load <<EOS
+sub {
+	my %attributes;
+
+	# load shipping address
+	$Tag->address({function => 'load',
+				type => 'shipping'});
+
+	# setup dropdown for country
+	$attributes{country}->{lookup_query} = q{SELECT code,name FROM country ORDER BY priority DESC, name};
+
+	return {attributes => \%attributes};
+}
+EOS
+]]></programlisting>
+<para>
+&nbsp;
+</para>
 </section>
 
 	<section>
