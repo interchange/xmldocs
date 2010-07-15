@@ -626,7 +626,7 @@ table. They are working pretty much the same as the
 	</para>
 	<para>
 Attributes can be applied for every form element with a certain name
-or only for a certain from:
+or only for a certain form:
 		</para>
 <screen>
 wellwell=> select * from form_attributes where name = 'country';
