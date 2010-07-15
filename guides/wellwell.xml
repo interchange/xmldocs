@@ -643,7 +643,7 @@ wellwell=> select * from form_attributes where component = 'content_edit';
    31 | body | content_edit | height    | 400
 </screen>
 <para>
-	The form load hook can also be used to provide form atttributes:
+	The <olink targetptr="form_load_hook">form load hook</olink> can also be used to provide form atttributes:
 </para>
 <programlisting><![CDATA[
 Sub form_address_edit_load <<EOS
@@ -679,8 +679,10 @@ EOS
 			<para>
 		The first parameter for both hook subs is the part name.
 			</para>
-			<para>
-		<emphasis role='bold'>The load hook</emphasis> is called for the setup of
+		<section id="form_load_hook">
+			<title>Load hook</title>
+		<para>
+		The load hook is called for the setup of
 		a form part. It is not
 		called if the profile check for the form part has failed.
 		The return value of the load hook is either a false value or
@@ -695,9 +697,11 @@ EOS
 				attributes  &mdash; hash reference providing defaults for form attributes
 			</para></listitem>
 		</itemizedlist>
-
+		</section>
+	  	<section id="form_save_hook">
+			<title>Save hook</title>
 			<para>
-		<emphasis role='bold'>The save hook</emphasis> is called if the form part has
+		The save hook is called if the form part has
 		been successfully submitted (e.g. profile check successful). The return value of the load hook is either a false value or
 		a hash reference where the following members are recognized:
 			</para>
@@ -710,6 +714,7 @@ EOS
 				redirect &mdash; redirects to the specified page if true
 			</para></listitem>
 		</itemizedlist>
+		</section>
 		</section>	
 
 		<section>
