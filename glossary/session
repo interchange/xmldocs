@@ -13,6 +13,7 @@ The session contains:
 </listitem>
 <listitem><tag>captcha</tag> code in <literal>captcha</literal> key
 </listitem>
+<listitem>result of &tag-subtotal; calculation in <literal>latest_subtotal</literal> (unless called with <literal>nodiscount=1</literal>)</listitem>
 </itemizedlist>
 <para>
 The length of the session identifier is determined by the <code>session_id_length</code> &conf-Limit; setting.
