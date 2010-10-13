@@ -75,6 +75,11 @@
 		<listitem><para>
 		Keep core of WellWell small, use plugins for extended functionality
 		</para></listitem>
+        <listitem><para>
+		Move out as much as code as possible into generic Perl modules which
+		don't use Interchange variables and functions. This is intended to
+		improve code reusability and code testing.
+		</para></listitem>
 		<listitem><para>
 		Deprecate bloated code and tags (i.e. &tag-button;, &tag-image;)
 		</para></listitem>
