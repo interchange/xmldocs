@@ -60,6 +60,26 @@ __NAME__ synopsis
 	</entry>
 
 </row> 
+<row>
+
+	<entry>
+	preserve_times
+	</entry>
+	<entry>
+	<!-- POS -->
+	</entry>
+	<entry>
+	<!-- REQ -->
+	</entry>
+	<entry>
+	0
+	</entry>
+	<entry>
+	Whether to preserve file access and modification times.
+	</entry>
+
+</row> 
+
 &TAG_NON_CONTAINER;
 __END__
 
