@@ -83,6 +83,8 @@ built-in user database functions.
 </entry><entry><literal>preferences</literal></entry></row>
 <row><entry>scratch</entry><entry>List of UserDB fields to load into &glos-scratch; space, instead of the default &glos-value;s space
 </entry><entry>None</entry></row>
+<row><entry>secure_cookies</entry><entry>Forces the MV_PASSWORD cookie to be set secure
+</entry><entry>1, if using https</entry></row>
 <row><entry>sql_counter</entry><entry>SQL counter spec (<literal>sequence</literal> or <literal>AUTO_INCREMENT</literal>) for <literal>assign_username</literal> function
 </entry><entry></entry></row>
 <row><entry>super_field</entry><entry>Field name that, when set to <literal>1</literal>, indicates account's superuser status
