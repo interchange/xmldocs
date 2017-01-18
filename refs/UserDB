@@ -51,6 +51,8 @@ built-in user database functions.
 </entry><entry><literal>db_acl</literal></entry></row>
 <row><entry>expire_field</entry><entry>Field name for account expiration data
 </entry><entry><literal>expiration</literal></entry></row>
+<row><entry>fallback_login</entry><entry>With <literal>indirect_login</literal>, fallback to primary table key if indirect fails
+</entry><entry>0</entry></row>
 <row><entry>file_acl</entry><entry>Field name for file access control
 </entry><entry><literal>file_acl</literal></entry></row>
 <row><entry>force_lower</entry><entry>Force possibly upper-case database fields to lower case session variable names?
